@@ -12,8 +12,8 @@ blockquote{font-size:14px;margin-left:10px}
 .list3 li:before{content:'- '}
 .list4{padding-left:20px;line-height:25px;font-size:16px;margin-top:5px}
 .list5{font-size:12px;list-style-position:inside;padding:0;margin:0 0 20px 0;}
-.list5 li:nth-child(odd){color:#000}
-.list5 li:nth-child(even){color:#999}
+.list5s li:nth-child(odd){color:#000}
+.list5s li:nth-child(even){color:#999}
 </style>
 	<ul class="breadcrumb" style="border-bottom:1px solid #d5d5d5">
 		<li><a href="<?php echo base_url();?>account">Account</a></li>
@@ -121,7 +121,7 @@ blockquote{font-size:14px;margin-left:10px}
 							<div style="display:none" id="script1-content">
 								<div style="padding:20px">
 									<h5><strong>Invite Warm Market</strong></h5>
-									<ul class="list5">
+									<ul class="list5 list5s">
 										<li>A [You]: Chit chat – family, job, etc</li>
 										<li>B: Guest</li>
 										<li>A: What are you doing this Wed night or Sat morning [pick BPM time or one-on-one time]?</li>
@@ -140,7 +140,7 @@ blockquote{font-size:14px;margin-left:10px}
 										<li>B: Ok.</li> 
 									</ul>
 									<h5><strong>Invite Cold Market</strong></h5>
-									<ul class="list5">
+									<ul class="list5 list5s">
 										<li>A: Hello. Is this John?  (Wait for answer)  Did I catch you in a good time? </li>
 										<li>J: Yes, John is speaking.  Yes, we can talk</li>
 										<li>A: Hi John, this is Alex, we met at Costco yesterday.  Remember me? (wait for answer) How are you?  It was very nice meeting you.  I noticed you are very friendly and you have a lot of experience in Financial industry.  We have a lot of people with your background that are doing very well in our office.  Like I said before, I can't promise anything.  I don’t know if this is the right business for you or if you are the right person for this business.
@@ -155,19 +155,8 @@ blockquote{font-size:14px;margin-left:10px}
 								<div style="padding:20px">
 									<div class="row">
 										<div class="col-lg-6">
-											<h5><strong>邀请熟人到外面</strong></h5>
-											<ul class="list5">
-												<li>你好 XXX，最近在忙什么？</li>
-												<li>还不是上班 ，忙小孩</li>
-												<li>对呀，公司呆久了也是无聊。不过我最近自己想做点东西 ， 你啥时有空我们聊聊。 </li>
-												<li>你想做什么，自己搞公司？</li>
-												<li>我看好了一个方向，觉得具有可能性，前景也不错。你哪天中午有空，咱们一起吃饭，边吃边聊？下周三，或周五那天有空？</li>
-												<li>周五吧！</li>
-												<li>咱们周五 12点见，在×××吧</li>
-											</ul>					
-
 											<h5><strong>邀请熟人到办公室</strong></h5>
-											<ul class="list5">
+											<ul class="list5 list5s">
 												<li>你好，最近在忙什么 ？</li>
 												<li>还不是上班，忙小孩</li>
 												<li>对呀，公司呆久了也是无聊。不过我最近自己想做点东西，你啥时有空我们聊聊。</li>
@@ -178,7 +167,7 @@ blockquote{font-size:14px;margin-left:10px}
 											</ul>
 
 											<h5><strong>邀请熟人到ＢＰＭ</strong></h5>
-											<ul class="list5">
+											<ul class="list5 list5s">
 												<li>你好，最近在忙什么 ？</li>
 												<li>还不是上班 ，忙小孩</li>
 												<li>对呀，公司呆久了也是无聊。不过我最近自己想做点东西，你啥时有空我们聊聊。</li>
@@ -192,7 +181,7 @@ blockquote{font-size:14px;margin-left:10px}
 										</div>
 										<div class="col-lg-6">
 											<h5><strong>在活动上遇到的生人</strong></h5> 
-											<ul class="list5">
+											<ul class="list5 list5s">
 											<li>你好，我是×××，咱们前天在××活动上认识的。</li>
 											<li>噢</li>
 											<li>那天的活动挺热门的，也很高兴认识你，觉得你人很（sharp / nice）,可惜那时没太多时间聊。记得你也是工程师（CPA 或者×××）吧！今天给你打电话主要是想问你一下，我们公司现在发展很迅速，也在寻找能干的人。我办公室里有满多与你背景相同的（工程师／会计师／ＲＮ……..），他们也挺聪明的，有full time job（全职工作），不过在我们这里做兼职，有第二收入。我也不知道你感不感兴趣，是不适合，喜欢不喜欢， 所以想请你来观察一下。 
