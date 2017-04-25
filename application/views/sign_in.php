@@ -22,7 +22,7 @@
 			<input type="password" class="form-control" type="password" name="password" required>
 		</div>
 		<div class="checkbox">
-			<input type="checkbox" style="margin-left:0 !important;" name="save_password">&nbsp;&nbsp;&nbsp;&nbsp;Stay signed in
+			<input type="checkbox" style="margin-left:0 !important;" name="save_password" checked>&nbsp;&nbsp;&nbsp;&nbsp;Stay signed in
 		</div>
 		<div class="form-group clearfix">
 			<button type="submit" class="btn btn-primary pull-right">Sign in</button>

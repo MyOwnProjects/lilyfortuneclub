@@ -11,6 +11,7 @@
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery-ui-1.11.4/jquery-ui.css" />
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/css/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.bootgrid-1.3.1/jquery.bootgrid.css" />		
+		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.webui-popover/jquery.webui-popover.css" />		
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/css/tooltip.css">
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/css/template.css?t=<?php echo time();?>" />		
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
@@ -19,6 +20,7 @@
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootbox.min.js"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery.bootgrid-1.3.1/jquery.bootgrid.js"></script>		
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery.webui-popover/jquery.webui-popover.js"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/js/tools.js"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/js/live-chat/live-chat.js?t=<?php echo time();?>"></script>	
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/simple_video_player/simple_video_player.js?t=<?php echo time();?>"></script>

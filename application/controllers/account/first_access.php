@@ -23,7 +23,7 @@ class First_access extends Account_base_controller {
 			}
 			else{
 				if($this->user_model->update($this->user['users_id'], array('email' => $email, 'password' => $password, 'first_access' => 'N'))){
-					header('location: '.base_url().'account');
+					header('location: '.base_url().'account/profile');
 					exit;
 				}
 				else{

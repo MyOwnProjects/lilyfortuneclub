@@ -1,9 +1,7 @@
-ul, li{margin:0;padding:0}
-ul{list-style:none}
 #main-header:after, #main-header-menu:after, #main-body-menu-bar:after, .clearfix:after{content:"";display: table;clear: both}
 body{font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin:0 auto;font-size:14px}
 #main-header{margin:0 auto;padding:5px 0;font-size:16px;background:url('../img/background/dark-wood-background-1013tm-pic-2573.jpg')}
-#main-header-menu{color:#fff;font-family:'AvenirLTStd-Medium', sans-serif, Arial;font-size:16px;margin-top:37px}
+#main-header-menu{color:#fff;font-family:'AvenirLTStd-Medium', sans-serif, Arial;font-size:16px;margin-top:37px;margin-right:20px}
 .main-header-menu-item{margin-right:20px}
 .main-header-menu-item>a{color:#fff !important;text-decoration:none;}
 .main-header-menu-item>a:hover{color:#aaa}
@@ -27,6 +25,10 @@ footer a{color:#fff}
 .doc-list, .doc-list li:not(:first-child){border-top:1px dotted #e5e5e5}
 .doc-list li .icon{margin-right:5px;}
 .doc-list img{height:20px;}
+
+.text-red{color:red}
+.text-lime{color:lime}
+.text-green{color:green}
 
 
 @media only screen and (max-width:700px) {

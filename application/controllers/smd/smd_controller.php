@@ -79,6 +79,17 @@ class Smd_controller extends CI_Controller {
 				),
 			),
 		),
+		'tasks'=> array(
+			'text' => 'Tasks',
+			'sub_menus' => array(
+				'' => array(
+					'text' => 'List'
+				),
+				'create' => array(
+					'text' => 'New Task'
+				),
+			),
+		)
 	);
 	public function __construct(){
 		parent::__construct();

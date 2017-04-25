@@ -12,16 +12,31 @@ class User_model extends Base_model{
 	}
 	
 	public function get_user_by_id($id){
-		$sql = "SELECT users.*, "
-			. "u1.first_name AS first_name1, u1.last_name AS last_name1, u1.nick_name AS nick_name1, "
-			. "u2.first_name AS first_name2, u2.last_name AS last_name2, u2.nick_name AS nick_name2 "
-			. "FROM users "
-			. "LEFT JOIN users u1 ON users.smd=u1.users_id "
-			. "LEFT JOIN users u2 ON users.parent=u2.users_id "
-			. "WHERE users.users_id='$id'";
+		$sql = "SELECT users.*, user_roles.*,  
+			u1.first_name AS first_name1, u1.last_name AS last_name1, u1.nick_name AS nick_name1, 
+			u2.first_name AS first_name2, u2.last_name AS last_name2, u2.nick_name AS nick_name2 
+			FROM users 
+			LEFT JOIN users u1 ON users.smd=u1.users_id 
+			LEFT JOIN users u2 ON users.parent=u2.users_id 
+			LEFT JOIN user_and_role ON user_and_role.user_id=users.users_id 
+			LEFT JOIN user_roles ON user_roles.user_roles_id=user_and_role.role_id 
+			WHERE users.users_id='$id'";
 		$results = $this->db->query($sql);
-		if(count($results) == 1)
-			return $results[0];
+		if(count($results) == 0)
+			return null;
+		$ret = array();
+		foreach($results[0] as $n => $v){
+			if($n != 'user_roles_id'){
+				$ret[$n] = $v;
+			}
+		}
+		$ret['roles'] = array();
+		foreach($results as $r){
+			if(isset($r['user_roles_id'])){
+				$ret['roles'][$r['user_roles_id']] = $r['user_role_name'];
+			}
+		}
+		return $ret;
 	}
 	
 	public function get_user_by_email($email){
@@ -271,5 +286,13 @@ class User_model extends Base_model{
 			return $result[0];
 		else
 			return null;
+	}
+	
+	public function get_all_assistants(){
+		$sql = "SELECT * FROM users u 
+			INNER JOIN user_and_role uar ON u.users_id=uar.user_id 
+			INNER JOIN user_roles ur ON ur.user_roles_id=uar.role_id
+			WHERE ur.user_roles_id=2";
+		return $this->db->query($sql);
 	}
 }

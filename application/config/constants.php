@@ -44,6 +44,9 @@ $grade_access = array(
 	'MD' => 'Marketing Director',
 	'SMD' => 'Senior Marketing Director',
 );
+define('KEY_LEAD', 1);
+define('ASSISTANT', 2);
+
 
 
 /* End of file constants.php */

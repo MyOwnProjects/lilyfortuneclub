@@ -281,8 +281,9 @@ function new_item(prop){//title, url, param){
 				//_search(this);
 			});
 			var $_filter_dropdown_menu = $('<ul>').addClass("dropdown-menu").css('width', '100%').css('margin', '0').appendTo($_filter_group);
+			$('<li data-value=""><a href="javascript:void(0)">All</a></li>').appendTo($_filter_dropdown_menu);
 			for(var filter_id in filter['options']){
-				$('<li data-value=' + filter_id + '><a href="javascript:void(0)">' + filter['options'][filter_id] + '</a></li>').appendTo($_filter_dropdown_menu);
+				$('<li data-value="' + filter_id + '"><a href="javascript:void(0)">' + filter['options'][filter_id] + '</a></li>').appendTo($_filter_dropdown_menu);
 			}
 			this.filter_dropdown_menu = $_filter_dropdown_menu;
 		}
@@ -436,6 +437,9 @@ function new_item(prop){//title, url, param){
 				if(_filter[filter['id']] != new_filter){
 					_filter[filter['id']] = new_filter;
 					_this.reload();
+				}
+				else if(new_filter == ''){
+					_filter = [];
 				}
 			});
 		}

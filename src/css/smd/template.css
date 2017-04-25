@@ -8,3 +8,7 @@ ul, ul li{padding:0;margin:0;list-style:none}
 .main-body-wrapper{padding:20px}
 .breadcrumb{background-color:#fff;margin-bottom:0;line-height:30px}
 
+.text-red{color:red}
+.text-lime{color:lime}
+.text-green{color:green}
+
