@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+
+     
+
+    RewriteEngine On
+
+    RewriteBase /
+ 
+
+    # Disable rewrite for valid directory/files     
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    RewriteCond %{REQUEST_FILENAME} !-d 
+
+ 
+
+ 	# Rewrite to index.php/URL
+
+	RewriteRule ^(.*)$ index.php?/$1 [PT,L]
+
+</IfModule>
+

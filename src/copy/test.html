@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="jquery.zclip.js"></script>
+</head>
+  <body>
+
+<input id="ddd" value="Hello"></input>
+<a href="#" id="copy-description">Copy to Clipboard</a>
+<script>
+$(document).ready(function(){
+    $('#copy-description').zclip({
+        path:'http://www.steamdev.com/zclip/js/ZeroClipboard.swf',
+        copy:$('#ddd').val()
+    });
+});
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,52 @@
+ul, li{margin:0;padding:0}
+ul{list-style:none}
+#main-header:after, #main-header-menu:after, #main-body-menu-bar:after, .clearfix:after{content:"";display: table;clear: both}
+body{font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin:0 auto;font-size:14px}
+#main-header{margin:0 auto;padding:5px 0;font-size:16px;background:url('../img/background/dark-wood-background-1013tm-pic-2573.jpg')}
+#main-header-menu{color:#fff;font-family:'AvenirLTStd-Medium', sans-serif, Arial;font-size:16px;margin-top:37px}
+.main-header-menu-item{margin-right:20px}
+.main-header-menu-item>a{color:#fff !important;text-decoration:none;}
+.main-header-menu-item>a:hover{color:#aaa}
+.main-header-menue-item .dropdown-menu, .main-header-menue-item .dropdown-menu a{ color: #d5d5d5}
+
+#main-header-menu-dropdown{display:none;font-size:26px;margin-top:3px;margin-right:10px}
+
+#logo{margin-left:20px}
+#logo a{text-decoration:none;color:#fff}
+#logo img{height:80px}
+footer{text-align:center;color:#353535;padding:20px 0 40px 0;font-size:14px;line-height:40px;/*background:url('/img/background/dark-wood-background-1013tm-pic-2573.jpg')*/}
+footer a{color:#fff}
+
+.wrapper-900{width:900px;margin:0 auto}
+.red, .error{color:#FF0000}
+
+.breadcrumb{background-color:#fff;margin-bottom:0;line-height:30px}
+
+.doc-list{margin-bottom:100px}
+.doc-list li{line-height:50px;font-size:16px;}	
+.doc-list, .doc-list li:not(:first-child){border-top:1px dotted #e5e5e5}
+.doc-list li .icon{margin-right:5px;}
+.doc-list img{height:20px;}
+
+
+@media only screen and (max-width:700px) {
+#main-header{padding:0}
+#logo{margin-left:0}
+#logo img{height:40px}
+#main-header-menu{display:none}
+#main-header-menu-dropdown{display:block}
+footer{display:none}
+}
+
+.main-content-wrapper{max-width:800px;margin:0 auto;padding:40px 0}
+.main-content-wrapper .breadcrumb{border-radius:0;border-bottom:1px solid #d5d5d5;background-color:#fff}
+@media only screen and (max-width:800px) {
+.main-content-wrapper{padding:10px 20px}
+}
+@media only screen and (max-width:400px) {
+}
+
+
+
+
+

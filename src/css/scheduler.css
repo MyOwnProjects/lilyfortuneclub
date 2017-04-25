@@ -1,0 +1,51 @@
+#smd-scheduler .scheduler-header:after{content:"";display: table;clear: both}
+#smd-scheduler .scheduler-header{padding:10px 0;text-align:center}
+#smd-scheduler .scheduler-header button.circle{border-radius:50%;width:30px;height:30px;border:none;}
+#smd-scheduler .scheduler-header .sheduler-title{font-size:18px;display:inline-block}
+#smd-scheduler table{width:100%;border-collapse:collapse}
+#smd-scheduler table{border:1px solid #b7b7b7}  
+#smd-scheduler table thead tr td{font-weight:bold;background:linear-gradient(#f8f8f8, #e8e8e8)}
+#smd-scheduler table tr td{position:relative}
+#smd-scheduler table tr td .div-back{position:absolute;top:0;right:0;bottom:0;left:0}
+#smd-scheduler table tr td:not(first-child) .div-back{border-left:1px solid #b7b7b7}
+#smd-scheduler table tbody tr td.h90 .div-back{border-top:1px solid #b7b7b7}
+#smd-scheduler table tbody tr:nth-child(odd) td.h20 .div-back{border-top:1px solid #b7b7b7}
+#smd-scheduler table tbody tr:nth-child(even) td.h20 .div-back{border-top:1px dashed #e7e7e7}
+#smd-scheduler table thead tr td:not(.w50){min-width:60px;text-align:center}
+#smd-scheduler table tbody tr td{text-align:right;vertical-align:top;}
+#smd-scheduler table tbody tr td.h90{height:90px;}
+#smd-scheduler table tbody tr td.h20{height:20px;}
+#smd-scheduler table tbody tr td div.inactive{color:#aaa}
+#smd-scheduler table tbody tr td div.plain-text{margin-right:5px} 
+#smd-scheduler table tr td.w50{width:50px;}
+#smd-scheduler .scheduler-event-block{opacity:0.8;text-align:left;font-size:11px;background:yellow;cursor:pointer;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;padding:0 2px}
+#smd-scheduler td.h20 .scheduler-event-block{position:absolute;left:0;right:0;top:0;bottom:0;}
+#smd-scheduler .scheduler-event-block-top-right-bottom-left{margin:2px 1px 1px 2px;border:1px solid #000;border-radius:3px;}
+#smd-scheduler .scheduler-event-block-top{border-top:1px solid #000}
+#smd-scheduler .scheduler-event-block-right{border-right:1px solid #000}
+#smd-scheduler .scheduler-event-block-bottom{border-bottom:1px solid #000}
+#smd-scheduler .scheduler-event-block-left{border-left:1px solid #000}
+#smd-scheduler .scheduler-event-block-top-right{border-top:1px solid #000;border-right:1px solid #000;border-top-right-radius:3px;}
+#smd-scheduler .scheduler-event-block-top-bottom{margin:2px 0 1px 0;border-top:1px solid #000;border-bottom:1px solid #000}
+#smd-scheduler .scheduler-event-block-top-left{margin:2px 0 0 2px;border-top:1px solid #000;border-left:1px solid #000;border-top-left-radius:3px;}
+#smd-scheduler .scheduler-event-block-right-bottom{margin:0 1px 1px 0;border-right:1px solid #000;border-bottom:1px solid #000;border-bottom-right-radius:3px;}
+#smd-scheduler .scheduler-event-block-right-left{margin:0 1px 0 2px;border-right:1px solid #000;border-left:1px solid #000}
+#smd-scheduler .scheduler-event-block-bottom-left{margin:0 0 1px 2px;border-bottom:1px solid #000;border-left:1px solid #000;border-bottom-left-radius:3px;}
+#smd-scheduler .scheduler-event-block-top-right-bottom{margin:2px 1px 1px 0;border-top:1px solid #000;border-right:1px solid #000;border-bottom:1px solid #000;border-top-right-radius:3px;border-bottom-right-radius:3px;}
+#smd-scheduler .scheduler-event-block-right-bottom-left{margin:0 1px 1px 2px;border-right:1px solid #000;border-bottom:1px solid #000;border-left:1px solid #000;border-bottom-right-radius:3px;border-bottom-left-radius:3px;}
+#smd-scheduler .scheduler-event-block-top-bottom-left{margin:2px 0 1px 2px;border-bottom:1px solid #000;border-left:1px solid #000;border-top:1px solid #000;border-bottom-left-radius:3px;border-top-left-radius:3px;}
+#smd-scheduler .scheduler-event-block-top-right-left{margin:2px 1px 0 2px;border-left:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-top-left-radius:3px;border-top-right-radius:3px;}
+#smd-scheduler table tbody tr td.h20 .scheduler-event-block-right-left{min-height:20px}
+#smd-scheduler table tbody tr td.h20 .scheduler-event-block-top-right-left,#smd-scheduler table tbody tr td.h20 .scheduler-event-block-right-bottom-left{min-height:18px;}
+#smd-scheduler .scheduler-event-block-red{color:#fff;background:#8B0000}
+#smd-scheduler .scheduler-event-block-yellow{color:#000;background:#FFDEAD}
+#smd-scheduler .scheduler-event-block-orange{color:#fff;background:orange}
+#smd-scheduler .scheduler-event-block-green{color:#fff;background:green}
+#smd-scheduler .scheduler-event-block-blue{color:#fff;background:blue}
+#smd-scheduler .scheduler-event-block-pink{color:#000;background:pink}
+#smd-scheduler .scheduler-event-block-purple{color:#fff;background:purple}
+#smd-scheduler .scheduler-event-block-grey{color:#fff;background:grey}
+#smd-scheduler .scheduler-event-block-olive{color:#000;background:olive}
+#smd-scheduler .scheduler-event-block-brown{color:#fff;background:brown}
+#smd-scheduler .scheduler-event-block-gold{color:#fff;background:gold}
+

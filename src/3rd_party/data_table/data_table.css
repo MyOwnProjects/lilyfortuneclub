@@ -1,0 +1,35 @@
+.data-table button:focus{outline:none}
+.data-table .table-group-bar>div, .data-table .customized_group>div{margin-bottom:10px}
+.data-table table{width:100%;table-layout:fixed}
+.data-table table td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.data-table table thead td{background:linear-gradient(#337ab7, #2e6da4)}
+.data-table table thead td:not(.data-table-checkbox){padding:2px 5px 2px 10px;}
+.data-table table tbody td:not(.data-table-checkbox){padding:5px 10px;font-size:14px;}
+.data-table table thead td.sortable{cursor:pointer}
+.data-table table thead td span{font-size:8px;margin-top:5px}
+.data-table table td.data-table-checkbox{text-align:center;width:30px}
+.data-table table tbody td.center{text-align:center;padding:20px}
+.data-table table tbody td.loading{padding:20px}
+.data-table table tbody td.loading div{width:40px;height:40px;margin:0 auto;background:url('spinning.gif') no-repeat;}
+.data-table table td.data-table-checkbox{text-align:center;}
+.data-table table tr:nth-child(even){background:#fafafa}
+.data-table table .data-table-action{text-align:center;width:70px}
+.data-table-action a:not(:first-child){margin-left:5px}
+.data-table table .data-table-action .glyphicon{cursor:pointer;}
+.data-table .data-table-button-group{float:left;margin-right:10px}
+.data-table .data-table-button-group .button{float:left;padding:10px 13px 7px 13px;cursor:pointer}
+.data-table .data-table-button-group .button:first-child{border-top-left-radius:3px;border-bottom-left-radius:3px}
+.data-table .data-table-button-group .button:last-child{border-top-right-radius:3px;border-bottom-right-radius:3px}
+
+.data-table .btn-group .btn-text{background:#fff;border-color:#2e6da4;cursor:default}
+
+.data-table .data-table-button-group{display:inline-block}
+
+.data-table table{border-width:1px;border-style:solid;border-color:#2e6da4;border-radius:10px}
+.data-table table thead td{border-width:1px;border-style:solid;border-color:#d5d5d5}
+.data-table table tbody td{vertical-align:middle;border-width:1px;border-style:solid;border-color:#e5e5e5}
+.data-table table tbody td img{height:16px;}
+
+
+
+
