@@ -101,13 +101,13 @@ $(document).delegate('#resource-list ul[data-role=listview] a', 'click', functio
 				$('.nav-prev').attr('data-id', data['prev']).removeClass( "ui-disabled" ).removeAttr( "aria-disabled");
 			}
 			else{
-				$('.nav-prev').addClass( "ui-disabled" ).attr( "aria-disabled", true );
+				$('.nav-prev').removeAttr('data-id').addClass( "ui-disabled" ).attr( "aria-disabled", true );
 			}
 			if(data['next']){
 				$('.nav-next').attr('data-id', data['next']).removeClass( "ui-disabled" ).removeAttr( "aria-disabled");
 			}
 			else{
-				$('.nav-next').addClass( "ui-disabled" ).attr( "aria-disabled", true );
+				$('.nav-next').removeAttr('data-id').addClass( "ui-disabled" ).attr( "aria-disabled", true );
 			}
 			var subject = $('<h4>').html(data['subject']);
 			var date = $('<div>').html(data['create_time']);
