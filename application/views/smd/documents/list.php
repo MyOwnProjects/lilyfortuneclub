@@ -40,16 +40,10 @@
 						success_reload: true,
 						checked: true,
 						callback: function(param){
-							$.ajax({
-								url: '<?php echo base_url();?>smd/documents/bulk_update/content_type',
-								success: new_item({
+							new_item({
 									title:'Update Document(s)', 
 									url: '<?php echo base_url();?>smd/documents/bulk_update/content_type',
 									param: param
-								}),
-								error: function(a, b, c){
-									Dialog.error(a.responseText);
-								}
 							});
 						}
 					},
@@ -58,17 +52,11 @@
 						success_reload: true,
 						checked: true,
 						callback: function(param){
-							$.ajax({
-								url: '<?php echo base_url();?>smd/documents/bulk_update/grade_access',
-								success: new_item({
+							new_item({
 									title: 'Update Document(s)', 
 									url: '<?php echo base_url();?>smd/documents/bulk_update/grade_access',
 									param: param
-								}),
-								error: function(a, b, c){
-									Dialog.error(a.responseText);
-								}
-							});
+								});
 						}
 					}
 				]
@@ -79,16 +67,10 @@
 				success_reload: true,
 				checked: true,
 				callback: function(param){
-					$.ajax({
-						url: '<?php echo base_url();?>smd/documents/delete',
-						success: new_item({
+					new_item({
 							title: 'Delete Document(s)', 
 							url: '<?php echo base_url();?>smd/documents/delete',
 							param: param
-						}),
-						error: function(a, b, c){
-							Dialog.error(a.responseText);
-						}
 					});
 				}
 			},

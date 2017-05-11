@@ -16,12 +16,8 @@ class Ac extends Base_Controller {
 				}
 				else{
 					$redirect = $this->input->get('redirect');
-					if(!empty($redirect)){
-						header("location: .".base_url()."account/".$redirect);
-					}
-					else{
-						header("location: ".base_url()."account");
-					}
+					$url = base_url()."account".(empty($redirect) ? "" : "/$redirect");
+					header("location: $url");
 				}
 				exit;
 			}
@@ -37,7 +33,7 @@ class Ac extends Base_Controller {
 	public function sign_out()
 	{
 		$this->unset_session_user();
-		header('location: '.base_url().'ac/sign_in');
+		header('location: '.base_url());
 	}
 	
 	public function reset_password(){

@@ -37,6 +37,14 @@ class Base_controller extends CI_Controller {
 	}
 	
 	public function load_view($view, $data = array()){
-		$this->load->view('template', array_merge(array('view' => $view, 'user' => $this->user), $data));
+		$this->load->library('user_agent');
+		if(true){
+		//if($this->agent->is_mobile()){
+			$this->load->view('mobile/template', array_merge(array('view' => 'mobile/'.$view, 'user' => $this->user), $data));
+		}
+		else{
+			$this->load->view('template', array_merge(array('view' => $view, 'user' => $this->user), $data));
+		}
 	}
+	
 }

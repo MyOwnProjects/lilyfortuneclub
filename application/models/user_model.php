@@ -295,4 +295,24 @@ class User_model extends Base_model{
 			WHERE ur.user_roles_id=2";
 		return $this->db->query($sql);
 	}
+	
+	public function get_prospect_list($where = ''){
+		$sql = "SELECT * FROM prospects".(empty($where) ? "" : " WHERE $where");
+		return $this->db->query($sql);
+	}
+	
+	public function insert_prospect($prop){
+		$fields = array();
+		$values = array();
+		foreach($prop as $n => $v){
+			array_push($fields, "`$n`");
+			array_push($values, isset($v) ? "'$v'" : "NULL");
+		}
+		$sql = "INSERT INTO prospects (".implode(",", $fields).") VALUES (".implode(",", $values).")";
+		
+		return $this->db->query($sql) && $this->db->insert_id() > 0;
+	}
+	
+	public function update_prospect($prop, $where){
+	}
 }

@@ -12,7 +12,7 @@ class Resource extends Base_Controller {
 		//$this->load_view('resource/index');
 		//return;
 		$result = $this->resource_model->get_items("access = 0");
-		$this->load_view('resource/index', array('resource_list' => $result));
+		$this->load_view('resource', array('resource_list' => $result));
 	}
 	
 	public function get_list(){
@@ -27,11 +27,26 @@ class Resource extends Base_Controller {
 			if(sha1($id) == substr($raw_id, 0, 40)){
 				$result = $this->resource_model->get_items("resources_id = '$id' AND access = 0");
 				if(count($result) > 0){
-					$this->load_view('resource/item', array('resource' => $result[0], 'web_title' => $result[0]['subject']));
+					$prev = $this->resource_model->get_prev($id);
+					$next = $this->resource_model->get_next($id);
+					if($this->input->is_ajax_request()){
+						if($prev){
+							$result[0]['prev'] = $prev['url_id'];
+						}
+						if($next){
+							$result[0]['next'] = $next['url_id'];
+						}
+						echo json_encode($result[0]);
+					}
+					else{
+						$this->load_view('resource_item', array('resource' => $result[0], 'web_title' => $result[0]['subject']));
+					}
 					return;
 				}
 			}
 		}
-		header('location: '.base_url().'resource');
+		if(!$this->input->is_ajax_request()){
+			header('location: '.base_url().'resource');
+		}
 	}
 }

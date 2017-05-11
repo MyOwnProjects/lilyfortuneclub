@@ -47,17 +47,11 @@
 				success_reload: true,
 				checked: true,
 				callback: function(param){
-					$.ajax({
-						url: '<?php echo base_url();?>smd/live/delete',
-						success: new_item({
+					new_item({
 							title: 'Delete Document(s)', 
 							url: '<?php echo base_url();?>smd/live/delete',
 							param: param
-						}),
-						error: function(a, b, c){
-							Dialog.error(a.responseText);
-						}
-					});
+						});
 				}
 			},
 		],

@@ -11,7 +11,7 @@ class Profile extends Account_base_controller {
 		$error = '';
 		$success = '';
 		$result = $this->user_model->get_user_by_id($this->user['users_id']);
-		$this->load_view('account/profile', array('error' => $error, 'success' => $success, 'user' => $result));
+		$this->load_view('profile', array('error' => $error, 'success' => $success, 'user' => $result));
 	}
 }
 

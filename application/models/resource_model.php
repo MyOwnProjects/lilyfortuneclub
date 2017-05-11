@@ -46,4 +46,21 @@ class Resource_model extends Base_model{
 		$sql = "DELETE FROM resources ".(empty($where) ? "" : " WHERE $where");
 		$this->db->query($sql);
 	}
+	
+	public function get_prev($resource_id){
+		$sql = "SELECT *, CONCAT(SHA1(resources_id), resources_id) AS url_id FROM resources WHERE resources_id > '$resource_id' LIMIT 1";
+		$result = $this->db->query($sql);
+		if(count($result) == 1){
+			return $result[0];
+		}
+	}
+	
+	public function get_next($resource_id){
+		$sql = "SELECT *, CONCAT(SHA1(resources_id), resources_id) AS url_id FROM resources WHERE resources_id < '$resource_id' LIMIT 1";
+		$result = $this->db->query($sql);
+		if(count($result) == 1){
+			return $result[0];
+		}
+	}
+	
 }

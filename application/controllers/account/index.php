@@ -9,7 +9,7 @@ class Index extends Account_base_controller {
 	
 	public function index()
 	{
-		$this->load_view('account/welcome', array());
+		header('location: '.base_url().'account/startup');
 	}
 }
 

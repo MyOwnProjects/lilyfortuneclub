@@ -19,16 +19,10 @@
 				success_reload: true,
 				checked: true,
 				callback: function(param){
-					$.ajax({
+					new_item({
+						title: 'Delete Tasks', 
 						url: '<?php echo base_url();?>smd/tasks/delete',
-						success: new_item({
-							title: 'Delete Tasks', 
-							url: '<?php echo base_url();?>smd/tasks/delete',
-							param: param
-						}),
-						error: function(a, b, c){
-							Dialog.error(a.responseText);
-						}
+						param: param
 					});
 				}
 			}

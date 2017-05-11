@@ -15,7 +15,13 @@
 				success_reload: true,
 				checked: true,
 				callback: function(param){
-					$.ajax({
+					new_item({
+							title: 'Delete Resource(s)', 
+							url: '<?php echo base_url();?>smd/resources/delete',
+							param: param,
+							button_labels: {primary: 'Yes', cancel: 'No'}
+						});
+					/*$.ajax({
 						url: '<?php echo base_url();?>smd/resources/delete',
 						success: new_item({
 							title: 'Delete Resource(s)', 
@@ -26,7 +32,7 @@
 						error: function(a, b, c){
 							Dialog.error(a.responseText);
 						}
-					});
+					});*/
 				}
 			},
 		],

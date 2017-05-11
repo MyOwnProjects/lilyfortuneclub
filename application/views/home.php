@@ -9,7 +9,72 @@
 	});
 </script>
 <div id="main-home">
-	<div id="main-home-slide" class="carousel slide" data-ride="carousel">
+	<div class="swiper-container">
+		<div class="swiper-wrapper" style="height:580px">
+			<div class="swiper-slide item active clearfix" id="slider-about">
+				<div class="slider-content-wrapper">
+					<div class="slider-content-subject">Who We Are?</div>
+					<ul class="slider-content-body">
+						<li>We are Financial Doctors</li>
+						<li>We are Financial Brokers</li>
+					</ul>
+				</div>
+			</div>
+			<div class="swiper-slide item clearfix" id="finance-status">
+				<div class="slider-content-wrapper">
+					<div class="slider-content-subject">What We Do?</div>
+					<ul class="slider-content-body">
+						<li>We help provide Solutions</li>
+						<li>Client Oriented vs. Company Oriented</li>
+						<li>Education Approach</li>
+					</ul>
+				</div>
+			</div>
+			<div class="swiper-slide item clearfix" id="diy">
+				<div class="slider-content-wrapper">
+							<div class="slider-content-subject">Great Business Opportunity</div>
+							<ul class="slider-content-body">
+								<li>Huge Market / Product Service</li>
+								<li>Powerful and Efficient System</li>
+								<li>Great Profitability</li>
+								<li>Doable</li>
+							</ul>
+				</div>
+			</div>
+			<div class="swiper-slide item clearfix" id="business-partner">
+				<div class="slider-content-wrapper">
+					<div class="slider-content-subject">Become Our Business Partners</div>
+					<ul class="slider-content-body">
+						<li>Financial Knowledge</li>
+						<li>Leadership Skills</li>
+						<li>Field Training</li>
+						<li>CEO of your own Business</li>
+					</ul>
+				</div>
+			</div>
+
+</div>
+ 
+<div class="swiper-pagination"></div>
+ 
+<div class="swiper-button-next"></div>
+<div class="swiper-button-prev"></div>
+</div>
+	<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/swiper/css/swiper.min.css">
+	<script src="<?php echo base_url();?>src/3rd_party/swiper/js/swiper.min.js"></script>
+	<script>
+	var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        slidesPerView: 1,
+        paginationClickable: true,
+        spaceBetween: 0,
+        loop: true
+    });
+	</script>
+	
+	<!--div id="main-home-slide" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
 		  <li data-target="#main-home-slide" data-slide-to="0" class="active"></li>
 		  <li data-target="#main-home-slide" data-slide-to="1"></li>
@@ -68,7 +133,7 @@
 			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
-	</div>
+	</div-->
 		
 	<div id="text-block">
 		<div class="row">

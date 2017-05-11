@@ -21,16 +21,10 @@
 				text: '<span class="glyphicon glyphicon-plus"></span>&nbsp;New',
 				success_reload: true,
 				callback: function(param){
-					$.ajax({
-						url: '<?php echo base_url();?>smd/team/add_memner',
-						success: new_item({
-							title: 'Add Member', 
-							url: '<?php echo base_url();?>smd/team/add_member',
-							param: param
-						}),
-						error: function(a, b, c){
-							Dialog.error(a.responseText);
-						}
+					new_item({
+						title: 'Add Member', 
+						url: '<?php echo base_url();?>smd/team/add_member',
+						param: param
 					});
 				}
 			}

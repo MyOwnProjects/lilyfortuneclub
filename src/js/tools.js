@@ -96,3 +96,22 @@ $.fn.scrollBottom = function(scroll){
 		return $(document).height() - $(window).height() - $(window).scrollTop();
 	}
 }
+
+function ajax_loading(show){
+	if(show){
+		if($('#ajax-loading').length){
+			$('#ajax-loading').show();
+		}
+		else{
+			var $_div = $('<div>').attr('id', 'ajax-loading').css('position', 'fixed').css('margin', '100px auto 0 auto').css('left', '0').css('right', '0')
+				.css('width', '400px').css('border', '1px solid #d5d5d5').css('background', '#fff').css('z-index', '10000').css('text-align', 'center').css('padding', '20px 0')
+				.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>');
+			$('body').append($_div);
+		}
+	}
+	else{
+		if($('#ajax-loading').length){
+			$('#ajax-loading').hide();
+		}
+	}
+}

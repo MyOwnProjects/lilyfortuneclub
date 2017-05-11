@@ -15,17 +15,11 @@
 				text: '<span class="glyphicon glyphicon-plus"></span>&nbsp;Add',
 				success_reload: true,
 				callback: function(param){
-					$.ajax({
-						url: '<?php echo base_url();?>smd/schedule/add',
-						success: new_item({
+					new_item({
 							title: 'Add Schedule', 
 							url: '<?php echo base_url();?>smd/schedule/add',
 							param: param
-						}),
-						error: function(a, b, c){
-							Dialog.error(a.responseText);
-						}
-					});
+						});
 				}
 			},
 			{
@@ -37,16 +31,10 @@
 						success_reload: true,
 						checked: true,
 						callback: function(param){
-							$.ajax({
-								url: '<?php echo base_url();?>smd/schedule/update/access',
-								success: new_item({
+							new_item({
 									title: 'Update Schedule(s) Access', 
 									url: '<?php echo base_url();?>smd/schedule/update/access',
 									param: param
-								}),
-								error: function(a, b, c){
-									Dialog.error(a.responseText);
-								}
 							});
 						}
 					},
@@ -55,16 +43,10 @@
 						success_reload: true,
 						checked: true,
 						callback: function(param){
-							$.ajax({
-								url: '<?php echo base_url();?>smd/schedule/update/time',
-								success: new_item({
+							new_item({
 									title: 'Update Schedule(s) Time', 
 									url: '<?php echo base_url();?>smd/schedule/update/time',
 									param: param
-								}),
-								error: function(a, b, c){
-									Dialog.error(a.responseText);
-								}
 							});
 						}
 					},					
@@ -73,16 +55,10 @@
 						success_reload: true,
 						checked: true,
 						callback: function(param){
-							$.ajax({
+							new_item({
+								title: 'Update Schedule(s) Location', 
 								url: '<?php echo base_url();?>smd/schedule/update/location',
-								success: new_item({
-									title: 'Update Schedule(s) Location', 
-									url: '<?php echo base_url();?>smd/schedule/update/location',
-									param: param
-								}),
-								error: function(a, b, c){
-									Dialog.error(a.responseText);
-								}
+								param: param
 							});
 						}
 					}
@@ -94,16 +70,10 @@
 				success_reload: true,
 				checked: true,
 				callback: function(param){
-					$.ajax({
+					new_item({
+						title: 'Delete Schedule(s)', 
 						url: '<?php echo base_url();?>smd/schedule/delete',
-						success: new_item({
-							title: 'Delete Schedule(s)', 
-							url: '<?php echo base_url();?>smd/schedule/delete',
-							param: param
-						}),
-						error: function(a, b, c){
-							Dialog.error(a.responseText);
-						}
+						param: param
 					});
 				}
 			},

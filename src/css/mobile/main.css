@@ -1,0 +1,49 @@
+.clearfix:before,.clearfix:after{display: table;content: " ";}
+.clearfix:after{clear: both;}
+a.nondec{color:#000 !important;text-decoration:none;font-weight:normal}
+
+#main-menu .menu-list{padding:10px;display:block}
+#main-menu .menu-list:not(:last-child){border-bottom:1px solid #d5d5d5}
+
+.page-nav{text-align:center;padding:10px;margin-top:20px;border-top:1px solid #d5d5d5}
+
+[data-role=header] h1{font-weight:bold}
+
+.pageq1{background:rgba(255, 255, 255, 1)}
+.page1 .page1-header{position:fixed;z-index:1000;top:0;left:0;right:0;line-height:30px;border-bottom1:1px solid #d5d5d5}
+
+.list1{list-style:none;padding:0;margin:0}
+.list1>li{margin:15px 0;padding-left:25px;line-height:18px;background:url(../../img/finger-of-a-hand-pointing-to-right-direction.svg) no-repeat;background-size:18px 18px}
+#list-phone{background-image:url(../../img/telephone.svg);background-repeat:no-repeat;background-position:left top;background-size:18px 18px}
+#list-email{background-image:url(../../img/email-filled-closed-envelope.svg);background-repeat:no-repeat;background-position:left top;background-size:18px 18px}
+#list-wechat{background-image:url(../../img/wechat.svg);background-repeat:no-repeat;background-position:left top;background-size:18px 18px}
+
+.list2{list-style-type:none;list-style-position:inside;padding:0;margin:0;}
+.list2>li{padding-left:10px;line-height:18px;margin:4px 0}
+.btn-1{background:#2196F3 !important;opacity:1 !important;color:#FFF !important;font-weight:normal !important}
+
+.list3{padding:0 0 0 20px;margin:0 0 20px 0;list-style-position:outside;list-style-type:square}
+
+.list4>li{padding:0 0 0 20px !important;line-height:47px;}
+.list4>li .ui-btn{float:right}
+
+.ui-field-contain{padding-bottom:1em}
+
+.resource-list-thumbnail{
+    float:left;
+    width:80px;
+    height:50px;
+    border: 1px solid #efefef;
+    margin-right: 20px;
+    text-align: center;
+    padding: 2px
+}
+.resource-list-thumbnail img{
+    width: 74px;
+    height: 44px;
+    display: inline
+}
+.resource-list-text{overflow:hidden}
+.resource-list-text .sub{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:bold;line-height:26px;color:#2489ce}
+.resource-list-text .info{font-size:12px;font-weight:normal;line-height:24px}
+.content-image img{width:auto;max-width:100%}

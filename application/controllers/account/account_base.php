@@ -5,7 +5,7 @@ class Account_base_controller extends Base_Controller {
 	public function __construct(){
 		parent::__construct();
 		if(empty($this->user)){
-			header('location: '.base_url().'ac/sign_in');
+			header('location: '.base_url());
 			exit;
 		}
 	}

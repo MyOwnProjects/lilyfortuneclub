@@ -1,16 +1,11 @@
-.carousel-inner>.item{text-align:center;}
-#main-home-slide .carousel-inner, #main-home-slide .carousel-inner .item, #main-home-slide .carousel-inner .item .slider-content-wrapper{height:100%}
-/*.carousel-inner>.item .slider-content-wrapper{min-width:400px;padding:80px;position:absolute;top:0;left:0;right:0;bottom:0;background:#000;opacity:0.8;z-index:100;text-align:center;color:#fff;left:15%;width:30%;text-align:left}
-*/
-.carousel-inner>.item .slider-content-wrapper{float:left;width:400px;padding:80px;background:rgba(0, 0, 0, 0.8);color:#fff;text-align:left;margin-left:15%}
-
-
-.carousel-inner>.item .slider-content-subject{font-family: 'Open Sans Condensed', sans-serif;/*font-family: 'Titillium Web', sans-serif;*/font-size:40px;line-height:40px;margin-bottom:30px}
-.carousel-inner>.item .slider-content-body{font-family: 'Open Sans Condensed', sans-serif;font-size:24px;}
-.carousel-inner #slider-about{background:url(../img/background/ict-goals-1.jpg) #fff no-repeat;background-size:100% auto;}
-.carousel-inner #finance-status{background:url(../img/background/finance-banner-banks-glass-buildings.jpg) #fff no-repeat;background-size:100% auto;}
-.carousel-inner #diy{background:url(../img/background/finance_status.jpg) #fff no-repeat;background-size:100% auto;}
-.carousel-inner #business-partner{background:url(../img/background/hex1600640.jpg) #fff no-repeat;background-size:100% auto;}
+.swiper-slide{text-align:center;height:100%}
+.swiper-slide .slider-content-wrapper{height:100%;float:left;width:400px;padding:80px;background:rgba(0, 0, 0, 0.8);color:#fff;text-align:left;margin-left:15%}
+.swiper-wrapper .slider-content-subject{font-family: 'Open Sans Condensed', sans-serif;/*font-family: 'Titillium Web', sans-serif;*/font-size:40px;line-height:40px;margin-bottom:30px}
+.swiper-wrapper .slider-content-body{font-family: 'Open Sans Condensed', sans-serif;font-size:24px;}
+.swiper-wrapper #slider-about{background:url(../img/background/ict-goals-1.jpg) #fff no-repeat;background-size:100% 100%;}
+.swiper-wrapper #finance-status{background:url(../img/background/finance-banner-banks-glass-buildings.jpg) #fff no-repeat;background-size:100% 100%;}
+.swiper-wrapper #diy{background:url(../img/background/finance_status.jpg) #fff no-repeat;background-size:100% 100%;}
+.swiper-wrapper #business-partner{background:url(../img/background/hex1600640.jpg) #fff no-repeat;background-size:100% 100%;}
 	.slider-content-body li{line-height:50px;}
 	.slider-content-body{list-style-type:square}
 
