@@ -48,7 +48,7 @@ foreach($pages as $i => $p){
 <?php
 }
 ?>
-<div data-role="page" id="invitation-why">
+<div data-role="page" id="invitation-why" data-theme="d">
 	<div data-role="header" data-theme="e">
 		<h1>Bring your guest to office</h1>
 		<a data-rel="back" data-icon="back" data-iconpos="notext" data-direction="reverse">Back</a>
@@ -63,7 +63,7 @@ foreach($pages as $i => $p){
 		<?php }?>
 	</div>
 </div>
-<div data-role="page" id="invitation-how">
+<div data-role="page" id="invitation-how" data-theme="d">
 	<div data-role="header" data-theme="e">
 		<b>How to invite your guests?</b>
 		<a data-rel="back" data-icon="back" data-iconpos="notext" data-direction="reverse">Back</a>
@@ -84,9 +84,9 @@ foreach($pages as $i => $p){
 		<?php }?>
 	</div>
 </div>
-<div data-role="page" id="invitation-scripts">
+<div data-role="page" id="invitation-scripts" data-theme="d">
 	<div data-role="header" data-theme="e">
-		<b>Invitation Scripts</b>
+		<h1>Invitation Scripts</h1>
 		<a data-rel="back" data-icon="back" data-iconpos="notext" data-direction="reverse">Back</a>
 	</div>
 	<div data-role="content">
@@ -105,9 +105,9 @@ foreach($pages as $i => $p){
 		<?php }?>
 	</div>
 </div>
-<div data-role="page" id="invitation-scripts-cn">
+<div data-role="page" id="invitation-scripts-cn" data-theme="d">
 	<div data-role="header" data-theme="e">
-		<b>中文邀请示例</b>
+		<h1>中文邀请示例</h1>
 		<a data-rel="back" data-icon="back" data-iconpos="notext" data-direction="reverse">Back</a>
 	</div>
 	<div data-role="content">
@@ -126,7 +126,7 @@ foreach($pages as $i => $p){
 		<?php }?>
 	</div>
 </div>
-<div data-role="page" id="objection">
+<div data-role="page" id="objection" data-theme="d">
 	<div data-role="header" data-theme="e">
 		<h1>Handling Objection</h1>
 		<a data-rel="back" data-icon="back" data-iconpos="notext" data-direction="reverse">Back</a>
