@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
-		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.mobile-1.4.5/theme-classic1.css">
+		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.mobile-1.4.5/theme-classic.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/w3.css?<?php echo time();?>">
 		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>src/css/mobile/main.css?<?php echo time();?>">
