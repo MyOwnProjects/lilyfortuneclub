@@ -65,7 +65,7 @@ foreach($pages as $i => $p){
 </div>
 <div data-role="page" id="invitation-how" data-theme="d">
 	<div data-role="header" data-theme="e">
-		<b>How to invite your guests?</b>
+		<h1>How to invite your guests?</h1>
 		<a data-rel="back" data-icon="back" data-iconpos="notext" data-direction="reverse">Back</a>
 	</div>
 	<div data-role="content">
