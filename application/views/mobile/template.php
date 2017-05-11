@@ -37,7 +37,7 @@
 		//$this->load->view("mobile/footer", $this->_ci_cached_vars);
 		?>
 		<div data-role="page" id="main-menu" data-theme="d">
-			<a data-rel="back" class="nondec menu-list" data-transition="slide" data-direction="reverse" style="text-align:right;font-size:26px">×</a>
+			<a data-rel="back" class="nondec menu-list" data-transition="slide" data-direction="reverse" style="text-align:right">×</a>
 			<a href="<?php echo base_url();?>" data-ajax="false" class="nondec menu-list">Home</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>resource">Resource</a>
 			<a  class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>events">Events</a>
