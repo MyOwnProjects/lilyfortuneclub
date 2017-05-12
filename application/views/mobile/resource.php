@@ -16,8 +16,8 @@
 	<div data-role="main" class="ui-content">
 		<div class="resource-content"></div>
 		<div class="page-nav">
-			<a class="nav-prev ui-btn-b" data-role="button" data-icon="arrow-l" href="resource#view-resource-1" data-transition="slide" data-iconpos="left" data-inline="true" data-mini="true" data-theme="b" data-direction="reverse">Prev</a>
-			<a class="nav-next ui-btn-b" data-role="button" data-icon="arrow-r" href="resource#view-resource-1" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true" data-theme="b">Next</a>
+			<a class="nav-prev ui-btn-b" data-role="button" data-icon="arrow-l" href="resource#view-resource-1" data-transition="slide" data-iconpos="left" data-inline="true" data-mini="true" data-theme="e" data-direction="reverse">Prev</a>
+			<a class="nav-next ui-btn-b" data-role="button" data-icon="arrow-r" href="resource#view-resource-1" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true" data-theme="e">Next</a>
 		</div>
 	</div>
 </div>
@@ -29,8 +29,8 @@
 	<div data-role="main" class="ui-content">
 		<div class="resource-content"></div>
 		<div class="page-nav">
-			<a class="nav-prev ui-btn-b" data-role="button" data-icon="arrow-l" href="resource#view-resource-0" data-transition="slide" data-iconpos="left" data-inline="true" data-mini="true" data-theme="b" data-direction="reverse">Prev</a>
-			<a class="nav-next ui-btn-b" data-role="button" data-icon="arrow-r" href="resource#view-resource-0" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true" data-theme="b">Next</a>
+			<a class="nav-prev ui-btn-b" data-role="button" data-icon="arrow-l" href="resource#view-resource-0" data-transition="slide" data-iconpos="left" data-inline="true" data-mini="true" data-theme="e" data-direction="reverse">Prev</a>
+			<a class="nav-next ui-btn-b" data-role="button" data-icon="arrow-r" href="resource#view-resource-0" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true" data-theme="e">Next</a>
 		</div>
 	</div>
 </div>
