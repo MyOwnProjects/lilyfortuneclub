@@ -315,4 +315,9 @@ class User_model extends Base_model{
 	
 	public function update_prospect($prop, $where){
 	}
+	
+	public function delete_prospect($ids = array()){
+		$sql = "DELETE FROM prospects WHERE prospects_id IN ('".implode("','", $ids)."')";
+		return $this->db->query($sql);
+	}
 }

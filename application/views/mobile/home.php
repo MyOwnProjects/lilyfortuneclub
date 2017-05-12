@@ -6,9 +6,9 @@
 .text-block-desc{font-size:16px;line-height:30px;text-align:left;font-family: 'Open Sans Condensed', sans-serif;list-style:square outside;}
 img{width:100%;max-width:400px;max-height:200px}
 </style>
-<div data-role="page" id="home">
+<div data-role="page" id="home" data-theme="d">
 	<?php $this->load->view('mobile/header', array('header_text' => 'Home'));?>
-	<div data-role="content" data-theme="d">
+	<div data-role="main" class="ui-content" data-theme="d">
 		<div class="ui-grid-solo ui-responsive">
 			<div class="ui-block-a">
 				<img src="<?php echo base_url();?>src/img/x-curve.png">
@@ -67,22 +67,22 @@ img{width:100%;max-width:400px;max-height:200px}
 				<img src="<?php echo base_url();?>src/img/72-rule.png">
 			</div>
 		</div>
+		<?php if(empty($user)) {
+		?>
+		<div class="ui-grid-solo ui-responsive" id="sign_in">
+			<div>
+				<h3 style="text-align:center">Sign in you account</h3>
+				<form method="post" data-ajax="false" action="<?php echo base_url();?>ac/sign_in">
+					<input type="text" name="username" placeholder="Username" required>
+					<input type="password" name="password" placeholder="Password" required>
+					<label for="save_password">Save Password</label>
+					<input type="checkbox" name="save_password" id="save_password" chacked>
+					<button type="submit" class="btn-1 ui-btn ui-corner-all">Sign in</button>
+				</form>
+			</div>
+		</div>	
+		<?php
+		}
+		?>
 	</div>
-	<?php if(empty($user)) {
-	?>
-	<div class="ui-grid-solo ui-responsive" id="sign_in">
-		<div class="ui-block-a">
-			<h3 style="text-align:center">Sign in you account</h3>
-			<form method="post" data-ajax="false" action="<?php echo base_url();?>ac/sign_in">
-				<input type="text" name="username" placeholder="Username" required>
-				<input type="password" name="password" placeholder="Password" required>
-				<label for="save_password">Save Password</label>
-				<input type="checkbox" name="save_password" id="save_password" chacked>
-				<button type="submit" class="btn-1 ui-btn ui-corner-all">Sign in</button>
-			</form>
-		</div>
-	</div>	
-	<?php
-	}
-	?>
 </div>

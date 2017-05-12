@@ -33,12 +33,12 @@ foreach($pages as $i => $p){
 		</ul>
 		<div class="page-nav">
 			<?php if($i > 0){?>
-			<a class="nav-prev" data-role="button" data-icon="arrow-l" href="business#step-<?php echo $i - 1;?>" data-transition="slide" data-iconpos="left" data-inline="true" data-mini="true" data-direction="reverse">Prev</a>
+			<a class="nav-prev" data-role="button" data-inline="true" data-mini="true" data-theme="b" data-icon="arrow-l" href="business#step-<?php echo $i - 1;?>" data-transition="slide" data-iconpos="left" data-direction="reverse">Prev</a>
 			<?php
 			}
 			if($i < count($pages) - 1){
 			?>
-			<a class="nav-next" data-role="button" data-icon="arrow-r" href="business#step-<?php echo $i + 1;?>" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true">Next</a>
+			<a class="nav-next" data-role="button" data-icon="arrow-r" data-theme="b" href="business#step-<?php echo $i + 1;?>" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true">Next</a>
 			<?php
 			}
 			?>
@@ -210,15 +210,29 @@ foreach($pages as $i => $p){
 	</div>
 </div>
 
+<div data-role="page" data-dialog="true" id="confirm-delete-prospect" data-theme="e" data-overlay-theme="d">
+	<div data-role="header" >
+		<h1>Confirmation!</h1>
+	</div>	
+	<div data-role="main" class="ui-content" data-theme="e">
+		<p>Delete this prospect?</p>
+		<div style="text-align:right">
+			<a data-role="button" data-rel="back" data-inline="true" data-mini="true" data-theme="e" onclick="delete_prospect();">Delete</a>
+			<a data-role="button" data-rel="back" data-inline="true" data-mini="true" data-theme="d">Cancel</a>
+		</div>
+	</div>
+</div>
+
 <div id="delete-prospect-opoup-content" style="display:none">
 	<p data-theme="e">Delete this prospect?</p>
 	<div>
-	<a href="#" data-rel="back" class="ui-btn ui-btn-inline ui-corner-all ui-mini" data-mini="true">Delete</a>
-	<a href="#" data-rel="back" class="ui-btn ui-btn-inline ui-corner-all">Cancel</a>
+		<a class="nav-prev" data-role="button" data-inline="true" data-mini="true" data-theme="b" data-icon="arrow-l" href="#" data-transition="slide" data-iconpos="left" data-direction="reverse">Prev</a>
+		<a href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true" data-theme="e">Delete</a>
+		<a data-rel="back" class="ui-btn ui-btn-inline ui-corner-all ui-mini">Cancel</a>
 	</div>
 </div>
 <script>
-var edit_prospect_id = 0;
+var selected_prospect_id = 0;
 
 function load_prospect(){
 	$.mobile.loading( 'show', {
@@ -235,8 +249,8 @@ function load_prospect(){
 				for(var i = 0; i < data.length; ++i){
 					$('<li>').attr('data-id', data[i]['prospects_id']).addClass("clearfix").addClass("ui-li-static").addClass("ui-body-inherit")
 						.append('<span>' + data[i]['prospects_name'] + '</span>')
-						.append('<span class="delete-prospect ui-btn ui-btn-icon-notext ui-icon-delete ui-corner-all ui-btn-inline"></span>')
-						.append('<span class="edit-prospect ui-btn ui-btn-icon-notext ui-icon-edit ui-corner-all ui-btn-inline"></span>')
+						.append('<a href="#confirm-delete-prospect" class="delete-prospect"><span class="delete-prospect ui-btn ui-btn-icon-notext ui-icon-delete ui-corner-all ui-btn-inline ui-btn-b"></span></a>')
+						.append('<a href="#edit-prospect"><span class="edit-prospect ui-btn ui-btn-icon-notext ui-icon-edit ui-corner-all ui-btn-inline ui-btn-e"></span></a>')
 						.appendTo(pl);
 				}
 			}
@@ -256,24 +270,43 @@ function load_prospect(){
 }
 
 function delete_prospect(){
-
-}
-
-function edit_prospect(){
-alert(1);
 	$.mobile.loading( 'show', {
 		theme: 'z',
 		html: ""
 	});
 	$.ajax({
-		url: '<?php echo base_url();?>account/business/update_prospect/' + edit_prospect_id,
+		url: '<?php echo base_url();?>account/business/delete_prospect/' + selected_prospect_id,
+		dataType: 'json',
+		success: function(data){
+			if(!data['success']){
+				$('#popup').html('Failed to delete prospect.').popup('open');
+			}
+		},
+		error: function(){
+		},
+		complete: function(){
+			$.mobile.loading( 'hide', {
+				theme: 'z',
+				html: ""
+			});
+		}
+	});
+}
+
+function edit_prospect(){
+	$.mobile.loading( 'show', {
+		theme: 'z',
+		html: ""
+	});
+	$.ajax({
+		url: '<?php echo base_url();?>account/business/update_prospect/' + selected_prospect_id,
 		dataType: 'json',
 			success: function(data){
 				if(data['success']){
 					$.mobile.changePage('bisubess#edit-prospect', { transition: "slide"} );
 				}
 				else{
-					$('#popup').html().popup('open');
+					$('#popup').html('Failed to update prospect.').popup('open');
 				}
 			},
 			error: function(){
@@ -327,17 +360,16 @@ function save_prospect(){
 }
 	
 $(document).on("pageshow","#prospects",function(){
+	selected_prospect_id = 0;
 	load_prospect();
 }).on('pagebeforeshow', '#edit-prospect', function(){
-	$('#edit-prospect [data-role=header] h1').html(edit_prospect_id ? 'Edit Proespect' : 'New Proespect');
+	$('#edit-prospect [data-role=header] h1').html(selected_prospect_id ? 'Edit Proespect' : 'New Proespect');
 }).on('pagehide', '#edit-prospect', function(){
-	edit_prospect_id = 0;
+	selected_prospect_id = 0;
 }).delegate('.edit-prospect', 'click', function(){
-	edit_prospect_id = $(this).parent().attr('data-id');
+	selected_prospect_id = $(this).parent().attr('data-id');
 	edit_prospect();
 }).delegate('.delete-prospect', 'click', function(){
-	edit_prospect_id = $(this).parent().attr('data-id');
-	$('#popup').html($('#delete-prospect-opoup-content').html()).popup('open');
-	delete_prospect();
+	selected_prospect_id = $(this).parent().attr('data-id');
 });
 </script>

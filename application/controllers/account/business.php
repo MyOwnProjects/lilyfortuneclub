@@ -215,6 +215,12 @@ class Business extends Account_base_controller {
 			}
 		}
 	}
+	
+	public function delete_prospect($id = 0){
+		$ret = $this->user_model->delete_prospect(array($id));
+		echo json_encode(array('success' => $ret));
+	}
+	
 }
 
 /* End of file welcome.php */
