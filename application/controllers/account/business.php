@@ -184,6 +184,11 @@ class Business extends Account_base_controller {
 		echo json_encode($result);
 	}
 	
+	public function get_prospect($id){
+		$result = $this->user_model->get_prospect_list("prospects_id='$id'");
+		echo json_encode($result);
+	}
+	
 	public function update_prospect(){
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$id = $this->input->post('id');
@@ -212,6 +217,16 @@ class Business extends Account_base_controller {
 				echo json_encode(array('success' => $ret));
 			}
 			else{
+				$ret = $this->user_model->update_prospect(array(
+					'prospects_user_id' => $this->user['users_id'],
+					'prospects_name' => $name,
+					'prospects_relationship' => $relationship,
+					'prospects_phone' => $phone,
+					'prospects_email' => $email,
+					'prospects_profile' => $pi,
+					'prospects_background' => $background
+				), "prospects_id='$id'");
+				echo json_encode(array('success' => $ret));
 			}
 		}
 	}

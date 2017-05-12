@@ -306,7 +306,7 @@ class User_model extends Base_model{
 		$values = array();
 		foreach($prop as $n => $v){
 			array_push($fields, "`$n`");
-			array_push($values, isset($v) ? "'$v'" : "NULL");
+			array_push($values, isset($v) ? "'".addslashes($v)."'" : "NULL");
 		}
 		$sql = "INSERT INTO prospects (".implode(",", $fields).") VALUES (".implode(",", $values).")";
 		
@@ -314,6 +314,12 @@ class User_model extends Base_model{
 	}
 	
 	public function update_prospect($prop, $where){
+		$values = array();
+		foreach($prop as $n => $v){
+			array_push($values, "`$n`=".(isset($v) ? "'".addslashes($v)."'" : "NULL"));
+		}
+		$sql = "UPdATE prospects SET ".implode(",", $values)." WHERE $where";
+		return $this->db->query($sql);
 	}
 	
 	public function delete_prospect($ids = array()){

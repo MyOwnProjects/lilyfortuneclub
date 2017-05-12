@@ -196,7 +196,7 @@ foreach($pages as $i => $p){
 				foreach($profile_list as $i => $p){
 				?>
 				<label for="edit-prospect-profile-<?php echo $i;?>"><?php echo $p;?></label>
-				<input type="checkbox" name="edit-prospect-profile-<?php echo $i;?>" id="edit-prospect-profile-<?php echo $i;?>" value="" data-mini="true">
+				<input type="checkbox" class="edit-prospect-profile" name="edit-prospect-profile-<?php echo $i;?>" id="edit-prospect-profile-<?php echo $i;?>" value="" data-mini="true">
 				<?php
 				}
 				?>
@@ -249,8 +249,8 @@ function load_prospect(){
 				for(var i = 0; i < data.length; ++i){
 					$('<li>').attr('data-id', data[i]['prospects_id']).addClass("clearfix").addClass("ui-li-static").addClass("ui-body-inherit")
 						.append('<span>' + data[i]['prospects_name'] + '</span>')
-						.append('<a href="#confirm-delete-prospect" class="delete-prospect"><span class="delete-prospect ui-btn ui-btn-icon-notext ui-icon-delete ui-corner-all ui-btn-inline ui-btn-b"></span></a>')
-						.append('<a href="#edit-prospect"><span class="edit-prospect ui-btn ui-btn-icon-notext ui-icon-edit ui-corner-all ui-btn-inline ui-btn-e"></span></a>')
+						.append('<a href="#confirm-delete-prospect" class="delete-prospect"><span class="ui-btn ui-btn-icon-notext ui-icon-delete ui-corner-all ui-btn-inline ui-btn-b"></span></a>')
+						.append('<a href="#edit-prospect" class="edit-prospect"><span class="ui-btn ui-btn-icon-notext ui-icon-edit ui-corner-all ui-btn-inline ui-btn-e"></span></a>')
 						.appendTo(pl);
 				}
 			}
@@ -292,7 +292,7 @@ function delete_prospect(){
 		}
 	});
 }
-
+/*
 function edit_prospect(){
 	$.mobile.loading( 'show', {
 		theme: 'z',
@@ -319,7 +319,7 @@ function edit_prospect(){
 			}
 		});
 }
-
+*/
 function save_prospect(){
 	$.mobile.loading( 'show', {
 		theme: 'z',
@@ -333,6 +333,7 @@ function save_prospect(){
 		url: '<?php echo base_url();?>account/business/update_prospect',
 		method: 'post',
 		data: {
+			id: selected_prospect_id,
 			name: $('#edit-prospect-name').val(),
 			relationship: $('[name=edit-prospect-relationship]:checked').val(),
 			phone: $('#edit-prospect-phone').val(),
@@ -368,7 +369,41 @@ $(document).on("pageshow","#prospects",function(){
 	selected_prospect_id = 0;
 }).delegate('.edit-prospect', 'click', function(){
 	selected_prospect_id = $(this).parent().attr('data-id');
-	edit_prospect();
+	$.mobile.loading( 'show', {
+		theme: 'z',
+		html: ""
+	});
+	$.ajax({
+		url: '<?php echo base_url();?>account/business/get_prospect/' + selected_prospect_id,
+		dataType: 'json',
+		success: function(data){
+			if(data.length > 0){
+			$('#edit-prospect-name').val(data[0]['prospects_name']);
+			$('[name=edit-prospect-relationship]').each(function(index, obj){
+				$(obj).prop( 'checked', $(obj).val() == data[0]['prospects_relationship']).checkboxradio( 'refresh' );	
+			});
+			//relationship: $('[name=edit-prospect-relationship]:checked').val(),
+			$('#edit-prospect-phone').val(data[0]['prospects_phone']);
+			$('#edit-prospect-email').val(data[0]['prospects_email']);
+			var v = data[0]['prospects_profile'];
+			for(var i = 8; i > 0; --i){
+				var checked = v % 2;
+				v = Math.floor(v / 2);
+				$('#edit-prospect-profile-' + (i - 1)).prop('checked', checked).checkboxradio('refresh');;
+			}
+			$('#edit-prospect-background').val(data[0]['prospects_background']);
+			//edit_prospect();
+			}
+		},
+		error: function(a, b, c){
+		},
+		complete: function(){
+			$.mobile.loading( 'hide', {
+				theme: 'z',
+				html: ""
+			});
+		}
+	});
 }).delegate('.delete-prospect', 'click', function(){
 	selected_prospect_id = $(this).parent().attr('data-id');
 });
