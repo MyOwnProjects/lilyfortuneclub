@@ -38,23 +38,23 @@
 		?>
 		<div data-role="page" id="main-menu" data-theme="d">
 			<a data-rel="back" class="nondec menu-list" data-transition="slide" data-direction="reverse" style="text-align:right">×</a>
-			<a href="<?php echo base_url();?>" data-ajax="false" class="nondec menu-list">Home</a>
-			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>resource">Resource</a>
-			<a  class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>events">Events</a>
+			<a href="<?php echo base_url();?>" data-ajax="false" class="nondec menu-list"><img src="<?php echo base_url();?>src/img/home.svg">Home</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>resource"><img src="<?php echo base_url();?>src/img/folded-newspaper.svg">Resource</a>
+			<a  class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>events"><img src="<?php echo base_url();?>src/img/drinking.svg">Events</a>
 			<?php
 			if(!empty($user)){
 			?>
-			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/startup">Startup</a>
-			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/business">Business</a>
-			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/document">Education</a>
-			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/live">Live</a>
-			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/profile">Profile</a>
-			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>ac/sign_out">Sign out</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/startup"><img src="<?php echo base_url();?>src/img/rocket-icon.svg">Startup</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/business"><img src="<?php echo base_url();?>src/img/give-money.svg">Business</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/document"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg">Education</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/live"><img src="<?php echo base_url();?>src/img/television.svg">Live</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/profile"><img src="<?php echo base_url();?>src/img/man-user.svg?1">Profile</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>ac/sign_out"><img src="<?php echo base_url();?>src/img/sign-out-option.svg">Sign out</a>
 			<?php
 			}
 			else{
 			?>
-			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>ac/sign_in">Sign in</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>ac/sign_in"><img src="<?php echo base_url();?>src/img/sign-in.svg">Sign in</a>
 			<?php
 			}
 			?>	

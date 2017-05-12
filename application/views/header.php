@@ -14,30 +14,30 @@
 					<?php
 					if(!empty($user)){
 					?>
-						<div class="menu-icon"><a href="<?php echo base_url();?>account" title="Startup"><image src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Startup</div></a></div>
-						<div class="menu-icon"><a href="<?php echo base_url();?>account/startup" title="Business"><image src="<?php echo base_url();?>src/img/give-money.svg"><div class="text">Business</div></a></div>
-						<div class="menu-icon"><a href="<?php echo base_url();?>account/documents" title="Education"><image src="<?php echo base_url();?>src/img/books-stack-of-three.svg"><div class="text">Education</div></a></div>
-						<div class="menu-icon"><a href="<?php echo base_url();?>account/live" title="Live"><image src="<?php echo base_url();?>src/img/television.svg"><div class="text">Live</div></a></div>
-						<div class="menu-icon"><a href="<?php echo base_url();?>account/profile" title="Profile"><image src="<?php echo base_url();?>src/img/man-user.svg?1"><div class="text">Profile</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>account" title="Startup"><img src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Startup</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>account/startup" title="Business"><img src="<?php echo base_url();?>src/img/give-money.svg"><div class="text">Business</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>account/documents" title="Education"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg"><div class="text">Education</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>account/live" title="Live"><img src="<?php echo base_url();?>src/img/television.svg"><div class="text">Live</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>account/profile" title="Profile"><img src="<?php echo base_url();?>src/img/man-user.svg?1"><div class="text">Profile</div></a></div>
 					<?php
 					}
 					?>
-						<div class="menu-icon"><a href="<?php echo base_url();?>" title="Home"><image src="<?php echo base_url();?>src/img/home.svg"><div class="text">Home</div></a></div>
-						<div class="menu-icon"><a href="<?php echo base_url();?>resource" title="Resource"><image src="<?php echo base_url();?>src/img/folded-newspaper.svg"><div class="text">Resource</div></a></div>
-						<div class="menu-icon"><a href="<?php echo base_url();?>events" title="Events"><image src="<?php echo base_url();?>src/img/drinking.svg"><div class="text">Events</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>" title="Home"><img src="<?php echo base_url();?>src/img/home.svg"><div class="text">Home</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>resource" title="Resource"><img src="<?php echo base_url();?>src/img/folded-newspaper.svg"><div class="text">Resource</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>events" title="Events"><img src="<?php echo base_url();?>src/img/drinking.svg"><div class="text">Events</div></a></div>
 					</div>
 					<div class="clearfix" style="width:300px;padding:15px">
-						<div class="menu-icon"><a href="<?php echo base_url();?>contact" title="Contact us"><image src="<?php echo base_url();?>src/img/telephone.svg?1"><div class="text">Contact Us</div></a></div>
-						<div class="menu-icon"><a href="<?php echo base_url();?>about" title="About us"><image src="<?php echo base_url();?>src/img/about-us.svg"><div class="text">About Us</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>contact" title="Contact us"><img src="<?php echo base_url();?>src/img/telephone.svg?1"><div class="text">Contact Us</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>about" title="About us"><img src="<?php echo base_url();?>src/img/about-us.svg"><div class="text">About Us</div></a></div>
 						<?php
 						if(empty($user)){
 						?>
-						<div class="menu-icon"><a href="<?php echo base_url();?>ac/sign_in" title="Sign in"><image src="<?php echo base_url();?>src/img/sign-in.svg"><div class="text">Sign in</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>ac/sign_in" title="Sign in"><img src="<?php echo base_url();?>src/img/sign-in.svg"><div class="text">Sign in</div></a></div>
 						<?php
 						}
 						else{
 						?>
-						<div class="menu-icon"><a href="<?php echo base_url();?>ac/sign_out" title="Sign out"><image src="<?php echo base_url();?>src/img/sign-out-option.svg"><div class="text">Sign out</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>ac/sign_out" title="Sign out"><img src="<?php echo base_url();?>src/img/sign-out-option.svg"><div class="text">Sign out</div></a></div>
 						<?php
 						}
 						?>

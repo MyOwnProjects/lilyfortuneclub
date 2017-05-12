@@ -4,6 +4,7 @@ a.nondec{color:#000 !important;text-decoration:none;font-weight:normal}
 
 #main-menu .menu-list{padding:10px;display:block}
 #main-menu .menu-list:not(:last-child){border-bottom:1px solid #d5d5d5}
+#main-menu img{width:20px;height:20px;margin-right:10px}
 
 .page-nav{text-align:center;padding:10px;margin-top:20px;border-top:1px solid #d5d5d5}
 
