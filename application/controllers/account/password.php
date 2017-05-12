@@ -24,14 +24,19 @@ class Password extends Account_base_controller {
 			}
 			else{
 				if(!$this->user_model->update($this->user['users_id'], array('password' => $password))){
-					$error = "Failed to change password";
+					$error = "New password cannot be same as old one";
 				}
 				else{
 					$success = 'Password has been changed successfully.';
 				}
 			}
 		}
-		$this->load_view('account/password', array('error' => $error, 'success' => $success));
+		if($this->input->is_ajax_request()){
+			echo json_encode(array('success' => empty($error), 'error' => $error));
+		}
+		else{
+			$this->load_view('account/password', array('error' => $error, 'success' => $success));
+		}
 	}
 	
 	public function view($file){

@@ -204,7 +204,7 @@ foreach($pages as $i => $p){
 		</div>
 		<div class="ui-field-contain">
 			<label for="edit-prospect-background">Background:</label>
-			<textarea name="edit-prospect-background" id="edit-prospect-background"></textarea>
+			<textarea name="edit-prospect-background" id="edit-prospect-background" rows="5"></textarea>
 		</div>
 		<div class="ui-field-contain" style="text-align:right"><a id="submit-prospect" data-role="button" class="ui-btn ui-corner-all ui-mini ui-btn-mini ui-btn-inline ui-btn-b" onclick="save_prospect();">Save</a></div>
 	</div>
@@ -279,7 +279,7 @@ function delete_prospect(){
 		dataType: 'json',
 		success: function(data){
 			if(!data['success']){
-				$('#popup').html('Failed to delete prospect.').popup('open');
+				$('#popup').html('<p class="w3-text-red">Failed to delete prospect.</p>').popup('open');
 			}
 		},
 		error: function(){
@@ -347,6 +347,7 @@ function save_prospect(){
 				$('#edit-prospect [data-rel="back"]').click();
 			}
 			else{
+				$('#popup').html('<p class="w3-text-red">Failed to save the prospect. </p>').popup('open');
 			}
 		},
 		error: function(){
@@ -364,9 +365,19 @@ $(document).on("pageshow","#prospects",function(){
 	selected_prospect_id = 0;
 	load_prospect();
 }).on('pagebeforeshow', '#edit-prospect', function(){
-	$('#edit-prospect [data-role=header] h1').html(selected_prospect_id ? 'Edit Proespect' : 'New Proespect');
+	$('#edit-prospect [data-role=header] h1').html(selected_prospect_id ? 'Edit Prospect' : 'New Prospect');
 }).on('pagehide', '#edit-prospect', function(){
 	selected_prospect_id = 0;
+	$('#edit-prospect-name').val('');
+	$('[name=edit-prospect-relationship]').each(function(index, obj){
+		$(obj).prop( 'checked', index === 0).checkboxradio( 'refresh' );	
+	});
+	$('#edit-prospect-phone').val('');
+	$('#edit-prospect-email').val('');
+	for(var i = 0; i < 8; ++i){
+		$('#edit-prospect-profile-' + i).prop('checked', false).checkboxradio('refresh');;
+	}
+	$('#edit-prospect-background').val('');
 }).delegate('.edit-prospect', 'click', function(){
 	selected_prospect_id = $(this).parent().attr('data-id');
 	$.mobile.loading( 'show', {

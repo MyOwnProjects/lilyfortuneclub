@@ -27,6 +27,9 @@ a.nondec{color:#000 !important;text-decoration:none;font-weight:normal}
 .list4>li{padding:0 0 0 20px !important;line-height:47px;}
 .list4>li .ui-btn{float:right}
 
+.list5>li label{font-size:12px;margin:0;color:#656565}
+.list5>li .ui-btn{float:right}
+
 .ui-field-contain{padding-bottom:1em}
 
 .resource-list-thumbnail{
