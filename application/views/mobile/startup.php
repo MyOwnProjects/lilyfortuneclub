@@ -25,16 +25,8 @@ foreach($pages as $i => $p){
 			?>
 			<div><a data-ajax="false" data-role="button" class="ui-btn ui-btn-inline ui-corner-all" href="<?php echo $p['btn']['url'];?>"><?php echo $p['btn']['text'];?></a></div>
 			<div class="page-nav">
-					<?php if($i > 0){?>
-					<a class="nav-prev" data-role="button" data-icon="arrow-l" href="startup#startup-<?php echo $i - 1;?>" data-transition="slide" data-iconpos="left" data-inline="true" data-mini="true" data-theme="b" data-direction="reverse">Prev</a>
-					<?php
-					}
-					if($i < count($pages) - 1){
-					?>
-					<a class="nav-next" data-role="button" data-icon="arrow-r" href="startup#startup-<?php echo $i + 1;?>" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true" data-theme="b">Next</a>
-					<?php
-					}
-					?>
+				<a class="nav-prev <?php echo $i <= 0 ? 'ui-disabled' : ''?>" data-role="button" data-icon="arrow-l" href="startup#startup-<?php echo $i - 1;?>" data-transition="slide" data-iconpos="left" data-inline="true" data-mini="true" data-theme="b" data-direction="reverse">Prev</a>
+				<a class="nav-next <?php echo $i >= count($pages) - 1 ? 'ui-disabled' : ''?>" data-role="button" data-icon="arrow-r" href="startup#startup-<?php echo $i + 1;?>" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true" data-theme="b">Next</a>
 			</div>
 		</div>
 	</div>
