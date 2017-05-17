@@ -239,6 +239,9 @@ if ( ! function_exists('my_email')){
 
 if ( ! function_exists('update_content')){
 	function update_content($content, $saved_image_path){
+		if(empty($content)){
+			return '';
+		}
 		$content = str_replace("\n", "", $content);
 		$local_host_path = parse_url(base_url());
 		$local_host = strtolower($local_host_path['host']);
