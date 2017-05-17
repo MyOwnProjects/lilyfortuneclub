@@ -17,23 +17,16 @@
 				document.webkitFullscreenElement ||
 				document.mozFullScreenElement ||
 				document.msFullscreenElement;
-		}
+		};
+		
 		var $_source = $('<source>').appendTo($_video);
 		var $_control_bar = $('<div>').css('background', 'rgba(0,0,0, 0.6)').css('color', '#fff').css('position','absolute').css('z-index', '10').css('bottom','0').css('left','0').css('right','0')
 			/*.css('border', '1px solid #d5d5d5')*/.css('margin-top', '-5px').css('padding-right', '5px').css('overflow', 'auto').appendTo($_this);
+			
 		var $_play_button = $('<div>').addClass('no-select').css('text-align', 'center').css('border-radius', '2px').css('cursor', 'pointer')
 			.css('line-height', _control_height).css('float', 'left').css('width',_control_height).css('height',_control_height).addClass('play')
 			.click(function(){
-				if(_video.paused){
-					$_play_button.attr('title', 'Pause').html('&#10074;&#10074;');
-					_video.play();
-					_timer = setTimeout(update_current, 10);
-				}
-				else{
-					clearTimeout(_timer);
-					$_play_button.attr('title', 'Play').html('&#9658');
-					_video.pause();
-				}
+				click_play_button();
 			}).appendTo($_control_bar);
 		var $_full_screen_button = $('<div>').addClass('pull-right').addClass('no-select').css('text-align', 'center').css('border-radius', '2px').css('cursor', 'pointer')
 			.css('line-height', _control_height).css('float', 'left').css('width',_control_height).css('height',_control_height).addClass('play').attr('title', 'Full Screen').html('&#9634')
@@ -90,6 +83,18 @@
 				_video.currentTime = e.offsetX / $_progress_line_grey.outerWidth() * _video.duration;
 				update_current();
 			}).appendTo($_progress);
+		var click_play_button = function(){
+			if(_video.paused){
+				$_play_button.attr('title', 'Pause').html('&#10074;&#10074;');
+				_video.play();
+				_timer = setTimeout(update_current, 10);
+			}
+			else{
+				clearTimeout(_timer);
+				$_play_button.attr('title', 'Play').html('&#9658');
+				_video.pause();
+			}
+		};
 		var update_video_size = function(){
 			if(is_full_screen()){
 				$_this.css('height', '100%');
@@ -142,9 +147,8 @@
 				prop['loaded']();
 			}
 			$_play_button.addClass('active').html('&#9658');
-			alert(prop['autostart'] ? 'true' : 'false');
 			if(prop['autostart']){
-				$_play_button.click();
+				click_play_button();
 			}
 		};
 		
