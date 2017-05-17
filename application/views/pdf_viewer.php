@@ -12,7 +12,7 @@
 <link rel="resource" type="application/l10n" href="<?php echo base_url();?>src/3rd_party/pdfjs/web/locale/locale.properties">
 <script src="<?php echo base_url();?>src/3rd_party/pdfjs/web/l10n.js"></script>
 <script src="<?php echo base_url();?>src/3rd_party/pdfjs/build/pdf.js"></script>
-    <script src="<?php echo base_url();?>src/3rd_party/pdfjs/web/viewer.js"></script>
+    <script src="<?php echo base_url();?>src/3rd_party/pdfjs/web/viewer.js?<?php echo time();?>"></script>
    </head>
 
   <body tabindex="1" class="loadingInProgress">

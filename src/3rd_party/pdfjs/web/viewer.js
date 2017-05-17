@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 'use strict';
-function load_pdf_viewer(file, load_allback){
+function load_pdf_viewer(file, load_callback){
 var DEFAULT_URL = file;//plug_url + 'web/compressed.tracemonkey-pldi-09.pdf';
 ;
 var pdfjsWebLibs;
@@ -6116,6 +6116,9 @@ var pdfjsWebLibs;
      moreInfoButton.removeAttribute('hidden');
      lessInfoButton.setAttribute('hidden', 'true');
      errorMoreInfo.value = moreInfoText;
+ 	if(typeof load_callback === "function"){
+		load_callback();
+	}
     },
     progress: function pdfViewProgress(level) {
      var percent = Math.round(level * 100);
@@ -6142,8 +6145,8 @@ var pdfjsWebLibs;
      var downloadedPromise = pdfDocument.getDownloadInfo().then(function () {
       self.downloadComplete = true;
       self.loadingBar.hide();
-	if(typeof load_allback === "function"){
-		load_allback();
+	if(typeof load_callback === "function"){
+		load_callback();
 	}
      });
      this.toolbar.setPagesCount(pdfDocument.numPages, false);
