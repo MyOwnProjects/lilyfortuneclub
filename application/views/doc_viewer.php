@@ -6,7 +6,8 @@
     <meta name="google" content="notranslate">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo $subject;?></title>
-   </head>
+ <script src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
+  </head>
 
   <body>
 	<div style="position:fixed;top:0;right:0;bottom:0;left:0">
