@@ -45,7 +45,7 @@ a.nondec{color:#000 !important;text-decoration:none;font-weight:normal}
 
 .document-subject{line-height:22px;}
 
-.csv-output{border-collapse:collapse;border-spacing:0;border:1px solid #000}
+.csv-output{width:100%;border-collapse:collapse;border-spacing:0;border:1px solid #000}
 .csv-output tr td{padding:0;border:1px solid #000;padding:2px}
 .csv-output tr:first-child td, .csv-output tr td:first-child{background:#d5d5d5}
 .csv-output tr:first-child td{text-align:center}
