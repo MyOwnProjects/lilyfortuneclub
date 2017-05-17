@@ -116,10 +116,9 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 					}
 				});
 			}
-			/*else if(data['mime_type'] == 'doc' || data['mime_type'] == 'ppt' || data['mime_type'] == 'excel'){
+			else if(mime_type == 'doc' || mime_type == 'ppt' || mime_type == 'excel'){
+		//<embed class="doc-frame" src=" echo sprintf($src, base_url().'src/temp/'.$file); style="width:100%" onload="document_loaded()">
 			}
-			else if(data['mime_type'] == 'HTML'){
-			}*/
 		},
 		error: function(){
 			location.href="documents#document-list";
@@ -156,7 +155,4 @@ function document_loaded(file){
 		});
 	}
 }
-	/*else if($mime_type == 'doc' || $mime_type == 'ppt' || $mime_type == 'excel'){ 
-		<embed class="doc-frame" src="<?php echo sprintf($src, base_url().'src/temp/'.$file);?>" style="width:100%" onload="document_loaded()">
-	}*/
 </script>
