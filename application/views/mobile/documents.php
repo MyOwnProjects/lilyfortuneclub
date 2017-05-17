@@ -79,7 +79,6 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 				var img = $('<img>').load(function(){
 					document_loaded(data['file']);				
 				}).css('width', '100%').attr('src', '<?php echo base_url();?>src/temp/' + data['file']).appendTo($_doc_content);
-				
 			}
 			else if(mime_type == 'html'){
 				$_doc_content.append(data['html_content']);
