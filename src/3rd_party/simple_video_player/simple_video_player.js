@@ -5,7 +5,7 @@
 		var _timer;
 		var _this = this;
 		var $_this = $(this);
-		$_this.css('position', 'relative').css('background', '#000').outerHeight($_this.outerWidth() * 9 / 16);
+		$_this.css('position', 'relative').css('width', '100%').css('background', '#000').outerHeight($_this.outerWidth() * 9 / 16);
 		var original_size = {width: $_this.outerWidth(), height: $_this.outerHeight()}
 		var $_video = $('<video>').attr('preload', 'auto').css('z-index', '1').appendTo($_this).contextmenu(function(){
 			return false;
@@ -92,7 +92,6 @@
 			}).appendTo($_progress);
 		var update_video_size = function(){
 			if(is_full_screen()){
-				$_this.css('width', '100%');
 				$_this.css('height', '100%');
 				if(_video.videoWidth / _video.videoHeight > screen.width / screen.height){
 					$_video.css('width', '100%');
@@ -104,8 +103,8 @@
 				}
 			}
 			else{
-				$_this.outerWidth(original_size['width']);
-				$_this.outerHeight(original_size['height']);
+				//$_this.outerWidth(original_size['width']);
+				$_this.outerHeight($_this.outerHeight($_this.outerWidth() * 9 / 16));
 				if(_video.videoWidth / _video.videoHeight > $_this.innerWidth() / $_this.innerHeight()){
 					$_video.css('width', '100%');
 					$_video.css('margin', ($_video.parent().innerHeight() - $_video.outerHeight()) / 2 + 'px' + ' 0');
@@ -186,6 +185,10 @@
 		}).on('webkitfullscreenchange', function(e){
 			update_video_size();
 		}).on('msfullscreenchange', function(e){
+			update_video_size();
+		});
+		
+		$(window).resize(function(){
 			update_video_size();
 		});
 		$_this.find('.no-select').css('-webkit-touch-callout', 'none').css('-webkit-user-select', 'none').css('-khtml-user-select', 'none')
