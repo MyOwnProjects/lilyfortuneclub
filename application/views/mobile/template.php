@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<script>var base_url = '<?php echo base_url();?>'; </script>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.mobile-1.4.5/theme-classic.css">
@@ -11,6 +12,7 @@
 		<script src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
 		<script src="<?php echo base_url();?>src/3rd_party/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<script src="<?php echo base_url();?>src/js/tools.js?<?php echo time();?>"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/pdfjs/pdf.js"></script>
 	</head>		
 	<script>
 	
@@ -46,7 +48,7 @@
 			?>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/startup"><img src="<?php echo base_url();?>src/img/rocket-icon.svg">Startup</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/business"><img src="<?php echo base_url();?>src/img/give-money.svg">Business</a>
-			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/document"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg">Education</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/documents"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg">Education</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/live"><img src="<?php echo base_url();?>src/img/television.svg">Live</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/profile"><img src="<?php echo base_url();?>src/img/man-user.svg?1">Profile</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>ac/sign_out"><img src="<?php echo base_url();?>src/img/sign-out-option.svg">Sign out</a>

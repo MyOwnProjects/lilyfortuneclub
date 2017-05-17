@@ -33,21 +33,14 @@ a.nondec{color:#000 !important;text-decoration:none;font-weight:normal}
 
 .ui-field-contain{padding-bottom:1em}
 
-.resource-list-thumbnail{
-    float:left;
-    width:80px;
-    height:50px;
-    border: 1px solid #efefef;
-    margin-right: 20px;
-    text-align: center;
-    padding: 2px
-}
-.resource-list-thumbnail img{
-    width: 74px;
-    height: 44px;
-    display: inline
-}
+[data-role=listview] .thumbnail{float:left;width:80px;height:50px;border:1px solid #efefef;margin-right:20px;text-align:center;padding:2px}
+[data-role=listview] .thumbnail img{width:74px;height:44px;display:inline}
 .resource-list-text{overflow:hidden}
 .resource-list-text .sub{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:bold;line-height:26px;color:#2489ce}
 .resource-list-text .info{font-size:12px;font-weight:normal;line-height:24px}
 .content-image img{width:auto;max-width:100%}
+
+[data-role=listview] .icon{float:left;margin-right:10px}
+[data-role=listview] .icon img{height:22px}
+
+.document-subject{line-height:22px;}

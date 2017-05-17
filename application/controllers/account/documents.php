@@ -25,7 +25,7 @@ class Documents extends Account_base_controller {
 		if(!empty($content_type) && $content_type != 'All'){
 			$where .= " AND content_type='$content_type'";
 		} 
-		$result = $this->document_model->get_list($where, array(), "$page,20");
+		$result = $this->document_model->get_list($where, array(), "$page,1000000");
 		foreach($result as $i => $r){
 			if(!empty($r['file_name'])){
 				$mime_type_i = mime_type(getcwd().'/application/documents/'.$r['uniqid'].'.'.$r['file_name']);
@@ -38,7 +38,7 @@ class Documents extends Account_base_controller {
 		}
 
 		$total = $this->document_model->get_list_total($where);
-		$this->load_view('documents/list', array('current' => $page + 1, 'total' => ceil($total / 20), 'list' => $result, 
+		$this->load_view('documents', array('current' => $page + 1, 'total' => ceil($total / 20), 'list' => $result, 
 			'mime_type_list' => $mime_type_list, 'content_type_list' => $content_type_list, 
 			'mime_type' => in_array($mime_type, $mime_type_list) ? $mime_type : 'All', 
 			'content_type' => in_array($content_type, $content_type_list) ? $content_type : 'All'));
@@ -69,8 +69,19 @@ class Documents extends Account_base_controller {
 		else{
 			$content_mime_type = $result[0]['mime_content_type'];
 		}
-		$this->load_view('documents/view', array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name'],
-			/*infolab.stanford.edu/pub/papers/google.pdf'*/ 'src'=> 'https://docs.google.com/gview?url=%s&embedded=true'));
+		
+		if($content_mime_type == 'pdf'){
+			$this->load->view('pdf_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
+		}
+		else{
+			if($this->input->is_ajax_request()){
+				echo json_encode(array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
+			}
+			else{
+				$this->load_view('document_item', array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name'],
+				/*infolab.stanford.edu/pub/papers/google.pdf'*/ 'src'=> 'https://docs.google.com/gview?url=%s&embedded=true'));
+			}
+		}
 	}
 	
 	public function delete_temp_document(){

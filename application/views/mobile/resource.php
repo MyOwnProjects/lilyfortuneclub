@@ -11,7 +11,7 @@
 <div data-role="page" id="view-resource-0" class="view-resource" data-theme="d">
 	<div data-role="header" data-theme="e">
 		<h1>Resource</h1>
-		<a href="#resource-list" data-icon="back" data-iconpos="notext" data-direction="reverse">Back</a>
+		<a href="#resource-list" data-icon="back" data-iconpos="notext" data-transition="slide" data-direction="reverse">Back</a>
 	</div>
 	<div data-role="main" class="ui-content">
 		<div class="resource-content"></div>
@@ -24,7 +24,7 @@
 <div data-role="page" id="view-resource-1" class="view-resource" data-theme="d">
 	<div data-role="header" data-theme="e">
 		<h1>Resource</h1>
-		<a href="#resource-list" data-icon="back" data-iconpos="notext" data-direction="reverse">Back</a>
+		<a href="#resource-list" data-icon="back" data-iconpos="notext" data-transition="slide" data-direction="reverse">Back</a>
 	</div>
 	<div data-role="main" class="ui-content">
 		<div class="resource-content"></div>
@@ -50,11 +50,11 @@ function load_resource(){
 				for(var i = 0; i < data.length; ++i){
 					var content_wrapper = $('<div>').append(data[i]['content']);
 					var $_li = $('<li>').addClass("clearfix").addClass("ui-li-static").addClass("ui-body-inherit");
-					var $_a = $('<a>').attr('data-id', data[i]['url_id']).attr('href', '#view-resource-0').addClass('nondec').appendTo($_li);
+					var $_a = $('<a>').attr('data-id', data[i]['url_id']).attr('href', '#view-resource-0').addClass('nondec').attr('data-transition', 'slide').appendTo($_li);
 					
 					var img_wrappers = content_wrapper.children('.content-image');
 					if(img_wrappers.length > 0){
-						var $_thumbnail = $('<div>').addClass('resource-list-thumbnail').appendTo($_a);
+						var $_thumbnail = $('<div>').addClass('thumbnail').appendTo($_a);
 						$('<img src="' + $(img_wrappers[0]).children('img').attr('src') + '">').appendTo($_thumbnail);
 					}
 					var date = data[i]['create_time'].split(' ');
