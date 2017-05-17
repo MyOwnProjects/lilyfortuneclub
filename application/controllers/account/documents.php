@@ -78,15 +78,18 @@ class Documents extends Account_base_controller {
 			$this->load->view('doc_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
 		}
 		else if($content_mime_type == 'csv'){
+			$max_columns = 0;
 			$ret = array();
 			$f = fopen($full_path, 'r');
 			while(!feof($f)){
 				$r = fgetcsv($f);
+				$count = count($r);
+				$max_columns = $count > $max_columns ? $count : $max_columns;
 				array_push($ret, $r);
 			}
 			fclose($f);
-			echo json_encode(array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 
-				'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'data' => $ret, 'name' => $result[0]['file_name']));
+			$this->load->view('csv_viewer', array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 
+				'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'data' => $ret, 'max_columns' => $max_columns,  'name' => $result[0]['file_name']));
 		}
 		else{
 			if($this->input->is_ajax_request()){
