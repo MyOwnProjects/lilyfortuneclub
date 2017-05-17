@@ -57,14 +57,16 @@ class Documents extends Account_base_controller {
 				return;
 			}
 			$ext = pathinfo($result[0]['uniqid'].'.'.$result[0]['file_name'], PATHINFO_EXTENSION);
-			$file = uniqid().'.'.$ext;
-			$to = getcwd().'/src/temp/'.$file;
-			if(!@copy($full_path, $to)){
-				$this->load_view('documents/view', array('error' => 'The document does not exist.'));
-				return;
-			}
 			$mime_type = mime_type($full_path);
 			$content_mime_type = $mime_type[0];
+			if($content_mime_type != 'csv'){
+				$file = uniqid().'.'.$ext;
+				$to = getcwd().'/src/temp/'.$file;
+				if(!@copy($full_path, $to)){
+					$this->load_view('documents/view', array('error' => 'The document does not exist.'));
+					return;
+				}
+			}
 		}
 		else{
 			$content_mime_type = $result[0]['mime_content_type'];
@@ -74,6 +76,17 @@ class Documents extends Account_base_controller {
 		}
 		else if($content_mime_type == 'doc' || $content_mime_type == 'ppt' || $content_mime_type == 'excel'){
 			$this->load->view('doc_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
+		}
+		else if($content_mime_type == 'csv'){
+			$ret = array();
+			$f = fopen($full_path, 'r');
+			while(!feof($f)){
+				$r = fgetcsv($f);
+				array_push($ret, $r);
+			}
+			fclose($f);
+			echo json_encode(array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 
+				'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'data' => $ret, 'name' => $result[0]['file_name']));
 		}
 		else{
 			if($this->input->is_ajax_request()){

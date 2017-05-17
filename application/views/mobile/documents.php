@@ -100,7 +100,28 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 				});
 			}
 			else if(mime_type == 'csv'){
-		//<embed class="doc-frame" src=" echo sprintf($src, base_url().'src/temp/'.$file); style="width:100%" onload="document_loaded()">
+				var data = data['data'];
+				var t = $('<table>').addClass('csv-output').appendTo($_doc_content);
+				var max_width = 0;
+				for(var i = 0; i < data.length; ++i){
+					if(data[i].length == 0){
+						continue;
+					}
+					if(data[i].length > max_width){
+						max_width = data[i].length;
+					}
+					var tr = $('<tr>').appendTo(t);
+					$('<td>').html(i + 1).appendTo(tr);
+					for(var j = 0; j < data[i].length; ++j){
+						$('<td>').html(data[i][j]).appendTo(tr);
+					}
+				}
+				var tr = $('<tr>').prependTo(t);
+				$('<td>').appendTo(tr);
+				for(var i = 0; i < max_width; ++i){
+					var c = String.fromCharCode(i + 65);
+					$('<td>').html(c).appendTo(tr);
+				}
 			}
 		},
 		error: function(){
