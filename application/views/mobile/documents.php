@@ -57,7 +57,7 @@ var resource_id = 0;
 $(document).delegate('#document-list ul[data-role=listview] li', 'click', function(){
 	resource_id = $(this).attr('data-id');
 	var content_type = $(this).attr('content-type');
-	if(content_type == 'pdf'){
+	if(content_type == 'pdf' || content_type == 'doc' || content_type == 'ppt' || content_type == 'excel'){
 		window.open('<?php echo base_url();?>account/documents/view/' + resource_id);
 	}
 	else{

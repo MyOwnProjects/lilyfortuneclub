@@ -72,6 +72,9 @@ class Documents extends Account_base_controller {
 		if($content_mime_type == 'pdf'){
 			$this->load->view('pdf_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
 		}
+		else if($content_mime_type == 'doc' || $content_mime_type == 'ppt' || $content_mime_type == 'excel'){
+			$this->load->view('doc_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
+		}
 		else{
 			if($this->input->is_ajax_request()){
 				echo json_encode(array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
