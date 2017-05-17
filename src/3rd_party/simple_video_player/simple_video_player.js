@@ -142,6 +142,7 @@
 				prop['loaded']();
 			}
 			$_play_button.addClass('active').html('&#9658');
+			alert(prop['autostart'] ? 'true' : 'false');
 			if(prop['autostart']){
 				$_play_button.click();
 			}
