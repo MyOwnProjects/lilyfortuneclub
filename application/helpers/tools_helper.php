@@ -112,7 +112,6 @@ if ( ! function_exists('mime_type'))
 		$ext = pathinfo($file_name, PATHINFO_EXTENSION);
 		$finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
 		$mime_type_str = finfo_file($finfo, $file_name);
-		echo $mime_type_str.' '.$ext;
 		finfo_close($finfo);
 		if(strpos($mime_type_str, 'video/') === 0){
 			return array('video', 'video');
@@ -133,6 +132,7 @@ if ( ! function_exists('mime_type'))
 				return array('doc', 'word');
 		}
 		if(in_array($mime_type_str, array('application/powerpoint', 'application/vnd.ms-powerpoint',
+			'application/vnd.openxmlformats-officedocument.presentationml.presentation',
 			'application/zip')) && in_array($ext, array('ppt', 'pptx', 'pptm'))){
 				return array('ppt', 'powerpoint');
 		}
