@@ -33,23 +33,6 @@
 	</div>
 	<div data-role="main" class="ui-content" style="height:100%">
 		<div class="document-content" style="height:100%"></div>
-		<div class="page-nav">
-			<a class="nav-prev ui-btn-b" data-role="button" data-icon="arrow-l" href="documents#view-document-1" data-transition="slide" data-iconpos="left" data-inline="true" data-mini="true" data-theme="e" data-direction="reverse">Prev</a>
-			<a class="nav-next ui-btn-b" data-role="button" data-icon="arrow-r" href="documents#view-document-1" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true" data-theme="e">Next</a>
-		</div>
-	</div>
-</div>
-<div data-role="page" id="view-document-1" class="view-document" data-theme="d">
-	<div data-role="header" data-theme="e">
-		<h1>Document</h1>
-		<a href="#document-list" data-icon="back" data-iconpos="notext" data-transition="slide" data-direction="reverse">Back</a>
-	</div>
-	<div data-role="main" class="ui-content">
-		<div class="document-content"></div>
-		<div class="page-nav">
-			<a class="nav-prev ui-btn-b" data-role="button" data-icon="arrow-l" href="documents#view-document-0" data-transition="slide" data-iconpos="left" data-inline="true" data-mini="true" data-theme="e" data-direction="reverse">Prev</a>
-			<a class="nav-next ui-btn-b" data-role="button" data-icon="arrow-r" href="documents#view-document-0" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true" data-theme="e">Next</a>
-		</div>
 	</div>
 </div>
 <script>

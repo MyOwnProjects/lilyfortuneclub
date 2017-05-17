@@ -138,10 +138,13 @@ if ( ! function_exists('mime_type'))
 		}
 		if(in_array($mime_type_str, array('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 
 			'application/excel', 'application/vnd.ms-excel', 'application/msexcel',
-			'application/excel', 'application/zip', 'text/plain',
-			'text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel',
-			'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel')) && in_array($ext, array('xlsx', 'xlt', 'xlsm', 'csv'))){
-				return array('excel', 'excel');
+			'application/zip', 'application/octet-stream', 'application/vnd.ms-excel', 'application/vnd.msexcel')) 
+			&& in_array($ext, array('xlsx', 'xlt', 'xlsm'))){
+			return array('excel', 'excel');
+		}
+		if(in_array($mime_type_str, array('text/plain', 'text/x-comma-separated-values', 'text/comma-separated-values', 
+			'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv')) && in_array($ext, array('csv'))){
+				return array('csv', 'excel');
 		}
 		return array('text', 'txt');
 	}
