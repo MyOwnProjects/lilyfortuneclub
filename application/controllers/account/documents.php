@@ -69,6 +69,7 @@ class Documents extends Account_base_controller {
 		else{
 			$content_mime_type = $result[0]['mime_content_type'];
 		}
+		var_dump($content_mime_type);exit;
 		if($content_mime_type == 'pdf'){
 			$this->load->view('pdf_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
 		}
