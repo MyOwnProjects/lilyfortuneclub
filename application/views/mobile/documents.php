@@ -110,7 +110,7 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 				}
 				$_vp.simple_video_player({
 					src: '<?php echo base_url();?>src/temp/' + data['file'], 
-					autostart: true, 
+					autostart: false, 
 					loaded: function(){
 						document_loaded(data['file']);		
 					}
