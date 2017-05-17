@@ -94,11 +94,6 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 			else if(data['mime_type'] == 'doc' || data['mime_type'] == 'ppt' || data['mime_type'] == 'excel'){
 			}
 			else if(data['mime_type'] == 'HTML'){
-			}
-			else if(data['mime_type'] == 'pdf'){
-				file = data['file'];
-				var $_doc_frame = $('<iframe>').addClass('doc-frame').attr('frameborder', '0').css('width', '100%').attr('onload', 'document_loaded(this)').appendTo($_doc_content);
-				renderPDF('<?php echo base_url();?>' + 'src/temp/' + data['file'], $_doc_frame);
 			}*/
 		},
 		error: function(){
@@ -111,6 +106,21 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 			});
 		}
 	});
+}).delegate('#documents-filter', 'change', function(){
+	var filter = $(this).val();
+	if(filter == 'all'){
+		$('ul[data-role=listview] li').show();
+	}
+	else{
+		$('ul[data-role=listview] li').each(function(index, obj){
+			if($(obj).attr('data-type') == filter){
+				$(obj).show();
+			}
+			else{
+				$(obj).hide();
+			}
+		});
+	}
 });
 
 function document_loaded(obj){
