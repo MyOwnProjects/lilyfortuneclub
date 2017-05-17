@@ -69,12 +69,10 @@ class Documents extends Account_base_controller {
 		else{
 			$content_mime_type = $result[0]['mime_content_type'];
 		}
-		var_dump($content_mime_type);
 		if($content_mime_type == 'pdf'){
 			$this->load->view('pdf_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
 		}
 		else if($content_mime_type == 'doc' || $content_mime_type == 'ppt' || $content_mime_type == 'excel'){
-			echo 123;exit;
 			$this->load->view('doc_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
 		}
 		else{
