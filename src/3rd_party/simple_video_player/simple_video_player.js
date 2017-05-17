@@ -28,8 +28,8 @@
 			.click(function(){
 				click_play_button();
 			}).appendTo($_control_bar);
-		var $_full_screen_button = $('<div>').addClass('pull-right').addClass('no-select').css('text-align', 'center').css('border-radius', '2px').css('cursor', 'pointer')
-			.css('line-height', _control_height).css('float', 'left').css('width',_control_height).css('height',_control_height).addClass('play').attr('title', 'Full Screen').html('&#9634')
+		var $_full_screen_button = $('<div>').addClass('no-select').css('float', 'right').css('text-align', 'center').css('border-radius', '2px').css('cursor', 'pointer')
+			.css('line-height', _control_height).css('width',_control_height).css('height',_control_height).addClass('play').attr('title', 'Full Screen').html('&#9634')
 			.click(function(){
 				if (_this[0].requestFullscreen) {
 					if(!is_full_screen()){
