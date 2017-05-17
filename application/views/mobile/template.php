@@ -13,6 +13,7 @@
 		<script src="<?php echo base_url();?>src/3rd_party/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<script src="<?php echo base_url();?>src/js/tools.js?<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/pdfjs/pdf.js"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/simple_video_player/simple_video_player.js?t=<?php echo time();?>"></script>
 	</head>		
 	<script>
 	

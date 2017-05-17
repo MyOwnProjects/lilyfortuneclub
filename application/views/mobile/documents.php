@@ -54,7 +54,6 @@
 </div>
 <script>
 var resource_id = 0;
-var file = '';
 $(document).delegate('#document-list ul[data-role=listview] li', 'click', function(){
 	resource_id = $(this).attr('data-id');
 	var content_type = $(this).attr('content-type');
@@ -66,6 +65,8 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 	}
 }).delegate('.nav-prev, .nav-next', 'click', function(){
 	resource_id = $(this).attr('data-id');
+}).on('pagehide', '.view-document', function(){
+	$(this).find('.document-content').empty();
 }).on('pageshow', '.view-document', function(){
 	var $_page = $(this);
 	$.mobile.loading( 'show', {
@@ -74,6 +75,7 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 	});
 	$.ajax({
 		url: '<?php echo base_url();?>account/documents/view/' + resource_id,
+		dataType: 'json',
 		success: function(data){
 			if(data['prev']){
 				$('.nav-prev').attr('data-id', data['prev']).removeClass( "ui-disabled" ).removeAttr( "aria-disabled");
@@ -88,10 +90,33 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 				$('.nav-next').removeAttr('data-id').addClass( "ui-disabled" ).attr( "aria-disabled", true );
 			}
 
-			var $_doc_content = $_page.find('.document-content').append(data);
-			/*if(data['mime_type'] == 'video'){
+			var $_doc_content = $_page.find('.document-content');
+			var mime_type = data['mime_type'].toLowerCase();
+			if(mime_type == 'image'){
+				var img = $('<img>').load(function(){
+					document_loaded(data['file']);				
+				}).css('width', '100%').attr('src', '<?php echo base_url();?>src/temp/' + data['file']).appendTo($_doc_content);
+				
 			}
-			else if(data['mime_type'] == 'doc' || data['mime_type'] == 'ppt' || data['mime_type'] == 'excel'){
+			else if(mime_type == 'html'){
+				$_doc_content.append(data['html_content']);
+			}
+			else if(mime_type == 'video'){
+				$('<h3>').html(data['subject']).appendTo($_doc_content);
+				var $_vp = $('<div>').attr('id', 'video-player').appendTo($_doc_content);
+				$('<p>').html('Content Type: ' + data['content_type']).appendTo($_doc_content);
+				if(data['html_content']){
+					$('<div>').html(data['html_content']).appendTo($_doc_content);
+				}
+				$_vp.simple_video_player({
+					src: '<?php echo base_url();?>src/temp/' + data['file'], 
+					autostart: true, 
+					loaded: function(){
+						document_loaded(data['file']);		
+					}
+				});
+			}
+			/*else if(data['mime_type'] == 'doc' || data['mime_type'] == 'ppt' || data['mime_type'] == 'excel'){
 			}
 			else if(data['mime_type'] == 'HTML'){
 			}*/
@@ -123,120 +148,15 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 	}
 });
 
-function document_loaded(obj){
-	if(obj && !$(obj).attr('src')) 
-		return false;
-	$.ajax({
-		url: '<?php echo base_url();?>' + 'account/documents/delete_temp_document',
-		data: {file: file},
-	});
-}
-
-function renderPDF(url, frame) {
-	var width = 0;
-	var height = 0;
-	var total_page = 0;
-	var options = { scale: 1 };
-	function renderPage(page) {
-		var viewport = page.getViewport(options.scale);
-		var canvas = document.createElement('canvas');
-		var ctx = canvas.getContext('2d');
-		var renderContext = {
-			canvasContext: ctx,
-			viewport: viewport
-		};
-		page.render(renderContext).then(function(){
-			width = viewport.width;
-			height = viewport.height;alert(height);
-			var w = frame.outerWidth();
-			var h = height * total_page * w / width;alert(h);
-			frame.outerHeight(h);
-			frame.attr('src', '<?php echo base_url();?>' + 'src/temp/' + file + '#toolbar=0&navpanes=0&scrollbar=0');
+function document_loaded(file){
+	if(file){
+		$.ajax({
+			url: '<?php echo base_url();?>' + 'account/documents/delete_temp_document',
+			data: {file: file},
 		});
 	}
-	function renderPages(pdfDoc) {
-		total_page = pdfDoc.numPages;
-		pdfDoc.getPage(1).then(renderPage);
-	}
-	PDFJS.disableWorker = true;
-	PDFJS.getDocument(url).then(renderPages);
-}   
-</script>
-	<?php
-	if($mime_type == 'video'){
-	?>
-		<h3 class="text-center"><?php echo $subject;?></h3>
-		<div class="video-player" style="margin:20px auto">
-		</div>
-		<div style="line-height:30px">Content Type: <?php echo $content_type;?></div>
-		<?php if(!empty($html_content)){ ?>
-		<div style="line-height:20px"><?php echo $html_content;?></div>
-		<?php } ?>
-	<script>
-	$('.video-player').simple_video_player({
-		src: '<?php echo base_url().'src/temp/'.$file;?>', 
-		autostart: true, 
-		loaded: function(){
-			document_loaded();		
-		}
-	});
-	</script>
-	<?php
-	}
-	else if($mime_type == 'doc' || $mime_type == 'ppt' || $mime_type == 'excel'){ 
-	?>
+}
+	/*else if($mime_type == 'doc' || $mime_type == 'ppt' || $mime_type == 'excel'){ 
 		<embed class="doc-frame" src="<?php echo sprintf($src, base_url().'src/temp/'.$file);?>" style="width:100%" onload="document_loaded()">
-	<?php
-	}
-	else if($mime_type == 'HTML'){
-	?>
-		<h3 class="text-center"><?php echo $subject;?></h3>
-		<div class="document-content"><?php echo $html_content;?></div>
-	<?php
-	}
-	else if($mime_type == 'pdf'){
-	?>
-		<h3 class="text-center"><?php echo $subject;?></h3>
-		<iframe class="doc-frame" frameborder="0" style="width:100%" onload="document_loaded(this)"></iframe>
-		<script type="text/javascript">
-		(function($){
-			function renderPDF(url, options) {
-				var width = 0;
-				var height = 0;
-				var total_page = 0;
-				var options = options || { scale: 1 };
-				function renderPage(page) {
-					var viewport = page.getViewport(options.scale);
-					var canvas = document.createElement('canvas');
-					var ctx = canvas.getContext('2d');
-					var renderContext = {
-						canvasContext: ctx,
-						viewport: viewport
-					};
-					page.render(renderContext).then(function(){
-						width = viewport.width;
-						height = viewport.height;
-						var w = $('.doc-frame').outerWidth();
-						var h = height * total_page * w / width;
-						$('.doc-frame').outerHeight(h);
-						$('.doc-frame').attr('src', '<?php echo base_url().'src/temp/'.$file;?>#toolbar=0&navpanes=0&scrollbar=0');
-					});
-				}
-    
-				function renderPages(pdfDoc) {
-					total_page = pdfDoc.numPages;
-					pdfDoc.getPage(1).then(renderPage);
-					//for(var num = 1; num <= pdfDoc.numPages; num++){
-					//}
-				}
-				
-				PDFJS.disableWorker = true;
-				PDFJS.getDocument(url).then(renderPages);
-			}   
-			renderPDF("<?php echo base_url().'src/temp/'.$file;?>");
-		}(jQuery));
-		</script>
-	<?php
-	}
-	?>
-
+	}*/
+</script>
