@@ -60,7 +60,7 @@ class Events extends Smd_Controller {
 				$ret['rows'][$i]['id'] = $r['events_id'];
 				$ret['rows'][$i]['events_subject'] = '<a href="'.base_url().'events/item/'.$r['events_id'].'" target="_blank">'.$r['events_subject'].'</a>';
 				$ret['rows'][$i]['events_start_time'] = date_format(date_create($r['events_start_time']), 'Y-m-d H:i');
-				$ret['rows'][$i]['events_start_time'] = date_format(date_create($r['events_end_time']), 'Y-m-d H:i');
+				$ret['rows'][$i]['events_end_time'] = date_format(date_create($r['events_end_time']), 'Y-m-d H:i');
 				$ret['rows'][$i]['events_city'] = $r['events_city'];
 				$ret['rows'][$i]['event_guests'] = intval($r['event_guests']);
 				$ret['rows'][$i]['action'] =  array(
