@@ -58,7 +58,7 @@ function load_resource(){
 						$('<img src="' + $(img_wrappers[0]).children('img').attr('src') + '">').appendTo($_thumbnail);
 					}
 					var date = data[i]['create_time'].split(' ');
-					$('<div>').addClass('resource-list-text').append('<div class="sub">' + data[i]['subject'] + '</div>').append('<div class="info">' + date[0] + '</div>').appendTo($_a);
+					$('<div>').addClass('list-text').append('<div class="sub">' + data[i]['subject'] + '</div>').append('<div class="info">' + date[0] + '</div>').appendTo($_a);
 
 					$_li.appendTo(pl);
 				}

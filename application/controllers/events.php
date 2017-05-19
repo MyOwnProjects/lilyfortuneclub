@@ -1,14 +1,42 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Events extends CI_Controller {
+require_once('base.php');
+class Events extends Base_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('event_model');
 	}
 	
 	public function index()
 	{
-		$this->load->view('template', array('data' => array('view'=>'events')));
+		$this->load_view('events');
+	}
+
+	public function get_list(){
+		$result = $this->event_model->get_list("events_end_time>'".date_format(date_create(), 'Y-m-d 00:00:00')."'", array('events_start_time DESC'));
+		foreach($result as $i => $r){
+			$result[$i]['events_start_date'] = date_format(date_create($r['events_start_time']), 'M d');
+		}
+		//header('Content-Type: application/json; charset=charset=ISO-8859-1');
+		echo json_encode($result);
+	}
+	
+	public function item($id = null){
+		$days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+		$result = $this->event_model->get_list("events_id='$id'");
+		if(count($result) > 0){
+			$result[0]['start_date'] = $days[date_format(date_create($result[0]['events_start_time']), 'w')].date_format(date_create($result[0]['events_start_time']), ', M d');
+			$result[0]['start_time'] = date_format(date_create($result[0]['events_start_time']), 'h:i A');
+			$result[0]['end_date'] = $days[date_format(date_create($result[0]['events_end_time']), 'w')].date_format(date_create($result[0]['events_end_time']), ', M d');
+			$result[0]['end_time'] = date_format(date_create($result[0]['events_end_time']), 'h:i A');
+			if($this->input->is_ajax_request()){
+				echo json_encode($result[0]);
+			}
+		}
+		if(!$this->input->is_ajax_request()){
+			header('location: '.base_url().'events');
+		}
 	}
 }
 

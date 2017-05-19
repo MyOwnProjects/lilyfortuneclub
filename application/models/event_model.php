@@ -11,108 +11,47 @@ class Event_model extends Base_model{
 		parent::__construct();
 	}
 	
-	public function get_events_by_date($start_date, $end_date, $user_id){
-		//$sql = "SELECT e.user_id, e.events_id, e.subject, et.event_date, et.event_start_time, et.event_end_time FROM events e 
-		//	INNER JOIN events_time et ON e.events_id=et.event_id AND et.event_date BETWEEN '$start_date' AND '$end_date 23:59:59'
-		//	WHERE e.user_id IN ($user_id) ORDER BY e.events_id ASC, et.event_date ASC, et.event_start_time ASC";
-		$sql = "
-			SELECT e.*, et.event_date, et.event_start_time, et.event_end_time FROM 
+	public function get_list_total($where = ''){
+		$sql = "SELECT COUNT(*) AS count FROM events WHERE $where AND active='Y'";
+		$result = $this->db->query($sql);
+		return $result[0]['count'];
+	}
+	
+	public function get_list($where = '1=1', $order_by = null, $limit= null){
+		$sql = "SELECT * FROM events e 
+			LEFT JOIN 
 			(
-				SELECT e.events_id, e.subject, e.user_id FROM events e 
-				INNER JOIN events_time et ON e.events_id=et.event_id AND et.event_date BETWEEN '$start_date' AND '$end_date 23:59:59'
-				WHERE e.user_id IN ($user_id) GROUP BY e.events_id
-			) e 
-			INNER JOIN events_time et ON e.events_id=et.event_id 
-			ORDER BY e.events_id ASC, et.event_date ASC, et.event_start_time ASC";
-		return $this->db->query($sql);
-		
+				SELECT event_guests_event_id, COUNT(*) AS event_guests FROM event_guests GROUP BY event_guests_event_id
+			) t ON t.event_guests_event_id=e.events_id
+			WHERE $where  AND active='Y'".(empty($order_by) ? '' : " ORDER BY ".implode(",", $order_by)).(empty($limit) ? "" : " LIMIT $limit");;
+		$result = $this->db->query($sql);
+		return $result;
 	}
 	
-	public function get_event_by_id($user_id, $event_id){
-		$sql = "SELECT e.user_id, e.events_id, e.subject, e.detail, et.event_date, et.event_start_time, et.event_end_time FROM events e 
-			INNER JOIN events_time et ON e.events_id=et.event_id
-			WHERE e.user_id IN ($user_id) AND e.events_id='$event_id'";
+	public function get_events($where = "1=1"){
+		$sql = "SELECT * FROM events e 
+			LEFT JOIN event_guests eg ON eg.event_guests_event_id=e.events_id
+			WHERE $where";
 		return $this->db->query($sql);
 	}
 	
-	public function update_event($user_id, $id, $subject, $detail, $time){
-		if($id > 0){
-			$sql = "SELECT * FROM events WHERE `events_id`='$id' AND `user_id`='$user_id'";
-			$result = $this->db->query($sql);
-			if(count($result) !== 1){
-				return false;
-			}
-			
-			$this->db->query("BEGIN");
-			$sql = "UPDATE events SET `subject`='".addslashes($subject)."', `detail`='".addslashes($detail)."' WHERE `events_id`='$id'";
-			if(!$this->db->query($sql)){
-				$this->db->query("ROLLBACK");
-				return false;
-			}
-			
-			$sql = "DELETE FROM events_time WHERE event_id='$id'";
-			if(!$this->db->query($sql)){
-				$this->db->query("ROLLBACK");
-				return false;
-			}
-			$values = array();
-			foreach($time as $date_time){
-				array_push($values, "('$id','".$date_time[0]."','".$date_time[1]."','".$date_time[2]."')");
-			}
-			$sql = "INSERT INTO `events_time` (`event_id`, `event_date`, `event_start_time`, `event_end_time`) VALUES ".implode(",", $values);
-			if(!$this->db->query($sql) || $this->db->insert_id() <= 0){
-				$this->db->query("ROLLBACK");
-				return false;
-			}
-			$this->db->query("COMMIT");
-			return true;
-		}
-		else{
-			$this->db->query("BEGIN");
-			$sql = "INSERT INTO `events` (`subject`,`detail`,`user_id`) VALUES ('".addslashes($subject)."','".addslashes($detail)."','$user_id')";
-			if(!$this->db->query($sql)){
-				$this->db->query("ROLLBACK");
-				return false;
-			}
-			$event_id = $this->db->insert_id();
-			if($event_id <= 0){
-				$this->db->query("ROLLBACK");
-				return false;
-			}
-			
-			$values = array();
-			foreach($time as $date_time){
-				array_push($values, "('$event_id','".$date_time[0]."','".$date_time[1]."','".$date_time[2]."')");
-			}
-			$sql = "INSERT INTO `events_time` (`event_id`, `event_date`, `event_start_time`, `event_end_time`) VALUES ".implode(",", $values);
-			if(!$this->db->query($sql) || $this->db->insert_id() <= 0){
-				$this->db->query("ROLLBACK");
-				return false;
-			}
-			$this->db->query("COMMIT");
-			return $event_id;
-		}
+	public function insert_event($subject, $street, $city, $state, $zipcode, $start_time, $end_time, $detail){
+		$sql = "INSERT INTO events (events_subject, events_street, events_city, events_state, events_zipcode, events_start_time, events_end_time, events_detail) 
+			VALUES ('".addslashes($subject)."', '".addslashes($street)."', '".addslashes($city)."', '".addslashes($state)."', '".addslashes($zipcode)."', '".addslashes($start_time)."', '".addslashes($end_time)."', '".addslashes($detail)."')";
+		return $this->db->query($sql) && $this->db->insert_id() > 0;
 	}
 	
-	public function delete_event($user_id, $event_id){
-			$sql = "SELECT * FROM events WHERE `events_id`='$event_id' AND `user_id`='$user_id'";
-			$result = $this->db->query($sql);
-			if(count($result) !== 1){
-				return false;
-			}
-			
-			$this->db->query("BEGIN");
-			$sql = "DELETE FROM events_time WHERE event_id='$event_id'";
-			if(!$this->db->query($sql)){
-				$this->db->query("ROLLBACK");
-				return false;
-			}
-			$sql = "DELETE FROM events WHERE events_id='$event_id'";
-			if(!$this->db->query($sql)){
-				$this->db->query("ROLLBACK");
-				return false;
-			}
-			$this->db->query("COMMIT");
-			return true;
+	public function update_event($where, $prop){
+		$values = array();
+		foreach($prop as $n => $v){
+			array_push($values, "$n='".addslashes($v)."'");
+		}
+		$sql = "UPDATE events SET ".implode(", ", $values)." WHERE $where";
+		return $this->db->query($sql);
+	}
+	
+	public function delete_events($where){
+		$sql = "UPDATE events SET active='N' WHERE $where";
+		return $this->db->query($sql);
 	}
 }

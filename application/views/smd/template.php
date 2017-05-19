@@ -2,13 +2,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8"></meta>
-		<title></title>
+		<title>SMD - Lily Fortune Club</title>
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery-ui-1.11.4/jquery-ui.css" />
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/jquery-simple-datetimepicker/jquery.datetimepicker.css?t=<?php echo time();?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/dialog/dialog.css?t=<?php echo time();?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/data_table/data_table.css?t=<?php echo time();?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/tree_grid/tree_grid.css?t=<?php echo time();?>">
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/jquery.datetimepicker/jquery.datetimepicker.css?t=<?php echo time();?>">
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/css/smd/template.css?t=<?php echo time();?>" />		
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/css/smd/team.css?t=<?php echo time();?>" />		
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootbox.min.js"></script>		
+		<script src="<?php echo base_url();?>src/3rd_party/jquery-simple-datetimepicker/jquery.datetimepicker.full.min.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/dialog/dialog.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/data_table/data_table.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/dialog_toggle.js?t=<?php echo time();?>"></script>
@@ -24,7 +25,6 @@
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/tree_grid/tree_grid.js?t=<?php echo time();?>"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/Chart.bundle.min.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/simple_video_player/simple_video_player.js?t=<?php echo time();?>"></script>
-		<script src="<?php echo base_url();?>src/3rd_party/jquery.datetimepicker/jquery.datetimepicker.full.min.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jstz.js"></script>
 		<script src="<?php echo base_url();?>src/3rd_party/ckeditor/ckeditor.js"></script>
 		<script>

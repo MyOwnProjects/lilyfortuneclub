@@ -57,6 +57,17 @@ class Smd_controller extends CI_Controller {
 				),
 			),
 		),
+		'events' => array(
+			'text' => 'Events',
+			'sub_menus' => array(
+				'' => array(
+					'text' => 'List'
+				),
+				'create' => array(
+					'text' => 'New Event'
+				),
+			),
+		),
 		'resources' => array(
 			'text' => 'Resources',
 			'sub_menus' => array(
