@@ -54,4 +54,15 @@ class Event_model extends Base_model{
 		$sql = "UPDATE events SET active='N' WHERE $where";
 		return $this->db->query($sql);
 	}
+	
+	public function add_event_guest($values){
+		$f = array();
+		$vs = array();
+		foreach($values as $n => $v){
+			array_push($f, $n);
+			array_push($vs, "'".addslashes($v)."'");
+		}
+		$sql = "INSERT INTO event_guests (".implode(",", $f).") VALUES (".implode(",", $vs).")";
+		return $this->db->query($sql) && $this->db->insert_id() > 0;
+	}
 }

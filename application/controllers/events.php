@@ -39,5 +39,17 @@ class Events extends Base_Controller {
 			header('location: '.base_url().'events');
 		}
 	}
+	
+	public function sign_up(){
+		$post = $this->input->post();
+		$value = array(
+			'event_guests_event_id' => $post['event_guests_event_id'],
+			'event_guests_name' => strip_tags($post['event_guests_name']),
+			'event_guests_email' => strip_tags($post['event_guests_email']),
+			'event_guests_phone' => strip_tags($post['event_guests_phone']),
+			'event_guests_referee' => strip_tags($post['event_guests_referee']),
+		);
+		echo json_encode(array('success' => $this->event_model->add_event_guest($value)));
+	}
 }
 

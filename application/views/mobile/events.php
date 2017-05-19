@@ -15,14 +15,15 @@
 	</div>
 	<div data-role="main" class="ui-content">
 		<div class="event-content"></div>
-		<div>
-			<form method="post" data-ajax="false" action="<?php echo base_url();?>events/sign_up">
+		<div id="sign-up-form">
+			<form method="post" data-ajax="false" onsubmit="return signup_submit();">
 				<input type="text" name="event_guests_name" placeholder="Your Name (Required)" required>
 				<input type="email" name="event_guests_email" placeholder="Email (Required)" required>
 				<input type="text" name="event_guests_phone" placeholder="Phon Number (Required)" required>
 				<input type="text" name="event_guests_referee" placeholder="Referee Name (Optional)">
 				<button type="submit" class="btn-1 ui-btn ui-corner-all">Sign up</button>
-			</form>
+			</form>			
+			<p style="display:none" class="w3-text-green">You have successfully signed up!<p>
 		</div>
 	</div>
 </div>
@@ -69,6 +70,42 @@ function load_events(){
 	});
 }
 
+function signup_submit(){
+	$.mobile.loading( 'show', {
+		theme: 'z',
+		html: ""
+	});
+	var data = {event_guests_event_id: event_id};
+	$('#sign-up-form input').each(function(index, obj){
+		data[$(obj).attr('name')] = $(obj).val();
+	});
+	$.ajax({
+		url: '<?php echo base_url();?>events/sign_up',
+		method: 'post',
+		data: data,
+		dataType: 'json',
+		success: function(data){
+			if(data['success']){
+				$('#sign-up-form form').hide();
+				$('#sign-up-form p').show();
+			}
+			else{
+				$('#popup').html('<p class="w3-text-red">Failed to sign up. Please do it again.</p>').popup('open');
+			}
+		},
+		error: function(){
+			$('#popup').html('<p class="w3-text-red">Failed to sign up. Please do it again.</p>').popup('open');
+		},
+		complete: function(){
+			$.mobile.loading( 'hide', {
+				theme: 'z',
+				html: ""
+			});
+		}
+	});
+	return false;
+}
+
 var event_id = 0;
 
 $(document).delegate('#event-list ul[data-role=listview] a', 'click', function(){
@@ -79,6 +116,7 @@ $(document).delegate('#event-list ul[data-role=listview] a', 'click', function()
 	load_events();
 }).on('pagebeforeshow', '.view-event', function(){
 	$('.event-content').empty();
+	$('#sign-up-form input').val('');
 }).on('pageshow', '.view-event', function(){
 	$.mobile.loading( 'show', {
 		theme: 'z',
