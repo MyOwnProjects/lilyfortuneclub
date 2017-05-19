@@ -17,6 +17,7 @@ class Events extends Base_Controller {
 		$result = $this->event_model->get_list("events_end_time>'".date_format(date_create(), 'Y-m-d 00:00:00')."'", array('events_start_time DESC'));
 		foreach($result as $i => $r){
 			$result[$i]['events_start_date'] = date_format(date_create($r['events_start_time']), 'M d');
+			$result[$i]['events_end_date'] = date_format(date_create($r['events_send_time']), 'M d');
 		}
 		//header('Content-Type: application/json; charset=charset=ISO-8859-1');
 		echo json_encode($result);
