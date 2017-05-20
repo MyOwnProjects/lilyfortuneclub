@@ -4,6 +4,10 @@
 		<script>var base_url = '<?php echo base_url();?>'; </script>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="AAAAAAAAA">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
 		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.mobile-1.4.5/theme-classic.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/w3.css?<?php echo time();?>">
