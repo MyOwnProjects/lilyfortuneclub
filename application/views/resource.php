@@ -1,6 +1,7 @@
 <style>
 .resource-list .resource-list-thumbnail{width:118px;height:69px;border:1px solid #efefef;margin-right:20px;text-align:center;padding:2px}
 .resource-list .resource-list-thumbnail img{width:112px;height:63px;display:inline;}
+.resource-list ul:not(.breadcrumb){list-style:none !important}
 .resource-list ul:not(.breadcrumb) li{margin:0 20px;line-height:30px;padding:20px 0}
 .resource-list ul:not(.breadcrumb) li:not(:first-child){border-top:1px solid #efefef}
 .resource-list li .resource-list-info{color:#888}
@@ -12,8 +13,8 @@
 .resource-list li .resource-list-info{display:none}
 .resource-list-short-desc{display:none}
 .resource-list-subject{font-weight:normal;overflow:visible}
-.resource-list ul:not(.breadcrumb){list-style:none;padding:0}
-.resource-list ul:not(.breadcrumb) li{list-style:none;padding:0}
+.resource-list #resource-list{list-style:none !important;padding:0}
+.resource-list #resource-listul li{list-style:none;padding:0}
 .resource-list ul:not(.breadcrumb) li:not(:first-child){border-top:none}
 }
 </style>
