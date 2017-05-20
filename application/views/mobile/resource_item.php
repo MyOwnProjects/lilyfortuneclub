@@ -1,5 +1,5 @@
 <div data-role="page" data-theme="d">
-	<?php $this->load->view('mobile/header', array('header_text' => 'Resource'));?>
+	<?php $this->load->view('mobile/header', array('header_text' => $resource['subject'].' - Lily Fortune Club'));?>
 	<div data-role="main" class="ui-content">
 		<div class="resource-content">
 			<h4><?php echo $resource['subject'];?></h4>
