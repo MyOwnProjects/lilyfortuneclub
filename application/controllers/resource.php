@@ -27,6 +27,8 @@ class Resource extends Base_Controller {
 			if(sha1($id) == substr($raw_id, 0, 40)){
 				$result = $this->resource_model->get_items("resources_id = '$id' AND access = 0");
 				if(count($result) > 0){
+					$this->load_view('resource_item', array('resource' => $result[0], 'web_title' => $result[0]['subject']));
+					return;
 					$prev = $this->resource_model->get_prev($id);
 					$next = $this->resource_model->get_next($id);
 					if($this->input->is_ajax_request()){
@@ -45,8 +47,6 @@ class Resource extends Base_Controller {
 				}
 			}
 		}
-		if(!$this->input->is_ajax_request()){
-			header('location: '.base_url().'resource');
-		}
+		header('location: '.base_url().'resource');
 	}
 }
