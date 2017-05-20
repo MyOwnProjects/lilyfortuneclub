@@ -12,6 +12,7 @@
 .resource-list li .resource-list-info{display:none}
 .resource-list-short-desc{display:none}
 .resource-list-subject{font-weight:normal;overflow:visible}
+.resource-list ul:not(.breadcrumb){list-style:none;padding:0}
 .resource-list ul:not(.breadcrumb) li{list-style:none;padding:0}
 .resource-list ul:not(.breadcrumb) li:not(:first-child){border-top:none}
 }
