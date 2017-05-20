@@ -31,11 +31,9 @@ class Events extends Base_Controller {
 			$result[0]['start_time'] = date_format(date_create($result[0]['events_start_time']), 'h:i A');
 			$result[0]['end_date'] = $days[date_format(date_create($result[0]['events_end_time']), 'w')].date_format(date_create($result[0]['events_end_time']), ', M d');
 			$result[0]['end_time'] = date_format(date_create($result[0]['events_end_time']), 'h:i A');
-			if($this->input->is_ajax_request()){
-				echo json_encode($result[0]);
-			}
+			$this->load_view('event_item', $result[0]);
 		}
-		if(!$this->input->is_ajax_request()){
+		else{
 			header('location: '.base_url().'events');
 		}
 	}
