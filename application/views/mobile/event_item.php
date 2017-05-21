@@ -19,7 +19,7 @@
 			<form method="post" data-ajax="false" onsubmit="return signup_submit();">
 				<input type="text" name="event_guests_name" placeholder="Your Name (Required)" required>
 				<input type="email" name="event_guests_email" placeholder="Email (Required)" required>
-				<input type="text" name="event_guests_phone" placeholder="Phon Number (Required)" required>
+				<input type="text" name="event_guests_phone" placeholder="Phone Number (Required)" required>
 				<input type="text" name="event_guests_referee" placeholder="Referee Name (Optional)">
 				<button type="submit" class="btn-1 ui-btn ui-corner-all">Sign up</button>
 			</form>			
