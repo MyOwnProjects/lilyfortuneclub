@@ -20,7 +20,7 @@
 		&nbsp;&nbsp;
 		<label>Source</label>
 		<input class="form-control input-sm" style="width:150px" name="source" value="<?php echo isset($source) ? $source : '';?>">
- 		<input class="btn btn-sm btn-primary pull-right" type="submit" value="submit">
+ 		<input class="btn btn-sm btn-success pull-right" type="submit" value="submit">
 		</div>
 		<div style="position:absolute;top:50px;right:0;bottom:0;left:0;">
 			<textarea class="form-control" name="content" id="resource-content"><?php echo isset($content) ? $content : '';?></textarea>
