@@ -45,7 +45,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12 form-group">
-				<input type="submit" class="btn btn-primary pull-right" value="submit" />
+				<input type="submit" class="btn btn-success pull-right" value="Submit" />
 			</div>
 		</div>
 	</form>

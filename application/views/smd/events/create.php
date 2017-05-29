@@ -65,7 +65,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<input class="btn btn-success pull-right" type="submit" value="submit">
+			<input class="btn btn-success pull-right" type="submit" value="Submit">
 		</div>
 		<?php
 		if(isset($event_guests)){
