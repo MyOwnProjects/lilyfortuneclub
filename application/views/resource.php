@@ -1,4 +1,5 @@
 <style>
+	#resource-list{margin:0;padding:0}
 .resource-list .resource-list-thumbnail{width:118px;height:69px;border:1px solid #efefef;margin-right:20px;text-align:center;padding:2px}
 .resource-list .resource-list-thumbnail img{width:112px;height:63px;display:inline;}
 .resource-list ul:not(.breadcrumb){list-style:none !important}

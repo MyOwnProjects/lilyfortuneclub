@@ -13,7 +13,8 @@
 			}
 			?>
 			<p>Time: <?php echo $time;?></p>
-			<p>Location: <?php echo "$events_street, $events_city, $events_state $events_zipcode";?></p>
+			<?php $address = "$events_street, $events_city, $events_state $events_zipcode";?>
+			<p>Location: <a href="https://www.google.com/maps/place/<?php echo $address;?>" target="_blank"><?php echo $address;?></a></p>
 		</div>
 		<div id="sign-up-form">
 			<form method="post" data-ajax="false" onsubmit="return signup_submit();">

@@ -54,6 +54,7 @@
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/startup"><img src="<?php echo base_url();?>src/img/rocket-icon.svg">Startup</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/business"><img src="<?php echo base_url();?>src/img/give-money.svg">Business</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/documents"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg">Education</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/schedule"><img src="<?php echo base_url();?>src/img/instructor-lecture-with-sceen-projection-tool.svg">On-site Classes</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/live"><img src="<?php echo base_url();?>src/img/television.svg">Live</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/profile"><img src="<?php echo base_url();?>src/img/man-user.svg?1">Profile</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>ac/sign_out"><img src="<?php echo base_url();?>src/img/sign-out-option.svg">Sign out</a>
