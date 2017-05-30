@@ -1,5 +1,5 @@
 <div data-role="page" id="event-list" data-theme="d">
-	<?php $this->load->view('mobile/header', array('header_text' => 'Events'));?>
+	<?php $this->load->view('mobile/header', array('header_text' => 'Seminar'));?>
 	<div data-role="main" class="ui-content" data-theme="d">
 		<form class="ui-filterable ui-content ui-mini ">
 			<input id="event-filter" data-type="search">

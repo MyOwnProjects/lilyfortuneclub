@@ -47,7 +47,7 @@
 			<a data-rel="back" class="nondec menu-list" data-transition="slide" data-direction="reverse" style="text-align:right">×</a>
 			<a href="<?php echo base_url();?>" data-ajax="false" class="nondec menu-list"><img src="<?php echo base_url();?>src/img/home.svg">Home</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>resource"><img src="<?php echo base_url();?>src/img/folded-newspaper.svg">Resource</a>
-			<a  class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>events"><img src="<?php echo base_url();?>src/img/drinking.svg">Events</a>
+			<a  class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>events"><img src="<?php echo base_url();?>src/img/instructor-lecture-with-sceen-projection-tool.svg">Seminar</a>
 			<?php
 			if(!empty($user)){
 			?>

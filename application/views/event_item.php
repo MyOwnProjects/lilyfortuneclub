@@ -11,7 +11,7 @@
 <div class="resource main-content-wrapper">
 	<ul class="breadcrumb">
 		<li><a href="<?php echo base_url();?>">Home</a></li>
-		<li><a href="<?php echo base_url();?>events">Events</a></li> 
+		<li><a href="<?php echo base_url();?>events">Seminar</a></li> 
 		<li class="active">Item</li> 
 	</ul>
 

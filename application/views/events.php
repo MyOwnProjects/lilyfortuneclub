@@ -22,7 +22,7 @@
 <div class="event-list  main-content-wrapper">
 	<ul class="breadcrumb">
 		<li><a href="<?php echo base_url();?>">Home</a></li>
-		<li class="active">Events</li> 
+		<li class="active">Seminar</li> 
 	</ul>
 	<ul id="event-list">
 		<li style="text-align:center;line-height:160px;"><img src="<?php echo base_url();?>src/img/spinning.gif"></li>
