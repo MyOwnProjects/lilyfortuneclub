@@ -1,5 +1,5 @@
 <div data-role="page" data-theme="d">
-	<?php $this->load->view('mobile/header', array('header_text' => $events_subject.' - Lily Fortune Club'));?>
+	<?php $this->load->view('mobile/header', array('header_text' => 'Seminar'));?>
 	<div data-role="main" class="ui-content">
 		<div class="event-content">
 			<h4><?php echo $events_subject;?></h4>
