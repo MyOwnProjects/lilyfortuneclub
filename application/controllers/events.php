@@ -14,7 +14,9 @@ class Events extends Base_Controller {
 	}
 
 	public function get_list(){
-		$result = $this->event_model->get_list("events_end_time>'".date_format(date_create(), 'Y-m-d 00:00:00')."'", array('events_start_time DESC'));
+		if(!empty($user)){
+		}
+		$result = $this->event_model->get_list("events_end_time>'".date_format(date_create(), 'Y-m-d 00:00:00')."' ".(empty($this->user) ? " AND events_public='Y'" : ""), array('events_start_time DESC'));
 		foreach($result as $i => $r){
 			$result[$i]['events_start_date'] = date_format(date_create($r['events_start_time']), 'M d');
 			$result[$i]['events_end_date'] = date_format(date_create($r['events_end_time']), 'M d');
