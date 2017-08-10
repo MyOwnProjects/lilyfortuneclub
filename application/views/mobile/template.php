@@ -16,7 +16,7 @@
 		<script src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
 		<script src="<?php echo base_url();?>src/3rd_party/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<script src="<?php echo base_url();?>src/js/tools.js?<?php echo time();?>"></script>
-		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/pdfjs/pdf.js"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/pdfjs/build/pdf.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/simple_video_player/simple_video_player.js?t=<?php echo time();?>"></script>
 	</head>		
 	<script>
@@ -53,6 +53,7 @@
 			?>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/startup"><img src="<?php echo base_url();?>src/img/rocket-icon.svg">Startup</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/business"><img src="<?php echo base_url();?>src/img/give-money.svg">Business</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/license"><img src="<?php echo base_url();?>src/img/certificate.svg">License</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/documents"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg">Education</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/schedule"><img src="<?php echo base_url();?>src/img/instructor-lecture-with-sceen-projection-tool.svg">On-site Classes</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/live"><img src="<?php echo base_url();?>src/img/television.svg">Live</a>

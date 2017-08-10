@@ -3,6 +3,7 @@
 .block-icon{float:left;text-align:center;margin-right:20px}
 .block-icon img{width:40px;height:40px}
 .block-text{overflow:hidden;min-height:160px}
+.block-text-main{height:160px;margin-bottom:10px}
 </style>
 <div style="max-width:1000px;width:100%;margin:0 auto 40px auto;padding:40px 0">
 	<div class="row">
@@ -29,9 +30,11 @@
 				<div class="panel-body clearfix">
 					<div class="block-icon"><img src="<?php echo $p['icon'];?>"></div>
 					<div class="block-text">
-						<b><?php echo $p['question'];?></b><br/><br/>
-						<p><?php echo implode('</p><p>', $p['text']); ?></p>
-						<a class="btn btn-sm btn-success" href="<?php echo $p['btn']['url'];?>"><?php echo $p['btn']['text'];?></a>
+						<div class="block-text-main">
+							<b><?php echo $p['question'];?></b><br/><br/>
+							<p><?php echo implode('</p><p>', $p['text']); ?></p>
+						</div>
+						<a class="btn btn btn-success" href="<?php echo $p['btn']['url'];?>"><?php echo $p['btn']['text'];?>&nbsp;<span class="glyphicon glyphicon-play-circle"></span></a>
 					</div>
 				</div>
 			</div>
@@ -39,7 +42,7 @@
 		<?php
 		}
 		?>
-	<div id="welcome-content" style="display:none">	
+		<div id="welcome-content" style="display:none">	
 			<h2>Welcome</h2>
 			<p>Congratulations on your decision to become an associate with World Financial Group (WFG). We believe you’ve made an excellent choice for you and your family, and will soon be helping others to achieve their dreams as well.</p>
 			<p>WFG offers a unique opportunity to people just like you — a chance to build a financial services business of your own no matter what your previous work or life experiences have been. You can build this business as big as you desire. The only obstacle in your path is your tenacity, dedication to the mission and desire to help individuals and families achieve their financial goals.</p>
@@ -55,7 +58,8 @@
 				<li>Positivity and Optimism: People prefer to be around positive, optimistic and motivated people, so set the example for your team. </li>
 				<li>Duplication: You must keep duplicating the WFG System again and again, even if you are bored with it. If you follow these principles and commit yourself to WFG, you have every chance to be a successful business leader. The future belongs to you.
 			</ul>
-		<p>Let’s get started!</p>
+			<p>Let’s get started!</p>
+		</div>
 	</div>
 </div>
 <script>

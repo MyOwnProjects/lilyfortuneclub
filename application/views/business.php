@@ -17,7 +17,7 @@ blockquote{font-size:14px;margin-left:10px}
 </style>
 	<ul class="breadcrumb" style="border-bottom:1px solid #d5d5d5">
 		<li><a href="<?php echo base_url();?>account">Account</a></li>
-		<li>New member Startup</li>
+		<li>Business</li>
 	</ul>
 <div style="margin:0 auto;max-width:1000px;padding:20px 0 80px 0;">
 	<div class="row" style="margin-bottom:20px">

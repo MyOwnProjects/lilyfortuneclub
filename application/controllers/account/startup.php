@@ -29,7 +29,22 @@ class Startup extends Account_base_controller {
 				),
 				'btn' => array(
 					'url' => base_url().'account/business',
-					'text' => 'Statup you business'
+					'text' => 'Statup your business'
+				)
+			),
+			array(
+				'subject' => 'Get Your License',
+				'icon' => base_url().'src/img/certificate.svg',
+				'question' => 'To get your license',
+				'text' => array(
+					'- Complete the 52 hours online courses.',
+					'- Take and pass the license exam.',
+					'- Apply for your license.',
+					'- Finish continuing education courses.',
+				),
+				'btn' => array(
+					'url' => base_url().'account/license',
+					'text' => 'Prepare your license'
 				)
 			),
 			array(
