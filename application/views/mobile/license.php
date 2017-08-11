@@ -65,6 +65,7 @@ var selected_step_id = 0;
 $(document).on("pageshow","#step-detail",function(){
 	;
 }).on('pagebeforeshow', '#step-detail', function(){
+	$('.detail-img img').attr('src', '');
 	$.mobile.loading( 'show', {
 		theme: 'z',
 		html: ""
