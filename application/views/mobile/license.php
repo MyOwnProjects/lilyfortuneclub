@@ -65,7 +65,6 @@ var selected_step_id = 0;
 $(document).on("pageshow","#step-detail",function(){
 	;
 }).on('pagebeforeshow', '#step-detail', function(){
-	selected_prospect_id = $(this).parent().attr('data-id');
 	$.mobile.loading( 'show', {
 		theme: 'z',
 		html: ""
@@ -88,7 +87,7 @@ $(document).on("pageshow","#step-detail",function(){
 		}
 	});
 }).delegate('.step-detail', 'click', function(){
-	selected_page_id = $(this).parent().attr('page-id');
-	selected_step_id = $(this).parent().attr('step-id');
+	selected_page_id = parseInt($(this).parent().attr('page-id'));
+	selected_step_id = parseInt($(this).parent().attr('step-id'));
 });
 </script>
