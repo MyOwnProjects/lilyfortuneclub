@@ -9,9 +9,9 @@ class License extends Account_base_controller {
 			'There are 2 or 3 steps to get your license, denpends on the state',
 			'steps' => array(
 				array(
-					'subject' => 'Online 52 Hourse Cource',
+					'subject' => '52 Hours Online Cources',
 					'url' => base_url().'account/license/online_course',
-					'comment' => 'The online 52 hours class is mandatory in some states, such as California. Some states do not require it, such as New Hampshire. <b>The online class is strongly recommended before your license exam, no matter the class is required or not</b>.',
+					'comment' => 'The 52 hours onine courses are mandatory in some states, such as California. Some states do not require it, such as New Hampshire. <b>The online class is strongly recommended before your license exam, no matter the class is required or not</b>.',
 					'instruct' => array(
 						'subject' => "52 Hours Online Class Registration",
 						'image_file_name'=> 'license-52-hours',
@@ -28,8 +28,13 @@ class License extends Account_base_controller {
 							'Enter the information to create your account, and then click <span class="screen-shot-btn">CONTINUE</span> button.',
 							'Enter your credit card information, and then click <i>Process Order</i> button.',
 							'Click the <span class="screen-shot-btn">Launch Course</span> button.',
-							'Congratulations! You have completed the registration. Fowllong the instruction in your account, and start your class.'
-						),
+							'You have completed the courses registration. Fowllow the instruction in your account, and start your class.You have to spend at least 12 hours on Code & Ethics, and 40 hours on Life and Accident & Health.',
+							'After you have completed the course, click the <i>Main Menu</i> on the top bar',
+							'At the bottom of the page, click <i>Get Certificate</i> link',
+							'Click the <i>Get Certificate</i> link in each course.',
+							'Check <i>Please send a copy of the certificate to my e-mail address</i>, and then click <i>Print Certificate</i> button. The cerfiticate will be printed, and an email will be sent.'.
+							'Congratulations! You have got your online course certificate. Now let us take the license exam.',
+							),
 					)
 				),
 				array(
@@ -40,19 +45,6 @@ class License extends Account_base_controller {
 						'subject' => "52 Hours Online Class Registration",
 						'image_file_name'=> 'license-52-hours',
 						'steps' => array(
-							'Go to the 52 online courses website at <a href="https://www.examfx.com" target="_blank">www.examfx.com</a>, and click <span class="screen-shot-btn">GET STARTED NOW</span> button.',
-							'In the edit box, enter <i>teamaspire@examfx.com</i>, and then click <span class="screen-shot-btn">CONTINUE</span> button.',
-							'Click <span class="screen-shot-btn">NEW STUDENT</span> button.',
-							'Click the link <span class="screen-shot-btn">Life and Health Insurance</span>.',
-							'In the dropdown box, select your state, and then click <span class="screen-shot-btn">CONTINUE</span> button.',
-							'Read the policy carefully in this page, and then click <span class="screen-shot-btn">CONTINUE</span> button.',
-							'Select the package you want. The first or second choice is recommended, since Continuing Education is required after you get your licence.',
-							'Click <span class="screen-shot-btn">CONTINUE</span> button directly.',
-							'Click <span class="screen-shot-btn">I ACCEPT</span> button.',
-							'Enter the information to create your account, and then click <span class="screen-shot-btn">CONTINUE</span> button.',
-							'Enter your credit card information, and then click <i>Process Order</i> button.',
-							'Click the <span class="screen-shot-btn">Launch Course</span> button.',
-							'Congratulations! You have completed the registration. Fowllong the instruction in your account, and start your class.'
 						),
 					)
 				),
@@ -67,6 +59,16 @@ class License extends Account_base_controller {
 	
 	public function index(){
 		$this->load_view('license', array('summary' => $this->summary));
+	}
+	
+	public function get_step_detail(){
+		$page = $this->input->get('page');
+		$step = $this->input->get('step');
+		echo json_encode(array(
+			'subject' => $this->summary['steps'][$page]['subject'], 
+			'image_file_name'=> $this->summary['steps'][$page]['instruct']['image_file_name'], 
+			'step' => $this->summary['steps'][$page]['instruct']['steps'][$step]));
+		
 	}
 	
 	public function online_courses(){
