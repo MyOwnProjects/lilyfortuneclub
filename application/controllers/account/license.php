@@ -91,31 +91,11 @@ class License extends Account_base_controller {
 	}
 	
 	public function online_courses(){
-
 		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][0]['instruct']));
 	}
 	
 	public function exam(){
-		$instruct = array(
-			'subject' => "License Exam Registration",
-			'image_file_name'=> 'license-52-hours',
-			'steps' => array(
-				'Go to the 52 online courses website at <a href="https://www.examfx.com" target="_blank">www.examfx.com</a>, and click <span class="screen-shot-btn">GET STARTED NOW</span> button.',
-				'In the edit box, enter <i>teamaspire@examfx.com</i>, and then click <span class="screen-shot-btn">CONTINUE</span> button.',
-				'Click <span class="screen-shot-btn">NEW STUDENT</span> button.',
-				'Click the link <span class="screen-shot-btn">Life nd Health Insurance</span>.',
-				'In the dropdown box, select your state, and then click <span class="screen-shot-btn">CONTINUE</span> button.',
-				'Read the policy carefully in this page, and then click <span class="screen-shot-btn">CONTINUE</span> button.',
-				'Select the package you want. The first or second choice is recommended, since Continuing Education is required after you get your licence.',
-				'Click <span class="screen-shot-btn">CONTINUE</span> button directly.',
-				'Click <span class="screen-shot-btn">I ACCEPT</span> button.',
-				'Enter the information to create your account, and then click <span class="screen-shot-btn">CONTINUE</span> button.',
-				'Enter your credit card information, and then click <i>Process Order</i> button.',
-				'Click the <span class="screen-shot-btn">Launch Course</span> button.',
-				'Congratulations! You have completed the registration. Fowllow the instruction in your account, and start your class.'
-			),
-		);
-		$this->load_view('license_instruct', array('instruct' => $instruct));
+		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][1]['instruct']));
 	}
 	
 	public function application(){
