@@ -112,7 +112,7 @@ class License extends Account_base_controller {
 				'Enter the information to create your account, and then click <span class="screen-shot-btn">CONTINUE</span> button.',
 				'Enter your credit card information, and then click <i>Process Order</i> button.',
 				'Click the <span class="screen-shot-btn">Launch Course</span> button.',
-				'Congratulations! You have completed the registration. Fowllong the instruction in your account, and start your class.'
+				'Congratulations! You have completed the registration. Fowllow the instruction in your account, and start your class.'
 			),
 		);
 		$this->load_view('license_instruct', array('instruct' => $instruct));
