@@ -13,7 +13,7 @@
 					<div class="clearfix" style="width:300px;border-bottom:1px solid #e5e5e5;padding:15px">
 						<div class="menu-icon"><a href="<?php echo base_url();?>" title="Home"><img src="<?php echo base_url();?>src/img/home.svg"><div class="text">Home</div></a></div>
 						<div class="menu-icon"><a href="<?php echo base_url();?>resource" title="Resource"><img src="<?php echo base_url();?>src/img/folded-newspaper.svg"><div class="text">Resource</div></a></div>
-						<div class="menu-icon"><a href="<?php echo base_url();?>events" title="Seminar"><img src="<?php echo base_url();?>src/img/instructor-lecture-with-sceen-projection-tool.svg"><div class="text">Seminar</div></a></div>
+						<div class="menu-icon"><a href="<?php echo base_url();?>seminar" title="Seminar"><img src="<?php echo base_url();?>src/img/instructor-lecture-with-sceen-projection-tool.svg"><div class="text">Seminar</div></a></div>
 					<?php
 					if(!empty($user)){
 					?>
@@ -21,7 +21,7 @@
 						<div class="menu-icon"><a href="<?php echo base_url();?>account/startup" title="Business"><img src="<?php echo base_url();?>src/img/give-money.svg"><div class="text">Business</div></a></div>
 						<div class="menu-icon"><a href="<?php echo base_url();?>account/license" title="License"><img src="<?php echo base_url();?>src/img/certificate.svg"><div class="text">License</div></a></div>
 						<div class="menu-icon"><a href="<?php echo base_url();?>account/documents" title="Education"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg"><div class="text">Education</div></a></div>
-						<div class="menu-icon"><a href="<?php echo base_url();?>account/live" title="Live"><img src="<?php echo base_url();?>src/img/television.svg"><div class="text">Live</div></a></div>
+						<!--div class="menu-icon"><a href="<?php echo base_url();?>account/live" title="Live"><img src="<?php echo base_url();?>src/img/television.svg"><div class="text">Live</div></a></div-->
 						<div class="menu-icon"><a href="<?php echo base_url();?>account/profile" title="Profile"><img src="<?php echo base_url();?>src/img/man-user.svg?1"><div class="text">Profile</div></a></div>
 					<?php
 					}

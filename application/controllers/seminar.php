@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once('base.php');
-class Schedule extends Base_Controller {
+class Seminar extends Base_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('schedule_model');
@@ -36,7 +36,7 @@ class Schedule extends Base_Controller {
 		$where .= empty($year) || $year == 'All' ? "" : " AND schedule_year='$year'";
 		$total = $this->schedule_model->get_list_total($where);
 		$result = $this->schedule_model->get_list($where, array('schedule_year DESC', 'schedule_month DESC'), ($page * 20).",20");
-		$this->load_view('schedule/list', array('list' => $result, 'locations' => $locations, 'years' => $years, 'year' => in_array($year, $years) ? $year : 'All', 
+		$this->load_view('seminar', array('list' => $result, 'locations' => $locations, 'years' => $years, 'year' => in_array($year, $years) ? $year : 'All', 
 			'location' => $location == 'Other' || in_array($location, $locations) ? $location : 'All', 'current' =>$page +1, 'total' => ceil($total / 20)));
 	}
 	

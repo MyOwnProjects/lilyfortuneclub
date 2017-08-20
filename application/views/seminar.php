@@ -1,4 +1,5 @@
 <style>
+ul, ul li{list-style:none}
 @media only screen and (max-width:600px) {
 .doc-list li:first-child{border-top:none;display:none}
 .doc-list li>div:not(:last-child){display:none}

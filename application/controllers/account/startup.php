@@ -24,7 +24,7 @@ class Startup extends Account_base_controller {
 				'icon' => base_url().'src/img/give-money.svg',
 				'question' => 'Do you want to startup your own business?',
 				'text' => array(
-					'- The best approach is to go to training <a href="<?php echo base_url();?>schedule">class</a> and field training!',
+					'- The best approach is to go to training <a href="'.base_url().'seminar">class</a> and field training!',
 					'- Start from here - building your business team.'
 				),
 				'btn' => array(
