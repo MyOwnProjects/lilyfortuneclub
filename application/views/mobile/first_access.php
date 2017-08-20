@@ -1,6 +1,6 @@
-<div data-role="page" id="first-access">
+<div data-role="page" id="first-access" data-theme="d">
 	<div data-role="content">
-		<p>Hello, this is the first time to access your account. Please enter or update the email, and change your password. </p>
+		<p>Hello <?php echo $first_name.' '.$last_name;?>, this is your first time to access your account. Please enter or update the email, and change your password. </p>
 		<form method="POST" data-ajax="false" action="<?php echo base_url();?>account/first_access">
 			<?php 
 			if(!empty($error)){

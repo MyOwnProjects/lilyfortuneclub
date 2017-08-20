@@ -31,7 +31,7 @@ class First_access extends Account_base_controller {
 				}
 			}
 		}
-		$this->load_view('first_access', array('email' => $email, 'error' => $error));
+		$this->load_view('first_access', array('email' => $email, 'error' => $error, 'first_name' => $this->user['first_name'], 'last_name' => $this->user['last_name'], ));
 	}
 }
 

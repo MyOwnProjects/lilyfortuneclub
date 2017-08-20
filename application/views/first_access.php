@@ -12,7 +12,7 @@
 	}
 	
 	?>
-	<p>Hello, this is the first time to access your account. Please enter or update the email, and change your password. </p>
+	<p>Hello <?php echo $first_name.' '.$last_name?>, this is your first time to access your account. Please enter or update the email, and change your password. </p>
 	<div class="form-group">
 		<label>Enter / Update Email (<span style="color:red;font-weight:normal">Important! Email is used to reset your password</span>)</label>
 		<input class="form-control" type="email" required name="email" value="<?php echo $email;?>">
