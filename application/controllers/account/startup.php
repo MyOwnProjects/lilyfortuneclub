@@ -35,7 +35,7 @@ class Startup extends Account_base_controller {
 			array(
 				'subject' => 'Get Your License',
 				'icon' => base_url().'src/img/certificate.svg',
-				'question' => 'To get your license',
+				'question' => 'Get your license',
 				'text' => array(
 					'- Complete the 52 hours online courses.',
 					'- Take and pass the license exam.',

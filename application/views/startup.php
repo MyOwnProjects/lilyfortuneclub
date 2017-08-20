@@ -2,8 +2,8 @@
 .block .panel-heading{font-weight:bold;font-size:16px;text-align:left;}
 .block-icon{float:left;text-align:center;margin-right:20px}
 .block-icon img{width:40px;height:40px}
-.block-text{overflow:hidden;min-height:160px}
-.block-text-main{height:160px;margin-bottom:10px}
+.block-text{overflow:hidden;min-height:200px;padding-bottom:10px}
+.block-text-main{height:200px;margin-bottom:10px}
 </style>
 <div style="max-width:1000px;width:100%;margin:0 auto 40px auto;padding:40px 0">
 	<div class="row">
