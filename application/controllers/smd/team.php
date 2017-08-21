@@ -150,6 +150,7 @@ class Team extends Smd_Controller {
 				'label' => 'State',
 				'name' => 'state',
 				'tag' => 'input',
+				'value' => 'CA'
 			),
 			array(
 				'label' => 'Zipcode',
@@ -160,6 +161,7 @@ class Team extends Smd_Controller {
 				'label' => 'Country',
 				'name' => 'country',
 				'tag' => 'input',
+				'value' => 'USA'
 			),
 		);
 		$this->load->view('smd/add_item', array('items' => $items));
