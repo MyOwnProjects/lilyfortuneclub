@@ -161,7 +161,7 @@ class Team extends Smd_Controller {
 				'label' => 'Country',
 				'name' => 'country',
 				'tag' => 'input',
-				'value' => 'USA'
+				'value' => 'US'
 			),
 		);
 		$this->load->view('smd/add_item', array('items' => $items));
