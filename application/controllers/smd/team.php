@@ -78,6 +78,12 @@ class Team extends Smd_Controller {
 		$upline_opt = $this->_get_all_smd_members($this->user['users_id']);
 		$items = array(
 			array(
+				'label' => 'Membership Code',
+				'name' => 'membership_code',
+				'tag' => 'input',
+				'required' => true,
+			),
+			array(
 				'label' => 'First Name',
 				'name' => 'first_name',
 				'tag' => 'input',
@@ -90,6 +96,12 @@ class Team extends Smd_Controller {
 				'required' => true,
 			),
 			array(
+				'label' => 'Nick Name',
+				'name' => 'nick_name',
+				'tag' => 'input',
+				'required' => false,
+			),
+			array(
 				'label' => 'Email',
 				'name' => 'email',
 				'tag' => 'input',
@@ -100,12 +112,6 @@ class Team extends Smd_Controller {
 				'tag' => 'input',
 				'type' => 'date',
 				'placeholder' => 'YYYY-MM-DD',
-			),
-			array(
-				'label' => 'Membership Code',
-				'name' => 'membership_code',
-				'tag' => 'input',
-				'required' => true,
 			),
 			array(
 				'label' => 'Grade',
