@@ -99,7 +99,6 @@ class Team extends Smd_Controller {
 				'label' => 'Nick Name',
 				'name' => 'nick_name',
 				'tag' => 'input',
-				'required' => false,
 			),
 			array(
 				'label' => 'Email',
