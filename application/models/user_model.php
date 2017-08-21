@@ -84,7 +84,7 @@ class User_model extends Base_model{
 			FROM users 
 			LEFT JOIN users u1 ON users.smd=u1.users_id 
 			LEFT JOIN users u2 ON users.parent=u2.users_id 
-			$where";
+			$where ORDER BY status ASC";
 		$results = $this->db->query($sql);
 		return $results;
 	}
