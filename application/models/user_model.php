@@ -84,7 +84,7 @@ class User_model extends Base_model{
 			FROM users 
 			LEFT JOIN users u1 ON users.smd=u1.users_id 
 			LEFT JOIN users u2 ON users.parent=u2.users_id 
-			$where ORDER BY status ASC";
+			$where ORDER BY users.status ASC";
 		$results = $this->db->query($sql);
 		return $results;
 	}
@@ -217,7 +217,7 @@ class User_model extends Base_model{
 				(
 					SELECT parent, COUNT(*) AS count FROM users GROUP BY parent
 				) u2 ON u1.users_id=u2.parent 
-				WHERE u1.parent='$parent_id'";
+				WHERE u1.parent='$parent_id' ORDER BY u1.status ASC";
 		}
 		else{
 			$sql = "SELECT u1.*, IF(u2.count IS NULL, 0, u2.count) AS count FROM users u1 
