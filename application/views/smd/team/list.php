@@ -4,10 +4,9 @@
 <script>
 	$('#team-member-grid').data_table({
 		header: [
-			{id: 'username', text: 'Username', sortable: true, width:'80px'}, 
-			{id: 'name', text: 'Name', sortable: true, width:'120px'}, 
+			{id: 'membership_code', text: 'Code', sortable: true, width:'60px', align:'center'},
+			{id: 'name', text: 'Name', sortable: true, width:'200px'}, 
 			{id: 'email', text: 'Email', sortable: true}, 
-			{id: 'membership_code', text: 'Code', sortable: true, width:'40px', align:'center'},
 			{id: 'grade', text: 'Grade', sortable: true, width:'40px', align:'center'},
 			{id: 'status', text: 'Status', align: 'center', width: '50px', sortable: true},
 			{id: 'create_date', text: 'Create Date',  width: '80px', sortable: true},
