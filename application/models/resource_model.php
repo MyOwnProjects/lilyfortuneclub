@@ -12,7 +12,7 @@ class Resource_model extends Base_model{
 	}
 	
 	public function get_items($where){
-		$sql = "SELECT *, CONCAT(SHA1(resources_id), resources_id) AS url_id FROM resources WHERE 1=1 ".(empty($where) ? "" : " AND ($where)")." ORDER BY resources_id DESC" ;
+		$sql = "SELECT *, CONCAT(SHA1(resources_id), resources_id) AS url_id FROM resources WHERE 1=1 ".(empty($where) ? "" : " AND ($where)")." ORDER BY top DESC, resources_id DESC" ;
 		return $this->db->query($sql);
 	}
 	
@@ -23,7 +23,7 @@ class Resource_model extends Base_model{
 	}
 	
 	public function get_list($where = '', $order_by = array(), $limit = ''){
-		$sql = "SELECT *, CONCAT(SHA1(resources_id), resources_id) AS url_id FROM resources WHERE $where ".(empty($order_by) ? '' : " ORDER BY ".implode(",", $order_by)).(empty($limit) ? "" : " LIMIT $limit");
+		$sql = "SELECT *, CONCAT(SHA1(resources_id), resources_id) AS url_id FROM resources WHERE $where ".(empty($order_by) ? '' : " ORDER BY ".implode(",", $order_by)).(empty($limit) ? "" : " LIMIT $limit");echo $sql;exit;
 		return $this->db->query($sql);
 	}
 	
