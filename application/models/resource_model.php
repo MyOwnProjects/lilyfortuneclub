@@ -12,7 +12,7 @@ class Resource_model extends Base_model{
 	}
 	
 	public function get_items($where){
-		$sql = "SELECT *, CONCAT(SHA1(resources_id), resources_id) AS url_id FROM resources WHERE 1=1 ".(empty($where) ? "" : " AND ($where)")." ORDER BY top DESC, resources_id DESC" ;
+		$sql = "SELECT *, CONCAT(SHA1(resources_id), resources_id) AS url_id FROM resources WHERE 1=1 ".(empty($where) ? "" : " AND ($where)")." ORDER BY top ASC, resources_id DESC" ;
 		return $this->db->query($sql);
 	}
 	
@@ -27,12 +27,12 @@ class Resource_model extends Base_model{
 		return $this->db->query($sql);
 	}
 	
-	public function insert($subject, $source, $content){
+	public function insert($subject, $source, $content, $top){
 		if(empty($source)){
-			$sql= "INSERT INTO resources (subject, content) VALUES ('".addslashes($subject)."','".addslashes($content)."')";
+			$sql= "INSERT INTO resources (subject, content, top) VALUES ('".addslashes($subject)."','".addslashes($content)."', '$top')";
 		}
 		else{
-			$sql= "INSERT INTO resources (subject, source, content) VALUES ('".addslashes($subject)."',".addslashes($source).",'".addslashes($content)."')";
+			$sql= "INSERT INTO resources (subject, source, content, top) VALUES ('".addslashes($subject)."','".addslashes($source)."','".addslashes($content)."', '$top')";
 		}
 		return $this->db->query($sql) && $this->db->insert_id() > 0;
 	}

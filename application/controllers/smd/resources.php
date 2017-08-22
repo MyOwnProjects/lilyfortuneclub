@@ -73,10 +73,11 @@ class Resources extends Smd_Controller {
 		$error = '';
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$subject = trim($this->input->post('subject'));
+			$top = $this->input->post('top');
 			$source = trim($this->input->post('source'));
 			//$content = $this->update_content(trim($this->input->post('content')));
 			$content = update_content(trim($this->input->post('content')), 'src/img/resource');
-			if($this->resource_model->insert($subject, $source, $content)){
+			if($this->resource_model->insert($subject, $source, $content, $top)){
 				header('location: '.base_url().'smd/resources');
 				exit;
 			}
@@ -92,10 +93,12 @@ class Resources extends Smd_Controller {
 			$subject = trim($this->input->post('subject'));
 			$source = trim($this->input->post('source'));
 			$content = update_content(trim($this->input->post('content')), 'src/img/resource');
+			$top = $this->input->post('top');
 			$prop = array(
 				"subject='".addslashes($subject)."'",
 				"source=".(empty($source) ? 'NULL' : "'".addslashes($source)."'"),
-				"content='".addslashes($content)."'"
+				"content='".addslashes($content)."'",
+				"top='$top'"
 			);
 			if($this->resource_model->update("resources_id='$id'", $prop)){
 				header('location: '.base_url().'smd/resources');
@@ -110,7 +113,8 @@ class Resources extends Smd_Controller {
 				$fields = array(
 					'subject' => $result[0]['subject'],
 					'source' => $result[0]['source'],
-					'content' => $result[0]['content']
+					'content' => $result[0]['content'],
+					'top' => $result[0]['top']
 				);
 			}
 			else{

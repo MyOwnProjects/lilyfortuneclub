@@ -20,6 +20,12 @@
 		&nbsp;&nbsp;
 		<label>Source</label>
 		<input class="form-control input-sm" style="width:150px" name="source" value="<?php echo isset($source) ? $source : '';?>">
+		&nbsp;&nbsp;
+		<label>Top</label>
+		<select class="form-control input-sm" name="top">
+			<option value="N" <?php echo isset($top) && $top == 'N' ? 'selected' : '';?>>No</option>
+			<option value="Y" <?php echo isset($top) && $top == 'Y' ? 'selected' : '';?>>Yes</option>
+		</select>
  		<input class="btn btn-sm btn-success pull-right" type="submit" value="Submit">
 		</div>
 		<div style="position:absolute;top:50px;right:0;bottom:0;left:0;">
