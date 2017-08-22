@@ -1,26 +1,3 @@
-<script>
-var o_width, o_height;
-$(window).on("orientationchange",function(){
-	var frame = $('.youtube-link');
-	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
-});
-$(document).on("pagecontainerload",function(){
-	var frame = $('.youtube-link');
-	o_width = parseInt(frame.attr('width'));
-	o_height = parseInt(frame.attr('height'));
-	frame.removeAttr('width').removeAttr('height').css('width', '100%').css('max-width', o_width + 'px');
-	alert(1);
-	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
-});
-$(document).on("pageshow","#resource-item",function(){ // When entering pagetwo
-	var frame = $('.youtube-link');
-	o_width = parseInt(frame.attr('width'));
-	o_height = parseInt(frame.attr('height'));
-	frame.removeAttr('width').removeAttr('height').css('width', '100%').css('max-width', o_width + 'px');
-	alert(1);
-	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
-});
-</script>
 <div data-role="page" id="resource-item" data-theme="d">
 	<?php $this->load->view('mobile/header', array('header_text' => $resource['subject'].' - Lily Fortune Club'));?>
 	<div data-role="main" class="ui-content">
