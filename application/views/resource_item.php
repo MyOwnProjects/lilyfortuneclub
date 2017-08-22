@@ -8,6 +8,19 @@
 .resource-subject, .resource-info{text-align:left;font-weight:normal}
 }
 </style>
+<script>
+	var o_width, o_height;
+	$(window).resize(function(){
+		var frame = $('.youtube-link');
+		frame.height(frame.width * o_width / o_height) ;
+	});
+$(document).ready(function(){
+	var frame = $('.youtube-link');
+	var o_width = $('.youtube-link').attr('width');
+	var o_height = $('.youtube-link').attr('height');
+	frame.removeAttr('width').removeAttr('height').css('width', '100%').css('max-width', o_width + 'px');
+});
+</script>
 <div class="resource main-content-wrapper">
 	<ul class="breadcrumb">
 		<li><a href="<?php echo base_url();?>">Home</a></li>
