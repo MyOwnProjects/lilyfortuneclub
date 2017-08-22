@@ -11,7 +11,10 @@ $(document).on("pagecontainerload",function(){
 	frame.removeAttr('width').removeAttr('height').css('width', '100%').css('max-width', o_width + 'px');
 	alert(1);
 	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
-})
+});
+$(document).on("pageshow","#resource-item",function(){ // When entering pagetwo
+  alert("pagetwo is now shown");
+});
 </script>
 <div data-role="page" id="resource-item" data-theme="d">
 	<?php $this->load->view('mobile/header', array('header_text' => $resource['subject'].' - Lily Fortune Club'));?>
