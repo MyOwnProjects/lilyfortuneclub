@@ -16,8 +16,8 @@
 	});
 $(document).ready(function(){
 	var frame = $('.youtube-link');
-	o_width = frame.attr('width');
-	o_height = frame.attr('height');
+	o_width = parseInt(frame.attr('width'));
+	o_height = parseInt(frame.attr('height'));
 	frame.removeAttr('width').removeAttr('height').css('width', '100%').css('max-width', o_width + 'px');
 });
 </script>
