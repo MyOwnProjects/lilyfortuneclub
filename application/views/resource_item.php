@@ -12,7 +12,7 @@
 	var o_width, o_height;
 	$(window).resize(function(){
 		var frame = $('.youtube-link');
-		frame.height(frame.width * o_width / o_height) ;
+		frame.innerHeight(frame.innerWidth * o_width / o_height) ;
 	});
 $(document).ready(function(){
 	var frame = $('.youtube-link');
