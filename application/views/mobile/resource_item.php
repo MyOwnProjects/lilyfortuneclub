@@ -1,6 +1,6 @@
 <script>
 var o_width, o_height;
-$(window).resize(function(){
+$(window).resize(function(){alert(o_width);
 	var frame = $('.youtube-link');
 	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
 });
