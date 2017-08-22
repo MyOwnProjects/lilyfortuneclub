@@ -35,7 +35,7 @@
 		}
 	});
 	var o_width, o_height;
-	$(window).on("orientationchange",function(){
+	$(window).resize(function(){
 		var frame = $('.youtube-link');
 		frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
 	});
