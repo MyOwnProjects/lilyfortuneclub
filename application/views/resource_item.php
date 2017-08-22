@@ -9,16 +9,17 @@
 }
 </style>
 <script>
-	var o_width, o_height;
-	$(window).resize(function(){
-		var frame = $('.youtube-link');
-		frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
-	});
+var o_width, o_height;
+$(window).resize(function(){
+	var frame = $('.youtube-link');
+	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
+});
 $(document).ready(function(){
 	var frame = $('.youtube-link');
 	o_width = parseInt(frame.attr('width'));
 	o_height = parseInt(frame.attr('height'));
 	frame.removeAttr('width').removeAttr('height').css('width', '100%').css('max-width', o_width + 'px');
+	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
 });
 </script>
 <div class="resource main-content-wrapper">
