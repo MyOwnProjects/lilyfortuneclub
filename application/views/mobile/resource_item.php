@@ -13,7 +13,12 @@ $(document).on("pagecontainerload",function(){
 	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
 });
 $(document).on("pageshow","#resource-item",function(){ // When entering pagetwo
-  alert("pagetwo is now shown");
+	var frame = $('.youtube-link');
+	o_width = parseInt(frame.attr('width'));
+	o_height = parseInt(frame.attr('height'));
+	frame.removeAttr('width').removeAttr('height').css('width', '100%').css('max-width', o_width + 'px');
+	alert(1);
+	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
 });
 </script>
 <div data-role="page" id="resource-item" data-theme="d">
