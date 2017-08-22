@@ -76,7 +76,7 @@ class License extends Account_base_controller {
 							'Enter your California ID, select your residency, and click the <i>Next</i> button.',
 							'In the next few pages, follow the instruction to enter the correct information, and the click <i>Next</i> button.',
 							'Follow the instruct to pay. After the payment, you will go back to the Check out page. You can click <i>Download Application</i> button to save your application.',
-							'You license application is done. After you are issued the license, you can start the continuing education.',
+							'You license application is done. After the license is issued, you can start the continuing education.',
 						)
 					)
 				)
