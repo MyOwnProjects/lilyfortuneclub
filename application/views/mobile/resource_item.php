@@ -9,7 +9,6 @@ $(document).ready(function(){
 	o_width = parseInt(frame.attr('width'));
 	o_height = parseInt(frame.attr('height'));
 	frame.removeAttr('width').removeAttr('height').css('width', '100%').css('max-width', o_width + 'px');
-	alert(o_width);
 	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
 });
 </script>
