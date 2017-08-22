@@ -23,7 +23,7 @@ class Resource_model extends Base_model{
 	}
 	
 	public function get_list($where = '', $order_by = array(), $limit = ''){
-		$sql = "SELECT *, CONCAT(SHA1(resources_id), resources_id) AS url_id FROM resources WHERE $where ".(empty($order_by) ? '' : " ORDER BY ".implode(",", $order_by)).(empty($limit) ? "" : " LIMIT $limit");echo $sql;exit;
+		$sql = "SELECT *, CONCAT(SHA1(resources_id), resources_id) AS url_id FROM resources WHERE $where ".(empty($order_by) ? '' : " ORDER BY ".implode(",", $order_by)).(empty($limit) ? "" : " LIMIT $limit");
 		return $this->db->query($sql);
 	}
 	
