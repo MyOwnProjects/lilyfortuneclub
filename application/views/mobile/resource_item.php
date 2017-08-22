@@ -4,11 +4,13 @@ $(window).resize(function(){
 	var frame = $('.youtube-link');
 	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
 });
+$(document).on("pagecontainerload",function(){
 	var frame = $('.youtube-link');
 	o_width = parseInt(frame.attr('width'));
 	o_height = parseInt(frame.attr('height'));
 	frame.removeAttr('width').removeAttr('height').css('width', '100%').css('max-width', o_width + 'px');
 	frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
+})
 </script>
 <div data-role="page" id="resource-item" data-theme="d">
 	<?php $this->load->view('mobile/header', array('header_text' => $resource['subject'].' - Lily Fortune Club'));?>
