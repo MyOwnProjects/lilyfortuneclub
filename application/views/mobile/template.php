@@ -44,14 +44,18 @@
 		o_width = parseInt(frame.attr('width'));
 		o_height = parseInt(frame.attr('height'));
 		frame.removeAttr('width').removeAttr('height').css('width', '100%').css('max-width', o_width + 'px');
-		frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
+		frame.innerHeight(frame.innerWidth() *  o_height / o_width) 
+			.attr('allowfullscreen', 'allowfullscreen').attr('mozallowfullscreen', 'mozallowfullscreen').attr('msallowfullscreen', 'msallowfullscreen')
+			.attr('oallowfullscreen', 'oallowfullscreen').attr('webkitallowfullscreen', 'webkitallowfullscreen');
 	});
 	$(document).on("pageshow","#resource-item",function(){ // When entering pagetwo
 		var frame = $('.youtube-link');
 		o_width = parseInt(frame.attr('width'));
 		o_height = parseInt(frame.attr('height'));
 		frame.removeAttr('width').removeAttr('height').css('width', '100%').css('max-width', o_width + 'px');
-		frame.innerHeight(frame.innerWidth() *  o_height / o_width) ;
+		frame.innerHeight(frame.innerWidth() *  o_height / o_width) 
+			.attr('allowfullscreen', 'allowfullscreen').attr('mozallowfullscreen', 'mozallowfullscreen').attr('msallowfullscreen', 'msallowfullscreen')
+			.attr('oallowfullscreen', 'oallowfullscreen').attr('webkitallowfullscreen', 'webkitallowfullscreen');
 	});
 	</script>
 	<body>
