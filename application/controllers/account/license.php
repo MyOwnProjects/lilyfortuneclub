@@ -69,6 +69,14 @@ class License extends Account_base_controller {
 						'subject' => "License Application",
 						'image_file_name'=> 'license-application',
 						'steps' => array(
+							'Go to <a href="www.insurance.ca.gov">www.insurance.ca.gov</a>, type <i>flash</i>in the search box at the top right of he page, then select <i>flash</i> in the dropbox, and click the <i>Search</i> button.',
+							'In the search result, click the <i>Flash Application</i> link.',
+							'Click the <i>Fast Licensing Application Service is Here (Flash)</i> link.',
+							'Click <i>Start New Application</i> link.',
+							'Enter your California ID, select your residency, and click the <i>Next</i> button.',
+							'In the next few pages, follow the instruction to enter the correct information, and the click <i>Next</i> button.',
+							'Follow the instruct to pay. After the payment, you will go back to the Check out page. You can click <i>Download Application</i> button to save your application.',
+							'You license application is done. After you are issued the license, you can start the continuing education.',
 						)
 					)
 				)
@@ -99,6 +107,7 @@ class License extends Account_base_controller {
 	}
 	
 	public function application(){
+		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][2]['instruct']));
 	}
 	
 	public function ce(){
