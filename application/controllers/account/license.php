@@ -90,7 +90,7 @@ class License extends Account_base_controller {
 						'steps' => array(
 							'Go to <i>https://www.webce.com</i>, and click <i>Sign In</i> link.',
 							'If you already have an account, sign in your account, otherwise click <i>Register Now</i> link.',
-							'Enter your username, and click <i>Next</i>button.',
+							'Enter your username, and click <i>Next</i> button.',
 							'Enter the account information, and then click <i>Complete Registration</i> button.',
 							'After signed in your account, click <i>Insurance CE</i> link of the navigation bar, select California state in the map, and then click <i>Life and Health</i> link.',
 							'Select the below courses, and add them to you cart:<br/>(1) CA 16-Hr Life & Health CE Package: Includes 8-Hr LCT & 8-Hr Annuity Initial Traning Courses<br/>(2) Anti-Money Laundering for the Insurance Industry<br/>(3) Paul J. Winn - Ethical Practice Standards for Today&#39s Producer',
