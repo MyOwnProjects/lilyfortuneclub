@@ -88,7 +88,7 @@ class License extends Account_base_controller {
 						'subject' => "Continuing Education",
 						'image_file_name'=> 'license-ce',
 						'steps' => array(
-							'Go to <i>https://www.webce.com</i>, and click <i>Sign In</i> link.',
+							'Go to <a href="https://www.webce.com" target="_blank">https://www.webce.com</a>, and click <i>Sign In</i> link.',
 							'If you already have an account, sign in your account, otherwise click <i>Register Now</i> link.',
 							'Enter your username, and click <i>Next</i> button.',
 							'Enter the account information, and then click <i>Complete Registration</i> button.',
