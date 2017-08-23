@@ -26,7 +26,7 @@
 <div style="margin:0 auto;max-width:1000px;padding:20px 0 80px 0;">
 	<div class="row" style="margin-bottom:20px">
 		<h2 class="text-center"><?php echo $instruct['subject'];?></h2>
-		<div class="text-center" style="font-size:16px">Follow the instruction to register the 52 hours online courses.</div>
+		<div class="text-center" style="font-size:16px"></div>
 	</div>
 	
 	<div class="row">
