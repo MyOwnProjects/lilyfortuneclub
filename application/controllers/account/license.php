@@ -135,7 +135,7 @@ class License extends Account_base_controller {
 	}
 	
 	public function ce(){
-		
+		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][3]['instruct']));
 	}
 }
 

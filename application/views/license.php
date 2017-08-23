@@ -61,5 +61,20 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 block">
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					4. Complete the online Continuing Education 
+				</div>
+				<div class="panel-body clearfix">
+					<div class="block-text-main">
+						<p>8 hours annuity training, 8 hours long term care, 4 hours Anti-Money Laundering for the Insurance Industry and 4 hours Ethical Practice Standards for Today's Producer are required.</p>
+					</div>
+					<div class="text-right">
+						<a class="btn btn btn-danger" href="<?php echo base_url();?>account/license/ce">Go&nbsp;<span class="glyphicon glyphicon-play-circle"></span></a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
