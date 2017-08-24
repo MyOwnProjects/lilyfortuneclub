@@ -146,7 +146,7 @@ if ( ! function_exists('mime_type'))
 			'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv')) && in_array($ext, array('csv'))){
 				return array('csv', 'excel');
 		}
-		return array('html', 'txt');
+		return array('text', 'txt');
 	}
 }
 

@@ -33,7 +33,7 @@ class Documents extends Account_base_controller {
 				$result[$i]['mime_content_type'] = strtoupper($mime_type_i[0]);
 			}
 			else{
-				$result[$i]['mime_type'] = $r['mime_content_type'];
+				$result[$i]['mime_type'] = strtolower($r['mime_content_type']);
 			}
 		}
 

@@ -53,7 +53,6 @@
 				echo '<div class="pull-left icon"><img src="'.base_url().'src/img/file_type/'.$l['mime_type'][1].'.png'.'"></div>';
 			}
 			else{
-				$file_size = 0;
 				echo '<div class="pull-left icon"><img src="'.base_url().'src/img/file_type/'.$l['mime_type'].'.png'.'"></div>';
 			}
 			echo '<div class="pull-right" style="width:80px;margin-left:20px;font-size:14px;">'.(empty($file_size) ? '&nbsp;' : $file_size).'</div>';
