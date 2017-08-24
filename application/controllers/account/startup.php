@@ -20,11 +20,20 @@ class Startup extends Account_base_controller {
 				)
 			),
 			array(
+				'subject' => 'Important to Know',
+				'icon' => base_url().'src/img/exclamation-sign.svg',
+				'question' => 'It is important to know before you startup the business!',
+				'text' => array(
+					'- Know about the <a href="'.base_url().'account/documents/view/599e6834d4d8c" target="_blank">promotion standard</a>.',
+					'- Know about the <a href="'.base_url().'account/documents/view/599e6b4cc736e" target="_blank">commission split rule</a>.'
+				),
+			),
+			array(
 				'subject' => 'Startup Your Business',
 				'icon' => base_url().'src/img/give-money.svg',
 				'question' => 'Do you want to startup your own business?',
 				'text' => array(
-					'- The best approach is to go to training <a href="'.base_url().'seminar">class</a> and field training!',
+					'- The best approach is to go to training <a href="'.base_url().'seminar" target="_blank">class</a> and field training!',
 					'- Start from here - building your business team.'
 				),
 				'btn' => array(
@@ -52,7 +61,7 @@ class Startup extends Account_base_controller {
 				'icon' => base_url().'src/img/books-stack-of-three.svg',
 				'question' => 'Do you understand your own family financial status?',
 				'text' => array(
-					'- The best approach is to go to training <a href="<?php echo base_url();?>schedule">class</a> and field training!',
+					'- The best approach is to go to training <a href="<?php echo base_url();?>schedule" target="_blank">class</a> and field training!',
 					'- Start to learn the finance knowledge yourself.'
 				),
 				'btn' => array(

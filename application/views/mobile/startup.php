@@ -22,8 +22,12 @@ foreach($pages as $i => $p){
 			<p><?php echo $t;?></p> 
 			<?php
 			}
+			if(array_key_exists('btn', $p)){
 			?>
 			<div><a data-ajax="false" data-role="button" class="ui-btn ui-btn-inline ui-corner-all" href="<?php echo $p['btn']['url'];?>"><?php echo $p['btn']['text'];?></a></div>
+			<?php
+			}
+			?>
 			<div class="page-nav">
 				<a class="nav-prev <?php echo $i <= 0 ? 'ui-disabled' : ''?>" data-role="button" data-icon="arrow-l" href="startup#startup-<?php echo $i - 1;?>" data-transition="slide" data-iconpos="left" data-inline="true" data-mini="true" data-theme="b" data-direction="reverse">Prev</a>
 				<a class="nav-next <?php echo $i >= count($pages) - 1 ? 'ui-disabled' : ''?>" data-role="button" data-icon="arrow-r" href="startup#startup-<?php echo $i + 1;?>" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true" data-theme="b">Next</a>

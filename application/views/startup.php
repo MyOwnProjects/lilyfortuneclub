@@ -34,7 +34,18 @@
 							<b><?php echo $p['question'];?></b><br/><br/>
 							<p><?php echo implode('</p><p>', $p['text']); ?></p>
 						</div>
+						<?php
+						if(array_key_exists('btn', $p)){
+						?>
 						<a class="btn btn btn-success" href="<?php echo $p['btn']['url'];?>"><?php echo $p['btn']['text'];?>&nbsp;<span class="glyphicon glyphicon-play-circle"></span></a>
+						<?php
+						}
+						else{
+						?>
+						<a class="btn btn btn-success" style="visibility:hidden">&nbsp;</a>
+						<?php
+						}
+						?>
 					</div>
 				</div>
 			</div>
