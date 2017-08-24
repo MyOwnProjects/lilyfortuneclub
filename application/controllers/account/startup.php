@@ -18,8 +18,10 @@ class Startup extends Account_base_controller {
 					'url' => base_url().'account/business',
 					'text' => "Let's start"
 				)
-			),
-			array(
+			)
+		);
+		if($this->user['preference'] == 'B' || $this->user['preference'] == 'BE'){
+			array_push($data, array(
 				'subject' => 'Important to Know',
 				'icon' => base_url().'src/img/exclamation-sign.svg',
 				'question' => 'It is important to know the guidence before you startup the business!',
@@ -27,8 +29,8 @@ class Startup extends Account_base_controller {
 					'- Know about the <a href="'.base_url().'account/documents/view/599e6834d4d8c" target="_blank">promotion standard</a>.',
 					'- Know about the <a href="'.base_url().'account/documents/view/599e6b4cc736e" target="_blank">commission split and override rule</a>.'
 				),
-			),
-			array(
+			));
+			array_push($data, array(
 				'subject' => 'Startup Your Business',
 				'icon' => base_url().'src/img/give-money.svg',
 				'question' => 'Do you want to startup your own business?',
@@ -40,11 +42,11 @@ class Startup extends Account_base_controller {
 					'url' => base_url().'account/business',
 					'text' => 'Statup your business'
 				)
-			),
-			array(
+			));
+			array_push($data, array(
 				'subject' => 'Get Your License',
 				'icon' => base_url().'src/img/certificate.svg',
-				'question' => 'Get your license',
+				'question' => 'Prepare and get your license',
 				'text' => array(
 					'- Complete the 52 hours online courses.',
 					'- Take and pass the license exam.',
@@ -55,33 +57,36 @@ class Startup extends Account_base_controller {
 					'url' => base_url().'account/license',
 					'text' => 'Prepare your license'
 				)
-			),
-			array(
-				'subject' => 'Finance Education',
-				'icon' => base_url().'src/img/books-stack-of-three.svg',
+			));
+		}
+		else{
+			array_push($data, array(
+				'subject' => 'Come to Training Classes',
+				'icon' => base_url().'src/img/instructor-lecture-with-sceen-projection-tool.svg',
+				'question' => 'These free classes are the best approach.',
+				'text' => array(
+					'- Come to our free professional <a href="'.base_url().'schedule" target="_blank">classes</a> every week.',
+				),
+			));
+			array_push($data, array(
+				'subject' => 'Take the License Courses',
+				'icon' => base_url().'src/img/certificate.svg',
+				'question' => 'This is an alternative approach, which need to be paid.',
+				'text' => array(
+					'- Take the <a href="'.base_url().'account/license/online_courses" target="_blank">52 hours online courses</a>.',
+					'- Take the EXAM Prep/Cram Class ($68), including the textbook ($32). Contact Mr. Ron Nishimura at 559-213-2341.',
+				),
+			));
+			array_push($data, array(
+				'subject' => 'Know Your Finacial Status',
+				'icon' => base_url().'src/img/learning.svg',
 				'question' => 'Do you understand your own family financial status?',
 				'text' => array(
-					'- The best approach is to go to training <a href="<?php echo base_url();?>schedule" target="_blank">class</a> and field training!',
-					'- Start to learn the finance knowledge yourself.'
-				),
-				'btn' => array(
-					'url' => base_url().'account/documents',
-					'text' => 'Learn finance knowledge'
+					'- <a href="'.base_url().'contact" target="_blank">Contact</a> SMD, Lily Zhu, to appoint a one-hour financial analysis.',
 				)
-			),
-			array(
-				'subject' => 'WFG History',
-				'icon' => base_url().'src/img/history-clock-button.svg',
-				'question' => "Are you interested in WFG's history?",
-				'text' => array(
-					"- Watch the video to know about WFG's history."
-				),
-				'btn' => array(
-					'url' => 'javascript:void(0)',
-					'text' => 'Watch WFG History'
-				)
-			),
-		);
+			));
+		}
+		
 		$this->load_view('startup', array('pages' => $data));
 	}
 }

@@ -29,7 +29,9 @@
 		<script>
 			$('body').delegate('iframe', 'load', function(){
 				this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
-			})
+			}).ready(function(){
+			    $('[data-toggle="tooltip"]').tooltip(); 
+			});
 		</script>
 	</head>
 

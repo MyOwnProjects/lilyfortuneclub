@@ -8,6 +8,21 @@ class Account_base_controller extends Base_Controller {
 			header('location: '.base_url());
 			exit;
 		}
+		else{ 
+			$class = strtolower($this->router->fetch_class());
+			if($this->user['first_access'] == 'Y'){
+				if($class != 'first_access'){
+					header("location: ".base_url()."account/first_access");
+					exit;
+				}
+			}
+			else if(!isset($this->user['preference'])){
+				if($class != 'preference'){
+					header("location: ".base_url()."account/preference");
+					exit;
+				}
+			}
+		}
 	}
 }
 

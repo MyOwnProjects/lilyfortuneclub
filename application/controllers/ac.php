@@ -11,14 +11,9 @@ class Ac extends Base_Controller {
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$this->set_session_user($this->input->post('username'), $this->input->post('password'), $this->input->post('save_password'));
 			if(!empty($this->user)){
-				if($this->user['first_access'] == 'Y'){
-					header("location: ".base_url()."account/first_access");
-				}
-				else{
-					$redirect = $this->input->get('redirect');
-					$url = base_url()."account".(empty($redirect) ? "" : "/$redirect");
-					header("location: $url");
-				}
+				$redirect = $this->input->get('redirect');
+				$url = base_url()."account".(empty($redirect) ? "" : "/$redirect");
+				header("location: $url");
 				exit;
 			}
 			else

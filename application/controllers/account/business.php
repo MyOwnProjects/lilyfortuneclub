@@ -4,6 +4,10 @@ require_once('account_base.php');
 class Business extends Account_base_controller {
 	public function __construct(){
 		parent::__construct();
+		if($this->user['preference'] != 'B' && $this->user['preference'] != 'BE'){
+			header('location: '.base_url().'account');
+			exit;
+		}
 	}
 	
 	public function index(){

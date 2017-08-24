@@ -24,6 +24,7 @@
 				<li class="list-group-item list-group-item-info clearfix"><div><label>General Info</label></div></li>
 				<li class="list-group-item clearfix"><div><label>Name:</label></div><div><?php echo $user['first_name'].' '.$user['last_name'];?></div></li>
 				<li class="list-group-item clearfix"><div><label>Nick Name:</label></div><div><?php echo $user['nick_name'];?></div></li>
+				<li class="list-group-item clearfix"><div><label>Preference:</label></div><div class="btn-link" data-toggle="tooltip" title="Please contact your SDM, Lily Zhu, to change your preference."><?php echo $user['preference'];?></div></li>
 				<li class="list-group-item clearfix"><div><label>Email:</label></div><div><?php echo $user['email'];?></div></li>
 				<li class="list-group-item clearfix"><div><label>Date of Birth:</label></div><div><?php echo date_format(date_create($user['date_of_birth']), 'F j');?></div></li>
 				<li class="list-group-item clearfix"><div><label>Phone:</label></div><div><?php echo $user['phone'];?></div></li>
