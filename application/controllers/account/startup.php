@@ -22,7 +22,7 @@ class Startup extends Account_base_controller {
 			array(
 				'subject' => 'Important to Know',
 				'icon' => base_url().'src/img/exclamation-sign.svg',
-				'question' => 'It is important to know before you startup the business!',
+				'question' => 'It is important to know the guidence before you startup the business!',
 				'text' => array(
 					'- Know about the <a href="'.base_url().'account/documents/view/599e6834d4d8c" target="_blank">promotion standard</a>.',
 					'- Know about the <a href="'.base_url().'account/documents/view/599e6b4cc736e" target="_blank">commission split and override rule</a>.'
