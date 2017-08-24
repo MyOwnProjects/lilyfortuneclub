@@ -25,7 +25,7 @@ class Startup extends Account_base_controller {
 				'question' => 'It is important to know before you startup the business!',
 				'text' => array(
 					'- Know about the <a href="'.base_url().'account/documents/view/599e6834d4d8c" target="_blank">promotion standard</a>.',
-					'- Know about the <a href="'.base_url().'account/documents/view/599e6b4cc736e" target="_blank">commission split rule</a>.'
+					'- Know about the <a href="'.base_url().'account/documents/view/599e6b4cc736e" target="_blank">commission split and override rule</a>.'
 				),
 			),
 			array(
