@@ -75,7 +75,6 @@ function document_loaded(file){
 	?>
 	</div>
 	<div class="right-part" style="overflow:hidden;padding-top:40px">
-		Ads
 	</div>
 </div>
 	
