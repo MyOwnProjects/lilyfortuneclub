@@ -110,7 +110,7 @@ class License extends Account_base_controller {
 	}
 	
 	public function index(){
-		if($this->user['preference'] == 'E'){
+		if($this->user['preference'] == 'E' && !$this->is_mobile){
 			header('location:'.base_url().'account/license/online_courses');
 			exit;
 		}

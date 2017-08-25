@@ -68,7 +68,7 @@ class Startup extends Account_base_controller {
 					'- Come to our free professional <a href="'.base_url().'seminar" target="_blank">classes</a> every week.',
 				),
 			));
-			$u = base_url().'account/license'.($this->agent->is_mobile() ? '' : '/online_courses');
+			$u = base_url().'account/license'.($this->is_mobile ? '' : '/online_courses');
 			array_push($data, array(
 				'subject' => 'Take the License Courses',
 				'icon' => base_url().'src/img/certificate.svg',

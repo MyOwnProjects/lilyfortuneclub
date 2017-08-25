@@ -2,6 +2,7 @@
 
 class Base_controller extends CI_Controller {
 	protected $user = null;
+	protected $is_mobile;
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper('cookie');
@@ -15,6 +16,7 @@ class Base_controller extends CI_Controller {
 			$this->user = $this->user_model->get_user_by_id($user_id);//array('grade' => 'SMD', 'first_name' => 'Kun', 'first_name' => 'Yang');
 		}
 		$this->load->library('user_agent');
+		$this->is_mobile = $this->agent->is_mobile();
 	}
 	
 	public function set_session_user($username, $password, $save_password = false){
@@ -38,8 +40,7 @@ class Base_controller extends CI_Controller {
 	}
 	
 	public function load_view($view, $data = array()){
-		//if(true){
-		if($this->agent->is_mobile()){
+		if($this->is_mobile){
 			$this->load->view('mobile/template', array_merge(array('view' => 'mobile/'.$view, 'user' => $this->user), $data));
 		}
 		else{
