@@ -128,18 +128,42 @@ class License extends Account_base_controller {
 	}
 	
 	public function online_courses(){
+		if($this->user['preference'] == 'E'){
+			if($this->is_mobile){
+				header('location:'.base_url().'account/license');
+				exit;
+			}
+		}
 		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][0]['instruct']));
 	}
 	
 	public function exam(){
+		if($this->user['preference'] == 'E'){
+			if($this->is_mobile){
+				header('location:'.base_url().'account/license');
+				exit;
+			}
+		}
 		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][1]['instruct']));
 	}
 	
 	public function application(){
+		if($this->user['preference'] == 'E'){
+			if($this->is_mobile){
+				header('location:'.base_url().'account/license');
+				exit;
+			}
+		}
 		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][2]['instruct']));
 	}
 	
 	public function ce(){
+		if($this->user['preference'] == 'E'){
+			if($this->is_mobile){
+				header('location:'.base_url().'account/license');
+				exit;
+			}
+		}
 		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][3]['instruct']));
 	}
 }
