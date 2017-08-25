@@ -14,6 +14,7 @@ class Base_controller extends CI_Controller {
 		if(!empty($user_id)){
 			$this->user = $this->user_model->get_user_by_id($user_id);//array('grade' => 'SMD', 'first_name' => 'Kun', 'first_name' => 'Yang');
 		}
+		$this->load->library('user_agent');
 	}
 	
 	public function set_session_user($username, $password, $save_password = false){
@@ -37,7 +38,6 @@ class Base_controller extends CI_Controller {
 	}
 	
 	public function load_view($view, $data = array()){
-		$this->load->library('user_agent');
 		//if(true){
 		if($this->agent->is_mobile()){
 			$this->load->view('mobile/template', array_merge(array('view' => 'mobile/'.$view, 'user' => $this->user), $data));

@@ -65,15 +65,16 @@ class Startup extends Account_base_controller {
 				'icon' => base_url().'src/img/instructor-lecture-with-sceen-projection-tool.svg',
 				'question' => 'These free classes are the best approach.',
 				'text' => array(
-					'- Come to our free professional <a href="'.base_url().'schedule" target="_blank">classes</a> every week.',
+					'- Come to our free professional <a href="'.base_url().'seminar" target="_blank">classes</a> every week.',
 				),
 			));
+			$u = base_url().'account/license'.($this->agent->is_mobile() ? '' : '/online_courses');
 			array_push($data, array(
 				'subject' => 'Take the License Courses',
 				'icon' => base_url().'src/img/certificate.svg',
 				'question' => 'This is an alternative approach, which need to be paid.',
 				'text' => array(
-					'- Take the <a href="'.base_url().'account/license/online_courses" target="_blank">52 hours online courses</a>.',
+					'- Take the <a href="'.$u.'" target="_blank">52 hours online courses</a>.',
 					'- Take the EXAM Prep/Cram Class ($68), including the textbook ($32). Contact Mr. Ron Nishimura at 559-213-2341.',
 				),
 			));
