@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'fin';
+$db['default']['username'] = 'lilyfortuneclub';
+$db['default']['password'] = '@5GmwcN1b4&f';
+$db['default']['database'] = 'lilyfortuneclub_main';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
