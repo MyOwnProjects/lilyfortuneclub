@@ -45,7 +45,7 @@ ul, ul li{list-style:none}
 		?>
 		</li>
 	<?php
-	if(count($list) == 0){
+	if(count($list) == 0){s
 	?>
 		<li style="text-align:center;line-height:160px">No schedules.</li>
 	<?php
@@ -56,7 +56,7 @@ ul, ul li{list-style:none}
 			<li class="clearfix">
 				<?php
 					echo '<div class="pull-left" style="font-size:14px;width:100px;text-align:center">'.(empty($l['schedule_month']) ? "" : str_pad($l['schedule_month'], 2, '0', STR_PAD_LEFT).' / ').$l['schedule_year'].'</div>';
-					echo '<div class="pull-left" style="font-size:14px;width:180px;margin:0 10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><a href="'.base_url().'schedule?location='.(empty($l['office_name']) ? 'Other' : $l['office_name']).'">'.(empty($l['office_name']) ? 'Other' : $l['office_name']).'</a></div>';
+					echo '<div class="pull-left" style="font-size:14px;width:180px;margin:0 10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><a href="'.base_url().'seminar?location='.(empty($l['office_name']) ? 'Other' : $l['office_name']).'">'.(empty($l['office_name']) ? 'Other' : $l['office_name']).'</a></div>';
 					echo '<div class="overflow:hidden;margin-left:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><a href="'.base_url(),'src/schedule/'.$l['schedule_year'].'/'.$l['file'].'" target="_blank">'.$l['file'].'</a></div>';
 				?>
 			</li>

@@ -13,6 +13,11 @@ class Profile extends Account_base_controller {
 		$result = $this->user_model->get_user_by_id($this->user['users_id']);
 		$this->load_view('profile', array('error' => $error, 'success' => $success, 'user' => $result));
 	}
+	
+	public function update_preference(){
+		$preference = $this->input->post('preference');
+		$result = $this->user_model->update($this->user['users_id'], array('preference' => $preference));
+	}
 }
 
 /* End of file welcome.php */
