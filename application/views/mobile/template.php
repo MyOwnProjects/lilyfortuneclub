@@ -81,6 +81,11 @@
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/documents"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg">Education</a>
 			<!--a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/live"><img src="<?php echo base_url();?>src/img/television.svg">Live</a-->
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/profile"><img src="<?php echo base_url();?>src/img/man-user.svg?1">Profile</a>
+			<?php }?>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>contact"><img src="<?php echo base_url();?>src/img/telephone.svg?1">Contact Us</a>
+			<?php
+			if(!empty($user)){
+			?>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>ac/sign_out"><img src="<?php echo base_url();?>src/img/sign-out-option.svg">Sign out</a>
 			<?php
 			}
