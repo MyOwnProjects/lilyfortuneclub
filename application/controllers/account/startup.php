@@ -15,7 +15,7 @@ class Startup extends Account_base_controller {
 					'Congratulations on your decision to become an associate with World Financial Group (WFG). We believe you’ve made an excellent choice for you and your family, and will soon be helping others to achieve their dreams as well.',
 				),
 				'btn' => array(
-					'url' => base_url().'account/business',
+					'url' => base_url().'account/startup#startup-1',
 					'text' => "Let's start"
 				)
 			)
