@@ -74,7 +74,9 @@
 			if(!empty($user)){
 			?>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/startup"><img src="<?php echo base_url();?>src/img/rocket-icon.svg">Startup</a>
+			<?php if($user['preference'] == 'B' || $user['preference'] == 'BE'){?>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/business"><img src="<?php echo base_url();?>src/img/give-money.svg">Business</a>
+			<?php }?>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/license"><img src="<?php echo base_url();?>src/img/certificate.svg">License</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/documents"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg">Education</a>
 			<!--a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/live"><img src="<?php echo base_url();?>src/img/television.svg">Live</a-->
