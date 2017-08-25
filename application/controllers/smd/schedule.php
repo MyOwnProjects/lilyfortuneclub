@@ -262,7 +262,20 @@ class Schedule extends Smd_Controller {
 	}
 	
 	public function delete(){
-		$this->load->view('smd/add_item', array('items' => $items));
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$ids = $this->input->post('selected_ids');
+			
+			$this->schedule_model->delete("schedules_id IN ('".implode("','", $ids)."')");
+			echo json_encode(array('success' => true));
+		}
+		else{
+			$items = array(
+					array(
+						'tag' => 'text', 'text' => 'Do you want to delete the schedule(s)?' 
+					)
+				);
+			$this->load->view('smd/add_item', array('items' => $items));
+		}
 	}
 }
 

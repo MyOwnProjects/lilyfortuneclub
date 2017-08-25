@@ -1,10 +1,11 @@
 <?php
-$item_count = count($items);
+$item_count = isset($items) ? count($items) : 0;
 $half_count = floor($item_count / 2 - 0.5);
 ?>
 <div class="row">
 	<div class="col-lg-<?php echo $item_count > 6 ? '6' : '12';?>">
 		<?php
+		if(isset($items)){
 		foreach($items as $i => $item){
 			if($item['tag'] == 'text'){
 				echo '<p>'.$item['text'].'<p>';
@@ -118,6 +119,7 @@ $half_count = floor($item_count / 2 - 0.5);
 				</div>
 			<?php
 			}
+		}
 			?>
 		</div>
 	<?php

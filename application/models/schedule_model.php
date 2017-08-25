@@ -88,4 +88,10 @@ class Schedule_model extends Base_model{
 		}
 		return $ret;
 	}
+	
+	public function delete($where = ''){
+		$sql = "DELETE FROM schedules WHERE 1=1 AND $where";
+		return $this->db->query($sql);
+		
+	}
 }
