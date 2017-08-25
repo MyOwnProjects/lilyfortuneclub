@@ -34,7 +34,7 @@ class License extends Account_base_controller {
 				),
 			)
 		));
-		if(!$this->agent->is_mobile()){
+		if($this->user['preference'] == 'B' || $this->user['preference'] == 'BE'){
 			array_push($steps, array(
 					'subject' => 'License Exam',
 					'url' => base_url().'account/license/exam',
