@@ -12,7 +12,7 @@ $half_count = floor($item_count / 2 - 0.5);
 			}
 		?>
 		<div class="form-group">
-			<label for="<?php echo $item['name'];?>"><?php echo $item['label'];?></label>
+			<label for="<?php echo is_string($item['name']) ? $item['name'] : '';?>"><?php echo $item['label'];?></label>
 				<?php echo array_key_exists('required', $item) ? '<span class="text-danger">*</span>' : ''; ?>
 
 			<?php
