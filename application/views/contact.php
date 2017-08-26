@@ -20,7 +20,7 @@
 					Sherry Hu: (415) 264-1889, Ms_huxin@hotmail.com
 					<div>
 					</div>
-					Minna: (415) 828-8841, Minna.millare@gmail.com
+					Minna Millare: (415) 828-8841, Minna.millare@gmail.com
 					</div>
 				</div>
 			</div>
