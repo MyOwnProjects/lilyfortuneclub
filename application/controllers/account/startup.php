@@ -22,15 +22,6 @@ class Startup extends Account_base_controller {
 		);
 		if($this->user['preference'] == 'B' || $this->user['preference'] == 'BE'){
 			array_push($data, array(
-				'subject' => 'Important to Know',
-				'icon' => base_url().'src/img/exclamation-sign.svg',
-				'question' => 'It is important to know the guidence before you startup the business!',
-				'text' => array(
-					'- Know about the <a href="'.base_url().'account/documents/view/599e6834d4d8c" target="_blank">promotion standard</a>.',
-					'- Know about the <a href="'.base_url().'account/documents/view/599e6b4cc736e" target="_blank">commission split and override rule</a>.'
-				),
-			));
-			array_push($data, array(
 				'subject' => 'Startup Your Business',
 				'icon' => base_url().'src/img/give-money.svg',
 				'question' => 'Do you want to startup your own business?',
@@ -59,32 +50,43 @@ class Startup extends Account_base_controller {
 				)
 			));
 		}
-		else{
-			array_push($data, array(
-				'subject' => 'Come to Training Classes',
-				'icon' => base_url().'src/img/instructor-lecture-with-sceen-projection-tool.svg',
-				'question' => 'These free classes are the best approach.',
-				'text' => array(
-					'- Come to our free professional <a href="'.base_url().'seminar" target="_blank">classes</a> every week.',
-				),
-			));
+		array_push($data, array(
+			'subject' => 'Come to Training Classes',
+			'icon' => base_url().'src/img/instructor-lecture-with-sceen-projection-tool.svg',
+			'question' => 'These free classes are the best approach.',
+			'text' => array(
+				'- Come to our free professional <a href="'.base_url().'seminar" target="_blank">classes</a> every week.',
+			),
+		));
+		if($this->user['preference'] == 'E'){
 			$u = base_url().'account/license'.($this->is_mobile ? '' : '/online_courses');
 			array_push($data, array(
 				'subject' => 'Take the License Courses',
 				'icon' => base_url().'src/img/certificate.svg',
 				'question' => 'This is an alternative approach, which need to be paid.',
 				'text' => array(
-					'- Take the <a href="'.$u.'" target="_blank">52 hours online courses</a>.',
-					'- Take the EXAM Prep/Cram Class ($68), including the textbook ($32). Contact Mr. Ron Nishimura at 559-213-2341.',
+					'- Take the <a href="'.$u.'" target="_blank">52 hours online courses</a>. This is <u>manatory</u> for license.',
+					'- Take the EXAM Prep/Cram Class ($68),  plus the textbook ($32). This is <u>optional</u> for license. Contact Mr. Ron Nishimura at 559-213-2341.',
 				),
 			));
+		}
+		array_push($data, array(
+			'subject' => 'Know Your Own Finacial Status',
+			'icon' => base_url().'src/img/learning.svg',
+			'question' => 'Do you understand your own family financial status?',
+			'text' => array(
+				'- <a href="'.base_url().'contact" target="_blank">Contact</a> SMD, Lily Zhu, to appoint a one-hour financial analysis.',
+			)
+		));
+		if($this->user['preference'] == 'B' || $this->user['preference'] == 'BE'){
 			array_push($data, array(
-				'subject' => 'Know Your Finacial Status',
-				'icon' => base_url().'src/img/learning.svg',
-				'question' => 'Do you understand your own family financial status?',
+				'subject' => 'Promotion and Code of Honor',
+				'icon' => base_url().'src/img/promotion.svg',
+				'question' => 'It is important to know the guidence before you startup the business!',
 				'text' => array(
-					'- <a href="'.base_url().'contact" target="_blank">Contact</a> SMD, Lily Zhu, to appoint a one-hour financial analysis.',
-				)
+					'- Know about the <a href="'.base_url().'account/documents/view/599e6834d4d8c" target="_blank">promotion standard</a>.',
+					'- Know about the <a href="'.base_url().'account/documents/view/599e6b4cc736e" target="_blank">commission split and override rule</a>.'
+				),
 			));
 		}
 		
