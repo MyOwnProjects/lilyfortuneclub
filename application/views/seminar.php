@@ -37,15 +37,15 @@ ul, ul li{list-style:none}
 		</div>
 	</div>
 	<ul class="doc-list">
-		<li class="clearfix" style="font-size:14px;background:#efefef;line-height:30px !important">
+		<!--li class="clearfix" style="font-size:14px;background:#efefef;line-height:30px !important">
 		<?php
 			echo '<div class="pull-left" style="width:100px;text-align:center;border-right:1px solid #fff">Date</div>';
 			echo '<div class="pull-left" style="width:180px;margin:0 10px;border-right:1px solid #fff">Location / Office</a></div>';
 			echo '<div class="overflow:hidden;padding-left:10px">Shcedule File</div>';
 		?>
-		</li>
+		</li-->
 	<?php
-	if(count($list) == 0){s
+	if(count($list) == 0){
 	?>
 		<li style="text-align:center;line-height:160px">No schedules.</li>
 	<?php
@@ -55,9 +55,14 @@ ul, ul li{list-style:none}
 		?>
 			<li class="clearfix">
 				<?php
+				$pos = strpos($l['file'], '.');
+				if($pos !== false){
+					$text = substr($l['file'], 0, $pos);
+				}
+				$text = str_replace('_', ' ', $text);
 					echo '<div class="pull-left" style="font-size:14px;width:100px;text-align:center">'.(empty($l['schedule_month']) ? "" : str_pad($l['schedule_month'], 2, '0', STR_PAD_LEFT).' / ').$l['schedule_year'].'</div>';
 					echo '<div class="pull-left" style="font-size:14px;width:180px;margin:0 10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><a href="'.base_url().'seminar?location='.(empty($l['office_name']) ? 'Other' : $l['office_name']).'">'.(empty($l['office_name']) ? 'Other' : $l['office_name']).'</a></div>';
-					echo '<div class="overflow:hidden;margin-left:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><a href="'.base_url(),'src/schedule/'.$l['schedule_year'].'/'.$l['file'].'" target="_blank">'.$l['file'].'</a></div>';
+					echo '<div class="overflow:hidden;margin-left:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><a href="'.base_url(),'src/schedule/'.$l['schedule_year'].'/'.$l['file'].'" target="_blank">'.$text.'</a></div>';
 				?>
 			</li>
 		<?php
