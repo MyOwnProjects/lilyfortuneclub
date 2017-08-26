@@ -7,7 +7,7 @@
 	<h3 class="text-center">Contact Us</h3>
 	<div style="margin:40px auto;max-width:600px;width:100%">
 		<div class="panel panel-success">
-			<div class="panel-heading">SMD</div>
+			<div class="panel-heading">Senior Marketing Director</div>
 			<div class="panel-body">Lily Zhu: (510) 461-3854, lily_minzhu@yahoo.com</div>
 		</div>
 			<div class="panel panel-info">
