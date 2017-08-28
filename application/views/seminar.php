@@ -17,20 +17,20 @@ ul, ul li{list-style:none}
 					<li><a href="<?php echo base_url();?>seminar<?php echo empty($year) ? '' : "?year=$year";?>">All</a></li>
 					<?php
 					foreach($locations as $l){
-						echo '<li><a href="'.base_url().'schedule?location='.$l.(empty($year) ? '' : "&year=$year").'">'.$l.'</a></li>';
+						echo '<li><a href="'.base_url().'seminar?location='.$l.(empty($year) ? '' : "&year=$year").'">'.$l.'</a></li>';
 					}
 					?>
-					<li><a href="<?php echo base_url();?>schedule?location=Other<?php echo (empty($year) ? '' : "&year=$year");?>">Other</a></li>
+					<li><a href="<?php echo base_url();?>seminar?location=Other<?php echo (empty($year) ? '' : "&year=$year");?>">Other</a></li>
 				</ul>
 		</div>
 		<div class="pull-right dropdown" style="margin-right:40px">
 			Year
 			<button class="btn btn-link dropdonw-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $year;?>&nbsp;<span class="caret"></span></button>
 			<ul class="dropdown-menu">
-				<li><a href="<?php echo base_url();?>schedule<?php echo empty($location) ? '' : "?location=$location"?>">All</a></li>
+				<li><a href="<?php echo base_url();?>seminar<?php echo empty($location) ? '' : "?location=$location"?>">All</a></li>
 				<?php
 				foreach($years as $y){
-					echo '<li><a href="'.base_url().'schedule?year='.$y.(empty($location) ? '' : "&location=$location").'">'.$y.'</a></li>';
+					echo '<li><a href="'.base_url().'seminar?year='.$y.(empty($location) ? '' : "&location=$location").'">'.$y.'</a></li>';
 				}
 				?>
 			</ul>
@@ -41,7 +41,7 @@ ul, ul li{list-style:none}
 		<?php
 			echo '<div class="pull-left" style="width:100px;text-align:center;border-right:1px solid #fff">Date</div>';
 			echo '<div class="pull-left" style="width:180px;margin:0 10px;border-right:1px solid #fff">Location / Office</a></div>';
-			echo '<div class="overflow:hidden;padding-left:10px">Shcedule File</div>';
+			echo '<div class="overflow:hidden;padding-left:10px">Schedule File</div>';
 		?>
 		</li-->
 	<?php
@@ -70,11 +70,11 @@ ul, ul li{list-style:none}
 	}
 		?>
 		<li style="font-size:14px;text-align:center">
-			<a class="btn btn-link <?php echo count($list) == 0 ? 'disabled' : '';?>" href="<?php echo base_url().'schedule?pg=1'.(empty($year) ? '' : "&year=$year").(empty($location) ? '' : "&location=$location");?>">First</a>
-			<a class="btn btn-link <?php echo $current > 1 ? '' : 'disabled';?>" href="<?php echo base_url().'schedule?pg='.($current - 1).(empty($year) ? '' : "&year=$year").(empty($location) ? '' : "&location=$location");?>">Prev</a>
+			<a class="btn btn-link <?php echo count($list) == 0 ? 'disabled' : '';?>" href="<?php echo base_url().'seminar?pg=1'.(empty($year) ? '' : "&year=$year").(empty($location) ? '' : "&location=$location");?>">First</a>
+			<a class="btn btn-link <?php echo $current > 1 ? '' : 'disabled';?>" href="<?php echo base_url().'seminar?pg='.($current - 1).(empty($year) ? '' : "&year=$year").(empty($location) ? '' : "&location=$location");?>">Prev</a>
 			<?php echo (empty($list) ? 0 : $current).' / '.$total;?>
-			<a class="btn btn-link <?php echo $current < $total ? '' : 'disabled';?>" href="<?php echo base_url().'schedule?pg='.($current + 1).(empty($year) ? '' : "&year=$year").(empty($location) ? '' : "&location=$location");?>">Next</a>
-			<a class="btn btn-link <?php echo count($list) == 0 ? 'disabled' : '';?>" href="<?php echo base_url().'schedule?pg='.$total.(empty($year) ? '' : "&year=$year").(empty($location) ? '' : "&location=$location");?>">Last</a>
+			<a class="btn btn-link <?php echo $current < $total ? '' : 'disabled';?>" href="<?php echo base_url().'seminar?pg='.($current + 1).(empty($year) ? '' : "&year=$year").(empty($location) ? '' : "&location=$location");?>">Next</a>
+			<a class="btn btn-link <?php echo count($list) == 0 ? 'disabled' : '';?>" href="<?php echo base_url().'seminar?pg='.$total.(empty($year) ? '' : "&year=$year").(empty($location) ? '' : "&location=$location");?>">Last</a>
 		</li>
 	</ul>
 </div>
