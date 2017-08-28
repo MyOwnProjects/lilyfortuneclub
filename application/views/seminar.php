@@ -8,13 +8,13 @@ ul, ul li{list-style:none}
 	
 </style>
 <div class="resource-list  main-content-wrapper">
-	<div class="breadcrumb">Home > Schedule > list</div>
+	<div class="breadcrumb"><a href="<?php echo base_url();?>">Home</a> > Seminar > list</div>
 	<div class="clearfix" style="font-size:14px;text-align:right">
 		<div class="pull-right dropdown">
 				Location
 				<button class="btn btn-link dropdonw-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $location;?>&nbsp;<span class="caret"></span></button>
 				<ul class="dropdown-menu">
-					<li><a href="<?php echo base_url();?>schedule<?php echo empty($year) ? '' : "?year=$year";?>">All</a></li>
+					<li><a href="<?php echo base_url();?>seminar<?php echo empty($year) ? '' : "?year=$year";?>">All</a></li>
 					<?php
 					foreach($locations as $l){
 						echo '<li><a href="'.base_url().'schedule?location='.$l.(empty($year) ? '' : "&year=$year").'">'.$l.'</a></li>';
