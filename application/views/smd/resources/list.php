@@ -6,6 +6,7 @@
 		header: [
 			{id: 'subject', text: 'Subject'}, 
 			{id: 'top', text: 'Top', align:'center', sortable: true, width:'40px'}, 
+			{id: 'language', text: 'Language', align:'center', sortable: true, width:'70px'}, 
 			{id: 'create_time', text: 'Create Time', align:'center', sortable: true, width:'150px'}, 
 			{id: 'source', text: 'Source', sortable: true, width:'80px'}, 
 		],

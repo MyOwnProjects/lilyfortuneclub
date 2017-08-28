@@ -27,12 +27,12 @@ class Resource_model extends Base_model{
 		return $this->db->query($sql);
 	}
 	
-	public function insert($subject, $source, $content, $top){
+	public function insert($subject, $source, $content, $top, $language){
 		if(empty($source)){
-			$sql= "INSERT INTO resources (subject, content, top) VALUES ('".addslashes($subject)."','".addslashes($content)."', '$top')";
+			$sql= "INSERT INTO resources (subject, content, top, language) VALUES ('".addslashes($subject)."','".addslashes($content)."', '$top', '$language')";
 		}
 		else{
-			$sql= "INSERT INTO resources (subject, source, content, top) VALUES ('".addslashes($subject)."','".addslashes($source)."','".addslashes($content)."', '$top')";
+			$sql= "INSERT INTO resources (subject, source, content, top, language) VALUES ('".addslashes($subject)."','".addslashes($source)."','".addslashes($content)."', '$top', '$language')";
 		}
 		return $this->db->query($sql) && $this->db->insert_id() > 0;
 	}

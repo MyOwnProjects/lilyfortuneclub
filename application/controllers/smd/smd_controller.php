@@ -57,7 +57,7 @@ class Smd_controller extends CI_Controller {
 				),
 			),
 		),
-		'events' => array(
+		/*'events' => array(
 			'text' => 'Events',
 			'sub_menus' => array(
 				'' => array(
@@ -67,7 +67,7 @@ class Smd_controller extends CI_Controller {
 					'text' => 'New Event'
 				),
 			),
-		),
+		),*/
 		'resources' => array(
 			'text' => 'Resources',
 			'sub_menus' => array(
@@ -79,7 +79,7 @@ class Smd_controller extends CI_Controller {
 				),
 			),
 		),
-		'live' => array(
+		/*'live' => array(
 			'text' => 'Live',
 			'sub_menus' => array(
 				'' => array(
@@ -89,7 +89,7 @@ class Smd_controller extends CI_Controller {
 					'text' => 'New Live Event'
 				),
 			),
-		),
+		),*/
 		'tasks'=> array(
 			'text' => 'Tasks',
 			'sub_menus' => array(

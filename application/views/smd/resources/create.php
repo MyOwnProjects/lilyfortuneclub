@@ -19,12 +19,18 @@
 		<input class="form-control input-sm" style="width:300px" name="subject" value="<?php echo isset($subject) ? $subject : '';?>" required>
 		&nbsp;&nbsp;
 		<label>Source</label>
-		<input class="form-control input-sm" style="width:150px" name="source" value="<?php echo isset($source) ? $source : '';?>">
+		<input class="form-control input-sm" style="width:80px" name="source" value="<?php echo isset($source) ? $source : '';?>">
 		&nbsp;&nbsp;
 		<label>Top</label>
 		<select class="form-control input-sm" name="top">
 			<option value="N" <?php echo isset($top) && $top == 'N' ? 'selected' : '';?>>No</option>
 			<option value="Y" <?php echo isset($top) && $top == 'Y' ? 'selected' : '';?>>Yes</option>
+		</select>
+		&nbsp;&nbsp;
+		<label>Language</label>
+		<select class="form-control input-sm" name="language">
+			<option value="EN" <?php echo isset($language) && $language == 'EN' ? 'selected' : '';?>>English</option>
+			<option value="CN" <?php echo isset($language) && $language == 'CN' ? 'selected' : '';?>>Chinese</option>
 		</select>
  		<input class="btn btn-sm btn-success pull-right" type="submit" value="Submit">
 		</div>

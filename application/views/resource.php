@@ -20,44 +20,66 @@
 }
 </style>
 <div class="resource-list  main-content-wrapper">
-	<ul class="breadcrumb">
-		<li><a href="<?php echo base_url();?>">Home</a></li>
-		<li class="active">Resource</li> 
-	</ul>
+	<div class="clearfix" style="border-bottom:1px solid #e5e5e5;padding:5px 20px">
+	<div class="pull-left">
+		<span><a href="<?php echo base_url();?>">Home</a></span>
+		>
+		<span class="active">Resource</span> 
+	</div>
+		<div class="pull-right">
+			<form>
+				<label class="radio-inline">
+					<input type="radio" name="language" value="EN" checked>English
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="language" value="CN">中文
+				</label>
+			</form>
+		</div>
+	</div>
 	<ul id="resource-list">
-		<li style="text-align:center;line-height:160px;"><img src="<?php echo base_url();?>src/img/spinning.gif"></li>
 	</ul>
 </div>
 <script>
-$.ajax({
-	url: '<?php echo base_url();?>resource/get_list',
-	dataType: 'json',
-	success:function(data){
-		if(data.length == 0){
-			$('#resource-list li').html('No resources.');
-			return false;
-		}
-		var $_resource_list = $('#resource-list').empty();
-		for(var i = 0; i < data.length; ++i){
-			var content_wrapper = $('<div>').append(data[i]['content']);
-			var $_li = $('<li>');
-			var $_a = $('<a>').attr('href', '<?php echo base_url();?>resource/item/' + data[i]['url_id']).attr('target', '_blank');
-			var img_wrappers = content_wrapper.children('.content-image');
-			var $_thumbnail = $('<div>').addClass('pull-left').addClass('resource-list-thumbnail').appendTo($_li);
-			if(img_wrappers.length > 0){
-				$_a.clone().append('<img src="' + $(img_wrappers[0]).children('img').attr('src') + '">').appendTo($_thumbnail);
-			}
-			var $_subject = $('<div>').addClass('resource-list-subject').appendTo($_li);
-			$('<span>').append($_a.clone().append(data[i]['subject'])).appendTo($_subject);
-			var date = data[i]['create_time'].split(' ');
-			$('<span>').addClass('resource-list-info').append('&nbsp;(' + date[0] + ')').appendTo($_subject);
-
-			var $_desc = $('<div>').addClass('resource-list-short-desc').html(content_wrapper.text()).appendTo($_li);
-			$_li.appendTo($_resource_list);
-		}
-	},
-	error: function(){
-		$('#resource-list li').html('No resources.');
-	}
+$('input[name=language]').change(function(){
+	get_resource_list($(this).val());
 });
+function get_resource_list(lan){
+	var $_resource_list = $('#resource-list');
+	$_resource_list.empty().append('<li style="text-align:center;line-height:160px;"><img src="<?php echo base_url();?>src/img/spinning.gif"></li>');
+	$.ajax({
+		url: '<?php echo base_url();?>resource/get_list',
+		data: {language: lan},
+		dataType: 'json',
+		success:function(data){
+			if(data.length == 0){
+				$('#resource-list li').html('No resources.');
+				return false;
+			}
+			var $_resource_list = $('#resource-list').empty();
+			for(var i = 0; i < data.length; ++i){
+				var content_wrapper = $('<div>').append(data[i]['content']);
+				var $_li = $('<li>');
+				var $_a = $('<a>').attr('href', '<?php echo base_url();?>resource/item/' + data[i]['url_id']).attr('target', '_blank');
+				var img_wrappers = content_wrapper.children('.content-image');
+				var $_thumbnail = $('<div>').addClass('pull-left').addClass('resource-list-thumbnail').appendTo($_li);
+				if(img_wrappers.length > 0){
+					$_a.clone().append('<img src="' + $(img_wrappers[0]).children('img').attr('src') + '">').appendTo($_thumbnail);
+				}
+				var $_subject = $('<div>').addClass('resource-list-subject').appendTo($_li);
+				$('<span>').append($_a.clone().append(data[i]['subject'])).appendTo($_subject);
+				var date = data[i]['create_time'].split(' ');
+				$('<span>').addClass('resource-list-info').append('&nbsp;(' + date[0] + ')').appendTo($_subject);
+
+				var $_desc = $('<div>').addClass('resource-list-short-desc').html(content_wrapper.text()).appendTo($_li);
+				$_li.appendTo($_resource_list);
+			}
+		},
+		error: function(){
+			$('#resource-list li').html('No resources.');
+		}
+	});
+}
+
+get_resource_list('EN');
 </script>

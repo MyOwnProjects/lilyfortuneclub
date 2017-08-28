@@ -16,7 +16,9 @@ class Resource extends Base_Controller {
 	}
 	
 	public function get_list(){
-		$result = $this->resource_model->get_items("access = 0");
+		$language = $this->input->get('language');
+		$language = $language == 'CN' ? 'CN' : 'EN';
+		$result = $this->resource_model->get_items("language='$language' AND access = 0");
 		//header('Content-Type: application/json; charset=charset=ISO-8859-1');
 		echo json_encode($result);
 	}
