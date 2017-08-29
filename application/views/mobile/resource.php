@@ -7,7 +7,7 @@
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<label for="language-en">English</label>
 					<input type="radio" name="language" id="language-en" value="EN" data-mini="true" checked>
-					<label for="language-cn">Chinese</label>
+					<label for="language-cn">中文</label>
 					<input type="radio" name="language" id="language-cn" value="CN" data-mini="true">
 				</fieldset>
 			</div>		
