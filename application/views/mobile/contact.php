@@ -18,8 +18,8 @@
 		<div class="panel-body">Bob Wang<br/>(408) 718-3622<br/>bob888wang@gmail.com</div>
 		<div class="panel-heading">License Procedure</div>
 		<div class="panel-body">Kun Yang<br/>(510) 461-3854<br/>kunyangnew@gmail.com</div>
-		<div class="panel-body">Christine Cen<br/>(510) 364-0502<br/>yiqingdu@hotmail.com</div>
+		<div class="panel-body">Christine Cen<br/>(510) 364-0502<br/>chrislicen@gmail.com</div>
 		<div class="panel-heading">Name Tag, Team Shirt and Binder Order</div>
-		<div class="panel-body">Christine Cen<br/>(510) 364-0502<br/>yiqingdu@hotmail.com</div>
+		<div class="panel-body">Christine Cen<br/>(510) 364-0502<br/>chrislicen@gmail.com</div>
 	</div>
 </div>

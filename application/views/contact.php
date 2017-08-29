@@ -66,7 +66,7 @@
 						<div class="col-xs-6">
 							<b>Christine Cen</b><br/>
 							(510) 364-0502<br/>
-							yiqingdu@hotmail.com
+							chrislicen@gmail.com
 						</div>
 					</div>
 				</div>
@@ -78,7 +78,7 @@
 						<div class="col-xs-12">
 							<b>Christine Cen</b><br/>
 							(510) 364-0502<br/>
-							yiqingdu@hotmail.com
+							chrislicen@gmail.com
 						</div>
 					</div>
 				</div>
