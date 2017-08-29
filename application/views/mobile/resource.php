@@ -4,11 +4,19 @@
 		<form class="ui-filterable ui-content ui-mini ">
 			<input id="resource-filter" data-type="search">
 		</form>
+		<div class="ui-field-contain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<label for="language-en">English</label>
+				<input type="radio" name="language" id="language-en" value="EN" data-mini="true" checked>
+				<label for="language-cn">Chinese</label>
+				<input type="radio" name="language" id="language-cn" value="CN" data-mini="true">
+			</fieldset>
+		</div>		
 		<ul data-role="listview" data-filter="true" data-input="#resource-filter"></ul>
 	</div>
 </div>
 <script>
-function load_resource(){
+function load_resource(language){
 	$.mobile.loading( 'show', {
 		theme: 'z',
 		html: ""
@@ -16,7 +24,7 @@ function load_resource(){
 	var pl = $('#resource-list ul[data-role=listview]');
 	pl.empty();
 	$.ajax({
-		url: '<?php echo base_url();?>resource/get_list',
+		url: '<?php echo base_url();?>resource/get_list?language=' + language,
 		dataType: 'json',
 		success: function(data){
 			if(data.length > 0){
@@ -51,6 +59,10 @@ function load_resource(){
 	});
 }
 $(document).on("pageshow","#resource-list",function(){
-	load_resource();
-})
+	load_resource('EN');
+});
+
+$('input[name=language]').change(function(){
+	load_resource($(this).val());
+});
 </script>
