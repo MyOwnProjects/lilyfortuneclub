@@ -3,15 +3,15 @@
 	<div data-role="main" class="ui-content" data-theme="d">
 		<form class="ui-filterable ui-content ui-mini ">
 			<input id="resource-filter" data-type="search">
+			<div class="ui-field-contain">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<label for="language-en">English</label>
+					<input type="radio" name="language" id="language-en" value="EN" data-mini="true" checked>
+					<label for="language-cn">Chinese</label>
+					<input type="radio" name="language" id="language-cn" value="CN" data-mini="true">
+				</fieldset>
+			</div>		
 		</form>
-		<div class="ui-field-contain">
-			<fieldset data-role="controlgroup" data-type="horizontal">
-				<label for="language-en">English</label>
-				<input type="radio" name="language" id="language-en" value="EN" data-mini="true" checked>
-				<label for="language-cn">Chinese</label>
-				<input type="radio" name="language" id="language-cn" value="CN" data-mini="true">
-			</fieldset>
-		</div>		
 		<ul data-role="listview" data-filter="true" data-input="#resource-filter"></ul>
 	</div>
 </div>
