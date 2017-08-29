@@ -40,7 +40,7 @@ class License extends Account_base_controller {
 					'url' => base_url().'account/license/exam',
 					'comment' => 'You must correctly answer above 60 or 70 percent, depends on state, of 150 questions in 195 minutes to pass the exam.',
 					'instruct' => array(
-						'subject' => "52 Hours Online Class Registration",
+						'subject' => "License Exam Registration",
 						'image_file_name'=> 'license-exam',
 						'steps' => array(
 							'Go to the PSI Exam  website at <a href="https://www.psiexams.com" target="_blank">www.psiexams.com</a>, and click <i>Create</i> an account.',
