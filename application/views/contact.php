@@ -1,6 +1,6 @@
 <style>
 .panel-heading{font-weight:bold}
-.panel-body div{line-height:40px;}
+.panel-body div{line-height:30px;}
 </style>
 
 <div style="max-width:1000px;width:100%;padding:40px 20px;margin:0 auto">
@@ -8,52 +8,78 @@
 	<div style="margin:40px auto;max-width:600px;width:100%">
 		<div class="panel panel-success">
 			<div class="panel-heading">Senior Marketing Director</div>
-			<div class="panel-body">Lily Zhu: (510) 461-3854, lily_minzhu@yahoo.com</div>
+			<div class="panel-body"><b>Lily Zhu</b> (510) 461-3854, lily_minzhu@yahoo.com</div>
 		</div>
-			<div class="panel panel-info">
+		<div class="panel panel-info">
 				<div class="panel-heading">Invitation and Objection Handling</div>
 				<div class="panel-body"> 
-					<div>
-					Lily Zhu: (510) 461-3854, lily_minzhu@yahoo.com
-					</div>
-					<div>
-					Sherry Hu: (415) 264-1889, Ms_huxin@hotmail.com
-					<div>
-					</div>
-					Minna Millare: (415) 828-8841, Minna.millare@gmail.com
+					<div class="row">
+						<div class="col-xs-4">
+							<b>Lily Zhu</b><br/>
+							(510) 501-4697<br/>
+							lily_minzhu@yahoo.com
+						</div>
+						<div class="col-xs-4">
+							<b>Sherry Hu</b><br/>
+							(415) 264-1889<br/>
+							Ms_huxin@hotmail.com
+						</div>
+						<div class="col-xs-4">
+							<b>Minna Millare</b><br/>
+							(415) 828-8841<br/>
+							Minna.millare@gmail.com
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="panel panel-info">
 				<div class="panel-heading">Products</div>
 				<div class="panel-body">
-					<div>
-					Lily Zhu: (510) 461-3854, lily_minzhu@yahoo.com
-					</div>
-					<div>
-					Yiqing Du: (510) 754-9984, yiqingdu@hotmail.com
-					<div>
-					</div>
-					Bob Wang: (408) 718-3622, bob888wang@gmail.com
+					<div class="row">
+						<div class="col-xs-4">
+							<b>Lily Zhu</b><br/>
+							(510) 501-4697<br/>
+							lily_minzhu@yahoo.com
+						</div>
+						<div class="col-xs-4">
+							<b>Yiqing Du</b><br/>
+							(510) 754-9984<br/>
+							yiqingdu@hotmail.com
+						</div>
+						<div class="col-xs-4">
+							<b>Bob Wang</b><br/>
+							(408) 718-3622<br/>
+							bob888wang@gmail.com
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="panel panel-info">
 				<div class="panel-heading">License Procedure</div>
 				<div class="panel-body">
-					<div>
-					Kun Yang: (510) 461-3854, kunyangnew@gmail.com
-					<div>
-					</div>
-					Christine Cen: (510) 364-0502, chrislicen@gmail.com
+					<div class="row">
+						<div class="col-xs-6">
+							<b>Kun Yang</b><br/>
+							(510) 461-3854<br/>
+							kunyangnew@gmail.com
+						</div>
+						<div class="col-xs-6">
+							<b>Christine Cen</b><br/>
+							(510) 364-0502<br/>
+							yiqingdu@hotmail.com
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="panel panel-info">
 				<div class="panel-heading">Name Tag, Team Shirt and Binder Order</div>
 				<div class="panel-body">
-					<div>
-					Christine Cen: (510) 364-0502, chrislicen@gmail.com
+					<div class="row">
+						<div class="col-xs-12">
+							<b>Christine Cen</b><br/>
+							(510) 364-0502<br/>
+							yiqingdu@hotmail.com
+						</div>
 					</div>
 				</div>
 			</div>
