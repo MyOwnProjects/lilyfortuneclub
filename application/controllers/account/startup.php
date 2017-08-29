@@ -31,7 +31,7 @@ class Startup extends Account_base_controller {
 				),
 				'btn' => array(
 					'url' => base_url().'account/business',
-					'text' => 'Statup your business'
+					'text' => 'Startup your business'
 				)
 			));
 			array_push($data, array(
