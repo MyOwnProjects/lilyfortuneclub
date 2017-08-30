@@ -1,6 +1,5 @@
 <style>
 .tab-content-page{padding:40px 80px}
-.tab-content-page:not(:first-child){display:none}
 .content-page-head{text-align:center;margin-bottom:40px}
 blockquote{font-size:14px;margin-left:10px}	
 .subject1{font-size:16px}
@@ -29,12 +28,12 @@ blockquote{font-size:14px;margin-left:10px}
 	</div>
 	
 	<ul class="nav nav-tabs" id="top-tab">
-	    <li class="active"><a href="javascript:void(0)">Prospecting</a></li>
-		<li><a href="javascript:void(0)">Invitation</a></li>
-		<li><a href="javascript:void(0)">Field Training</a></li>
+		<li class="active"><a data-toggle="tab" href="#prospecting-page">Prospecting</a></li>
+		<li><a data-toggle="tab" href="#invitation-page">Invitation</a></li>
+		<li><a data-toggle="tab" href="#field-training-page">Field Training</a></li>
 	</ul>
-	<div id="tab-content-pages">
-	<div class="tab-content-page">
+	<div id="tab-content-pages" class="tab-content">
+	<div id="prospecting-page" class="tab-pane fade in active tab-content-page">
 				<h3 class="content-page-head">Step 1. Prospecting</h3>
 				<ul class="list1">
 					<li class="to-do">Find the people you already know, <a href="<?php echo base_url();?>account/prospect" target="_blank">add</a> them into your prospect list.</li>
@@ -72,7 +71,7 @@ blockquote{font-size:14px;margin-left:10px}
 				</ul>
 			</div>
 
-		<div class="tab-content-page">
+		<div id="invitation-page" class="tab-pane fade tab-content-page">
 				<h3 class="content-page-head">Step 2. Invitation/Approach</h3>
 				<div><strong>Goal:</strong> Bring him/her to office. <a href="javascript:void(0)" id="why">Why?</a></div>
 				<div><strong>Method:</strong> Share the business opportunity. <span style="font-size:14px"><a href="javascript:void(0)" id="how">How?</a></span></div>
@@ -103,7 +102,7 @@ blockquote{font-size:14px;margin-left:10px}
 				</ul>
 			</div>
 		
-			<div class="tab-content-page">
+			<div id="field-training-page" class="tab-pane fade tab-content-page">
 				<h3 class="content-page-head">Step 3. Field Training</h3>
 				<div><strong>Goal:</strong> Field Training is the best and efficient way to improve your personal business and professional skills.</div>
 
@@ -393,12 +392,4 @@ function open_prospect_list(){
 	});
 }
 
-$('#top-tab li').click(function(){
-	if($(this).hasClass('active')){
-		return;
-	}
-	$(this).addClass('active').siblings().removeClass('active');
-	var index = $(this).index();
-	$('#tab-content-pages').children('.tab-content-page:nth-child(' + (index +1) + ')').show().siblings().hide();
-});
 </script>
