@@ -45,7 +45,12 @@ class Seminar extends Base_Controller {
 		$first_date = date_format($d, 'Y-m-d 00:00:00');
 		$last_date = date_format(date_create("$year-$month-".date_format($d, 't')), 'Y-m-d 23:59:59');
 		
-		$result = $this->schedule_model->get_list("schedule_date_start BETWEEN '$first_date' AND '$last_date' OR schedule_date_start BETWEEN '$first_date' AND '$last_date'", array('schedule_date_start DESC'));
+		$result = $this->schedule_model->get_list(
+			"schedule_date_start < '$first_date' AND schedule_date_end >'$last_date'
+			 OR schedule_date_start BETWEEN '$first_date' AND '$last_date'
+			 OR schedule_date_end BETWEEN '$first_date' AND '$last_date'", 
+			array('schedule_date_start DESC')
+		);
 		$this->load_view('seminar', array('list' => $result, 'year' => $year, 'month' => $month));
 	}
 	
