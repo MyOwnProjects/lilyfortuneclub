@@ -353,13 +353,14 @@ class Documents extends Smd_Controller {
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$upload_files = $this->input->post('upload_files');
 			if(empty($upload_files)){
+				echo 'A file must be loaded';
 				return;
 			}
 			$subject = $this->input->post('subject');
 			$content_type = $this->input->post('content_type');
 			$grade_access = $this->input->post('grade_access');
 			$abstract = $this->input->post('abstract');
-			$html_content = update_content(trim($this->input->post('html_content')), 'src/img/document');
+			//$html_content = update_content(trim($this->input->post('html_content')), 'src/img/document');
 			$uniqid = uniqid();
 
 			$values = array();
