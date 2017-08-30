@@ -12,7 +12,7 @@
 			Type
 			<button class="btn btn-link dropdonw-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $mime_type;?>&nbsp;<span class="caret"></span></button>
 			<ul class="dropdown-menu">
-				<li><a href="<?php echo base_url();?>account/documents<?php echo empty($content_type) ? '' : "?content_type=$content_type";?>">All</a></li>
+				<li><a href="<?php echo base_url();?>account/documents<?php echo empty($content_type) ? '' : "?content_type=$content_type";?>" target="_blank">All</a></li>
 				<?php
 				foreach($mime_type_list as $mt){
 					echo '<li><a href="'.base_url().'account/documents?mime_type='.$mt.(empty($content_type) ? '' : "&content_type=$content_type").'">'.$mt.'</a></li>';
