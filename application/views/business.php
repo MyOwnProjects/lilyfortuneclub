@@ -30,8 +30,8 @@ blockquote{font-size:14px;margin-left:10px}
 			<div style="padding:0 20px">
 				<h4 class="text-left">Step 1. Prospecting</h4>
 				<ul class="list1">
-					<li class="to-do">Find the people you already know, <a href="<?php echo base_url();?>account/prospect_list">add</a> them into your prospect list.</li>
-					<li class="to-do"><a href="<?php echo base_url();?>account/prospect_list">Review</a> your top 25 prospect list.</li>
+					<li class="to-do">Find the people you already know, <a href="<?php echo base_url();?>account/prospect">add</a> them into your prospect list.</li>
+					<li class="to-do"><a href="<?php echo base_url();?>account/prospect">Review</a> your top 25 prospect list.</li>
 					<li class="to-do">Discuss the prospect list with your leader face to face, or through <a href="javascript:void(0)">phone</a>.</li>
 				</ul>
 				<ul class="list2">
