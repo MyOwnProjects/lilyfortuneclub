@@ -6,8 +6,9 @@ $back_imgs = array(
 $month = intval($month);
 ?>
 <style>
-.background-list{position:relative;font-family:Comic Sans MS, cursive, sans-serif;font-size:16px;min-height:300px}
-.background-list:after{
+.background-list{position:relative;font-family:Comic Sans MS, cursive, sans-serif;font-size:16px;min-height:300px;
+}
+.ui-content:after{
 	content: "";
 	background-image:url('<?php echo base_url();?>src/img/12 Google Calendar Walls/<?php echo $back_imgs[$month - 1];?>');
 	background-size:100% 100%;
@@ -22,7 +23,7 @@ $month = intval($month);
 .background-list-block{padding:10px 0}
 .background-list-block>div{text-align:center;line-height:30px;}
 </style>
-<div data-role="page" id="seminar" data-theme="d">
+<div data-role="page" id="seminar">
 	<?php $this->load->view('mobile/header', array('header_text' => 'Seminar'));?>
 	<div data-role="main" class="ui-content" data-theme="d">
 			<div class="background-list">
@@ -90,8 +91,8 @@ $month = intval($month);
 			?>
 			
 			<div class="page-nav">
-				<a class="nav-prev" data-role="button" data-inline="true" data-mini="true" data-theme="b" data-icon="arrow-l" href="<?php echo base_url();?>seminar?year=<?php echo $last_year;?>&month=<?php echo $last_month;?>" data-transition="slide" data-iconpos="left" data-direction="reverse">Prev</a>
-				<a class="nav-next" data-role="button" data-icon="arrow-r" data-theme="b" href="<?php echo base_url();?>seminar?year=<?php echo $next_year;?>&month=<?php echo $next_month;?>" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true">Next</a>
+				<a class="nav-prev" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-theme="b" data-icon="arrow-l" href="<?php echo base_url();?>seminar?year=<?php echo $last_year;?>&month=<?php echo $last_month;?>" data-transition="slide" data-iconpos="left" data-direction="reverse">Prev</a>
+				<a class="nav-next" data-ajax="false" data-role="button" data-icon="arrow-r" data-theme="b" href="<?php echo base_url();?>seminar?year=<?php echo $next_year;?>&month=<?php echo $next_month;?>" data-transition="slide" data-iconpos="right" data-inline="true" data-mini="true">Next</a>
 			</div>
 	</div>
 </div>
