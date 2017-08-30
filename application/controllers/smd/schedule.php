@@ -102,15 +102,17 @@ class Schedule extends Smd_Controller {
 					'value' => array('M')
 				),
 				array(
-					'label' => 'Date',
-					'name' => array('year' => 'schedule_year', 'month' => 'schedule_month'),
-					'tag' => 'combo',
-					'type' => 'year_month',
-					'options' => array(
-						'year' => $year_options,
-						'month' => $month_options,
-					),
-					'value' => array('year' => $y, 'month' => 1)
+					'label' => 'Start Date',
+					'name' => 'schedule_date_start',
+					'tag' => 'input',
+					'type' => 'date',
+					'required' => true
+				),
+				array(
+					'label' => 'End Date',
+					'name' => 'schedule_date_end',
+					'tag' => 'input',
+					'type' => 'date'
 				),
 				array(
 					'label' => 'Office/Location',
@@ -131,11 +133,12 @@ class Schedule extends Smd_Controller {
 		}
 		else{
 			$access = $this->input->post('access');
-			$schedule_year = $this->input->post('schedule_year');
-			$schedule_month = $this->input->post('schedule_month');
+			$schedule_date_start = $this->input->post('schedule_date_start');
+			$schedule_date_end = $this->input->post('schedule_date_end');
 			$location = $this->input->post('location');
 			$upload_files =$this->input->post('upload_files');
 			$upload_files = empty($upload_files) ? array() : explode(',', $upload_files);
+			$schedule_year = date_format(date_create($schedule_date_start), 'Y');
 
 			$files = array();
 			foreach($upload_files as $file){
@@ -149,8 +152,8 @@ class Schedule extends Smd_Controller {
 					array_push($files, array(
 						'file' => $name,
 						'access' => $access,
-						'schedule_year' => $schedule_year,
-						'schedule_month' => $schedule_month,
+						'schedule_date_start' => $schedule_date_start,
+						'schedule_date_end' => $schedule_date_end,
 						'location' => $location
 					));
 				}

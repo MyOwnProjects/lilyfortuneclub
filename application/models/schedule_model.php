@@ -45,10 +45,10 @@ class Schedule_model extends Base_model{
 	public function insert($files){
 		$values = array();
 		foreach($files as $file){
-			array_push($values, "('".$file['file']."', '".$file['schedule_year']."', ".(empty($file['schedule_month']) ? "NULL" : "'".$file['schedule_month']."'")
+			array_push($values, "('".$file['file']."', '".$file['schedule_date_start']."', ".(empty($file['schedule_date_end']) ? "NULL" : "'".$file['schedule_date_end']."'")
 				.", ".(empty($file['location']) ? "NULL" : "'".$file['location']."'").", '".$file['access']."')");
 		}
-		$sql = "INSERT INTO schedules (file, schedule_year, schedule_month, location, access) VALUES ".implode(",", $values);
+		$sql = "INSERT INTO schedules (file, schedule_date_start, schedule_date_end, location, access) VALUES ".implode(",", $values);
 		return $this->db->query($sql) && $this->db->insert_id() > 0;
 	}
 	
