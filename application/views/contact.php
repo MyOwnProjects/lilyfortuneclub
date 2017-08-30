@@ -8,7 +8,7 @@
 	<div style="margin:40px auto;max-width:600px;width:100%">
 		<div class="panel panel-success">
 			<div class="panel-heading">Senior Marketing Director</div>
-			<div class="panel-body"><b>Lily Zhu</b> (510) 461-3854, lily_minzhu@yahoo.com</div>
+			<div class="panel-body"><b>Lily Zhu</b> (510) 501-4697, lily_min_zhu@yahoo.com</div>
 		</div>
 		<div class="panel panel-info">
 				<div class="panel-heading">Invitation and Objection Handling</div>
@@ -17,7 +17,7 @@
 						<div class="col-xs-4">
 							<b>Lily Zhu</b><br/>
 							(510) 501-4697<br/>
-							lily_minzhu@yahoo.com
+							lily_min_zhu@yahoo.com
 						</div>
 						<div class="col-xs-4">
 							<b>Sherry Hu</b><br/>
@@ -39,7 +39,7 @@
 						<div class="col-xs-4">
 							<b>Lily Zhu</b><br/>
 							(510) 501-4697<br/>
-							lily_minzhu@yahoo.com
+							lily_min_zhu@yahoo.com
 						</div>
 						<div class="col-xs-4">
 							<b>Yiqing Du</b><br/>
