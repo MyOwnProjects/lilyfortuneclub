@@ -12,7 +12,7 @@
 			Type
 			<button class="btn btn-link dropdonw-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $mime_type;?>&nbsp;<span class="caret"></span></button>
 			<ul class="dropdown-menu">
-				<li><a href="<?php echo base_url();?>account/documents<?php echo empty($content_type) ? '' : "?content_type=$content_type";?>" target="_blank">All</a></li>
+				<li><a href="<?php echo base_url();?>account/documents<?php echo empty($content_type) ? '' : "?content_type=$content_type";?>">All</a></li>
 				<?php
 				foreach($mime_type_list as $mt){
 					echo '<li><a href="'.base_url().'account/documents?mime_type='.$mt.(empty($content_type) ? '' : "&content_type=$content_type").'">'.$mt.'</a></li>';
@@ -58,10 +58,10 @@
 			echo '<div class="pull-right" style="width:80px;margin-left:20px;font-size:14px;">'.(empty($file_size) ? '&nbsp;' : $file_size).'</div>';
 			echo '<div class="pull-right" style="width:80px;margin-left:20px;font-size:14px;">'.$l['mime_content_type'].'</div>';
 			if(!empty($l['subject'])){
-				echo '<div class="overflow:hidden"><a href="'.base_url(),'account/documents/view/'.$l['uniqid'].'">'.$l['subject'].'</a></div>';
+				echo '<div class="overflow:hidden"><a href="'.base_url(),'account/documents/view/'.$l['uniqid'].'" target="_blank">'.$l['subject'].'</a></div>';
 			}
 			else{
-				echo '<div class="overflow:hidden"><a href="'.base_url(),'account/documents/view/'.$l['uniqid'].'">'.$l['file_name'].'</a></div>';
+				echo '<div class="overflow:hidden"><a href="'.base_url(),'account/documents/view/'.$l['uniqid'].'" target="_blank">'.$l['file_name'].'</a></div>';
 			}
 			?>
 		</li>
