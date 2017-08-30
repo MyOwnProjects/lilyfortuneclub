@@ -7,10 +7,10 @@
 	<p style="font-size:16px">You would like to:</p>
 	<form method="post">
 		<div class="radio">
-			<label><input type="radio" name="preference" value="B" required>Start your own business only</label>
+			<label><input type="radio" name="preference" value="E" required>Learn financial knowledge</label>
 		</div>
 		<div class="radio">
-			<label><input type="radio" name="preference" value="E">Learn financial knowledge only</label>
+			<label><input type="radio" name="preference" value="B">Do business</label>
 		</div>
 		<div class="radio">
 			<label><input type="radio" name="preference" value="BE">Both</label>
