@@ -351,35 +351,38 @@ class Documents extends Smd_Controller {
 	public function create(){
 		$fields = array();
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$upload_files = $this->input->post('upload_files');
+			if(empty($upload_files)){
+				return;
+			}
 			$subject = $this->input->post('subject');
 			$content_type = $this->input->post('content_type');
 			$grade_access = $this->input->post('grade_access');
+			$abstract = $this->input->post('abstract');
 			$html_content = update_content(trim($this->input->post('html_content')), 'src/img/document');
 			$uniqid = uniqid();
 
-			$upload_files = $this->input->post('upload_files');
 			$values = array();
-			$upload_files = empty($upload_files) ? array() : explode(',', $upload_files);
-			if(!empty($upload_files)){
-				foreach($upload_files as $file){
-					if(rename(getcwd().'/application/documents/temp/'.$file, getcwd().'/application/documents/'.$file)){
-						$pos = strpos($file, '.');
-						$uniqid = substr($file, 0, $pos);
-						$name =  substr($file, $pos + 1);
-						$mime_type = mime_type(getcwd().'/application/documents/'.$file);
-						array_push($values, array(
-							'uniqid' => $uniqid,
-							'subject' => addslashes($subject),
-							'file_name' => $name,
-							'grade_access' => $grade_access,
-							'content_type' => $content_type,
-							'mime_content_type' => $mime_type[0],
-							'html_content' => addslashes($html_content)
+			$upload_files = explode(',', $upload_files);
+			foreach($upload_files as $file){
+				if(rename(getcwd().'/application/documents/temp/'.$file, getcwd().'/application/documents/'.$file)){
+					$pos = strpos($file, '.');
+					$uniqid = substr($file, 0, $pos);
+					$name =  substr($file, $pos + 1);
+					$mime_type = mime_type(getcwd().'/application/documents/'.$file);
+					array_push($values, array(
+						'uniqid' => $uniqid,
+						'subject' => addslashes($subject),
+						'file_name' => $name,
+						'grade_access' => $grade_access,
+						'content_type' => $content_type,
+						'mime_content_type' => $mime_type[0],
+						'abstract' => $abstract
+						//'html_content' => addslashes($html_content)
 						));
 					}
 				}
-			}
-			else{
+			/*else{
 				array_push($values, array(
 					'uniqid' => $uniqid,
 					'subject' => addslashes($subject),
@@ -388,7 +391,7 @@ class Documents extends Smd_Controller {
 					'mime_content_type' => 'HTML',
 					'html_content' => addslashes($html_content)
 				));
-			}
+			}*/
 			
 			if($this->document_model->insert($values)){
 				header('location: '.base_url().'smd/documents');

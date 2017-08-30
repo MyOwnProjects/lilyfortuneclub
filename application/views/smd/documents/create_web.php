@@ -39,8 +39,9 @@
 		<?php } ?>
 		<div class="row">
 			<div class="col-lg-12 form-group">
-				<label>Content</label>
-				<textarea class="form-control" name="html_content" id="html_content"><?php echo isset($html_content) ? $html_content : '';?></textarea>
+				<label>Abstract</label>
+				<input class="form-control" name="profile" value="<?php echo isset($profile) ? $profile : '';?>">
+				<!--textarea class="form-control" name="html_content" id="html_content"><?php echo isset($html_content) ? $html_content : '';?></textarea-->
 			</div>
 		</div>
 		<div class="row">
@@ -52,14 +53,13 @@
 </div>
 <script>
 (function($){
-	CKEDITOR.replace( 'html_content', {
+	/*CKEDITOR.replace( 'html_content', {
 		enterMode: CKEDITOR.ENTER_P, 
 		extraPlugins: 'autogrow',
-		/*removePlugins: 'resize'*/
 	}).on('instanceCreated', function(ev) {
 		ev.editor.on('resize',function(reEvent){
 		});
-	});
+	});*/
 	if($('#input-file')){	
 		$('#input-file').ajax_upload('<?php echo base_url();?>smd/documents/upload_files').change(function(files){
 			var file_names = [];

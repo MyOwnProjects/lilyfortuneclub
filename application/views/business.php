@@ -108,7 +108,7 @@ blockquote{font-size:14px;margin-left:10px}
 
 				<ul class="list1">
 					<li>
-						Edify your trainer.
+						Trainee, like a movie director, initiates, organizes, and acts a key role in every step of a business process.
 					</li>
 				</ul>
 			</div>		
