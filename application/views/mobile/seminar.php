@@ -23,7 +23,7 @@ $month = intval($month);
 .background-list-block{padding:10px 0}
 .background-list-block>div{text-align:center;line-height:30px;}
 </style>
-<div data-role="page" id="seminar">
+<div data-role="page" id="seminar" data-theme="f">
 	<?php $this->load->view('mobile/header', array('header_text' => 'Seminar'));?>
 	<div data-role="main" class="ui-content" data-theme="d">
 			<div class="background-list">
