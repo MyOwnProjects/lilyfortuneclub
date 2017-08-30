@@ -21,6 +21,17 @@
 			<li  data-role="list-divider">General Info</li>
 			<li><label>Name:</label><?php echo $user['first_name'].' '.$user['last_name'];?>&nbsp;</li>
 			<li><label>Nick Name:</label><?php echo $user['nick_name'];?>&nbsp;</li>
+			<li>
+				<label>Preference:</label>
+				<fieldset data-role="controlgroup" data-type="horizontal" >
+					<label for="preference-e">Learn knowledge</label>
+					<input type="radio" name="preference" id="preference-e" value="E" data-mini="true" <?php echo $user['preference'] == 'E' ? 'checked' : '';?>>
+					<label for="preference-b">Do business</label>
+					<input type="radio" name="preference" id="preference-b" value="B" data-mini="true" <?php echo $user['preference'] == 'B' ? 'checked' : '';?>>
+					<label for="preference-be">Both</label>
+					<input type="radio" name="preference" id="preference-be" value="BE" data-mini="true" <?php echo $user['preference'] == 'BE' ? 'checked' : '';?>>
+				</fieldset>				
+			</li>
 			<li><label>Email:</label><?php echo $user['email'];?>&nbsp;</li>
 			<li><label>Date of Birth:</label><?php echo date_format(date_create($user['date_of_birth']), 'F j, Y');?>&nbsp;</li>
 			<li><label>Phone:</label><?php echo $user['phone'];?>&nbsp;</li>
@@ -86,6 +97,32 @@ $('#btn-save-password').click(function(e){
 			});
 		}
 	});
+});
+
+function update_user_preference(val){
+	$.mobile.loading( 'show', {
+		theme: 'z',
+		html: ""
+	});
+	$.ajax({
+		url: '<?php echo base_url();?>account/profile/update_preference',
+		method: 'post',
+		data: {preference:val},
+		success: function(){
+			
+		},
+		error: function(){
+		},
+		complete: function(){
+			$.mobile.loading( 'hide', {
+				theme: 'z',
+				html: ""
+			});
+		}
+	});
+}
+$('input[name=preference]').change(function(){
+	update_user_preference($(this).val());
 });
 </script>
 
