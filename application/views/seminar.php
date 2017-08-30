@@ -3,13 +3,14 @@ $back_imgs = array(
 	'bkg_01_january.jpg','bkg_02_february.jpg','bkg_03_march.jpg', 'bkg_04_april.jpg', 'bkg_05_may.jpg', 'bkg_06_june.jpg',
 	'bkg_07_july.jpg','bkg_08_august.jpg','bkg_09_september.jpg', 'bkg_10_october.jpg', 'bkg_11_november.jpg', 'bkg_12_december.jpg'
 );
+$month = intval($month);
 ?>
 <style>
 ul, ul li{list-style:none}
 .background-list-block{position:relative;padding:40px 20px;font-family:Comic Sans MS, cursive, sans-serif}
 .background-list-block:after{
 	content: "";
-	background-image:url('<?php echo base_url();?>src/img/12 Google Calendar Walls/<?php echo $back_imgs[$month];?>');
+	background-image:url('<?php echo base_url();?>src/img/12 Google Calendar Walls/<?php echo $back_imgs[$month - 1];?>');
 	background-size:100% 100%;
 	opacity: 0.2;
 	top: 0;
@@ -31,7 +32,7 @@ ul, ul li{list-style:none}
 		<a href="<?php echo base_url();?>">Home</a> > Seminar > list
 	</div>
 	<div class="background-list-block">
-		<h2 class="text-center" style="margin-bottom:40px"><?php echo date_format(date_create("$year-".($month + 1)."-00"), 'F, Y');?></h2>
+		<h2 class="text-center" style="margin-bottom:40px"><?php echo date_format(date_create("$year-".($month)."-01"), 'F, Y');?></h2>
 		<div style="font-size:18px;min-height:300px">
 		<?php
 		if(count($list) == 0){
@@ -82,16 +83,16 @@ ul, ul li{list-style:none}
 		</div>
 		<div class="text-center">
 			<?php 
-			if($month == 0){
-				$last_month = 11;
+			if($month == 1){
+				$last_month = 12;
 				$last_year = $year - 1;
 			}
 			else{
 				$last_month = $month - 1;
 				$last_year = $year;
 			}
-			if($month == 11){
-				$next_month = 0;
+			if($month == 12){
+				$next_month = 1;
 				$next_year = $year + 1;
 			}
 			else{
