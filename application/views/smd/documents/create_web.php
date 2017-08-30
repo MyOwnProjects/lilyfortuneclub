@@ -40,7 +40,7 @@
 		<div class="row">
 			<div class="col-lg-12 form-group">
 				<label>Abstract</label>
-				<input class="form-control" name="profile" value="<?php echo isset($profile) ? $profile : '';?>">
+				<input class="form-control" name="abstract" value="<?php echo isset($abstract) ? $abstract : '';?>">
 				<!--textarea class="form-control" name="html_content" id="html_content"><?php echo isset($html_content) ? $html_content : '';?></textarea-->
 			</div>
 		</div>
