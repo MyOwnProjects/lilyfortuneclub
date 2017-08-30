@@ -1,4 +1,7 @@
 <style>
+.tab-content-page{padding:40px 80px}
+.tab-content-page:not(:first-child){display:none}
+.content-page-head{text-align:center;margin-bottom:40px}
 blockquote{font-size:14px;margin-left:10px}	
 .subject1{font-size:16px}
 .list1{list-style-type:none;line-height:20px;list-style-position:outside;font-size:16px;padding:0;margin:0;}
@@ -19,19 +22,23 @@ blockquote{font-size:14px;margin-left:10px}
 		<li><a href="<?php echo base_url();?>account">Account</a></li>
 		<li>Business</li>
 	</ul>
-<div style="margin:0 auto;max-width:1000px;padding:20px 0 80px 0;">
+<div style="margin:0 auto;max-width:800px;padding:20px 0 80px 0;">
 	<div class="row" style="margin-bottom:20px">
 		<h2 class="text-center">Startup Your WFG Business</h2>
 		<div class="text-center" style="font-size:16px"><b>Critical:</b> The best approach is to <a href="<?php echo base_url();?>schedule">go to training class and field training</a>!</div>
 	</div>
 	
-	<div class="row">
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding:0 20px">
-			<div style="padding:0 20px">
-				<h4 class="text-left">Step 1. Prospecting</h4>
+	<ul class="nav nav-tabs" id="top-tab">
+	    <li class="active"><a href="javascript:void(0)">Prospecting</a></li>
+		<li><a href="javascript:void(0)">Invitation</a></li>
+		<li><a href="javascript:void(0)">Field Training</a></li>
+	</ul>
+	<div id="tab-content-pages">
+	<div class="tab-content-page">
+				<h3 class="content-page-head">Step 1. Prospecting</h3>
 				<ul class="list1">
-					<li class="to-do">Find the people you already know, <a href="<?php echo base_url();?>account/prospect">add</a> them into your prospect list.</li>
-					<li class="to-do"><a href="<?php echo base_url();?>account/prospect">Review</a> your top 25 prospect list.</li>
+					<li class="to-do">Find the people you already know, <a href="<?php echo base_url();?>account/prospect" target="_blank">add</a> them into your prospect list.</li>
+					<li class="to-do"><a href="<?php echo base_url();?>account/prospect" target="_blank">Review</a> your top 25 prospect list.</li>
 					<li class="to-do">Discuss the prospect list with your leader face to face, or through <a href="javascript:void(0)">phone</a>.</li>
 				</ul>
 				<ul class="list2">
@@ -64,15 +71,53 @@ blockquote{font-size:14px;margin-left:10px}
 					</li>
 				</ul>
 			</div>
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-			<div style="padding:0 20px">
-				<h4 class="text-left">Step 2. Invitation/Approach</h4>
+
+		<div class="tab-content-page">
+				<h3 class="content-page-head">Step 2. Invitation/Approach</h3>
+				<div><strong>Goal:</strong> Bring him/her to office. <a href="javascript:void(0)" id="why">Why?</a></div>
+				<div><strong>Method:</strong> Share the business opportunity. <span style="font-size:14px"><a href="javascript:void(0)" id="how">How?</a></span></div>
+
 				<ul class="list1">
 					<li>
-						Invite through phone <span><img src="<?php echo base_url();?>src/img/telephone.svg" style="width:20px;height:20px"></span>
-						<div class="list4">
-							<div><strong>Goal:</strong> Bring him/her to office. <a href="javascript:void(0)" id="why">Why?</a></div>
+						Invite through phone <span><img src="<?php echo base_url();?>src/img/telephone.svg" style="width:20px;height:20px"></span>.<a href="javascript:void(0)" id="script1">. Invitation scripts</a>, <a href="javascript:void(0)" id="script2">中文示例</a> and <a href="javascript:void(0)" id="script3">Handling Objection</a>
+					</li>
+					<li>
+						Approach by <a href="javascript:void(0)" id="text-script1">sms text <span><img src="<?php echo base_url();?>src/img/email-filled-closed-envelope.svg" style="width:20px;height:20px"></span> or wechat <span><img src="<?php echo base_url();?>src/img/wechat.svg" style="width:20px;height:20px"></span></a>. <a href="javascript:void(0)" id="text-script2">中文示例</a>
+					</li>
+				</ul>
+				<ul class="list2">
+					<li class="important">What should I do if I am declined? [<a href="javascript:void(0)" data-toggle="collapse" data-target="#dc">+/-</a>]
+						<blockquote class="collapse" id="dc">
+							<ul class="list3">
+								<li>Get his/her referrals.</li>
+							</ul>
+						</blockquote>
+					</li>
+					<li class="info">What is BPM? [<a href="javascript:void(0)" data-toggle="collapse" data-target="#wbpm">+/-</a>]
+						<blockquote class="collapse" id="wbpm">
+							<ul class="list3">
+								<li></li>
+							</ul>
+						</blockquote>
+					</li>
+				</ul>
+			</div>
+		
+			<div class="tab-content-page">
+				<h3 class="content-page-head">Step 3. Field Training</h3>
+				<div><strong>Goal:</strong> Field Training is the best and efficient way to improve your personal business and professional skills.</div>
+
+				<ul class="list1">
+					<li>
+						Edify your trainer.
+					</li>
+				</ul>
+			</div>		
+				
+	</div>
+
+		
+</div>
 							<div style="display:none" id="why-content">
 								<div style="padding:20px">
 									<h4 class="text-center">Bring your guest to BMP</h4>
@@ -95,12 +140,7 @@ blockquote{font-size:14px;margin-left:10px}
 									width: 500
 								});
 							</script>
-							<div class="clearfix">
-								<strong class="pull-left">Method:&nbsp;</strong>
-								<div style="overflow:hidden">Share the business opportunity. <span style="font-size:14px"><a href="javascript:void(0)" id="how">How?</a></span>
-								</div>
-							</div>
-							<div style="display:none" id="how-content">
+											<div style="display:none" id="how-content">
 								<div style="padding:20px">
 									<h4 class="text-center">What you should do?</h4>
 									<ul class="list5">
@@ -114,11 +154,6 @@ blockquote{font-size:14px;margin-left:10px}
 										<li>Do not try to handle objections. If you have to, see the script of <i>handling objection</i> part</li>
 										<li>Do not ask open ended question (Are you free on Wed?), always choices (Are you free on Wed or Friday?)</li>
 									</ul>
-								</div>
-							</div>
-							<div class="clearfix">
-								<strong class="pull-left">Scripts:&nbsp;</strong>
-								<div style="overflow:hidden">See the <a href="javascript:void(0)" id="script1">invitation scripts</a>, <a href="javascript:void(0)" id="script2">中文示例</a> and <a href="javascript:void(0)" id="script3">Handling Objection</a></span>
 								</div>
 							</div>
 							<div style="display:none" id="script1-content">
@@ -219,6 +254,26 @@ blockquote{font-size:14px;margin-left:10px}
 									<br/>
 								</div>
 							</div>
+							<div style="display:none" id="text-script1-content">
+								<div style="padding:20px">
+									<h5><strong>Invite to office/home BPM</strong></h5> 
+									<ul class="list5 list5s">
+										<li>I: Hey xxx. Are you free tomorrow night at 7pm?</li>
+										<li>Guest: Yes</li>
+										<li>I: Cool. My business partner Lily will be at my office/home in Fremont/xxx city. She lives in the eastbay, very respectable finance executive. She will be giving an overview of the investing, taxes, long term planning and retirement to name a few. If you can join us at 7pm at my office/home, that would be awesome. Address is: xxx Y st, City. </li>
+										<li>Guest: ...</li>
+										<li>I: Can I count on you there?</li>
+									</ul>
+								</div>
+							</div>
+							<div style="display:none" id="text-script2-content">
+								<div style="padding:20px">
+									<h5><strong>邀请上公开讲座。</strong></h5> 
+									<ul class="list5 list5s">
+										<li>你好，我的朋友xxx是湾区非常知名的大学规划师，他/她的讲座是听君一席话，胜读十年书。根据孩子不同特色进行不同教育指导以及大学规划。很多家长都懂得在孩子小的时候就需要进行长远规划了，否则太大了就有些来不及了。周六她会有讲座，一票难求，免费，但是要提前和我确认，根据先后顺序，我帮助订座位。</li>
+									</ul>
+								</div>
+							</div>
 							<script>
 								$('#how').webuiPopover({
 									title: 'Bring your guest to the office',
@@ -260,36 +315,27 @@ blockquote{font-size:14px;margin-left:10px}
 									padding:false,
 									width: 800
 								});
+								$('#text-script1').webuiPopover({
+									title: 'Invitation by sms text or wechat',
+									html: true,
+									content:$('#text-script1-content').html(),
+									closeable: true,
+									placement:'auto-bottom',
+									dismissible:true,
+									padding:false,
+									width: 500
+								});
+								$('#text-script2').webuiPopover({
+									title: '通过短信或微信邀请',
+									html: true,
+									content:$('#text-script2-content').html(),
+									closeable: true,
+									placement:'auto-bottom',
+									dismissible:true,
+									padding:false,
+									width: 500
+								});
 							</script>
-						</div>
-					</li>
-					<li>
-						Approach by email <span><img src="<?php echo base_url();?>src/img/email-filled-closed-envelope.svg" style="width:20px;height:20px"></span>
-					</li>
-					<li>
-						Contact by wechat <span><img src="<?php echo base_url();?>src/img/wechat.svg" style="width:20px;height:20px"></span>
-					</li>
-				</ul>
-				<ul class="list2">
-					<li class="important">What should I do if I am declined? [<a href="javascript:void(0)" data-toggle="collapse" data-target="#dc">+/-</a>]
-						<blockquote class="collapse" id="dc">
-							<ul class="list3">
-								<li>Get his/her referrals.</li>
-							</ul>
-						</blockquote>
-					</li>
-					<li class="info">What is BPM? [<a href="javascript:void(0)" data-toggle="collapse" data-target="#wbpm">+/-</a>]
-						<blockquote class="collapse" id="wbpm">
-							<ul class="list3">
-								<li></li>
-							</ul>
-						</blockquote>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
 <script>
 function open_prospect_list(){
 	$.ajax({
@@ -344,5 +390,15 @@ function open_prospect_list(){
 		error: function(a, b, c){
 			Dialog.error(a.responseText);
 		}
-	});}
+	});
+}
+
+$('#top-tab li').click(function(){
+	if($(this).hasClass('active')){
+		return;
+	}
+	$(this).addClass('active').siblings().removeClass('active');
+	var index = $(this).index();
+	$('#tab-content-pages').children('.tab-content-page:nth-child(' + (index +1) + ')').show().siblings().hide();
+});
 </script>

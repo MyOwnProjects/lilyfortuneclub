@@ -60,7 +60,20 @@ input[type=button]{width:60px !important;box-sizing:border-box;}
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<span style="color:grey;cursor:pointer" class="glyphicon glyphicon-print" title="Print"></span>
 	</div>
-
+	
+	<div>
+		<h4>* Qualification of the prospects</h4>
+		<ul>
+			<li>25+ years old
+			<li>Married</li>
+			<li>Dependent children</li>
+			<li>Homeowner</li>
+			<li>Solid business/career background</li>
+			<li>$40,000+ household income</li>
+			<li>Dissatisfied with his/her current situation</li>
+			<li>Entrepreneurial</li>
+		</ul>
+	</div>
 <script>
 $('.prospect-table').delegate('.prospect-delete', 'click', function(){
 	var $obj = $(this);

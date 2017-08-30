@@ -109,11 +109,13 @@ function update_user_preference(val){
 		method: 'post',
 		data: {preference:val},
 		success: function(){
-			
+			$.mobile.loading( 'hide', {
+				theme: 'z',
+				html: ""
+			});
+			location.reload();
 		},
 		error: function(){
-		},
-		complete: function(){
 			$.mobile.loading( 'hide', {
 				theme: 'z',
 				html: ""

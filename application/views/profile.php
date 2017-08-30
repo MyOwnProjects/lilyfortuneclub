@@ -63,11 +63,10 @@ function update_user_preference(val){
 		method: 'post',
 		data: {preference:val},
 		success: function(){
-			
+			ajax_loading(flse);
+			location.reload();
 		},
 		error: function(){
-		},
-		complete: function(){
 			ajax_loading(flse);
 		}
 	});
