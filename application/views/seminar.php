@@ -73,7 +73,7 @@ ul, ul li{list-style:none}
 							<?php echo (empty($l['office_name']) ? 'Other' : $l['office_name']);?>
 						</div>
 						<div class="overflow:hidden;margin-left:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
-							<a href="<?php echo base_url();?>src/schedule/<?php echo $l['schedule_year'].'/'.$l['file'];?>" target="_blank"><?php echo $text;?></a>
+							<a href="<?php echo base_url();?>src/schedule/<?php echo date_format($start_date, 'Y').'/'.$l['file'];?>" target="_blank"><?php echo $text;?></a>
 						</div>
 				</div>
 			<?php
