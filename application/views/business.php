@@ -270,7 +270,7 @@ blockquote{font-size:14px;margin-left:10px}
 							</div>
 							<div style="display:none" id="text-script2-content">
 								<div style="padding:20px">
-									<h5><strong>邀请上公开讲座。</strong></h5> 
+									<h5><strong>邀请上公开讲座</strong></h5> 
 									<ul class="list5 list5s">
 										<li>你好，我的朋友xxx是湾区非常知名的大学规划师，他/她的讲座是听君一席话，胜读十年书。根据孩子不同特色进行不同教育指导以及大学规划。很多家长都懂得在孩子小的时候就需要进行长远规划了，否则太大了就有些来不及了。周六她会有讲座，一票难求，免费，但是要提前和我确认，根据先后顺序，我帮助订座位。</li>
 									</ul>

@@ -5,6 +5,15 @@ foreach($pages as $i => $p){
 	<?php $this->load->view('mobile/header', array('header_text' => 'Business'));?>
 	<div data-role="content" data-theme="d">
 		<h4>Step <?php echo $i + 1;?>.&nbsp;<?php echo $p['subject'];?></h4>
+		<?php
+		if(array_key_exists('text', $p)){
+		foreach($p['text']  as $t){
+		?>
+		<div><?php echo $t;?></div>
+		<?php
+		}
+		}
+		?>
 		<ul class="list1">
 			<?php 
 			foreach($p['list'] as $l){
@@ -129,6 +138,48 @@ foreach($pages as $i => $p){
 		<div>
 			<u><?php echo $o['subject'];?></u>
 			<?php echo $o['text'];?>
+		</div>
+		<?php }?>
+	</div>
+</div>
+<div data-role="page" id="text-invitation-scripts" data-theme="d">
+	<div data-role="header" data-theme="e">
+		<h1>Invitation Scripts</h1>
+		<a data-rel="back" data-icon="back" data-iconpos="notext" data-direction="reverse">Back</a>
+	</div>
+	<div data-role="content">
+		<?php foreach($text_invitation_scripts as $ih){
+		?>
+		<div>
+			<u><?php echo $ih['subject'];?></u>
+			<ul class="list3">
+			<?php foreach($ih['list'] as $l){
+			?>
+				<li><?php echo $l;?></li>
+			<?php
+			}?>
+			</ul>
+		</div>
+		<?php }?>
+	</div>
+</div>
+<div data-role="page" id="text-invitation-scripts-cn" data-theme="d">
+	<div data-role="header" data-theme="e">
+		<h1>中文邀请示例</h1>
+		<a data-rel="back" data-icon="back" data-iconpos="notext" data-direction="reverse">Back</a>
+	</div>
+	<div data-role="content">
+		<?php foreach($text_invitation_scripts_cn as $ih){
+		?>
+		<div>
+			<u><?php echo $ih['subject'];?></u>
+			<ul class="list3">
+			<?php foreach($ih['list'] as $l){
+			?>
+				<li><?php echo $l;?></li>
+			<?php
+			}?>
+			</ul>
 		</div>
 		<?php }?>
 	</div>

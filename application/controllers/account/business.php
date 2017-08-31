@@ -28,23 +28,18 @@ class Business extends Account_base_controller {
 			),
 			array(
 				'subject' => "Invitation/Approach",
+				'text' => array(
+					'<b>Goal:</b> Bring him/her to office. <a href="business#invitation-why">Why</a>?',
+					'<b>Method:</b> Share the business opportunity. <a href="business#invitation-how">How</a>?',
+				),
 				'list' => array(
 					array(
 						'id' => 'list-phone',
-						'text' => 'Invite through phone.',
-						'sub_list' => array(
-							'<b>Goal:</b> Bring him/her to office. <a href="business#invitation-why">Why</a>?',
-							'<b>Method:</b> Share the business opportunity. <a href="business#invitation-how">How</a>?',
-							'<b>Scripts:</b> <a href="business#invitation-scripts">Invitation scripts</a>, <a href="business#invitation-scripts-cn">中文示例</a> and <a href="business#objection">handling objection</a>.'
-						)
+						'text' => 'Invite through phone. <a href="business#invitation-scripts">Scripts</a>, <a href="business#invitation-scripts-cn">中文示例</a> and <a href="business#objection">handling objection</a>.'
 					),
 					array(
 						'id' => 'list-email',
-						'text' => 'Approach by email.',
-					),
-					array(
-						'id' => 'list-wechat',
-						'text' => "Contact by wechat.",
+						'text' => 'Approach by sms text or wechat. <a href="business#text-invitation-scripts">Scripts</a>, <a href="text-business#text-invitation-scripts-cn">中文示例</a>.'
 					)
 				),
 			)
@@ -175,8 +170,28 @@ class Business extends Account_base_controller {
 				'text' => "<p>That's not uncommon. Have you been to a restaurant that you like and one time the waiter/waitress had a bad attitude and the experience wasn't as good as before? Has that ever happened to you? wfa....That’s probably what happened here, You might’ve run into someone who wasn’t good or didn’t have the right attitude</p>"
 			)
 		);
+		$text_invitation_scripts = array(
+			array(
+				'subject' => 'Invite to office/home BPM',
+				'list' => array(
+					"A: Hey xxx. Are you free tomorrow night at 7pm?",
+					"B: Yes.",
+					"A: Cool. My business partner Lily will be at my office/home in Fremont/xxx city. She lives in the eastbay, very respectable finance executive. She will be giving an overview of the investing, taxes, long term planning and retirement to name a few. If you can join us at 7pm at my office/home, that would be awesome. Address is: xxx Y st, City.",
+					"A: Can I count on you there?"
+				),
+			),		
+		);	
+		$text_invitation_scripts_cn = array(
+			array(
+				'subject' => '邀请上公开讲座',
+				'list' => array(
+					'你好，我的朋友xxx是湾区非常知名的大学规划师，他/她的讲座是听君一席话，胜读十年书。根据孩子不同特色进行不同教育指导以及大学规划。很多家长都懂得在孩子小的时候就需要进行长远规划了，否则太大了就有些来不及了。周六她会有讲座，一票难求，免费，但是要提前和我确认，根据先后顺序，我帮助订座位。'
+				)
+			)	
+		);
 		$this->load_view('business', array('pages' => $pages, 'invitation_why' => $invitation_why, 'invitation_how' => $invitation_how,
-			'invitation_scripts' => $invitation_scripts, 'invitation_scripts_cn' => $invitation_scripts_cn, 'objection' => $objection));
+			'invitation_scripts' => $invitation_scripts, 'invitation_scripts_cn' => $invitation_scripts_cn, 'objection' => $objection,
+			'text_invitation_scripts' => $text_invitation_scripts, 'text_invitation_scripts_cn' => $text_invitation_scripts_cn));
 	}
 	
 	public function get_prospect_list(){
