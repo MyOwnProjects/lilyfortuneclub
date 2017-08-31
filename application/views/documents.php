@@ -2,7 +2,7 @@
 ul.doc-list, ul.doc-list li{list-style:none;margin:0;padding:0}
 ul.doc-list li{padding:20px 10px 20px 20px}
 ul.doc-list li{border-top:1px solid #efefef}
-.doc-icon{float:left;font-size:60px;margin-right:20px}
+.doc-icon{float:left;font-size:60px;line-height:60px;height:60px;margin-right:20px}
 .doc-type{float:right;margin-left:20px;width:100px;text-align:center;line-height:60px}
 .doc-text{overflow:hidden}
 .doc-subject{margin-bottom:10px;height:18px;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
