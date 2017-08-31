@@ -417,13 +417,13 @@ class Documents extends Smd_Controller {
 			$subject = $this->input->post('subject');
 			$content_type = $this->input->post('content_type');
 			$grade_access = $this->input->post('grade_access');
-			$html_content = update_content(trim($this->input->post('html_content')), 'src/img/document');
+			$abstract = $this->input->post('abstract');
 			if($this->document_model->update(array(
 				'uniqid' => $uniqid,
 				'subject' => addslashes($subject),
 				'grade_access' => $grade_access,
 				'content_type' => $content_type,
-				'html_content' => addslashes($html_content)
+				'abstract' => addslashes($abstract)
 			), "uniqid='$uniqid'")){
 				header('location: '.base_url().'smd/documents');
 			}
