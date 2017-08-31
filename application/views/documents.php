@@ -39,39 +39,11 @@ ul.doc-list li{border-top:1px solid #efefef}
 				}
 				?>
 			</div>
-			<div class="doc-type"><?php echo $l['content_type'];?></div>
+			<div class="doc-type"><a href="<?php echo base_url();?>account/documents?content_type=<?php echo $l['content_type'];?>"><?php echo $l['content_type'];?></a></div>
 			<div class="doc-text">
 				<div class="doc-subject"><a href="<?php echo base_url();?>account/documents/view/<?php echo $l['uniqid'];?>" target="_blank"><?php echo $l['subject'];?></a></div>
 				<div class="doc-abstract"><?php echo $l['abstract'];?></div>
 			</div>
-		</li>
-		
-			<?php continue;
-			if(!empty($l['file_name'])){
-				$file_size = filesize(getcwd().'/application/documents/'.$l['uniqid'].'.'.$l['file_name']);
-				if($file_size / 1024 < 1){
-					$file_size = number_format($file_size, 0).' B';
-				}
-				else if($file_size / 1024 / 1024 < 1){
-					$file_size = number_format($file_size / 1024, 0).' KB';
-				}
-				else{
-					$file_size = number_format($file_size / 1024 / 1024, 0).' MB';
-				}
-				echo '<div class="pull-left icon"><img src="'.base_url().'src/img/file_type/'.$l['mime_type'][1].'.png'.'"></div>';
-			}
-			else{
-				echo '<div class="pull-left icon"><img src="'.base_url().'src/img/file_type/'.$l['mime_type'].'.png'.'"></div>';
-			}
-			echo '<div class="pull-right" style="width:80px;margin-left:20px;font-size:14px;">'.(empty($file_size) ? '&nbsp;' : $file_size).'</div>';
-			echo '<div class="pull-right" style="width:80px;margin-left:20px;font-size:14px;">'.$l['mime_content_type'].'</div>';
-			if(!empty($l['subject'])){
-				echo '<div class="overflow:hidden"><a href="'.base_url(),'account/documents/view/'.$l['uniqid'].'" target="_blank">'.$l['subject'].'</a></div>';
-			}
-			else{
-				echo '<div class="overflow:hidden"><a href="'.base_url(),'account/documents/view/'.$l['uniqid'].'" target="_blank">'.$l['file_name'].'</a></div>';
-			}
-			?>
 		</li>
 	<?php
 	}
