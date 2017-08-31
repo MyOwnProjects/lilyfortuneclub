@@ -42,7 +42,21 @@ class Business extends Account_base_controller {
 						'text' => 'Approach by sms text or wechat. <a href="business#text-invitation-scripts">Scripts</a>, <a href="text-business#text-invitation-scripts-cn">中文示例</a>.'
 					)
 				),
-			)
+			),
+			array(
+				'subject' => "Field Training",
+				'text' => array(
+					'<b>Goal:</b> Field Training is the best and efficient way to improve your personal business and professional skills.',
+				),
+				'list' => array(
+					array(
+						'text' => 'Understand the <a href="'.base_url().'account/documents/view/59a82bf04b717" target=_blank">BPM Protocols & Trainer Trainee Role</a>.'
+					),
+					array(
+						'text' => 'It is <u>very important</u> to <a href="'.base_url().'account/documents/view/59a7448770267" target=_blank">Be A Good Trainee</a> to your business.'
+					)
+				),
+			),
 		);
 		$invitation_why = array(
 			array(
