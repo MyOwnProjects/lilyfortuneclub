@@ -16,7 +16,13 @@
 		foreach($list as $l){
 		?>
 			<li data-id="<?php echo $l['uniqid'];?>" content-type="<?php echo is_array($l['mime_type'])? $l['mime_type'][0] : $l['mime_type'];?>" data-type="<?php echo $l['content_type'];?>">
-				<img src="<?php echo base_url();?>src/img/file_type/<?php echo empty($l['file_name']) ? $l['mime_type'] : $l['mime_type'][1];?>.png" class="ui-li-icon">
+				<?php
+				$a = array_unique($l['mime_type']);
+				foreach($a as $mt){
+					echo '<i class="fa fa-file-'.$mt.'-o" style="color:'.doc_icon_color($l['mime_type']).'"></i>';
+				}
+				?>
+				&nbsp;
 				<?php echo empty($l['subject']) ? $l['file_name'] : $l['subject'];?>
 			</li>
 		<?php
