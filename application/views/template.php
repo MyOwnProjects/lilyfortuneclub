@@ -9,7 +9,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 		<link rel="icon" type="image/png/ico" href="<?php echo base_url();?>src/img/lfc.ico">
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery-ui-1.11.4/jquery-ui.css" />
-		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/css/bootstrap1.min.css" />
+		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/css/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.bootgrid-1.3.1/jquery.bootgrid.css" />		
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/dialog/dialog.css?t=<?php echo time();?>">
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.webui-popover/jquery.webui-popover.css" />		
