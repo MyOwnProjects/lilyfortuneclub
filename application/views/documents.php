@@ -1,7 +1,7 @@
 <style>
 ul.doc-list, ul.doc-list li{list-style:none;margin:0;padding:0}
-ul.doc-list li{padding:20px 10px}
-ul.doc-list li:not(:last-child){border-bottom:1px solid #efefef}
+ul.doc-list li{padding:20px 10px 20px 20px}
+ul.doc-list li{border-top:1px solid #efefef}
 .doc-icon{float:left;font-size:60px;margin-right:20px}
 .doc-type{float:right;margin-left:20px;width:100px;text-align:center;line-height:60px}
 .doc-text{overflow:hidden}
@@ -9,19 +9,21 @@ ul.doc-list li:not(:last-child){border-bottom:1px solid #efefef}
 .doc-abstract{line-height:16px;height:32px;}
 </style>
 <div class="wrapper-900">
-	<div class="breadcrumb">Account > Documents > list</div>
-	<div class="clearfix" style="font-size:14px;text-align:right">
-		<div class="pull-right dropdown">
-			Content
-			<button class="btn btn-link dropdonw-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $content_type;?>&nbsp;<span class="caret"></span></button>
-			<ul class="dropdown-menu">
-				<li><a href="<?php echo base_url();?>account/documents<?php echo empty($mime_type) ? '' : "?mime_type=$mime_type";?>">All</a></li>
-				<?php
-				foreach($content_type_list as $ct){
-					echo '<li><a href="'.base_url().'account/documents?content_type='.$ct.(empty($mime_type) ? '' : "&mime_type=$mime_type").'">'.$ct.'</a></li>';
-				}
-				?>
-			</ul>
+	<div class="clearfix" style="margin-top:20px;padding-left:20px">
+		<div class="pull-left" style="line-height:40px"><a href="<?php echo base_url();?>">Account</a> > Documents > list</div>
+		<div class="pull-right" style="line-height:40px;font-size:14px;text-align:right">
+			<div class="pull-right dropdown">
+				Content
+				<button class="btn btn-link dropdonw-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $content_type;?>&nbsp;<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+					<li><a href="<?php echo base_url();?>account/documents<?php echo empty($mime_type) ? '' : "?mime_type=$mime_type";?>">All</a></li>
+					<?php
+					foreach($content_type_list as $ct){
+						echo '<li><a href="'.base_url().'account/documents?content_type='.$ct.(empty($mime_type) ? '' : "&mime_type=$mime_type").'">'.$ct.'</a></li>';
+					}
+					?>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<ul class="doc-list">
