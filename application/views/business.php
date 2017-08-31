@@ -108,7 +108,10 @@ blockquote{font-size:14px;margin-left:10px}
 
 				<ul class="list1">
 					<li>
-						Trainee, like a movie director, initiates, organizes, and acts a key role in every step of a business process.
+						Understand the <a href="<?php echo base_url();?>account/documents/view/59a82bf04b717" target=_blank">BPM Protocols & Trainer Trainee Role</a>.
+					</li>
+					<li>
+						It is <u>very important</u> to <a href="<?php echo base_url();?>account/documents/view/59a7448770267" target=_blank">Be A Good Trainee</a> to your business.
 					</li>
 				</ul>
 			</div>		
