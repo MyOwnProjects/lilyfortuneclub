@@ -27,6 +27,11 @@ ul.doc-list li{border-top:1px solid #efefef}
 		</div>
 	</div>
 	<ul class="doc-list">
+		<li>
+			<div class="doc-icon">
+				<i class="fa fa-file-pdf-o"></i>
+			</div>
+		</li>
 	<?php
 	foreach($list as $l){
 	?>
