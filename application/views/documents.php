@@ -26,9 +26,6 @@ ul.doc-list li{border-top:1px solid #efefef}
 			</div>
 		</div>
 	</div>
-			<div style="font-size:60px">
-				<i class="fa fa-file-pdf-o"></i>
-			</div>
 	<ul class="doc-list">
 	<?php
 	foreach($list as $l){
