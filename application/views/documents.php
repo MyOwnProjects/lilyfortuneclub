@@ -27,7 +27,7 @@ ul.doc-list li{border-top:1px solid #efefef}
 		</div>
 	</div>
 	<ul class="doc-list">
-		<li>
+		<li class="clearfix">
 			<div class="doc-icon">
 				<i class="fa fa-file-pdf-o"></i>
 			</div>
