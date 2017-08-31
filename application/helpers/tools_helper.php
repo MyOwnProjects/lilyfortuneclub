@@ -288,3 +288,21 @@ if ( ! function_exists('update_content')){
 	}
 }
 
+if ( ! function_exists('doc_icon_color')){
+	function doc_icon_color($type){
+		$icon_colors = array(
+			'pdf' => '#8B0000',
+			'powerpoint' =>'DarkOrange',
+			'image' => '#48D1CC',
+			'word' => '#191970',
+			'video' => '#696969',
+			'excel' => '#008000'
+		);
+		foreach($type as $t){
+			if(array_key_exists($t, $icon_colors)){
+				return $icon_colors[$t];
+			}
+		}
+		return '#000';
+	}
+}

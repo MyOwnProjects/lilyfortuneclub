@@ -1,25 +1,16 @@
 <style>
-.doc-list{margin-bottom:100px;list-style:none}
-.doc-list li{line-height:50px;font-size:16px;}	
-.doc-list, .doc-list li:not(:first-child){border-top:1px dotted #e5e5e5}
-.doc-list li .icon{margin-right:5px;}
-.doc-list img{height:20px;}
+ul.doc-list, ul.doc-list li{list-style:none;margin:0;padding:0}
+ul.doc-list li{padding:20px 10px}
+ul.doc-list li:not(:last-child){border-bottom:1px solid #efefef}
+.doc-icon{float:left;font-size:60px;margin-right:20px}
+.doc-type{float:right;margin-left:20px;width:100px;text-align:center;line-height:60px}
+.doc-text{overflow:hidden}
+.doc-subject{margin-bottom:10px;height:18px;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-abstract{line-height:16px;height:32px;}
 </style>
 <div class="wrapper-900">
 	<div class="breadcrumb">Account > Documents > list</div>
 	<div class="clearfix" style="font-size:14px;text-align:right">
-		<div class="pull-right dropdown" style="margin-left:40px">
-			Type
-			<button class="btn btn-link dropdonw-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $mime_type;?>&nbsp;<span class="caret"></span></button>
-			<ul class="dropdown-menu">
-				<li><a href="<?php echo base_url();?>account/documents<?php echo empty($content_type) ? '' : "?content_type=$content_type";?>">All</a></li>
-				<?php
-				foreach($mime_type_list as $mt){
-					echo '<li><a href="'.base_url().'account/documents?mime_type='.$mt.(empty($content_type) ? '' : "&content_type=$content_type").'">'.$mt.'</a></li>';
-				}
-				?>
-			</ul>
-		</div>
 		<div class="pull-right dropdown">
 			Content
 			<button class="btn btn-link dropdonw-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $content_type;?>&nbsp;<span class="caret"></span></button>
@@ -38,7 +29,22 @@
 	foreach($list as $l){
 	?>
 		<li class="clearfix">
-			<?php
+			<div class="doc-icon" style="color:<?php echo doc_icon_color($l['mime_type']);?>">
+				<?php
+				$a = array_unique($l['mime_type']);
+				foreach($a as $mt){
+					echo '<i class="fa fa-file-'.$mt.'-o"></i>';
+				}
+				?>
+			</div>
+			<div class="doc-type"><?php echo $l['content_type'];?></div>
+			<div class="doc-text">
+				<div class="doc-subject"><a href="<?php echo base_url();?>account/documents/view/<?php echo $l['uniqid'];?>" target="_blank"><?php echo $l['subject'];?></a></div>
+				<div class="doc-abstract"><?php echo $l['abstract'];?></div>
+			</div>
+		</li>
+		
+			<?php continue;
 			if(!empty($l['file_name'])){
 				$file_size = filesize(getcwd().'/application/documents/'.$l['uniqid'].'.'.$l['file_name']);
 				if($file_size / 1024 < 1){

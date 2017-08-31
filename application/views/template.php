@@ -15,6 +15,7 @@
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.webui-popover/jquery.webui-popover.css" />		
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/css/tooltip.css">
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/css/template.css?t=<?php echo time();?>" />		
+		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/font-awesome-4.7.0/css/font-awesome.min.css">
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-migrate-1.2.1.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-ui-1.11.4/jquery-ui.min.js"></script>

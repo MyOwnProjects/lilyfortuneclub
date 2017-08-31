@@ -20,12 +20,6 @@ footer a{color:#fff}
 
 .breadcrumb{background-color:#fff;margin-bottom:0;line-height:30px}
 
-.doc-list{margin-bottom:100px}
-.doc-list li{line-height:50px;font-size:16px;}	
-.doc-list, .doc-list li:not(:first-child){border-top:1px dotted #e5e5e5}
-.doc-list li .icon{margin-right:5px;}
-.doc-list img{height:20px;}
-
 .text-red{color:red}
 .text-lime{color:lime}
 .text-green{color:green}
