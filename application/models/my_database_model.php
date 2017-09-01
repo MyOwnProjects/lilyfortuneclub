@@ -44,5 +44,28 @@ class My_database_model extends CI_Model{
 	public function affected_rows(){
 		return self::$db->affected_rows();
 	}
+	
+	public function trans_start(){
+		self::$db->trans_start();
+	}
+	
+	public function trans_begin(){
+		self::$db->trans_begin();
+	}
+	
+	public function trans_rollback(){
+		self::$db->trans_rollback();
+	}
+	
+	public function trans_commit(){
+		self::$db->trans_commit();
+	}
+	public function trans_complete(){
+		self::$db->trans_complete();
+	}
+	
+	public function trans_status(){
+		return self::$db->trans_status();
+	}
 }
 

@@ -13,7 +13,7 @@ if(!$member){
 			<li class="list-group-item list-group-item-info"><b>Member Information</b></li>
 			<?php 
 			foreach($member as $name => $value){
-				if(in_array($name, array('users_id', 'reset_token', 'smd', 'parent', 'street', 'city', 'state', 'zipcode', 'first_name', 'last_name'))) continue;
+				if(in_array($name, array('users_id', 'reset_token', 'smd', 'street', 'city', 'state', 'zipcode', 'first_name', 'last_name'))) continue;
 			?>
 			<li class="list-group-item clearfix">
 				<div class="pull-left" style="font-weight:bold;text-transform:capitalize;width:130px;margin-right:5px;text-align:right"><?php echo str_replace('_', ' ', $name);?>:</div>

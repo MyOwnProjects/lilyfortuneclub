@@ -79,7 +79,7 @@ class User_model extends Base_model{
 			$where = '';
 		$sql = "SELECT CONCAT(users.first_name, ' ', users.last_name) AS name, users.*,
 			CONCAT(users.street, ', ', users.city, ', ', users.state, ' ', users.zipcode) AS address,
-			CONCAT(u2.first_name, ' ', (u2.last_name)) AS upline, 
+			CONCAT(u2.first_name, ' ', (u2.last_name)) AS parent, 
 			CONCAT(u1.first_name, ' ', (u1.last_name)) AS SMD
 			FROM users 
 			LEFT JOIN users u1 ON users.smd=u1.users_id 
@@ -98,14 +98,58 @@ class User_model extends Base_model{
 				array_push($set, $k."=NULL");
 			else
 				array_push($set, $k."='".$v."'");
-		}
-		if(!empty($set)){
-			$sql = "UPDATE users SET ".implode(',', $set)." WHERE users_id=$id";
-			if($this->db->query($sql) && $this->db->affected_rows() == 1){
-				return true;
+			if($k == 'parent'){
+				$new_parent = $v;
+				$result = $this->db->query("SELECT parent, children FROM users WHERE users_id=$id");
+				if(count($result) == 1){
+					$old_parent = $result[0]['parent'];
+					if($old_parent != $new_parent){
+						$new_ancestors = $this->get_ancestors($new_parent);
+						$new_ancestors_id = array();
+						foreach($new_ancestors as $p){
+							if($p['users_id'] == $id){
+								return false;
+							}
+							array_push($new_ancestors_id, $p['users_id']);
+						}
+						$old_ancestors = $this->get_ancestors($old_parent);
+						$old_ancestors_id = array();
+						foreach($old_ancestors as $p){
+							array_push($old_ancestors_id, $p['users_id']);
+						}
+					}
+					$children = $result[0]['children'];
+				}
 			}
 		}
-		return false;
+		if(!empty($set)){
+			try{
+				$this->db->trans_begin();
+				$sql = "UPDATE users SET ".implode(',', $set)." WHERE users_id=$id";
+				if(!$this->db->query($sql)){
+					$this->db->trans_rollback();
+					return false;
+				}
+				if(isset($old_parent) && isset($new_parent) && $old_parent != $new_parent){
+					$sql = "UPDATE users SET children=children - $children - 1 WHERE users_id IN (".implode(",", $old_ancestors_id).")";
+					if(!$this->db->query($sql) || $this->db->affected_rows() != count($old_ancestors_id)){
+						$this->db->trans_rollback();
+						return false;
+					}
+					$sql = "UPDATE users SET children=children + $children + 1 WHERE users_id IN (".implode(",", $new_ancestors_id).")";
+					if(!$this->db->query($sql) || $this->db->affected_rows() != count($new_ancestors_id)){
+						$this->db->trans_rollback();
+						return false;
+					}
+				}
+				$this->db->trans_commit();
+			}
+			catch(Exception $e){
+				$this->db->trans_rollback();
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public function get_count($where = '', $order_by = array(), $limit = ''){
@@ -184,11 +228,39 @@ class User_model extends Base_model{
 		}
 		array_push($name_list, 'create_date');
 		array_push($value_list, date_format(date_create(), 'Y-m-d'));
-		if(!$this->db->query("INSERT INTO users (`".implode("`, `", $name_list)."`) VALUES ('".implode("', '", $value_list)."')")){
+		try{
+			$this->db->trans_begin();
+			if(!$this->db->query("INSERT INTO users (`".implode("`, `", $name_list)."`) VALUES ('".implode("', '", $value_list)."')")){
+				$this->db->trans_rollback();
+				return false;
+			}
+			$insert_id = $this->db->insert_id();
+			if($insert_id <= 0){
+				$this->db->trans_rollback();
+				return false;
+			}
+			$parents = $this->get_ancestors($prop['parent']);
+			$p_id = array();
+			foreach($parents as $p){
+				array_push($p_id, $p['users_id']);
+			}
+			$sql = "UPDATE users SET children=children + 1 WHERE users_id IN (".implode(",", $p_id).")";
+			if(!$this->db->query($sql)){
+				$this->db->trans_rollback();
+				return false;
+			}
+			if($this->db->affected_rows() != count($p_id)){
+				$this->db->trans_rollback();
+				return false;
+			}
+			$this->db->trans_commit();
+		}
+		catch(Exception $e){
+			$this->db->trans_rollback();
 			return false;
 		}
-		$insert_id = $this->db->insert_id();
-		return $insert_id > 0 ? $insert_id : false;
+
+		return $insert_id;
 	}
 	
 	public function signup($email, $password, $first_name, $last_name, $phone_number, $address, $city, $state, $zip_code){
@@ -324,6 +396,23 @@ class User_model extends Base_model{
 	
 	public function delete_prospect($ids = array()){
 		$sql = "DELETE FROM prospects WHERE prospects_id IN ('".implode("','", $ids)."')";
+		return $this->db->query($sql);
+	}
+	
+	public function get_ancestors($user_id){
+		$sql = "SELECT T2.users_id, T2.parent
+			FROM (
+				SELECT
+					@r AS _id,
+					(SELECT @r := parent FROM users WHERE users_id = _id) AS parent,
+					@l := @l + 1 AS lvl
+				FROM
+					(SELECT @r := $user_id, @l := 0) vars,
+					users h
+				WHERE @r <> 0) T1
+			JOIN users T2
+			ON T1._id = T2.users_id
+			ORDER BY T1.lvl DESC";
 		return $this->db->query($sql);
 	}
 }

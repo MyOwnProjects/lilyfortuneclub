@@ -550,7 +550,7 @@ class Team extends Smd_Controller {
 						),
 					);
 					break;
-				case 'upline':
+				case 'parent':
 					$items = array(
 						array(
 							'label' => 'Upline',
@@ -600,7 +600,7 @@ class Team extends Smd_Controller {
 					}
 					break;
 				case 'address':
-				case 'upline':
+				case 'parent':
 				case 'name':
 				case 'date_of_birth':
 				case 'grade':
