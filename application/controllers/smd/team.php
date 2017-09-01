@@ -411,7 +411,7 @@ class Team extends Smd_Controller {
 			foreach($result as $r){
 				$t = $r['grade'];
 				$t .= ", ".($r['status'] == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>');
-				$t .= ", ".($r['count'] == 0 ? '<span class="text-danger">No downline</span>' : '<span class="text-success">'.$r['count'].' direct downline</span>');
+				$t .= ", ".($r['count'] == 0 ? '<span class="text-danger">No downline</span>' : '<span class="text-success">'.$r['children'].' downline , '.$r['count'].' direct downline</span>');
 				
 				if(isset($user_id)){
 					$url = base_url().'smd/team/member/'.$r['users_id'];
