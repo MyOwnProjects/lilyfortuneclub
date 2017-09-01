@@ -11,7 +11,7 @@
 				<label for="preference-be">Both of the Above</label>
 				<input type="radio" name="preference" id="preference-be" value="BE" required>
 			</fieldset>
-			<input type="submit" data-inline="true" value="Submit">
+			<button type="submit" class="ui-btn ui-corner-all btn-1">Update</button>
 		</form>
 	</div>
 </div>

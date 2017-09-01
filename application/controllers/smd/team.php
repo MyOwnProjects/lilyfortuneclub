@@ -129,6 +129,7 @@ class Team extends Smd_Controller {
 				'label' => 'Upline',
 				'name' => 'parent',
 				'tag' => 'select',
+				'class' => 'selectpicker',
 				'options' => $upline_opt
 			),
 			array(
