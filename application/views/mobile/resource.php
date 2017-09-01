@@ -31,7 +31,7 @@ function load_resource(language){
 				for(var i = 0; i < data.length; ++i){
 					var content_wrapper = $('<div>').append(data[i]['content']);
 					var $_li = $('<li>').addClass("clearfix").addClass("ui-li-static").addClass("ui-body-inherit");
-					var $_a = $('<a>').attr('href', '<?php echo base_url();?>resource/item/' + data[i]['url_id']).addClass('nondec').attr('data-transition', 'slide').appendTo($_li);
+					var $_a = $('<a>').attr('target', '_blank').attr('href', '<?php echo base_url();?>resource/item/' + data[i]['url_id']).addClass('nondec').attr('data-transition', 'slide').appendTo($_li);
 					
 					var img_wrappers = content_wrapper.children('.content-image');
 					if(img_wrappers.length > 0){
