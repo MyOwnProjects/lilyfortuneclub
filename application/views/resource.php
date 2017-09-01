@@ -81,5 +81,5 @@ function get_resource_list(lan){
 	});
 }
 
-get_resource_list('EN');
+get_resource_list($('input[name=language]').val());
 </script>

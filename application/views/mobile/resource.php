@@ -59,7 +59,7 @@ function load_resource(language){
 	});
 }
 $(document).on("pageshow","#resource-list",function(){
-	load_resource('EN');
+	load_resource($('input[name=language]').val());
 });
 
 $('input[name=language]').change(function(){
