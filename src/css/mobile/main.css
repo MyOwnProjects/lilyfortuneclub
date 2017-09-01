@@ -50,3 +50,5 @@ a.nondec{color:#000 !important;text-decoration:none;font-weight:normal}
 .csv-output tr:first-child td, .csv-output tr td:first-child{background:#d5d5d5}
 .csv-output tr:first-child td{text-align:center}
 .youtube-thumb{display:none}
+
+fieldset label, fieldset label:before, fieldset label:after{box-sizing:content-box !important}
