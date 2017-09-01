@@ -50,8 +50,9 @@ $half_count = floor($item_count / 2 - 0.5);
 			<?php
 			}
 			else if($item['tag'] == 'select'){
+				$add_class = array_key_exists('class', $item) ? $item['class'] : '';
 			?>
-				<select class="form-control dialog-edit-field" id="<?php echo $item['name'];?>" name="<?php echo $item['name'];?>">
+				<select class="form-control dialog-edit-field <?php echo $add_class;?>" id="<?php echo $item['name'];?>" name="<?php echo $item['name'];?>">
 					<?php
 					if(array_key_exists('optgroups', $item)){
 						foreach($item['optgroups'] as $group){
@@ -174,5 +175,7 @@ $half_count = floor($item_count / 2 - 0.5);
 		});
 	});*/
 }(jQuery));
-
+$(document).ready(function(){
+	$('.selectpicker').attr('data-live-search', 'true').selectpicker();
+});
 </script>

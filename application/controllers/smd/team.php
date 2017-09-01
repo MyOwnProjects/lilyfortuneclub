@@ -555,6 +555,7 @@ class Team extends Smd_Controller {
 						array(
 							'label' => 'Upline',
 							'name' => 'parent',
+							'class' => 'selectpicker',
 							'tag' => 'select',
 							'required' => true,
 							'value' => $result[0]['status'],
@@ -564,6 +565,21 @@ class Team extends Smd_Controller {
 					break;
 				//case 'SMD':
 				//	break;
+				case 'preference':
+					$items = array(
+						array(
+							'label' => 'Prefernce',
+							'name' => 'preference',
+							'tag' => 'select',
+							'value' => $result[0]['preference'],
+							'options' => array(
+								array('value' => 'E', 'text' => 'Learning More Financial Solution for My Family'),
+								array('value' => 'B', 'text' => 'Starting a business/Career'),
+								array('value' => 'BE', 'text' => 'Both of the Above'),
+							)
+						)
+					);
+					break;
 				case 'nick_name':
 				case 'email':
 				case 'username':

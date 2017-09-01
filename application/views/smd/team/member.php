@@ -16,7 +16,16 @@ if(!$member){
 				if(in_array($name, array('users_id', 'reset_token', 'smd', 'street', 'city', 'state', 'zipcode', 'first_name', 'last_name'))) continue;
 			?>
 			<li class="list-group-item clearfix">
-				<div class="pull-left" style="font-weight:bold;text-transform:capitalize;width:130px;margin-right:5px;text-align:right"><?php echo str_replace('_', ' ', $name);?>:</div>
+				<div class="pull-left" style="font-weight:bold;text-transform:capitalize;width:130px;margin-right:5px;text-align:right">
+					<?php
+					if($name == 'parent'){
+						echo 'Upline';
+					}
+					else{
+						echo str_replace('_', ' ', $name);
+					}
+					?>:
+				</div>
 				<div class="value pull-left">
 					<?php 
 					if($name == 'status'){
@@ -65,3 +74,7 @@ if(!$member){
 	</div>
 </div>
 </div>
+<script>
+$(document).ready(function(){
+});
+</script>

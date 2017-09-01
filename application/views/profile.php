@@ -28,13 +28,13 @@
 					<div><label>Preference:</label></div>
 					<div>
 						<div class="radio" style="margin-top:0 !important;">
-							<label><input type="radio" name="preference" value="E" <?php echo $user['preference'] == 'E' ? 'checked' : '';?>>Learn knowledge</label>
+							<label><input type="radio" name="preference" value="E" <?php echo $user['preference'] == 'E' ? 'checked' : '';?>>Learning More Financial Solution for My Family</label>
 						</div>
 						<div class="radio">
-							<label><input type="radio" name="preference" value="B" <?php echo $user['preference'] == 'B' ? 'checked' : '';?>>Do business</label>
+							<label><input type="radio" name="preference" value="B" <?php echo $user['preference'] == 'B' ? 'checked' : '';?>>Starting a business/Career</label>
 						</div>
 						<div class="radio disabled">
-							<label><input type="radio" name="preference" value="BE" <?php echo $user['preference'] == 'BE' ? 'checked' : '';?>>Both</label>
+							<label><input type="radio" name="preference" value="BE" <?php echo $user['preference'] == 'BE' ? 'checked' : '';?>>Both of the Above</label>
 						</div>
 					</div>
 				</li>

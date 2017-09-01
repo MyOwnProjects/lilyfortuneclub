@@ -22,7 +22,7 @@ $(document).ready(function(){
 							callback: function() {
 								Dialog.modal.ajaxLoad(function(){
 									var data = {};
-									$('.dialog-edit-field').each(function(){
+									$('.dialog-edit-field:not(div)').each(function(){
 										var $_this = $(this);
 										data[$_this.attr('name')] = $_this.val().trim();
 									});
