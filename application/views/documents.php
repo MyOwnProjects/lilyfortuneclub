@@ -5,7 +5,8 @@ ul.doc-list li{border-top:1px solid #efefef}
 .doc-icon{float:left;font-size:60px;line-height:60px;height:60px;margin-right:20px}
 .doc-type{float:right;margin-left:20px;width:100px;text-align:center;line-height:60px}
 .doc-text{overflow:hidden}
-.doc-subject{margin-bottom:10px;height:18px;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-subject{margin-bottom:6px;height:22px;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-subject{text-decoration:none}
 .doc-abstract{line-height:16px;height:32px;}
 </style>
 <div class="wrapper-900">
