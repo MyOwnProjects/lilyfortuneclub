@@ -181,7 +181,11 @@ class Business extends Account_base_controller {
 			),
 			array(
 				'subject' => 'I heard Negative Things about WFG',
-				'text' => "<p>That's not uncommon. Have you been to a restaurant that you like and one time the waiter/waitress had a bad attitude and the experience wasn't as good as before? Has that ever happened to you? wfa....That’s probably what happened here, You might’ve run into someone who wasn’t good or didn’t have the right attitude</p>"
+				'text' => "<p>That's not uncommon. Have you been to a restaurant that you like and one time the waiter/waitress had a bad attitude and the experience wasn't as good as before? Has that ever happened to you? wfa....That’s probably what happened here, You might’ve run into someone who wasn’t good or didn’t have the right attitude.</p>"
+			),
+			array(
+				'subject' => 'How to handle negtives for WFG history',
+				'text' => "<p>Hi xxx, we have some detailed material but in general my common sense told me if two hundreds big financial provider companies want to do business with WFG, they have done their du diligence, besides Aegon and Transmaerica are hundreds years old too financial giants in the world, if they agreed to acquire WFG many years ago, they have done their researches as well. Is our research capability better than Ageon, Transamerica and 200 big financial firms combined? Of course, each office is independently operated like franchise, so they need to be lucky to find a top rated office like ours. </p>"
 			)
 		);
 		$text_invitation_scripts = array(
