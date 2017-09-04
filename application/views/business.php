@@ -24,7 +24,7 @@ blockquote{font-size:14px;margin-left:10px}
 <div style="margin:0 auto;max-width:800px;padding:20px 0 80px 0;">
 	<div class="row" style="margin-bottom:20px">
 		<h2 class="text-center">Startup Your WFG Business</h2>
-		<div class="text-center" style="font-size:16px"><b>Critical:</b> The best approach is to <a href="<?php echo base_url();?>seminar">go to training class and field training</a>!</div>
+		<div class="text-center" style="font-size:16px"><b>Critical:</b> The best approach is to <a href="<?php echo base_url();?>seminar" target="_blank">go to training class and field training</a>!</div>
 	</div>
 	
 	<ul class="nav nav-tabs" id="top-tab">
