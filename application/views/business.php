@@ -253,6 +253,8 @@ blockquote{font-size:14px;margin-left:10px}
 									<br/>
 									<h5><strong>I heard Negative Things about WFG </strong></h5>
 									<p>That's not uncommon. Have you been to a restaurant that you like and one time the waiter/waitress had a bad attitude and the experience wasn't as good as before? Has that ever happened to you? wfa....That’s probably what happened here, You might’ve run into someone who wasn’t good or didn’t have the right attitude.</p>
+									<h5><strong>How to handle negtives for WFG history </strong></h5>
+									<p>Hi xxx, we have some detailed material but in general my common sense told me if two hundreds big financial provider companies want to do business with WFG, they have done their du diligence, besides Aegon and Transmaerica are hundreds years old too financial giants in the world, if they agreed to acquire WFG many years ago, they have done their researches as well. Is our research capability better than Ageon, Transamerica and 200 big financial firms combined? Of course, each office is independently operated like franchise, so they need to be lucky to find a top rated office like ours.</p>
 									<br/>
 								</div>
 							</div>
