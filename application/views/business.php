@@ -78,7 +78,7 @@ blockquote{font-size:14px;margin-left:10px}
 
 				<ul class="list1">
 					<li>
-						Invite through phone <span><img src="<?php echo base_url();?>src/img/telephone.svg" style="width:20px;height:20px"></span>.<a href="javascript:void(0)" id="script1">. Invitation scripts</a>, <a href="javascript:void(0)" id="script2">中文示例</a> and <a href="javascript:void(0)" id="script3">Handling Objection</a>
+						Invite through phone <span><img src="<?php echo base_url();?>src/img/telephone.svg" style="width:20px;height:20px"></span>. <a href="javascript:void(0)" id="script1">Invitation scripts</a>, <a href="javascript:void(0)" id="script2">中文示例</a> and <a href="javascript:void(0)" id="script3">Handling Objection</a>
 					</li>
 					<li>
 						Approach by <a href="javascript:void(0)" id="text-script1">sms text <span><img src="<?php echo base_url();?>src/img/email-filled-closed-envelope.svg" style="width:20px;height:20px"></span> or wechat <span><img src="<?php echo base_url();?>src/img/wechat.svg" style="width:20px;height:20px"></span></a>. <a href="javascript:void(0)" id="text-script2">中文示例</a>
