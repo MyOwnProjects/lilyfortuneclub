@@ -29,10 +29,10 @@
 		<div class="pull-right">
 			<form>
 				<label class="radio-inline">
-					<input type="radio" name="language" value="EN" checked>English
+					<input type="radio" name="language" value="EN" <?php echo $language == 'EN' ? 'checked' : ''?>>English
 				</label>
 				<label class="radio-inline">
-					<input type="radio" name="language" value="CN">中文
+					<input type="radio" name="language" value="CN" <?php echo $language == 'CN' ? 'checked' : ''?>>中文
 				</label>
 			</form>
 		</div>

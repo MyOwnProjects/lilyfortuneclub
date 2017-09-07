@@ -11,8 +11,10 @@ class Resource extends Base_Controller {
 	{
 		//$this->load_view('resource/index');
 		//return;
+		$language = $this->input->get('language');
+		$language = $language == 'CN' ? 'CN' : 'EN';
 		$result = $this->resource_model->get_items("access = 0");
-		$this->load_view('resource', array('resource_list' => $result));
+		$this->load_view('resource', array('resource_list' => $result, 'language' => $language));
 	}
 	
 	public function get_list(){

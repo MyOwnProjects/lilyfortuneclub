@@ -6,9 +6,9 @@
 			<div class="ui-field-contain">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<label for="language-en">English</label>
-					<input type="radio" name="language" id="language-en" value="EN" data-mini="true" checked>
+					<input type="radio" name="language" id="language-en" value="EN" data-mini="true" <?php echo $language == 'EN' ? 'checked' : ''?>>
 					<label for="language-cn">中文</label>
-					<input type="radio" name="language" id="language-cn" value="CN" data-mini="true">
+					<input type="radio" name="language" id="language-cn" value="CN" data-mini="true" <?php echo $language == 'CN' ? 'checked' : ''?>>
 				</fieldset>
 			</div>		
 		</form>
