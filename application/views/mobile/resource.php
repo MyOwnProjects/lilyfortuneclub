@@ -62,7 +62,7 @@ $(document).on("pageshow","#resource-list",function(){
 	load_resource($('input[name=language]').val());
 });
 
-$('input[name=language]').change(function(){
+$('input[name=language]:checked').change(function(){
 	load_resource($(this).val());
 });
 </script>

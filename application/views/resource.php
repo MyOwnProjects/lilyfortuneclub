@@ -81,5 +81,5 @@ function get_resource_list(lan){
 	});
 }
 
-get_resource_list($('input[name=language]').val());
+get_resource_list($('input[name=language]:checked').val());
 </script>
