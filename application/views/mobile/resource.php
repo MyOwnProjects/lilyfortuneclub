@@ -59,10 +59,10 @@ function load_resource(language){
 	});
 }
 $(document).on("pageshow","#resource-list",function(){
-	load_resource($('input[name=language]').val());
+	load_resource($('input[name=language]:checked').val());
 });
 
-$('input[name=language]:checked').change(function(){
+$('input[name=language]').change(function(){
 	load_resource($(this).val());
 });
 </script>
