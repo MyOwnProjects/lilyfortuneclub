@@ -89,6 +89,15 @@
 										</select>
 									</div>
 								</div>
+								<div class="col-lg-2 col-md-3 col-sm-3">
+									<div class="form-group">
+										<label>Floor and caps?</label>
+										<select class="submit-field form-control input-sm" id="floor-caps">
+											<option value="Y">Yes</option>
+											<option value="N" selected>No</option>
+										</select>
+									</div>
+								</div>
 							</div>
 						</fieldset>
 						<fieldset>
@@ -307,10 +316,13 @@ function illustration_post(data){
 				}
 			}
 			var tr = $('<tr class="button">').appendTo(tbody);
-			var btn = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').html('Recalculate').click(function(){
+			var btn1 = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').html('Recalculate').click(function(){
 				illustration_recalc();
 			});
-			var td = $('<td>').attr('colspan', '18').append(btn).appendTo(tr);
+			var btn2 = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-success').html('Export').click(function(){
+				illustration_export();
+			});
+			var td = $('<td>').attr('colspan', '18').append(btn1).append('&nbsp;&nbsp;').append(btn2).appendTo(tr);
 		},
 		error: function(){
 		},

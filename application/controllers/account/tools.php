@@ -38,6 +38,7 @@ class Tools extends Account_base_controller {
 		$tax_investment = $this->input->post('tax-investment');
 		$tax_income = $this->input->post('tax-income');
 		$inflation = $this->input->post('inflation');
+		$floor_caps = $this->input->post('floor-caps') == 'Y';
 		$current_age = $this->input->post('current-age');
 		$end_age = $this->input->post('end-age');
 		$total_years = $end_age - $current_age + 1;
@@ -74,6 +75,14 @@ class Tools extends Account_base_controller {
 			}
 			else{
 				$interest = $interest_percent / 100;
+			}
+			if($floor_caps){
+				if($interest < 0.0075){
+					$interest = 0.0075;
+				}
+				else if($interest > 0.135){
+					$interest = 0.135;
+				}
 			}
 			$balance_now_end = $balance_now_begin;
 			$balance_defer_end = $balance_defer_begin;
@@ -139,7 +148,7 @@ class Tools extends Account_base_controller {
 				$age, number_format($balance_now_begin + $balance_defer_begin + $balance_free_begin, 0),
 				number_format($balance_now_begin, 0), number_format($balance_defer_begin, 0), number_format($balance_free_begin, 0), 
 				$age < $retirement_age ? number_format($deposit_tax_now, 0) : 0, $age < $retirement_age ? number_format($deposit_tax_defer, 0) : 0, $age < $retirement_age ? number_format($deposit_tax_free, 0) : 0,
-				$interest_percent.'%', 
+				($interest * 100).'%', 
 				'<input type="number" class="modified-interest" style="width:55px" '.($modified_interest_list && array_key_exists($interest_year, $modified_interest_list) ? 'value="'.$modified_interest_list[$interest_year].'"' : '').'>%',
 				number_format($invest_tax_amount, 0), number_format($income_tax, 0),	
 				$age >= $retirement_age ? number_format($current_living_withdraw, 0) : 0, 
