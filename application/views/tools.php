@@ -7,6 +7,7 @@
 .table-report thead{background:linear-gradient(darkgreen, #5cb85c)}
 .table-report thead td{border:1px solid #fff;color:#fff;text-align:center;padding:5px}
 .table-report tbody td{border:1px solid #e5e5e5;padding:5px}
+.table-report tbody tr:not(.button) td:first-child{text-align:center}
 .table-report tbody tr td:not(:first-child){text-align:right}
 </style>
 	<ul class="breadcrumb" style="border-bottom:1px solid #d5d5d5">
@@ -236,8 +237,10 @@
 							<td rowspan="2">Age</td>
 							<td colspan="4">Year Begin Balance</td>
 							<td colspan="3">Deposit</td>
-							<td rowspan="2">Interest</td>
-							<td colspan="2">Tax</td>
+							<td rowspan="2">History<br/>Interest</td>
+							<td rowspan="2">Modified<br/>Interest</td>
+							<td rowspan="2">Investment<br/>Tax</td>
+							<td rowspan="2">Income<br/>Tax</td>
 							<td colspan="2">Withdraw</td>
 							<td colspan="4">Year End Balance</td>
 						</tr>
@@ -249,8 +252,6 @@
 							<td>Tax Now</td>
 							<td>Tax Defer</td>
 							<td>Tax Free</td>
-							<td>Invest</td>
-							<td>Income</td>
 							<td>Living</td>
 							<td>LTC</td>
 							<td>Tax Now</td>
@@ -282,26 +283,34 @@
 	</div>
 </div>
 <script>
-function illustration_submit(){
+var post_data = {};
+function illustration_post(data){
 	ajax_loading(true);
 	var tbody = $('.table-report tbody');
 	tbody.empty();
-	var data = {};
-	$('#illustration-form .submit-field').each(function(index, obj){
-		data[$(obj).attr('id')] = $(obj).val();
-	});	
 	$.ajax({
 		url: '<?php echo base_url();?>account/tools/illustration_report',
 		method: 'post',
 		data: data,
 		dataType: 'json',
 		success: function(data){
-			for(var i = 0; i < data.length; ++i){
+			if(data['error']){
 				var tr = $('<tr>').appendTo(tbody);
-				for(var j = 0; j < data[i].length; ++j){
-					tr.append('<td>' + data[i][j] + '</td>');
+				tr.append('<td colspan="18" style="text-align:center">' + data['error'] + '</td>');
+				return false;
+			}
+			post_data = data['post'];
+			for(var year in data['data']){
+				var tr = $('<tr>').attr('data-id', year).appendTo(tbody);
+				for(var i = 0; i < data['data'][year].length; ++i){
+					tr.append('<td>' + data['data'][year][i] + '</td>');
 				}
 			}
+			var tr = $('<tr class="button">').appendTo(tbody);
+			var btn = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').html('Recalculate').click(function(){
+				illustration_recalc();
+			});
+			var td = $('<td>').attr('colspan', '18').append(btn).appendTo(tr);
 		},
 		error: function(){
 		},
@@ -309,5 +318,24 @@ function illustration_submit(){
 			ajax_loading(false);
 		}
 	});
+}
+
+function illustration_recalc(){
+	post_data['modified-interest-list'] = {};
+	$('.table-report .modified-interest').each(function(index, obj){
+		var v = parseFloat($(obj).val());
+		if(!isNaN(v)){
+			var year = $(obj).parent().parent().attr('data-id');
+			post_data['modified-interest-list'][year] = v;
+		}
+	});
+	illustration_post(post_data);
+}
+function illustration_submit(){
+	var data = {};
+	$('#illustration-form .submit-field').each(function(index, obj){
+		data[$(obj).attr('id')] = $(obj).val();
+	});	
+	illustration_post(data);
 }
 </script>
