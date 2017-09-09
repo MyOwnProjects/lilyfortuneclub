@@ -100,7 +100,7 @@ class Tools extends Account_base_controller {
 					else{
 						$balance_now_end = 0;
 						$before_tax_withdraw = ($total_withdraw - $balance_free_end - $balance_now_end) / (1 - $tax_income / 100);
-						$income_tax = $before_tax_withdraw - ($total_withdraw - $balance_free_end - $balance_now_end);
+						$income_tax = $before_tax_withdraw * ($tax_income / 100);
 						$balance_defer_end -= $before_tax_withdraw;
 					}
 				}
