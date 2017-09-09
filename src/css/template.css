@@ -43,6 +43,9 @@ footer{display:none}
 }
 
 .youtube-thumb{display:none}
+fieldset{border-radius:3px;border:1px solid #e5e5e5;padding:10px}
+legend{padding:0 10px;font-weight:bold}
+fieldset label{font-weight:normal}
 
 
 
