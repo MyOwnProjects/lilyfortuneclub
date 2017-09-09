@@ -93,16 +93,16 @@ class Tools extends Account_base_controller {
 					$balance_free_end -= $total_withdraw;
 				}
 				else{
-					$balance_free_end = 0;
 					if($total_withdraw - $balance_free_end <= $balance_now_end){
 						$balance_now_end -= $total_withdraw - $balance_free_end;
 					}
 					else{
-						$balance_now_end = 0;
 						$before_tax_withdraw = ($total_withdraw - $balance_free_end - $balance_now_end) / (1 - $tax_income / 100);
 						$income_tax = $before_tax_withdraw * ($tax_income / 100);
 						$balance_defer_end -= $before_tax_withdraw;
+						$balance_now_end = 0;
 					}
+					$balance_free_end = 0;
 				}
 			}
 			
