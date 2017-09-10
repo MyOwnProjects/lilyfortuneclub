@@ -3,15 +3,16 @@ $item_count = isset($items) ? count($items) : 0;
 $half_count = floor($item_count / 2 - 0.5);
 ?>
 <div class="row">
-	<div class="col-lg-<?php echo $item_count > 6 ? '6' : '12';?>">
-		<?php
-		if(isset($items)){
-		foreach($items as $i => $item){
-			if($item['tag'] == 'text'){
-				echo '<p>'.$item['text'].'<p>';
-				continue;
-			}
+	<?php
+	if(isset($items)){
+	foreach($items as $i => $item){
+		if($item['tag'] == 'text'){
+			echo '<p>'.$item['text'].'<p>';
+			continue;
+		}
+			
 		?>
+	<div class="col-lg-<?php echo $item_count > 6 ? '6' : '12';?>">
 		<div class="form-group">
 			<label for="<?php echo is_string($item['name']) ? $item['name'] : '';?>"><?php echo $item['label'];?></label>
 				<?php echo array_key_exists('required', $item) ? '<span class="text-danger">*</span>' : ''; ?>
@@ -120,13 +121,13 @@ $half_count = floor($item_count / 2 - 0.5);
 				</div>
 			<?php
 			}
-		}
 			?>
 		</div>
-	<?php
+	</div>
+		<?php		
+		}
 	if($item_count > 6 && $i == $half_count){
 	?>
-	</div>
 	<div class="col-lg-6">
 	<?php	
 	}

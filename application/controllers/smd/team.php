@@ -84,6 +84,13 @@ class Team extends Smd_Controller {
 				'required' => true,
 			),
 			array(
+				'label' => 'Upline',
+				'name' => 'parent',
+				'tag' => 'select',
+				'class' => 'selectpicker',
+				'options' => $upline_opt
+			),
+			array(
 				'label' => 'First Name',
 				'name' => 'first_name',
 				'tag' => 'input',
@@ -101,11 +108,6 @@ class Team extends Smd_Controller {
 				'tag' => 'input',
 			),
 			array(
-				'label' => 'Email',
-				'name' => 'email',
-				'tag' => 'input',
-			),
-			array(
 				'label' => 'Date of Birth',
 				'name' => 'date_of_birth',
 				'tag' => 'input',
@@ -113,24 +115,9 @@ class Team extends Smd_Controller {
 				'placeholder' => 'YYYY-MM-DD',
 			),
 			array(
-				'label' => 'Grade',
-				'name' => 'grade',
-				'tag' => 'select',
-				'options' => array(
-					array('value' => 'G', 'text' => 'Guest'),
-					array('value' => 'TA', 'text' => 'Trainee Associate'),
-					array('value' => 'A', 'text' => 'Associate'),
-					array('value' => 'SA', 'text' => 'Senior Associate'),
-					array('value' => 'MD', 'text' => 'Margeting Director')
-				),
-				'value' => 'TA',
-			),
-			array(
-				'label' => 'Upline',
-				'name' => 'parent',
-				'tag' => 'select',
-				'class' => 'selectpicker',
-				'options' => $upline_opt
+				'label' => 'Email',
+				'name' => 'email',
+				'tag' => 'input',
 			),
 			array(
 				'label' => 'Phone',
@@ -163,6 +150,19 @@ class Team extends Smd_Controller {
 				'name' => 'country',
 				'tag' => 'input',
 				'value' => 'US'
+			),
+			array(
+				'label' => 'Grade',
+				'name' => 'grade',
+				'tag' => 'select',
+				'options' => array(
+					array('value' => 'G', 'text' => 'Guest'),
+					array('value' => 'TA', 'text' => 'Trainee Associate'),
+					array('value' => 'A', 'text' => 'Associate'),
+					array('value' => 'SA', 'text' => 'Senior Associate'),
+					array('value' => 'MD', 'text' => 'Margeting Director')
+				),
+				'value' => 'TA',
 			),
 		);
 		$this->load->view('smd/add_item', array('items' => $items));
