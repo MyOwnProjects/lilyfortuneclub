@@ -24,7 +24,7 @@ function pop_up(prop){//title, url, param){
 								if(param && param['selected_ids']){
 									param_data['selected_ids'] = param['selected_ids'];
 								}
-								$('.dialog-edit-field').each(function(index, field){
+								$('.dialog-edit-field:not(div)').each(function(index, field){
 									var obj = $(this);
 									var id = obj.attr('id');
 									param_data[id] = obj.val().trim();
@@ -98,7 +98,7 @@ function new_item(prop){//title, url, param){
 								if(param && param['selected_ids']){
 									param_data['selected_ids'] = param['selected_ids'];
 								}
-								$('.dialog-edit-field').each(function(index, field){
+								$('.dialog-edit-field:not(div)').each(function(index, field){
 									var obj = $(this);
 									var id = obj.attr('id');
 									param_data[id] = obj.val().trim();
