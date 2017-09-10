@@ -79,6 +79,7 @@ class Resources extends Smd_Controller {
 			//$content = $this->update_content(trim($this->input->post('content')));
 			$content = update_content(trim($this->input->post('content')), 'src/img/resource');
 			$upload_files = $this->input->post('upload_files');
+			$ext = null;
 			if(!empty($upload_files)){
 				$ext = substr(strrchr($upload_files,'.'),1);
 			}
