@@ -91,6 +91,19 @@ class Team extends Smd_Controller {
 				'options' => $upline_opt
 			),
 			array(
+				'label' => 'Grade',
+				'name' => 'grade',
+				'tag' => 'select',
+				'options' => array(
+					array('value' => 'G', 'text' => 'Guest'),
+					array('value' => 'TA', 'text' => 'Trainee Associate'),
+					array('value' => 'A', 'text' => 'Associate'),
+					array('value' => 'SA', 'text' => 'Senior Associate'),
+					array('value' => 'MD', 'text' => 'Margeting Director')
+				),
+				'value' => 'TA',
+			),
+			array(
 				'label' => 'First Name',
 				'name' => 'first_name',
 				'tag' => 'input',
@@ -150,19 +163,6 @@ class Team extends Smd_Controller {
 				'name' => 'country',
 				'tag' => 'input',
 				'value' => 'US'
-			),
-			array(
-				'label' => 'Grade',
-				'name' => 'grade',
-				'tag' => 'select',
-				'options' => array(
-					array('value' => 'G', 'text' => 'Guest'),
-					array('value' => 'TA', 'text' => 'Trainee Associate'),
-					array('value' => 'A', 'text' => 'Associate'),
-					array('value' => 'SA', 'text' => 'Senior Associate'),
-					array('value' => 'MD', 'text' => 'Margeting Director')
-				),
-				'value' => 'TA',
 			),
 		);
 		$this->load->view('smd/add_item', array('items' => $items));

@@ -1,5 +1,13 @@
 <?php
 $item_count = isset($items) ? count($items) : 0;
+$col_width = 4;
+if($item_count <= 4){
+	$col_width = 12;
+}
+else if($item_count <= 10){
+	$col_width = 6;
+}
+
 $half_count = floor($item_count / 2 - 0.5);
 ?>
 <div class="row">
@@ -12,7 +20,7 @@ $half_count = floor($item_count / 2 - 0.5);
 		}
 			
 		?>
-	<div class="col-lg-<?php echo $item_count > 6 ? '6' : '12';?>">
+	<div class="col-lg-<?php echo $col_width;?>">
 		<div class="form-group">
 			<label for="<?php echo is_string($item['name']) ? $item['name'] : '';?>"><?php echo $item['label'];?></label>
 				<?php echo array_key_exists('required', $item) ? '<span class="text-danger">*</span>' : ''; ?>
@@ -22,7 +30,7 @@ $half_count = floor($item_count / 2 - 0.5);
 				if($item['type'] == 'year_month'){
 			?>
 			<div>
-			<select class="form-control dialog-edit-field" style="display:inline;width:auto" id="<?php echo $item['name']['year'];?>">
+			<select class="form-control input-sm dialog-edit-field" style="display:inline;width:auto" id="<?php echo $item['name']['year'];?>">
 					<?php
 						foreach($item['options']['year'] as $option){
 						?>
@@ -32,7 +40,7 @@ $half_count = floor($item_count / 2 - 0.5);
 					?>
 			</select>
 			/
-			<select class="form-control dialog-edit-field" style="display:inline;width:auto" id="<?php echo $item['name']['month'];?>">
+			<select class="form-control input-sm dialog-edit-field" style="display:inline;width:auto" id="<?php echo $item['name']['month'];?>">
 					<?php
 						foreach($item['options']['month'] as $option){
 						?>
@@ -47,13 +55,13 @@ $half_count = floor($item_count / 2 - 0.5);
 			}
 			else if($item['tag'] == 'textarea'){
 			?>
-			<textarea class="form-control dialog-edit-field" name="<?php echo $item['name'];?>" id="<?php echo $item['name'];?>"><?php echo array_key_exists('value', $item) ? $item['value'] : '';?></textarea>
+			<textarea class="form-control input-sm dialog-edit-field" name="<?php echo $item['name'];?>" id="<?php echo $item['name'];?>"><?php echo array_key_exists('value', $item) ? $item['value'] : '';?></textarea>
 			<?php
 			}
 			else if($item['tag'] == 'select'){
 				$add_class = array_key_exists('class', $item) ? $item['class'] : '';
 			?>
-				<select class="form-control dialog-edit-field <?php echo $add_class;?>" id="<?php echo $item['name'];?>" name="<?php echo $item['name'];?>">
+				<select class="form-control input-sm dialog-edit-field <?php echo $add_class;?>" id="<?php echo $item['name'];?>" name="<?php echo $item['name'];?>">
 					<?php
 					if(array_key_exists('optgroups', $item)){
 						foreach($item['optgroups'] as $group){
@@ -99,7 +107,7 @@ $half_count = floor($item_count / 2 - 0.5);
 				}
 				else{
 			?>
-				<input <?php echo $attributes;?> class="form-control dialog-edit-field" id="<?php echo $item['name'];?>" <?php echo array_key_exists('type', $item) && $item['type'] == 'file' ? 'onchange="selected_files_change(this)"' :''?>>
+				<input <?php echo $attributes;?> class="form-control input-sm dialog-edit-field" id="<?php echo $item['name'];?>" <?php echo array_key_exists('type', $item) && $item['type'] == 'file' ? 'onchange="selected_files_change(this)"' :''?>>
 			<?php
 				}
 			}
