@@ -1,14 +1,18 @@
 <style>
 .tab-content-page{padding:40px 80px}
 .content-page-head{text-align:center;margin-bottom:40px}
+.setting-body .form-group label{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .table-report{border:1px solid darkgreen;overflow-x:auto}
 .table-report table{width:100%;}
 .table-report td{font-size:12px;}
-.table-report thead{background:linear-gradient(darkgreen, #5cb85c)}
+.table-report thead{background:linear-gradient(darkgreen, #5cb85c);border-bottom:1px solid darkgreen}
 .table-report thead td{border:1px solid #fff;color:#fff;text-align:center;padding:5px}
 .table-report tbody td{border:1px solid #e5e5e5;padding:5px}
 .table-report tbody tr:not(.button) td:first-child{text-align:center}
 .table-report tbody tr td:not(:first-child){text-align:right}
+.table-report tbody tr.highlight td{color:darkred}
+.table-report tbody tr td input.modified-interest{width:55px}
+.table-report tbody tr td.disabled{color:#a5a5a5;text-decoration:line-through}
 </style>
 	<ul class="breadcrumb" style="border-bottom:1px solid #d5d5d5">
 		<li><a href="<?php echo base_url();?>account">Account</a></li>
@@ -28,14 +32,14 @@
 		<div id="illustration-page" class="tab-pane fade in active tab-content-page">
 			<div class="panel panel-primary">
 				<div class="panel-heading">Setting<div class="pull-right">[<a href="#setting-body" data-toggle="collapse" style="color:#fff">+/-</a>]</div></div>
-				<div class="panel-body collapse in" id="setting-body">
+				<div class="panel-body collapse in setting-body" id="setting-body">
 			<form id="illustration-form">
 					<fieldset>
 						<legend>Rate</legend>
 							<div class="row">
 								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
-										<label>First year of interest</label> <span class="glyphicon glyphicon-info-sign"></span>
+										<label>First year S&P 500</label>
 										<select class="submit-field form-control input-sm" id="interest-year-start">
 										<?php 
 										foreach($interest_history as $year => $rate){
@@ -95,6 +99,20 @@
 										<select class="submit-field form-control input-sm" id="floor-caps">
 											<option value="Y">Yes</option>
 											<option value="N" selected>No</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-2 col-md-3 col-sm-3">
+									<div class="form-group">
+										<label>Loop year S&P 500</label>
+										<select class="submit-field form-control input-sm" id="loop-year-start">
+										<?php 
+										foreach($interest_history as $year => $rate){
+										?>
+											<option value="<?php echo $year;?>"><?php echo $year.': '.$rate.'%';?></option>
+										<?php
+										}
+										?>	
 										</select>
 									</div>
 								</div>
@@ -276,8 +294,8 @@
 			<div class="report-notes">
 				<h5>Notes</h5>
 				<ul>
-					<li>Living withdraw has 4% of inflation per year.</li>
-					<li>Suppose no deposit after retirement.</li>
+					<li>Living withdraw and LTC withdraw have an percentage inflation per year.</li>
+					<li>Suppose no deposit after retirement age.</li>
 					<li>Living withdraw started only after retirement starts.</li>
 				</ul>
 			</div>
@@ -302,17 +320,22 @@ function illustration_post(data){
 		method: 'post',
 		data: data,
 		dataType: 'json',
-		success: function(data){
-			if(data['error']){
+		success: function(resp){
+			if(resp['error']){
 				var tr = $('<tr>').appendTo(tbody);
-				tr.append('<td colspan="18" style="text-align:center">' + data['error'] + '</td>');
+				tr.append('<td colspan="18" style="text-align:center">' + resp['error'] + '</td>');
 				return false;
 			}
-			post_data = data['post'];
-			for(var year in data['data']){
-				var tr = $('<tr>').attr('data-id', year).appendTo(tbody);
-				for(var i = 0; i < data['data'][year].length; ++i){
-					tr.append('<td>' + data['data'][year][i] + '</td>');
+			$('#setting-body').collapse("hide");
+			post_data = resp['post'];
+			for(var i = 0; i < resp['data'].length; ++i){
+				var data = resp['data'][i]['data'];
+				var tr = $('<tr>').attr('data-id', data[0]).appendTo(tbody);
+				if(data[data.length - 1][0] == '-'){
+					tr.addClass('highlight');
+				}
+				for(var j = 0; j < data.length; ++j){
+					tr.append('<td>' + data[j] + '</td>');
 				}
 			}
 			var tr = $('<tr class="button">').appendTo(tbody);
@@ -323,6 +346,13 @@ function illustration_post(data){
 				illustration_export();
 			});
 			var td = $('<td>').attr('colspan', '18').append(btn1).append('&nbsp;&nbsp;').append(btn2).appendTo(tr);
+			
+			$('input.modified-interest').each(function(index, obj){
+				var $obj = $(obj);
+				if(!isNaN(parseFloat($obj.val()))){
+					$obj.parent().prev().addClass('disabled');
+				}
+			});
 		},
 		error: function(){
 		},

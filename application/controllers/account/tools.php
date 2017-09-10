@@ -39,9 +39,9 @@ class Tools extends Account_base_controller {
 		$tax_income = $this->input->post('tax-income');
 		$inflation = $this->input->post('inflation');
 		$floor_caps = $this->input->post('floor-caps') == 'Y';
+		$loop_year_start = $this->input->post('loop-year-start');
 		$current_age = $this->input->post('current-age');
 		$end_age = $this->input->post('end-age');
-		$total_years = $end_age - $current_age + 1;
 		$retirement_age = $this->input->post('retirement-age');
 		$ltc_age_start = $this->input->post('ltc-age-start');
 		$ltc_years = $this->input->post('ltc-years');
@@ -55,23 +55,23 @@ class Tools extends Account_base_controller {
 		$withdraw_ltc = $this->input->post('withdraw-ltc');
 		$modified_interest_list = $this->input->post('modified-interest-list');
 		
-		$index = array_search($interest_year_start,array_keys($this->interest_history));
-		if(count($this->interest_history) - $index < $total_years){
-			echo json_encode(array('error' => "Error! The number of interest years is less than the total age years."));
-			return;
-		}
+		$k = array_keys($this->interest_history);
+        $last_year = end($k);
 			
 		$balance_now_begin = $balance_tax_now;
 		$balance_defer_begin = $balance_tax_defer;
 		$balance_free_begin = $balance_tax_free;
 		$current_living_withdraw = $withdraw_living;
 		$income_tax = 0;
-		for($age = $current_age; $age < $current_age + $total_years; ++$age){
+		$interest_year = $interest_year_start; 
+		for($age = $current_age; $age <= $end_age; ++$age){
 			$current_living_withdraw *= 1 + $inflation / 100;
-			$interest_year = $age - $current_age + $interest_year_start;
+			if($interest_year > $last_year){
+				$interest_year = $loop_year_start;
+			}
 			$interest_percent = $this->interest_history[$interest_year];
-			if($modified_interest_list && array_key_exists($interest_year, $modified_interest_list)){
-				$interest = $modified_interest_list[$interest_year] / 100;
+			if($modified_interest_list && array_key_exists($age, $modified_interest_list)){
+				$interest = $modified_interest_list[$age] / 100;
 			}
 			else{
 				$interest = $interest_percent / 100;
@@ -115,6 +115,7 @@ class Tools extends Account_base_controller {
 			if($age >= $ltc_age_start && $age < $ltc_age_start + $ltc_years){//LTC
 				//LTC withdraw
 				$total_withdraw += $withdraw_ltc;
+				$withdraw_ltc *= 1 + $inflation / 100;
 			}
 			
 			/*if($age == 70 && $balance_defer_end > 0){
@@ -144,21 +145,25 @@ class Tools extends Account_base_controller {
 				}
 			}
 			
-			$data[$interest_year] = array(
+			$data[] = array(
+				'year' => $interest_year,
+				'data' => array(
 				$age, number_format($balance_now_begin + $balance_defer_begin + $balance_free_begin, 0),
 				number_format($balance_now_begin, 0), number_format($balance_defer_begin, 0), number_format($balance_free_begin, 0), 
 				$age < $retirement_age ? number_format($deposit_tax_now, 0) : 0, $age < $retirement_age ? number_format($deposit_tax_defer, 0) : 0, $age < $retirement_age ? number_format($deposit_tax_free, 0) : 0,
-				($interest * 100).'%', 
-				'<input type="number" class="modified-interest" style="width:55px" '.($modified_interest_list && array_key_exists($interest_year, $modified_interest_list) ? 'value="'.$modified_interest_list[$interest_year].'"' : '').'>%',
+				$interest_percent.'%('.$interest_year.')', 
+				'<input type="number" class="modified-interest" '.($modified_interest_list && array_key_exists($age, $modified_interest_list) ? 'value="'.$modified_interest_list[$age].'"' : '').'>%',
 				number_format($invest_tax_amount, 0), number_format($income_tax, 0),	
 				$age >= $retirement_age ? number_format($current_living_withdraw, 0) : 0, 
 				$age >= $ltc_age_start && $age < $ltc_age_start + $ltc_years ? number_format($withdraw_ltc, 0) : 0,	
 				number_format($balance_now_end, 0), number_format($balance_defer_end, 0), number_format($balance_free_end, 0), 
 				number_format($balance_now_end + $balance_defer_end + $balance_free_end, 0)
+				)
 			);
 			$balance_now_begin = $balance_now_end;
 			$balance_defer_begin = $balance_defer_end;
 			$balance_free_begin = $balance_free_end;
+			++$interest_year;
 		}
 		echo json_encode(array('data' => $data, 'post' => $post));
 	}
