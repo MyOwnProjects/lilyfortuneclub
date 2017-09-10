@@ -78,7 +78,18 @@ class Resources extends Smd_Controller {
 			$source = trim($this->input->post('source'));
 			//$content = $this->update_content(trim($this->input->post('content')));
 			$content = update_content(trim($this->input->post('content')), 'src/img/resource');
-			if($this->resource_model->insert($subject, $source, $content, $top, $language)){
+			$upload_files = $this->input->post('upload_files');
+			if(!empty($upload_files)){
+				$ext = substr(strrchr($upload_files,'.'),1);
+			}
+
+			$id = $this->resource_model->insert($subject, $source, $content, $top, $language, $ext);
+			if($id){
+				if(!empty($upload_files)){
+					$ext = substr(strrchr($upload_files,'.'),1);
+					$file_id = sha1($id).$id;
+					rename(getcwd().'/src/doc/resources/'.$upload_files, getcwd().'/src/doc/resources/'.$file_id.'.'.$ext);
+				}
 				header('location: '.base_url().'smd/resources');
 				exit;
 			}
@@ -143,6 +154,24 @@ class Resources extends Smd_Controller {
 			$this->load->view('smd/add_item', array('items' => $items));
 		}
 	}
+	
+	public function upload_files(){
+		$this->load->library('upload');
+		$uniq_id = uniqid();
+		$dir = getcwd().'/src/doc/resources/';
+		$this->upload->set_upload_path($dir);
+		$this->upload->set_allowed_types('*');
+		if($this->upload->do_upload('ajax-upload-file')){
+			$data = $this->upload->data();
+			$data['final_file_name'] = $uniq_id.'.'.$data['file_name'];
+			rename($dir.$data['file_name'], $dir.$data['final_file_name']);
+			echo json_encode(array('success' => true, 'data' => $data));
+		}
+		else{
+			echo json_encode(array('success' => false, 'error' => $this->upload->display_errors()));
+		}
+	}
+
 }
 
 /* End of file welcome.php */

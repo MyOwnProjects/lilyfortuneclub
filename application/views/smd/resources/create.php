@@ -34,13 +34,30 @@
 		</select>
  		<input class="btn btn-sm btn-success pull-right" type="submit" value="Submit">
 		</div>
-		<div style="position:absolute;top:50px;right:0;bottom:0;left:0;">
+			<div style="padding:10px">
+				<div id="input-file">
+				</div>
+				<input class="dialog-edit-field" type="hidden" id="upload_files" name="upload_files">
+			</div>
+		
+		<div style="position:absolute;top:150px;right:0;bottom:0;left:0;">
 			<textarea class="form-control" name="content" id="resource-content"><?php echo isset($content) ? $content : '';?></textarea>
 		</div>
 	</form>
 </div>
 <script>
+
 (function($){
+	if($('#input-file')){	
+		$('#input-file').ajax_upload('<?php echo base_url();?>smd/resources/upload_files').change(function(files){
+			var file_names = [];
+			for(var i = 0; i < files.length; ++i){
+				file_names.push(files[i]['final_file_name']);
+			}
+			$('#input-file').next().val(file_names);
+		});
+	}
+	
 	var editor = CKEDITOR.replace( 'resource-content', {
 		enterMode: CKEDITOR.ENTER_P, 
 		//extraPlugins: 'autogrow',

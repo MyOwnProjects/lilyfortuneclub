@@ -18,6 +18,7 @@ function simpleUpload(e,l,n){function t(){if("object"==typeof n&&null!==n){if("b
 		var _files = this.files = [];
 		var $_input = null;
 		var $_input_wrapper = $('<div>').appendTo($_this);
+		var $_percent_span = null;
 		var _add_input = function(){
 			$_input = $('<input>').attr('type', 'file').attr('name', 'ajax-upload-file').attr('multiple', true)/*.attr('accept', "image/*")*/.hide().change(function(){
 				_input_change();
@@ -46,16 +47,19 @@ function simpleUpload(e,l,n){function t(){if("object"==typeof n&&null!==n){if("b
 					var $_upload_status_block = $('<div>').addClass('clearfix').css('margin', '2px 0').css('padding', '5px').css('border', '1px solid #d5d5d5').appendTo($_upload_status_block_wrapper);
 					var top = $('<div>').addClass('clearfix').appendTo($_upload_status_block);
 					$('<div>').addClass('pull-right').addClass('clearfix').outerWidth('20px').append('<a href="javascript:void(0)" class="pull-right"><span class="glyphicon glyphicon-remove ajax-upload-file-remove"></span></a>').appendTo(top); 
-					$('<div>').css('overflow', 'hidden').css('white-space', 'nowrap').css('text-overflow', 'ellipsis').append(file['name']).appendTo(top);
+					var $_name_div = $('<div>').css('overflow', 'hidden').css('white-space', 'nowrap').css('text-overflow', 'ellipsis').append('<span>' + file['name'] + '</span>').appendTo(top);
+					$_percent_span = $('<span></span>').appendTo($_name_div);
 					this.progress_bar = $('<div>').addClass('progress-bar').addClass("notransition").css('width', '1%').outerHeight('5px').appendTo($_upload_status_block);
 				},
 
 				progress: function(progress){
 					if(upload_error){
 						$('#uploaded-progress-bar .progress-bar').attr('aria-valuenow', 0).css('width', 0).html(0);
+						$_percent_span.css('color', 'red').html(' - Error');
 					}
 					else{
 						this.progress_bar.css('width', progress + '%');
+						$_percent_span.css('color', 'black').html(' - ' + progress + '%');
 					}
 				},
 

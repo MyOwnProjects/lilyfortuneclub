@@ -27,14 +27,21 @@ class Resource_model extends Base_model{
 		return $this->db->query($sql);
 	}
 	
-	public function insert($subject, $source, $content, $top, $language){
+	public function insert($subject, $source, $content, $top, $language, $file_type){
 		if(empty($source)){
-			$sql= "INSERT INTO resources (subject, content, top, language) VALUES ('".addslashes($subject)."','".addslashes($content)."', '$top', '$language')";
+			$sql= "INSERT INTO resources (subject, content, top, language, file_type) VALUES ('".addslashes($subject)."','".addslashes($content)."', '$top', '$language', ".(empty($file_type) ? "NULL" : "'$file_type'").")";
 		}
 		else{
-			$sql= "INSERT INTO resources (subject, source, content, top, language) VALUES ('".addslashes($subject)."','".addslashes($source)."','".addslashes($content)."', '$top', '$language')";
+			$sql= "INSERT INTO resources (subject, source, content, top, language, file_type) VALUES ('".addslashes($subject)."','".addslashes($source)."','".addslashes($content)."', '$top', '$language', ".(empty($file_type) ? "NULL" : "'$file_type'").")";
 		}
-		return $this->db->query($sql) && $this->db->insert_id() > 0;
+		if(!$this->db->query($sql)){
+			return false;
+		}
+		$insert_id = $this->db->insert_id();
+		if($insert_id <= 0){
+			return false;
+		}
+		return $insert_id;
 	}
 
 	public function update($where, $prop){

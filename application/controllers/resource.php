@@ -31,8 +31,22 @@ class Resource extends Base_Controller {
 			if(sha1($id) == substr($raw_id, 0, 40)){
 				$result = $this->resource_model->get_items("resources_id = '$id' AND access = 0");
 				if(count($result) > 0){
-					$this->load_view('resource_item', array('resource' => $result[0], 'web_title' => $result[0]['subject']));
-					return;
+					$file_type = strtolower($result[0]['file_type']);
+					if(!empty($file_type)){
+						$file = base_url().'src/doc/resources/'.$raw_id.'.'.$file_type;
+						echo $file;exit;
+						if($file_type == 'pdf'){
+							$this->load->view('pdf_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
+						}
+						else if($file_type == 'doc' || $file_type == 'ppt' || $file_type == 'excel'){
+							$this->load->view('doc_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
+						}
+					}
+					else{
+						$this->load_view('resource_item', array('resource' => $result[0], 'web_title' => $result[0]['subject']));
+					}
+				}
+				return;
 					$prev = $this->resource_model->get_prev($id);
 					$next = $this->resource_model->get_next($id);
 					if($this->input->is_ajax_request()){
@@ -48,7 +62,6 @@ class Resource extends Base_Controller {
 						$this->load_view('resource_item', array('resource' => $result[0], 'web_title' => $result[0]['subject']));
 					}
 					return;
-				}
 			}
 		}
 		header('location: '.base_url().'resource');
