@@ -61,11 +61,9 @@ class Tools extends Account_base_controller {
 		$balance_now_begin = $balance_tax_now;
 		$balance_defer_begin = $balance_tax_defer;
 		$balance_free_begin = $balance_tax_free;
-		$current_living_withdraw = $withdraw_living;
 		$income_tax = 0;
 		$interest_year = $interest_year_start; 
 		for($age = $current_age; $age <= $end_age; ++$age){
-			$current_living_withdraw *= 1 + $inflation / 100;
 			if($interest_year > $last_year){
 				$interest_year = $loop_year_start;
 			}
@@ -101,7 +99,7 @@ class Tools extends Account_base_controller {
 				$tax_now_gain = $balance_now_begin * $interest;
 				$tax_defer_gain = $balance_defer_begin * $interest;
 				$tax_free_gain = $balance_free_begin * $interest;
-				$total_withdraw += $current_living_withdraw;
+				$total_withdraw += $withdraw_living;
 			}
 			
 			if($tax_now_gain >= 0){
@@ -115,7 +113,6 @@ class Tools extends Account_base_controller {
 			if($age >= $ltc_age_start && $age < $ltc_age_start + $ltc_years){//LTC
 				//LTC withdraw
 				$total_withdraw += $withdraw_ltc;
-				$withdraw_ltc *= 1 + $inflation / 100;
 			}
 			
 			/*if($age == 70 && $balance_defer_end > 0){
@@ -151,10 +148,10 @@ class Tools extends Account_base_controller {
 				$age, number_format($balance_now_begin + $balance_defer_begin + $balance_free_begin, 0),
 				number_format($balance_now_begin, 0), number_format($balance_defer_begin, 0), number_format($balance_free_begin, 0), 
 				$age < $retirement_age ? number_format($deposit_tax_now, 0) : 0, $age < $retirement_age ? number_format($deposit_tax_defer, 0) : 0, $age < $retirement_age ? number_format($deposit_tax_free, 0) : 0,
-				$interest_percent.'%('.$interest_year.')', 
+				($interest * 100).'% ('.$interest_year.')', 
 				'<input type="number" class="modified-interest" '.($modified_interest_list && array_key_exists($age, $modified_interest_list) ? 'value="'.$modified_interest_list[$age].'"' : '').'>%',
 				number_format($invest_tax_amount, 0), number_format($income_tax, 0),	
-				$age >= $retirement_age ? number_format($current_living_withdraw, 0) : 0, 
+				$age >= $retirement_age ? number_format($withdraw_living, 0) : 0, 
 				$age >= $ltc_age_start && $age < $ltc_age_start + $ltc_years ? number_format($withdraw_ltc, 0) : 0,	
 				number_format($balance_now_end, 0), number_format($balance_defer_end, 0), number_format($balance_free_end, 0), 
 				number_format($balance_now_end + $balance_defer_end + $balance_free_end, 0)
@@ -163,6 +160,8 @@ class Tools extends Account_base_controller {
 			$balance_now_begin = $balance_now_end;
 			$balance_defer_begin = $balance_defer_end;
 			$balance_free_begin = $balance_free_end;
+			$withdraw_living *= 1 + $inflation / 100;
+			$withdraw_ltc *= 1 + $inflation / 100;
 			++$interest_year;
 		}
 		echo json_encode(array('data' => $data, 'post' => $post));

@@ -82,15 +82,9 @@
 								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>Annual inflation</label>
-										<select class="submit-field form-control input-sm" id="inflation">
-										<?php 
-										for($i = 1; $i <= 100; $i++){
-										?>
-											<option value="<?php echo $i;?>" <?php echo $i == 4 ? 'selected' : ''?>><?php echo $i;?>%</option>
-										<?php
-										}
-										?>	
-										</select>
+										<div class="clearfix">
+											<div class="pull-right" style="line-height:30px">%</div><div style="overflow:hidden"><input type="number" class="submit-field form-control input-sm" min="0" max="20" id="inflation" value="3.5"></div>
+										</div>
 									</div>
 								</div>
 								<div class="col-lg-2 col-md-3 col-sm-3">
@@ -239,14 +233,14 @@
 								</div>
 								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
-										<label>Withdraw living</label>
+										<label>Current living expense</label>
 										<input type="number" class="submit-field form-control input-sm" id="withdraw-living" value="36000">
 									</div>
 								</div>
 								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
-										<label>Withdraw LTC</label>
-										<input type="number" class="submit-field form-control input-sm" id="withdraw-ltc" value="190000">
+										<label>Current LTC expense</label>
+										<input type="number" class="submit-field form-control input-sm" id="withdraw-ltc" value="130000">
 									</div>
 								</div>
 							</div>
