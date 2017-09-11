@@ -53,7 +53,7 @@
 								</div>
 								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
-										<label>Investment Tax</label>
+										<label>Investment gain tax</label>
 										<select class="submit-field form-control input-sm" id="tax-investment">
 										<?php 
 										for($i = 5; $i <= 100; $i += 5){
@@ -67,7 +67,7 @@
 								</div>
 								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
-										<label>Income Tax</label>
+										<label>Income tax</label>
 										<select class="submit-field form-control input-sm" id="tax-income">
 										<?php 
 										for($i = 5; $i <= 100; $i += 5){
