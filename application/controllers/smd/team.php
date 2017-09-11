@@ -66,17 +66,6 @@ class Team extends Smd_Controller {
 			$prop['smd'] = $this->user['users_id'];
 			$prop['username']= $prop['membership_code'];
 			$prop['password']= sha1(strtoupper(trim($prop['membership_code']).trim($prop['last_name'])));
-			$address = $prop['address'];
-			$ar = explode("\n", $address);
-			$prop['street'] = trim($ar[0]);
-			$ar = explode(',', trim($ar[1]));
-			$prop['city'] = trim($ar[0]);
-			$ar = explode('-', trim($ar[1]));
-			$prop['country'] = trim($ar[1]);
-			$ar = explode(' ', trim($ar[0]));
-			$prop['state'] = trim($ar[0]);
-			$prop['zipcode'] = trim($ar[1]);
-			unset($prop['address']);
 			$res = $this->user_model->new_user($prop);
 			if($res){
 				echo json_encode(array('success' => true));
@@ -89,6 +78,10 @@ class Team extends Smd_Controller {
 		$upline_opt = $this->_get_all_smd_members($this->user['users_id']);
 		$items = array(
 			array(
+				'name' => 'auto-fill',
+				'fill_type' => 'team_member',
+			),
+			array(
 				'label' => 'Membership Code',
 				'name' => 'membership_code',
 				'tag' => 'input',
@@ -100,6 +93,19 @@ class Team extends Smd_Controller {
 				'tag' => 'select',
 				'class' => 'selectpicker',
 				'options' => $upline_opt
+			),
+			array(
+				'label' => 'Grade',
+				'name' => 'grade',
+				'tag' => 'select',
+				'options' => array(
+					array('value' => 'G', 'text' => 'Guest'),
+					array('value' => 'TA', 'text' => 'Trainee Associate'),
+					array('value' => 'A', 'text' => 'Associate'),
+					array('value' => 'SA', 'text' => 'Senior Associate'),
+					array('value' => 'MD', 'text' => 'Margeting Director')
+				),
+				'value' => 'TA',
 			),
 			array(
 				'label' => 'First Name',
@@ -119,17 +125,16 @@ class Team extends Smd_Controller {
 				'tag' => 'input',
 			),
 			array(
+				'label' => 'Email',
+				'name' => 'email',
+				'tag' => 'input',
+			),
+			array(
 				'label' => 'Date of Birth',
 				'name' => 'date_of_birth',
 				'tag' => 'input',
 				'type' => 'date',
-				'value' => '1900-01-01',
 				'placeholder' => 'YYYY-MM-DD',
-			),
-			array(
-				'label' => 'Email',
-				'name' => 'email',
-				'tag' => 'input',
 			),
 			array(
 				'label' => 'Phone',
@@ -137,22 +142,31 @@ class Team extends Smd_Controller {
 				'tag' => 'input',
 			),
 			array(
-				'label' => 'Grade',
-				'name' => 'grade',
-				'tag' => 'select',
-				'options' => array(
-					array('value' => 'G', 'text' => 'Guest'),
-					array('value' => 'TA', 'text' => 'Trainee Associate'),
-					array('value' => 'A', 'text' => 'Associate'),
-					array('value' => 'SA', 'text' => 'Senior Associate'),
-					array('value' => 'MD', 'text' => 'Margeting Director')
-				),
-				'value' => 'TA',
+				'label' => 'Street',
+				'name' => 'street',
+				'tag' => 'input',
 			),
 			array(
-				'label' => 'Address',
-				'name' => 'address',
-				'tag' => 'textarea',
+				'label' => 'City',
+				'name' => 'city',
+				'tag' => 'input',
+			),
+			array(
+				'label' => 'State',
+				'name' => 'state',
+				'tag' => 'input',
+				'value' => 'CA'
+			),
+			array(
+				'label' => 'Zipcode',
+				'name' => 'zipcode',
+				'tag' => 'input',
+			),
+			array(
+				'label' => 'Country',
+				'name' => 'country',
+				'tag' => 'input',
+				'value' => 'US'
 			),
 		);
 		$this->load->view('smd/add_item', array('items' => $items));

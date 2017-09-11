@@ -14,11 +14,26 @@ $half_count = floor($item_count / 2 - 0.5);
 	<?php
 	if(isset($items)){
 	foreach($items as $i => $item){
+		$is_auto_fill = $item['name'] == 'auto-fill';
+		if($is_auto_fill){
+	?>
+		<div class="col-lg-12">
+			<div class="form-group">
+				<textarea id="auto-fill" fill-type="<?php echo $item['fill_type'];?>" class="form-control control-sm"></textarea>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="form-group">
+				<span class="btn btn-sm btn-primary" id="auto-fill-btn">Fill</span>
+			</div>
+		</div>
+	<?php
+	continue;
+		}
 		if($item['tag'] == 'text'){
 			echo '<p>'.$item['text'].'<p>';
 			continue;
 		}
-			
 		?>
 	<div class="col-lg-<?php echo $col_width;?>">
 		<div class="form-group">
@@ -186,5 +201,72 @@ $half_count = floor($item_count / 2 - 0.5);
 }(jQuery));
 $(document).ready(function(){
 	$('.selectpicker').attr('data-live-search', 'true').selectpicker();
+	$('#auto-fill-btn').click(function(){
+		var fill_type = $('#auto-fill').attr('fill-type');
+		if(fill_type == 'team_member'){
+			var content_array = $('#auto-fill').val().trim().split('\n');
+			var name = null;
+			var phone_list = [];
+			var address = [];
+			for(var i = 0; i < content_array.length; ++i){
+				var line = content_array[i].trim();
+				if(line.length > 0){
+					if(line[line.length - 1] == ':'){
+						name = line.substr(0, line.length - 1);
+					}
+					else{
+						switch(name){
+							case 'Name':
+								$('#membership_code').val(line.substr(line.length - 6, 5)); 
+								line = line.substr(0, line.length - 7).trim();
+								var pos = line.lastIndexOf(' ');
+								$('#first_name').val(line.substr(0, pos));
+								$('#last_name').val(line.substr(pos + 1, line.length - pos));
+								break;
+							case 'DOB':
+								var date = new Date(line + ' 2017');
+								var date_str = '1900-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+								$('#date_of_birth').val(date_str);
+								break;
+							case 'Home Phone':
+								phone_list.push('H:' + line);
+								break;
+							case 'Business Phone':
+								phone_list.push('B:' + line);
+								break;
+							case 'Mobile Phone':
+								phone_list.push('M:' + line);
+								break;
+							case 'Personal Email':
+								$('#email').val(line);
+								break;
+							case 'Home Address':
+								address.push(line);
+								break;
+							case 'Recruiter':
+								$('#parent option').each(function(index, obj){
+									var v = $(obj).html().trim().toLowerCase();
+									if(v == line.toLowerCase()){
+										$('#parent').val($(obj).val()).selectpicker('refresh');
+										return false;
+									}
+								});
+								break;
+						}
+					}
+				}
+			}
+			
+			$('#street').val(address[0]);
+			var ar = address[1].split(',');
+			$('#city').val(ar[0].trim());
+			ar = ar[1].split('-');
+			$('#country').val(ar[1].trim());
+			ar = ar[0].trim().split(' ');
+			$('#state').val(ar[0].trim());
+			$('#zipcode').val(ar[1].trim());
+			$('#phone').val(phone_list.join(','));
+		}
+	});
 });
 </script>
