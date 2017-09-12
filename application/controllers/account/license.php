@@ -67,7 +67,7 @@ class License extends Account_base_controller {
 						'subject' => "License Application",
 						'image_file_name'=> 'license-application',
 						'steps' => array(
-							'Go to <a href="www.insurance.ca.gov">www.insurance.ca.gov</a>, type <i>flash</i>in the search box at the top right of he page, then select <i>flash</i> in the dropbox, and click the <i>Search</i> button.',
+							'Go to <a href="https://www.insurance.ca.gov" target="_blank">www.insurance.ca.gov</a>, type <i>flash</i>in the search box at the top right of he page, then select <i>flash</i> in the dropbox, and click the <i>Search</i> button.',
 							'In the search result, click the <i>Flash Application</i> link.',
 							'Click the <i>Fast Licensing Application Service is Here (Flash)</i> link.',
 							'Click <i>Start New Application</i> link.',
