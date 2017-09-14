@@ -34,8 +34,16 @@
 		foreach($instruct['steps'] as $i => $s){
 		?>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<div style="padding:0 20px">
-				<h4 class="text-left"><?php echo ($i + 1).'. '.$s;?></h4>
+			<div style="padding:0 20px" class="clearfix">
+				<div class="pull-left" style="width:30px">
+					<h4><?php echo ($i + 1).'.'?></h4>
+				</div>
+				<div style="overflow:hidden">
+					<h4 class="text-left">
+						<?php 
+						echo '<p>'.str_replace('<br/>', '</p><p>', $s).'</p>';
+						?>
+					</h4>
 				<?php 
 				$img = $instruct['image_file_name'].'-'.  str_pad($i + 1, 2, '0', STR_PAD_LEFT).'.png';
 				if(file_exists(getcwd().'/src/img/license/'.$img)){
@@ -46,6 +54,7 @@
 				<?php
 				}
 				?>
+				</div>
 			</div>
 		</div>
 		<?php

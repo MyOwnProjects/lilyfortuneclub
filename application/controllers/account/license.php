@@ -101,6 +101,39 @@ class License extends Account_base_controller {
 							'Download the PDF document, and start to learn.'
 						)
 					)
+				),
+				array(
+					'subject' => 'License Appointment',
+					'url' => base_url().'account/license/appointment',
+					'comment' =>'To sell products through certain product providers, you must be properly appointed.',
+					'instruct' => array(
+						'subject' => "License Appoitment",
+						'image_file_name'=> 'license-appointment',
+						'steps' => array(
+							'Send an email, attached with your license and all CE certificaters with signature, to <i>wfghost@transamerica.com</i> and <i>wfglicenseapps@transamerica.com</i>.',
+							'Sign in to <a href="https://www.mywfg.com" target="_blank">www.mywfg.com</a>, click the <i>MENU</i> at the top right of the screen. Then select <i>Licensing</i> > </i>Appoitments</i>.',
+							'Click <i>Carrier Appointments</i>.',
+							'Let us, by example, select <i>Non-New York Life and Disability</i> carrier with <i>Transamerica PremierLife Insurance Company</i>.<br/>Select <i>Life and Disability Insuarance</i>.',
+							'Click <i>Non-New York Life and Disability Carriers</i>.',
+							'Click <i>Transamerica Premier Life Insuarance Company - TPLIC (P00002)</i>.',
+							'Click <i>Resident</i>.',
+							'Click the link <i>Click here to continue</i>.',
+							'At the bottom of the agreement page, type the date and your name, and then click <i>I Accept</i> button.',
+							'Click <i>Next</i> botton.',
+							'Enter your personal information, and then click <i>Next</i> botton.',
+							'Enter your resisdence address, and then click <i>Next</i> botton.',
+							'Enter your bisuness address, and then click <i>Next</i> botton.',
+							'Finish items in the background check page, and then click <i>Next</i> botton.',
+							'Select the states, and then click <i>Next</i> botton.',
+							'Select the products, and then click <i>Next</i> botton.',
+							'Check the items in acknowledgement page, and then click <i>Next</i> botton.',
+							'Fill additional information, and then click <i>Next</i> botton.',
+							'Click the <i>Review</i> botton on each document.',
+							'In each document review page, click the <i>Apply eSignature</i> botton at the bottom of the page.',
+							'After review the documents,click <i>Submit</i> botton.',
+							'You have finished to appoint with the Transamerica Premier Life Insuarance Company. To appoint with other providres, select other product type/crriers, and fowllow the instruction.',
+						)
+					)
 				));
 		}
 		$this->summary = array(
@@ -157,6 +190,13 @@ class License extends Account_base_controller {
 			exit;
 		}
 		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][3]['instruct']));
+	}
+	public function appointment(){
+		if($this->user['preference'] == 'E'){
+			header('location:'.base_url().'account/license');
+			exit;
+		}
+		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][4]['instruct']));
 	}
 }
 

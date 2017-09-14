@@ -76,5 +76,20 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 block">
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					5. Appoint with with the product providers. 
+				</div>
+				<div class="panel-body clearfix">
+					<div class="block-text-main">
+						<p>Now that you are life licensed, it is time to become appointed with the product providers of your choice so you can begin to offer products and solutions to clients.</p>
+					</div>
+					<div class="text-right">
+						<a class="btn btn btn-danger" href="<?php echo base_url();?>account/license/appointment">Go&nbsp;<span class="glyphicon glyphicon-play-circle"></span></a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
