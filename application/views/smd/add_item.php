@@ -217,8 +217,11 @@ $(document).ready(function(){
 					else{
 						switch(name){
 							case 'Name':
-								$('#membership_code').val(line.substr(line.length - 6, 5)); 
-								line = line.substr(0, line.length - 7).trim();
+								lpos = line.indexOf('(');
+								rpos = line.indexOf(')');
+								code_len = rpos - lpos - 1;
+								$('#membership_code').val(line.substr(line.length - (code_len + 1), code_len)); 
+								line = line.substr(0, line.length - (code_len + 2)).trim();
 								var pos = line.lastIndexOf(' ');
 								$('#first_name').val(line.substr(0, pos));
 								$('#last_name').val(line.substr(pos + 1, line.length - pos));
