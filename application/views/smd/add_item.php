@@ -223,6 +223,9 @@ $(document).ready(function(){
 								$('#first_name').val(line.substr(0, pos));
 								$('#last_name').val(line.substr(pos + 1, line.length - pos));
 								break;
+							case 'Level':
+								$('#grade').val(line);
+								break;
 							case 'DOB':
 								var date = new Date(line + ' 2017');
 								var date_str = '1900-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
