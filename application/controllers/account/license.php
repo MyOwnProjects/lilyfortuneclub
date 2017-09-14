@@ -122,7 +122,7 @@ class License extends Account_base_controller {
 							'Click <i>Next</i> botton.',
 							'Enter your personal information, and then click <i>Next</i> botton.',
 							'Enter your resisdence address, and then click <i>Next</i> botton.',
-							'Enter your bisuness address, and then click <i>Next</i> botton.',
+							'Enter your bisuness address, and then click <i>Next</i> botton.<br/><u>NOTE: Business address must not be different from the home address.</u>',
 							'Finish items in the background check page, and then click <i>Next</i> botton.',
 							'Select the states, and then click <i>Next</i> botton.',
 							'Select the products, and then click <i>Next</i> botton.',
