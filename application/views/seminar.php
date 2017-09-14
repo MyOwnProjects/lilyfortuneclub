@@ -53,9 +53,15 @@ ul, ul li{list-style:none}
 						$end_date = null;
 					}
 					
-					$pos = strpos($l['file'], '.');
-					if($pos !== false){
-						$text = substr($l['file'], 0, $pos);
+					$pos1 = strpos($l['file'], '.');
+					if($pos1 !== false){
+						$pos2 = strrpos($l['file'], '.');
+						if($pos2 == $pos1){
+							$text = substr($l['file'], 0, $pos);
+						}
+						else{
+							$text = substr($l['file'], $pos1 + 1, $pos2 - $pos1 - 1);
+						}
 					}
 					$text = str_replace('_', ' ', $text);
 					?>

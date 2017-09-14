@@ -142,15 +142,15 @@ class Schedule extends Smd_Controller {
 
 			$files = array();
 			foreach($upload_files as $file){
-				$pos = strpos($file, '.');
-				$name =  substr($file, $pos + 1);
+				//$pos = strpos($file, '.');
+				//$name =  substr($file, $pos + 1);
 				$dir = getcwd().'/src/schedule/'.$schedule_year;
 				if(!file_exists($dir)){
 					mkdir($dir);
 				}
-				if(rename(getcwd().'/application/documents/temp/'.$file, $dir.'/'.$name)){
+				if(rename(getcwd().'/application/documents/temp/'.$file, $dir.'/'.$file)){
 					array_push($files, array(
-						'file' => $name,
+						'file' => $file,
 						'access' => $access,
 						'schedule_date_start' => $schedule_date_start,
 						'schedule_date_end' => $schedule_date_end,

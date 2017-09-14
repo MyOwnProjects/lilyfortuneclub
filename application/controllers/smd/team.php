@@ -652,5 +652,8 @@ class Team extends Smd_Controller {
 		}
 	}
 	
+	
+	public function email(){
+	}
 }
 

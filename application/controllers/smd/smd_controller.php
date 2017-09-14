@@ -26,6 +26,9 @@ class Smd_controller extends CI_Controller {
 				),
 				'hierarchy' => array(
 					'text' => 'Hierarchy',
+				),
+				'email' => array(
+					'text' => 'Email',
 				)
 			),
 		),
