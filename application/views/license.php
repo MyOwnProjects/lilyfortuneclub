@@ -86,7 +86,7 @@
 						<p>Now that you are life licensed, it is time to become appointed with the product providers of your choice so you can begin to offer products and solutions to clients.</p>
 					</div>
 					<div class="text-right">
-						<a class="btn btn btn-danger" href="<?php echo base_url();?>account/license/appointment">Go&nbsp;<span class="glyphicon glyphicon-play-circle"></span></a>
+						<a class="btn btn btn-primary" href="<?php echo base_url();?>account/license/appointment">Go&nbsp;<span class="glyphicon glyphicon-play-circle"></span></a>
 					</div>
 				</div>
 			</div>
