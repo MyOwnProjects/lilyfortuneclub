@@ -20,7 +20,7 @@ $month = intval($month);
 	position: absolute;
 	z-index: -1;
 }
-.background-list-block{padding:10px 0}
+.background-list-block{padding:20px 0}
 .background-list-block>div{text-align:center;line-height:25px;}
 .background-list-block>div a{text-decoration:none;color:#2489ce}
 </style>
