@@ -77,7 +77,7 @@
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 block">
-			<div class="panel panel-danger">
+			<div class="panel panel-primary">
 				<div class="panel-heading">
 					5. Appoint with with the product providers. 
 				</div>
