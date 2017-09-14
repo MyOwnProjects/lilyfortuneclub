@@ -48,7 +48,7 @@ $month = intval($month);
 					if($pos1 !== false){
 						$pos2 = strrpos($l['file'], '.');
 						if($pos2 == $pos1){
-							$text = substr($l['file'], 0, $pos);
+							$text = substr($l['file'], 0, $pos1);
 						}
 						else{
 							$text = substr($l['file'], $pos1 + 1, $pos2 - $pos1 - 1);
