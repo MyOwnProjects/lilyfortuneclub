@@ -17,10 +17,10 @@ ul.doc-list li{border-top:1px solid #efefef}
 				Content
 				<button class="btn btn-link dropdonw-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $content_type;?>&nbsp;<span class="caret"></span></button>
 				<ul class="dropdown-menu">
-					<li><a href="<?php echo base_url();?>account/documents<?php echo empty($mime_type) ? '' : "?mime_type=$mime_type";?>">All</a></li>
+					<li><a href="<?php echo base_url();?>documents<?php echo empty($mime_type) ? '' : "?mime_type=$mime_type";?>">All</a></li>
 					<?php
 					foreach($content_type_list as $ct){
-						echo '<li><a href="'.base_url().'account/documents?content_type='.$ct.(empty($mime_type) ? '' : "&mime_type=$mime_type").'">'.$ct.'</a></li>';
+						echo '<li><a href="'.base_url().'documents?content_type='.$ct.(empty($mime_type) ? '' : "&mime_type=$mime_type").'">'.$ct.'</a></li>';
 					}
 					?>
 				</ul>
@@ -40,9 +40,9 @@ ul.doc-list li{border-top:1px solid #efefef}
 				}
 				?>
 			</div>
-			<div class="doc-type"><a href="<?php echo base_url();?>account/documents?content_type=<?php echo $l['content_type'];?>"><?php echo $l['content_type'];?></a></div>
+			<div class="doc-type"><a href="<?php echo base_url();?>documents?content_type=<?php echo $l['content_type'];?>"><?php echo $l['content_type'];?></a></div>
 			<div class="doc-text">
-				<div class="doc-subject"><a href="<?php echo base_url();?>account/documents/view/<?php echo $l['uniqid'];?>" target="_blank"><?php echo $l['subject'];?></a></div>
+				<div class="doc-subject"><a href="<?php echo base_url();?>documents/view/<?php echo $l['uniqid'];?>" target="_blank"><?php echo $l['subject'];?></a></div>
 				<div class="doc-abstract"><?php echo $l['abstract'];?></div>
 			</div>
 		</li>
@@ -50,16 +50,16 @@ ul.doc-list li{border-top:1px solid #efefef}
 	}
 	?>
 		<li style="font-size:14px;text-align:center">
-			<a class="btn btn-link <?php echo count($list) == 0 ? 'disabled' : '';?>" href="<?php echo base_url().'account/documents?pg=1'.(empty($mime_type) ? '' : "&mime_type=$mime_type")
+			<a class="btn btn-link <?php echo count($list) == 0 ? 'disabled' : '';?>" href="<?php echo base_url().'documents?pg=1'.(empty($mime_type) ? '' : "&mime_type=$mime_type")
 				.(empty($content_type) ? '' : "&content_type=$content_type");?>"><span class="glyphicon glyphicon-step-backward"></span></a>
-			<a class="btn btn-link <?php echo $current > 1 ? '' : 'disabled';?>" href="<?php echo base_url().'account/document?pg='.($current - 1)
+			<a class="btn btn-link <?php echo $current > 1 ? '' : 'disabled';?>" href="<?php echo base_url().'document?pg='.($current - 1)
 				.(empty($mimt_type) ? '' : "&mime_type=$mime_type")
 				.(empty($content_type) ? '' : "&content_type=$content_type");?>"><span class="glyphicon glyphicon-backward"></span></a>
 			<?php echo (empty($list) ? 0 : $current).' / '.$total;?>
-			<a class="btn btn-link <?php echo $current < $total ? '' : 'disabled';?>" href="<?php echo base_url().'account/document?pg='.($current + 1)
+			<a class="btn btn-link <?php echo $current < $total ? '' : 'disabled';?>" href="<?php echo base_url().'document?pg='.($current + 1)
 				.(empty($mimt_type) ? '' : "&mime_type=$mime_type")
 				.(empty($content_type) ? '' : "&content_type=$content_type");?>"><span class="glyphicon glyphicon-forward"></span></a>
-			<a class="btn btn-link <?php echo count($list) == 0 ? 'disabled' : '';?>" href="<?php echo base_url().'account/documents?pg='.$total.(empty($mime_type) ? '' : "&mime_type=$mime_type")
+			<a class="btn btn-link <?php echo count($list) == 0 ? 'disabled' : '';?>" href="<?php echo base_url().'documents?pg='.$total.(empty($mime_type) ? '' : "&mime_type=$mime_type")
 				.(empty($content_type) ? '' : "&content_type=$content_type");?>"><span class="glyphicon glyphicon-step-forward"></span></a>
 		</li>
 	</ul>
