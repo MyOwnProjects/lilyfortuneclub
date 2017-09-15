@@ -9,7 +9,7 @@ img{width:100%;max-width:400px;max-height:200px}
 <div data-role="page" id="home" data-theme="d">
 	<?php $this->load->view('mobile/header', array('header_text' => 'Sign in'));?>
 	<div data-role="main" class="ui-content" data-theme="d">
-			<form method="post" data-ajax="false" action="<?php echo base_url();?>ac/sign_in">
+			<form method="post" data-ajax="false">
 				<div style="color:red"><?php echo $error;?></div>
 				<input type="text" name="username" placeholder="Username" required>
 				<input type="password" name="password" placeholder="Password" required>
