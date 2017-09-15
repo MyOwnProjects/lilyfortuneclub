@@ -70,6 +70,7 @@
 			<a href="<?php echo base_url();?>" data-ajax="false" class="nondec menu-list"><img src="<?php echo base_url();?>src/img/home.svg">Home</a>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>resource"><img src="<?php echo base_url();?>src/img/folded-newspaper.svg">Resource</a>
 			<a  class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>seminar"><img src="<?php echo base_url();?>src/img/instructor-lecture-with-sceen-projection-tool.svg">Seminar</a>
+			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>documents"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg">Education</a>
 			<?php
 			if(!empty($user)){
 			?>
@@ -78,7 +79,6 @@
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/business"><img src="<?php echo base_url();?>src/img/give-money.svg">Business</a>
 			<?php }?>
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/license"><img src="<?php echo base_url();?>src/img/certificate.svg">License</a>
-			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/documents"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg">Education</a>
 			<!--a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/live"><img src="<?php echo base_url();?>src/img/television.svg">Live</a-->
 			<a class="nondec menu-list" data-ajax="false" href="<?php echo base_url();?>account/profile"><img src="<?php echo base_url();?>src/img/man-user.svg?1">Profile</a>
 			<?php }?>

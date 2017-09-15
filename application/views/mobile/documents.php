@@ -47,7 +47,7 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 	resource_id = $(this).attr('data-id');
 	var content_type = $(this).attr('content-type');
 	if(content_type == 'pdf' || content_type == 'doc' || content_type == 'ppt' || content_type == 'excel' || content_type == 'csv'){
-		window.open('<?php echo base_url();?>account/documents/view/' + resource_id);
+		window.open('<?php echo base_url();?>documents/view/' + resource_id);
 	}
 	else{
 		$.mobile.changePage('documents#view-document-0', { transition: "slide"} );
@@ -63,7 +63,7 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 		html: ""
 	});
 	$.ajax({
-		url: '<?php echo base_url();?>account/documents/view/' + resource_id,
+		url: '<?php echo base_url();?>documents/view/' + resource_id,
 		dataType: 'json',
 		success: function(data){
 			if(data['prev']){
@@ -159,7 +159,7 @@ $(document).delegate('#document-list ul[data-role=listview] li', 'click', functi
 function document_loaded(file){
 	if(file){
 		$.ajax({
-			url: '<?php echo base_url();?>' + 'account/documents/delete_temp_document',
+			url: '<?php echo base_url();?>' + 'documents/delete_temp_document',
 			data: {file: file},
 		});
 	}
