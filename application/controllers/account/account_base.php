@@ -5,7 +5,14 @@ class Account_base_controller extends Base_Controller {
 	public function __construct(){
 		parent::__construct();
 		if(empty($this->user)){
-			header('location: '.base_url());
+			$params = $this->input->get();
+			$param_str = array();
+			if(!empty($params)){
+				foreach($params as $n => $v){
+					array_push($param_str, "$n=$v");  
+				}
+			}
+			header('location: '.base_url().'ac/sign_in?redirect='.$this->uri->uri_string().(empty($param_str) ? "" : "?".implode("&", $param_str)));
 			exit;
 		}
 		else{ 
