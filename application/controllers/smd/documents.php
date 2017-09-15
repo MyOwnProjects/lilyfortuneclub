@@ -46,9 +46,6 @@ class Documents extends Smd_Controller {
 		);
 		$total = $this->document_model->get_list_total($where);
 		if($total > 0){
-			if($current <= 0){
-				$current = 1;
-			}
 			$ret = paginate($total, $current, $row_count);
 			$ret['search'] = $search_str;
 			$order_by = array();

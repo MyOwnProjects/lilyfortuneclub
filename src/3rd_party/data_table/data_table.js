@@ -462,21 +462,24 @@ function new_item(prop){//title, url, param){
                                             if($(this).hasClass('sort-asc')){
                                                 $(this).removeClass('sort-asc').addClass('sort-desc');
                                                 $(this).children('span').removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom');
+												_sort[$(this).attr('data-id')] = 'desc';
                                             }
                                             else if($(this).hasClass('sort-desc')){
                                                 $(this).removeClass('sort-desc');
                                                 $(this).children('span').removeClass('glyphicon-triangle-bottom').addClass('glyphicon-sort');
+												delete _sort[$(this).attr('data-id')];
                                             }
                                             else{
                                                 $(this).addClass('sort-asc');
                                                 $(this).children('span').removeClass('glyphicon-sort').addClass('glyphicon-triangle-top');
+												_sort[$(this).attr('data-id')] = 'asc';
                                             }
-                                            $(this).siblings().removeClass('sort-asc').removeClass('sort-desc');
-                                            $(this).siblings().children('span').removeClass('glyphicon-triangle-top').removeClass('glyphicon-triangle-bottom').addClass('glyphicon-sort');
+                                            //$(this).siblings().removeClass('sort-asc').removeClass('sort-desc');
+                                            //$(this).siblings().children('span').removeClass('glyphicon-triangle-top').removeClass('glyphicon-triangle-bottom').addClass('glyphicon-sort');
                                             var tr = $('<tr>');
                                             $('<td>').addClass('loading').attr('colspan', _this.thead.find('td').length).append('<div></div>').appendTo(tr);
                                             _this.tbody.empty().append(tr);
-                                            _sort = {};
+												/*_sort = {};
                                             $(_this.thead.find('.sortable')).each(function(){
                                                 if($(this).hasClass('sort-asc')){
                                                     _sort[$(this).attr('data-id')] = 'asc';
@@ -484,7 +487,7 @@ function new_item(prop){//title, url, param){
                                                  else if($(this).hasClass('sort-desc')){
                                                     _sort[$(this).attr('data-id')] = 'desc';
                                                  }
-                                            });
+                                            });*/
                                             _current_page= 1;
                                             _this.reload();
                                     });

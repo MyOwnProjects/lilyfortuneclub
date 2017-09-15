@@ -189,7 +189,7 @@ class User_model extends Base_model{
 				array_push($order_by, $name.' '.$value);
 			}
 		}
-
+//echo implode(', ', $order_by);exit;
 		$sql = "SELECT * FROM 
 			(
 				SELECT users.*, CONCAT(users.first_name, ' ', users.last_name) AS name, CONCAT(u1.first_name, ' ', u1.last_name) AS upline, IF(u2.count IS NULL,0, u2.count) AS downline 

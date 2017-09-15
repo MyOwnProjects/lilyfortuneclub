@@ -44,9 +44,6 @@ class Tasks extends Smd_Controller {
 		);
 		$total = $this->task_model->get_list_total($where);
 		if($total > 0){
-			if($current <= 0){
-				$current = 1;
-			}
 			$ret = paginate($total, $current, $row_count);
 			$ret['search'] = $search_str;
 			$ret['rows'] = $this->task_model->get_list($where, $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count']);

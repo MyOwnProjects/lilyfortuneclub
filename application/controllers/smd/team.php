@@ -34,9 +34,6 @@ class Team extends Smd_Controller {
 		);
 		$total = $this->user_model->get_total("smd='".$this->user['users_id']."'", $search);
 		if($total > 0){
-			if($current <= 0){
-				$current = 1;
-			}
 			$ret = paginate($total, $current, $row_count);
 			$ret['search'] = $search_str;
 			$ret['rows'] = $this->user_model->get_list("smd='".$this->user['users_id']."'", $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count'], $search);
@@ -326,9 +323,6 @@ class Team extends Smd_Controller {
 		
 		$total = $this->user_model->get_total("parent='".$id."'", $search);
 		if($total > 0){
-			if($current <= 0){
-				$current = 1;
-			}
 			$ret = paginate($total, $current, $row_count);
 			$ret['search'] = $search_str;
 			$ret['rows'] = $this->user_model->get_list("parent='".$id."'", $sort, ($ret['current'] - 1).", ".$ret['row_count'], $search);
