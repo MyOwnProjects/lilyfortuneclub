@@ -16,7 +16,7 @@ class Base_controller extends CI_Controller {
 			$this->user = $this->user_model->get_user_by_id($user_id);//array('grade' => 'SMD', 'first_name' => 'Kun', 'first_name' => 'Yang');
 		}
 		$this->load->library('user_agent');
-		$this->is_mobile = $this->agent->is_mobile();
+		$this->is_mobile = true;//$this->agent->is_mobile();
 	}
 	
 	public function set_session_user($username, $password, $save_password = false){
