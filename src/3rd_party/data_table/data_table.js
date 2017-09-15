@@ -152,6 +152,7 @@ function new_item(prop){//title, url, param){
 		var url = prop['url']; 
 		var customized_buttons = prop['customized_buttons'];
 		var filter = prop['filter'];
+		var customized_filters = prop['customized_filters'];
 		var row_count = prop['row_count'];
 		var order_by = prop['order_by'];
 		var _row_count = row_count > 0 ? row_count : Number.MAX_SAFE_INTEGER;
@@ -277,7 +278,7 @@ function new_item(prop){//title, url, param){
 			var $_filter_input_group = $('<div>').addClass('input-group').addClass('pull-left').addClass('dropdown-toggle').attr('data-toggle', 'dropdown').appendTo($_filter_group);
 			var $_filter_select = $('<input>').addClass('form-control').addClass('input-sm').attr('type', 'text').attr('readonly', true).css('background', '#fff').attr('placeholder', 'Filter by ').appendTo($_filter_input_group);
 			var $_span = $('<span>').addClass('input-group-btn').appendTo($_filter_input_group);
-			var $_filter_select_button = $('<button>').addClass('btn').addClass('btn-default').addClass('btn-sm').attr('type','button').append('<span class="glyphicon glyphicon glyphicon-menu-down"></span>').appendTo($_span).click(function(){
+			var $_filter_select_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').attr('type','button').append('<span class="glyphicon glyphicon glyphicon-menu-down"></span>').appendTo($_span).click(function(){
 				//_search(this);
 			});
 			var $_filter_dropdown_menu = $('<ul>').addClass("dropdown-menu").css('width', '100%').css('margin', '0').appendTo($_filter_group);
@@ -287,8 +288,11 @@ function new_item(prop){//title, url, param){
 			}
 			this.filter_dropdown_menu = $_filter_dropdown_menu;
 		}
+		else if(customized_filters && Array.isArray(customized_filters)){
+			
+		}
 
-            	var $_search_group = $('<div>').addClass('dialog-input-group-block').addClass('input-group').addClass('pull-left').appendTo($_table_group_bar);
+        var $_search_group = $('<div>').addClass('dialog-input-group-block').addClass('input-group').addClass('pull-left').appendTo($_table_group_bar);
 		var $_input_group = $('<div>').addClass('input-group').addClass('pull-left').appendTo($_search_group);
 		var $_search_input = $('<input>').addClass('form-control').addClass('input-sm').attr('type', 'text').attr('placeholder', 'search').appendTo($_input_group).keypress(function(e){
 			if ( e.which == 13 ) {

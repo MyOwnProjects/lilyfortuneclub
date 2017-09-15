@@ -51,7 +51,7 @@ class Team extends Smd_Controller {
 		$member_list = $this->user_model->get_list("users_id='$smd' OR smd='$smd'", array('name' => 'ASC'), "", array());
 		$upline_opt = array();
 		foreach($member_list as $m){
-			array_push($upline_opt, array('text'=>$m['name'], 'value' => $m['users_id']));
+			array_push($upline_opt, array('text'=>$m['name'].(empty($m['nick_name']) ? "" : " (".$m['nick_name'].")"), 'value' => $m['users_id']));
 		}
 		return $upline_opt;
 	}	
