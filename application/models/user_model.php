@@ -79,7 +79,7 @@ class User_model extends Base_model{
 			$where = '';
 		$sql = "SELECT CONCAT(users.first_name, ' ', users.last_name) AS name,
 			users.nick_name,
-			CONCAT(u2.first_name, ' ', (u2.last_name)) AS parent, 
+			CONCAT(u2.first_name, ' ', (u2.last_name), IF(u2.nick_name IS NULL, '', CONCAT(' (', u2.nick_name, ')')) ) AS parent, 
 			users.children AS downline,
 			users.grade,
 			users.preference,
