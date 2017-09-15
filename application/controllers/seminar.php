@@ -52,9 +52,9 @@ class Seminar extends Base_Controller {
 			$grade_access = "";
 		}
 		$result = $this->schedule_model->get_list(
-			"schedule_date_start < '$first_date' AND schedule_date_end >'$last_date'
+			"(schedule_date_start < '$first_date' AND schedule_date_end >'$last_date'
 			 OR schedule_date_start BETWEEN '$first_date' AND '$last_date'
-			 OR schedule_date_end BETWEEN '$first_date' AND '$last_date' $grade_access", 
+			 OR schedule_date_end BETWEEN '$first_date' AND '$last_date') $grade_access", 
 			array('schedule_date_start DESC')
 		);
 		$this->load_view('seminar', array('list' => $result, 'year' => $year, 'month' => $month));
