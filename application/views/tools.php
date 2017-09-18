@@ -33,89 +33,77 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">Setting<div class="pull-right">[<a href="#setting-body" data-toggle="collapse" style="color:#fff">+/-</a>]</div></div>
 				<div class="panel-body collapse in setting-body" id="setting-body">
-			<form id="illustration-form">
-					<fieldset>
-						<legend>Rate</legend>
-							<div class="row">
-								<div class="col-lg-2 col-md-3 col-sm-3">
-									<div class="form-group">
-										<label>First year S&P 500</label>
-										<select class="submit-field form-control input-sm" id="interest-year-start">
-										<?php 
-										foreach($interest_history as $year => $rate){
-										?>
-											<option value="<?php echo $year;?>"><?php echo $year.': '.$rate.'%';?></option>
-										<?php
-										}
-										?>	
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
-									<div class="form-group">
-										<label>Investment gain tax</label>
-										<select class="submit-field form-control input-sm" id="tax-investment">
-										<?php 
-										for($i = 5; $i <= 100; $i += 5){
-										?>
-											<option value="<?php echo $i;?>" <?php echo $i == 20 ? 'selected' : '';?>><?php echo $i;?>%</option>
-										<?php
-										}
-										?>	
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
-									<div class="form-group">
-										<label>Income tax</label>
-										<select class="submit-field form-control input-sm" id="tax-income">
-										<?php 
-										for($i = 5; $i <= 100; $i += 5){
-										?>
-											<option value="<?php echo $i;?>" <?php echo $i == 30 ? 'selected' : '';?>><?php echo $i;?>%</option>
-										<?php
-										}
-										?>	
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
-									<div class="form-group">
-										<label>Annual inflation</label>
-										<div class="clearfix">
-											<div class="pull-right" style="line-height:30px">%</div><div style="overflow:hidden"><input type="number" class="submit-field form-control input-sm" min="0" max="20" id="inflation" value="3.5"></div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
-									<div class="form-group">
-										<label>Floor and caps?</label>
-										<select class="submit-field form-control input-sm" id="floor-caps">
-											<option value="Y">Yes</option>
-											<option value="N" selected>No</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
-									<div class="form-group">
-										<label>Loop year S&P 500</label>
-										<select class="submit-field form-control input-sm" id="loop-year-start">
-										<?php 
-										foreach($interest_history as $year => $rate){
-										?>
-											<option value="<?php echo $year;?>"><?php echo $year.': '.$rate.'%';?></option>
-										<?php
-										}
-										?>	
-										</select>
-									</div>
-								</div>
+					<form id="illustration-form">
+						<div class="row">
+							<div class="col-lg-3 col-md-4 col-sm-6">
+								<fieldset>
+									<legend>Rate</legend>
+												<div class="form-group">
+													<label>First year S&P 500</label>
+													<select class="submit-field form-control input-sm" id="interest-year-start">
+													<?php 
+													foreach($interest_history as $year => $rate){
+													?>
+														<option value="<?php echo $year;?>"><?php echo $year.': '.$rate.'%';?></option>
+													<?php
+													}
+													?>	
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Investment gain tax</label>
+													<select class="submit-field form-control input-sm" id="tax-investment">
+													<?php 
+													for($i = 5; $i <= 100; $i += 5){
+													?>
+														<option value="<?php echo $i;?>" <?php echo $i == 20 ? 'selected' : '';?>><?php echo $i;?>%</option>
+													<?php
+													}
+													?>	
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Income tax</label>
+													<select class="submit-field form-control input-sm" id="tax-income">
+													<?php 
+													for($i = 5; $i <= 100; $i += 5){
+													?>
+														<option value="<?php echo $i;?>" <?php echo $i == 30 ? 'selected' : '';?>><?php echo $i;?>%</option>
+													<?php
+													}
+													?>	
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Annual inflation</label>
+													<div class="clearfix">
+														<div class="pull-right" style="line-height:30px">%</div><div style="overflow:hidden"><input type="number" class="submit-field form-control input-sm" min="0" max="20" id="inflation" value="3.5"></div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Floor and caps?</label>
+													<select class="submit-field form-control input-sm" id="floor-caps">
+														<option value="Y">Yes</option>
+														<option value="N" selected>No</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Loop year S&P 500</label>
+													<select class="submit-field form-control input-sm" id="loop-year-start">
+													<?php 
+													foreach($interest_history as $year => $rate){
+													?>
+														<option value="<?php echo $year;?>"><?php echo $year.': '.$rate.'%';?></option>
+													<?php
+													}
+													?>	
+													</select>
+											</div>
+									</fieldset>
 							</div>
-						</fieldset>
+						<div class="col-lg-3 col-md-4 col-sm-6">
 						<fieldset>
 							<legend>Year</legend>
-							<div class="row">
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>Start/Current age</label>
 										<select class="submit-field form-control input-sm" id="current-age">
@@ -128,8 +116,6 @@
 											?>	
 										</select>
 									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>End age</label>
 										<select class="submit-field form-control input-sm" id="end-age">
@@ -142,8 +128,6 @@
 											?>	
 										</select>
 									</div>
-								</div>								
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>Retirement age</label>
 										<select class="submit-field form-control input-sm" id="retirement-age">
@@ -156,8 +140,6 @@
 											?>	
 										</select>
 									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>LTC start age</label>
 										<select class="submit-field form-control input-sm" id="ltc-age-start">
@@ -170,8 +152,6 @@
 											?>	
 										</select>
 									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>LTC last years</label>
 										<select class="submit-field form-control input-sm" id="ltc-years">
@@ -183,68 +163,73 @@
 											}
 											?>	
 										</select>
-									</div>
-								</div>
 							</div>
 						</fieldset>
+						</div>
+						<div class="col-lg-3 col-md-4 col-sm-6">
 						<fieldset>
 							<legend>Current Balance</legend>
-							<div class="row">
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>Tax-now account</label>
 										<input type="number" class="submit-field form-control input-sm" id="balance-tax-now" value="1500000">
 									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>Tax-defer account</label>
 										<input type="number" class="submit-field form-control input-sm" id="balance-tax-defer" value="200000">
 									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>Tax-free account</label>
 										<input type="number" class="submit-field form-control input-sm" id="balance-tax-free" value="0">
 									</div>
-								</div>
-							</div>
 						</fieldset>
+						</div>
+						<div class="col-lg-3 col-md-4 col-sm-6">
 						<fieldset>
 							<legend>Annual Deposit and Withdraw</legend>
-							<div class="row">
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
-										<label>Deposit to tax-now</label>
+									<label>Deposit to tax-now</label>
+										<div class="row">
+										<div class="col-xs-6">
 										<input type="number" class="submit-field form-control input-sm" id="deposit-tax-now" value="0">
+										</div>
+										<div class="col-xs-6">
+										<input type="number" class="submit-field form-control input-sm" id="deposit-tax-now-total" value="0">
+										</div>
+										</div>
 									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>Deposit to tax-defer</label>
+										<div class="row">
+										<div class="col-xs-6">
 										<input type="number" class="submit-field form-control input-sm" id="deposit-tax-defer" value="0">
+										</div>
+										<div class="col-xs-6">
+										<input type="number" class="submit-field form-control input-sm" id="deposit-tax-defer-total" value="0">
+										</div>
+										</div>
 									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>Deposit to tax-free</label>
+										<div class="row">
+										<div class="col-xs-6">
 										<input type="number" class="submit-field form-control input-sm" id="deposit-tax-free" value="0">
+										</div>
+										<div class="col-xs-6">
+										<input type="number" class="submit-field form-control input-sm" id="deposit-tax-free-total" value="0">
+										</div>
+										</div>
 									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>Current living expense</label>
 										<input type="number" class="submit-field form-control input-sm" id="withdraw-living" value="36000">
 									</div>
-								</div>
-								<div class="col-lg-2 col-md-3 col-sm-3">
 									<div class="form-group">
 										<label>Current LTC expense</label>
 										<input type="number" class="submit-field form-control input-sm" id="withdraw-ltc" value="130000">
 									</div>
-								</div>
-							</div>
 						</fieldset>
+						</div>
+							</div>
 				</form>
 			<div style="padding-top:10px">
 				<button type="button" class="btn btn-sm btn-primary" onclick="illustration_submit();">Go</button>
