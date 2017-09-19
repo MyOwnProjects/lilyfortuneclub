@@ -43,7 +43,7 @@ class License extends Account_base_controller {
 						'subject' => "License Exam Registration",
 						'image_file_name'=> 'license-exam',
 						'steps' => array(
-							'Go to the PSI Exam  website at <a href="https://www.psiexams.com" target="_blank">www.psiexams.com</a>, and click <i>Create</i> an account.',
+							'Go to the PSI Exam  website at <a href="https://candidate.psiexams.com/" target="_blank">PSI Exams Online</a>, and click <i>Create</i> an account.',
 							'Enter your account information.',
 							'Log in your account, in the account page, click <i>Register for a test</i> link.',
 							'Select <i>Government/State Licensing Agencies</i> option.',
