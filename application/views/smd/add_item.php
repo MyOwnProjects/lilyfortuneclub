@@ -252,6 +252,10 @@ $(document).ready(function(){
 							case 'Recruiter':
 								$('#parent option').each(function(index, obj){
 									var v = $(obj).html().trim().toLowerCase();
+									var index = v.indexOf('(');
+									if(index > 0){
+										v = v.substr(0, index).trim();
+									}
 									if(v == line.toLowerCase()){
 										$('#parent').val($(obj).val()).selectpicker('refresh');
 										return false;
