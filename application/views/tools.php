@@ -5,10 +5,12 @@
 .table-report td{font-size:12px;}
 .table-report thead{background:linear-gradient(darkgreen, #5cb85c);border-bottom:1px solid darkgreen}
 .table-report thead td{border:1px solid #fff;color:#fff;text-align:center;padding:5px}
-.table-report tbody td{border:1px solid #e5e5e5;padding:2px 5px}
-.table-report tbody td.editable{border:1px solid #e5e5e5;padding:0 !important;width:70px !important;position:relative;background:#f8f8f8}
+.table-report tbody td{border:1px solid #a5a5a5;padding:2px 5px}
+.table-report tbody td.editable{border:1px solid #a5a5a5;padding:0 !important;position:relative;background:#e8e8e8}
 .table-report tbody td.editable .text-back{line-height:20px;position:absolute;right:5px;top:0;z-index:10}
-.table-report tbody td.editable input{z-index:1;text-align:right;border:0 !important;padding:2px 5px !important;width:45px;margin-right:15px;box-sizing:border-box}
+.table-report tbody td.editable input{z-index:1;text-align:right;border:0 !important;padding:2px 5px !important;margin-right:15px;box-sizing:border-box}
+.table-report tbody td.editable input.input-amount{width:70px}
+.table-report tbody td.editable input.input-percent{width:45px}
 .table-report tbody tr:not(.button) td:first-child{text-align:center}
 .table-report tbody tr td:not(:first-child){text-align:right}
 .table-report tbody tr.highlight td{color:#ff0000}
@@ -256,16 +258,16 @@ function illustration_post(data){
 					.append('<td>' + parseInt(data['balance-defer-begin']).toLocaleString() + '</td>')
 					.append('<td>' + parseInt(data['balance-free-begin']).toLocaleString() + '</td>');
 				
-				var input = $('<input>').addClass('deposit-tax-now').val(parseInt(data['deposit-tax-now']).toLocaleString());
+				var input = $('<input>').addClass('deposit-tax-now').addClass('input-amount').val(parseInt(data['deposit-tax-now']).toLocaleString());
 				var back_amount = $('<div>$</div>').addClass('text-back');
 				var td11 = $('<td>').css('width', '70px').addClass('editable').append(input).append(back_amount.clone()).appendTo(tr);
-				var input = $('<input>').addClass('deposit-tax-defer').val(parseInt(data['deposit-tax-defer']).toLocaleString());
+				var input = $('<input>').addClass('deposit-tax-defer').addClass('input-amount').val(parseInt(data['deposit-tax-defer']).toLocaleString());
 				var td12 = $('<td>').css('width', '70px').addClass('editable').append(input).append(back_amount.clone()).appendTo(tr);
-				var input = $('<input>').addClass('deposit-tax-free').val(parseInt(data['deposit-tax-free']).toLocaleString());
+				var input = $('<input>').addClass('deposit-tax-free').addClass('input-amount').val(parseInt(data['deposit-tax-free']).toLocaleString());
 				var td13 = $('<td>').css('width', '70px').addClass('editable').append(input).append(back_amount.clone()).appendTo(tr);
 				var td1 = $('<td>').html(parseFloat(data['historical-interest']).toFixed(2).toLocaleString() + '%').appendTo(tr);
 				var back_percent = $('<div>%</div>').addClass('text-back');
-				var input = $('<input>').addClass('applied-interest');
+				var input = $('<input>').addClass('applied-interest').addClass('input-percent');
 				var td2 = $('<td>').css('width', '70px').addClass('editable').append(back_percent.clone()).append(input).appendTo(tr);
 				var applied_interest = parseFloat(data['applied-interest']).toFixed(2);
 				if(!isNaN(applied_interest)){
@@ -273,10 +275,10 @@ function illustration_post(data){
 					input.val(applied_interest.toLocaleString());
 				}
 				var back_percent = $('<div>%</div>').addClass('text-back');
-				input = $('<input>').addClass('tax-rate-investment').val(parseFloat(data['tax-rate-investment']).toFixed(2).toLocaleString());
+				input = $('<input>').addClass('tax-rate-investment').addClass('input-percent').val(parseFloat(data['tax-rate-investment']).toFixed(2).toLocaleString());
 				var td3 = $('<td>').css('width', '70px').addClass('editable').append(input).append(back_percent.clone()).appendTo(tr);
 				tr.append('<td>' + parseInt(data['tax-amount-investment']).toLocaleString() + '</td>');
-				input = $('<input>').addClass('tax-rate-income').val(parseFloat(data['tax-rate-income']).toFixed(2).toLocaleString());
+				input = $('<input>').addClass('tax-rate-income').addClass('input-percent').val(parseFloat(data['tax-rate-income']).toFixed(2).toLocaleString());
 				var td4 = $('<td>').css('width', '70px').addClass('editable').append(input).append(back_percent.clone()).appendTo(tr);
 				tr.append('<td>' + parseInt(data['tax-amount-income']).toLocaleString() + '</td>');
 				tr.append('<td>' + parseInt(data['withdraw-living']).toLocaleString() + '</td>')
@@ -320,8 +322,33 @@ function illustration_submit(){
 }
 
 $('#table-illustration').delegate('input', 'dblclick', function(){
-	alert($(this).val());
+	var input = $(this);
+	bootbox.confirm({
+		title: "Confirmation?",
+		message: "Do you want to apply this value (" + input.val() + ") to all in the this column?",
+		buttons: {
+			cancel: {
+				label: '<i class="fa fa-times"></i> Cancel'
+			},
+			confirm: {
+				label: '<i class="fa fa-check"></i> Yes',
+				className: 'btn-danger'
+			}
+		},
+		callback: function (result) {
+			if(result){
+				var col_index = input.parent().parent().children('td').index(input.parent()) + 1;
+				$('#table-illustration tbody tr').each(function(index, tr){
+					$(tr).children('td:nth-child('+ col_index + ')').children('input').val(input.val());
+				});
+			}
+		}
+	});
+}).delegate('input', 'click', function(){
+	this.select();
+	this.setSelectionRange(0, $(this).val().length);
 });
+
 $(document).ready(function(){
 illustration_submit();	
 });

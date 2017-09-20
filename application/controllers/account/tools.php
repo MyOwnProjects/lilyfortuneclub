@@ -75,8 +75,8 @@ class Tools extends Account_base_controller {
 				$deposit_tax_free[$i] = 0;
 			}
 		}
-		$balance_tax_now = 1000000;
-		$balance_tax_defer = 200000; 
+		$balance_tax_now = 0;
+		$balance_tax_defer = 0; 
 		$balance_tax_free = 0; 
 		
 		$k = array_keys($this->interest_history);
