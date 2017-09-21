@@ -304,7 +304,7 @@ function illustration_post(data){
 					tr.addClass('highlight');
 				}
 			}
-			
+			tbody.find('.editable input').attr('title', 'Double click to change whole column.');
 		},
 		error: function(){
 		},
@@ -353,7 +353,7 @@ function illustration_export(){
 $('#table-illustration').delegate('input', 'dblclick', function(){
 	var input = $(this);
 	bootbox.prompt({
-		title: "Apply the value to all in the this column",
+		title: "Apply the value to all in this column",
 		inputType: 'number',
 		value: input.val(),
 		callback: function (result) {
