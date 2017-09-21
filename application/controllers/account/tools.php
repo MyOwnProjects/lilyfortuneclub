@@ -192,25 +192,25 @@ class Tools extends Account_base_controller {
 			else{
 				$data[$age] = array(
 					'age' => $age,
-					'balance-total-begin' => number_format($balance_now_begin + $balance_defer_begin + $balance_free_begin, 0).'$',
-					'balance-now-begin' => number_format($balance_now_begin, 0).'$',
-					'balance-defer-begin' => number_format($balance_defer_begin, 0).'$',
-					'balance-free-begin' => number_format($balance_free_begin, 0).'$',
-					'deposit-tax-now' => number_format($deposit_tax_now[$age], 0).'$',
-					'deposit-tax-defer' => number_format($deposit_tax_defer[$age], 0).'$',
-					'deposit-tax-free' => number_format($deposit_tax_free[$age],0).'$',
-					'historical-interest' => number_format($interest_percent, 2).'%',
-					'applied-interest' => $applied_interest_list && array_key_exists($age, $applied_interest_list) ? number_format($applied_interest_list[$age], 2).'$' : null,
-					'tax-rate-investment' => number_format($tax_investment[$age], 2).'%',
-					'tax-amount-investment' => number_format($invest_tax_amount, 0).'$',
-					'tax-rate-income' => number_format($tax_income[$age], 2).'%', 
-					'tax-amount-income' => number_format($income_tax, 0).'$',
-					'withdraw-living' => ($age >= $retirement_age ? number_format($withdraw_living, 0) : 0).'$', 
-					'withdraw-ltc' => $age >= ($ltc_age_start && $age < $ltc_age_start + $ltc_years ? number_format($withdraw_ltc, 0) : 0).'$',	
-					'balance-now-end' => number_format($balance_now_end, 0).'$',
-					'balance-defer-end' => number_format($balance_defer_end, 0).'$',
-					'balance-free-end' => number_format($balance_free_end, 0).'$',
-					'balance-total-end' => number_format($balance_now_end + $balance_defer_end + $balance_free_end, 0).'$',
+					'balance-total-begin' => number_format($balance_now_begin + $balance_defer_begin + $balance_free_begin, 0),
+					'balance-now-begin' => number_format($balance_now_begin, 0),
+					'balance-defer-begin' => number_format($balance_defer_begin, 0),
+					'balance-free-begin' => number_format($balance_free_begin, 0),
+					'deposit-tax-now' => number_format($deposit_tax_now[$age], 0),
+					'deposit-tax-defer' => number_format($deposit_tax_defer[$age], 0),
+					'deposit-tax-free' => number_format($deposit_tax_free[$age],0),
+					'historical-interest' => number_format($interest_percent / 100, 4),
+					'applied-interest' => $applied_interest_list && array_key_exists($age, $applied_interest_list) ? number_format($applied_interest_list[$age] / 100, 4) : null,
+					'tax-rate-investment' => number_format($tax_investment[$age] / 100, 4),
+					'tax-amount-investment' => number_format($invest_tax_amount, 0),
+					'tax-rate-income' => number_format($tax_income[$age] / 100, 4), 
+					'tax-amount-income' => number_format($income_tax, 0),
+					'withdraw-living' => ($age >= $retirement_age ? number_format($withdraw_living, 0) : 0), 
+					'withdraw-ltc' => $age >= ($ltc_age_start && $age < $ltc_age_start + $ltc_years ? number_format($withdraw_ltc, 0) : 0),	
+					'balance-now-end' => number_format($balance_now_end, 0),
+					'balance-defer-end' => number_format($balance_defer_end, 0),
+					'balance-free-end' => number_format($balance_free_end, 0),
+					'balance-total-end' => number_format($balance_now_end + $balance_defer_end + $balance_free_end, 0),
 				);
 			}
 			$balance_now_begin = $balance_now_end;
@@ -233,11 +233,11 @@ class Tools extends Account_base_controller {
 		header('Content-Type: application/csv');
 		header('Content-Disposition: attachment; filename="illustration.csv";');
 		$f = fopen('php://output', 'w');
-		fputcsv($f, array('Age', 'Year Begin Balance Total', 'Year Begin Balance Tax Now', 'Year Begin Balance Tax Defer', 
-			'Year Begin Balance Tax Free', 'Deposit to Account Tax Now', 'Deposit to Account Tax Defer', 'Deposit to Account Tax Free',
-			'Gain Interest Historical',	'Gain Interest Applied', 'Investment Tax Rate', 'Investment Tax Amount',
-			'Income	Tax Rate', 'Income Tax Amount', 'Living Expense', 'LTC Expense', 'Year End Balance Total', 
-			'Year End Balance Tax Now', 'Year End Balance Tax Defer', 'Year End Balance Tax Free'
+		fputcsv($f, array('Age', 'Year Begin Balance Total ($)', 'Year Begin Balance Tax Now ($)', 'Year Begin Balance Tax Defer ($)', 
+			'Year Begin Balance Tax Free ($)', 'Deposit to Account Tax Now ($)', 'Deposit to Account Tax Defer ($)', 'Deposit to Account Tax Free ($)',
+			'Gain Interest Historical (%)',	'Gain Interest Applied (%)', 'Investment Tax Rate (%)', 'Investment Tax Amount ($)',
+			'Income	Tax Rate (%)', 'Income Tax Amount ($)', 'Living Expense ($)', 'LTC Expense ($)', 'Year End Balance Total ($)', 
+			'Year End Balance Tax Now ($)', 'Year End Balance Tax Defer ($)', 'Year End Balance Tax Free ($)'
 		));
 		foreach ($data as $line) {
 			fputcsv($f, $line);
