@@ -352,27 +352,6 @@ $('#table-illustration').delegate('input', 'dblclick', function(){
 				$(tr).children('td:nth-child('+ col_index + ')').children('input').val(result);
 			});
 		}
-	});return;
-	bootbox.confirm({
-		title: "Confirmation?",
-		message: "Do you want to apply this value (" + input.val() + ") to all in the this column?",
-		buttons: {
-			cancel: {
-				label: '<i class="fa fa-times"></i> Cancel'
-			},
-			confirm: {
-				label: '<i class="fa fa-check"></i> Yes',
-				className: 'btn-danger'
-			}
-		},
-		callback: function (result) {
-			if(result){
-				var col_index = input.parent().parent().children('td').index(input.parent()) + 1;
-				$('#table-illustration tbody tr').each(function(index, tr){
-					$(tr).children('td:nth-child('+ col_index + ')').children('input').val(input.val());
-				});
-			}
-		}
 	});
 }).delegate('input', 'click', function(){
 	this.select();
