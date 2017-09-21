@@ -31,7 +31,7 @@ class Tools extends Account_base_controller {
 		$this->load_view('tools', array('interest_history' => $this->interest_history));
 	}
 	
-	private function illustration_data(){
+	private function illustration_data($data_format_only = true){
 		$data = array();
 		$post = $this->input->post();
 		$tax_income_raw = $this->input->post('tax-rate-income');
@@ -165,28 +165,54 @@ class Tools extends Account_base_controller {
 				}
 			}
 			
-			$data[$age] = array(
-				'age' => $age,
-				'balance-total-begin' => $balance_now_begin + $balance_defer_begin + $balance_free_begin,
-				'balance-now-begin' => $balance_now_begin, 
-				'balance-defer-begin' => $balance_defer_begin, 
-				'balance-free-begin' => $balance_free_begin, 
-				'deposit-tax-now' => $deposit_tax_now[$age], 
-				'deposit-tax-defer' => $deposit_tax_defer[$age], 
-				'deposit-tax-free' => $deposit_tax_free[$age],
-				'historical-interest' => $interest_percent, 
-				'applied-interest' => $applied_interest_list && array_key_exists($age, $applied_interest_list) ? $applied_interest_list[$age] : null,
-				'tax-rate-investment' => $tax_investment[$age], 
-				'tax-amount-investment' => $invest_tax_amount, 
-				'tax-rate-income' => $tax_income[$age], 
-				'tax-amount-income' => $income_tax,	
-				'withdraw-living' => $age >= $retirement_age ? $withdraw_living : 0, 
-				'withdraw-ltc' => $age >= $ltc_age_start && $age < $ltc_age_start + $ltc_years ? $withdraw_ltc : 0,	
-				'balance-now-end' => $balance_now_end, 
-				'balance-defer-end' => $balance_defer_end, 
-				'balance-free-end' => $balance_free_end, 
-				'balance-total-end' => $balance_now_end + $balance_defer_end + $balance_free_end
-			);
+			if($data_format_only){
+				$data[$age] = array(
+					'age' => $age,
+					'balance-total-begin' => $balance_now_begin + $balance_defer_begin + $balance_free_begin,
+					'balance-now-begin' => $balance_now_begin, 
+					'balance-defer-begin' => $balance_defer_begin, 
+					'balance-free-begin' => $balance_free_begin, 
+					'deposit-tax-now' => $deposit_tax_now[$age], 
+					'deposit-tax-defer' => $deposit_tax_defer[$age], 
+					'deposit-tax-free' => $deposit_tax_free[$age],
+					'historical-interest' => $interest_percent, 
+					'applied-interest' => $applied_interest_list && array_key_exists($age, $applied_interest_list) ? $applied_interest_list[$age] : null,
+					'tax-rate-investment' => $tax_investment[$age], 
+					'tax-amount-investment' => $invest_tax_amount, 
+					'tax-rate-income' => $tax_income[$age], 
+					'tax-amount-income' => $income_tax,	
+					'withdraw-living' => $age >= $retirement_age ? $withdraw_living : 0, 
+					'withdraw-ltc' => $age >= $ltc_age_start && $age < $ltc_age_start + $ltc_years ? $withdraw_ltc : 0,	
+					'balance-now-end' => $balance_now_end, 
+					'balance-defer-end' => $balance_defer_end, 
+					'balance-free-end' => $balance_free_end, 
+					'balance-total-end' => $balance_now_end + $balance_defer_end + $balance_free_end
+				);
+			}
+			else{
+				$data[$age] = array(
+					'age' => $age,
+					'balance-total-begin' => number_format($balance_now_begin + $balance_defer_begin + $balance_free_begin, 0).'$',
+					'balance-now-begin' => number_format($balance_now_begin, 0).'$',
+					'balance-defer-begin' => number_format($balance_defer_begin, 0).'$',
+					'balance-free-begin' => number_format($balance_free_begin, 0).'$',
+					'deposit-tax-now' => number_format($deposit_tax_now[$age], 0).'$',
+					'deposit-tax-defer' => number_format($deposit_tax_defer[$age], 0).'$',
+					'deposit-tax-free' => number_format($deposit_tax_free[$age],0).'$',
+					'historical-interest' => number_format($interest_percent, 2).'%',
+					'applied-interest' => $applied_interest_list && array_key_exists($age, $applied_interest_list) ? number_format($applied_interest_list[$age], 2).'$' : null,
+					'tax-rate-investment' => number_format($tax_investment[$age], 2).'%',
+					'tax-amount-investment' => number_format($invest_tax_amount, 0).'$',
+					'tax-rate-income' => number_format($tax_income[$age], 2).'%', 
+					'tax-amount-income' => number_format($income_tax, 0).'$',
+					'withdraw-living' => ($age >= $retirement_age ? number_format($withdraw_living, 0) : 0).'$', 
+					'withdraw-ltc' => $age >= ($ltc_age_start && $age < $ltc_age_start + $ltc_years ? number_format($withdraw_ltc, 0) : 0).'$',	
+					'balance-now-end' => number_format($balance_now_end, 0).'$',
+					'balance-defer-end' => number_format($balance_defer_end, 0).'$',
+					'balance-free-end' => number_format($balance_free_end, 0).'$',
+					'balance-total-end' => number_format($balance_now_end + $balance_defer_end + $balance_free_end, 0).'$',
+				);
+			}
 			$balance_now_begin = $balance_now_end;
 			$balance_defer_begin = $balance_defer_end;
 			$balance_free_begin = $balance_free_end;
@@ -203,7 +229,7 @@ class Tools extends Account_base_controller {
 	}
 	
 	public function illustration_export(){
-		$data = $this->illustration_data();
+		$data = $this->illustration_data(false);
 		header('Content-Type: application/csv');
 		header('Content-Disposition: attachment; filename="illustration.csv";');
 		$f = fopen('php://output', 'w');
