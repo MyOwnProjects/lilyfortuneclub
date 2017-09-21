@@ -167,20 +167,21 @@
 										</select>
 									</div>
 								</div>
-							</div>
-							<div style="padding-top:10px">
-								<button type="button" class="btn btn-sm btn-primary" onclick="illustration_report();">Go</button>
-								<button type="button" class="btn btn-sm btn-success" onclick="illustration_export();">Export</button>
+									<div class="col-xs-12 report-notes">
+										<h5>Notes</h5>
+										<ul>
+											<li>Living expense and LTC expense have a percentage inflation per year.</li>
+											<li>Suppose no deposit after retirement.</li>
+											<li>Living withdraw starts only after retirement starts.</li>
+										</ul>
+									</div>
 							</div>
 						</div>
 						</div>
-						<div class="report-notes">
-							<h5>Notes</h5>
-							<ul>
-								<li>Living expense and LTC expense have a percentage inflation per year.</li>
-								<li>Suppose no deposit after retirement.</li>
-								<li>Living withdraw starts only after retirement starts.</li>
-							</ul>
+						<div style="padding-bottom:10px">
+							<button type="button" class="btn btn-sm btn-primary" onclick="illustration_report();">Recap</button>
+							&nbsp;&nbsp;
+							<button type="button" class="btn btn-sm btn-success" onclick="illustration_export();">Export</button>
 						</div>
 						<div class="table-report">
 							<table border="1" cellspacing="0" cellpadding="0" id="table-illustration">
@@ -221,6 +222,12 @@
 								</tbody>
 							</table>
 						</div>
+						<div style="padding:10px 0">
+							<button type="button" class="btn btn-sm btn-primary" onclick="illustration_report();">Recap</button>
+							&nbsp;&nbsp;
+							<button type="button" class="btn btn-sm btn-success" onclick="illustration_export();">Export</button>
+						</div>
+				
 			</form>
 		</div>
 

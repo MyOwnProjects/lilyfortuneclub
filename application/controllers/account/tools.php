@@ -64,18 +64,18 @@ class Tools extends Account_base_controller {
 		$applied_interest_list = array();
 		for($i = $current_age; $i <= $end_age; ++$i){
 			if($tax_income_raw){
-					$tax_investment[$i] = floatval($tax_investment_raw[$i - $current_age]);
-					$tax_income[$i] = floatval($tax_income_raw[$i - $current_age]);
+					$tax_investment[$i] = floatval(str_replace(',', '', $tax_investment_raw[$i - $current_age]));
+					$tax_income[$i] = floatval(str_replace(',', '', $tax_income_raw[$i - $current_age]));
 					if($applied_interest_list_raw[$i - $current_age] !== ''){
-						$applied_interest_list[$i] = floatval($applied_interest_list_raw[$i - $current_age]);
+						$applied_interest_list[$i] = floatval(str_replace(',', '', $applied_interest_list_raw[$i - $current_age]));
 					}
-					$deposit_tax_now[$i] = intval($deposit_tax_now_raw[$i - $current_age]); 
-					$deposit_tax_defer[$i] = intval($deposit_tax_defer_raw[$i - $current_age]); 
-					$deposit_tax_free[$i] = intval($deposit_tax_free_raw[$i - $current_age]); 
+					$deposit_tax_now[$i] = intval(str_replace(',', '', $deposit_tax_now_raw[$i - $current_age])); 
+					$deposit_tax_defer[$i] = intval(str_replace(',', '', $deposit_tax_defer_raw[$i - $current_age])); 
+					$deposit_tax_free[$i] = intval(str_replace(',', '', $deposit_tax_free_raw[$i - $current_age])); 
 			}
 			else{
 					$tax_investment[$i] = 20;
-					$tax_income[$i] = 30;
+					$tax_income[$i] = 35;
 					$deposit_tax_now[$i] = 0; 
 					$deposit_tax_defer[$i] = 0; 
 					$deposit_tax_free[$i] = 0;
@@ -166,6 +166,7 @@ class Tools extends Account_base_controller {
 			}
 			
 			$data[$age] = array(
+				'age' => $age,
 				'balance-total-begin' => $balance_now_begin + $balance_defer_begin + $balance_free_begin,
 				'balance-now-begin' => $balance_now_begin, 
 				'balance-defer-begin' => $balance_defer_begin, 0, 
