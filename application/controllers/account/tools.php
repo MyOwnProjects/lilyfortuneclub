@@ -31,11 +31,15 @@ class Tools extends Account_base_controller {
 		$this->load_view('tools', array('interest_history' => $this->interest_history));
 	}
 	
-	public function illustration_report(){
+	private function illustration_data(){
 		$data = array();
 		$post = $this->input->post();
-		$flexible = $this->input->post('flexible');
-		$flexible = empty($flexible) ? array() : $flexible;
+		$tax_income_raw = $this->input->post('tax-rate-income');
+		$tax_investment_raw = $this->input->post('tax-rate-investment');
+		$applied_interest_list_raw = $this->input->post('applied-interest');
+		$deposit_tax_free_raw = $this->input->post('deposit-tax-free');
+		$deposit_tax_defer_raw = $this->input->post('deposit-tax-defer');
+		$deposit_tax_now_raw = $this->input->post('deposit-tax-now');
 		$current_age = $this->input->post('current-age');
 		$end_age = $this->input->post('end-age');
 		$ltc_age_start = $this->input->post('ltc-age-start');
@@ -49,6 +53,8 @@ class Tools extends Account_base_controller {
 		$withdraw_ltc = $this->input->post('withdraw-ltc');
 		$floor_caps = $this->input->post('floor-caps') == 'Y';
 		
+		//var_dump($tax_income_raw);
+		//echo 123;print_r($post);exit;
 		
 		$tax_investment = array();
 		$tax_income = array();
@@ -57,22 +63,22 @@ class Tools extends Account_base_controller {
 		$deposit_tax_free = array();
 		$applied_interest_list = array();
 		for($i = $current_age; $i <= $end_age; ++$i){
-			if(array_key_exists($i, $flexible)){
-				$tax_investment[$i] = floatval($flexible[$i]['tax-rate-investment']);
-				$tax_income[$i] = floatval($flexible[$i]['tax-rate-income']);
-				if($flexible[$i]['applied-interest'] !== ''){
-					$applied_interest_list[$i] = floatval($flexible[$i]['applied-interest']);
-				}
-				$deposit_tax_now[$i] = intval($flexible[$i]['deposit-tax-now']); 
-				$deposit_tax_defer[$i] = intval($flexible[$i]['deposit-tax-defer']); 
-				$deposit_tax_free[$i] = intval($flexible[$i]['deposit-tax-free']); 
+			if($tax_income_raw){
+					$tax_investment[$i] = floatval($tax_investment_raw[$i - $current_age]);
+					$tax_income[$i] = floatval($tax_income_raw[$i - $current_age]);
+					if($applied_interest_list_raw[$i - $current_age] !== ''){
+						$applied_interest_list[$i] = floatval($applied_interest_list_raw[$i - $current_age]);
+					}
+					$deposit_tax_now[$i] = intval($deposit_tax_now_raw[$i - $current_age]); 
+					$deposit_tax_defer[$i] = intval($deposit_tax_defer_raw[$i - $current_age]); 
+					$deposit_tax_free[$i] = intval($deposit_tax_free_raw[$i - $current_age]); 
 			}
 			else{
-				$tax_investment[$i] = 20;
-				$tax_income[$i] = 30;
-				$deposit_tax_now[$i] = 0; 
-				$deposit_tax_defer[$i] = 0; 
-				$deposit_tax_free[$i] = 0;
+					$tax_investment[$i] = 20;
+					$tax_income[$i] = 30;
+					$deposit_tax_now[$i] = 0; 
+					$deposit_tax_defer[$i] = 0; 
+					$deposit_tax_free[$i] = 0;
 			}
 		}
 		$balance_tax_now = 0;
@@ -106,18 +112,15 @@ class Tools extends Account_base_controller {
 					$interest = 0.135;
 				}
 			}
-			$balance_now_end = $balance_now_begin;
-			$balance_defer_end = $balance_defer_begin;
-			$balance_free_end = $balance_free_begin;
 			
+			$balance_now_end = $balance_now_begin + $deposit_tax_now[$age];
+			$balance_defer_end = $balance_defer_begin + $deposit_tax_defer[$age];
+			$balance_free_end = $balance_free_begin + $deposit_tax_free[$age];
+
 			$total_withdraw = 0;
-			$tax_now_gain = ($balance_now_begin + $deposit_tax_now[$age]) * $interest;
-			$tax_defer_gain = ($balance_defer_begin + $deposit_tax_defer[$age]) * $interest;
-			$tax_free_gain = ($balance_free_begin + $deposit_tax_free[$age]) * $interest;
-			
-			if($age >= $retirement_age){//can work
-				$total_withdraw += $withdraw_living;
-			}
+			$tax_now_gain = ($balance_now_end) * $interest;
+			$tax_defer_gain = ($balance_defer_end) * $interest;
+			$tax_free_gain = ($balance_free_end) * $interest;
 			
 			if($tax_now_gain >= 0){
 				$invest_tax_amount = $tax_now_gain * ($tax_investment[$age] / 100);
@@ -127,6 +130,9 @@ class Tools extends Account_base_controller {
 				$invest_tax_amount = 0;
 			}
 
+			if($age >= $retirement_age){//can work
+				$total_withdraw += $withdraw_living;
+			}
 			if($age >= $ltc_age_start && $age < $ltc_age_start + $ltc_years){//LTC
 				//LTC withdraw
 				$total_withdraw += $withdraw_ltc;
@@ -137,7 +143,7 @@ class Tools extends Account_base_controller {
 				$total_withdraw -= $balance_defer_end * (1 - $tax_income[$age] / 100);
 				$income_tax = $balance_defer_end * ($tax_income[$age] / 100);
 			}*/
-			
+			//echo $balance_now_end.' '.$tax_now_gain;exit;
 			$balance_now_end += $tax_now_gain;
 			$balance_defer_end += $tax_defer_gain;
 			$balance_free_end += $tax_free_gain;
@@ -187,7 +193,28 @@ class Tools extends Account_base_controller {
 			$withdraw_ltc *= 1 + $inflation / 100;
 			++$interest_year;
 		}
+		return $data;
+	}
+
+	public function illustration_report(){
+		$data = $this->illustration_data();
 		echo json_encode($data);
+	}
+	
+	public function illustration_export(){
+		$data = $this->illustration_data();
+		header('Content-Type: application/csv');
+		header('Content-Disposition: attachment; filename="illustration.csv";');
+		$f = fopen('php://output', 'w');
+		fputcsv($f, array('Age', 'Year Begin Balance Total', 'Year Begin Balance Tax Now', 'Year Begin Balance Tax Defer', 
+			'Year Begin Balance Tax Free', 'Deposit to Account Tax Now', 'Deposit to Account Tax Defer', 'Deposit to Account Tax Free',
+			'Gain Interest Historical',	'Gain Interest Applied', 'Investment Tax Rate', 'Investment Tax Amount',
+			'Income	Tax Rate', 'Income Tax Amount', 'Living Expense', 'LTC Expense', 'Year End Balance Total', 
+			'Year End Balance Tax Now', 'Year End Balance Tax Defer', 'Year End Balance Tax Free'
+		));
+		foreach ($data as $line) {
+			fputcsv($f, $line);
+		}
 	}
 }
 

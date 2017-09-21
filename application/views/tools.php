@@ -37,15 +37,15 @@
 	</ul>
 	<div id="tab-content-pages" class="tab-content">
 		<div id="illustration-page" class="tab-pane fade in active tab-content-page">
-			<div class="panel panel-primary">
-				<div class="panel-heading">Setting</div>
-					<div class="panel-body">
-						<form id="illustration-form">
+			<form id="illustration-form" method="POST" action="<?php echo base_url();?>account/tools/illustration_export" target="_blank" onsubmit1="return false;">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Setting</div>
+						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-2 col-md-4 col-sm-3 col-sx-6">
 									<div class="form-group">
 										<label>Start/Current age</label>
-										<select class="submit-field form-control input-sm" id="current-age">
+										<select class="submit-field form-control input-sm" name="current-age" id="current-age">
 											<?php 
 											for($i = 20; $i <= 80; ++$i){
 											?>
@@ -59,7 +59,7 @@
 								<div class="col-lg-2 col-md-4 col-sm-3 col-sx-6">
 									<div class="form-group">
 										<label>LTC start age</label>
-										<select class="submit-field form-control input-sm" id="ltc-age-start">
+										<select class="submit-field form-control input-sm" name="ltc-age-start" id="ltc-age-start">
 											<?php 
 											for($i = 20; $i <= 100; ++$i){
 											?>
@@ -73,7 +73,7 @@
 								<div class="col-lg-2 col-md-4 col-sm-3 col-sx-6">
 									<div class="form-group">
 										<label>LTC last years</label>
-										<select class="submit-field form-control input-sm" id="ltc-years">
+										<select class="submit-field form-control input-sm" name="ltc-years" id="ltc-years">
 											<?php 
 											for($i = 1; $i <= 80; ++$i){
 											?>
@@ -87,13 +87,13 @@
 								<div class="col-lg-2 col-md-4 col-sm-3 col-sx-6">
 									<div class="form-group">
 										<label>Current living expense</label>
-										<input type="number" class="submit-field form-control input-sm" id="withdraw-living" value="36000">
+										<input type="number" class="submit-field form-control input-sm" name="withdraw-living" id="withdraw-living" value="36000">
 									</div>
 								</div>
 								<div class="col-lg-2 col-md-4 col-sm-3 col-sx-6">
 									<div class="form-group">
 										<label>Current LTC expense</label>
-										<input type="number" class="submit-field form-control input-sm" id="withdraw-ltc" value="130000">
+										<input type="number" class="submit-field form-control input-sm" name="withdraw-ltc" id="withdraw-ltc" value="130000">
 									</div>
 								</div>
 							</div>
@@ -106,7 +106,7 @@
 								<div class="col-lg-2 col-md-4 col-sm-3 col-sx-6">
 									<div class="form-group">
 										<label>End age</label>
-										<select class="submit-field form-control input-sm" id="end-age">
+										<select class="submit-field form-control input-sm" name="end-age" id="end-age">
 											<?php 
 											for($i = 60; $i <= 120; ++$i){
 											?>
@@ -121,14 +121,14 @@
 									<div class="form-group">
 										<label>Annual inflation</label>
 										<div class="clearfix">
-											<div class="pull-right" style="line-height:30px">%</div><div style="overflow:hidden"><input type="number" class="submit-field form-control input-sm" min="0" max="20" id="inflation" value="3.5"></div>
+											<div class="pull-right" style="line-height:30px">%</div><div style="overflow:hidden"><input type="number" class="submit-field form-control input-sm" min="0" max="20" name="inflation" id="inflation" value="3.5"></div>
 										</div>
 									</div>
 								</div>
 								<div class="col-lg-2 col-md-4 col-sm-3 col-sx-6">
 									<div class="form-group">
 										<label>Retirement age</label>
-										<select class="submit-field form-control input-sm" id="retirement-age">
+										<select class="submit-field form-control input-sm" name="retirement-age" id="retirement-age">
 											<?php 
 											for($i = 60; $i <= 70; ++$i){
 											?>
@@ -142,7 +142,7 @@
 								<div class="col-lg-2 col-md-4 col-sm-3 col-sx-6">
 									<div class="form-group">
 										<label>First year S&P 500</label>
-										<select class="submit-field form-control input-sm" id="interest-year-start">
+										<select class="submit-field form-control input-sm" name="interest-year-start" id="interest-year-start">
 										<?php 
 										foreach($interest_history as $year => $rate){
 										?>
@@ -156,7 +156,7 @@
 								<div class="col-lg-2 col-md-4 col-sm-3 col-sx-6">
 									<div class="form-group">
 										<label>Loop year S&P 500</label>
-										<select class="submit-field form-control input-sm" id="loop-year-start">
+										<select class="submit-field form-control input-sm" name="loop-year-start" id="loop-year-start">
 										<?php 
 										foreach($interest_history as $year => $rate){
 										?>
@@ -168,59 +168,60 @@
 									</div>
 								</div>
 							</div>
-					</form>
-			<div style="padding-top:10px">
-				<button type="button" class="btn btn-sm btn-primary" onclick="illustration_submit();">Go</button>
-			</div>
-			</div>
-			</div>
-			<div class="report-notes">
-				<h5>Notes</h5>
-				<ul>
-					<li>Living expense and LTC expense have a percentage inflation per year.</li>
-					<li>Suppose no deposit after retirement.</li>
-					<li>Living withdraw starts only after retirement starts.</li>
-				</ul>
-			</div>
-			<div class="table-report">
-				<table border="1" cellspacing="0" cellpadding="0" id="table-illustration">
-					<thead>
-						<tr>
-							<td rowspan="2">Age</td>
-							<td colspan="4">Year Begin Balance</td>
-							<td colspan="3">Deposit to Account</td>
-							<td colspan="2">Gain Interest</td>
-							<td colspan="2">Investment </td>
-							<td colspan="2">Income</td>
-							<td colspan="2">Expenses</td>
-							<td colspan="4">Year End Balance</td>
-						</tr>
-						<tr>
-							<td>Total</td>
-							<td>Tax Now</td>
-							<td>Tax Defer</td>
-							<td>Tax Free</td>
-							<td>Now</td>
-							<td>Defer</td>
-							<td>Free</td>
-							<td>Historical<br/>Interest</td>
-							<td>Applied<br/>Interest</td>
-							<td>Tax Rate</td>
-							<td>Tax Amount</td>
-							<td>Tax Rate</td>
-							<td>Tax Amount</td>
-							<td>Living</td>
-							<td>LTC</td>
-							<td>Tax Now</td>
-							<td>Tax Defer</td>
-							<td>Tax Free</td>
-							<td>Total</td>
-						<tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
-			</div>
+							<div style="padding-top:10px">
+								<button type="button" class="btn btn-sm btn-primary" onclick="illustration_report();">Go</button>
+								<button type="button" class="btn btn-sm btn-success" onclick="illustration_export();">Export</button>
+							</div>
+						</div>
+						</div>
+						<div class="report-notes">
+							<h5>Notes</h5>
+							<ul>
+								<li>Living expense and LTC expense have a percentage inflation per year.</li>
+								<li>Suppose no deposit after retirement.</li>
+								<li>Living withdraw starts only after retirement starts.</li>
+							</ul>
+						</div>
+						<div class="table-report">
+							<table border="1" cellspacing="0" cellpadding="0" id="table-illustration">
+								<thead>
+									<tr>
+										<td rowspan="2">Age</td>
+										<td colspan="4">Year Begin Balance</td>
+										<td colspan="3">Deposit to Account</td>
+										<td colspan="2">Gain Interest</td>
+										<td colspan="2">Investment </td>
+										<td colspan="2">Income</td>
+										<td colspan="2">Expenses</td>
+										<td colspan="4">Year End Balance</td>
+									</tr>
+									<tr>
+										<td>Total</td>
+										<td>Tax Now</td>
+										<td>Tax Defer</td>
+										<td>Tax Free</td>
+										<td>Now</td>
+										<td>Defer</td>
+										<td>Free</td>
+										<td>Historical<br/>Interest</td>
+										<td>Applied<br/>Interest</td>
+										<td>Tax Rate</td>
+										<td>Tax Amount</td>
+										<td>Tax Rate</td>
+										<td>Tax Amount</td>
+										<td>Living</td>
+										<td>LTC</td>
+										<td>Tax Now</td>
+										<td>Tax Defer</td>
+										<td>Tax Free</td>
+										<td>Total</td>
+									<tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+			</form>
 		</div>
 
 		<div id="invitation-page" class="tab-pane fade tab-content-page">
@@ -262,16 +263,16 @@ function illustration_post(data){
 					.append('<td>' + parseInt(data['balance-defer-begin']).toLocaleString() + '</td>')
 					.append('<td>' + parseInt(data['balance-free-begin']).toLocaleString() + '</td>');
 				
-				var input = $('<input>').addClass('deposit-tax-now').addClass('input-amount').val(parseInt(data['deposit-tax-now']).toLocaleString());
+				var input = $('<input>').attr('name', 'deposit-tax-now[]').addClass('deposit-tax-now').addClass('input-amount').val(parseInt(data['deposit-tax-now']).toLocaleString());
 				var back_amount = $('<div>$</div>').addClass('text-back');
 				var td11 = $('<td>').css('width', '70px').addClass('editable').append(input).append(back_amount.clone()).appendTo(tr);
-				var input = $('<input>').addClass('deposit-tax-defer').addClass('input-amount').val(parseInt(data['deposit-tax-defer']).toLocaleString());
+				var input = $('<input>').attr('name', 'deposit-tax-defer[]').addClass('deposit-tax-defer').addClass('input-amount').val(parseInt(data['deposit-tax-defer']).toLocaleString());
 				var td12 = $('<td>').css('width', '70px').addClass('editable').append(input).append(back_amount.clone()).appendTo(tr);
-				var input = $('<input>').addClass('deposit-tax-free').addClass('input-amount').val(parseInt(data['deposit-tax-free']).toLocaleString());
+				var input = $('<input>').attr('name', 'deposit-tax-free[]').addClass('deposit-tax-free').addClass('input-amount').val(parseInt(data['deposit-tax-free']).toLocaleString());
 				var td13 = $('<td>').css('width', '70px').addClass('editable').append(input).append(back_amount.clone()).appendTo(tr);
 				var td1 = $('<td>').html(parseFloat(data['historical-interest']).toFixed(2).toLocaleString() + '%').appendTo(tr);
 				var back_percent = $('<div>%</div>').addClass('text-back');
-				var input = $('<input>').addClass('applied-interest').addClass('input-percent');
+				var input = $('<input>').attr('name', 'applied-interest[]').addClass('applied-interest').addClass('input-percent');
 				var td2 = $('<td>').css('width', '70px').addClass('editable').append(back_percent.clone()).append(input).appendTo(tr);
 				var applied_interest = parseFloat(data['applied-interest']).toFixed(2);
 				if(!isNaN(applied_interest)){
@@ -279,10 +280,10 @@ function illustration_post(data){
 					input.val(applied_interest.toLocaleString());
 				}
 				var back_percent = $('<div>%</div>').addClass('text-back');
-				input = $('<input>').addClass('tax-rate-investment').addClass('input-percent').val(parseFloat(data['tax-rate-investment']).toFixed(2).toLocaleString());
+				input = $('<input>').attr('name', 'tax-rate-investment[]').addClass('tax-rate-investment').addClass('input-percent').val(parseFloat(data['tax-rate-investment']).toFixed(2).toLocaleString());
 				var td3 = $('<td>').css('width', '70px').addClass('editable').append(input).append(back_percent.clone()).appendTo(tr);
 				tr.append('<td>' + parseInt(data['tax-amount-investment']).toLocaleString() + '</td>');
-				input = $('<input>').addClass('tax-rate-income').addClass('input-percent').val(parseFloat(data['tax-rate-income']).toFixed(2).toLocaleString());
+				input = $('<input>').attr('name', 'tax-rate-income[]').addClass('tax-rate-income').addClass('input-percent').val(parseFloat(data['tax-rate-income']).toFixed(2).toLocaleString());
 				var td4 = $('<td>').css('width', '70px').addClass('editable').append(input).append(back_percent.clone()).appendTo(tr);
 				tr.append('<td>' + parseInt(data['tax-amount-income']).toLocaleString() + '</td>');
 				tr.append('<td>' + parseInt(data['withdraw-living']).toLocaleString() + '</td>')
@@ -306,23 +307,40 @@ function illustration_post(data){
 	});
 }
 
-function illustration_submit(){
+function illustration_data(){
 	var data = {
-		flexible: {}
+		'tax-rate-income': [], 'tax-rate-investment': [],
+		'applied-interest': [], 'deposit-tax-free': [], 
+		'deposit-tax-defer': [], 'deposit-tax-now': []
 	};
 	$('#table-illustration tbody tr').each(function(index, obj){
 		var tr = $(obj);
 		var age = parseInt(tr.attr('data-id'));
-		data['flexible'][age] = {
-			'tax-rate-income': tr.find('.tax-rate-income').val(), 'tax-rate-investment': tr.find('.tax-rate-investment').val(),
-			'applied-interest': tr.find('.applied-interest').val(), 'deposit-tax-free': tr.find('.deposit-tax-free').val(), 
-			'deposit-tax-defer': tr.find('.deposit-tax-defer').val(), 'deposit-tax-now': tr.find('.deposit-tax-now').val()
-		};
+		data['tax-rate-income'].push(tr.find('.tax-rate-income').val()); 
+		data['tax-rate-investment'].push(tr.find('.tax-rate-investment').val()); 
+		data['applied-interest'].push(tr.find('.applied-interest').val()); 
+		data['deposit-tax-free'].push(tr.find('.deposit-tax-free').val()); 
+		data['deposit-tax-defer'].push(tr.find('.deposit-tax-defer').val()); 
+		data['deposit-tax-now'].push(tr.find('.deposit-tax-now').val()); 
 	});
+	$('#illustration-form .submit-field').each(function(index, obj){
+		data[$(obj).attr('id')] = $(obj).val();
+	});
+	return data;
+}
+
+function illustration_report(){
+	var data = illustration_data();
 	$('#illustration-form .submit-field').each(function(index, obj){
 		data[$(obj).attr('id')] = $(obj).val();
 	});	
 	illustration_post(data);
+	return false;
+}
+
+function illustration_export(){
+	$('#illustration-form').submit();
+	$('#illustration-form').prop('onsubmit', 'return false');
 }
 
 $('#table-illustration').delegate('input', 'dblclick', function(){
@@ -359,6 +377,6 @@ $('#table-illustration').delegate('input', 'dblclick', function(){
 });
 
 $(document).ready(function(){
-illustration_submit();	
+	illustration_report();	
 });
 </script>
