@@ -2,11 +2,15 @@
 .tab-content-page{padding:40px 80px}
 .content-page-head{text-align:center;margin-bottom:40px}
 .setting-body .form-group label{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.table-report td{font-size:12px;}
-.table-report thead{background:linear-gradient(darkgreen, #5cb85c);border-bottom:1px solid darkgreen}
-.table-report thead td{border:1px solid #fff;color:#fff;text-align:center;padding:5px}
-.table-report tbody td{border:1px solid #a5a5a5;padding:2px 5px}
-.table-report tbody td.editable{border:1px solid #a5a5a5;padding:0 !important;position:relative;background:#e8e8e8}
+.table-report table{margin-right:40px}
+.table-report td{font-size:12px;border:1px solid #5cb85c}
+.table-report thead{background:linear-gradient(darkgreen, #5cb85c)}
+.table-report thead tr:first-child td{font-weight:bold;font-size:16px}
+.table-report thead td{text-align:center;padding:5px;color:#fff;border-top:1px solid white}
+.table-report thead tr:not(:last-child) td{border-bottom:1px solid white}
+.table-report thead td:not(:last-child){border-right:1px solid white;}
+.table-report tbody td{padding:2px 5px}
+.table-report tbody td.editable{padding:0 !important;position:relative;background:#e8e8e8}
 .table-report tbody td.editable .text-back{line-height:20px;position:absolute;right:5px;top:0;z-index:10}
 .table-report tbody td.editable input{z-index:1;text-align:right;border:0 !important;padding:2px 5px !important;margin-right:15px;box-sizing:border-box}
 .table-report tbody td.editable input.input-amount{width:70px}
@@ -170,6 +174,14 @@
 			</div>
 			</div>
 			</div>
+			<div class="report-notes">
+				<h5>Notes</h5>
+				<ul>
+					<li>Living expense and LTC expense have a percentage inflation per year.</li>
+					<li>Suppose no deposit after retirement.</li>
+					<li>Living withdraw starts only after retirement starts.</li>
+				</ul>
+			</div>
 			<div class="table-report">
 				<table border="1" cellspacing="0" cellpadding="0" id="table-illustration">
 					<thead>
@@ -208,14 +220,6 @@
 					<tbody>
 					</tbody>
 				</table>
-			</div>
-			<div class="report-notes">
-				<h5>Notes</h5>
-				<ul>
-					<li>Living withdraw and LTC withdraw have an percentage inflation per year.</li>
-					<li>Suppose no deposit after retirement age.</li>
-					<li>Living withdraw started only after retirement starts.</li>
-				</ul>
 			</div>
 		</div>
 
@@ -323,6 +327,32 @@ function illustration_submit(){
 
 $('#table-illustration').delegate('input', 'dblclick', function(){
 	var input = $(this);
+	bootbox.prompt({
+		title: "Apply the value to all in the this column",
+		inputType: 'number',
+		value: input.val(),
+		callback: function (result) {
+			console.log(result);
+		},
+		buttons: {
+			cancel: {
+				label: '<i class="fa fa-times"></i> Cancel'
+			},
+			confirm: {
+				label: '<i class="fa fa-check"></i> Apply',
+				className: 'btn-danger'
+			}
+		},
+		callback: function (result) {
+			if(result === null){
+				return;
+			}	
+			var col_index = input.parent().parent().children('td').index(input.parent()) + 1;
+			$('#table-illustration tbody tr').each(function(index, tr){
+				$(tr).children('td:nth-child('+ col_index + ')').children('input').val(result);
+			});
+		}
+	});return;
 	bootbox.confirm({
 		title: "Confirmation?",
 		message: "Do you want to apply this value (" + input.val() + ") to all in the this column?",
