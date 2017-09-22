@@ -60,6 +60,11 @@ class Team extends Smd_Controller {
 		$this->load->model('user_model');
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$prop = $this->input->post();
+			$result = $this->user_model->get_count("users_id='".$prop['parent']."'");
+			if($result <= 0){
+				echo json_encode(array('success' => false, 'fields' => array('parent'), 'message' => 'Invalid upline.'));
+				return;
+			}
 			$prop['smd'] = $this->user['users_id'];
 			$prop['username']= $prop['membership_code'];
 			$prop['password']= sha1(strtoupper(trim($prop['membership_code']).trim($prop['last_name'])));
@@ -73,6 +78,7 @@ class Team extends Smd_Controller {
 			}
 		}
 		$upline_opt = $this->_get_all_smd_members($this->user['users_id']);
+		array_unshift($upline_opt, array('text'=>' ', 'value' => ''));
 		$items = array(
 			array(
 				'name' => 'auto-fill',
@@ -89,7 +95,8 @@ class Team extends Smd_Controller {
 				'name' => 'parent',
 				'tag' => 'select',
 				'class' => 'selectpicker',
-				'options' => $upline_opt
+				'options' => $upline_opt,
+				'required' => true
 			),
 			array(
 				'label' => 'Start Date',

@@ -46,7 +46,12 @@ function pop_up(prop){//title, url, param){
 											Dialog.modal.success('', param['func']);
 										}
 										else{
-											Dialog.modal.error(data['message']);
+											if(data['fields']){
+												Dialog.modal.fielderror(data['fields']);
+											}
+											if(data['message']){
+												Dialog.modal.error(data['message']);
+											}
 											return false;
 										}
 									},
@@ -114,7 +119,12 @@ function new_item(prop){//title, url, param){
 											Dialog.modal.success('', param['func']);
 										}
 										else{
-											Dialog.modal.error(data['message']);
+											if(data['fields']){
+												Dialog.modal.fielderror(data['fields']);
+											}
+											if(data['message']){
+												Dialog.modal.error(data['message']);
+											}
 											return false;
 										}
 									},

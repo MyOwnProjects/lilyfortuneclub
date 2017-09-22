@@ -51,6 +51,18 @@ Dialog.modal.error = function(message, callback){
 	}
 };
 
+Dialog.modal.fielderror = function(fields, callback){
+	Dialog.modal.loading.hide();
+	var selectors = [];
+	for(var i = 0; i < fields.length; ++i){
+		selectors.push('input#' + fields[i] + ',select#' + fields[i]);
+	}
+	Dialog.modal.box.find(selectors.join(',')).addClass('dialog-bootbox-error');
+	if(callback && $.isFunction(callback)){
+		callback();
+	}
+};
+
 Dialog.modal.success = function(message, callback){
 	Dialog.modal.loading.hide();
 	Dialog.modal.result.removeClass('alert-danger').addClass('alert-success').html(message).show();

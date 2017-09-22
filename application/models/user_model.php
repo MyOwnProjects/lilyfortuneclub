@@ -166,8 +166,9 @@ class User_model extends Base_model{
 	}
 	
 	public function get_count($where = '', $order_by = array(), $limit = ''){
-		$sql = "SELECT count(*) FROM users ".(empty($where) ? '' : ' WHERE '.$where).(empty($order_by) ? ' ORDER BY users_id DESC' : ' ORDER BY '.implode(',', $order_by).(empty($limit) ? ' LIMIT 0, 50' : ' LIMIT '.$limit));
-		return $this->db->query($sql);
+		$sql = "SELECT count(*) AS count FROM users ".(empty($where) ? '' : ' WHERE '.$where).(empty($order_by) ? ' ORDER BY users_id DESC' : ' ORDER BY '.implode(',', $order_by).(empty($limit) ? ' LIMIT 0, 50' : ' LIMIT '.$limit));
+		$result = $this->db->query($sql);
+		return $result[0]['count'];
 	}
 
 	public function get_list($where = '', $sort = array(), $limit = '', $search = array()){
@@ -190,7 +191,10 @@ class User_model extends Base_model{
 
 		$sql = "SELECT * FROM 
 			(
-				SELECT users.*, CONCAT(users.first_name, ' ', users.last_name) AS name, CONCAT(u1.first_name, ' ', u1.last_name) AS upline, IF(u2.count IS NULL,0, u2.count) AS downline 
+				SELECT users.*, 
+					CONCAT(users.first_name, ' ', users.last_name) AS name, 
+					CONCAT(u1.first_name, ' ', u1.last_name, IF(u1.nick_name IS NULL OR u1.nick_name='', '', CONCAT(' (', u1.nick_name, ')')) ) AS upline, 
+					IF(u2.count IS NULL,0, u2.count) AS downline 
 				FROM users 
 				LEFT JOIN users u1 ON users.parent=u1.users_id
 				LEFT JOIN 
