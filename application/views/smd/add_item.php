@@ -229,6 +229,11 @@ $(document).ready(function(){
 							case 'Level':
 								$('#grade').val(line);
 								break;
+							case 'Start Date':
+								var date = new Date(line);
+								var date_str = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+								$('#start_date').val(date_str);
+								break;
 							case 'DOB':
 								var date = new Date(line + ' 2017');
 								var date_str = '1900-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');

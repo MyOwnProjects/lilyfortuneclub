@@ -77,25 +77,23 @@ class User_model extends Base_model{
 		}
 		else
 			$where = '';
-		$sql = "SELECT CONCAT(users.first_name, ' ', users.last_name) AS name,
-			users.nick_name,
+		$sql = "SELECT CONCAT(users.first_name, ' ', users.last_name, IF(users.nick_name IS NULL, '', CONCAT(' (', users.nick_name ,')'))) AS name,
+			users.membership_code,
 			CONCAT(u2.first_name, ' ', (u2.last_name), IF(u2.nick_name IS NULL, '', CONCAT(' (', u2.nick_name, ')')) ) AS parent, 
 			users.children AS downline,
-			users.grade,
-			users.preference,
-			CONCAT(u1.first_name, ' ', (u1.last_name)) AS SMD,
-			users.status,
-			users.membership_code,
+			users.grade as level,
 			users.phone,
 			users.email,
 			users.username,
 			users.password,
 			users.date_of_birth,
-			users.create_date,
-			users.first_access,
+			users.start_date,
 			CONCAT(users.street, ', ', users.city, ', ', users.state, ' ', users.zipcode) AS address,
 			users.users_id,
-			users.first_name, ' ', users.last_name
+			users.preference,
+			users.status,
+			users.first_access,
+			CONCAT(u1.first_name, ' ', (u1.last_name)) AS SMD
 			FROM users 
 			LEFT JOIN users u1 ON users.smd=u1.users_id 
 			LEFT JOIN users u2 ON users.parent=u2.users_id 
