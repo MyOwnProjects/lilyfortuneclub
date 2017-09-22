@@ -77,9 +77,9 @@ class User_model extends Base_model{
 		}
 		else
 			$where = '';
-		$sql = "SELECT CONCAT(users.first_name, ' ', users.last_name, IF(users.nick_name IS NULL, '', CONCAT(' (', users.nick_name ,')'))) AS name,
+		$sql = "SELECT CONCAT(users.first_name, ' ', users.last_name, IF(users.nick_name IS NULL OR users.nick_name='', '', CONCAT(' (', users.nick_name ,')'))) AS name,
 			users.membership_code,
-			CONCAT(u2.first_name, ' ', (u2.last_name), IF(u2.nick_name IS NULL, '', CONCAT(' (', u2.nick_name, ')')) ) AS parent, 
+			CONCAT(u2.first_name, ' ', (u2.last_name), IF(u2.nick_name IS NULL OR u2.nick_name='', '', CONCAT(' (', u2.nick_name, ')')) ) AS parent, 
 			users.children AS downline,
 			users.grade as level,
 			users.phone,
