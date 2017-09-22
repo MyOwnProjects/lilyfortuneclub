@@ -92,17 +92,11 @@ class Team extends Smd_Controller {
 				'options' => $upline_opt
 			),
 			array(
-				'label' => 'Grade',
-				'name' => 'grade',
-				'tag' => 'select',
-				'options' => array(
-					array('value' => 'G', 'text' => 'Guest'),
-					array('value' => 'TA', 'text' => 'Trainee Associate'),
-					array('value' => 'A', 'text' => 'Associate'),
-					array('value' => 'SA', 'text' => 'Senior Associate'),
-					array('value' => 'MD', 'text' => 'Margeting Director')
-				),
-				'value' => 'TA',
+				'label' => 'Start Date',
+				'name' => 'start_date',
+				'tag' => 'input',
+				'type' => 'date',
+				'placeholder' => 'YYYY-MM-DD',
 			),
 			array(
 				'label' => 'First Name',
@@ -164,6 +158,19 @@ class Team extends Smd_Controller {
 				'name' => 'country',
 				'tag' => 'input',
 				'value' => 'US'
+			),
+			array(
+				'label' => 'Level',
+				'name' => 'grade',
+				'tag' => 'select',
+				'options' => array(
+					array('value' => 'G', 'text' => 'Guest'),
+					array('value' => 'TA', 'text' => 'Trainee Associate'),
+					array('value' => 'A', 'text' => 'Associate'),
+					array('value' => 'SA', 'text' => 'Senior Associate'),
+					array('value' => 'MD', 'text' => 'Margeting Director')
+				),
+				'value' => 'TA',
 			),
 		);
 		$this->load->view('smd/add_item', array('items' => $items));
@@ -456,6 +463,13 @@ class Team extends Smd_Controller {
 							'required' => true,
 							'value' => $result[0]['last_name']
 						),
+						array(
+							'label' => 'Nick Name',
+							'name' => 'nick_name',
+							'tag' => 'input',
+							'required' => true,
+							'value' => $result[0]['nick_name']
+						),
 					);
 					break;
 				case 'password':
@@ -488,10 +502,22 @@ class Team extends Smd_Controller {
 						)
 					);
 					break;
+				case 'start_date':
+					$items = array(
+						array(
+							'label' => 'Start Date',
+							'name' => 'start_date',
+							'tag' => 'input',
+							'required' => true,
+							'type' => 'date',
+							'value' => $result[0]['start_date']
+						)
+					);
+					break;
 				case 'grade':
 					$items = array(
 						array(
-							'label' => 'Grade',
+							'label' => 'Level',
 							'name' => 'grade',
 							'tag' => 'select',
 							'required' => true,
@@ -618,6 +644,7 @@ class Team extends Smd_Controller {
 				case 'parent':
 				case 'name':
 				case 'date_of_birth':
+				case 'start_date':
 				case 'grade':
 					foreach($this->input->post() as $n => $v){
 						$values[$n] = trim($v);
