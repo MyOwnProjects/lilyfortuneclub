@@ -27,7 +27,14 @@ if(!$member){
 					echo str_replace('_', ' ', $name);
 					?>:
 				</div>
-				<div class="value pull-left">
+				<?php
+				if(!in_array($name, array('create_date', 'SMD', 'downline'))){
+				?>
+				<a href="javascript:void(0)" class="pull-right dialog-toggle" data-id="<?php echo $member['membership_code'];?>" dialog-header="Update Member Information" dialog-url="<?php echo base_url();?>smd/team/update_user/<?php echo $name?>"><i class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+				<?php
+				}
+				?>
+				<div class="value" style="overflow:hidden">
 					<?php 
 					if($name == 'status'){
 						echo $value == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';
@@ -40,13 +47,6 @@ if(!$member){
 					}
 					?>
 				</div>
-				<?php
-				if(!in_array($name, array('create_date', 'SMD', 'downline'))){
-				?>
-				<a href="javascript:void(0)" class="pull-right dialog-toggle" data-id="<?php echo $member['membership_code'];?>" dialog-header="Update Member Information" dialog-url="<?php echo base_url();?>smd/team/update_user/<?php echo $name?>"><i class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-				<?php
-				}
-				?>
 			</li>
 			<?php
 			}
