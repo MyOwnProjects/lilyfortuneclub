@@ -42,6 +42,9 @@ if(!$member){
 					else if($name == 'password'){
 						echo '********';
 					}
+					else if($name == 'phone'){
+						echo str_replace(',', '<br/>', $value);
+					}
 					else{
 						echo $value;
 					}
