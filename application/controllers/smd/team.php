@@ -41,7 +41,8 @@ class Team extends Smd_Controller {
 				$ret['rows'][$i]['name'] = $r['name'].(isset($ret['rows'][$i]['nick_name']) && trim($ret['rows'][$i]['nick_name']) != '' ? ' ('.$ret['rows'][$i]['nick_name'].')' : '');
 				$ret['rows'][$i]['status'] = $ret['rows'][$i]['status'] == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';
 				$ret['rows'][$i]['location'] = empty($r['state']) ? $r['country'] : $r['state'].'/'.$r['country'];
-				$ret['rows'][$i]['action'] = array('view' => base_url().'smd/team/member/'.$r['users_id']);
+				$ret['rows'][$i]['downline'] = $r['downline'];
+				$ret['rows'][$i]['action'] = array('view' => base_url().'smd/team/member/'.$r['membership_code']);
 			}
 		}
 		echo json_encode($ret);
@@ -51,7 +52,7 @@ class Team extends Smd_Controller {
 		$member_list = $this->user_model->get_list("users_id='$smd' OR smd='$smd'", array('name' => 'ASC'), "", array());
 		$upline_opt = array();
 		foreach($member_list as $m){
-			array_push($upline_opt, array('text'=>$m['name'].(empty($m['nick_name']) ? "" : " (".$m['nick_name'].")"), 'value' => $m['users_id']));
+			array_push($upline_opt, array('text'=>$m['name'].(empty($m['nick_name']) ? "" : " (".$m['nick_name'].")"), 'value' => $m['membership_code']));
 		}
 		return $upline_opt;
 	}	
@@ -60,9 +61,9 @@ class Team extends Smd_Controller {
 		$this->load->model('user_model');
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$prop = $this->input->post();
-			$result = $this->user_model->get_count("users_id='".$prop['parent']."'");
+			$result = $this->user_model->get_count("membership_code='".$prop['recruiter']."'");
 			if($result <= 0){
-				echo json_encode(array('success' => false, 'fields' => array('parent'), 'message' => 'Invalid upline.'));
+				echo json_encode(array('success' => false, 'fields' => array('recruiter'), 'message' => 'Invalid upline.'));
 				return;
 			}
 			$prop['smd'] = $this->user['users_id'];
@@ -92,7 +93,7 @@ class Team extends Smd_Controller {
 			),
 			array(
 				'label' => 'Upline',
-				'name' => 'parent',
+				'name' => 'recruiter',
 				'tag' => 'select',
 				'class' => 'selectpicker',
 				'options' => $upline_opt,
@@ -183,9 +184,9 @@ class Team extends Smd_Controller {
 		$this->load->view('smd/add_item', array('items' => $items));
 	}
 
-	public function member($id = 0){
+	public function member($membership_code = 0){
 		$this->load->model('user_model');
-		$result = $this->user_model->get_user_by(array('users_id' => $id, 'smd'=> $this->user['users_id']));
+		$result = $this->user_model->get_user_by(array('membership_code' => $membership_code, 'smd'=> $this->user['users_id']));
 		if(count($result) == 1){
 			$member = $result[0];
 			$member_info = $this->user_model->get_user_info_by_user_id(array($member['users_id']), $this->user['users_id']);
@@ -295,19 +296,19 @@ class Team extends Smd_Controller {
 		}
 	}
 	
-	public function Hierarchy($id = 0){
+	public function Hierarchy($membership_code = ''){
 		$error = '';
-		if(empty($id)){
-			$id = $this->user['users_id'];
+		if(empty($membership_code)){
+			$membership_code = $this->user['membership_code'];
 		}
-		if($id != $this->user['users_id']){
-			$result = $this->user_model->get_user_by(array('users_id' => $id, 'smd' => $this->user['users_id']));
+		if($membership_code != $this->user['membership_code']){
+			$result = $this->user_model->get_user_by(array('membership_code' => $membership_code, 'smd' => $this->user['users_id']));
 			if(count($result) == 0){
 				$error = "The member does not exist, or you don't have permission";
 			}
 		}
 		$this->nav_menus['team']['sub_menus']['hierarchy']['active'] = true;
-		$this->load_view('team/hierarchy', array('error' => $error, 'parent' => $id));
+		$this->load_view('team/hierarchy', array('error' => $error, 'parent' => $membership_code));
 	}
 	
 	public function get_downlines($id = 0){
@@ -335,11 +336,11 @@ class Team extends Smd_Controller {
 			}
 		}
 		
-		$total = $this->user_model->get_total("parent='".$id."'", $search);
+		$total = $this->user_model->get_total("recruiter='".$id."'", $search);
 		if($total > 0){
 			$ret = paginate($total, $current, $row_count);
 			$ret['search'] = $search_str;
-			$ret['rows'] = $this->user_model->get_list("parent='".$id."'", $sort, ($ret['current'] - 1).", ".$ret['row_count'], $search);
+			$ret['rows'] = $this->user_model->get_list("recruiter='".$id."'", $sort, ($ret['current'] - 1).", ".$ret['row_count'], $search);
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['name'] = $r['name'].(isset($ret['row'][$i]['nick_name']) && trim($ret['rows'][$i]['nick_name']) != '' ? ' ('.$ret['rows'][$i]['nick_name'].')' : '');
 				$ret['rows'][$i]['status'] = $ret['rows'][$i]['status'] == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';
@@ -413,9 +414,9 @@ class Team extends Smd_Controller {
 		$this->load->view('smd/uploaded_member_grid', array('header' => $header, 'body' => $data));
 	}
 
-	public function get_direct_downline($user_id= null){
+	public function get_direct_downline($membership_code = null){
 		$this->load->model('user_model');
-		$result = $this->user_model->get_child_users($user_id, $this->user['users_id']);
+		$result = $this->user_model->get_child_users($membership_code, $this->user['users_id']);
 		if(count($result) == 0){
 			$data = 'No downline';
 		}
@@ -426,8 +427,8 @@ class Team extends Smd_Controller {
 				$t .= ", ".($r['status'] == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>');
 				$t .= ", ".($r['count'] == 0 ? '<span class="text-danger">No downline</span>' : '<span class="text-success">'.$r['children'].' downline , '.$r['count'].' direct downline</span>');
 				
-				if(isset($user_id)){
-					$url = base_url().'smd/team/member/'.$r['users_id'];
+				if(isset($membership_code)){
+					$url = base_url().'smd/team/member/'.$r['membership_code'];
 				}
 				else{
 					$url = base_url().'smd';
@@ -437,15 +438,15 @@ class Team extends Smd_Controller {
 						.(empty($r['nick_name']) ? '' : '('.$r['nick_name'].')')."</a>&nbsp;"
 						."[$t]"
 					, 'child_count' => $r['count'] 
-					, 'child_url' => base_url().'smd/team/get_direct_downline/'.$r['users_id']
+					, 'child_url' => base_url().'smd/team/get_direct_downline/'.$r['membership_code']
 				));
 			}
 		}
 		echo json_encode(array('success' => true, 'data' => $data));		
 	}	
 	
-	public function update_user($field = null, $id = 0){
-		$result = $this->user_model->get_user_by(array('smd' => $this->user['users_id'], 'users_id' => $id));
+	public function update_user($field = null, $membership_code = 0){
+		$result = $this->user_model->get_user_by(array('smd' => $this->user['users_id'], 'membership_code' => $membership_code));
 		if(count($result) == 0){
 			ajax_error(500, "The user does not eists, or you don't have permission to access the user.");
 			exit;
@@ -580,13 +581,19 @@ class Team extends Smd_Controller {
 							'tag' => 'input',
 							'value' => $result[0]['zipcode']
 						),
+						array(
+							'label' => 'Country',
+							'name' => 'country',
+							'tag' => 'input',
+							'value' => $result[0]['country']
+						),
 					);
 					break;
-				case 'parent':
+				case 'recruiter':
 					$items = array(
 						array(
 							'label' => 'Upline',
-							'name' => 'parent',
+							'name' => 'recruiter',
 							'class' => 'selectpicker',
 							'tag' => 'select',
 							'required' => true,
@@ -648,14 +655,14 @@ class Team extends Smd_Controller {
 					}
 					break;
 				case 'address':
-				case 'parent':
+				case 'recruiter':
 				case 'name':
 				case 'date_of_birth':
 				case 'start_date':
 				case 'grade':
 					foreach($this->input->post() as $n => $v){
 						$values[$n] = trim($v);
-					};
+					}
 					break;
 					
 				//case 'SMD':
@@ -671,7 +678,7 @@ class Team extends Smd_Controller {
 				default:
 					ajax_error(500, "Invalid field.");
 			}
-			if($this->user_model->update($id, $values)){
+			if($this->user_model->update($result[0]['users_id'], $values)){
 				echo json_encode(array('success' => true));
 			}
 			else{

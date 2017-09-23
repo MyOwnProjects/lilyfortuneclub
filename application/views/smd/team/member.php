@@ -13,17 +13,13 @@ if(!$member){
 			<li class="list-group-item list-group-item-info"><b>Member Information</b></li>
 			<?php 
 			foreach($member as $name => $value){
-				if(in_array($name, array('users_id', 'reset_token', 'smd', 'street', 'city', 'state', 'zipcode', 'first_name', 'last_name'))) continue;
+				if(in_array($name, array('users_id', 'reset_token', 'smd', 'street', 'city', 'state', 
+					'zipcode', 'country', 'first_name', 'last_name', 'nick_name'))) continue;
 			?>
 			<li class="list-group-item clearfix">
 				<div class="pull-left" style="font-weight:bold;text-transform:capitalize;width:130px;margin-right:5px;text-align:right">
 					<?php
-					if($name == 'parent'){
-						echo 'Upline';
-					}
-					else{
-						echo str_replace('_', ' ', $name);
-					}
+					echo str_replace('_', ' ', $name);
 					?>:
 				</div>
 				<div class="value pull-left">
@@ -40,9 +36,9 @@ if(!$member){
 					?>
 				</div>
 				<?php
-				if(!in_array($name, array('create_date', 'SMD'))){
+				if(!in_array($name, array('create_date', 'SMD', 'downline'))){
 				?>
-				<a href="javascript:void(0)" class="pull-right dialog-toggle" data-id="<?php echo $member['users_id'];?>" dialog-header="Update Member Information" dialog-url="<?php echo base_url();?>smd/team/update_user/<?php echo $name?>"><i class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+				<a href="javascript:void(0)" class="pull-right dialog-toggle" data-id="<?php echo $member['membership_code'];?>" dialog-header="Update Member Information" dialog-url="<?php echo base_url();?>smd/team/update_user/<?php echo $name?>"><i class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 				<?php
 				}
 				?>

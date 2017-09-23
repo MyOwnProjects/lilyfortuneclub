@@ -17,7 +17,7 @@ class User_model extends Base_model{
 			u2.first_name AS first_name2, u2.last_name AS last_name2, u2.nick_name AS nick_name2 
 			FROM users 
 			LEFT JOIN users u1 ON users.smd=u1.users_id 
-			LEFT JOIN users u2 ON users.parent=u2.users_id 
+			LEFT JOIN users u2 ON users.recruiter=u2.membership_code 
 			LEFT JOIN user_and_role ON user_and_role.user_id=users.users_id 
 			LEFT JOIN user_roles ON user_roles.user_roles_id=user_and_role.role_id 
 			WHERE users.users_id='$id'";
@@ -79,9 +79,9 @@ class User_model extends Base_model{
 			$where = '';
 		$sql = "SELECT CONCAT(users.first_name, ' ', users.last_name, IF(users.nick_name IS NULL OR users.nick_name='', '', CONCAT(' (', users.nick_name ,')'))) AS name,
 			users.membership_code,
-			CONCAT(u2.first_name, ' ', (u2.last_name), IF(u2.nick_name IS NULL OR u2.nick_name='', '', CONCAT(' (', u2.nick_name, ')')) ) AS parent, 
+			CONCAT(u2.first_name, ' ', (u2.last_name), IF(u2.nick_name IS NULL OR u2.nick_name='', '', CONCAT(' (', u2.nick_name, ')')) ) AS recruiter, 
 			users.children AS downline,
-			users.grade as level,
+			users.grade as grade,
 			users.phone,
 			users.email,
 			users.username,
@@ -93,10 +93,12 @@ class User_model extends Base_model{
 			users.preference,
 			users.status,
 			users.first_access,
-			CONCAT(u1.first_name, ' ', (u1.last_name)) AS SMD
+			CONCAT(u1.first_name, ' ', (u1.last_name)) AS SMD, 
+			users.first_name, users.last_name,users.nick_name,
+			users.street, users.city,users.state,users.zipcode, users.country
 			FROM users 
 			LEFT JOIN users u1 ON users.smd=u1.users_id 
-			LEFT JOIN users u2 ON users.parent=u2.users_id 
+			LEFT JOIN users u2 ON users.recruiter=u2.membership_code 
 			$where ORDER BY users.status ASC";
 		$results = $this->db->query($sql);
 		return $results;
@@ -111,24 +113,25 @@ class User_model extends Base_model{
 				array_push($set, $k."=NULL");
 			else
 				array_push($set, $k."='".$v."'");
-			if($k == 'parent'){
-				$new_parent = $v;
-				$result = $this->db->query("SELECT parent, children FROM users WHERE users_id=$id");
+			if($k == 'recruiter'){
+				$new_recruiter = $v;
+				$result = $this->db->query("SELECT membership_code, recruiter, children FROM users WHERE users_id=$id");
 				if(count($result) == 1){
-					$old_parent = $result[0]['parent'];
-					if($old_parent != $new_parent){
-						$new_ancestors = $this->get_ancestors($new_parent);
-						$new_ancestors_id = array();
+					$code = $result[0]['membership_code'];
+					$old_recruiter = $result[0]['recruiter'];
+					if($old_recruiter != $new_recruiter){
+						$new_ancestors = $this->get_ancestors($new_recruiter);
+						$new_ancestors_code = array();
 						foreach($new_ancestors as $p){
-							if($p['users_id'] == $id){
+							if($p['membership_code'] == $code){
 								return false;
 							}
-							array_push($new_ancestors_id, $p['users_id']);
+							array_push($new_ancestors_code, $p['membership_code']);
 						}
-						$old_ancestors = $this->get_ancestors($old_parent);
-						$old_ancestors_id = array();
+						$old_ancestors = $this->get_ancestors($old_recruiter);
+						$old_ancestors_code = array();
 						foreach($old_ancestors as $p){
-							array_push($old_ancestors_id, $p['users_id']);
+							array_push($old_ancestors_code, $p['membership_code']);
 						}
 					}
 					$children = $result[0]['children'];
@@ -143,14 +146,14 @@ class User_model extends Base_model{
 					$this->db->trans_rollback();
 					return false;
 				}
-				if(isset($old_parent) && isset($new_parent) && $old_parent != $new_parent){
-					$sql = "UPDATE users SET children=children - $children - 1 WHERE users_id IN (".implode(",", $old_ancestors_id).")";
-					if(!$this->db->query($sql) || $this->db->affected_rows() != count($old_ancestors_id)){
+				if(isset($old_recruiter) && isset($new_recruiter) && $old_recruiter != $new_recruiter){
+					$sql = "UPDATE users SET children=children - $children - 1 WHERE membership_code IN ('".implode("','", $old_ancestors_code)."')";
+					if(!$this->db->query($sql) || $this->db->affected_rows() != count($old_ancestors_code)){
 						$this->db->trans_rollback();
 						return false;
 					}
-					$sql = "UPDATE users SET children=children + $children + 1 WHERE users_id IN (".implode(",", $new_ancestors_id).")";
-					if(!$this->db->query($sql) || $this->db->affected_rows() != count($new_ancestors_id)){
+					$sql = "UPDATE users SET children=children + $children + 1 WHERE membership_code IN ('".implode("','", $new_ancestors_code)."')";
+					if(!$this->db->query($sql) || $this->db->affected_rows() != count($new_ancestors_code)){
 						$this->db->trans_rollback();
 						return false;
 					}
@@ -196,11 +199,11 @@ class User_model extends Base_model{
 					CONCAT(u1.first_name, ' ', u1.last_name, IF(u1.nick_name IS NULL OR u1.nick_name='', '', CONCAT(' (', u1.nick_name, ')')) ) AS upline, 
 					IF(u2.count IS NULL,0, u2.count) AS downline 
 				FROM users 
-				LEFT JOIN users u1 ON users.parent=u1.users_id
+				LEFT JOIN users u1 ON users.recruiter=u1.membership_code
 				LEFT JOIN 
 				(
-					SELECT parent, COUNT(*) AS count FROM users GROUP BY parent
-				) u2 ON users.users_id=u2.parent
+					SELECT recruiter, COUNT(*) AS count FROM users GROUP BY recruiter
+				) u2 ON users.users_id=u2.recruiter
 			) t
 			WHERE 1=1 ".(empty($where) ? "" : " AND $where ")
 			.(empty($like_array) ? "" : " AND (".implode(" OR ", $like_array).")")
@@ -224,7 +227,7 @@ class User_model extends Base_model{
 			(
 				SELECT users.*, CONCAT(users.first_name, ' ', users.last_name) AS name, CONCAT(u1.first_name, ' ', u1.last_name) AS upline 
 				FROM users 
-				LEFT JOIN users u1 ON users.parent=u1.users_id 
+				LEFT JOIN users u1 ON users.recruiter=u1.membership_code 
 			) t
 			WHERE 1=1 ".(empty($where) ? "" : " AND $where ")
 			.(empty($like_array) ? "" : " AND (".implode(" OR ", $like_array).")");
@@ -256,17 +259,17 @@ class User_model extends Base_model{
 				$this->db->trans_rollback();
 				return false;
 			}
-			$parents = $this->get_ancestors($prop['parent']);
-			$p_id = array();
-			foreach($parents as $p){
-				array_push($p_id, $p['users_id']);
+			$recruiters = $this->get_ancestors($prop['recruiter']);
+			$r_code = array();
+			foreach($recruiters as $p){
+				array_push($r_code, $p['membership_code']);
 			}
-			$sql = "UPDATE users SET children=children + 1 WHERE users_id IN (".implode(",", $p_id).")";
+			$sql = "UPDATE users SET children=children + 1 WHERE users_id IN ('".implode("','", $r_code)."')";
 			if(!$this->db->query($sql)){
 				$this->db->trans_rollback();
 				return false;
 			}
-			if($this->db->affected_rows() != count($p_id)){
+			if($this->db->affected_rows() != count($r_code)){
 				$this->db->trans_rollback();
 				return false;
 			}
@@ -299,37 +302,37 @@ class User_model extends Base_model{
 		return $this->db->query($sql);
 	}
 	
-	public function get_child_users($parent_id, $user_id = null){
-		if(isset($parent_id)){
+	public function get_child_users($recruiter_code, $user_id = null){
+		if(isset($recruiter_code)){
 			$sql = "SELECT u1.*, IF(u2.count IS NULL, 0, u2.count) AS count FROM users u1 
 				LEFT JOIN 
 				(
-					SELECT parent, COUNT(*) AS count FROM users GROUP BY parent
-				) u2 ON u1.users_id=u2.parent 
-				WHERE u1.parent='$parent_id' ORDER BY u1.status ASC";
+					SELECT recruiter, COUNT(*) AS count FROM users GROUP BY recruiter
+				) u2 ON u1.membership_code=u2.recruiter 
+				WHERE u1.recruiter='$recruiter_code' ORDER BY u1.status ASC";
 		}
 		else{
 			$sql = "SELECT u1.*, IF(u2.count IS NULL, 0, u2.count) AS count FROM users u1 
 				LEFT JOIN 
 				(
-					SELECT parent, COUNT(*) AS count FROM users GROUP BY parent
-				) u2 ON u1.users_id=u2.parent 
+					SELECT recruiter, COUNT(*) AS count FROM users GROUP BY recruiter
+				) u2 ON u1.membership_code=u2.recruiter 
 				WHERE u1.users_id = '$user_id'";
 		}
 		return $this->db->query($sql);
 	}
 	
-	public function get_all_children($parent_id){
+	public function get_all_children($recruiter_code){
 		$data = array();
-		$parent_ids = array($parent_id);
-		while(count($parent_ids) > 0){
-			$sql = "SELECT * FROM users WHERE parent IN ('".implode("','", $parent_ids)."')";
+		$recruiter_codes = array($recruiter_code);
+		while(count($recruiter_codes) > 0){
+			$sql = "SELECT * FROM users WHERE recruiter IN ('".implode("','", $recruiter_codes)."')";
 			$result = $this->db->query($sql);
-			$parent_ids = array();
+			$recruiter_codes = array();
 			foreach($result as $r){
-				$id = $r['users_id'];
-				$data[$id] = $r;
-				array_push($parent_ids, $id);	
+				$code = $r['membership_code'];
+				$data[$code] = $r;
+				array_push($recruiter_codes, $code);	
 			}
 		}
 		return $data;
@@ -416,19 +419,19 @@ class User_model extends Base_model{
 		return $this->db->query($sql);
 	}
 	
-	public function get_ancestors($user_id){
-		$sql = "SELECT T2.users_id, T2.parent
+	public function get_ancestors($membership_code){
+		$sql = "SELECT T2.membership_code, T2.recruiter
 			FROM (
 				SELECT
 					@r AS _id,
-					(SELECT @r := parent FROM users WHERE users_id = _id) AS parent,
+					(SELECT @r := recruiter FROM users WHERE membership_code = _id) AS recruiter,
 					@l := @l + 1 AS lvl
 				FROM
-					(SELECT @r := $user_id, @l := 0) vars,
+					(SELECT @r := '$membership_code', @l := 0) vars,
 					users h
 				WHERE @r <> 0) T1
 			JOIN users T2
-			ON T1._id = T2.users_id
+			ON T1._id = T2.membership_code
 			ORDER BY T1.lvl DESC";
 		return $this->db->query($sql);
 	}

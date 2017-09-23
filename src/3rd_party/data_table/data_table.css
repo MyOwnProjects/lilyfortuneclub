@@ -1,4 +1,8 @@
 .data-table button:focus{outline:none}
+.data-table .table-group-bar{overflow:hidden}
+.data-table .customized_group{margin-right:20px}
+.data-table .standard-groups{margin-left:20px}
+.data-table .standard-groups>.btn-group{margin-left:5px}
 .data-table .table-group-bar>div, .data-table .customized_group>div{margin-bottom:10px}
 .data-table table{width:100%;table-layout:fixed}
 .data-table table td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

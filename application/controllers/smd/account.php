@@ -13,7 +13,7 @@ class Account extends Smd_Controller {
 	public function index()
 	{
 		$this->load->model('user_model');
-		$result = $this->user_model->get_all_children($this->user['users_id']);
+		$result = $this->user_model->get_all_children($this->user['membership_code']);
 		$grades = array();
 		$statuses = array();
 		foreach($result as $r){

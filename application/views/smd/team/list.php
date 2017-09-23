@@ -11,8 +11,8 @@
 			{id: 'status', text: 'Status', align: 'center', width: '50px', sortable: true},
 			{id: 'start_date', text: 'Start Date',  width: '80px', sortable: true},
 			{id: 'location', text: 'Location', align: 'center', width: '60px', sortable: true},
-			{id: 'upline', text: 'Upline', width:'100px', sortable: true},
-			{id: 'downline', text: 'Downline', width:'60px', align: 'center', sortable: true},
+			{id: 'upline', text: 'Recruiter', width:'100px', sortable: true},
+			{id: 'children', text: 'Downline', width:'60px', align: 'center', sortable: true},
 		],
 		url: '<?php echo base_url();?>smd/team/get_member_list',
 		customized_buttons: [
