@@ -57,25 +57,51 @@ class Team extends Smd_Controller {
 		return $upline_opt;
 	}	
 	
-	public function add_member(){
+	public function add_member($membership_code = null){
 		$this->load->model('user_model');
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$prop = $this->input->post();
-			$result = $this->user_model->get_count("membership_code='".$prop['recruiter']."'");
-			if($result <= 0){
-				echo json_encode(array('success' => false, 'fields' => array('recruiter'), 'message' => 'Invalid upline.'));
-				return;
-			}
-			$prop['smd'] = $this->user['users_id'];
-			$prop['username']= $prop['membership_code'];
-			$prop['password']= sha1(strtoupper(trim($prop['membership_code']).trim($prop['last_name'])));
-			$res = $this->user_model->new_user($prop);
-			if($res){
-				echo json_encode(array('success' => true));
-				return;
+			if(isset($membership_code)){
+				$result = $this->user_model->get_user_by(array('membership_code' => $membership_code, 'smd' => $this->user['users_id']));
+				if(count($result) == 0){
+					echo json_encode(array('success' => false, 'message' => 'Invalid user.'));
+					return;
+				}
+				else{
+					$user_id = $result[0]['users_id'];
+					$result1 = $this->user_model->get_count("membership_code='".$prop['recruiter']."'");
+					if($result1 <= 0){
+						echo json_encode(array('success' => false, 'fields' => array('recruiter'), 'message' => 'Invalid upline.'));
+						return;
+					}
+					unset($prop['membership_code']);
+					$res = $this->user_model->update($user_id, $prop);
+					if($res){
+						echo json_encode(array('success' => true));
+						return;
+					}
+					else{
+						echo json_encode(array('success' => false, 'message' => 'Failed to add member'));
+					}	
+				}
 			}
 			else{
-				echo json_encode(array('success' => false, 'message' => 'Failed to add member'));
+				$result = $this->user_model->get_count("membership_code='".$prop['recruiter']."'");
+				if($result <= 0){
+					echo json_encode(array('success' => false, 'fields' => array('recruiter'), 'message' => 'Invalid upline.'));
+					return;
+				}
+				$prop['smd'] = $this->user['users_id'];
+				$prop['username']= $prop['membership_code'];
+				$prop['password']= sha1(strtoupper(trim($prop['membership_code']).trim($prop['last_name'])));
+				$res = $this->user_model->new_user($prop);
+				if($res){
+					echo json_encode(array('success' => true));
+					return;
+				}
+				else{
+					echo json_encode(array('success' => false, 'message' => 'Failed to add member'));
+				}
 			}
 		}
 		$upline_opt = $this->_get_all_smd_members($this->user['users_id']);
@@ -87,7 +113,7 @@ class Team extends Smd_Controller {
 			),
 			array(
 				'label' => 'Membership Code',
-				'name' => 'membership_code',
+				'name' => isset($membership_code) ? null : 'membership_code',
 				'tag' => 'input',
 				'required' => true,
 			),

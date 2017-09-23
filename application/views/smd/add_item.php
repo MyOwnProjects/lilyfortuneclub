@@ -14,6 +14,9 @@ $half_count = floor($item_count / 2 - 0.5);
 	<?php
 	if(isset($items)){
 	foreach($items as $i => $item){
+		if(!$item['name']){
+			continue;
+		}
 		$is_auto_fill = $item['name'] == 'auto-fill';
 		if($is_auto_fill){
 	?>
@@ -255,14 +258,14 @@ $(document).ready(function(){
 								address.push(line);
 								break;
 							case 'Recruiter':
-								$('#parent option').each(function(index, obj){
+								$('#recruiter option').each(function(index, obj){
 									var v = $(obj).html().trim().toLowerCase();
 									var index = v.indexOf('(');
 									if(index > 0){
 										v = v.substr(0, index).trim();
 									}
 									if(v == line.toLowerCase()){
-										$('#parent').val($(obj).val()).selectpicker('refresh');
+										$('#recruiter').val($(obj).val()).selectpicker('refresh');
 										return false;
 									}
 								});

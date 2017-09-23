@@ -10,7 +10,12 @@ if(!$member){
 <div class="row">
 	<div class="col-lg-6">
 		<ul class="list-group">
-			<li class="list-group-item list-group-item-info"><b>Member Information</b></li>
+			<li class="list-group-item list-group-item-info cearfix">
+				<b>Member Information</b>
+				<a href="javascript:void(0)" class="pull-right dialog-toggle" data-id="<?php echo $member['membership_code'];?>" dialog-header="Update Member Information" dialog-url="<?php echo base_url();?>smd/team/add_member">
+					<i class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit"></i>
+				</a>
+			</li>
 			<?php 
 			foreach($member as $name => $value){
 				if(in_array($name, array('users_id', 'reset_token', 'smd', 'street', 'city', 'state', 
