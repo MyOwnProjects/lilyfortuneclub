@@ -258,33 +258,45 @@ $(document).ready(function(){
 								address.push(line);
 								break;
 							case 'Recruiter':
-								$('#recruiter option').each(function(index, obj){
+								var p = line.lastIndexOf(' ');
+								var l_first_name = line.substr(0, p).toLowerCase();
+								var l_last_name = line.substr(p + 1).toLowerCase();
+								for(var ii = 0; ii < $('#recruiter option').length; ++ii){
+									var obj = $('#recruiter option:nth-child(' + (ii + 1) + ')');
 									var v = $(obj).html().trim().toLowerCase();
-									var index = v.indexOf('(');
-									if(index > 0){
-										v = v.substr(0, index).trim();
+									var p1 = v.indexOf('(');
+									var p2 = v.indexOf(')');
+									if(p1 >= 0 && p2 >= 3){
+										var v_nick_name = v.substr(p1 + 1, p2 - p1 - 1);
+										v = v.substr(0, p1).trim();
 									}
-									if(v == line.toLowerCase()){
+									var p = v.lastIndexOf(' ');
+									var v_first_name = v.substr(0, p).toLowerCase();
+									var v_last_name = v.substr(p + 1).toLowerCase();
+									if(l_last_name == v_last_name && 
+										( l_first_name == v_first_name || l_first_name == v_nick_name)){
 										$('#recruiter').val($(obj).val()).selectpicker('refresh');
-										return false;
+										break;
 									}
-								});
+								}
 								break;
 						}
 					}
 				}
 			}
-			
-			$('#street').val(address[0]);
-			var ar = address[1].split(',');
-			$('#city').val(ar[0].trim());
-			ar = ar[1].split('-');
-			$('#country').val(ar[1].trim());
-			ar = ar[0].trim().split(' ');
-			$('#state').val(ar[0].trim());
-			$('#zipcode').val(ar[1].trim());
+			if(address.length >= 2){
+				$('#street').val(address[0]);
+				var ar = address[1].split(',');
+				$('#city').val(ar[0].trim());
+				ar = ar[1].split('-');
+				$('#country').val(ar[1].trim());
+				ar = ar[0].trim().split(' ');
+				$('#state').val(ar[0].trim());
+				$('#zipcode').val(ar[1].trim());
+			}
 			$('#phone').val(phone_list.join(','));
 		}
 	});
+
 });
 </script>
