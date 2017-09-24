@@ -22,6 +22,10 @@ class My_database_model extends CI_Model{
 			return $result;
 	}
 	
+	public function query_obj($sql){
+		return self::$db->query($sql)->result_object();
+	}
+
 	public function escape_str($value, $add_quote = true, $like = false){
 		$value = self::$db->escape_str($value, $like);
 		if($add_quote){
@@ -42,7 +46,8 @@ class My_database_model extends CI_Model{
 	}
 	
 	public function affected_rows(){
-		return self::$db->affected_rows();
+		$result = $this->query('select row_count() AS count');
+		return $result[0]['count'];
 	}
 	
 	public function trans_start(){

@@ -103,7 +103,18 @@ class Smd_controller extends CI_Controller {
 					'text' => 'New Task'
 				),
 			),
-		)
+		),
+		'tools' => array(
+			'text' => 'Tools',
+			'sub_menus' => array(
+				'' => array(
+					'text' => 'Direct Query'
+				),
+				'elite_qualification' => array(
+					'text' => 'Elite Qualification'
+				),
+			),
+		),
 	);
 	public function __construct(){
 		parent::__construct();
