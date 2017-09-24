@@ -25,35 +25,40 @@ function direct_query(){
 		$.ajax({
 			url: '<?php echo base_url();?>smd/tools/direct_query',
 			data: {sql: sql},
-			dataType: 'json',
 			method: 'post',
 			success: function(data){
-				if(data['success']){
-					var result = data['result'];
-					if(!result || result.length == 0){
-						table.append('<tr><td style="text-align:center; line-height:80px">Empty result.</td></tr>');
-					}
-					else{
-						var thead = $('<thead>').appendTo(table);
-						var tr = $('<tr>').appendTo(thead);
-						for(var col in result[0]){
-							tr.append('<td>' + col + '</td>');
+				try{
+					data = JSON.parse(data);
+					if(data['success']){
+						var result = data['result'];
+						if(!result || result.length == 0){
+							table.append('<tr><td class="bg-danger" style="text-align:center; line-height:80px">Empty result.</td></tr>');
 						}
-						var tbody = $('<tbody>').appendTo(table);
-						for(var i = 0; i < result.length; ++i){
-							var tr = $('<tr>').appendTo(tbody);
-							for(var c in result[i]){
-								tr.append('<td>' + result[i][c] + '</td>');
+						else{
+							var thead = $('<thead>').appendTo(table);
+							var tr = $('<tr>').appendTo(thead);
+							for(var col in result[0]){
+								tr.append('<td>' + col + '</td>');
+							}
+							var tbody = $('<tbody>').appendTo(table);
+							for(var i = 0; i < result.length; ++i){
+								var tr = $('<tr>').appendTo(tbody);
+								for(var c in result[i]){
+									tr.append('<td>' + result[i][c] + '</td>');
+								}
 							}
 						}
 					}
+					else{
+						table.append('<tr><td style="text-align:center;padding:40px 0px">' + data['message'] + '</td></tr>');
+					}
 				}
-				else{
-					table.append('<tr><td style="text-align:center;padding:40px 0px">' + data['message'] + '</td></tr>');
+				catch(e){
+					table.append('<tr><td style="text-align:center;padding:40px 0px">' + data + '</td></tr>');
 				}
 			},
 			error: function(a, b, c){
-				table.append('<tr><td style="text-align:center;padding:40px 0px">' + a.responseText + '</td></tr>');
+				table.append('<tr><td class="bg-danger" style="text-align:center;padding:40px 0px">' + a.responseText + '</td></tr>');
 			},
 			complete: function(){
 				ajax_loading(false);
