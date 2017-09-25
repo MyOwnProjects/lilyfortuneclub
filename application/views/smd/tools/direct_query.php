@@ -32,7 +32,7 @@ function direct_query(){
 					if(data['success']){
 						var result = data['result'];
 						if(!result || result.length == 0){
-							table.append('<tr><td class="bg-danger" style="text-align:center; line-height:80px">Empty result.</td></tr>');
+							table.append('<tr><td style="text-align:center; line-height:80px">Empty result.</td></tr>');
 						}
 						else{
 							var thead = $('<thead>').appendTo(table);
@@ -50,11 +50,11 @@ function direct_query(){
 						}
 					}
 					else{
-						table.append('<tr><td style="text-align:center;padding:40px 0px">' + data['message'] + '</td></tr>');
+						table.append('<tr><td class="bg-danger" style="text-align:center;padding:40px 0px">' + data['message'] + '</td></tr>');
 					}
 				}
 				catch(e){
-					table.append('<tr><td style="text-align:center;padding:40px 0px">' + data + '</td></tr>');
+					table.append('<tr><td class="bg-danger" style="text-align:center;padding:40px 0px">' + data + '</td></tr>');
 				}
 			},
 			error: function(a, b, c){
