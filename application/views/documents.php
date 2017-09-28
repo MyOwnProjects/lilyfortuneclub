@@ -10,8 +10,8 @@ ul.doc-list li{border-top:1px solid #efefef}
 .doc-abstract{line-height:16px;height:32px;}
 @media only screen and (max-width:768px) {
 ul.doc-list li{padding:0 20px}
-.doc-icon{font-size:20px;line-height:30px;height:30px;margin-right:10px}
-.doc-subject{font-size:14px;line-height:30px;height:30px}
+.doc-icon{font-size:20px;line-height:50px;height:50px;margin-right:10px}
+.doc-subject{font-size:14px;line-height:50px;height:50px}
 .doc-text .doc-abstract{display:none}
 .doc-type{display:none}
 .doc-subject{margin-bottom:0;height:20px;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
