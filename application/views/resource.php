@@ -9,23 +9,17 @@
 .resource-list-subject{font-weight:bold;overflow:hidden}
 .resource-list-subject .resource-list-info{font-weight:normal}
 .resource-list-short-desc{line-height:20px;height:40px;font-size:12px;overflow:hidden;overflow:hidden}
-@media only screen and (max-width:600px) {
-.resource-list .resource-list-thumbnail{display:none}
+@media only screen and (max-width:768px) {
+.main-content-wrapper{padding:20px 0}
 .resource-list li .resource-list-info{display:none}
-.resource-list-short-desc{display:none}
+#resource-list li:last-child{border-bottom:1px solid #efefef}
 .resource-list-subject{font-weight:normal;overflow:visible}
 .resource-list #resource-list{list-style:none !important;padding:0}
-.resource-list #resource-listul li{list-style:none;padding:0}
-.resource-list ul:not(.breadcrumb) li:not(:first-child){border-top:none}
+#resource-list li{list-style:none;padding:20px;margin:0}
 }
 </style>
 <div class="resource-list  main-content-wrapper">
 	<div class="clearfix" style="border-bottom:1px solid #e5e5e5;padding:5px 20px">
-	<div class="pull-left">
-		<span><a href="<?php echo base_url();?>">Home</a></span>
-		>
-		<span class="active">Resource</span> 
-	</div>
 		<div class="pull-right">
 			<form>
 				<label class="radio-inline">
