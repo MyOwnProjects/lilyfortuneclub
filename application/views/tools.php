@@ -1,4 +1,5 @@
 <style>
+.main-content-wrapper{max-width:none}
 .nav-tabs>li:not(:last-child){width:33%}
 .nav-tabs>li:last-child{width:34%}
 .tab-content{padding:40px}
