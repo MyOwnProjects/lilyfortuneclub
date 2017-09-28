@@ -5,13 +5,12 @@ ul.doc-list li{border-top:1px solid #efefef}
 .doc-icon{float:left;font-size:60px;line-height:60px;height:60px;margin-right:20px}
 .doc-type{float:right;margin-left:20px;width:100px;text-align:center;line-height:60px}
 .doc-text{overflow:hidden}
-.doc-subject{margin-bottom:6px;height:22px;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.doc-subject{text-decoration:none}
+.doc-subject{margin-bottom:6px;height:22px;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}
 .doc-abstract{line-height:16px;height:32px;}
 @media only screen and (max-width:768px) {
 ul.doc-list li{padding:0 20px}
 .doc-icon{font-size:20px;line-height:50px;height:50px;margin-right:10px}
-.doc-subject{font-size:16px;line-height:50px;height:50px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-subject{margin-bottom:0;font-size:16px;line-height:50px;height:50px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .doc-text .doc-abstract{display:none}
 .doc-type{display:none}
 }
