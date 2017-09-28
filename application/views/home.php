@@ -1,6 +1,6 @@
 <style>
 @media only screen and (max-width:768px) {
-#text-block{width:auto;padding:0}
+#text-block{width:auto;padding:0 40px}
 .text-block-content-text, .text-block-content-image{width:100%;height:50%}
 </style>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/css/home.css?t=<?php echo time();?>"></script>
@@ -80,7 +80,7 @@
 	</script>
 	
 	<div id="text-block" style="padding:0 40px;max-width:1080px">
-		<div id="text-block">
+		<div id="text-block-wrapper">
 		<div class="row">
 			<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 image">
 				<div class="text-block-content-image" id="x-curve">
