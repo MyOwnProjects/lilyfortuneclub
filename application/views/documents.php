@@ -9,7 +9,7 @@ ul.doc-list li{border-top:1px solid #efefef}
 .doc-subject{text-decoration:none}
 .doc-abstract{line-height:16px;height:32px;}
 @media only screen and (max-width:768px) {
-ul.doc-list li{padding:0 20px}
+ul.doc-list li{padding:0}
 .doc-icon{font-size:20px;line-height:50px;height:50px;margin-right:10px}
 .doc-subject{font-size:14px;line-height:50px;height:50px}
 .doc-text .doc-abstract{display:none}
