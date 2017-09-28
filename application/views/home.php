@@ -1,7 +1,7 @@
 <style>
 @media only screen and (max-width:768px) {
 #text-block{width:auto;padding:0}
-.text-block-content-text, .text-block-content-image{}
+.text-block-content-text, .text-block-content-image{width:100%;height:50%}
 </style>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/css/home.css?t=<?php echo time();?>"></script>
 <script>
