@@ -8,12 +8,12 @@
 .resource-list li .resource-list-info{color:#888}
 .resource-list-subject{font-weight:bold;overflow:hidden}
 .resource-list-subject .resource-list-info{font-weight:normal}
-.resource-list-short-desc{line-height:20px;height:40px;font-size:12px;overflow:hidden;overflow:hidden}
+.resource-list-short-desc{line-height:20px;height:40px;font-size:12px;overflow:hidden}
 @media only screen and (max-width:768px) {
 .main-content-wrapper{padding:20px 0}
 .resource-list li .resource-list-info{display:none}
 #resource-list li:last-child{border-bottom:1px solid #efefef}
-.resource-list-subject{font-weight:normal;overflow:visible}
+.resource-list-subject{font-weight:normal;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .resource-list #resource-list{list-style:none !important;padding:0}
 #resource-list li{list-style:none;padding:20px;margin:0}
 }
