@@ -14,17 +14,17 @@
 				<div class="panel-heading">Invitation and Objection Handling</div>
 				<div class="panel-body"> 
 					<div class="row">
-						<div class="col-xs-4">
+						<div class="col-sm-4 col-xs-6">
 							<b>Lily Zhu</b><br/>
 							(510) 501-4697<br/>
 							lily_min_zhu@yahoo.com
 						</div>
-						<div class="col-xs-4">
+						<div class="col-sm-4 col-xs-4">
 							<b>Sherry Hu</b><br/>
 							(415) 264-1889<br/>
 							Ms_huxin@hotmail.com
 						</div>
-						<div class="col-xs-4">
+						<div class="col-sm-4 col-xs-4">
 							<b>Minna Millare</b><br/>
 							(415) 828-8841<br/>
 							Minna.millare@gmail.com
@@ -36,17 +36,17 @@
 				<div class="panel-heading">Products</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-xs-4">
+						<div class="col-sm-4 col-xs-6">
 							<b>Lily Zhu</b><br/>
 							(510) 501-4697<br/>
 							lily_min_zhu@yahoo.com
 						</div>
-						<div class="col-xs-4">
+						<div class="col-sm-4 col-xs-6">
 							<b>Yiqing Du</b><br/>
 							(510) 754-9984<br/>
 							yiqingdu@hotmail.com
 						</div>
-						<div class="col-xs-4">
+						<div class="col-sm-4 col-xs-6">
 							<b>Bob Wang</b><br/>
 							(408) 718-3622<br/>
 							bob888wang@gmail.com
