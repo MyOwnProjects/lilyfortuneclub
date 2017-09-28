@@ -1,7 +1,7 @@
 <style>
 @media only screen and (max-width:768px) {
 #text-block{width:auto;padding:0}
-.text-block-content-text, .text-block-content-image{width:80%;margin:0;text-align:center}
+.text-block-content-text, .text-block-content-image{}
 </style>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/css/home.css?t=<?php echo time();?>"></script>
 <script>
@@ -79,7 +79,8 @@
     });
 	</script>
 	
-	<div id="text-block" style="width:100%;max-width:1000px">
+	<div id="text-block" style="padding:0 40px;max-width:1080px">
+		<div id="text-block">
 		<div class="row">
 			<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 image">
 				<div class="text-block-content-image" id="x-curve">
@@ -144,6 +145,7 @@
 					<img src="<?php echo base_url();?>src/img/72-rule.png">
 				</div>
 			</div>
+		</div>
 		</div>
 </div>
 </div>
