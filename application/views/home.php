@@ -74,67 +74,6 @@
     });
 	</script>
 	
-	<!--div id="main-home-slide" class="carousel slide" data-ride="carousel">
-		<ol class="carousel-indicators">
-		  <li data-target="#main-home-slide" data-slide-to="0" class="active"></li>
-		  <li data-target="#main-home-slide" data-slide-to="1"></li>
-		  <li data-target="#main-home-slide" data-slide-to="2"></li>
-		  <li data-target="#main-home-slide" data-slide-to="3"></li>
-		</ol>
-
-		<div class="carousel-inner" role="listbox">
-			<div class="item active clearfix" id="slider-about">
-				<div class="slider-content-wrapper">
-					<div class="slider-content-subject">Who We Are?</div>
-					<ul class="slider-content-body">
-						<li>We are Financial Doctors</li>
-						<li>We are Financial Brokers</li>
-					</ul>
-				</div>
-			</div>
-			<div class="item clearfix" id="finance-status">
-				<div class="slider-content-wrapper">
-					<div class="slider-content-subject">What We Do?</div>
-					<ul class="slider-content-body">
-						<li>We help provide Solutions</li>
-						<li>Client Oriented vs. Company Oriented</li>
-						<li>Education Approach</li>
-					</ul>
-				</div>
-			</div>
-			<div class="item clearfix" id="diy">
-				<div class="slider-content-wrapper">
-							<div class="slider-content-subject">Great Business Opportunity</div>
-							<ul class="slider-content-body">
-								<li>Huge Market / Product Service</li>
-								<li>Powerful and Efficient System</li>
-								<li>Great Profitability</li>
-								<li>Doable</li>
-							</ul>
-				</div>
-			</div>
-			<div class="item clearfix" id="business-partner">
-				<div class="slider-content-wrapper">
-					<div class="slider-content-subject">Become Our Business Partners</div>
-					<ul class="slider-content-body">
-						<li>Financial Knowledge</li>
-						<li>Leadership Skills</li>
-						<li>Field Training</li>
-						<li>CEO of your own Business</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<a class="left carousel-control" href="#main-home-slide" role="button" data-slide="prev">
-			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="right carousel-control" href="#main-home-slide" role="button" data-slide="next">
-			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-	</div-->
-		
 	<div id="text-block">
 		<div class="row">
 			<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 image">

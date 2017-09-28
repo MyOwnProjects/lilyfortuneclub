@@ -6,13 +6,11 @@ class License extends Account_base_controller {
 	public function __construct(){
 		parent::__construct();
 		$steps = array(array(
-			'subject' => '52 Hours Online Cources',
-			'url' => base_url().'account/license/online_course',
+			'title' => 'Courses',
 			'comment' => 'The 52 hours onine courses are mandatory in some states, such as California. Some states do not require it, such as New Hampshire. <b>The online class is strongly recommended before your license exam, no matter the class is required or not</b>.',
-			'instruct' => array(
-				'subject' => "52 Hours Online Class Registration",
-				'image_file_name'=> 'license-52-hours',
-				'steps' => array(
+			'subject' => "52 Hours Online Class Registration",
+			'image_file_name'=> 'license-52-hours',
+			'steps' => array(
 					'Go to the 52 online courses website at <a href="https://www.examfx.com" target="_blank">www.examfx.com</a>, and click <span class="screen-shot-btn">GET STARTED NOW</span> button.',
 					'In the edit box, enter <i>teamaspire@examfx.com</i>, and then click <span class="screen-shot-btn">CONTINUE</span> button.',
 					'Click <span class="screen-shot-btn">NEW STUDENT</span> button.',
@@ -31,18 +29,15 @@ class License extends Account_base_controller {
 					'Click the <i>Get Certificate</i> link in each course.',
 					'Check <i>Please send a copy of the certificate to my e-mail address</i>, and then click <i>Print Certificate</i> button. The cerfiticate will be printed, and an email will be sent.'.
 					'Congratulations! You have got your online course certificate. Now let us take the license exam.',
-				),
-			)
+			),
 		));
 		if($this->user['preference'] == 'B' || $this->user['preference'] == 'BE'){
 			array_push($steps, array(
-					'subject' => 'License Exam',
-					'url' => base_url().'account/license/exam',
+					'title' => 'Exam',
 					'comment' => 'You must correctly answer above 60 or 70 percent, depends on state, of 150 questions in 195 minutes to pass the exam.',
-					'instruct' => array(
-						'subject' => "License Exam Registration",
-						'image_file_name'=> 'license-exam',
-						'steps' => array(
+					'subject' => "License Exam Registration",
+					'image_file_name'=> 'license-exam',
+					'steps' => array(
 							'Go to the PSI Exam  website at <a href="https://candidate.psiexams.com/" target="_blank">PSI Exams Online</a>, and click <i>Create</i> an account.',
 							'Enter your account information.',
 							'Log in your account, in the account page, click <i>Register for a test</i> link.',
@@ -57,16 +52,13 @@ class License extends Account_base_controller {
 							'After go back to the PSI Exam page, click the <i>schedule for the test</i> link, to select a time and location you would like for the exam, following the instruction.',
 							'Next, go to take the exam at the time and location you have scheduled. Good luck!'
 						),
-					)
 				),
 				array(
-					'subject' => 'License Application',
-					'url' => base_url().'account/license/application',
+					'title' => 'Application',
 					'comment' =>'You can only apply for the license after you finished both of the 52 hours courses and license exam.',
-					'instruct' => array(
-						'subject' => "License Application",
-						'image_file_name'=> 'license-application',
-						'steps' => array(
+					'subject' => "License Application",
+					'image_file_name'=> 'license-application',
+					'steps' => array(
 							'Go to <a href="https://www.insurance.ca.gov" target="_blank">www.insurance.ca.gov</a>, type <i>flash</i>in the search box at the top right of he page, then select <i>flash</i> in the dropbox, and click the <i>Search</i> button.',
 							'In the search result, click the <i>Flash Application</i> link.',
 							'Click the <i>Fast Licensing Application Service is Here (Flash)</i> link.',
@@ -75,16 +67,13 @@ class License extends Account_base_controller {
 							'In the next few pages, follow the instruction to enter the correct information, and the click <i>Next</i> button.',
 							'Follow the instruct to pay. After the payment, you will go back to the Check out page. You can click <i>Download Application</i> button to save your application.',
 							'You license application is done. After the license is issued, you can start the continuing education.',
-						)
-					)
+						),
 				),
 				array(
-					'subject' => 'Continuing Education',
-					'url' => base_url().'account/license/ce',
+					'title' => 'CE',
 					'comment' =>'You can only pass the CE exam after you get your licen number, however, you can start to learn the curses during the course of  the license application..',
-					'instruct' => array(
-						'subject' => "Continuing Education",
-						'image_file_name'=> 'license-ce',
+					'subject' => "Continuing Education",
+					'image_file_name'=> 'license-ce',
 						'steps' => array(
 							'Go to <a href="https://www.webce.com" target="_blank">https://www.webce.com</a>, and click <i>Sign In</i> link.',
 							'If you already have an account, sign in your account, otherwise click <i>Register Now</i> link.',
@@ -99,17 +88,14 @@ class License extends Account_base_controller {
 							'Click <i>Begin Courses</i> button.',
 							'If you have got the license, enter your Llicense Number and NPN, and click <i>Save and Continue</i>button. Otherwise, click <i>Skip</i> button.',
 							'Download the PDF document, and start to learn.'
-						)
-					)
+						),
 				),
 				array(
-					'subject' => 'License Appointment',
-					'url' => base_url().'account/license/appointment',
+					'title' => 'Appointment',
 					'comment' =>'To sell products through certain product providers, you must be properly appointed.',
-					'instruct' => array(
-						'subject' => "License Appoitment",
-						'image_file_name'=> 'license-appointment',
-						'steps' => array(
+					'subject' => "License Appoitment",
+					'image_file_name'=> 'license-appointment',
+					'steps' => array(
 							'Send an email, attached with your license and all CE certificaters with signature, to <i>wfghost@transamerica.com</i> and <i>wfglicenseapps@transamerica.com</i>.',
 							'Sign in to <a href="https://www.mywfg.com" target="_blank">www.mywfg.com</a>, click the <i>MENU</i> at the top right of the screen. Then select <i>Licensing</i> > </i>Appoitments</i>.',
 							'Click <i>Carrier Appointments</i>.',
@@ -132,12 +118,11 @@ class License extends Account_base_controller {
 							'In each document review page, click the <i>Apply eSignature</i> botton at the bottom of the page.',
 							'After review the documents,click <i>Submit</i> botton.',
 							'You have finished to appoint with the Transamerica Premier Life Insuarance Company. To appoint with other providres, select other product type/crriers, and fowllow the instruction.',
-						)
-					)
+					),
 				));
 		}
 		$this->summary = array(
-			'There are 2 or 3 steps to get your license, denpends on the state',
+			'summary' => 'There are 2 or 3 steps to get your license, denpends on the state',
 			'steps' => $steps		
 		);
 	}

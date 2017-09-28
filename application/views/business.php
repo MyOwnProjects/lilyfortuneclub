@@ -1,4 +1,6 @@
 <style>
+.nav-tabs>li:not(:last-child){width:33%}
+.nav-tabs>li:last-child{width:34%}
 .tab-content-page{padding:40px 80px}
 .content-page-head{text-align:center;margin-bottom:40px}
 blockquote{font-size:14px;margin-left:10px}	
@@ -16,18 +18,13 @@ blockquote{font-size:14px;margin-left:10px}
 .list5{font-size:12px;list-style-position:inside;padding:0;margin:0 0 20px 0;}
 .list5s li:nth-child(odd){color:#000}
 .list5s li:nth-child(even){color:#999}
+.tab-content a{color:red;text-decoration:underline}
 </style>
-	<ul class="breadcrumb" style="border-bottom:1px solid #d5d5d5">
-		<li><a href="<?php echo base_url();?>account">Account</a></li>
-		<li>Business</li>
-	</ul>
 <div style="margin:0 auto;max-width:800px;padding:20px 0 80px 0;">
-	<div class="row" style="margin-bottom:20px">
 		<h2 class="text-center">Startup Your WFG Business</h2>
-		<div class="text-center" style="font-size:16px"><b>Critical:</b> The best approach is to <a href="<?php echo base_url();?>seminar" target="_blank">go to training class and field training</a>!</div>
-	</div>
+		<div class="text-center" style="font-size:16px;margin-bottom:20px"><b>Critical:</b> The best approach is to <a href="<?php echo base_url();?>seminar" target="_blank">go to training class and field training</a>!</div>
 	
-	<ul class="nav nav-tabs" id="top-tab">
+	<ul class="nav nav-tabs clearfix" id="top-tab">
 		<li class="active"><a data-toggle="tab" href="#prospecting-page">Prospecting</a></li>
 		<li><a data-toggle="tab" href="#invitation-page">Invitation</a></li>
 		<li><a data-toggle="tab" href="#field-training-page">Field Training</a></li>

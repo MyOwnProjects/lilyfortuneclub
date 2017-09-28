@@ -12,7 +12,7 @@ class Ac extends Base_Controller {
 			$this->set_session_user($this->input->post('username'), $this->input->post('password'), $this->input->post('save_password'));
 			if(!empty($this->user)){
 				$redirect = $this->input->get('redirect');
-				$url = base_url().(empty($redirect) ? "" : "$redirect");
+				$url = base_url().(empty($redirect) ? "account" : "$redirect");
 				header("location: $url");
 				exit;
 			}

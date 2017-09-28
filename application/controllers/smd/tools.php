@@ -34,6 +34,24 @@ class Tools extends Smd_Controller {
 	}
 	
 	public function elite_qualification(){
+		$sql = "select users.membership_code, u.start_date from users INNER JOIN users u ON u.recruiter=users.membership_code where u.start_date BETWEEN '2017-04-01' AND '2017-10-01'";
+		$recruiters = array();
+		foreach($result as $r){
+			$code = $r['recruiter_membership_code']; 
+			if(!array_key_exists($code, $recruiters)){
+				$recruiters[$code] = array();
+				$start_date = strtotime($start_date) / 86400;
+				for($date = $start_date; $date <= $start_date; $date++){
+					$recruiters[$code][$date] = array('count' => 0);
+				}
+			}
+			$recruit_date = strtotime($r['start_date']) /86400;
+			array_push($recruiters[$code], array());
+		}
+		foreach($users as $code => $recruits){
+			foreach($recruites as $r){
+			}
+		}
 	}
 	
 }

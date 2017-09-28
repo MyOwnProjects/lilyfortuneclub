@@ -2,7 +2,7 @@
 .radio{margin-left:20px}
 </style>
 
-<div style="max-width:1000px;width:100%;padding:40px 20px;margin:0 auto">
+<div class="main-content-wrapper">
 	<h4>Welcome to WFG, Lily's finance club. Before startup, please let us know about your preference.</h4>
 	<p style="font-size:16px">You would like to:</p>
 	<form method="post">

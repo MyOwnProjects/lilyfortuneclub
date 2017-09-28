@@ -7,7 +7,7 @@ $month = intval($month);
 ?>
 <style>
 ul, ul li{list-style:none}
-.background-list-block{position:relative;padding:40px 20px;font-family:Comic Sans MS, cursive, sans-serif}
+.background-list-block{position:relative;padding:80px 20px;font-family:Comic Sans MS, cursive, sans-serif}
 .background-list-block:after{
 	content: "";
 	background-image:url('<?php echo base_url();?>src/img/12 Google Calendar Walls/<?php echo $back_imgs[$month - 1];?>');
@@ -20,18 +20,25 @@ ul, ul li{list-style:none}
 	position: absolute;
 	z-index: -1;
 }
-@media only screen and (max-width:600px) {
-.doc-list li:first-child{border-top:none;display:none}
-.doc-list li>div:not(:last-child){display:none}
-.doc-list li>div:last-child{padding-left:10px}
+.background-list-block-line>div{line-height:60px}
+.background-list-block-line>div a{color:#ff0000;text-decoration:underline}
+.background-list-block-line>div:first-child{float:left;width:250px;margin-right:40px;text-align:center}
+.background-list-block-line>div:nth-child(2){float:left;width:180px;margin-right:20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.background-list-block-line>div:last-child{overflow:hidden;margin-left:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+@media only screen and (max-width:768px) {
+.background-list-block{padding:40px 20px}
+.background-list-block-line{margin-bottom:20px}
+.background-list-block-line>div{line-height:30px;text-align:center}
+.background-list-block-line>div:first-child,
+.background-list-block-line>div:nth-child(2),
+.background-list-block-line>div:last-child{float:none;display:block;width:100%}
+.background-list-block:after{
+	background-size:auto 100%;
+}
 }
 	
 </style>
-<div class="resource-list  main-content-wrapper">
-	<div style="border-bottom:1px solid #e5e5e5;padding:0 0 10px 10px" class="clearfix">
-		<a href="<?php echo base_url();?>">Home</a> > Seminar > list
-	</div>
-	<div class="background-list-block">
+<div class="resource-list  main-content-wrapper background-list-block">
 		<h2 class="text-center" style="margin-bottom:40px"><?php echo date_format(date_create("$year-".($month)."-01"), 'F, Y');?></h2>
 		<div style="font-size:18px;min-height:300px">
 		<?php
@@ -43,7 +50,7 @@ ul, ul li{list-style:none}
 		else{
 			foreach($list as $l){
 			?>
-				<div class="clearfix" style="line-height:60px">
+				<div class="clearfix background-list-block-line">
 					<?php
 					$start_date = date_create($l['schedule_date_start']);
 					if(!empty($l['schedule_date_end'])){
@@ -65,7 +72,7 @@ ul, ul li{list-style:none}
 					}
 					$text = str_replace('_', ' ', $text);
 					?>
-						<div class="pull-left" style="width:250px;margin-right:40px;text-align:center">
+						<div>
 							<?php echo date_format($start_date, 'M d, Y');
 							if(!empty($end_date)){
 							?>
@@ -75,10 +82,10 @@ ul, ul li{list-style:none}
 							}
 							?>
 						</div>
-						<div class="pull-left" style="width:180px;margin-right:20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
+						<div>
 							<?php echo (empty($l['office_name']) ? 'Other' : $l['office_name']);?>
 						</div>
-						<div class="overflow:hidden;margin-left:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
+						<div>
 							<a href="<?php echo base_url();?>src/schedule/<?php echo date_format($start_date, 'Y').'/'.$l['file'];?>" target="_blank"><?php echo $text;?></a>
 						</div>
 				</div>
@@ -109,5 +116,4 @@ ul, ul li{list-style:none}
 			<a class="btn btn-link" href="<?php echo base_url();?>seminar?year=<?php echo $last_year;?>&month=<?php echo $last_month;?>">Last Month</a>
 			<a class="btn btn-link" href="<?php echo base_url();?>seminar?year=<?php echo $next_year;?>&month=<?php echo $next_month;?>">Next Month</a>
 		</div>
-	</div>
 </div>

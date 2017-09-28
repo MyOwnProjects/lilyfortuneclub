@@ -1,4 +1,4 @@
 <footer>
-	<section>Add Favorate&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Terms of Service&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Privacy Policy&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Contact Us</section>
+	<section><span>Add Favorate</span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span>Terms of Service</span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span>Privacy Policy</span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="<?php echo base_url();?>contact">Contact Us</a></span></section>
 	<section>Copyright © 2016 lilyfortuneclub. All rights reserved.</section>
 </footer>

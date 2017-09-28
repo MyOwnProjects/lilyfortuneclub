@@ -8,10 +8,17 @@ ul.doc-list li{border-top:1px solid #efefef}
 .doc-subject{margin-bottom:6px;height:22px;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .doc-subject{text-decoration:none}
 .doc-abstract{line-height:16px;height:32px;}
+@media only screen and (max-width:768px) {
+ul.doc-list li{padding:0 10px}
+.doc-icon{font-size:20px;line-height:30px;height:30px;padding:5px 0;margin-right:10px}
+.doc-subject{font-size:14px;line-height:30px;height:30px}
+.doc-text .doc-abstract{display:none}
+.doc-type{display:none}
+.doc-subject{margin-bottom:0;height:20px;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
 </style>
 <div class="wrapper-900">
 	<div class="clearfix" style="margin-top:20px;padding-left:20px">
-		<div class="pull-left" style="line-height:40px"><a href="<?php echo base_url();?>">Account</a> > Documents > list</div>
 		<div class="pull-right" style="line-height:40px;font-size:14px;text-align:right">
 			<div class="pull-right dropdown">
 				Content

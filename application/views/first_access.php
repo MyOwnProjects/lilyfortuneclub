@@ -1,4 +1,6 @@
-<form method="POST" style="width:600px;margin:80px auto">
+<div class="main-content-wrapper">
+	<h2 class="text-center">First Time Access</h2>
+<form method="POST" style="margin:40px auto">
 	<?php 
 	if(!empty($error)){
 	?>
@@ -28,4 +30,5 @@
 	<div class="form-group">
 		<input class="pull-right btn btn-primary" type="submit" value="Change">
 	</div>
-</form>
+</form>	
+</div>
