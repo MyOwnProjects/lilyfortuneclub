@@ -74,7 +74,7 @@
     });
 	</script>
 	
-	<div id="text-block">
+	<div id="text-block" style="width:100%;max-width:1000px">
 		<div class="row">
 			<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 image">
 				<div class="text-block-content-image" id="x-curve">
