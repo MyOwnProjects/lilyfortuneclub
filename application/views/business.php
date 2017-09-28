@@ -31,7 +31,7 @@ blockquote{font-size:14px;margin-left:10px}
 	</ul>
 	<div id="tab-content-pages" class="tab-content">
 	<div id="prospecting-page" class="tab-pane fade in active tab-content-page">
-				<h3 class="content-page-head">Step 1. Prospecting</h3>
+				<h3 class="content-page-head">Prospecting</h3>
 				<ul class="list1">
 					<li class="to-do">Find the people you already know, <a href="<?php echo base_url();?>account/prospect" target="_blank">add</a> them into your prospect list.</li>
 					<li class="to-do"><a href="<?php echo base_url();?>account/prospect" target="_blank">Review</a> your top 25 prospect list.</li>
@@ -69,7 +69,7 @@ blockquote{font-size:14px;margin-left:10px}
 			</div>
 
 		<div id="invitation-page" class="tab-pane fade tab-content-page">
-				<h3 class="content-page-head">Step 2. Invitation/Approach</h3>
+				<h3 class="content-page-head">Invitation/Approach</h3>
 				<div><strong>Goal:</strong> Bring him/her to office. <a href="javascript:void(0)" id="why">Why?</a></div>
 				<div><strong>Method:</strong> Share the business opportunity. <span style="font-size:14px"><a href="javascript:void(0)" id="how">How?</a></span></div>
 
@@ -100,7 +100,7 @@ blockquote{font-size:14px;margin-left:10px}
 			</div>
 		
 			<div id="field-training-page" class="tab-pane fade tab-content-page">
-				<h3 class="content-page-head">Step 3. Field Training</h3>
+				<h3 class="content-page-head">Field Training</h3>
 				<div><strong>Goal:</strong> Field Training is the best and efficient way to improve your personal business and professional skills.</div>
 
 				<ul class="list1">
