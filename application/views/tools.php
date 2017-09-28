@@ -1,5 +1,7 @@
 <style>
-.tab-content-page{padding:40px 80px}
+.nav-tabs>li:not(:last-child){width:33%}
+.nav-tabs>li:last-child{width:34%}
+.tab-content{padding:40px}
 .content-page-head{text-align:center;margin-bottom:40px}
 .setting-body .form-group label{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .table-report table{margin-right:40px}
@@ -20,12 +22,11 @@
 .table-report tbody tr.highlight td{color:#ff0000}
 .table-report tbody tr td.disabled{color:#a5a5a5;text-decoration:line-through}
 .table-report tbody tr td:nth-child(2),.table-report tbody tr td:last-child{font-weight:bold} 
+@media only screen and (max-width:768px) {
+.tab-content{padding:20px 10px}
+.main-content-wrapper{padding:20px 0}
 </style>
-	<ul class="breadcrumb" style="border-bottom:1px solid #d5d5d5">
-		<li><a href="<?php echo base_url();?>account">Account</a></li>
-		<li>Tools</li>
-	</ul>
-<div style="margin:0 auto;padding:20px 40px 80px 40px;">
+<div class="main-content-wrapper">
 	<div class="row" style="margin-bottom:20px">
 		<h2 class="text-center">Tools</h2>
 	</div>
