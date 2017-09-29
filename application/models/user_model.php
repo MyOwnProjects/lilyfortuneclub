@@ -251,11 +251,13 @@ class User_model extends Base_model{
 		try{
 			$this->db->trans_begin();
 			if(!$this->db->query("INSERT INTO users (`".implode("`, `", $name_list)."`) VALUES ('".implode("', '", $value_list)."')")){
+				echo '1  ';
 				$this->db->trans_rollback();
 				return false;
 			}
 			$insert_id = $this->db->insert_id();
 			if($insert_id <= 0){
+				echo '2  ';
 				$this->db->trans_rollback();
 				return false;
 			}
@@ -266,16 +268,19 @@ class User_model extends Base_model{
 			}
 			$sql = "UPDATE users SET children=children + 1 WHERE users_id IN ('".implode("','", $r_code)."')";
 			if(!$this->db->query($sql)){
+				echo '3  ';
 				$this->db->trans_rollback();
 				return false;
 			}
 			if($this->db->affected_rows() != count($r_code)){
+				echo '4  ';
 				$this->db->trans_rollback();
 				return false;
 			}
 			$this->db->trans_commit();
 		}
 		catch(Exception $e){
+			echo '5  ';
 			$this->db->trans_rollback();
 			return false;
 		}

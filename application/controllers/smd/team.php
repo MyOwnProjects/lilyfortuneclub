@@ -81,7 +81,7 @@ class Team extends Smd_Controller {
 						return;
 					}
 					else{
-						echo json_encode(array('success' => false, 'message' => 'Failed to add member'));
+						echo json_encode(array('success' => false, 'message' => 'Failed to update member.'));
 					}	
 				}
 			}
@@ -100,7 +100,7 @@ class Team extends Smd_Controller {
 					return;
 				}
 				else{
-					echo json_encode(array('success' => false, 'message' => 'Failed to add member'));
+					echo json_encode(array('success' => false, 'message' => 'Failed to add member.'));
 				}
 			}
 		}
