@@ -266,7 +266,7 @@ class User_model extends Base_model{
 			foreach($recruiters as $p){
 				array_push($r_code, $p['membership_code']);
 			}
-			$sql = "UPDATE users SET children=children + 1 WHERE users_id IN ('".implode("','", $r_code)."')";
+			$sql = "UPDATE users SET children=children + 1 WHERE membership_code IN ('".implode("','", $r_code)."')";
 			if(!$this->db->query($sql) || $this->db->affected_rows() != count($r_code)){
 				echo '3  '.$sql;
 				$this->db->trans_rollback();
