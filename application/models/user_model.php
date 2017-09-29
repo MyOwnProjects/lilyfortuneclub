@@ -273,6 +273,7 @@ class User_model extends Base_model{
 				return false;
 			}
 			if($this->db->affected_rows() != count($r_code)){
+				echo $this->db->affected_rows().' '.count($r_code).' ';
 				echo '4  '.$sql;
 				$this->db->trans_rollback();
 				return false;
