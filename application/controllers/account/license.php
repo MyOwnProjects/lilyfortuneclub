@@ -54,7 +54,7 @@ class License extends Account_base_controller {
 						),
 				),
 				array(
-					'title' => 'Application',
+					'title' => 'Apply',
 					'comment' =>'You can only apply for the license after you finished both of the 52 hours courses and license exam.',
 					'subject' => "License Application",
 					'image_file_name'=> 'license-application',
@@ -91,7 +91,7 @@ class License extends Account_base_controller {
 						),
 				),
 				array(
-					'title' => 'Appointment',
+					'title' => 'Appoint',
 					'comment' =>'To sell products through certain product providers, you must be properly appointed.',
 					'subject' => "License Appoitment",
 					'image_file_name'=> 'license-appointment',

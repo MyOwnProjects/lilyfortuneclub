@@ -54,6 +54,10 @@ class Tools extends Smd_Controller {
 		}
 	}
 	
+	public function javascript_code(){
+		$this->nav_menus['tools']['sub_menus']['javascript_code']['active'] = true;
+		$this->load_view('tools/javascript_code');
+	}
 }
 
 /* End of file welcome.php */

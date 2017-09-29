@@ -1,5 +1,6 @@
 <style>
-.nav-tabs>li{width:25%}
+.nav-tabs>li:not(:last-child){width:33%}
+.nav-tabs>li:last-child{width:34%}
 .tab-content-page{padding:40px}
 .content-page-head{text-align:center;margin-bottom:40px}
 .tab-content-page p{margin-bottom:20px}

@@ -113,6 +113,9 @@ class Smd_controller extends CI_Controller {
 				'elite_qualification' => array(
 					'text' => 'Elite Qualification'
 				),
+				'javascript_code' => array(
+					'text' => 'Javascript Code'
+				),
 			),
 		),
 	);
