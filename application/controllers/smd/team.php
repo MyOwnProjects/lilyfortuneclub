@@ -101,6 +101,7 @@ class Team extends Smd_Controller {
 				}
 				else{
 					echo json_encode(array('success' => false, 'message' => 'Failed to add member.'));
+					return;
 				}
 			}
 		}
