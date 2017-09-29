@@ -268,7 +268,7 @@ class User_model extends Base_model{
 			}
 			$sql = "UPDATE users SET children=children + 1 WHERE users_id IN ('".implode("','", $r_code)."')";
 			if(!$this->db->query($sql)){
-				echo '3  ';
+				echo '3  '.$sql;
 				$this->db->trans_rollback();
 				return false;
 			}
