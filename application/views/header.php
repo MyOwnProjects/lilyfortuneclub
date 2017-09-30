@@ -12,6 +12,13 @@ a{color:#000;text-decoration:none}
 	<div id="main-header-menu" class="list-unstyled pull-right clearfix">
 			<span class="glyphicon glyphicon-menu-hamburger" id="menu-icon" style="cursor:pointer;font-size:25px"></span>
 			<div style="display:none">
+					<?php
+					if($user && $user['grade'] == 'SMD'){
+					?>
+					<div class="clearfix" style="border-bottom:1px solid #e5e5e5;">
+						<a class="menu-ico-url" href="<?php echo base_url();?>smd" title="SMD"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/hierarchical-structure.svg"><div class="text">SMD Account</div></div></a>
+					</div>
+					<?php }?>
 					<div class="clearfix" style="border-bottom:1px solid #e5e5e5;">
 						<a class="menu-ico-url" href="<?php echo base_url();?>" title="Home"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/home.svg"><div class="text">Home</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>resource" title="Resource"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/folded-newspaper.svg"><div class="text">Resource</div></div></a>

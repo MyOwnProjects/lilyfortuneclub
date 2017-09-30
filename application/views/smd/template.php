@@ -5,6 +5,7 @@
 		<title>SMD - Lily Fortune Club</title>
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery-ui-1.11.4/jquery-ui.css" />
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/css/bootstrap.min.css" />
+		<link rel="icon" type="image/png/ico" href="<?php echo base_url();?>src/img/smd.ico">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/jquery-simple-datetimepicker/jquery.datetimepicker.css?t=<?php echo time();?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/dialog/dialog.css?t=<?php echo time();?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/data_table/data_table.css?t=<?php echo time();?>">
