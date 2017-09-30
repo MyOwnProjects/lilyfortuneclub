@@ -43,7 +43,7 @@ function simpleUpload(e,l,n){function t(){if("object"==typeof n&&null!==n){if("b
 			var upload_error = false;
 			$_input.simpleUpload(url, {
 				start: function(file){
-					var $_upload_status_block_wrapper = $('<div>').addClass('col-lg-6').addClass('col-md-6').addClass('small').appendTo($_upload_status);
+					var $_upload_status_block_wrapper = $('<div>').addClass('col-lg-12').addClass('col-md-12').addClass('small').appendTo($_upload_status);
 					var $_upload_status_block = $('<div>').addClass('clearfix').css('margin', '2px 0').css('padding', '5px').css('border', '1px solid #d5d5d5').appendTo($_upload_status_block_wrapper);
 					var top = $('<div>').addClass('clearfix').appendTo($_upload_status_block);
 					$('<div>').addClass('pull-right').addClass('clearfix').outerWidth('20px').append('<a href="javascript:void(0)" class="pull-right"><span class="glyphicon glyphicon-remove ajax-upload-file-remove"></span></a>').appendTo(top); 
