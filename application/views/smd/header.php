@@ -10,6 +10,7 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
+				<li><a href="<?php echo base_url();?>">Home</a></li>
 				<?php
 				foreach($nav_menus as $name => $menu){
 				?>

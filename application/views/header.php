@@ -70,6 +70,19 @@ a{color:#000;text-decoration:none}
 			});
 		</script>
 	</div>
+	<?php
+	if($user){
+	?>
+	<div class="main-header-text pull-right">
+		<span class="glyphicon glyphicon-user"></span>
+		&nbsp;
+		<?php
+		echo $user['first_name'].' '.$user['last_name'].' ('.$user['membership_code'].')';
+		?>
+	</div>
+	<?php
+	}
+	?>
 <script>
 function toggle_chat(){
 	$('#live-chat').slideToggle();
