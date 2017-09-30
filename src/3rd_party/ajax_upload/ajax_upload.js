@@ -49,7 +49,7 @@ function simpleUpload(e,l,n){function t(){if("object"==typeof n&&null!==n){if("b
 					$('<div>').addClass('pull-right').addClass('clearfix').outerWidth('20px').append('<a href="javascript:void(0)" class="pull-right"><span class="glyphicon glyphicon-remove ajax-upload-file-remove"></span></a>').appendTo(top); 
 					var $_name_div = $('<div>').css('overflow', 'hidden').css('white-space', 'nowrap').css('text-overflow', 'ellipsis').append('<span>' + file['name'] + '</span>').appendTo(top);
 					$_percent_span = $('<span></span>').appendTo($_name_div);
-					this.progress_bar = $('<div>').addClass('progress-bar').addClass("notransition").css('width', '1%').outerHeight('5px').appendTo($_upload_status_block);
+					this.progress_bar = $('<div>').addClass('progress-bar').addClass('progress-bar-success').addClass("notransition").css('width', '1%').css('margin-top', '5px').outerHeight('20px').html('0%').appendTo($_upload_status_block);
 				},
 
 				progress: function(progress){
@@ -59,13 +59,15 @@ function simpleUpload(e,l,n){function t(){if("object"==typeof n&&null!==n){if("b
 					}
 					else{
 						this.progress_bar.css('width', progress + '%');
-						$_percent_span.css('color', 'black').html(' - ' + progress + '%');
+						//$_percent_span.css('color', 'black').html(' - ' + progress + '%');
+						this.progress_bar.html(Math.round(progress) + '%');
 					}
 				},
 
 				success: function(data){
 					data = JSON.parse(data);
 					if(data['success']){
+						$('#uploaded-progress-bar .progress-bar').addClass('progress-bar-success');
 						var file = data['data'];
 						_files.push(file);
 						if(_change_callback){
