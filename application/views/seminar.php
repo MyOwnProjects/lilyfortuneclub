@@ -27,7 +27,7 @@ ul, ul li{list-style:none}
 .background-list-block-line>div:last-child{overflow:hidden;margin-left:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 @media only screen and (max-width:768px) {
 .background-list-block{padding:40px 20px}
-.background-list-block-line{margin-bottom:20px}
+.background-list-block-line{margin-bottom:40px}
 .background-list-block-line>div{line-height:30px;text-align:center}
 .background-list-block-line>div:first-child,
 .background-list-block-line>div:nth-child(2),
