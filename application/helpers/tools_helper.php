@@ -306,3 +306,23 @@ if ( ! function_exists('doc_icon_color')){
 		return '#000';
 	}
 }
+
+if ( ! function_exists('send_mail')){
+	function send_mail($mailer, $from, $fromName, $to, $subject, $body){
+		$mailer->From = $from;
+		$mailer->FromName = $fromName;
+		
+		$mailer->addReplyTo($from);
+		foreach($to as $t){
+			$mailer->addAddress(trim($t));
+		}
+		
+		$mailer->Subject = $subject;
+		$mailer->Body = $body;
+
+		if(!$mailer->Send()){
+			return "Message was not sent. ".$mailer->ErrorInfo;
+		}
+		return true;
+	}
+}

@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Smd_controller extends CI_Controller {
+	public $mailer;
 	protected $user = null;
 	protected $view_data = array();
 	protected $nav_menus = array(
@@ -107,6 +108,9 @@ class Smd_controller extends CI_Controller {
 				'' => array(
 					'text' => 'Direct Query'
 				),
+				'recruit_number' => array(
+					'text' => 'Recruit Number'
+				),
 				'elite_qualification' => array(
 					'text' => 'Elite Qualification'
 				),
@@ -122,6 +126,7 @@ class Smd_controller extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('session');
+		$this->load->library('PHPMailer');
 		$this->load->helper('cookie');
 		$user_id = $this->session->userdata('session_user');
 		if(empty($user_id)){
@@ -131,6 +136,21 @@ class Smd_controller extends CI_Controller {
 		if(!empty($user_id)){
 			$this->user = $this->user_model->get_user_by_id($user_id);//array('grade' => 'SMD', 'first_name' => 'Kun', 'first_name' => 'Yang');
 		}
+		$this->mailer = new PHPMailer();
+		$this->mailer->IsSMTP();
+		$this->mailer->Mailer = 'smtp';
+		$this->mailer->SMTPAuth = true;
+		$this->mailer->Host = 'smtp.gmail.com'; // "ssl://smtp.gmail.com" didn't worked
+		$this->mailer->Port = 587;
+		$this->mailer->SMTPSecure = 'tls';//'ssl';
+		$this->mailer->SMTPDebug = 0;
+
+		$this->mailer->Username = "lily.officemanager@gmail.com";
+		$this->mailer->Password = "Aspire2016";
+
+		$this->mailer->SingleTo = true; // if you want to send a same email to multiple users. multiple emails will be sent one-by-one.
+		$this->mailer->IsHTML(true); // if you are going to send HTML formatted emails
+		
 	}
 	
 	public function set_session_user($username, $password, $save_password = false){
