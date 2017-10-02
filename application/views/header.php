@@ -3,7 +3,7 @@
 .menu-icon:hover{background:#e5e5e5}
 .menu-ico-url:first-child .menu-icon{margin-top:10px}
 .menu-ico-url:last-child .menu-icon{margin-bottom:10px}
-a{color:#000;text-decoration:none}
+.menu-icon a{color:#000;text-decoration:none}
 .menu-icon img{float:left;width:20px;height:20px}	
 .menu-icon .text{float:left;margin-left:10px;line-height:20px}
 </style>

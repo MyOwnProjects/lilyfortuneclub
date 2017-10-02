@@ -27,9 +27,6 @@ class Smd_controller extends CI_Controller {
 				'hierarchy' => array(
 					'text' => 'Hierarchy',
 				),
-				'email' => array(
-					'text' => 'Email',
-				)
 			),
 		),
 		'schedule' => array(
@@ -116,6 +113,9 @@ class Smd_controller extends CI_Controller {
 				'javascript_code' => array(
 					'text' => 'Javascript Code'
 				),
+				'group_email' => array(
+					'text' => 'Group Email'
+				)
 			),
 		),
 	);
@@ -134,8 +134,12 @@ class Smd_controller extends CI_Controller {
 	}
 	
 	public function set_session_user($username, $password, $save_password = false){
-		$this->user = $this->user_model->get_user($username, $password);
-		if($this->user){
+		$result = $this->user_model->get_user($username, $password);
+		if(is_string($result)){
+			unset($this->user);
+		}
+		else{
+			$this->user = $result;
 			$this->session->set_userdata(array('session_user' => $this->user['users_id']));
 			if($save_password){
 				$this->input->set_cookie('session_user', $this->user['users_id'],  time() + 86400*30);

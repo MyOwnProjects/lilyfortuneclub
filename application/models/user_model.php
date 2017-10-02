@@ -54,10 +54,18 @@ class User_model extends Base_model{
 	}
 
 	public function get_user($username, $password){
+		$sql = "SELECT * FROM users WHERE username='$username'";
+		$results = $this->db->query($sql);
+		if(count($results) == 0){
+			return "The Code $username does not exist. It is because either you entered the wrong code, or the member has not been added into the system. "
+				. "Please <a href=\"".base_url()."contact\" target=\"_blank\">contact</a> the administrator.";
+		}
 		$sql = "SELECT * FROM users WHERE username='$username' AND password=SHA1('$password')";
 		$results = $this->db->query($sql);
-		if(count($results) == 1)
-			return $results[0];
+		if(count($results) == 0){
+			return 'Invalid password';
+		}
+		return $results[0];
 	}
 	
 	public function get_user_by_token($token){

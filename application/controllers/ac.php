@@ -9,15 +9,16 @@ class Ac extends Base_Controller {
 	public function sign_in()
 	{
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
-			$this->set_session_user($this->input->post('username'), $this->input->post('password'), $this->input->post('save_password'));
-			if(!empty($this->user)){
+			$result = $this->set_session_user($this->input->post('username'), $this->input->post('password'), $this->input->post('save_password'));
+			if($result === true && !empty($this->user)){
 				$redirect = $this->input->get('redirect');
 				$url = base_url().(empty($redirect) ? "account" : "$redirect");
 				header("location: $url");
 				exit;
 			}
-			else
-				$this->load_view('sign_in', array('error'=>'Invalid username or password'));
+			else{
+				$this->load_view('sign_in', array('error' => $result));
+			}
 		} 
 		else{
 			$error = $this->input->get('error', $_GET);

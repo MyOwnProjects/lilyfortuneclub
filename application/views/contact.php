@@ -55,7 +55,10 @@
 				</div>
 			</div>
 			<div class="panel panel-info">
-				<div class="panel-heading">License Procedure</div>
+				<div class="panel-heading">
+					License Procedure / Website Administration<br/>
+					Name Tag, Team Shirt and Binder Order
+				</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-xs-6">
@@ -63,16 +66,13 @@
 							(510) 461-3854<br/>
 							kunyangnew@gmail.com
 						</div>
-						<div class="col-xs-6">
-							<b>Christine Cen</b><br/>
-							(510) 364-0502<br/>
-							chrislicen@gmail.com
-						</div>
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-info">
-				<div class="panel-heading">Name Tag, Team Shirt and Binder Order</div>
+			<!--div class="panel panel-info">
+				<div class="panel-heading">
+					Name Tag, Team Shirt and Binder Order<br/>
+				</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-xs-12">
@@ -82,6 +82,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div-->
 		</div>
 	</div>
