@@ -47,6 +47,8 @@ $grade_access = array(
 define('KEY_LEAD', 1);
 define('ASSISTANT', 2);
 
+define('DEFAULT_EMAIL_FROM', 'lily.officemanager@gmail.com');
+define('DEFAULT_NAME_FROM', 'Lily Office Manager');
 
 
 /* End of file constants.php */

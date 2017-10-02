@@ -2,6 +2,7 @@
 
 class Smd_controller extends CI_Controller {
 	public $mailer;
+	public $email_templates;
 	protected $user = null;
 	protected $view_data = array();
 	protected $nav_menus = array(
@@ -150,7 +151,13 @@ class Smd_controller extends CI_Controller {
 
 		$this->mailer->SingleTo = true; // if you want to send a same email to multiple users. multiple emails will be sent one-by-one.
 		$this->mailer->IsHTML(true); // if you are going to send HTML formatted emails
-		
+	
+		$this->email_templates = array(
+			'welcome_email' => array(
+				'subject' => "Welcome to Lily Zhu's Team of World Financial Group",
+				'body' => '<p>Welcome to Lily Zhu&#39;s team.</p><p>We have a website for our team members only, on which there are useful resources, information and tools.</p><p>To sign in the website, go to '.base_url().'ac/sign_in. The username is your WFG code, and the password is your WFG code plus your last name, all letters are capital. After you first time sign in, you are requested to change the password and email, if needed, and selected your preference.</p>'
+			),
+		);
 	}
 	
 	public function set_session_user($username, $password, $save_password = false){

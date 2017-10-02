@@ -2,20 +2,12 @@
 
 require_once('smd_controller.php');
 class Tools extends Smd_Controller {
-	private $email_templates;
 	public function __construct(){
 		parent::__construct();
 		if(empty($this->user) || $this->user['grade'] !== 'SMD'){
 			header('location: '.base_url().'smd/ac/sign_in');
 		}		
 		$this->nav_menus['tools']['active'] = true;
-		
-		$this->email_templates = array(
-			'welcome_email' => array(
-				'subject' => "Welcome to Lily Zhu's Team of World Financial Group",
-				'body' => '<p>Welcome to Lily Zhu&#39;s team.</p><p>We have a website for our team members only, on which there are useful resources, information and tools.</p><p>To sign in the website, go to '.base_url().'ac/sign_in. The username is your WFG code, and the password is your WFG code plus your last name, all letters are capital. After you first time sign in, you are requested to change the password and email, if needed, and selected your preference.</p>'
-			),
-		);
 	}
 	
 	public function index()

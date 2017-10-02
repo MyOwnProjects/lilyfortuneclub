@@ -77,6 +77,10 @@ class Team extends Smd_Controller {
 					unset($prop['membership_code']);
 					$res = $this->user_model->update($user_id, $prop);
 					if($res){
+						/*if($prop['send_email'] == 'Y'){
+							send_mail($this->mailer, DEFAULT_EMAIL_FROM, DEFAULT_NAME_FROM, 
+								$this->email_templates['welcome_email']['subject'], $this->email_templates['welcome_email']['body']);
+						}*/
 						echo json_encode(array('success' => true));
 						return;
 					}
@@ -207,6 +211,16 @@ class Team extends Smd_Controller {
 				),
 				'value' => 'TA',
 			),
+			array(
+				'label' => 'Send welcome email?',
+				'name' => 'send_email',
+				'tag' => 'select',
+				'options' => array(
+					array('value' => 'Y', 'text' => 'Yes'),
+					array('value' => 'N', 'text' => 'No'),
+				),
+				'value' => 'Y'
+			)
 		);
 		$this->load->view('smd/add_item', array('items' => $items));
 	}
