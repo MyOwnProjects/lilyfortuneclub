@@ -77,10 +77,6 @@ class Team extends Smd_Controller {
 					unset($prop['membership_code']);
 					$res = $this->user_model->update($user_id, $prop);
 					if($res){
-						/*if($prop['send_email'] == 'Y'){
-							send_mail($this->mailer, DEFAULT_EMAIL_FROM, DEFAULT_NAME_FROM, 
-								$this->email_templates['welcome_email']['subject'], $this->email_templates['welcome_email']['body']);
-						}*/
 						echo json_encode(array('success' => true));
 						return;
 					}
@@ -95,11 +91,17 @@ class Team extends Smd_Controller {
 					echo json_encode(array('success' => false, 'fields' => array('recruiter'), 'message' => 'Invalid upline.'));
 					return;
 				}
+				$send_email = $prop['send_email'];
+				unset($prop['send_email']);
 				$prop['smd'] = $this->user['users_id'];
 				$prop['username']= $prop['membership_code'];
 				$prop['password']= sha1(strtoupper(trim($prop['membership_code']).trim($prop['last_name'])));
 				$res = $this->user_model->new_user($prop);
 				if($res){
+						/*if($send_email == 'Y'){
+							send_mail($this->mailer, DEFAULT_EMAIL_FROM, DEFAULT_NAME_FROM, 
+								$this->email_templates['welcome_email']['subject'], $this->email_templates['welcome_email']['body']);
+						}*/
 					echo json_encode(array('success' => true));
 					return;
 				}
