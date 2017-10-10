@@ -61,6 +61,7 @@ class Team extends Smd_Controller {
 		$this->load->model('user_model');
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$prop = $this->input->post();
+			unset($prop['send_email']);
 			if(isset($membership_code)){
 				$result = $this->user_model->get_user_by(array('membership_code' => $membership_code, 'smd' => $this->user['users_id']));
 				if(count($result) == 0){
