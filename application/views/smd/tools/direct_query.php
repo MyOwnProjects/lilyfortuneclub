@@ -43,6 +43,7 @@ function direct_query(){
 							var tbody = $('<tbody>').appendTo(table);
 							for(var i = 0; i < result.length; ++i){
 								var tr = $('<tr>').appendTo(tbody);
+								tr.append('<td>' + (i + 1) + '</td>');
 								for(var c in result[i]){
 									tr.append('<td>' + result[i][c] + '</td>');
 								}
