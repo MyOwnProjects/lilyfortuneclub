@@ -734,5 +734,22 @@ class Team extends Smd_Controller {
 	
 	public function email(){
 	}
+	
+	public function retrieve_member($code = ''){
+		if($this->input->server('REQUEST_METHOD') == 'GET'){
+			$this->load->model('user_model');
+			$result = $this->user_model->get_list();
+			$codes = array();
+			foreach($result as $r){
+				array_push($codes, $r['membership_code']);
+			}
+			$this->load_view('team/retrieve_members', array('codes' => $codes));
+		}
+		else{
+			$url = "https://www.mywfg.com/Wfg.HierarchyTool/HierarchyDetails/AgentDetails?agentcodenumber=$code";
+			$ret = file_get_contents($url);
+			echo $ret;
+		}
+	}
 }
 
