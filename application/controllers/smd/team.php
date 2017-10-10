@@ -738,7 +738,7 @@ class Team extends Smd_Controller {
 	public function retrieve_member($code = ''){
 		if($this->input->server('REQUEST_METHOD') == 'GET'){
 			$this->load->model('user_model');
-			$result = $this->user_model->get_list('', array('users_id' => 'asc'));
+			$result = $this->user_model->get_list('', array('start_date' => 'asc', 'users_id' => 'asc'));
 			$codes = array();
 			foreach($result as $r){
 				array_push($codes, $r['membership_code']);
