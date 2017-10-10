@@ -37,6 +37,7 @@ function direct_query(){
 						else{
 							var thead = $('<thead>').appendTo(table);
 							var tr = $('<tr>').appendTo(thead);
+							tr.append('<td></td>');
 							for(var col in result[0]){
 								tr.append('<td>' + col + '</td>');
 							}
