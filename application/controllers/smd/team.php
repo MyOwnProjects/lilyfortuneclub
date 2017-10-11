@@ -1481,7 +1481,7 @@ class Team extends Smd_Controller {
 		foreach($node['children'] as $k => $c){
 			$node['count'] += $this->_cal_children_count($node['children'][$k], $k);
 		}
-		echo "UPDATE users SET children=".$node['count']." WHERE emebership_code='$code';<br/>";
+		echo "UPDATE users SET children=".$node['count']." WHERE membership_code='$code';<br/>";
 		return $node['count'];
 	}
 	
