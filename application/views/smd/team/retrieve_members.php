@@ -62,7 +62,7 @@ function retrieve_one(index){
 							case 'Business Phone:':
 								phone_list.push('B:' + value);
 								break;
-							case 'Mobile Phone':
+							case 'Mobile Phone:':
 								phone_list.push('M:' + value);
 								break;
 							case 'Personal Email:':
