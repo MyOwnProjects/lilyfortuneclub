@@ -6,6 +6,8 @@
 .menu-icon a{color:#000;text-decoration:none}
 .menu-icon img{float:left;width:20px;height:20px}	
 .menu-icon .text{float:left;margin-left:10px;line-height:20px}
+.webui-popover{position:fixed;top:61px !important;left:auto !important;right:0 !important}
+.webui-arrow{left:auto !important;right: 22px;}
 </style>
 <header id="main-header">
 	<div id="logo" class="pull-left clearfix"><a href="<?php echo base_url();?>"><img src="<?php echo base_url();?>src/img/lfc.png"></a></div>
@@ -36,7 +38,8 @@
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/finance_status" title="Finance Status"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/learning.svg"><div class="text">Your Fiance Status</div></div></a>
 						<!--div class="menu-icon"><a href="<?php echo base_url();?>account/live" title="Live"><img src="<?php echo base_url();?>src/img/television.svg"><div class="text">Live</div></a></div-->
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/terminology" title="Terminologies"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/terminology.svg"><div class="text">Terminologies</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/tools" title="Tools"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/work-tools-cross.svg?1"><div class="text">Tools</div></div></a>
+						<!--a class="menu-ico-url" href="<?php echo base_url();?>account/tools" title="Tools"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/work-tools-cross.svg?1"><div class="text">Tools</div></div></a-->
+						<a class="menu-ico-url" href="<?php echo base_url();?>account/how_to" title="How to"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/finger-of-a-hand-pointing-to-right-direction.svg?"><div class="text">How to</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/profile" title="Profile"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/man-user.svg?1"><div class="text">Profile</div></div></a>
 					<?php
 					}
