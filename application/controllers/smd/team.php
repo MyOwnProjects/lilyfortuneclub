@@ -387,7 +387,8 @@ class Team extends Smd_Controller {
 			$ret['rows'] = $this->user_model->get_list("recruiter='".$id."'", $sort, ($ret['current'] - 1).", ".$ret['row_count'], $search);
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['name'] = $r['name'].(isset($ret['row'][$i]['nick_name']) && trim($ret['rows'][$i]['nick_name']) != '' ? ' ('.$ret['rows'][$i]['nick_name'].')' : '');
-				$ret['rows'][$i]['status'] = $ret['rows'][$i]['status'] == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';
+				$ret['rows'][$i]['membership_code'] = ' - '.$ret['rows'][$i]['membership_code'];
+				$ret['rows'][$i]['start_date'] = ', Start: '.$ret['rows'][$i]['start_date'];
 				$ret['rows'][$i]['action'] = array('view' => base_url().'smd/team/member/'.$r['users_id']);
 				$ret['rows'][$i]['downline'] = $r['downline'] > 0 ? '<a href="'.base_url().'smd/team/hierarchy/'.$id.'">'.$r['downline'].'</a>' : '0';
 			}
@@ -467,9 +468,9 @@ class Team extends Smd_Controller {
 		else{
 			$data = array();
 			foreach($result as $r){
-				$t = $r['grade'];
-				$t .= ", ".($r['status'] == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>');
-				$t .= ", ".($r['count'] == 0 ? '<span class="text-danger">No downline</span>' : '<span class="text-success">'.$r['children'].' downline , '.$r['count'].' direct downline</span>');
+				$t = "[".($r['count'] == 0 ? '<span class="text-danger">No downline</span>' : '<span class="text-success">'.$r['children'].' baseshop, '.$r['count'].' direct downline</span>')."]";
+				$t .= "  [".$r['grade'];
+				$t .= ", start at ".$r['start_date']."]";
 				
 				if(isset($membership_code)){
 					$url = base_url().'smd/team/member/'.$r['membership_code'];
@@ -479,8 +480,8 @@ class Team extends Smd_Controller {
 				}
 				array_push($data, array(
 					'text' => '<a href="'.$url.'">'.$r['first_name'].' '.$r['last_name']
-						.(empty($r['nick_name']) ? '' : '('.$r['nick_name'].')')."</a>&nbsp;"
-						."[$t]"
+						.(empty($r['nick_name']) ? '' : '('.$r['nick_name'].')')." - ".$r['membership_code']."</a>&nbsp;"
+						."$t"
 					, 'child_count' => $r['count'] 
 					, 'child_url' => base_url().'smd/team/get_direct_downline/'.$r['membership_code']
 				));
@@ -1481,7 +1482,7 @@ class Team extends Smd_Controller {
 		foreach($node['children'] as $k => $c){
 			$node['count'] += $this->_cal_children_count($node['children'][$k], $k);
 		}
-		echo "UPDATE users SET children=".$node['count']." WHERE membership_code='$code';<br/>";
+		//echo "UPDATE users SET children=".$node['count']." WHERE membership_code='$code';<br/>";
 		return $node['count'];
 	}
 	
@@ -1490,8 +1491,8 @@ class Team extends Smd_Controller {
 		$result = $this->user_model->get_list();
 		$tree = array('24KIZ' => array('count' =>0, 'children' => array()));
 		$this->_construct_tree_node($tree, $result);
-		$this->_cal_children_count($tree['24KIZ'], '24KIZ');//$tree['24KIZ']);
-		//print_r($tree);
+		$this->_cal_children_count($tree['24KIZ']['children']['23UZX'], '23UZX');//$tree['24KIZ']);
+		print_r($tree['24KIZ']['children']['23UZX']);
 	}
 	
 	public function get_base_shop($code = null){
