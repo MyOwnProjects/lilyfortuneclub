@@ -12,14 +12,12 @@ class User_model extends Base_model{
 	}
 	
 	public function get_user_by_id($id){
-		$sql = "SELECT users.*, user_roles.*,  
+		$sql = "SELECT users.*,  
 			u1.first_name AS first_name1, u1.last_name AS last_name1, u1.nick_name AS nick_name1, 
 			u2.first_name AS first_name2, u2.last_name AS last_name2, u2.nick_name AS nick_name2 
 			FROM users 
 			LEFT JOIN users u1 ON users.smd=u1.users_id 
 			LEFT JOIN users u2 ON users.recruiter=u2.membership_code 
-			LEFT JOIN user_and_role ON user_and_role.user_id=users.users_id 
-			LEFT JOIN user_roles ON user_roles.user_roles_id=user_and_role.role_id 
 			WHERE users.users_id='$id'";
 		$results = $this->db->query($sql);
 		if(count($results) == 0)
@@ -191,6 +189,7 @@ class User_model extends Base_model{
 				array_push($like_array, "email LIKE '%$s%'");
 				array_push($like_array, "membership_code LIKE '%$s%'");
 				array_push($like_array, "upline LIKE '%$s%'");
+				array_push($like_array, "recruiter LIKE '%$s%'");
 			}
 		}
 		$order_by = array();
@@ -229,11 +228,12 @@ class User_model extends Base_model{
 				array_push($like_array, "email LIKE '%$s%'");
 				array_push($like_array, "membership_code LIKE '%$s%'");
 				array_push($like_array, "upline LIKE '%$s%'");
+				array_push($like_array, "recruiter LIKE '%$s%'");
 			}
 		}
 		$sql = "SELECT COUNT(*) AS total FROM 
 			(
-				SELECT users.*, CONCAT(users.first_name, ' ', users.last_name) AS name, CONCAT(u1.first_name, ' ', u1.last_name) AS upline 
+				SELECT users.*, CONCAT(users.first_name, ' ', users.last_name) AS name, CONCAT(u1.first_name, ' ', u1.last_name, IF(u1.nick_name IS NULL OR u1.nick_name='', '', CONCAT(' (', u1.nick_name, ')')) ) AS upline 
 				FROM users 
 				LEFT JOIN users u1 ON users.recruiter=u1.membership_code 
 			) t
