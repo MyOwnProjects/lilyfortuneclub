@@ -28,6 +28,7 @@
 				}
 			}
 		],
-		row_count: 50
+		row_count: 50,
+		order_by:{start_date: 'desc'}
 	});
 </script>
