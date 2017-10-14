@@ -490,6 +490,12 @@ class Team extends Smd_Controller {
 		echo json_encode(array('success' => true, 'data' => $data));		
 	}	
 	
+	public function bulk_update_users(){
+		$data = $this->input->post('data');
+		$this->load->model('user_model');
+		$this->user_model->bulk_update_level($data);
+	}
+	
 	public function update_user($field = null, $membership_code = 0){
 		$result = $this->user_model->get_user_by(array('smd' => $this->user['users_id'], 'membership_code' => $membership_code));
 		if(count($result) == 0){
@@ -737,20 +743,9 @@ class Team extends Smd_Controller {
 	}
 	
 	public function retrieve_member($code = ''){
-		if($this->input->server('REQUEST_METHOD') == 'GET'){
-			$this->load->model('user_model');
-			$result = $this->user_model->get_list('', array('start_date' => 'asc', 'users_id' => 'asc'));
-			$codes = array();
-			foreach($result as $r){
-				array_push($codes, $r['membership_code']);
-			}
-			$this->load_view('team/retrieve_members', array('codes' => $codes));
-		}
-		else{
-			$url = "https://www.mywfg.com/Wfg.HierarchyTool/HierarchyDetails/AgentDetails?agentcodenumber=$code";
-			$ret = file_get_contents($url);
-			echo $ret;
-		}
+		$url = "https://www.mywfg.com/Wfg.HierarchyTool/HierarchyDetails/AgentDetails?agentcodenumber=$code";
+		$ret = file_get_contents($url);
+		echo $ret;
 	}
 	
 	public function update_recruiter(){
@@ -1497,6 +1492,11 @@ class Team extends Smd_Controller {
 	
 	public function get_base_shop($code = null){
 		if($this->input->is_ajax_request()){
+			$code = $this->input->get('code');
+			$start = $this->input->get('start');
+			$ret = file_get_contents("https://www.mywfg.com/Wfg.HierarchyTool/Hierarchy/LoadHierarchyTableResults?iDisplayStart=$start&iDisplayLength=5&agentCodeNumber=$code&baseType=0&agentLevel1=-1&lastName=&firstName=&city=&jurisdictionId=&zipCode=&isdowwnline=1");
+			echo $ret;
+			return;
 			$str = array();
 			for($i = 0; $i < 12; ++$i){
 				$ret = file_get_contents("https://www.mywfg.com/Wfg.HierarchyTool/Hierarchy/LoadHierarchyTableResults?iDisplayStart=".($i * 5)."&iDisplayLength=5&agentCodeNumber=$code&baseType=0&agentLevel1=-1&lastName=&firstName=&city=&jurisdictionId=&zipCode=&isdowwnline=1");
@@ -1506,6 +1506,21 @@ class Team extends Smd_Controller {
 		}
 		else{
 			$this->load_view('team/baseshop');
+		}
+	}
+	
+	public function get_new_members(){
+		if($this->input->is_ajax_request()){
+			$this->load->model('user_model');
+			$existing_code_list = array();
+			$result = $this->user_model->get_list();
+			foreach($result as $r){
+				$existing_code_list[$r['membership_code']] = $r['grade'];
+			}
+			echo json_encode($existing_code_list);
+		}
+		else{
+			$this->load_view('team/new_members');
 		}
 	}
 }

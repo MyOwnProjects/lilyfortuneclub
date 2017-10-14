@@ -443,4 +443,17 @@ class User_model extends Base_model{
 			ORDER BY T1.lvl DESC";
 		return $this->db->query($sql);
 	}
+	
+	
+	public function bulk_update_level($data){
+		$sql = '';
+		foreach($data as $code => $value){
+			$sql .= " WHEN membership_code='$code' THEN '$value'";
+		}
+		$sql = "UPDATE users SET grade = CASE
+			$sql
+			ELSE grade
+			END;";
+		return $this->db->query($sql);
+	}
 }

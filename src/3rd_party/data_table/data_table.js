@@ -149,6 +149,12 @@ function new_item(prop){//title, url, param){
 					Dialog.modal('hide');
 				}
 			});
+			if(param && param['source']){
+				var source = param['source'];
+				for(var id in source){
+					$('.bootbox #' + id).val(source[id]);
+				}
+			}
 		},
 		error: function(a, b, c){
 			Dialog.error(a.responseText);
