@@ -28,6 +28,6 @@
 				}
 			}
 		],
-		row_count: 20
+		row_count: 50
 	});
 </script>
