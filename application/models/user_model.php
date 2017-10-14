@@ -317,7 +317,7 @@ class User_model extends Base_model{
 				(
 					SELECT recruiter, COUNT(*) AS count FROM users GROUP BY recruiter
 				) u2 ON u1.membership_code=u2.recruiter 
-				WHERE u1.recruiter='$recruiter_code' ORDER BY count DESC, u1.status ASC";
+				WHERE u1.recruiter='$recruiter_code' ORDER BY children DESC, count DESC, u1.status ASC";
 		}
 		else{
 			$sql = "SELECT u1.*, IF(u2.count IS NULL, 0, u2.count) AS count FROM users u1 
@@ -325,7 +325,7 @@ class User_model extends Base_model{
 				(
 					SELECT recruiter, COUNT(*) AS count FROM users GROUP BY recruiter
 				) u2 ON u1.membership_code=u2.recruiter 
-				WHERE u1.users_id = '$user_id' ORDER BY count DESC, u1.status ASC";
+				WHERE u1.users_id = '$user_id' ORDER BY children DESC, count DESC, u1.status ASC";
 		}
 		return $this->db->query($sql);
 	}
