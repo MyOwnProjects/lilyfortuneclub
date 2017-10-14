@@ -3,7 +3,7 @@
 .result>div:nth-child(2)>div, .result>div:nth-child(4)>div{width:230px;margin-right:20px;float:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 <div class="main-body-wrapper">
-	<h3 class="text-center">New Members</h3>
+	<h3 class="text-center">Members Update</h3>
 	<div class="row">
 		<div class="col-xs-12" id="get-baseshop-progress">
 			<div class="text">1. Retrieving baseshop......</div>
