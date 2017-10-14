@@ -43,7 +43,7 @@
 					<div><?php echo $user['email'];?></div>
 				</li>
 				<li class="list-group-item clearfix"><div><label>Date of Birth:</label></div><div><?php echo date_format(date_create($user['date_of_birth']), 'F j');?></div></li>
-				<li class="list-group-item clearfix"><div><label>Phone:</label></div><div><?php echo $user['phone'];?></div></li>
+				<li class="list-group-item clearfix"><div><label>Phone:</label></div><div><?php echo str_replace(",", "<br/>", $user['phone']);?></div></li>
 				<li class="list-group-item clearfix"><div><label>Address:</label></div><div>
 					<?php 
 						echo (empty($user['street']) ? '' : $user['street'].'<br/>')
