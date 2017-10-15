@@ -1,5 +1,5 @@
 .tree-grid div.loading{margin:20px;width:40px;height:40px;background:url('./spinning.gif') no-repeat;}
 .tree-grid .tree-node-icon{cursor:pointer;margin-right:5px}
 .tree-grid ul{margin-left:20px;list-style:none}
-.tree-grid li{line-height:25px;list-style:none !important}
+.tree-grid li{line-height:25px;list-style:none !important;white-space:nowrap}
 .tree-grid li .alert{display:inline-block}
