@@ -12,9 +12,9 @@ class Team extends Account_base_controller {
 	
 	public function get_member_info($code = 0){
 		$this->load->model('user_model');
-		$result = $this->user_model->get_ancestors($code);
+		$ancestors = $this->user_model->get_ancestors($code);
 		$valid = false;
-		foreach($result as $r){
+		foreach($ancestors as $r){
 			if($r['membership_code'] == $this->user['membership_code']){
 				$valid = true;
 				break;
@@ -25,7 +25,7 @@ class Team extends Account_base_controller {
 			return;
 		}
 		$result = $this->user_model->get_user_by(array('membership_code' => $code));
-		echo json_encode(array('success' => true, 'info' => $result[0]));
+		echo json_encode(array('success' => true, 'info' => $result[0], 'ancestors' => $ancestors));
 	}
 	
 	public function get_direct_downline($membership_code = null){

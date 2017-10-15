@@ -19,22 +19,22 @@
 		<div id="page-summary" class="tab-pane fade in active tab-content-page">
 				<div class="row">
 					<div class="col-xs-12 clearfix">
-						<div>Code:</div><div><?php echo $user['membership_code'];?></div>
+						<div>Your Code:</div><div><?php echo $user['membership_code'];?></div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-12 clearfix">
-						<div>Level:</div><div><?php echo $user['grade'];?></div>
+						<div>Your Level:</div><div><?php echo $user['grade'];?></div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-12 clearfix">
-						<div>Recruiter:</div><div><?php echo empty($user['first_name2']) ? 'N/A' : $user['first_name2'].' '.$user['last_name2'].(empty($user['nick_name2']) ? '' : ' ('.$user['nick_name2'].')');?></div>
+						<div>Your Upline:</div><div><?php echo empty($user['first_name2']) ? 'N/A' : $user['first_name2'].' '.$user['last_name2'].(empty($user['nick_name2']) ? '' : ' ('.$user['nick_name2'].')');?></div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-12 clearfix">
-						<div>Baseshop:</div><div><?php echo $user['children'];?></div>
+						<div>Your Baseshop:</div><div><?php echo $user['children'];?></div>
 					</div>
 				</div>
 		</div>
@@ -71,12 +71,31 @@ $('body').delegate('.hierarchy-url', 'click', function(){
 	ajax_loading(true);
 	$.ajax({
 		url: '<?php echo base_url();?>account/team/get_member_info/' + code,
+		dataType: 'json',
 		success: function(data){
 			if(data['success']){
-				data['info'][''];
+				var row_data = {};
+				var info = data['info'];
+				row_data['Name'] = info['name']; 
+				row_data['Code'] = info['membership_code']; 
+				var ancestors = data['ancestors'];
+				var t = '<span>' + info['name'] + '</span>';
+				for(var i = ancestors.length - 1; i >= 0; --i){
+					t += '&nbsp;&rarr;&nbsp;<span>' + ancestors[i]['first_name'] + ' ' + ancestors[i]['last_name'] 
+						+ (ancestors[i]['nick_name'] !== undefined && ancestors[i]['nick_name'] !== null && ancestors[i]['nick_name'].length > 0 ? ' (' + ancestors[i]['nick_name'] + ')' : '') + '</span>'; 
+				}
+				row_data['Upline'] = t; 
+				row_data['Baseshop'] = info['children']; 
+				row_data['Personal Recruits'] = 0; 
+
 				var wrap = $('<div>');
-				wrap.append();
-				Dialog.modal({message: '<div class="alert alert-danger">' + data['message'] + '</div>', title: 'Member Information'});
+				for(var label in row_data){
+					var row = $('<div>').addClass('clearfix').css('padding', '5px 0').appendTo(wrap);
+					var div_label = $('<div>').addClass('pull-left').css('font-weight', 'bold').css('width', '125px').css('margin-right', '5px').html(label + ':');
+					var div_value = $('<div>').css('overflow', 'hidden').html(row_data[label]);
+					row.append(div_label).append(div_value);
+				}
+				Dialog.modal({message: wrap.html(), title: 'Member Information'});
 			}
 			else{
 				Dialog.modal({message: '<div class="alert alert-danger">' + data['message'] + '</div>', title: 'Error'});

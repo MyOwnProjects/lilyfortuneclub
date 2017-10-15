@@ -99,6 +99,7 @@ class User_model extends Base_model{
 			users.preference,
 			users.status,
 			users.first_access,
+			users.children,
 			CONCAT(u1.first_name, ' ', (u1.last_name)) AS SMD, 
 			users.first_name, users.last_name,users.nick_name,
 			users.street, users.city,users.state,users.zipcode, users.country
@@ -428,7 +429,7 @@ class User_model extends Base_model{
 	}
 	
 	public function get_ancestors($membership_code){
-		$sql = "SELECT T2.membership_code, T2.recruiter
+		$sql = "SELECT T2.membership_code, T2.first_name, T2.last_name, T2.nick_name, T2.recruiter
 			FROM (
 				SELECT
 					@r AS _id,
