@@ -480,7 +480,7 @@ class Team extends Smd_Controller {
 				}
 				array_push($data, array(
 					'text' => '<a href="'.$url.'">'.$r['first_name'].' '.$r['last_name']
-						.(empty($r['nick_name']) ? '' : '('.$r['nick_name'].')')." - ".$r['membership_code']."</a>&nbsp;"
+						.(empty($r['nick_name']) ? '' : ' ('.$r['nick_name'].')')." - ".$r['membership_code']."</a>&nbsp;"
 						."$t"
 					, 'child_count' => $r['count'] 
 					, 'child_url' => base_url().'smd/team/get_direct_downline/'.$r['membership_code']

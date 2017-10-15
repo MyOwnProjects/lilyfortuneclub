@@ -30,6 +30,7 @@
 					<?php
 					if(!empty($user)){
 					?>
+						<a class="menu-ico-url" href="<?php echo base_url();?>account/team" title="Your team"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/team.svg"><div class="text">Team</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account" title="Startup"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Startup</div></div></a>
 						<?php if($user['preference'] == 'B' || $user['preference'] == 'BE'){?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/business" title="Business"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/give-money.svg"><div class="text">Business</div></div></a>
@@ -37,7 +38,6 @@
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/license" title="License"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/certificate.svg"><div class="text">License</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/code_of_honor" title="Code of Honor"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/promotion.svg"><div class="text">Code of Honor</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/finance_status" title="Finance Status"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/learning.svg"><div class="text">Your Fiance Status</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/team" title="Your team"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/team.svg"><div class="text">Team</div></div></a>
 						<!--div class="menu-icon"><a href="<?php echo base_url();?>account/live" title="Live"><img src="<?php echo base_url();?>src/img/television.svg"><div class="text">Live</div></a></div-->
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/terminology" title="Terminologies"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/terminology.svg"><div class="text">Terminologies</div></div></a>
 						<!--a class="menu-ico-url" href="<?php echo base_url();?>account/tools" title="Tools"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/work-tools-cross.svg?1"><div class="text">Tools</div></div></a-->

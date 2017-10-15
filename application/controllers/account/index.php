@@ -10,7 +10,7 @@ class Index extends Account_base_controller {
 	public function index()
 	{
 		if(isset($this->user['preference'])){
-			header('location: '.base_url().'account/startup');
+			header('location: '.base_url().'account/team');
 		}
 		else{
 			header('location: '.base_url().'account/preference');

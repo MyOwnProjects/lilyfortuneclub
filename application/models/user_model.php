@@ -58,7 +58,7 @@ class User_model extends Base_model{
 			return "The Code $username does not exist. It is because either you entered the wrong code, or the member has not been added into the system. "
 				. "Please <a href=\"".base_url()."contact\" target=\"_blank\">contact</a> the administrator.";
 		}
-		$sql = "SELECT * FROM users WHERE username='$username' AND password=SHA1('$password')";
+		$sql = "SELECT users.*, CONCAT(u1.first_name, ' ', u1.last_name) AS upline FROM users LEFT JOIN users u1 ON users.recruiter=u1.membership_code WHERE users.username='$username' AND users.password=SHA1('$password')";
 		$results = $this->db->query($sql);
 		if(count($results) == 0){
 			return 'Invalid password';

@@ -14,6 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/dialog/dialog.css?t=<?php echo time();?>">
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery.webui-popover/jquery.webui-popover.css" />		
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/css/tooltip.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/tree_grid/tree_grid.css?t=<?php echo time();?>">
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/css/template.css?t=<?php echo time();?>" />		
 		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/font-awesome-4.7.0/css/font-awesome.min.css">
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
@@ -27,6 +28,7 @@
 		<script type="text/javascript" src="<?php echo base_url();?>src/js/tools.js"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/js/live-chat/live-chat.js?t=<?php echo time();?>"></script>	
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/simple_video_player/simple_video_player.js?t=<?php echo time();?>"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/tree_grid/tree_grid.js?t=<?php echo time();?>"></script>		
 		<script>
 			$('body').delegate('iframe', 'load', function(){
 				this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
