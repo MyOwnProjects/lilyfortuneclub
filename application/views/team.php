@@ -43,36 +43,6 @@
 			<div class="clearfix">
 				<div id="team-member-grid-baseshop"></div>
 			</div>
-			<script>
-				$.ajax({
-					url: '<?php echo base_url();?>account/team/get_baseshop',
-					dataType: 'json',
-					success: function(data){
-						if(data['success']){
-							var baseshop = data['baseshop'];
-							baseshop_sort(baseshop, 'start_date', 'desc');
-							var table = $('<table>').addClass('table').addClass('table-striped').appendTo($('#team-member-grid-baseshop'));
-							table.append('<thead><tr><th>Name</th><th>Code</th><th>Level</th><th>Baseshop</th><th>Start Date</th></tr></thead>');
-							var tbody = $('<tbody>').appendTo(table);
-							for(var i = 0; i < baseshop.length;++i){
-								var tr = $('<tr>').appendTo(tbody);
-								$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + baseshop[i]['membership_code'] + '">' + baseshop[i]['name']).appendTo(tr);
-								$('<td>').html(baseshop[i]['membership_code']).appendTo(tr);
-								$('<td>').html(baseshop[i]['grade']).appendTo(tr);
-								$('<td>').html(baseshop[i]['children']).appendTo(tr);
-								$('<td>').html(baseshop[i]['start_date']).appendTo(tr);
-							}
-						}
-						else{
-							$('#team-member-grid-baseshop').html('<div class="alert alert-danger">' + data['message'] + '</div>');
-						}
-					},
-					error: function(){
-					},
-					complete: function(){
-					}
-				});
-			</script>
 		</div>
 		<div id="page-hierarchy" class="tab-pane fade tab-content-page">
 			<div class="clearfix">
@@ -87,7 +57,7 @@
 				<div class="col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label>Type</label>
-						<select class="form-control control-sm">
+						<select class="form-control control-sm" id="recruits-type-select">
 							<option value="P">Personal Recruits</option>
 							<option value="T">Baseshop Recruits</option>
 						</select>
@@ -96,7 +66,7 @@
 				<div class="col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label>Team Member</label>
-						<select class="form-control control-sm"></select>
+						<select class="form-control control-sm" data-live-search='true' id="recruits-baseshop-select"></select>
 					</div>
 				</div>
 			</div>
@@ -104,23 +74,27 @@
 				<div class="col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label>Date From</label>
-						<input type="date" class="form-control control-sm">
+						<input type="date" class="form-control control-sm" id="recruits-date-from">
 					</div>
 				</div>
 				<div class="col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label>Date To</label>
-						<input type="date" class="form-control control-sm">
+						<input type="date" class="form-control control-sm" id="recruits-date-to">
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="form-group text-right">
-						<button class="btn btn-sm btn-primary">Go</button>
+						<button class="btn btn-sm btn-primary" onclick="get_recruits();">Go</button>
 					</div>
 				</div>
 			</div>
+			<div class="clearfix">
+				<div id="recruits-grid"></div>
+			</div>
+			
 		</div>
 	</div>
 </div>
@@ -131,6 +105,44 @@ function baseshop_sort(data, column, order){
 			return order == 'asc' ? x[column].localeCompare(y[column]) : y[column].localeCompare(x[column]);
 		}
 	);
+}
+
+function get_recruits(){
+	$('#recruits-grid').empty();
+	ajax_loading(true);
+	$.ajax({
+		url: '<?php echo base_url();?>account/team/get_recruits',
+		method: 'post',
+		dataType: 'json',
+		data: {
+			type: $('#recruits-type-select').val(),
+			code: $('#recruits-baseshop-select').val(),
+			date_from: $('#recruits-date-from').val(),
+			date_to: $('#recruits-date-to').val(),
+		},
+		success: function(data){
+			if(data['success']){
+				var data = data['data'];
+						var table = $('<table>').addClass('table').addClass('table-striped').appendTo($('#recruits-grid'));
+							table.append('<thead><tr><th>Name</th><th>Code</th><th>Recruiter</th><th>Start Date</th></tr></thead>');
+							var tbody = $('<tbody>').appendTo(table);
+							for(var i = 0; i < data.length;++i){
+								var tr = $('<tr>').appendTo(tbody);
+								$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + data[i]['membership_code'] + '">' + data[i]['name']).appendTo(tr);
+								$('<td>').html(data[i]['membership_code']).appendTo(tr);
+								$('<td>').html(data[i]['recruiter']).appendTo(tr);
+								$('<td>').html(data[i]['start_date']).appendTo(tr);
+							}
+			}
+			else{
+			}
+		},
+		error: function(a, b, c){
+		},
+		complete: function(){
+			//ajax_loading(false);
+		}
+	});
 }
 
 $('body').delegate('.detail-url', 'click', function(){
@@ -177,4 +189,36 @@ $('body').delegate('.detail-url', 'click', function(){
 		}
 	});	
 });	
+
+				$.ajax({
+					url: '<?php echo base_url();?>account/team/get_baseshop',
+					dataType: 'json',
+					success: function(data){
+						if(data['success']){
+							var baseshop = data['baseshop'];
+							baseshop_sort(baseshop, 'start_date', 'desc');
+							var table = $('<table>').addClass('table').addClass('table-striped').appendTo($('#team-member-grid-baseshop'));
+							table.append('<thead><tr><th>Name</th><th>Code</th><th>Level</th><th>Baseshop</th><th>Start Date</th></tr></thead>');
+							var tbody = $('<tbody>').appendTo(table);
+							for(var i = 0; i < baseshop.length;++i){
+								var tr = $('<tr>').appendTo(tbody);
+								$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + baseshop[i]['membership_code'] + '">' + baseshop[i]['name']).appendTo(tr);
+								$('<td>').html(baseshop[i]['membership_code']).appendTo(tr);
+								$('<td>').html(baseshop[i]['grade']).appendTo(tr);
+								$('<td>').html(baseshop[i]['children']).appendTo(tr);
+								$('<td>').html(baseshop[i]['start_date']).appendTo(tr);
+								var option = $('<option>').val(baseshop[i]['membership_code']).html(baseshop[i]['name'] + ' - ' + baseshop[i]['membership_code']).appendTo($('#recruits-baseshop-select'));
+							}
+							$('#recruits-baseshop-select').selectpicker();
+						}
+						else{
+							$('#team-member-grid-baseshop').html('<div class="alert alert-danger">' + data['message'] + '</div>');
+						}
+					},
+					error: function(){
+					},
+					complete: function(){
+					}
+				});
+
 </script>

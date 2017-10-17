@@ -54,6 +54,26 @@ class Team extends Account_base_controller {
 		echo json_encode(array('success' => true, 'data' => $data));		
 	}	
 
+	private function _get_baseshop($code){
+		$result = $this->user_model->get_user_by();
+		$baseshop = array();
+		$recruiters = array($code);
+		while(count($recruiters) > 0){
+			$new_recruiters = array();
+			foreach($result as $i => $r){
+				if(in_array($r['recruiter'], $recruiters)){
+					array_push($baseshop, $r);
+					array_push($new_recruiters, $r['membership_code']);
+				}
+			}
+			if(count($new_recruiters) == 0){
+				break;
+			}
+			$recruiters = $new_recruiters;
+		}
+		return $baseshop;
+	}
+	
 	public function get_baseshop($code = 0){
 		if(empty($code)){
 			$code = $this->user['membership_code'];
@@ -72,24 +92,57 @@ class Team extends Account_base_controller {
 			return;
 		}
 		//echo 1;exit;
-		$result = $this->user_model->get_user_by();
-		$baseshop = array();
-		$recruiters = array($code);
-		while(count($recruiters) > 0){
-			$new_recruiters = array();
-			foreach($result as $i => $r){
-				if(in_array($r['recruiter'], $recruiters)){
-					array_push($baseshop, $r);
-					array_push($new_recruiters, $r['membership_code']);
-				}
-			}
-			if(count($new_recruiters) == 0){
-				break;
-			}
-			$recruiters = $new_recruiters;
-		}
+		$baseshop = $this->_get_baseshop($code);
 		echo json_encode(array('success' => true, 'baseshop' => $baseshop));
 	}
+	
+	
+	public function get_recruits(){
+		$type = $this->input->post('type');
+		$code = $this->input->post('code');
+		$from = $this->input->post('date_from');
+		$to = $this->input->post('date_to');
+		$this->load->model('user_model');
+		$ancestors = $this->user_model->get_ancestors($code);
+		$valid = false;
+		foreach($ancestors as $r){
+			if($r['membership_code'] == $this->user['membership_code']){
+				$valid = true;
+				break;
+			}
+		}
+		if(!$valid){
+			echo json_encode(array('success' => false, 'message' => "Invalid membership code."));
+			return;
+		}
+		$where = "1=1";
+		if(!empty($from)){
+			$where .= " AND u.start_date >= '$from'"; 
+		}
+		if(!empty($to)){
+			$where .= " AND u.start_date <= '$to'"; 
+		}
+		if($type == 'P'){
+			$result = $this->user_model->get_recruits(array($code), $where);
+		}
+		else{
+			$baseshop = $this->_get_baseshop($code);
+			$result = array();
+			foreach($baseshop as $b){
+				if((empty($from) || strcmp($b['start_date'], $from) >= 0)
+					&& (empty($to) || strcmp($b['start_date'], $to) <= 0)){
+					array_push($result, $b);
+				}
+			}
+			
+			function sort_temp($a,$b){
+				return strcmp($b['start_date'], $a['start_date']);
+			}
+			usort($result, "sort_temp");
+		}
+		echo json_encode(array('success' => true, 'data' => $result));
+	}
+	
 }
 
 /* End of file welcome.php */

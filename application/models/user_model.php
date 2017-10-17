@@ -458,4 +458,12 @@ class User_model extends Base_model{
 			END;";
 		return $this->db->query($sql);
 	}
+	
+	public function get_recruits($codes, $where = ""){
+		$sql = "SELECT u.*, CONCAT(u.first_name, ' ', u.last_name) AS name, CONCAT(u1.first_name, ' ', u1.last_name, ' (', u.recruiter, ')') AS recruiter FROM users u 
+			LEFT JOIN users u1 ON u1.membership_code=u.recruiter
+			WHERE u.recruiter IN ('".implode("','", $codes)."') AND (".(empty($where) ? "" : $where).") "
+			." ORDER BY u.start_date DESC";
+		return $result= $this->db->query($sql);
+	}
 }
