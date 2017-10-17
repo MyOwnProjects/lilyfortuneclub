@@ -66,7 +66,9 @@
 				<div class="col-sm-6 col-xs-12">
 					<div class="form-group">
 						<label>Team Member</label>
-						<select class="form-control control-sm" data-live-search='true' id="recruits-baseshop-select"></select>
+						<select class="form-control control-sm" data-live-search='true' id="recruits-baseshop-select">
+							<option value="<?php echo $user['membership_code'];?>"><?php echo $user['first_name'].' '.$user['last_name'].' ('.$user['membership_code'].')';?></option>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -207,7 +209,7 @@ $('body').delegate('.detail-url', 'click', function(){
 								$('<td>').html(baseshop[i]['grade']).appendTo(tr);
 								$('<td>').html(baseshop[i]['children']).appendTo(tr);
 								$('<td>').html(baseshop[i]['start_date']).appendTo(tr);
-								var option = $('<option>').val(baseshop[i]['membership_code']).html(baseshop[i]['name'] + ' - ' + baseshop[i]['membership_code']).appendTo($('#recruits-baseshop-select'));
+								var option = $('<option>').val(baseshop[i]['membership_code']).html(baseshop[i]['name'] + ' (' + baseshop[i]['membership_code'] + ')').appendTo($('#recruits-baseshop-select'));
 							}
 							$('#recruits-baseshop-select').selectpicker();
 						}
