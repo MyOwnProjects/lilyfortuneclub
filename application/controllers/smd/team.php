@@ -1508,6 +1508,9 @@ class Team extends Smd_Controller {
 			$this->load_view('team/baseshop');
 		}
 	}
+	public function sync_members(){
+			$this->load_view('team/new_members');
+	}
 	
 	public function get_new_members(){
 		if($this->input->is_ajax_request()){
@@ -1518,9 +1521,6 @@ class Team extends Smd_Controller {
 				$existing_code_list[$r['membership_code']] = $r['grade'];
 			}
 			echo json_encode($existing_code_list);
-		}
-		else{
-			$this->load_view('team/new_members');
 		}
 	}
 }
