@@ -1,6 +1,6 @@
 <style>
 .main-content-wrapper{max-width:1000px !important}	
-.nav-tabs>li{width:33.3%}
+.nav-tabs>li{width:25%}
 .tab-content-page{padding:40px}
 .content-page-head{text-align:center;margin-bottom:40px}
 .tab-content-page p{margin-bottom:20px}	
@@ -12,6 +12,7 @@
 	<h2 class="text-center">My Team</h2>
 	<ul class="nav nav-tabs clearfix" id="top-tab">
 		<li class="active"><a data-toggle="tab" href="#page-summary">Summary</a></li>
+		<li><a data-toggle="tab" href="#page-baseshop">Base Shop</a></li>
 		<li><a data-toggle="tab" href="#page-hierarchy">Hierarchy</a></li>
 		<li><a data-toggle="tab" href="#page-recruits">Recruits</a></li>
 	</ul>
@@ -38,6 +39,41 @@
 					</div>
 				</div>
 		</div>
+		<div id="page-baseshop" class="tab-pane fade tab-content-page">
+			<div class="clearfix">
+				<div id="team-member-grid-baseshop"></div>
+			</div>
+			<script>
+				$.ajax({
+					url: '<?php echo base_url();?>account/team/get_baseshop',
+					dataType: 'json',
+					success: function(data){
+						if(data['success']){
+							var baseshop = data['baseshop'];
+							baseshop_sort(baseshop, 'start_date', 'desc');
+							var table = $('<table>').addClass('table').addClass('table-striped').appendTo($('#team-member-grid-baseshop'));
+							table.append('<thead><tr><th>Name</th><th>Code</th><th>Level</th><th>Baseshop</th><th>Start Date</th></tr></thead>');
+							var tbody = $('<tbody>').appendTo(table);
+							for(var i = 0; i < baseshop.length;++i){
+								var tr = $('<tr>').appendTo(tbody);
+								$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + baseshop[i]['membership_code'] + '">' + baseshop[i]['name']).appendTo(tr);
+								$('<td>').html(baseshop[i]['membership_code']).appendTo(tr);
+								$('<td>').html(baseshop[i]['grade']).appendTo(tr);
+								$('<td>').html(baseshop[i]['children']).appendTo(tr);
+								$('<td>').html(baseshop[i]['start_date']).appendTo(tr);
+							}
+						}
+						else{
+							$('#team-member-grid-baseshop').html('<div class="alert alert-danger">' + data['message'] + '</div>');
+						}
+					},
+					error: function(){
+					},
+					complete: function(){
+					}
+				});
+			</script>
+		</div>
 		<div id="page-hierarchy" class="tab-pane fade tab-content-page">
 			<div class="clearfix">
 				<div id="team-member-grid-hierarchy"></div>
@@ -47,26 +83,57 @@
 			</script>
 		</div>
 		<div id="page-recruits" class="tab-pane fade tab-content-page">
-			<div class="form-group">
-				<label>Team Member</label>
-				<select class="form-control control-sm"></select>
+			<div class="row">
+				<div class="col-sm-6 col-xs-12">
+					<div class="form-group">
+						<label>Type</label>
+						<select class="form-control control-sm">
+							<option value="P">Personal Recruits</option>
+							<option value="T">Baseshop Recruits</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-6 col-xs-12">
+					<div class="form-group">
+						<label>Team Member</label>
+						<select class="form-control control-sm"></select>
+					</div>
+				</div>
 			</div>
-			<div class="form-group">
-				<label>Date From</label>
-				<input type="date" class="form-control control-sm">
+			<div class="row">
+				<div class="col-sm-6 col-xs-12">
+					<div class="form-group">
+						<label>Date From</label>
+						<input type="date" class="form-control control-sm">
+					</div>
+				</div>
+				<div class="col-sm-6 col-xs-12">
+					<div class="form-group">
+						<label>Date To</label>
+						<input type="date" class="form-control control-sm">
+					</div>
+				</div>
 			</div>
-			<div class="form-group">
-				<label>Date To</label>
-				<input type="date" class="form-control control-sm">
-			</div>
-			<div class="form-group text-right">
-				<button class="btn btn-sm btn-primary">Go</button>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group text-right">
+						<button class="btn btn-sm btn-primary">Go</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
-$('body').delegate('.hierarchy-url', 'click', function(){
+function baseshop_sort(data, column, order){
+	data.sort(
+		function(x, y){
+			return order == 'asc' ? x[column].localeCompare(y[column]) : y[column].localeCompare(x[column]);
+		}
+	);
+}
+
+$('body').delegate('.detail-url', 'click', function(){
 	var code = $(this).attr('data-id');
 	ajax_loading(true);
 	$.ajax({
@@ -78,6 +145,8 @@ $('body').delegate('.hierarchy-url', 'click', function(){
 				var info = data['info'];
 				row_data['Name'] = info['name']; 
 				row_data['Code'] = info['membership_code']; 
+				row_data['Level'] = info['grade']; 
+				row_data['Start'] = info['start_date']; 
 				var ancestors = data['ancestors'];
 				var t = '<span>' + info['name'] + '</span>';
 				for(var i = ancestors.length - 1; i >= 0; --i){

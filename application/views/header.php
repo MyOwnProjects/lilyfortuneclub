@@ -31,7 +31,7 @@
 					if(!empty($user)){
 					?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/team" title="Your team"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/team.svg"><div class="text">Team</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account" title="Startup"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Startup</div></div></a>
+						<a class="menu-ico-url" href="<?php echo base_url();?>account/startup" title="Startup"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Startup</div></div></a>
 						<?php if($user['preference'] == 'B' || $user['preference'] == 'BE'){?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/business" title="Business"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/give-money.svg"><div class="text">Business</div></div></a>
 						<?php }?>

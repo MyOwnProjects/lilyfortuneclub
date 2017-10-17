@@ -100,6 +100,7 @@ class User_model extends Base_model{
 			users.status,
 			users.first_access,
 			users.children,
+			users.recruiter,
 			CONCAT(u1.first_name, ' ', (u1.last_name)) AS SMD, 
 			users.first_name, users.last_name,users.nick_name,
 			users.street, users.city,users.state,users.zipcode, users.country

@@ -44,7 +44,7 @@ class Team extends Account_base_controller {
 				$t .= "  [".$r['grade'];
 				$t .= ", start at ".$r['start_date']."]";
 				array_push($data, array(
-					'text' => '<a class="hierarchy-url" href="javascript:void(0)" data-id="'.$r['membership_code'].'">'.$r['first_name'].' '.$r['last_name']
+					'text' => '<a class="detail-url" href="javascript:void(0)" data-id="'.$r['membership_code'].'">'.$r['first_name'].' '.$r['last_name']
 						.(empty($r['nick_name']) ? '' : ' ('.$r['nick_name'].')')." - ".$r['membership_code']."</a>"
 					, 'child_count' => $r['count'] 
 					, 'child_url' => base_url().'account/team/get_direct_downline/'.$r['membership_code']
@@ -54,6 +54,42 @@ class Team extends Account_base_controller {
 		echo json_encode(array('success' => true, 'data' => $data));		
 	}	
 
+	public function get_baseshop($code = 0){
+		if(empty($code)){
+			$code = $this->user['membership_code'];
+		}
+		$this->load->model('user_model');
+		$ancestors = $this->user_model->get_ancestors($code);
+		$valid = false;
+		foreach($ancestors as $r){
+			if($r['membership_code'] == $this->user['membership_code']){
+				$valid = true;
+				break;
+			}
+		}
+		if(!$valid){
+			echo json_encode(array('success' => false, 'message' => "Invalid membership code."));
+			return;
+		}
+		//echo 1;exit;
+		$result = $this->user_model->get_user_by();
+		$baseshop = array();
+		$recruiters = array($code);
+		while(count($recruiters) > 0){
+			$new_recruiters = array();
+			foreach($result as $i => $r){
+				if(in_array($r['recruiter'], $recruiters)){
+					array_push($baseshop, $r);
+					array_push($new_recruiters, $r['membership_code']);
+				}
+			}
+			if(count($new_recruiters) == 0){
+				break;
+			}
+			$recruiters = $new_recruiters;
+		}
+		echo json_encode(array('success' => true, 'baseshop' => $baseshop));
+	}
 }
 
 /* End of file welcome.php */
