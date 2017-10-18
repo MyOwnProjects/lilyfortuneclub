@@ -164,7 +164,7 @@ $('body').delegate('.detail-url', 'click', function(){
 				var ancestors = data['ancestors'];
 				var t = '';
 				for(var i = ancestors.length - 1; i >= 0; --i){
-					t += '&nbsp;&rarr;&nbsp;<span>' + ancestors[i]['first_name'] + ' ' + ancestors[i]['last_name'] 
+					t += (i > 0 ? '&nbsp;&rarr;&nbsp;' : '') + '<span>' + ancestors[i]['first_name'] + ' ' + ancestors[i]['last_name'] 
 						+ (ancestors[i]['nick_name'] !== undefined && ancestors[i]['nick_name'] !== null && ancestors[i]['nick_name'].length > 0 ? ' (' + ancestors[i]['nick_name'] + ')' : '') + '</span>'; 
 				}
 				row_data['Upline'] = t; 
