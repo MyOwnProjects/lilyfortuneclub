@@ -162,7 +162,7 @@ $('body').delegate('.detail-url', 'click', function(){
 				row_data['Level'] = info['grade']; 
 				row_data['Start'] = info['start_date']; 
 				var ancestors = data['ancestors'];
-				var t = '<span>' + info['name'] + '</span>';
+				var t = '';
 				for(var i = ancestors.length - 1; i >= 0; --i){
 					t += '&nbsp;&rarr;&nbsp;<span>' + ancestors[i]['first_name'] + ' ' + ancestors[i]['last_name'] 
 						+ (ancestors[i]['nick_name'] !== undefined && ancestors[i]['nick_name'] !== null && ancestors[i]['nick_name'].length > 0 ? ' (' + ancestors[i]['nick_name'] + ')' : '') + '</span>'; 
