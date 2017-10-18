@@ -25,19 +25,19 @@
 									var $_li = $('<li>').appendTo($_ul_parent);
 									if(node['child_count'] && node['child_url']){
 										var $_node_text = $('<span>').html(node['text']);
-										var $_leaf_icon = $('<span>').addClass('tree-node-icon').addClass('glyphicon').attr('data-url', node['child_url']);
+										var $_leaf_icon = $('<div>').addClass('tree-node-icon').addClass('glyphicon').attr('data-url', node['child_url']);
 										$_leaf_icon.addClass(tree_node_icon_right);
 										if(node['child_count'] == 0){
 											$_leaf_icon.css('visibility', 'hidden').attr('data-url', node['child_url']);
 										}
 										var $_div = $('<div>').append($_leaf_icon).append($_node_text);
-										var $_node_text = $('<span>').html(node['text']);
-										var $_div = $('<div>').append($_leaf_icon).append($_node_text);
+										var $_node_text = $('<div>').html(node['text']);
+										var $_div = $('<div>').addClass('clearfix').addClass('tree-row').append($_leaf_icon).append($_node_text);
 										$_li.append($_div);
 									}
 									else{
-										var $_node_text = $('<span>').html(node['text']);
-										var $_div = $('<div>').append($_node_text);
+										var $_node_text = $('<div>').html(node['text']);
+										var $_div = $('<div>').addClass('clearfix').addClass('tree-row').append($_node_text);
 										$_li.append($_div);
 									}
 									$_ul_parent.append($_li);
