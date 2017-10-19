@@ -212,7 +212,7 @@ class User_model extends Base_model{
 				LEFT JOIN 
 				(
 					SELECT recruiter, COUNT(*) AS count FROM users GROUP BY recruiter
-				) u2 ON users.users_id=u2.recruiter
+				) u2 ON users.membership_code=u2.recruiter
 			) t
 			WHERE 1=1 ".(empty($where) ? "" : " AND $where ")
 			.(empty($like_array) ? "" : " AND (".implode(" OR ", $like_array).")")
