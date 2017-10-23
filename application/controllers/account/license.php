@@ -96,7 +96,8 @@ class License extends Account_base_controller {
 					'subject' => "License Appoitment",
 					'image_file_name'=> 'license-appointment',
 					'steps' => array(
-							'Send an email, attached with your license and all CE certificaters with signature, to <i>wfghost@transamerica.com</i> and <i>wfglicenseapps@transamerica.com</i>.',
+							'Print the license and 3 CE certificates, sign them, and scan them to one PDF or image file.',
+							'Send an email, attached with the file in last step, to <i>wfghost@transamerica.com</i> and <i>wfglicenseapps@transamerica.com</i>.',
 							'Sign in to <a href="https://www.mywfg.com" target="_blank">www.mywfg.com</a>, click the <i>MENU</i> at the top right of the screen. Then select <i>Licensing</i> > </i>Appoitments</i>.',
 							'Click <i>Carrier Appointments</i>.',
 							'Let us, by example, select <i>Non-New York Life and Disability</i> carrier with <i>Transamerica PremierLife Insurance Company</i>.<br/>Select <i>Life and Disability Insuarance</i>.',
