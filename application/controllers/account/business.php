@@ -50,10 +50,10 @@ class Business extends Account_base_controller {
 				),
 				'list' => array(
 					array(
-						'text' => 'Understand the <a href="'.base_url().'documents/view/59a82bf04b717" target=_blank">BPM Protocols & Trainer Trainee Role</a>.'
+						'text' => 'Understand the <a href="'.base_url().'account/documents/view/59a82bf04b717" target=_blank">BPM Protocols & Trainer Trainee Role</a>.'
 					),
 					array(
-						'text' => 'It is <u>very important</u> to <a href="'.base_url().'documents/view/59a7448770267" target=_blank">Be A Good Trainee</a> to your business.'
+						'text' => 'It is <u>very important</u> to <a href="'.base_url().'account/documents/view/59a7448770267" target=_blank">Be A Good Trainee</a> to your business.'
 					)
 				),
 			),

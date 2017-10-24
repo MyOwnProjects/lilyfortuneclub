@@ -52,7 +52,7 @@ class Documents extends Base_controller {
 		}
 		if(in_array($result[0]['grade_access'], array('SMD', 'MD', 'SA', 'A', 'TA')) && 
 			(empty($this->user) || $this->user['grade'] == 'G')){
-			header('location: '.base_url().'ac/sign_in?redirect=documents/view/'.$file);
+			header('location: '.base_url().'ac/sign_in?redirect=account/documents/view/'.$file);
 			exit;
 		}
 		if(!empty($result[0]['file_name'])){
