@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('base.php');
+require_once('account_base.php');
 class Documents extends Base_controller {
 	public function __construct(){
 		parent::__construct();
