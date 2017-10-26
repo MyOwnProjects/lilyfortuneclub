@@ -126,7 +126,7 @@ function get_recruits(){
 			if(data['success']){
 				var data = data['data'];
 						var table = $('<table>').addClass('table').addClass('table-striped').appendTo($('#recruits-grid'));
-							table.append('<thead><tr><th>Name</th><th>Code</th><th>Recruiter</th><th>Start Date</th></tr></thead>');
+							table.append('<thead><tr><th>&nbsp;</th><th>Name</th><th>Code</th><th>Recruiter</th><th>Start Date</th></tr></thead>');
 							var tbody = $('<tbody>').appendTo(table);
 							for(var i = 0; i < data.length;++i){
 								var tr = $('<tr>').appendTo(tbody);
