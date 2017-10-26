@@ -130,6 +130,7 @@ function get_recruits(){
 							var tbody = $('<tbody>').appendTo(table);
 							for(var i = 0; i < data.length;++i){
 								var tr = $('<tr>').appendTo(tbody);
+								$('<td>').html(i + 1).appendTo(tr);
 								$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + data[i]['membership_code'] + '">' + data[i]['name']).appendTo(tr);
 								$('<td>').html(data[i]['membership_code']).appendTo(tr);
 								$('<td>').html(data[i]['recruiter']).appendTo(tr);
