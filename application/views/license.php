@@ -47,7 +47,7 @@
 				<div style="overflow:hidden">
 					<h5 class="text-left">
 						<?php 
-						echo '<p>'.str_replace('<br/>', '</p><p>', $s).($image_exist ? '<span class="detail-url">&nbsp;[<a href="'.base_url().'src/img/license/'.$img.'" target=_blank">Detail'.'</a>]</span>' : '').'</p>';
+						echo '<p>'.str_replace('<br/>', '</p><p>', $s).($image_exist ? '<span class="detail-url">&nbsp;[<a href="'.base_url().'src/img/license/'.$img.'?'.time().' target=_blank">Detail'.'</a>]</span>' : '').'</p>';
 						?>
 					</h5>
 				<?php 
@@ -55,7 +55,7 @@
 				if($image_exist){
 				?>
 				<div class="img-wrapper">
-					<a href="<?php echo base_url();?>src/img/license/<?php echo $img;?>" target="_blank"><img src="<?php echo base_url();?>src/img/license/<?php echo $img;?>"></a>
+					<a href="<?php echo base_url();?>src/img/license/<?php echo $img;?>?<?php echo time();?>" target="_blank"><img src="<?php echo base_url();?>src/img/license/<?php echo $img;?>?<?php echo time();?>"></a>
 				</div>
 				<?php
 				}

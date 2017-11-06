@@ -17,7 +17,7 @@ foreach($pages as $i => $p){
 			foreach($p['instruct']['steps'] as $j => $l){
 					$img = $p['instruct']['image_file_name'].'-'.  str_pad($j + 1, 2, '0', STR_PAD_LEFT).'.png';
 					if(file_exists(getcwd().'/src/img/license/'.$img)){
-						$img_url = base_url().'src/img/license/'.$img;
+						$img_url = base_url().'src/img/license/'.$img.'?'.time();
 					}
 					else{
 						$img_url = '';
@@ -76,7 +76,7 @@ $(document).on("pageshow","#step-detail",function(){
 		success: function(data){
 			$('#step-detail h1').html(data['subject']);
 			$('.detail-text').html(data['step']);
-			$('.detail-img img').attr('src', '<?php echo base_url();?>' + 'src/img/license/' + data['image_file_name'] + '-' + String(selected_step_id + 1).padStart(2, '0') + '.png');
+			$('.detail-img img').attr('src', '<?php echo base_url();?>' + 'src/img/license/' + data['image_file_name'] + '-' + String(selected_step_id + 1).padStart(2, '0') + '.png?'.time();
 		},
 		error: function(a, b, c){
 		},
