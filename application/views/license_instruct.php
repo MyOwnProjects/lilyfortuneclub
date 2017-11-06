@@ -45,7 +45,7 @@
 						?>
 					</h4>
 				<?php 
-				$img = $instruct['image_file_name'].'-'.  str_pad($i + 1, 2, '0', STR_PAD_LEFT).'.png';
+				$img = $instruct['image_file_name'].'-'.  str_pad($i + 1, 2, '0', STR_PAD_LEFT).'.png?'.time();
 				if(file_exists(getcwd().'/src/img/license/'.$img)){
 				?>
 				<div class="img-wrapper">
