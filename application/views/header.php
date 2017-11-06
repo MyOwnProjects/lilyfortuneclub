@@ -36,7 +36,7 @@
 						<?php }?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/license" title="License"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/certificate.svg"><div class="text">License</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/code_of_honor" title="Code of Honor"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/promotion.svg"><div class="text">Code of Honor</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/finance_status" title="Finance Status"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/learning.svg"><div class="text">Your Fiance Status</div></div></a>
+						<a class="menu-ico-url" href="<?php echo base_url();?>account/finance_status" title="Finance Status"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/learning.svg"><div class="text">Your Finance Status</div></div></a>
 						<!--div class="menu-icon"><a href="<?php echo base_url();?>account/live" title="Live"><img src="<?php echo base_url();?>src/img/television.svg"><div class="text">Live</div></a></div-->
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/documents" title="Education"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg"><div class="text">Education</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/terminology" title="Terminologies"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/terminology.svg"><div class="text">Terminologies</div></div></a>
