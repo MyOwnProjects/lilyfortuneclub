@@ -64,7 +64,7 @@ class License extends Account_base_controller {
 							'Click the <i>Fast Licensing Application Service is Here (Flash)</i> link.',
 							'Click <i>Start New Application</i> link.',
 							'Enter your California ID, select your residency, and click the <i>Next</i> button.',
-							'In the next few pages, follow the instruction to enter the correct information, and the click <i>Next</i> button.',
+							'In the next few pages, follow the instruction to enter the correct information, and the click <i>Next</i> button.<br/> - Enter your home address in <i>Home Address</i>.<br/> - Enter 39355 California Street, Suite 201-B, Fremont, CA 94538 as <i>Business Address</i>.<br/> - Use home address as your <i>Primary Address</i>.',
 							'Follow the instruct to pay. After the payment, you will go back to the Check out page. You can click <i>Download Application</i> button to save your application.',
 							'You license application is done. After the license is issued, you can start the continuing education.',
 						),
