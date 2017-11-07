@@ -9,7 +9,11 @@ Dialog.modal = function(option){
 		message: $('<div>').append(loading_div.clone()).append(result_div.clone()).html() + option['message'],
 		title: option['title'],
 		buttons: option['buttons']
-	});
+	}).on('shown.bs.modal', function (e) {
+        if(option['loaded'] && jQuery.isFunction(option['loaded'])){
+			option['loaded']();
+		}
+    });
 	Dialog.modal.loading = $('.dialog-bootbox-loading');
 	Dialog.modal.result = $('.dialog-bootbox-result');
 	Dialog.modal.statusCode = [];

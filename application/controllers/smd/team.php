@@ -1523,5 +1523,100 @@ class Team extends Smd_Controller {
 			echo json_encode($existing_code_list);
 		}
 	}
+	
+	/*public function retrieve_and_update_member($code = ''){
+		$url = "https://www.mywfg.com/Wfg.HierarchyTool/HierarchyDetails/AgentDetails?agentcodenumber=$code";
+		$ret = file_get_contents($url);
+		$content_array = trim($ret).explode('\n');
+		$name = null;
+		$phone_list = array();
+		$address = array();
+		foreach(content_array as $line){
+				$line = trim($line);
+				if($line != ''){
+					$len = strlen($line);
+					if(substr($line, -1) == ':'){
+						$name = substr($line, 0, $len - 1);
+					}
+					else{
+						switch($name){
+							case 'Name':
+								$lpos = strpos($line, '(');
+								rpos = line.indexOf(')');
+								code_len = rpos - lpos - 1;
+								$('#membership_code').val(line.substr(line.length - (code_len + 1), code_len)); 
+								line = line.substr(0, line.length - (code_len + 2)).trim();
+								var pos = line.lastIndexOf(' ');
+								$('#first_name').val(line.substr(0, pos));
+								$('#last_name').val(line.substr(pos + 1, line.length - pos));
+								break;
+							case 'Level':
+								$('#grade').val(line);
+								break;
+							case 'Start Date':
+								var date = new Date(line);
+								var date_str = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+								$('#start_date').val(date_str);
+								break;
+							case 'DOB':
+								var date = new Date(line + ' 2017');
+								var date_str = '1900-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+								$('#date_of_birth').val(date_str);
+								break;
+							case 'Home Phone':
+								phone_list.push('H:' + line);
+								break;
+							case 'Business Phone':
+								phone_list.push('B:' + line);
+								break;
+							case 'Mobile Phone':
+								phone_list.push('M:' + line);
+								break;
+							case 'Personal Email':
+								$('#email').val(line);
+								break;
+							case 'Home Address':
+								address.push(line);
+								break;
+							case 'Recruiter':
+								var p = line.lastIndexOf(' ');
+								var l_first_name = line.substr(0, p).toLowerCase();
+								var l_last_name = line.substr(p + 1).toLowerCase();
+								for(var ii = 0; ii < $('#recruiter option').length; ++ii){
+									var obj = $('#recruiter option:nth-child(' + (ii + 1) + ')');
+									var v = $(obj).html().trim().toLowerCase();
+									var p1 = v.indexOf('(');
+									var p2 = v.indexOf(')');
+									if(p1 >= 0 && p2 >= 3){
+										var v_nick_name = v.substr(p1 + 1, p2 - p1 - 1);
+										v = v.substr(0, p1).trim();
+									}
+									var p = v.lastIndexOf(' ');
+									var v_first_name = v.substr(0, p).toLowerCase();
+									var v_last_name = v.substr(p + 1).toLowerCase();
+									if(l_last_name == v_last_name && 
+										( l_first_name == v_first_name || l_first_name == v_nick_name)){
+										$('#recruiter').val($(obj).val()).selectpicker('refresh');
+										break;
+									}
+								}
+								break;
+						}
+					}
+				}
+			}
+			if(address.length >= 2){
+				$('#street').val(address[0]);
+				var ar = address[1].split(',');
+				$('#city').val(ar[0].trim());
+				ar = ar[1].split('-');
+				$('#country').val(ar[1].trim());
+				ar = ar[0].trim().split(' ');
+				$('#state').val(ar[0].trim());
+				$('#zipcode').val(ar[1].trim());
+			}
+			$('#phone').val(phone_list.join(','));		
+		echo $ret;
+	}*/
 }
 

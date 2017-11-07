@@ -77,7 +77,7 @@ function retrieve_one(index){
 								var l_last_name = value.substr(p + 1).toLowerCase();
 								tr.append('<td>' + l_first_name +' ' + l_last_name + '</td>');
 								break;
-						}
+							}
 						}
 					
 				

@@ -87,12 +87,14 @@ function new_item(prop){//title, url, param){
 	var title = prop['title'];
 	var url = prop['url'];
 	var param = prop['param'];
+	var loaded = prop['loaded'];
 	$.ajax({
 		url: url,
 		success: function(data){
 			Dialog.modal({
 				message: data,
 				title: title,
+				loaded: loaded,
 				buttons: {
 					primary: {
 						label: prop && prop['button_labels'] && prop['button_labels']['primary'] ? prop['button_labels']['primary'] : "Submit",

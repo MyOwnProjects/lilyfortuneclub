@@ -13,11 +13,10 @@
 				</div>
 			</div>
 			<div class="result">
-				<div class="text"></div>
+				<div class="text clearfix"></div>
 				<div class="clearfix"></div>
-				<div class="text"></div>
+				<div class="text clearfix"></div>
 				<div class="clearfix"></div>
-				<div style="padding:20px 0"><button class="btn btn-sm btn-primary disabled" id="btn-update-level" onclick="update_level();">Update Member Level</button></div>
 			</div>
 		</div>
 		<div class="col-xs-12" id="update-new-members" style="display:none">
@@ -82,7 +81,7 @@ function get_baseshop(start){
 					get_baseshop(start);
 				}
 				else{
-					$('#get-baseshop-progress .rsult>div:first-child').html('1. Retrieving baseshop. Done!');
+					$('#get-baseshop-progress>.text').html('1. Retrieving baseshop. Done!');
 					$('#get-bashop-progress .progress-bar').attr('aria-valuenow', 1).css('width', '100%');
 					var c = 0;
 					for(var code in newCodes){
@@ -91,24 +90,54 @@ function get_baseshop(start){
 						$('#get-baseshop-progress .result>div:nth-child(2)')
 							.append('<div title="' + t + '"><button type="button" class="new-member-url btn btn-link" data-id="' + code + '">' + t + '</button></div>');
 					}
-					$('#get-baseshop-progress .result>div:nth-child(1)').html("New members: " + c);
+					var btn_trvieve_new_members = null;
+					if(c > 0){
+						btn_trvieve_new_members = $('<button>').addClass('btn').addClass('btn-sm').addClass('btn-success')
+							.html('Retrieve All').click(function(){
+								update_level();
+							}
+						);
+					}
+					$('#get-baseshop-progress .result>div:nth-child(1)').append('<span>New members: ' + c + '&nbsp;&nbsp;&nbsp;&nbsp;</span>').append(btn_trvieve_new_members);
 					c = 0;
 					for(var code in changedCodes){
 						c++;
 						var t = changedCodes[code]['old_level'] + '&rarr;' + changedCodes[code]['level'] +  ' - ' + changedCodes[code]['name'] + ' (' + code + ')';
 						$('#get-baseshop-progress .result>div:nth-child(4)')
-							.append('<div title="' + t + '">' + t + '</div>');
+							.attr('id', 'btn-trvieve-new-members').append('<div title="' + t + '">' + t + '</div>');
 					}
-					$('#get-baseshop-progress .result>div:nth-child(3)').html("Level changed members: " + c);
+					var btn_update_level = null;
 					if(c > 0){
-						$('#btn-update-level').removeClass('disabled');
+						btn_update_level = $('<button>').addClass('btn').addClass('btn-sm').addClass('btn-success')
+							.attr('id', 'btn-update-level').html('Update Member Level').click(function(){
+								update_level();
+							}
+						);
 					}
+					$('#get-baseshop-progress .result>div:nth-child(3)').append('<span>Level changed members: ' + c + '&nbsp;&nbsp;&nbsp;&nbsp;</span>').append(btn_update_level);
 				}
 			}
 		}
 	});
 }
 
+function retrive_and_update_member(){
+	$.ajax({
+		url:'<?php echo base_url();?>smd/team/retrieve_and_update_member/' + code,
+
+	});
+}
+
+function retrive_all_members(){
+	var c = 0;
+	for(var code in newCodes){
+		c++;
+		$.ajax({
+			url:'<?php echo base_url();?>smd/team/retrieve_and_update_member/' + code,
+
+		});
+	}
+}
 
 $('body').delegate('.new-member-url', 'click', function(){
 	var $_this = $(this);
@@ -124,11 +153,16 @@ $('body').delegate('.new-member-url', 'click', function(){
 				text += $(obj).find('.horizontal-form-value').text().trim() + '\n';
 			});
 			new_item({title: "Add Member", url: "<?php echo base_url();?>smd/team/add_member",
-				param:{source: {'auto-fill': text}, func: function(){
-					delete newCodes[code];
-					$_this.parent().prepend('<span class="text-success glyphicon glyphicon-ok-sign"></span>');
-					$_this.addClass('disabled');
-				}}
+				loaded: function(){
+					$('#auto-fill-btn').click();
+				},
+				param:{source: {'auto-fill': text}, 
+					func: function(){
+						delete newCodes[code];
+						$_this.parent().prepend('<span class="text-success glyphicon glyphicon-ok-sign"></span>');
+						$_this.addClass('disabled');
+					},
+				}
 			});
 		},
 		error: function(){
