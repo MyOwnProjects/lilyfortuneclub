@@ -703,6 +703,7 @@ class Team extends Smd_Controller {
 					}
 					else{
 						$values['password'] = $password;
+						$values['first_access'] = 'Y';
 					}
 					break;
 				case 'address':
