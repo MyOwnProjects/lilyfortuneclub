@@ -151,6 +151,7 @@ class License extends Account_base_controller {
 			header('location:'.base_url().'account/license');
 			exit;
 		}
+		print_r($this->summary['steps'][0]);exit;
 		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][0]['instruct']));
 	}
 	
