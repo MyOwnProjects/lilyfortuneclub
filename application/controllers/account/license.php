@@ -51,9 +51,8 @@ class License extends Account_base_controller {
 				'After go back to the PSI Exam page, click the <i>schedule for the test</i> link, to select a time and location you would like for the exam, following the instruction.',
 				'Next, go to take the exam at the time and location you have scheduled. Good luck!'
 			),
-		));
-		if($this->user['preference'] == 'B' || $this->user['preference'] == 'BE'){
-			array_push($steps, array(
+		),
+		array(
 					'title' => 'Apply',
 					'comment' =>'You can only apply for the license after you finished both of the 52 hours courses and license exam.',
 					'subject' => "License Application",
@@ -68,8 +67,9 @@ class License extends Account_base_controller {
 							'Follow the instruct to pay. After the payment, you will go back to the Check out page. You can click <i>Download Application</i> button to save your application.',
 							'You license application is done. After the license is issued, you can start the continuing education.',
 						),
-				),
-				array(
+		));
+		if($this->user['preference'] == 'B' || $this->user['preference'] == 'BE'){
+			array_push($steps, array(
 					'title' => 'CE',
 					'comment' =>'You can only pass the CE exam after you get your licen number, however, you can start to learn the curses during the course of  the license application..',
 					'subject' => "Continuing Education",
