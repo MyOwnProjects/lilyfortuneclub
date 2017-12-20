@@ -1,5 +1,7 @@
 <style>
 .nav-tabs-2>li{width:50%}
+.nav-tabs-3>li{width:33%}
+.nav-tabs-3>:last-child>li{width:34%}
 .nav-tabs-5>li{width:20%}
 .tab-content-page{padding:40px}
 .content-page-head{text-align:center;margin-bottom:40px}
