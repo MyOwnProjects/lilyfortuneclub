@@ -129,7 +129,7 @@ class License extends Account_base_controller {
 	}
 	
 	public function index(){
-		if($this->user['preference'] == 'E' && !$this->is_mobile){
+		if(false){//$this->user['preference'] == 'E' && !$this->is_mobile){
 			header('location:'.base_url().'account/license/online_courses');
 			exit;
 		}
@@ -147,7 +147,7 @@ class License extends Account_base_controller {
 	}
 	
 	public function online_courses(){
-		if($this->user['preference'] == 'E' && $this->is_mobile){
+		if(false){//$this->user['preference'] == 'E' && $this->is_mobile){
 			header('location:'.base_url().'account/license');
 			exit;
 		}
@@ -155,7 +155,7 @@ class License extends Account_base_controller {
 	}
 	
 	public function exam(){
-		if($this->user['preference'] == 'E'){
+		if(false){//$this->user['preference'] == 'E'){
 			header('location:'.base_url().'account/license');
 			exit;
 		}
@@ -163,7 +163,7 @@ class License extends Account_base_controller {
 	}
 	
 	public function application(){
-		if($this->user['preference'] == 'E'){
+		if(false){//$this->user['preference'] == 'E'){
 			header('location:'.base_url().'account/license');
 			exit;
 		}
@@ -171,14 +171,14 @@ class License extends Account_base_controller {
 	}
 	
 	public function ce(){
-		if($this->user['preference'] == 'E'){
+		if(false){//$this->user['preference'] == 'E'){
 			header('location:'.base_url().'account/license');
 			exit;
 		}
 		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][3]));
 	}
 	public function appointment(){
-		if($this->user['preference'] == 'E'){
+		if(false){//$this->user['preference'] == 'E'){
 			header('location:'.base_url().'account/license');
 			exit;
 		}
