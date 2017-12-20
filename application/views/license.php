@@ -1,7 +1,6 @@
 <style>
-.nav-tabs>li{width:20%}
 .nav-tabs-2>li{width:50%}
-.nav-tabs-5>li{width:50%}
+.nav-tabs-5>li{width:20%}
 .tab-content-page{padding:40px}
 .content-page-head{text-align:center;margin-bottom:40px}
 .tab-content img{width:100%}
@@ -18,7 +17,7 @@
 		<h2 class="text-center">Get Your License</h2>
 		<div class="text-center" style="font-size:16px;margin-bottom:20px"><?php echo $summary['summary'];?></div>
 	
-	<ul class="nav nav-tabs-<?php echo count($summary['steps']);?> clearfix" id="top-tab">
+	<ul class="nav nav-tabs nav-tabs-<?php echo count($summary['steps']);?> clearfix" id="top-tab">
 		<?php
 		foreach($summary['steps'] as $i => $step){
 		?>
