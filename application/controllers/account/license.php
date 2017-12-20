@@ -141,8 +141,8 @@ class License extends Account_base_controller {
 		$step = $this->input->get('step');
 		echo json_encode(array(
 			'subject' => $this->summary['steps'][$page]['subject'], 
-			'image_file_name'=> $this->summary['steps'][$page]['instruct']['image_file_name'], 
-			'step' => $this->summary['steps'][$page]['instruct']['steps'][$step]));
+			'image_file_name'=> $this->summary['steps'][$page]['steps']['image_file_name'], 
+			'step' => $this->summary['steps'][$page]['steps'][$step]));
 		
 	}
 	
@@ -151,8 +151,7 @@ class License extends Account_base_controller {
 			header('location:'.base_url().'account/license');
 			exit;
 		}
-		print_r($this->summary['steps'][0]);exit;
-		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][0]['instruct']));
+		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][0]));
 	}
 	
 	public function exam(){
@@ -160,7 +159,7 @@ class License extends Account_base_controller {
 			header('location:'.base_url().'account/license');
 			exit;
 		}
-		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][1]['instruct']));
+		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][1]));
 	}
 	
 	public function application(){
@@ -168,7 +167,7 @@ class License extends Account_base_controller {
 			header('location:'.base_url().'account/license');
 			exit;
 		}
-		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][2]['instruct']));
+		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][2]));
 	}
 	
 	public function ce(){
@@ -176,14 +175,14 @@ class License extends Account_base_controller {
 			header('location:'.base_url().'account/license');
 			exit;
 		}
-		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][3]['instruct']));
+		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][3]));
 	}
 	public function appointment(){
 		if($this->user['preference'] == 'E'){
 			header('location:'.base_url().'account/license');
 			exit;
 		}
-		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][4]['instruct']));
+		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][4]));
 	}
 }
 
