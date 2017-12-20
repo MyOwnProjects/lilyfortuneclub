@@ -30,30 +30,30 @@ class License extends Account_base_controller {
 					'Check <i>Please send a copy of the certificate to my e-mail address</i>, and then click <i>Print Certificate</i> button. The cerfiticate will be printed, and an email will be sent.'.
 					'Congratulations! You have got your online course certificate. Now let us take the license exam.',
 			),
+		),
+		array(
+			'title' => 'Exam',
+			'comment' => 'You must correctly answer above 60 or 70 percent, depends on state, of 150 questions in 195 minutes to pass the exam.',
+			'subject' => "License Exam Registration",
+			'image_file_name'=> 'license-exam',
+			'steps' => array(
+				'Go to the PSI Exam  website at <a href="https://candidate.psiexams.com/" target="_blank">PSI Exams Online</a>, and click <i>Create</i> an account.',
+				'Enter your account information.',
+				'Log in your account, in the account page, click <i>Register for a test</i> link.',
+				'Select <i>Government/State Licensing Agencies</i> option.',
+				'Select the state option.',
+				'Select <i>CA Department of Insurance</i>.',
+				'Select <i>CA PSI Site - Life, Accident and health Agent Examination (Life Agent)</i> option.',
+				'Click <i>Register</i> button.',
+				'Enter your information. In the School/Provider, select the <i>145803 ExamFX</i> option, and then click <i>Continue</i> button.',
+				'Click <i>Continue</i> button',
+				'Follow the instruction, and pay for the exam.',
+				'After go back to the PSI Exam page, click the <i>schedule for the test</i> link, to select a time and location you would like for the exam, following the instruction.',
+				'Next, go to take the exam at the time and location you have scheduled. Good luck!'
+			),
 		));
 		if($this->user['preference'] == 'B' || $this->user['preference'] == 'BE'){
 			array_push($steps, array(
-					'title' => 'Exam',
-					'comment' => 'You must correctly answer above 60 or 70 percent, depends on state, of 150 questions in 195 minutes to pass the exam.',
-					'subject' => "License Exam Registration",
-					'image_file_name'=> 'license-exam',
-					'steps' => array(
-							'Go to the PSI Exam  website at <a href="https://candidate.psiexams.com/" target="_blank">PSI Exams Online</a>, and click <i>Create</i> an account.',
-							'Enter your account information.',
-							'Log in your account, in the account page, click <i>Register for a test</i> link.',
-							'Select <i>Government/State Licensing Agencies</i> option.',
-							'Select the state option.',
-							'Select <i>CA Department of Insurance</i>.',
-							'Select <i>CA PSI Site - Life, Accident and health Agent Examination (Life Agent)</i> option.',
-							'Click <i>Register</i> button.',
-							'Enter your information. In the School/Provider, select the <i>145803 ExamFX</i> option, and then click <i>Continue</i> button.',
-							'Click <i>Continue</i> button',
-							'Follow the instruction, and pay for the exam.',
-							'After go back to the PSI Exam page, click the <i>schedule for the test</i> link, to select a time and location you would like for the exam, following the instruction.',
-							'Next, go to take the exam at the time and location you have scheduled. Good luck!'
-						),
-				),
-				array(
 					'title' => 'Apply',
 					'comment' =>'You can only apply for the license after you finished both of the 52 hours courses and license exam.',
 					'subject' => "License Application",
