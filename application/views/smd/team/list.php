@@ -40,6 +40,14 @@
 						}
 					},
 					{
+						text: 'Google Import',
+						success_reload: false,
+						checked: false,
+						callback: function(param){
+							location.href = '<?php echo base_url();?>smd/team/export/google_import';
+						}
+					},
+					{
 						text: 'Mobile Phone Only', 
 						success_reload: false,
 						checked: false,

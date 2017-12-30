@@ -1565,6 +1565,24 @@ class Team extends Smd_Controller {
 					fputcsv($output, array($r['membership_code'], $r['first_name'].' '.$r['last_name'], $mp));
 				}
 			}
+			else if($item == 'google_import'){
+				$headers = array('First Name', 'Last Name','E-mail Address', 
+					'Home Phone', 'Mobile Phone', 'Home Address', 'Home Street', 
+					'Home City', 'Home State', 'Home Postal Code', 'Home Country',
+					'Business Phone');
+				fputcsv($output, $headers);
+				foreach($result as $r){
+					$tl = array('H' => '', 'M' => '', 'B' => '');
+					$pl = explode(',', $r['phone']);
+					foreach($pl as $p){
+						$tl[$p[0]] = str_replace(array(' ', '(', ')', '-'), '', (substr($p, 2)));
+					}
+					$address = $r['street'].', '.$r['city'].', '.$r['state'].' '.$r['zipcode'].', '.$r['country'];
+					fputcsv($output, array($r['first_name'], $r['last_name'], $r['email'],
+						$tl['H'], $tl['M'], $address, $r['street'], $r['city'], $r['state'], 
+						$r['zipcode'], $r['country'], $tl['B']));
+				}
+			}
 		}
 		else{
 			echo "No data is returned.";
