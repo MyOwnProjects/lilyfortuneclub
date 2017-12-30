@@ -26,7 +26,30 @@
 						param: param
 					});
 				}
-			}
+			},
+			{
+				text: '<span class="glyphicon glyphicon-export"></span>&nbsp;Export',
+				checked: false,
+				sub_menus:[
+					{
+						text: 'All',
+						success_reload: false,
+						checked: false,
+						callback: function(param){
+							location.href = '<?php echo base_url();?>smd/team/export';
+						}
+					},
+					{
+						text: 'Mobile Phone Only', 
+						success_reload: false,
+						checked: false,
+						callback: function(param){
+							location.href = '<?php echo base_url();?>smd/team/export/mobile_phone';
+					}
+					}
+				]
+				
+			},
 		],
 		row_count: 50,
 		order_by:{start_date: 'desc'}

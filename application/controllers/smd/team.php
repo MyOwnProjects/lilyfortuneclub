@@ -1525,6 +1525,51 @@ class Team extends Smd_Controller {
 		}
 	}
 	
+	public function export($item = 'all'){
+		$this->load->model('user_model');
+		$result = $this->user_model->get_list();
+		header('Content-Type: text/csv; charset=utf-8');
+		header("Content-Disposition: attachment; filename=team-members.csv");
+		$output = fopen('php://output', 'w');
+		if(count($result) > 0){
+			$headers = array();
+			if($item == 'all'){
+				foreach($result[0] as $k => $v){
+					array_push($headers, $k);
+				}
+				fputcsv($output, $headers);
+				foreach($result as $r){
+					fputcsv($output, $r);
+				}
+			}
+			else if($item == 'mobile_phone'){
+				$headers = array('Code', 'Name', 'Mobile Phone');
+				fputcsv($output, $headers);
+				foreach($result as $r){
+					$phone = $r['phone'];
+					$pl = explode(',', $phone);
+					$tl = array();
+					foreach($pl as $p){
+						$tl[$p[0]] = $p;
+					}
+					$mp = '';
+					if(array_key_exists('M', $tl)){
+						$mp = $tl['M'];
+					}
+					else if(array_key_exists('H', $tl)){
+						$mp = $tl['H'];
+					}
+					if(!empty($mp)){
+						$mp = str_replace(array(' ', '(', ')', '-'), '', (substr($mp, 2)));
+					}
+					fputcsv($output, array($r['membership_code'], $r['first_name'].' '.$r['last_name'], $mp));
+				}
+			}
+		}
+		else{
+			echo "No data is returned.";
+		}
+	}
 	/*public function retrieve_and_update_member($code = ''){
 		$url = "https://www.mywfg.com/Wfg.HierarchyTool/HierarchyDetails/AgentDetails?agentcodenumber=$code";
 		$ret = file_get_contents($url);
