@@ -184,8 +184,10 @@ class Smd_controller extends CI_Controller {
 	
 	protected function load_view($view, $data = array()){
 		$this->view_data = array('view' => $view, 'user' => $this->user, 'nav_menus' => $this->nav_menus);
-		foreach($data as $k => $v){
-			$this->view_data[$k] = $v;	
+		if(!empty($data)){
+			foreach($data as $k => $v){
+				$this->view_data[$k] = $v;	
+			}
 		}
 		$this->load->view('smd/template', $this->view_data);
 	}

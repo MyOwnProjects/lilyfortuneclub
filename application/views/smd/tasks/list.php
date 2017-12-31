@@ -4,12 +4,13 @@
 <script>
 	$('#tasks-grid').data_table({
 		header: [
-			{id: 'tasks_id', text: 'ID', sortable: true, width:'60px', align: 'center'}, 
+			{id: 'tasks_case_no', text: 'Case #', sortable: true, width:'60px', align: 'center'}, 
+			{id: 'tasks_name', text: 'Name', width:'100px', sortable: true}, 
+			{id: 'tasks_subject', text: 'Subject'}, 
+			{id: 'tasks_type', text: 'Type', width:'100px', align: 'center', sortable: true}, 
 			{id: 'tasks_priority', text: 'Priority', sortable: true, width:'60px', align: 'center'}, 
-			{id: 'tasks_subject', text: 'Subject', sortable: true}, 
-			{id: 'tasks_update', text: 'Update', sortable: true, width:'100px', align:'center'},
-			{id: 'tasks_user', text: 'Assigned to', sortable: true, width:'120px', align:'center'},
-			{id: 'tasks_due', text: 'Due', sortable: true, width:'100px', align:'center'},
+			{id: 'tasks_create', text: 'Create', sortable: true, width:'50px', align:'center'},
+			{id: 'tasks_due_date', text: 'Due', sortable: true, width:'50px', align:'center'},
 			{id: 'tasks_status', text: 'Status', sortable: true, width:'60px', align: 'center'}, 
 		],
 		url: '<?php echo base_url();?>smd/tasks/get_task_list',
@@ -28,7 +29,7 @@
 			}
 		],
 		row_count: 20,
-		order_by: {tasks_update: 'desc'},
+		order_by: {tasks_create: 'desc'},
 		filter: {id: 'tasks_status', options:{
 			new: '<span class="text-red glyphicon glyphicon-plus-sign"></span> New', 
 			pending: '<span class="text-danger glyphicon glyphicon-question-sign"></span> Pending',

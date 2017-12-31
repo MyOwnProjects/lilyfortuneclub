@@ -25,7 +25,7 @@ class Task_model extends Base_model{
 			}
 		}
 		
-		$sql = "SELECT *, CONCAT(users.first_name,' ',users.last_name) AS tasks_user FROM tasks LEFT JOIN users ON tasks.tasks_user_id=users.users_id "
+		$sql = "SELECT * FROM tasks "
 			.(empty($where) ? "" : " WHERE $where ")
 			.(empty($sort_array) ? "" : " ORDER BY ".implode(",", $sort_array))
 			.(empty($limit) ? "" : " LIMIT $limit");
@@ -33,27 +33,27 @@ class Task_model extends Base_model{
 	}
 	
 	public function get_list_total($where = ''){
-		$sql = "SELECT COUNT(*) AS count FROM tasks LEFT JOIN users ON tasks.tasks_user_id=users.users_id "
+		$sql = "SELECT COUNT(*) AS count FROM tasks "
 			.(empty($where) ? "" : " WHERE $where ");
 		$result = $this->db->query($sql);
 		return $result[0]['count'];
 	}
 	
-	public function insert($user_id, $subject, $detail, $priority, $due_date, $due_time){
-		$now = date_format(date_create(), 'Y-m-d H:i:s');
-		$sql = "INSERT INTO tasks (tasks_user_id, tasks_subject, tasks_detail, tasks_status, tasks_priority, tasks_create, tasks_due_date, tasks_due_time, tasks_update) 
-			 VALUES ('$user_id', '".addslashes($subject)."', '".(isset($detail) ? addslashes($detail) : '')."', 'new', '$priority', '$now', ".($due_date ? "'$due_date'" : 'NULL').", ".($due_time ? "'$due_time'" : 'NULL').", '$now')";
+	public function insert($case_no, $name, $subject, $detail, $type, $source, $priority, $due_date){
+		$now = date_format(date_create(), 'Y-m-d');
+		$sql = "INSERT INTO tasks (tasks_case_no, tasks_name, tasks_subject, 
+			tasks_detail, tasks_status, tasks_type, tasks_source, tasks_priority, tasks_create, tasks_due_date) 
+			VALUES ('".addslashes($case_no)."', '".addslashes($name)."', '".addslashes($subject)."', 
+			'".(isset($detail) ? addslashes($detail) : '')."', 'new', '$type', '$source', '$priority', 
+			'$now', ".($due_date ? "'$due_date'" : 'NULL').")";
 		return $this->db->query($sql) && $this->db->insert_id() > 0;
 	}
 	
 	public function update($prop, $where){
-		$now = date_format(date_create(), 'Y-m-d H:i:s');
 		$set = array();
 		foreach($prop as $k => $v){
 			array_push($set, "$k='".addslashes($v)."'");
 		}
-		array_push($set, "tasks_update='$now'");
-		array_push($set, "tasks_status='pending'");
 		$sql = "UPDATE tasks SET ".implode(",", $set).(!empty($where) ? " WHERE $where" : "");
 		return $this->db->query($sql);
 	}

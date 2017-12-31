@@ -49,8 +49,15 @@ class Tasks extends Smd_Controller {
 			$ret['rows'] = $this->task_model->get_list($where, $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count']);
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['id'] = $r['tasks_id'];
-				$ret['rows'][$i]['tasks_id'] = str_pad($r['tasks_id'], 5, '0', STR_PAD_LEFT);
-				$ret['rows'][$i]['subject'] = $r['tasks_subject'];
+				$ret['rows'][$i]['tasks_case_no'] = $r['tasks_case_no'];
+				$ret['rows'][$i]['tasks_subject'] = $r['tasks_subject'];
+				if($r['tasks_type'] == 'or'){
+					$type = 'Outstanding Requirement';
+				}
+				else{
+					$type = 'Other';
+				}
+				$ret['rows'][$i]['tasks_type'] = $type;
 				if($r['tasks_priority']== 'H'){
 					$c = 'label-danger';
 					$t = 'High';
@@ -78,9 +85,8 @@ class Tasks extends Smd_Controller {
 					$c = 'text-danger glyphicon glyphicon-exclamation-sign';
 				}
 				$ret['rows'][$i]['tasks_status'] = '<span class="'.$c.'"></span> '.$r['tasks_status'];
-				$ret['rows'][$i]['tasks_update'] = date_format(date_create($r['tasks_update']), 'm/d g:i A');
-				$ret['rows'][$i]['tasks_due'] = (isset($r['tasks_due_date']) ? date_format(date_create($r['tasks_due_date']), 'm/d ') : '').(isset($r['tasks_due_time']) ? date_format(date_create($r['tasks_due_time']), 'g:i A') : '');
-				$ret['rows'][$i]['tasks_user'] = $r['first_name'].' '.$r['last_name'];
+				$ret['rows'][$i]['tasks_create'] = isset($r['tasks_create']) ? date_format(date_create($r['tasks_create']), 'M j') : '';
+				$ret['rows'][$i]['tasks_due_date'] = isset($r['tasks_due_date']) ? date_format(date_create($r['tasks_due_date']), 'M j') : '';
 				$ret['rows'][$i]['action'] =  array(
 					'view' => base_url().'smd/tasks/view/'.$r['tasks_id']
 				);
@@ -92,15 +98,13 @@ class Tasks extends Smd_Controller {
 	
 	public function view($id = 0){
 		$this->load->model('user_model');
-		$assistants = $this->user_model->get_all_assistants();
 		$result = $this->task_model->get_list("tasks_id='$id'");
 		if(count($result) == 0){
 			$this->load_view('tasks/create', array('error' => 'The task does not exist.'));
 			return;
 		}
 		
-		$this->load_view('tasks/create', array('tasks_id' => $result[0]['tasks_id'], 'subject' => $result[0]['tasks_subject'], 'tasks_priority' => $result[0]['tasks_priority'],
-			'tasks_user_id' => $result[0]['tasks_user_id'], 'tasks_detail' => $result[0]['tasks_detail'], 'assistants' => $assistants, ));
+		$this->load_view('tasks/create', $result[0]);
 	}
 	
 	public function update($id = 0){
@@ -139,21 +143,22 @@ class Tasks extends Smd_Controller {
 	public function create(){
 		$error = '';
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$case_no = trim($this->input->post('tasks_case_no'));
+			$name = trim($this->input->post('tasks_name'));
 			$subject = trim($this->input->post('tasks_subject'));
+			$detail = trim($this->input->post('tasks_detail'));
+			$type = trim($this->input->post('tasks_type'));
+			$source = trim($this->input->post('tasks_source'));
 			$priority = $this->input->post('tasks_priority');
-			$user_id = $this->input->post('tasks_user_id');
 			$due_date = $this->input->post('tasks_due_date');
-			$due_time = $this->input->post('tasks_due_time');
-			$detail = $this->input->post('tasks_detail');
-			if($this->task_model->insert($user_id, $subject, $detail, $priority, $due_date, $due_time)){
+			if($this->task_model->insert($case_no, $name, $subject, $detail, $type, $source, $priority, $due_date)){
 				header('location: '.base_url().'smd/tasks');
 				exit;
 			}
 			$error = 'Failed to create task';
 		}
 		$this->load->model('user_model');
-		$assistants = $this->user_model->get_all_assistants();
-		$this->load_view('tasks/create', array_merge($this->input->post() ? $this->input->post() : array(), array('assistants' => $assistants, 'error' => $error)));
+		$this->load_view('tasks/create', $this->input->post());
 	}
 	
 }
