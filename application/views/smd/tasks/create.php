@@ -31,7 +31,7 @@
 						<select class="form-control input-sm" name="tasks_source">
 							<option value="other">Other</option>
 							<option value="tp" <?php echo isset($tasks_source) && $tasks_source == 'tp' ? 'selected' : '';?>>Transamerica Premier</option>
-							<option value="tfaconnect" <?php isset($tasks_source) && $tasks_source == 'tfaconnect' ? 'selected' : '';?>>TFAConnect Account</option>
+							<option value="tfaconnect" <?php echo isset($tasks_source) && $tasks_source == 'tfaconnect' ? 'selected' : '';?>>TFAConnect Account</option>
 							<option value="yahoo" <?php echo isset($tasks_source) && $tasks_source == 'yahoo' ? 'selected' : '';?>>Yahoo Email</option>
 						</select>
 					</div>

@@ -71,6 +71,7 @@ class Tasks extends Smd_Controller {
 					$t = 'Low';
 				}
 				$ret['rows'][$i]['tasks_priority'] = '<span class="label '.$c.'">'.$t.'</span>';
+				$ret['rows'][$i]['tasks_source'] = $r['tasks_source'];
 				
 				if($r['tasks_status'] == 'new'){
 					$c = 'text-red glyphicon glyphicon-plus-sign';
