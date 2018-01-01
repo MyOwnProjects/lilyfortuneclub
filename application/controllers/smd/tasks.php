@@ -151,8 +151,9 @@ class Tasks extends Smd_Controller {
 			$type = trim($this->input->post('tasks_type'));
 			$source = trim($this->input->post('tasks_source'));
 			$priority = $this->input->post('tasks_priority');
+			$create = $this->input->post('tasks_create');
 			$due_date = $this->input->post('tasks_due_date');
-			if($this->task_model->insert($case_no, $name, $subject, $detail, $type, $source, $priority, $due_date)){
+			if($this->task_model->insert($case_no, $name, $subject, $detail, $type, $source, $priority, $create, $due_date)){
 				header('location: '.base_url().'smd/tasks');
 				exit;
 			}
