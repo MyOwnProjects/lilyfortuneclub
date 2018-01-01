@@ -87,7 +87,7 @@ class Tasks extends Smd_Controller {
 				}
 				$ret['rows'][$i]['tasks_status'] = '<span class="'.$c.'"></span> '.$r['tasks_status'];
 				$ret['rows'][$i]['tasks_create'] = isset($r['tasks_create']) ? date_format(date_create($r['tasks_create']), 'M j') : '';
-				$ret['rows'][$i]['tasks_due_date'] = isset($r['tasks_due_date']) ? date_format(date_create($r['tasks_due_date']), 'M j') : null;
+				$ret['rows'][$i]['tasks_due_date'] = isset($r['tasks_due_date']) ? date_format(date_create($r['tasks_due_date']), 'M j') : '';
 				$ret['rows'][$i]['action'] =  array(
 					'view' => base_url().'smd/tasks/view/'.$r['tasks_id']
 				);
