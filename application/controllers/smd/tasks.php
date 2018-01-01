@@ -29,7 +29,7 @@ class Tasks extends Smd_Controller {
 		if(!empty($search)){
 			$serch_where = array();
 			foreach($search as $s){
-				array_push($serch_where, "tasks_subject LIKE '%$s%' OR first_name LIKE '%$s%' OR last_name LIKE '%$s%'");
+				array_push($serch_where, "tasks_subject LIKE '%$s%' OR tasks_case_no LIKE '%$s%' OR tasks_name LIKE '%$s%'");
 			}
 			$where .= " AND (".implode(" OR ", $serch_where).") ";
 		}
