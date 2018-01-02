@@ -77,11 +77,11 @@
 	<?php
 	if($user){
 	?>
-	<div class="main-header-text pull-right">
+	<div class="main-header-text pull-right" data-toggle="tooltip" data-placement="top" title="<?php echo $user['membership_code'];?>">
 		<span class="glyphicon glyphicon-user"></span>
 		&nbsp;
 		<?php
-		echo $user['first_name'].' '.$user['last_name'].' ('.$user['membership_code'].')';
+		echo $user['first_name'].' '.$user['last_name'];
 		?>
 	</div>
 	<?php

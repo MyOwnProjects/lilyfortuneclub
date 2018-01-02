@@ -2,7 +2,7 @@ ul, ul li{padding:0;margin:0;list-style:none}
 #main-header:after, #main-header-menu:after, #main-body-menu-bar:after, .clearfix:after{content:"";display: table;clear: both}
 body{font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin:0 auto;font-size:14px}
 #main-header{z-index:10;margin:0 auto;padding:5px 0;font-size:16px;background:url('../img/background/dark-wood-background-1013tm-pic-2573.jpg')}
-.main-header-text{color:#fff;font-size:16px;margin-top:35px;margin-right:60px}
+.main-header-text{color:#fff;font-size:16px;margin-top:35px;margin-right:60px;cursor:pointer}
 #main-header-menu{color:#fff;font-family:'AvenirLTStd-Medium', sans-serif, Arial;font-size:16px;margin-top:30px;margin-right:20px}
 .main-header-menu-item{margin-right:20px}
 .main-header-menu-item>a{color:#fff !important;text-decoration:none;}
