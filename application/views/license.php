@@ -16,6 +16,7 @@
 }
 </style>
 <div style="margin:0 auto;max-width:800px;padding:20px 0 80px 0;">
+	<button class="pull-right btn btn-xs btn-primary" onclick="window.print();"><span class="glyphicon glyphicon-print"></span>&nbsp;Print</button>
 		<h2 class="text-center">Get Your License</h2>
 		<div class="text-center" style="font-size:16px;margin-bottom:20px"><?php echo $summary['summary'];?></div>
 	
