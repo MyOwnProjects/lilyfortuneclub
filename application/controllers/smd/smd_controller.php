@@ -112,11 +112,8 @@ class Smd_controller extends CI_Controller {
 				'' => array(
 					'text' => 'Direct Query'
 				),
-				'recruit_number' => array(
-					'text' => 'Recruit Number'
-				),
-				'elite_qualification' => array(
-					'text' => 'Elite Qualification'
+				'generate_plan' => array(
+					'text' => 'Generate Plan'
 				),
 				'javascript_code' => array(
 					'text' => 'Javascript Code'

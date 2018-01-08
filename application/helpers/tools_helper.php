@@ -326,3 +326,22 @@ if ( ! function_exists('send_mail')){
 		return true;
 	}
 }
+
+if ( ! function_exists('number_to_chinese')){
+	function number_to_chinese($number){
+		//10.3万
+		//341万
+		//2039万
+		//1.37亿
+		//13.98亿
+		if($number < 10000){
+			return $number;
+		}
+		else if($number < 100000000){
+			$number = round($number / 10000);
+			return $number.'万';
+		}
+		$number = round($number / 100000000, 2);
+		return $number.'亿';
+	}
+}

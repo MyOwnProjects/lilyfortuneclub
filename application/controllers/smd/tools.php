@@ -157,6 +157,214 @@ class Tools extends Smd_Controller {
 			echo json_encode(array('subject' => '', 'body' => ''));
 		}
 	}
+	
+	public function debug($command){
+		if($command == 'baseshop'){
+		}
+	}
+	
+	public function log_on(){
+		$url = 'https://www.mywfg.com/Users/Account/LogOn?ReturnUrl=%2F';
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: text/html, application/xhtml+xml, image/jxr, */* ",
+					"Accept-Encoding: gzip, deflate, br ",
+					"Accept-Language: en-US, en; q=0.8, zh-Hans-CN; q=0.5, zh-Hans; q=0.3 ",
+					"Cache-Control: no-cache ",
+					"Connection: Keep-Alive ",
+					//"Content-Length: 247 ",
+					"Content-Type: application/x-www-form-urlencoded ",
+					"Cookie: liveagent_oref=https://www.mywfg.com/Users/Account/AccessDenied?ReturnUrl=%2f; liveagent_vc=3; liveagent_ptid=68a60e34-6c68-4f11-ae23-286e7873e62a; __RequestVerificationToken=YOeKQk5Sf3wce6JZfYgudse6MRARelJWDvQgoq1vkjEuV-tCdU54rYXtV7VUdO3S2lzPS7R8QHjp9ln1MSbHDN76EyG4WY3jbdWUSokWhn7X-3nSYvMAqOGd7Kw5dogJQ3wj5vTPaK80yuWbo9fkfw2; TS01f938d8=01a47a43037ad5fa89f85001d2b9c17299c95d132f789abba9faf94b2dbb4eff3270b7f5659423f9652c6d6a89522b7de184c9b7d1d9bdd7bcaf32885ab94a9ce073a9a2d92babd2665b3510bc85713296b25ca3cca172bd6d0ee4de00a857fb1c662a8e8e5319c79f0453092efb77b6e8a05ec9ffe5a22582e2bd0c088f40d35aab6f311e; ASP.NET_SessionId=at1kqlju0ec2kmpbohuiagib; liveagent_sid=80f7bfcb-d31f-412f-90a4-757326102ab1; www.mywfg.com-b1P=37da45e4f52f4fc15e7311cda6b1afdc_1508394991; _ga=GA1.2.712155456.1505204933; _gid=GA1.2.1189114318.1508394992; _gat=1 ",
+					"Host: www.mywfg.com ",
+					"Referer: https://www.mywfg.com/Users/Account/AccessDenied?ReturnUrl=%2f ",
+					"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36 Edge/15.15063 "
+				)); 
+				
+      	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_VERBOSE, 1);
+		curl_setopt($ch, CURLOPT_HEADER, 1);
+
+		$data = array(
+			//'__RequestVerificationToken' => '_l_cm9zOfAeHVC9diRyFxBTOltsKTEFXdgpF-bE0FTK5QKR-wR2ieeXnpJsYD9xnC3tuG60fWB__LqA-rGTGC6YPad-LIsee4gHutK95JhIk-b573HrDFrm4kWBwwC2-OhKFYvPLWmnSKLjsjfEjZLtLwnXPhKf6N5MjRmpS9Vk1',
+			'password' => 'Beijing@2007',
+			'userNameOrEmail' => '27QUE'			
+		);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+echo '<html><head><meta charset="UTF-8"></head><body>';
+		$response = curl_exec($ch);
+		var_dump(curl_error($ch));
+		var_dump(curl_errno($ch));
+		$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+		$header = substr($response, 0, $header_size);
+		$body = substr($response, $header_size);
+		var_dump($header_size);
+		var_dump($header);
+		var_dump($body);
+		curl_close($ch);
+		echo '</body></html>';
+	}
+	
+	private function get_value($data, $name){
+		$head = array('Age','Year','Premium','Withdrawal','Loan','Net Premium','Policy Value','Cash Surrender Value','Death Benefit');
+		
+		return $data[array_search($name, $head)];
+	}
+	
+	public function generate_plan($action = null){
+		if($action == 'load'){
+			if(!file_exists($_FILES['file']['tmp_name'])){
+				echo 'File does not exist.';
+				return;
+			}
+			$content = file_get_contents($_FILES['file']['tmp_name']);
+			$this->load_view('tools/generate_plan', array('content' => (Array)json_decode($content)));
+			return;
+		}
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$action = $this->input->post('action');
+			$plan_descs = $this->input->post('plan-desc');
+			$format = $this->input->post('format');
+			$illu = $this->input->post('illustration') == 'Y';
+			$plan_data = $this->input->post('plan-data');
+			$language = $this->input->post('language');
+			$case_name = $this->input->post('case-name'); 
+			$case_age = $this->input->post('case-age');
+			$case_gender = $this->input->post('case-gender'); 
+			$case_desc = $this->input->post('case-desc');
+			if($action == 'save'){
+				$plan_descs_new = array();
+				foreach($plan_descs as $pd){
+					array_push($plan_descs_new, urlencode($pd));
+				}
+				$save_data = array(
+					'plan_descs' => $plan_descs_new,
+					'format' => $format,
+					'illu' => $illu,
+					'plan_data' => $plan_data,
+					'language' => $language,
+					'case_name' => urlencode($case_name), 
+					'case_age' => $case_age,
+					'case_gender' => $case_gender, 
+					'case_desc' => urlencode($case_desc)
+				);
+				$file_name = $case_name.'.json';
+				header('Content-Type: text/csv; charset=utf-8');
+				header("Content-Disposition: attachment; filename=$file_name");
+				//$save_data = mb_convert_encoding(json_encode($save_data), 'UTF-8', 'UTF-8');
+				$output = fopen('php://output', 'w');
+				//fputs($output, chr(0xEF).chr(0xBB).chr(0xBF));
+				fputs($output, json_encode($save_data));
+				return;
+			}
+			$case_data = array(
+				'language' => $language,
+				'name' => $case_name, 
+				'age' => $case_age, 
+				'gender' => $case_gender, 
+				'desc' => $case_desc, 
+				'illu' => $illu,
+				'plans' => array(),
+				'plan_data' => array()
+			);
+			foreach($plan_data as $index => $raw_data){
+				$raw_data_array = explode("\n", $raw_data);
+				$data = array();
+				foreach($raw_data_array as $row){
+					$row = explode("\t", $row);
+					if(is_numeric($row[0])){
+						$rn = array();
+						foreach($row as $d){
+							$dn = str_replace(array('$',',', ')'), '', $d);
+							$dn = intval(str_replace(array('('), '-', $dn));
+							array_push($rn, $dn);
+						}
+						array_push($data, $rn);
+					}
+				}
+				array_push($case_data['plan_data'], $data);
+				
+					$premium = array(
+						'start_age' => -1,
+						'years' => 0,
+						'amount_per_year' => 0,
+						'amount_last_year' => 0
+					);
+					$last_premium = 0;
+
+					$withdraw = array(
+						'start_age' => -1,
+						'end_age' => 100,
+						'amount_per_year' => 0,
+						'total_amount' => 0,
+					);
+					$cash_value = array();
+					$withdraw_value = array();
+					$death_benifit = array();
+					$rate = array();
+					$withdraw_total = 0;
+					foreach($data as $dyear){
+						$age_v = $this->get_value($dyear, 'Age');
+						$premium_v = $this->get_value($dyear, 'Premium');
+						if($premium_v > 0){
+							if($premium['start_age'] < 0){
+								$premium['start_age'] = $age_v;
+							}
+							if($last_premium == 0 || $premium_v == $last_premium){
+								$premium['years']++;
+								$premium['amount_per_year'] = $premium_v;
+							}
+							else{
+								$premium['amount_last_year'] = $premium_v;
+							}
+							$last_premium = $premium_v;
+						}
+						$withdraw_v = $this->get_value($dyear, 'Withdrawal') + $this->get_value($dyear, 'Loan');
+						if($withdraw_v > 0 && $age_v <= 100){
+							if($withdraw['start_age'] < 0){
+								$withdraw['start_age'] = $age_v;
+								$withdraw['amount_per_year'] = $withdraw_v;
+							}
+							$withdraw['end_age'] = $age_v;
+						}
+						$withdraw['total_amount'] += $withdraw_v;
+						if(in_array($age_v, array(45, 55, 65, 75, 85, 95, 100))){
+							$cash_value[$age_v] = $this->get_value($dyear, 'Policy Value');
+							$withdraw_value[$age_v] = $withdraw['total_amount'];
+							$death_benifit[$age_v] = $this->get_value($dyear, 'Death Benefit');
+							$rate[$age_v] = $death_benifit[$age_v] + $withdraw['total_amount'];
+						}
+					}
+
+					$plan = array(
+						'premium' => $premium,
+						'withdraw' => $withdraw,
+						'cash_value' => $cash_value,
+						'death_benifit' => $death_benifit,
+						'rate' => $rate,
+						'desc' => $plan_descs[$index],
+						'withdraw_value' => $withdraw_value
+					);
+
+					array_push($case_data['plans'], $plan);				
+			}
+			
+			if($format == 'csv'){
+			}
+			else{
+				$this->load->view('smd/tools/plan_form', $case_data);
+			}
+			//print_r($_FILES['plan-files']);
+			
+			//print_r($this->input->post());
+			return;
+		}
+		$this->nav_menus['tools']['sub_menus']['generate_plan']['active'] = true;
+		$this->load_view('tools/generate_plan');
+		
+	}
+	
 }
 
 /* End of file welcome.php */
