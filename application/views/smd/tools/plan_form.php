@@ -94,8 +94,8 @@ $real_age_count = count($plans[0]['cash_value']);
 			<?php 
 				foreach($plan['cash_value'] as $a => $v){
 			?>
-				<td class="c" style="color:blue"><?php echo number_to_chinese($v);?></td>
-				<td class="c" style="color:lime"><?php echo number_to_chinese($plan['withdraw_value'][$a]);?></td>
+				<td class="c" style="color:red"><?php echo number_to_chinese($v);?></td>
+				<td class="c" style="color:blue"><?php echo number_to_chinese($plan['withdraw_value'][$a]);?></td>
 				<td class="c" style="color:green"><?php echo number_to_chinese($plan['death_benifit'][$a]);?></td>
 				<td class="c">
 					<?php echo number_to_chinese($plan['rate'][$a]);?>
