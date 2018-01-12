@@ -13,7 +13,7 @@
 				<div class="row">
 					<div class="col-md-6 form-group">
 						<label>Case NO</label>
-						<input class="form-control input-sm" name="tasks_case_no" value="<?php echo isset($tasks_case_no) ? $tasks_case_no : '';?>" required>
+						<input class="form-control input-sm" name="tasks_case_no" value="<?php echo isset($tasks_case_no) ? $tasks_case_no : '';?>">
 					</div>
 					<div class="col-md-6 form-group">
 						<label>Name</label>
