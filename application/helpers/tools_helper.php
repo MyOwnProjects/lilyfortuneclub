@@ -260,7 +260,7 @@ if ( ! function_exists('update_content')){
 			if(!in_array('content-image', $class_list)){
 				$img_list->item($i)->parentNode->setAttribute('class', $class." content-image");
 			}
-			$src = $img_list->item($i)->getAttribute('src');
+			$src = strtok($img_list->item($i)->getAttribute('src'), '?');
 			$class = $img_list->item($i)->getAttribute('class');
 			while ($img_list->item($i)->attributes->length > 0) {
 				$img_list->item($i)->removeAttribute($img_list->item($i)->attributes->item(0)->name);
