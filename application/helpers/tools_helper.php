@@ -337,6 +337,10 @@ if ( ! function_exists('number_to_chinese')){
 		if($number < 10000){
 			return $number;
 		}
+		else if($number < 100000){
+			$number = round($number / 10000, 1);
+			return $number.'万';
+		}
 		else if($number < 100000000){
 			$number = round($number / 10000);
 			return $number.'万';
