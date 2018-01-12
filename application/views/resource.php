@@ -55,7 +55,7 @@ function get_resource_list(lan){
 				var content_wrapper = $('<div>').append(data[i]['content']);
 				var $_li = $('<li>');
 				var $_a = $('<a>').addClass('text-link').attr('href', '<?php echo base_url();?>resource/item/' + data[i]['url_id']).attr('target', '_blank');
-				var img_wrappers = content_wrapper.children('.content-image');
+				var img_wrappers = content_wrapper.find('.content-image');
 				var $_thumbnail = $('<div>').addClass('pull-left').addClass('resource-list-thumbnail').appendTo($_li);
 				if(img_wrappers.length > 0){
 					$_a.clone().append('<img src="' + $(img_wrappers[0]).children('img').attr('src') + '">').appendTo($_thumbnail);
