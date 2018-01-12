@@ -25,7 +25,7 @@ class Tasks extends Smd_Controller {
 		$row_count= $this->input->post('row_count');
 		$sort = $this->input->post('sort');
 		$filter = $this->input->post('filter');
-		$where = '1=1 ';
+		$where = "tasks_status <> 'done' ";
 		if(!empty($search)){
 			$serch_where = array();
 			foreach($search as $s){
