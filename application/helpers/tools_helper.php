@@ -267,7 +267,7 @@ if ( ! function_exists('update_content')){
 			}
 			$img_list->item($i)->setAttribute('class', $class);
 			$path = parse_url($src);
-			if(strtolower($path['host']) != $local_host){
+			if(!isset($path['host']) || strtolower($path['host']) != $local_host){
 				$image = file_get_contents($src);
 				$image_name = time().$i;
 				file_put_contents(getcwd().'/'.$saved_image_path.'/'.$image_name, $image);
