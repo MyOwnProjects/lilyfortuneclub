@@ -119,7 +119,7 @@ if($illu){
 <?php
 foreach($plan_data as $i => $data){
 ?>
-	<table style="float:left;margin-right:20px">
+	<table style="float:left;margin-right:20px;margin-bottom:20px">
 		<thead>
 		<tr>
 			<th colspan="7">计划 <?php echo ($i + 1);?></th>
