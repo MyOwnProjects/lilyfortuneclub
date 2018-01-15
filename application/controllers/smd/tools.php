@@ -329,7 +329,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 							$withdraw['end_age'] = $age_v;
 						}
 						$withdraw['total_amount'] += $withdraw_v;
-						if(in_array($age_v, array(45, 55, 65, 75, 85, 95, 100))){
+						if(in_array($age_v, array(70, 80, 90, 100))){
 							$cash_value[$age_v] = $this->get_value($dyear, 'Policy Value');
 							$withdraw_value[$age_v] = $withdraw['total_amount'];
 							$death_benifit[$age_v] = $this->get_value($dyear, 'Death Benefit');
