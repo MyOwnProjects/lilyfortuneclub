@@ -48,7 +48,13 @@
 					?>
 					</div>
 					<div class="clearfix">
+						<?php
+						if(!empty($user)){
+						?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>contact" title="Contact us"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/telephone.svg?1"><div class="text">Contact Us</div></div></a>
+						<?php
+						}
+						?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>about" title="About us"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/about-us.svg"><div class="text">About Us</div></div></a>
 						<?php
 						if(empty($user)){
