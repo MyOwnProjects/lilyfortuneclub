@@ -110,7 +110,7 @@ $blocks = array(
 						?>
 					</tr>
 					<tr>
-						<td colspan="2" class="h">投资额</td>
+						<td colspan="2" class="h">投资方案</td>
 						<?php
 						foreach($plans as $i => $plan){
 							$premium_total = $plan['premium']['amount_per_year'] * $plan['premium']['years'] + $plan['premium']['amount_last_year'];
@@ -132,7 +132,7 @@ $blocks = array(
 						?>
 					</tr>
 					<tr>
-						<td colspan="2" class="h">生前取出现金值<br/>(全部免税)</td>
+						<td colspan="2" class="h">生前取出现金值</td>
 						<?php
 						foreach($plans as $i => $plan){
 						?>
