@@ -147,7 +147,7 @@ $blocks = array(
 						?>
 					</tr>
 					<tr>
-						<td colspan="2" class="h">生前取出现金值</td>
+						<td colspan="2" class="h">生前取现金方案</td>
 						<?php
 						foreach($plans as $i => $plan){
 						?>
