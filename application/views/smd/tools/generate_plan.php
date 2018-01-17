@@ -164,7 +164,7 @@ function calculate_commission(){
 		var rows = data.split('\n');
 		for(var i = 0; i < rows.length; ++i){
 			var cells = rows[i].split('\t');
-			var v = parseInt(cells[5].trim().replace(/[,$)]+/g,'').replace(/[(]+/g,'-'));
+			var v = parseInt(cells[2].trim().replace(/[,$)]+/g,'').replace(/[(]+/g,'-'));
 			if(v > 0){
 				premium_sum += v;
 			}
