@@ -214,6 +214,10 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 	
 	public function generate_plan($action = null){
 		if($action == 'load'){
+			if($this->input->server('REQUEST_METHOD') == 'GET'){
+				header('location: '.base_url().'smd/tools/generate_plan');
+				return;
+			}
 			if(!file_exists($_FILES['file']['tmp_name'])){
 				echo 'File does not exist.';
 				return;

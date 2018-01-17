@@ -56,7 +56,7 @@
 		?>
 	</div>
 	<div class="form-group">
-		<a type="submit" class="btn btn-small btn-primary <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="calculate_commission();">Commission</a>
+		<a type="submit" class="btn btn-small btn-primary <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="commission_click();">Commission</a>
 		&nbsp;
 		<button type="submit" class="btn btn-small btn-primary <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="generate_report();">Generate Report</button>
 		&nbsp;
@@ -125,6 +125,54 @@ function file_selected(obj){
 	else{
 		$(obj).prev().html('Click to select a file');
 		$('#button-file-load').addClass('disabled');
+	}
+}
+
+function commission_click(){
+	var wrapper = $('<div>');
+	var form = $('<div>').addClass('clearfix').appendTo(wrapper);
+	$('<a type="button" class="btn btn-primary btn-sm pull-right" style="margin-left:10px" onclick="calculate_commission();">Calculate</a>').appendTo(form); 
+	var input_group = $('<div>').css('overflow', 'hidden').addClass('input-group').appendTo(form)
+		.append('<span class="input-group-addon"><i class="glyphicon">$</i></span>')
+		.append('<input id="input-premium" type="text" class="form-control input-sm" placeholder="Premium">');
+	wrapper.append('<br/>');
+	var table = $('<table>').attr('id', 'table-premium').attr('border', '0').css('width', '100%').appendTo(wrapper);
+	Dialog.modal({
+		message: wrapper.html(),
+		title: "Calculate Commission",
+		buttons: {
+			cancel: {
+				label: "Close",
+				className: "btn"
+			}
+		},
+		onEscape: function () {
+			Dialog.modal('hide');
+		}
+	});
+}
+
+function calculate_commission(){
+	var output = [];
+	var premium = parseFloat($('#input-premium').val().trim().replace(/[,$]+/g,''));
+	$('input[name="plan-code[]"]').each(function(index, obj){
+		output[index] = {code: $(obj).val().trim()};
+	});
+	$('textarea[name="plan-data[]"]').each(function(index, obj){
+		var premium_sum = 0;
+		var data = $(obj).val();
+		var rows = data.split('\n');
+		var cells = rows[rows.length - 1].split('\t');
+		output[index]['premium'] = parseInt(cells[5].trim().replace(/[,$]+/g,''));
+	});
+	var table = $('#table-premium');
+	table.empty().append('<thead><tr><th class="text-center">Plan Code</th><th class="text-center">Total Premium</th><th class="text-center">Commission</th><tr></thead>');
+	var tbody = $('<tbody>').appendTo(table);
+	for(var i = 0; i < output.length; ++i){
+		var tr = $('<tr>').appendTo(tbody);
+		$('<td>').addClass('text-center').css('border-top', '1px solid #e5e5e5').html('$' + output[i]['code']).appendTo(tr);
+		$('<td>').addClass('text-center').css('border-top', '1px solid #e5e5e5').html('$' + output[i]['premium'].toLocaleString()).appendTo(tr);
+		$('<td>').addClass('text-center').css('border-top', '1px solid #e5e5e5').html('$' + Math.floor(premium * 1.25 * 0.65 / 2).toLocaleString()).appendTo(tr);
 	}
 }
 </script>

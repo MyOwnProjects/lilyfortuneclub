@@ -51,14 +51,12 @@
 $blocks = array(
 	array(
 		'head' => '产品介绍',
-		'text' => array(
-			'本款产品为指数型美元投资养老保险产品，保底无市场风险，有稳健的投资回报。过去20年平均年化收益率为7 - 9%。过去65年平均年化收益率最低的25年是7.75%。以下案例中用7.75%回报率保守计算，实际收益有可能更高。'
-		)
+		'text' => '本款产品为指数型美元投资养老保险产品，保底无市场风险，有稳健的投资回报。过去20年平均年化收益率为7 - 9%。过去65年平均年化收益率最低的25年是7.75%。以下案例中用7.75%回报率保守计算，实际收益有可能更高。'
 	),
 	array(
 		'head' => '产品功能',
 		'text' => array(
-			' - 保底无市场风险，稳健的投资回报', ' - 财产的保护以及财富的传承', ' - 全免税：免除投资增益税和收入税', ' - 高杠杆的家庭保护', ' - 灵活的投资取放形式，可流动性现金池', ' - 多功能的运用：保护，教育，退休，遗产，税务'
+			'保底无市场风险，稳健的投资回报', '财产的保护以及财富的传承', '全免税：免除投资增益税和收入税', '高杠杆的家庭保护', '灵活的投资取放形式，可流动性现金池', '多功能的运用：保护，教育，退休，遗产，税务'
 		)
 	),
 );
@@ -73,15 +71,22 @@ $blocks = array(
 				<?php echo $block['head'];?>
 			</div>
 			<div class="text">
-				<ul class="clearfix">
+				<div class="clearfix">
 				<?php 
-				foreach($block['text'] as $text){
+				if(is_array($block['text'])){
+					foreach($block['text'] as $text){
+					?>
+					<div style="float:left;width:50%;"><div style="margin:0 1mm"><!--&#10023;--><span style="color:#B80000">&#10022;</span>&nbsp;<?php echo $text;?></div></div>	
+					<?php
+					}
+				}
+				else{
 				?>
-					<li><?php echo $text;?></li>	
+					<div><?php echo $block['text'];?></div>	
 				<?php
 				}
 				?>
-				</ul>
+				</div>
 			</div>
 		</div>
 		<?php
