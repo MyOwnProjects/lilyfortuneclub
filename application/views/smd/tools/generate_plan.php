@@ -162,8 +162,14 @@ function calculate_commission(){
 		var premium_sum = 0;
 		var data = $(obj).val();
 		var rows = data.split('\n');
-		var cells = rows[rows.length - 1].split('\t');
-		output[index]['premium'] = parseInt(cells[5].trim().replace(/[,$]+/g,''));
+		for(var i = 0; i < rows.length; ++i){
+			var cells = rows[i].split('\t');
+			var v = parseInt(cells[5].trim().replace(/[,$)]+/g,'').replace(/[(]+/g,'-'));
+			if(v > 0){
+				premium_sum += v;
+			}
+		}
+		output[index]['premium'] = premium_sum;
 	});
 	var table = $('#table-premium');
 	table.empty().append('<thead><tr><th class="text-center">Plan Code</th><th class="text-center">Total Premium</th><th class="text-center">Commission</th><tr></thead>');
