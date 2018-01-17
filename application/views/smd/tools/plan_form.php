@@ -227,7 +227,7 @@ foreach($plan_data as $i => $data){
 ?>
 <div class="a4 clearfix">
 	<div class="block clearfix">
-		<div class="head1">附<?php echo ($i + 1);?>：详细列表 - 计划 <?php echo $plans[$i]['code'];?> </div>
+		<div class="head1">附 <?php echo ($i + 1);?>：详细列表 - 计划 <?php echo $plans[$i]['code'];?> </div>
 		<div class="clearfix">
 	<table class="t2 <?php echo count($data) > 53 ? 'th' : 'tf';?>">
 		<thead>
