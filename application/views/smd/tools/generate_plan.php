@@ -170,7 +170,7 @@ function calculate_commission(){
 	var tbody = $('<tbody>').appendTo(table);
 	for(var i = 0; i < output.length; ++i){
 		var tr = $('<tr>').appendTo(tbody);
-		$('<td>').addClass('text-center').css('border-top', '1px solid #e5e5e5').html('$' + output[i]['code']).appendTo(tr);
+		$('<td>').addClass('text-center').css('border-top', '1px solid #e5e5e5').html(output[i]['code']).appendTo(tr);
 		$('<td>').addClass('text-center').css('border-top', '1px solid #e5e5e5').html('$' + output[i]['premium'].toLocaleString()).appendTo(tr);
 		$('<td>').addClass('text-center').css('border-top', '1px solid #e5e5e5').html('$' + Math.floor(premium * 1.25 * 0.65 / 2).toLocaleString()).appendTo(tr);
 	}
