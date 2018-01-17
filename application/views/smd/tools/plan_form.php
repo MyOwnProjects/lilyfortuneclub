@@ -31,7 +31,7 @@
 		table.t1 td:not(.h):not(.f){padding:5px 5px;vertical-align:top;text-align:left}
 		table.t1 td.h2{color:#000;font-weight:bold;border-bottom:1px solid #8B0000}
 		table.t1 td:not(.h):not(.h1):not(.h2):not(.b):not(.f):not(.g){border-bottom:1px solid #858585}
-		table.t1 td.g{border-bottom:1px solid #f5f5f5}
+		table.t1 td.g{border-bottom:1px solid #e5e5e5}
 		table.t1 td.h2.t{text-align:center}
 		table.t1 tr td:last-child{border-right:1px solid #8B0000}
 		table.t1 td.t{border-top:1px solid #8B0000}
