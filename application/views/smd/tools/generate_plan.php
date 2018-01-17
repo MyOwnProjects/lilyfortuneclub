@@ -12,16 +12,6 @@
 <br/><br/>
 <form id="the_form" class="form-inline" target="_blank" action="<?php echo base_url();?>smd/tools/generate_plan" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="action" value="">
-	<div class="form-group form-group-sm">
-		<label>Language</label>&nbsp;
-		<select class="form-control" name="language"><option value="en">English</option><option value="cn">Chinese</option></select>
-	</div>
-	<div class="form-group form-group-sm">
-		<label>Output Format</label>&nbsp;<select class="form-control" name="format"><option value="web">Web</option><option value="csv">Csv</option></select>
-	</div>
-	<div class="form-group form-group-sm">
-		<label>Attach Illustration</label>&nbsp;<select class="form-control" name="illustration"><option value="Y">Yes</option><option value="N">No</option></select>
-	</div>
 	<div class="form-group form-group-sm">  
 		<label>Case Name</label>&nbsp;<input type="text" class="form-control" name="case-name" required value="<?php echo isset($content) && $content['case_name'] ? urldecode($content['case_name']) : ''?>">
 	</div>
@@ -54,7 +44,8 @@
 			<div class="form-group form-group-sm">
 				<a title="Remove the plan" class="btn btn-xs btn-danger" onclick="remove_plan(this);">
 					<span class="glyphicon glyphicon-trash"></span>
-				</a>&nbsp;&nbsp;<label>Desc</label>&nbsp;<input type="text" name="plan-desc[]" style="width:300px" class="form-control" value="<?php echo urldecode($content['plan_descs'][$i]);?>">
+				</a>&nbsp;&nbsp;<label>Code</label>&nbsp;<input type="text" name="plan-code[]" style="width:300px" class="form-control" value="<?php echo array_key_exists('plan_code', $content) ? urldecode($content['plan_code'][$i]) : '';?>">
+				<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Desc</label>&nbsp;<input type="text" name="plan-desc[]" style="width:300px" class="form-control" value="<?php echo urldecode($content['plan_descs'][$i]);?>">
 			</div>&nbsp;<div class="form-group form-group-sm">
 				<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quote</label>&nbsp<textarea style="height:150px;width:500px" name="plan-data[]" class="form-control"><?php echo $pd;?></textarea>
 			</div>
@@ -65,6 +56,8 @@
 		?>
 	</div>
 	<div class="form-group">
+		<a type="submit" class="btn btn-small btn-primary <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="calculate_commission();">Commission</a>
+		&nbsp;
 		<button type="submit" class="btn btn-small btn-primary <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="generate_report();">Generate Report</button>
 		&nbsp;
 		<button type="submit" class="btn btn-small btn-success <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="save_report();">Save</button>
@@ -92,6 +85,11 @@ function add_plan(){
 		})
 		.appendTo(group);
 	group.append('&nbsp;&nbsp;');
+    $('<label>').attr('for', 'aa').html('Code').appendTo(group);
+	group.append('&nbsp;');
+	$('<input>').attr('type', 'text').attr('name', 'plan-code[]').css('width', '300px').addClass('form-control').appendTo(group);	group.append('&nbsp;');
+	group.append('<br/><br/>');
+	group.append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
     $('<label>').attr('for', 'aa').html('Desc').appendTo(group);
 	group.append('&nbsp;');
 	$('<input>').attr('type', 'text').attr('name', 'plan-desc[]').css('width', '300px').addClass('form-control').appendTo(group);	group.append('&nbsp;');

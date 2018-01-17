@@ -30,11 +30,13 @@
 		table.t1 td.h:not(.b){border-bottom:1px solid #fff}
 		table.t1 td:not(.h):not(.f){padding:5px 5px;vertical-align:top;text-align:left}
 		table.t1 td.h2{color:#000;font-weight:bold;border-bottom:1px solid #8B0000}
-		table.t1 td:not(.h):not(.h1):not(.h2):not(.b):not(.f){border-bottom:1px solid #e5e5e5}
+		table.t1 td:not(.h):not(.h1):not(.h2):not(.b):not(.f):not(.g){border-bottom:1px solid #858585}
+		table.t1 td.g{border-bottom:1px solid #f5f5f5}
+		table.t1 td.h2.t{text-align:center}
 		table.t1 tr td:last-child{border-right:1px solid #8B0000}
 		table.t1 td.t{border-top:1px solid #8B0000}
 		table.t1 td.b{border-bottom:1px solid #8B0000}
-		table.t1 tr td:not(:last-child):not(.h):not(.h1):not(.h2){border-right:1px solid #e5e5e5}
+		table.t1 tr td:not(:last-child):not(.h):not(.h1):not(.h2){border-right:1px solid #858585}
 		table.t1 tr td.h2:not(:last-child){border-right:1px solid #8B0000 !important}
 		
 		table.t2{text-align:center;table-layout:fixed;border-collapse:collapse;font-size:3.5mm}
@@ -71,7 +73,7 @@ $blocks = array(
 				<?php echo $block['head'];?>
 			</div>
 			<div class="text">
-				<ul>
+				<ul class="clearfix">
 				<?php 
 				foreach($block['text'] as $text){
 				?>
@@ -93,18 +95,31 @@ $blocks = array(
 			<div class="head1">案例 - <?php echo $name?></div>
 			<div class="text">
 				<?php $da = explode("\n", $desc);?>
-				<p><?php echo ($gender == 'F' ? '女' : '男').', '.$age.'岁。 <br/>'.implode('<br/>', $da);?><br/></p>
+				<div><?php echo implode('<br/>', $da);?></div>
+				<br/>
 				<table class="t1" cellspacing="0" cellpadding="0" border="0" style="width:200mm">
 					<tr>
 						<td class="f" style="width:8mm;height:0px"></td>
 						<td class="f" style="width:30mm"></td>
 					<tr>
 					<tr>
-						<td colspan="2" class="h t">计划描述</td>
+						<td colspan="2" class="h t">计划代码</td>
 						<?php
 						foreach($plans as $i => $plan){
 						?>
-						<td class="h2 t"><?php echo ($i + 1);?>.&nbsp;<?php echo $plan['desc'];?></td>
+						<td class="h2 t">
+							<?php echo $plan['code'];?>
+						</td>
+						<?php
+						}
+						?>
+					</tr>
+					<tr>
+						<td colspan="2" class="h">计划描述</td>
+						<?php
+						foreach($plans as $i => $plan){
+						?>
+						<td><?php echo $plan['desc'];?></td>
 						<?php
 						}
 						?>
@@ -161,7 +176,7 @@ $blocks = array(
 						<?php
 						foreach($plans as $i => $plan){
 						?>
-						<td class="c"><?php echo number_to_chinese($plan['cash_value'][$a]);?></td>
+						<td class="c g"><?php echo number_to_chinese($plan['cash_value'][$a]);?></td>
 						<?php
 						}
 						?>
@@ -171,7 +186,7 @@ $blocks = array(
 						<?php
 						foreach($plans as $i => $plan){
 						?>
-						<td class="c"><?php echo number_to_chinese($plan['withdraw_value'][$a]);?></td>
+						<td class="c g"><?php echo number_to_chinese($plan['withdraw_value'][$a]);?></td>
 						<?php
 						}
 						?>
@@ -181,7 +196,7 @@ $blocks = array(
 						<?php
 						foreach($plans as $i => $plan){
 						?>
-						<td class="c"><?php echo number_to_chinese($plan['death_benifit'][$a]);?></td>
+						<td class="c g"><?php echo number_to_chinese($plan['death_benifit'][$a]);?></td>
 						<?php
 						}
 						?>
@@ -212,7 +227,7 @@ foreach($plan_data as $i => $data){
 ?>
 <div class="a4 clearfix">
 	<div class="block clearfix">
-		<div class="head1">附：详细列表 - 计划 <?php echo ($i + 1);?></div>
+		<div class="head1">附：详细列表 - 计划 <?php echo ($i + 1).' '.$plans[$i]['code'];?> </div>
 		<div class="clearfix">
 	<table class="t2 <?php echo count($data) > 53 ? 'th' : 'tf';?>">
 		<thead>

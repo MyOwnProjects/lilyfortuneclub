@@ -225,10 +225,8 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$action = $this->input->post('action');
 			$plan_descs = $this->input->post('plan-desc');
-			$format = $this->input->post('format');
-			$illu = $this->input->post('illustration') == 'Y';
 			$plan_data = $this->input->post('plan-data');
-			$language = $this->input->post('language');
+			$plan_code = $this->input->post('plan-code');
 			$case_name = $this->input->post('case-name'); 
 			$case_age = $this->input->post('case-age');
 			$case_gender = $this->input->post('case-gender'); 
@@ -240,10 +238,8 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 				}
 				$save_data = array(
 					'plan_descs' => $plan_descs_new,
-					'format' => $format,
-					'illu' => $illu,
+					'plan_code' => $plan_code,
 					'plan_data' => $plan_data,
-					'language' => $language,
 					'case_name' => urlencode($case_name), 
 					'case_age' => $case_age,
 					'case_gender' => $case_gender, 
@@ -259,12 +255,11 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 				return;
 			}
 			$case_data = array(
-				'language' => $language,
+				'code' => $plan_code, 
 				'name' => $case_name, 
 				'age' => $case_age, 
 				'gender' => $case_gender, 
 				'desc' => $case_desc, 
-				'illu' => $illu,
 				'plans' => array(),
 				'plan_data' => array()
 			);
@@ -344,17 +339,15 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 						'death_benifit' => $death_benifit,
 						'rate' => $rate,
 						'desc' => $plan_descs[$index],
+						'code' => $plan_code[$index],
 						'withdraw_value' => $withdraw_value
 					);
 
 					array_push($case_data['plans'], $plan);				
 			}
 			
-			if($format == 'csv'){
-			}
-			else{
-				$this->load->view('smd/tools/plan_form', $case_data);
-			}
+			
+			$this->load->view('smd/tools/plan_form', $case_data);
 			//print_r($_FILES['plan-files']);
 			
 			//print_r($this->input->post());
