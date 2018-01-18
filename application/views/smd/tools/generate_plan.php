@@ -5,7 +5,7 @@
 <div style="margin:40px">
 <h3 class="text-center">Generate Plans</h3>
 <form action="<?php echo base_url();?>smd/tools/generate_plan/load" method="post" enctype="multipart/form-data">
-	<a href="javascript:void()" onclick="file_load_click();">Click to select a file</a><input style="display:none" type="file" id="input-load-file" name="file" value="" onchange="file_selected(this)" required>
+	<a href="javascript:void()" onclick="file_load_click();">Click to select a case file</a><input style="display:none" type="file" id="input-load-file" name="file" value="" onchange="file_selected(this)" required>
 	&nbsp;
 	<button class="btn btn-primary btn-xs disabled" type="submit" id="button-file-load">&nbsp;Load&nbsp;</button>
 </form>
@@ -125,7 +125,7 @@ function file_selected(obj){
 		$('#button-file-load').removeClass('disabled');
 	}
 	else{
-		$(obj).prev().html('Click to select a file');
+		$(obj).prev().html('Click to select a case file');
 		$('#button-file-load').addClass('disabled');
 	}
 }
