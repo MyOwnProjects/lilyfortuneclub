@@ -27,9 +27,20 @@
 	</div>
 	<br/>
 	<div class="form-group form-group-sm">
-		<label>Desc</label>&nbsp;
-		<textarea class="form-control" name="case-desc" style="height:150px;width:600px"><?php echo isset($content) && $content['case_desc'] ? urldecode($content['case_desc']) : ''?></textarea>
+		<label>Case Desc</label>&nbsp;
+		<textarea class="form-control" name="case-desc" style="height:80px;width:600px"><?php echo isset($content) && $content['case_desc'] ? urldecode($content['case_desc']) : ''?></textarea>
 	</div>
+	<br/>
+	<div class="form-group">
+		<a type="submit" class="btn btn-small btn-primary <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="commission_click();">Commission</a>
+		&nbsp;
+		<button type="submit" class="btn btn-small btn-primary <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="generate_report();">Generate Report</button>
+		&nbsp;
+		<button type="submit" class="btn btn-small btn-success <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="save_report();">Save</button>
+		
+		<a class="btn btn-danger btn-small" style="margin-left:50px" role="button" href="<?php echo base_url();?>smd/tools/generate_plan">New Plan</a>
+	</div>
+	
 	<br/>
 	<div class="form-group">
 		<a class="btn btn-xs btn-success" onclick="add_plan();return false;"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add a Plan</a>
@@ -54,15 +65,6 @@
 			}
 		}
 		?>
-	</div>
-	<div class="form-group">
-		<a type="submit" class="btn btn-small btn-primary <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="commission_click();">Commission</a>
-		&nbsp;
-		<button type="submit" class="btn btn-small btn-primary <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="generate_report();">Generate Report</button>
-		&nbsp;
-		<button type="submit" class="btn btn-small btn-success <?php echo isset($content) && count($content['plan_data']) > 0 ? '' : 'disabled';?> button-submit" onclick="save_report();">Save</button>
-		
-		<a class="btn btn-danger btn-small" style="margin-left:200px" role="button" href="<?php echo base_url();?>smd/tools/generate_plan">New Plan</a>
 	</div>
 </form>
 </div>	
@@ -129,16 +131,17 @@ function file_selected(obj){
 }
 
 function commission_click(){
-	var wrapper = $('<div>');
+	var s = calculate_commission();
+	/*var wrapper = $('<div>');
 	var form = $('<div>').addClass('clearfix').appendTo(wrapper);
 	$('<a type="button" class="btn btn-primary btn-sm pull-right" style="margin-left:10px" onclick="calculate_commission();">Calculate</a>').appendTo(form); 
 	var input_group = $('<div>').css('overflow', 'hidden').addClass('input-group').appendTo(form)
 		.append('<span class="input-group-addon"><i class="glyphicon">$</i></span>')
 		.append('<input id="input-premium" type="text" class="form-control input-sm" placeholder="Premium">');
 	wrapper.append('<br/>');
-	var table = $('<table>').attr('id', 'table-premium').attr('border', '0').css('width', '100%').appendTo(wrapper);
+	var table = $('<table>').attr('id', 'table-premium').attr('border', '0').css('width', '100%').appendTo(wrapper);*/
 	Dialog.modal({
-		message: wrapper.html(),
+		message: s,
 		title: "Calculate Commission",
 		buttons: {
 			cancel: {
@@ -154,7 +157,8 @@ function commission_click(){
 
 function calculate_commission(){
 	var output = [];
-	var premium = parseFloat($('#input-premium').val().trim().replace(/[,$]+/g,''));
+	var commission_premium = 999999999;//parseFloat($('#input-premium').val().trim().replace(/[,$]+/g,''));
+	
 	$('input[name="plan-code[]"]').each(function(index, obj){
 		output[index] = {code: $(obj).val().trim()};
 	});
@@ -168,17 +172,22 @@ function calculate_commission(){
 			if(v > 0){
 				premium_sum += v;
 			}
+			if(i == 0 && v < commission_premium){
+				commission_premium = v;
+			}
 		}
 		output[index]['premium'] = premium_sum;
 	});
-	var table = $('#table-premium');
+	var table = $('<table>').attr('id', 'table-premium').css('width', '100%');
 	table.empty().append('<thead><tr><th class="text-center">Plan Code</th><th class="text-center">Total Premium</th><th class="text-center">Commission</th><tr></thead>');
 	var tbody = $('<tbody>').appendTo(table);
 	for(var i = 0; i < output.length; ++i){
 		var tr = $('<tr>').appendTo(tbody);
 		$('<td>').addClass('text-center').css('border-top', '1px solid #e5e5e5').html(output[i]['code']).appendTo(tr);
 		$('<td>').addClass('text-center').css('border-top', '1px solid #e5e5e5').html('$' + output[i]['premium'].toLocaleString()).appendTo(tr);
-		$('<td>').addClass('text-center').css('border-top', '1px solid #e5e5e5').html('$' + Math.floor(premium * 1.25 * 0.65 / 2).toLocaleString()).appendTo(tr);
+		$('<td>').addClass('text-center').css('border-top', '1px solid #e5e5e5').html('$' + Math.floor(commission_premium * 1.25 * 0.65 / 2).toLocaleString()).appendTo(tr);
 	}
+	var wrapper = $('<div>').append(table);
+	return wrapper.html();
 }
 </script>
