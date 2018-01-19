@@ -351,7 +351,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 			}
 			
 			
-			$this->load->view('smd/tools/plan_form', $case_data);
+			$this->load->view('smd/pages/plan_form', $case_data);
 			//print_r($_FILES['plan-files']);
 			
 			//print_r($this->input->post());
@@ -361,7 +361,59 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 		$this->load_view('tools/generate_plan');
 		
 	}
-	
+
+	public function commission_report(){
+		$data = array();
+		foreach($_FILES['case-files-commission-report']['tmp_name'] as $i => $tmp_name){
+			if(!file_exists($tmp_name)){
+				echo 'File '.$_FILES['case-files-commission-report']['name'][$i].' does not exist.';
+				return;
+			}
+			$content = (Array)json_decode(file_get_contents($tmp_name));
+			foreach($content['plan_code'] as $i => $plan_code){
+				$sub_code1 = substr($plan_code, 0, 5);
+				$sub_code2 = substr($plan_code, 6);
+				$key = $sub_code1.$sub_code2;
+				if(!array_key_exists($key, $data)){
+					$data[$key] = array(
+						'case_name' => urldecode($content['case_name']),
+						'case_desc' => urldecode($content['case_desc']),
+						'case_plans' => array()
+					);
+				}
+				$data[$key]['case_plans'][$plan_code] = array(
+					'plan_desc' => urldecode($content['plan_descs'][$i]),
+					'plan_data' => $content['plan_data'][$i],
+				);
+			}
+		}
+		ksort($data);
+		foreach($data as $key => $case){
+			ksort($data[$key]);
+		}
+		foreach($data as $key => $case){
+			$commission_premium = 9999999;
+			foreach($case['case_plans'] as $code => $plan){
+				$premium_total = 0;
+				$rows = explode("\n", $plan['plan_data']);
+				foreach($rows as $i => $row){
+					$cells = explode("\t", $row); 
+					$v = intval(str_replace(array('('), '-', str_replace(array('$',',', ')'), '', $cells[2])));
+					if($v > 0){
+						$premium_total += $v;
+						if($i == 0 && $v < $commission_premium){
+							$commission_premium = $v;
+						}
+					}
+				}
+				unset($data[$key]['case_plans'][$code]['plan_data']);
+				$data[$key]['case_plans'][$code]['premium_total'] = $premium_total;
+			}
+			$data[$key]['commission'] = $commission_premium * 1.2 * 0.65 * 0.5;
+		}
+		$this->load->view('smd/pages/commission_report', array('data' => $data));
+		return;
+	}
 }
 
 /* End of file welcome.php */

@@ -1,51 +1,11 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title><?php echo $name?></title>
-	<link rel="icon" type="image/png/ico" href="<?php echo base_url();?>src/img/smd.ico">
-	<!--meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-	<link href='http://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-	<!--link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/css/bootstrap.css?<?php time();?>" />
-	<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script-->
-	<style>
-		body{margin:0;padding:0}
-		.a4{width:200mm;height:287mm;padding:5mm;margin:0 auto;overflow:auto;}
-		.clearfix:after{content:"";display:table;clear:both}
-		ul,ul li{padding:0;margin:0;list-style:none}
-		.block .head1{color:#8B0000;font-weight:bold;font-size:5mm;line-height:10mm}
-		.block:not(:first-child) .head1{margin-top:5mm}
-		.block .text{font-size:3.5mm;line-height:5mm}
-		
-		table{table-layout:fixed;border-collapse:collapse;}
-		table.t1 td.h.h1.h2{font-size:3.5mm}
-		table.t1 td:not(.h):not(.h1):not(.h2){font-size:3.5mm}
-		table.t1 tr td.h{padding:0.5mm 0;text-align:center;vertical-align:middle;color:#fff;background:#8B0000/*#d9534f*/;font-weight:bold}
-		table.t1 tr td.h1{border-right:1px solid #fff;}
-		table.t1 tr td.h:first-child{border-left:1px solid #8B0000;}
-		table.t1 td.h:not(.b){border-bottom:1px solid #fff}
-		table.t1 td:not(.h):not(.f){padding:5px 5px;vertical-align:top;text-align:left}
-		table.t1 td.h2{color:#000;font-weight:bold;border-bottom:1px solid #8B0000}
-		table.t1 td:not(.h):not(.h1):not(.h2):not(.b):not(.f):not(.g){border-bottom:1px solid #858585}
-		table.t1 td.g{border-bottom:1px solid #e5e5e5}
-		table.t1 td.h2.t{text-align:center}
-		table.t1 tr td:last-child{border-right:1px solid #8B0000}
-		table.t1 td.t{border-top:1px solid #8B0000}
-		table.t1 td.b{border-bottom:1px solid #8B0000}
-		table.t1 tr td:not(:last-child):not(.h):not(.h1):not(.h2){border-right:1px solid #858585}
-		table.t1 tr td.h2:not(:last-child){border-right:1px solid #8B0000 !important}
-		
-		table.t2{text-align:center;table-layout:fixed;border-collapse:collapse;font-size:3.5mm}
-		table.t2.th{width:95mm}
-		table.t2.tf{width:200mm}
-		table.t2:first-child{float:left}
-		table.t2:nth-child(2){float:right}
-		table.t2 tr td{border-top:1px solid #e5e5e5;white-space:nowrap;}
-	</style>
+	<title></title>
+	<?php
+	$this->load->view('smd/pages/css.php');
+	?>
 </head>
 <?php
 $blocks = array(
@@ -62,7 +22,9 @@ $blocks = array(
 );
 ?>
 <body>
-	<div class="a4">
+<div class="a4">
+	<div class="header"></div>
+	<div class="main">
 		<?php
 		foreach($blocks as $block){
 		?>
@@ -102,7 +64,7 @@ $blocks = array(
 				<?php $da = explode("\n", $desc);?>
 				<div><?php echo implode('<br/>', $da);?></div>
 				<br/>
-				<table class="t1" cellspacing="0" cellpadding="0" border="0" style="width:200mm">
+				<table class="t1" cellspacing="0" cellpadding="0" border="0">
 					<tr>
 						<td class="f" style="width:8mm;height:0px"></td>
 						<td class="f" style="width:30mm"></td>
@@ -227,100 +189,105 @@ $blocks = array(
 			</div>
 		</div>
 	</div>
+	<div class="footer"></div>
+</div>
 <?php
 foreach($plan_data as $i => $data){
 ?>
 <div class="a4 clearfix">
-	<div class="block clearfix">
-		<div class="head1">附 <?php echo ($i + 1);?>：详细列表 - 计划 <?php echo $plans[$i]['code'];?> </div>
-		<div class="clearfix">
-	<table class="t2 <?php echo count($data) > 53 ? 'th' : 'tf';?>">
-		<thead>
-			<tr>
-				<th style="width:12mm">年龄</th>
-				<th>投资金额<br/>每年/总额</th>
-				<th>生前取出<br/>每年/总额</th>
-				<th>账户<br/>现金余额</th>
-				<th>身后传承</th>
-			</tr>
-		</thead>
-		<tbody>
-	<?php
-	$s1 = 0;
-	$s2 = 0;
-	$end = count($data) < 53 ? count($data) : 53;
-	for($i = 0; $i < $end; ++$i){
-		$row = $data[$i];
-		$a = intval($row[0]);
-		/*if($a > 100){
-			continue;
-		}
-		if($i != 0 && ($a < 70 && $a % 5 != 0)){
-			continue;
-		}*/
-		$s1 += $row[2];
-		$s2 += $row[3] + $row[4];
-		echo '<tr>';
-		echo '<td>'.$row[0].'岁</td>';
-		echo '<td>'.number_to_chinese($row[2]).'/'.number_to_chinese($s1).'</td>';
-		echo '<td>'.number_to_chinese($row[3] + $row[4]).'/'.number_to_chinese($s2).'</td>';
-		echo '<td>'.number_to_chinese($row[6]).'</td>';
-		echo '<td>'.number_to_chinese($row[8]).'</td>';
-		echo '</tr>';
-	}
-	?>
-		</tbody>
-	</table>
+	<div class="header"></div>
+	<div class="main">
+		<div class="block clearfix">
+			<div class="head1">附 <?php echo ($i + 1);?>：详细列表 - 计划 <?php echo $plans[$i]['code'];?> </div>
+			<div class="clearfix">
+		<table class="t2 <?php echo count($data) > 53 ? 'th' : 'tf';?>">
+			<thead>
+				<tr>
+					<th style="width:12mm">年龄</th>
+					<th>投资金额<br/>每年/总额</th>
+					<th>生前取出<br/>每年/总额</th>
+					<th>账户<br/>现金余额</th>
+					<th>身后传承</th>
+				</tr>
+			</thead>
+			<tbody>
 		<?php
-		if(count($data) > 53){
-		?>
-	<table class="t2 th">
-		<thead>
-			<tr>
-				<th style="width:12mm">年龄</th>
-				<th>投资金额<br/>每年/总额</th>
-				<th>生前取出<br/>每年/总额</th>
-				<th>账户<br/>现金余额</th>
-				<th>身后传承</th>
-			</tr>
-		</thead>
-		<tbody>
-	<?php
-	$s1 = 0;
-	$s2 = 0;
-	for($i = 53; $i < count($data); ++$i){
-		$row = $data[$i];
-		$a = intval($row[0]);
-		/*if($a > 100){
-			continue;
-		}
-		if($i != 0 && ($a < 70 && $a % 5 != 0)){
-			continue;
-		}*/
-		$s1 += $row[2];
-		$s2 += $row[3] + $row[4];
-		echo '<tr>';
-		echo '<td>'.$row[0].'岁</td>';
-		echo '<td>'.number_to_chinese($row[2]).'/'.number_to_chinese($s1).'</td>';
-		echo '<td>'.number_to_chinese($row[3] + $row[4]).'/'.number_to_chinese($s2).'</td>';
-		echo '<td>'.number_to_chinese($row[6]).'</td>';
-		echo '<td>'.number_to_chinese($row[8]).'</td>';
-		echo '</tr>';
-	}
-	?>
-		</tbody>
-	</table>		
-		<?php
+		$s1 = 0;
+		$s2 = 0;
+		$end = count($data) < 50 ? count($data) : 50;
+		for($i = 0; $i < $end; ++$i){
+			$row = $data[$i];
+			$a = intval($row[0]);
+			/*if($a > 100){
+				continue;
+			}
+			if($i != 0 && ($a < 70 && $a % 5 != 0)){
+				continue;
+			}*/
+			$s1 += $row[2];
+			$s2 += $row[3] + $row[4];
+			echo '<tr>';
+			echo '<td>'.$row[0].'岁</td>';
+			echo '<td>'.number_to_chinese($row[2]).'/'.number_to_chinese($s1).'</td>';
+			echo '<td>'.number_to_chinese($row[3] + $row[4]).'/'.number_to_chinese($s2).'</td>';
+			echo '<td>'.number_to_chinese($row[6]).'</td>';
+			echo '<td>'.number_to_chinese($row[8]).'</td>';
+			echo '</tr>';
 		}
 		?>
-		
-		
+			</tbody>
+		</table>
+			<?php
+			if(count($data) > 53){
+			?>
+		<table class="t2 th">
+			<thead>
+				<tr>
+					<th style="width:12mm">年龄</th>
+					<th>投资金额<br/>每年/总额</th>
+					<th>生前取出<br/>每年/总额</th>
+					<th>账户<br/>现金余额</th>
+					<th>身后传承</th>
+				</tr>
+			</thead>
+			<tbody>
+		<?php
+		$s1 = 0;
+		$s2 = 0;
+		for($i = 53; $i < count($data); ++$i){
+			$row = $data[$i];
+			$a = intval($row[0]);
+			/*if($a > 100){
+				continue;
+			}
+			if($i != 0 && ($a < 70 && $a % 5 != 0)){
+				continue;
+			}*/
+			$s1 += $row[2];
+			$s2 += $row[3] + $row[4];
+			echo '<tr>';
+			echo '<td>'.$row[0].'岁</td>';
+			echo '<td>'.number_to_chinese($row[2]).'/'.number_to_chinese($s1).'</td>';
+			echo '<td>'.number_to_chinese($row[3] + $row[4]).'/'.number_to_chinese($s2).'</td>';
+			echo '<td>'.number_to_chinese($row[6]).'</td>';
+			echo '<td>'.number_to_chinese($row[8]).'</td>';
+			echo '</tr>';
+		}
+		?>
+			</tbody>
+		</table>		
+			<?php
+			}
+			?>
+
+
+			</div>
 		</div>
 	</div>
-
+	<div class="footer"></div>
 </div>
 <?php
 }
 ?>
-	</body>
+</body>
 </html>
