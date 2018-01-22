@@ -1,7 +1,7 @@
 <style>
 .clearfix:after{content:"";display:table;clear:both}
 body{margin:0;padding:0;background:url(<?php echo base_url();?>src/img/Checkered.png)}
-.a4{width:210mm;height:297.5mm;margin:0;background:#fff;opacity:1}
+.a4{width:210mm;height:297.0mm;margin:0;background:#fff;opacity:1}
 .a4 .header{height:10mm}
 .a4 .footer{height:10mm}
 .a4 .main{height:277.5mm;width:200mm;overflow:auto;margin:0 auto;background:#fff;opacity:1}
