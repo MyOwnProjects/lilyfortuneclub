@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title><?php echo $name;?></title>
 	<?php
 	$this->load->view('smd/pages/css.php');
 	?>
