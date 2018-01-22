@@ -1,6 +1,7 @@
 <style>
 	#resource-list{margin:0;padding:0}
 .resource-list .resource-list-thumbnail{width:118px;height:69px;border:1px solid #efefef;margin-right:20px;text-align:center;padding:2px}
+.resource-list .resource-list-thumbnail-blank img{opacity:0.2}
 .resource-list .resource-list-thumbnail img{width:112px;height:63px;display:inline;}
 .resource-list ul:not(.breadcrumb){list-style:none !important}
 .resource-list ul:not(.breadcrumb) li{margin:0 20px;line-height:30px;padding:20px 0}
@@ -59,6 +60,10 @@ function get_resource_list(lan){
 				var $_thumbnail = $('<div>').addClass('pull-left').addClass('resource-list-thumbnail').appendTo($_li);
 				if(img_wrappers.length > 0){
 					$_a.clone().append('<img src="' + $(img_wrappers[0]).children('img').attr('src') + '">').appendTo($_thumbnail);
+				}
+				else{
+					$_thumbnail.addClass('resource-list-thumbnail-blank');
+					$_a.clone().append('<img src="<?php echo base_url();?>src/img/lfc2.png">').appendTo($_thumbnail);
 				}
 				var $_subject = $('<div>').addClass('resource-list-subject').appendTo($_li);
 				$('<span>').append($_a.clone().append(data[i]['subject'])).appendTo($_subject);

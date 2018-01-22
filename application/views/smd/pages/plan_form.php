@@ -253,7 +253,6 @@ foreach($plan_data as $i => $data){
 			<tbody>
 		<?php
 		$s1 = 0;
-		$s2 = 0;
 		for($i = 53; $i < count($data); ++$i){
 			$row = $data[$i];
 			$a = intval($row[0]);
