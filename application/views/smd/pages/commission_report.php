@@ -65,7 +65,7 @@ function one_page($data){
 		</div>
 	</div>
 	<div class="footer">
-		<div>新京集团财富管理中心</div>		
+		<div>仅供内部使用</div><div>新京集团财富管理中心</div>		
 	</div>
 </div>
 <?php

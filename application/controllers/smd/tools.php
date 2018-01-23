@@ -328,7 +328,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 							$withdraw['end_age'] = $age_v;
 						}
 						$withdraw['total_amount'] += $withdraw_v;
-						echo $dyear.' '.$withdraw_v.' '.$withdraw['total_amount'].'<br/>';
+						//echo $age_v.' '.$withdraw_v.' '.$withdraw['total_amount'].'<br/>';
 						if(in_array($age_v, array(70, 80, 90, 100))){
 							$cash_value[$age_v] = $this->get_value($dyear, 'Policy Value');
 							$withdraw_value[$age_v] = $withdraw['total_amount'];

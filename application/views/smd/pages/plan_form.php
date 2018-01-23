@@ -189,7 +189,9 @@ $blocks = array(
 			</div>
 		</div>
 	</div>
-	<div class="footer"></div>
+	<div class="footer">
+		<div>新京集团财富管理中心</div>		
+	</div>
 </div>
 <?php
 foreach($plan_data as $i => $data){
@@ -238,7 +240,7 @@ foreach($plan_data as $i => $data){
 			</tbody>
 		</table>
 			<?php
-			if(count($data) > 53){
+			if(count($data) > 50){
 			?>
 		<table class="t2 th">
 			<thead>
@@ -253,7 +255,7 @@ foreach($plan_data as $i => $data){
 			<tbody>
 		<?php
 		$s1 = 0;
-		for($i = 53; $i < count($data); ++$i){
+		for($i = 50; $i < count($data); ++$i){
 			$row = $data[$i];
 			$a = intval($row[0]);
 			/*if($a > 100){
@@ -283,7 +285,9 @@ foreach($plan_data as $i => $data){
 			</div>
 		</div>
 	</div>
-	<div class="footer"></div>
+	<div class="footer">
+		<div>新京集团财富管理中心</div>		
+	</div>
 </div>
 <?php
 }
