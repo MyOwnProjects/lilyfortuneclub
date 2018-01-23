@@ -31,6 +31,13 @@
 			<option value="M" <?php echo isset($content) && $content['case_gender'] == 'M' ? 'selected' : ''?>>Male</option>
 		</select>
 	</div>
+	<div class="form-group form-group-sm">
+		<label>For</label>&nbsp;
+		<select class="form-control" name="case-for">
+			<option value="0" <?php echo isset($content) && array_key_exists('case_for', $content) && $content['case_for'] == 0 ? 'selected' : ''?>>其它</option>
+			<option value="1" <?php echo !isset($content) || !array_key_exists('case_for', $content) || $content['case_for'] == 1 ? 'selected' : ''?>>新京集团</option>
+		</select>
+	</div>
 	<br/>
 	<div class="form-group form-group-sm">
 		<label>Case Desc</label>&nbsp;

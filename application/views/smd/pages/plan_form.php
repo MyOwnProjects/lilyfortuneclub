@@ -1,3 +1,13 @@
+<?php
+function write_footer($for){
+?>
+	<div class="footer">
+		<div>仅供内部使用</div><div><?php echo $for == 1 ? '新京集团财富管理中心' : 'Internal use only'?></div>		
+	</div>
+
+<?php
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -189,9 +199,7 @@ $blocks = array(
 			</div>
 		</div>
 	</div>
-	<div class="footer">
-		<div>仅供内部使用</div><div>新京集团财富管理中心</div>		
-	</div>
+	<?php write_footer($for);?>
 </div>
 <?php
 foreach($plan_data as $i => $data){
@@ -295,9 +303,7 @@ foreach($plan_data as $i => $data){
 			</div>
 		</div>
 	</div>
-	<div class="footer">
-		<div>仅供内部使用</div><div>新京集团财富管理中心</div>		
-	</div>
+	<?php write_footer($for);?>
 </div>
 <?php
 }

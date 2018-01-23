@@ -228,6 +228,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 		}
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$action = $this->input->post('action');
+			$case_for = $this->input->post('case-for');
 			$plan_descs = $this->input->post('plan-desc');
 			$plan_data = $this->input->post('plan-data');
 			$plan_code = $this->input->post('plan-code');
@@ -247,7 +248,8 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 					'case_name' => urlencode($case_name), 
 					'case_age' => $case_age,
 					'case_gender' => $case_gender, 
-					'case_desc' => urlencode($case_desc)
+					'case_desc' => urlencode($case_desc),
+					'case_for' => $case_for
 				);
 				$file_name = $case_name.'.json';
 				header('Content-Type: text/csv; charset=utf-8');
@@ -265,7 +267,8 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 				'gender' => $case_gender, 
 				'desc' => $case_desc, 
 				'plans' => array(),
-				'plan_data' => array()
+				'plan_data' => array(),
+				'for' => $case_for
 			);
 			foreach($plan_data as $index => $raw_data){
 				$raw_data_array = explode("\n", $raw_data);

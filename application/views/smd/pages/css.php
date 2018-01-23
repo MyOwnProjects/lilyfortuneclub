@@ -1,6 +1,6 @@
 <style>
 .clearfix:after{content:"";display:table;clear:both}
-body{margin:0;padding:0;background:url(<?php echo base_url();?>src/img/Checkered.png)}
+body{margin:0;padding:0;background:url(<?php echo base_url();?>src/img/Checkered.png);font-family:Arial}
 .a4{width:210mm;height:297.0mm;margin:0;background:#fff;opacity:1;position:relative}
 .a4 .header{height:10mm}
 .a4 .footer{position:absolute;bottom:0;left:5mm;right:5mm;height:10mm;border-top:1px solid #e5e5e5;font-size:13px;color:#858585;}
