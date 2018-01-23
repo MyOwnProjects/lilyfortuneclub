@@ -328,6 +328,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 							$withdraw['end_age'] = $age_v;
 						}
 						$withdraw['total_amount'] += $withdraw_v;
+						echo $dyear.' '.$withdraw_v.' '.$withdraw['total_amount'].'<br/>';
 						if(in_array($age_v, array(70, 80, 90, 100))){
 							$cash_value[$age_v] = $this->get_value($dyear, 'Policy Value');
 							$withdraw_value[$age_v] = $withdraw['total_amount'];
@@ -409,7 +410,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 				unset($data[$key]['case_plans'][$code]['plan_data']);
 				$data[$key]['case_plans'][$code]['premium_total'] = $premium_total;
 			}
-			$data[$key]['commission'] = $commission_premium * 1.2 * 0.65 * 0.5;
+			$data[$key]['commission'] = $commission_premium * 1.2 * 0.65 * 0.6 * 0.5;
 		}
 		$this->load->view('smd/pages/commission_report', array('data' => $data));
 		return;
