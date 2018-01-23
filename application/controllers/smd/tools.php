@@ -330,7 +330,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 						$withdraw['total_amount'] += $withdraw_v;
 						//echo $age_v.' '.$withdraw_v.' '.$withdraw['total_amount'].'<br/>';
 						if(in_array($age_v, array(70, 80, 90, 100))){
-							$cash_value[$age_v] = $this->get_value($dyear, 'Policy Value');
+							$cash_value[$age_v] = $withdraw['total_amount'] > 0 ? $this->get_value($dyear, 'Cash Surrender Value') : $this->get_value($dyear, 'Policy Value');;
 							$withdraw_value[$age_v] = $withdraw['total_amount'];
 							$death_benifit[$age_v] = $this->get_value($dyear, 'Death Benefit');
 							$rate[$age_v] = $death_benifit[$age_v] + $withdraw['total_amount'];
