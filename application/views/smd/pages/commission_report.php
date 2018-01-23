@@ -3,9 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title></title>
-		<meta charset="UTF-8">
-	<title></title>
+	<title>投资理财计划佣金列表</title>
 	<?php
 	$this->load->view('smd/pages/css.php');
 	?>
@@ -66,7 +64,9 @@ function one_page($data){
 			</div>
 		</div>
 	</div>
-	<div class="header"></div>
+	<div class="footer">
+		<div>新京集团财富管理中心</div>		
+	</div>
 </div>
 <?php
 }
