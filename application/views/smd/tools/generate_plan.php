@@ -22,7 +22,7 @@
 		<label>Case Name</label>&nbsp;<input type="text" class="form-control" name="case-name" required value="<?php echo isset($content) && $content['case_name'] ? urldecode($content['case_name']) : ''?>">
 	</div>
 	<div class="form-group form-group-sm">
-		<label>Age</label>&nbsp;<input type="number" class="form-control" min="30" max="100" name="case-age" value="<?php echo isset($content) && $content['case_age'] ? $content['case_age'] : ''?>">
+		<label>Age</label>&nbsp;<input type="number" class="form-control" min="20" max="100" name="case-age" value="<?php echo isset($content) && $content['case_age'] ? $content['case_age'] : ''?>">
 	</div>
 	<div class="form-group form-group-sm">
 		<label>Gender</label>&nbsp;
