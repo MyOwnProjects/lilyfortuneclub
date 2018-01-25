@@ -212,54 +212,8 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 		return $data[array_search($name, $head)];
 	}
 	
-	public function generate_plan($action = null){
-		if($action == 'load'){
-			if($this->input->server('REQUEST_METHOD') == 'GET'){
-				header('location: '.base_url().'smd/tools/generate_plan');
-				return;
-			}
-			if(!file_exists($_FILES['file']['tmp_name'])){
-				echo 'File does not exist.';
-				return;
-			}
-			$content = file_get_contents($_FILES['file']['tmp_name']);
-			$this->load_view('tools/generate_plan', array('content' => (Array)json_decode($content)));
-			return;
-		}
-		if($this->input->server('REQUEST_METHOD') == 'POST'){
-			$action = $this->input->post('action');
-			$case_for = $this->input->post('case-for');
-			$plan_descs = $this->input->post('plan-desc');
-			$plan_data = $this->input->post('plan-data');
-			$plan_code = $this->input->post('plan-code');
-			$case_name = $this->input->post('case-name'); 
-			$case_age = $this->input->post('case-age');
-			$case_gender = $this->input->post('case-gender'); 
-			$case_desc = $this->input->post('case-desc');
-			if($action == 'save'){
-				$plan_descs_new = array();
-				foreach($plan_descs as $pd){
-					array_push($plan_descs_new, urlencode($pd));
-				}
-				$save_data = array(
-					'plan_descs' => $plan_descs_new,
-					'plan_code' => $plan_code,
-					'plan_data' => $plan_data,
-					'case_name' => urlencode($case_name), 
-					'case_age' => $case_age,
-					'case_gender' => $case_gender, 
-					'case_desc' => urlencode($case_desc),
-					'case_for' => $case_for
-				);
-				$file_name = $case_name.'.json';
-				header('Content-Type: text/csv; charset=utf-8');
-				header("Content-Disposition: attachment; filename=$file_name");
-				//$save_data = mb_convert_encoding(json_encode($save_data), 'UTF-8', 'UTF-8');
-				$output = fopen('php://output', 'w');
-				//fputs($output, chr(0xEF).chr(0xBB).chr(0xBF));
-				fputs($output, json_encode($save_data));
-				return;
-			}
+	private function create_plan_form_data($case_for, $plan_descs, $plan_data
+		,$plan_code, $case_name, $case_age, $case_gender, $case_desc){
 			$case_data = array(
 				'code' => $plan_code, 
 				'name' => $case_name, 
@@ -357,6 +311,156 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 
 					array_push($case_data['plans'], $plan);				
 			}
+			return $case_data;
+	}
+	
+	public function generate_plan($action = null){
+		if($action == 'load'){
+			if($this->input->server('REQUEST_METHOD') == 'GET'){
+				header('location: '.base_url().'smd/tools/generate_plan');
+				return;
+			}
+			if(!file_exists($_FILES['file']['tmp_name'])){
+				echo 'File does not exist.';
+				return;
+			}
+			$content = file_get_contents($_FILES['file']['tmp_name']);
+			$this->load_view('tools/generate_plan', array('content' => (Array)json_decode($content)));
+			return;
+		}
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$action = $this->input->post('action');
+			$case_for = $this->input->post('case-for');
+			$plan_descs = $this->input->post('plan-desc');
+			$plan_data = $this->input->post('plan-data');
+			$plan_code = $this->input->post('plan-code');
+			$case_name = $this->input->post('case-name'); 
+			$case_age = $this->input->post('case-age');
+			$case_gender = $this->input->post('case-gender'); 
+			$case_desc = $this->input->post('case-desc');
+			if($action == 'save'){
+				$plan_descs_new = array();
+				foreach($plan_descs as $pd){
+					array_push($plan_descs_new, urlencode($pd));
+				}
+				$save_data = array(
+					'plan_descs' => $plan_descs_new,
+					'plan_code' => $plan_code,
+					'plan_data' => $plan_data,
+					'case_name' => urlencode($case_name), 
+					'case_age' => $case_age,
+					'case_gender' => $case_gender, 
+					'case_desc' => urlencode($case_desc),
+					'case_for' => $case_for
+				);
+				$file_name = $case_name.'.json';
+				header('Content-Type: text/csv; charset=utf-8');
+				header("Content-Disposition: attachment; filename=$file_name");
+				//$save_data = mb_convert_encoding(json_encode($save_data), 'UTF-8', 'UTF-8');
+				$output = fopen('php://output', 'w');
+				//fputs($output, chr(0xEF).chr(0xBB).chr(0xBF));
+				fputs($output, json_encode($save_data));
+				return;
+			}
+			$case_data = $this->create_plan_form_data($case_for, $plan_descs, $plan_data
+				,$plan_code, $case_name, $case_age, $case_gender, $case_desc);
+			/*$case_data = array(
+				'code' => $plan_code, 
+				'name' => $case_name, 
+				'age' => $case_age, 
+				'gender' => $case_gender, 
+				'desc' => $case_desc, 
+				'plans' => array(),
+				'plan_data' => array(),
+				'for' => $case_for
+			);
+			foreach($plan_data as $index => $raw_data){
+				$raw_data_array = explode("\n", $raw_data);
+				$data = array();
+				foreach($raw_data_array as $row){
+					$row = explode("\t", $row);
+					if(is_numeric($row[0])){
+						$rn = array();
+						foreach($row as $d){
+							$dn = str_replace(array('$',',', ')'), '', $d);
+							$dn = intval(str_replace(array('('), '-', $dn));
+							array_push($rn, $dn);
+						}
+						array_push($data, $rn);
+					}
+				}
+				array_push($case_data['plan_data'], $data);
+				
+					$premium = array(
+						'start_age' => -1,
+						'years' => 0,
+						'amount_per_year' => 0,
+						'amount_last_year' => 0
+					);
+					$last_premium = 0;
+
+					$withdraw = array(
+						'start_age' => -1,
+						'end_age' => 100,
+						'amount_per_year' => 0,
+						'total_amount' => 0,
+					);
+					$cash_value = array();
+					$withdraw_value = array();
+					$death_benifit = array();
+					$rate = array();
+					$premium_total = 0;
+					$withdraw_total = 0;
+					foreach($data as $dyear){
+						$age_v = $this->get_value($dyear, 'Age');
+						$premium_v = $this->get_value($dyear, 'Premium');
+						if($premium_v > 0){
+							if($premium['start_age'] < 0){
+								$premium['start_age'] = $age_v;
+							}
+							if($last_premium == 0 || $premium_v == $last_premium){
+								$premium['years']++;
+								$premium['amount_per_year'] = $premium_v;
+							}
+							else{
+								$premium['amount_last_year'] = $premium_v;
+							}
+							$last_premium = $premium_v;
+						}
+						$premium_total += $premium_v;
+						$withdraw_v = $this->get_value($dyear, 'Withdrawal') + $this->get_value($dyear, 'Loan');
+						if($withdraw_v > 0 && $age_v <= 100){
+							if($withdraw['start_age'] < 0){
+								$withdraw['start_age'] = $age_v;
+								$withdraw['amount_per_year'] = $withdraw_v;
+							}
+							$withdraw['end_age'] = $age_v;
+						}
+						$withdraw['total_amount'] += $withdraw_v;
+						//echo $age_v.' '.$withdraw_v.' '.$withdraw['total_amount'].'<br/>';
+						if(in_array($age_v, array(70, 80, 90, 100))){
+							$cash_value[$age_v] = $withdraw['total_amount'] > 0 ? $this->get_value($dyear, 'Cash Surrender Value') : $this->get_value($dyear, 'Policy Value');;
+							$withdraw_value[$age_v] = $withdraw['total_amount'];
+							$death_benifit[$age_v] = $this->get_value($dyear, 'Death Benefit');
+							$rate[$age_v] = $death_benifit[$age_v] + $withdraw['total_amount'];
+							//echo $age_v.' '.$death_benifit[$age_v].' '.$withdraw['total_amount'].'<br/>';
+						}
+					}
+
+					$plan = array(
+						'premium_total' => $premium_total,
+						'premium' => $premium,
+						'withdraw' => $withdraw,
+						'cash_value' => $cash_value,
+						'death_benifit' => $death_benifit,
+						'rate' => $rate,
+						'desc' => $plan_descs[$index],
+						'code' => $plan_code[$index],
+						'withdraw_value' => $withdraw_value
+					);
+
+					array_push($case_data['plans'], $plan);				
+			}*/
 			
 			
 			$this->load->view('smd/pages/plan_form', $case_data);
@@ -421,6 +525,36 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 		}
 		$this->load->view('smd/pages/commission_report', array('data' => $data, 'for' => $this->input->post('case-for')));
 		return;
+	}
+	
+	public function bulk_plans(){
+		$cases = array();
+		foreach($_FILES['bulk-plans-report']['tmp_name'] as $i => $tmp_name){
+			if(!file_exists($tmp_name)){
+				echo 'File '.$tmp_name.' does not exist.';
+				return;
+			}
+			
+			$content = (Array)json_decode(file_get_contents($tmp_name));
+			$case_for = $content['case_for']; 
+			$plan_descs = array();
+			foreach($content['plan_descs'] as $d){
+				array_push($plan_descs, urldecode($d));
+			}
+			
+			$plan_data = $content['plan_data'];
+			$plan_code = $content['plan_code']; 
+			$case_name = urldecode($content['case_name']);
+			$case_age = $content['case_age'];
+			$case_gender = $content['case_gender'];
+			$case_desc = urldecode($content['case_desc']);
+			
+			$case_data = $this->create_plan_form_data($case_for, $plan_descs, $plan_data
+				,$plan_code, $case_name, $case_age, $case_gender, $case_desc);
+			$case = $this->load->view('smd/pages/plan_form', $case_data, true);
+			array_push($cases, $case);
+		}
+		$this->load_view('tools/bulk_plan_forms', array('cases' =>$cases));
 	}
 }
 
