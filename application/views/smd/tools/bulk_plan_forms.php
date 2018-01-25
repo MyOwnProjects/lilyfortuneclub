@@ -10,4 +10,4 @@ newWindow.document.close();
 <?php
 }
 ?>
-<script>window.close();</script>
+<script>//window.close();</script>
