@@ -9,12 +9,13 @@ body{margin:0;padding:0;background:url(<?php echo base_url();?>src/img/Checkered
 .a4 .footer>div:last-child{float:right}
 .a4 .main{height:276.5mm;width:200mm;overflow:auto;margin:0 auto;background:#fff;opacity:1}
 .a41:nth-child(even){background:red}.a42:nth-child(odd){background:blue}
+.a4 .title{font-size:8mm;font-weight:bold;text-align:center;color:#7D0B0F;margin-bottom:10mm}
 ul,ul li{padding:0;margin:0;list-style:none}
 .block .head1{color:#8B0000;font-weight:bold;font-size:5mm;line-height:10mm}
 .block:not(:first-child) .head1{margin-top:5mm}
 .block .text{font-size:3.5mm;line-height:5mm}
-
-		table{table-layout:fixed;border-collapse:collapse;}
+p{font-size:4mm;text-indent:8mm;line-height:6mm;margin:5mm}
+		table{table-layout:fixed;border-collapse:collapse;margin:0 auto}
 		table.t1{width:200mm}
 		table.t1 td.h.h1.h2{font-size:3.5mm}
 		table.t1 td:not(.h):not(.h1):not(.h2){font-size:3.5mm}
@@ -40,20 +41,19 @@ ul,ul li{padding:0;margin:0;list-style:none}
 		table.t2:nth-child(2){float:right}
 		table.t2 tr td{border-top:1px solid #e5e5e5;white-space:nowrap;}
 		
-		table{table-layout:fixed;border-collapse:collapse;}
-		table.t3{width:200mm}
+		table.t3{width:190mm}
 		table.t3 td{font-size:3.5mm}
 		table.t3 td.c{text-align:center}
 		table.t3 td.h{border-top:1px solid #8B0000;background:#8B0000;color:#fff;font-weight:bold;padding:2mm 1.5mm}
 		table.t3 td:not(.h){padding:1.5mm}
 		table.t3 td.gl{border-left:1px solid #8B0000;}
 		table.t3 td:last-child{border-right:1px solid #8B0000;}
-		table.t3 tr td.b, table.t1 tr:last-child td{border-bottom:1px solid #8B0000;}
 		table.t3 tr td.h:not(:first-child){border-left:1px solid #FFF;}
 		table.t3 td{padding-left:1mm;padding-right:1mm}
 		table.t3 tr td:not(.h):not(.b):not(.s){border-bottom:1px solid #858585}
 		table.t3 tr td.s{border-bottom:1px solid #e5e5e5}
 		table.t3 tr td:not(.h):not(.gl){border-left:1px solid #858585}
+		table.t3 tr td.b, table.t3 tr:last-child td{border-bottom:1px solid #8B0000 !important;}
 		
 
 </style>
