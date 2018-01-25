@@ -536,7 +536,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 			}
 			
 			$content = (Array)json_decode(file_get_contents($tmp_name));
-			$case_for = $content['case_for']; 
+			$case_for = array_key_exists('case_for', $content) ? $content['case_for'] : 1; 
 			$plan_descs = array();
 			foreach($content['plan_descs'] as $d){
 				array_push($plan_descs, urldecode($d));

@@ -34,7 +34,7 @@ $blocks = array(
 	),
 );
 ?>
-<body>
+<body onload="window.print();">
 <div class="a4">
 	<div class="header"></div>
 	<div class="main">
