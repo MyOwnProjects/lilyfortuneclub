@@ -1,13 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+<script>
 <?php
 foreach($cases as $case){
 	$html = str_replace(array("\n", "\r"), '', $case);
 ?>
-<script>
-var newWindow = window.open('about:blank');
+var newWindow = window.open('');
 newWindow.document.write('<?php echo $html;?>');
 newWindow.document.close();
-</script>
 <?php
 }
 ?>
-<script>//window.close();</script>
+window.close();
+</script>
+</head>
+<body></body>
+</html>
