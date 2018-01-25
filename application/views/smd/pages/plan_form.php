@@ -105,7 +105,6 @@ $blocks = array(
 						<td colspan="2" class="h">投资方案</td>
 						<?php
 						foreach($plans as $i => $plan){
-							$premium_total = $plan['premium']['amount_per_year'] * $plan['premium']['years'] + $plan['premium']['amount_last_year'];
 						?>
 						<td>
 							从<?php echo $plan['premium']['start_age'];?>岁起每年投<?php echo number_to_chinese($plan['premium']['amount_per_year']);?>美元，
@@ -117,7 +116,7 @@ $blocks = array(
 							<?php
 							}
 							?>
-							共<?php echo number_to_chinese($premium_total);?>美元。
+							共<?php echo number_to_chinese($plan['premium_total']);?>美元。
 						</td>
 						<?php
 						}
@@ -185,7 +184,7 @@ $blocks = array(
 						?>
 						<td class="c <?php echo $a == 100 ? 'b' : ''?>">
 							<?php echo number_to_chinese($plan['rate'][$a]);?>，
-							<?php echo round($plan['rate'][$a] / $premium_total, 1);?>倍
+							<?php echo round($plan['rate'][$a] / $plan['premium_total'], 1);?>倍
 						</td>
 						<?php
 						}

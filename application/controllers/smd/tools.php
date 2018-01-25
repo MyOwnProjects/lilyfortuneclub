@@ -305,6 +305,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 					$withdraw_value = array();
 					$death_benifit = array();
 					$rate = array();
+					$premium_total = 0;
 					$withdraw_total = 0;
 					foreach($data as $dyear){
 						$age_v = $this->get_value($dyear, 'Age');
@@ -322,6 +323,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 							}
 							$last_premium = $premium_v;
 						}
+						$premium_total += $premium_v;
 						$withdraw_v = $this->get_value($dyear, 'Withdrawal') + $this->get_value($dyear, 'Loan');
 						if($withdraw_v > 0 && $age_v <= 100){
 							if($withdraw['start_age'] < 0){
@@ -337,10 +339,12 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 							$withdraw_value[$age_v] = $withdraw['total_amount'];
 							$death_benifit[$age_v] = $this->get_value($dyear, 'Death Benefit');
 							$rate[$age_v] = $death_benifit[$age_v] + $withdraw['total_amount'];
+							//echo $age_v.' '.$death_benifit[$age_v].' '.$withdraw['total_amount'].'<br/>';
 						}
 					}
 
 					$plan = array(
+						'premium_total' => $premium_total,
 						'premium' => $premium,
 						'withdraw' => $withdraw,
 						'cash_value' => $cash_value,
@@ -415,7 +419,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 			}
 			$data[$key]['commission'] = $commission_premium * 1.2 * 0.65 * 0.6 * 0.5;
 		}
-		$this->load->view('smd/pages/commission_report', array('data' => $data));
+		$this->load->view('smd/pages/commission_report', array('data' => $data, 'for' => $this->input->post('case-for')));
 		return;
 	}
 }
