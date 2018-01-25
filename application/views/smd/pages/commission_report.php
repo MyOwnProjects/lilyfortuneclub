@@ -25,7 +25,7 @@ function one_page(&$data, $row_count){
 					$case = current($data);
 					while($case !== FALSE && $index_count < $row_count){
 						$key = key($data);
-						$b = end(array_keys($data)) || $index_count == $row_count - 1 ? 'b' : '';
+						$b = end(array_keys($data)) == $key || $index_count == $row_count - 1 ? 'b' : '';
 					?>
 					<tr>
 						<?php
