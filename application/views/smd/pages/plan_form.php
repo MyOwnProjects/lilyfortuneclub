@@ -1,11 +1,14 @@
 <?php
-function write_footer($for){
-?>
-	<div class="footer">
-		<div>仅供内部使用</div><div><?php echo $for == 1 ? '新京集团财富管理中心' : 'Internal use only'?></div>		
-	</div>
+if ( ! function_exists('write_footer'))
+{
+	function write_footer($for){
+	?>
+		<div class="footer">
+			<div>仅供内部使用</div><div><?php echo $for == 1 ? '新京集团财富管理中心' : 'Internal use only'?></div>		
+		</div>
 
-<?php
+	<?php
+	}
 }
 ?>
 <!DOCTYPE html>

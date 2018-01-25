@@ -16,9 +16,15 @@
 	<button class="btn btn-primary btn-xs disabled" type="submit" id="button-file-load1">&nbsp;Generate Commission Report&nbsp;</button>
 </form>
 <br/><br/>
+<form class="form-inline" target="_blank" action="<?php echo base_url();?>smd/tools/bulk_plans" method="post" enctype="multipart/form-data">
+	<a href="javascript:void()" onclick="file_load_click2();">Click to select multiple case files</a><input style="display:none" type="file" id="input-load-file2" name="bulk-plans-report[]" value="" onchange="file_selected2(this)" required multiple accept=".json">
+	&nbsp;
+	<button class="btn btn-primary btn-xs disabled" type="submit" id="button-file-load2">&nbsp;Generate Bulk Plans&nbsp;</button>
+</form>
+<br/><br/>
 <form action="<?php echo base_url();?>smd/tools/generate_plan/load" method="post" enctype="multipart/form-data">
 	<a href="javascript:void()" onclick="file_load_click();">Click to select a case file</a><input style="display:none" type="file" id="input-load-file" name="file" value="" onchange="file_selected(this)" required accept=".json">
-	&nbsp;
+&nbsp;
 	<button class="btn btn-primary btn-xs disabled" type="submit" id="button-file-load">&nbsp;Load&nbsp;</button>
 </form>
 <br/>
@@ -160,6 +166,20 @@ function file_selected1(obj){
 	else{
 		$(obj).prev().html('Click to select case file(s)');
 		$('#button-file-load1').addClass('disabled');
+	}
+}
+
+function file_load_click2(){
+	$('#input-load-file2').click();
+}
+function file_selected2(obj){
+	if($(obj)[0].files.length > 0){
+		$(obj).prev().html($(obj)[0].files.length + ' files are selected');
+		$('#button-file-load2').removeClass('disabled');
+	}
+	else{
+		$(obj).prev().html('Click to select multiple case files');
+		$('#button-file-load2').addClass('disabled');
 	}
 }
 
