@@ -241,7 +241,7 @@ foreach($plan_data as $i => $data){
 			echo '<tr>';
 			echo '<td>'.$row[0].'岁</td>';
 			echo '<td>'.number_to_chinese($row[2]).'/'.number_to_chinese($s1).'</td>';
-			echo '<td>'.number_to_chinese($s2).'/'.number_to_chinese($s2).'</td>';
+			echo '<td>'.number_to_chinese($row[3] + $row[4]).'/'.number_to_chinese($s2).'</td>';
 			if($s2 > 0){
 				echo '<td>'.number_to_chinese($row[7]).'</td>';
 			}
