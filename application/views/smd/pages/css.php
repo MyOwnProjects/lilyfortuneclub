@@ -1,13 +1,13 @@
 <style>
 .clearfix:after{content:"";display:table;clear:both}
 body{margin:0;padding:0;background:url(<?php echo base_url();?>src/img/Checkered.png);font-family:Arial}
-.a4{width:210mm;height:297.0mm;margin:0;background:#fff;opacity:1;position:relative}
+.a4{width:210mm;height:297.0mm;margin:0;background:url(<?php echo base_url();?>src/img/watermark.png) #fff no-repeat;opacity:1;position:relative}
 .a4 .header{height:10mm}
 .a4 .footer{position:absolute;bottom:0;left:5mm;right:5mm;height:10mm;border-top:1px solid #e5e5e5;font-size:13px;color:#858585;}
 .a4 .footer div{line-height:20px}
 .a4 .footer>div:first-child{float:left}
 .a4 .footer>div:last-child{float:right}
-.a4 .main{height:276.5mm;width:200mm;overflow:auto;margin:0 auto;background:#fff;opacity:1}
+.a4 .main{height:276.5mm;width:200mm;overflow:auto;margin:0 auto;background:transparent}
 .a41:nth-child(even){background:red}.a42:nth-child(odd){background:blue}
 .a4 .title{font-size:8mm;font-weight:bold;text-align:center;color:#7D0B0F;margin-bottom:10mm}
 ul,ul li{padding:0;margin:0;list-style:none}
