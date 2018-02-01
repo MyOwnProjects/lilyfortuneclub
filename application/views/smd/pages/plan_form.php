@@ -10,6 +10,17 @@ if ( ! function_exists('write_footer'))
 	<?php
 	}
 }
+if ( ! function_exists('write_header'))
+{
+	function write_header($name){
+	?>
+		<div class="header">
+			<div>案例 - <?php echo $name;?></div>
+		</div>
+
+	<?php
+	}
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +47,7 @@ $blocks = array(
 ?>
 <body onload="window.print();">
 <div class="a4">
-	<div class="header"></div>
+	<?php write_header($name);?>
 	<div class="main">
 		<?php
 		foreach($blocks as $block){
@@ -72,7 +83,7 @@ $blocks = array(
 		?>
 		
 		<div class="block">
-			<div class="head1">案例 - <?php echo $name?></div>
+			<div class="head1">案例 - <?php echo $name;?></div>
 			<div class="text">
 				<?php $da = explode("\n", $desc);?>
 				<div><?php echo implode('<br/>', $da);?></div>
@@ -207,7 +218,7 @@ $blocks = array(
 foreach($plan_data as $i => $data){
 ?>
 <div class="a4 clearfix">
-	<div class="header"></div>
+	<?php write_header($name);?>
 	<div class="main">
 		<div class="block clearfix">
 			<div class="head1">附 <?php echo ($i + 1);?>：详细列表 - 计划 <?php echo $plans[$i]['code'];?> </div>

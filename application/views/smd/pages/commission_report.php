@@ -72,12 +72,16 @@ return $index_count;
 reset($data);
 ?>
 <div class="a4">
-	<div class="header"></div>
+	<div class="header">
+		<div>投资理财计划佣金列表</div>
+	</div>
 	<div class="main">
-		<div class="title">投资理财计划佣金列表</div>
-		<p>以下是不同案例代码和对应的参考佣金列表。案例代码所对应的案例详情请参阅附加文档。</p>
-		<p>本列表仅供参考，实际的佣金以客户实际购买的计划为准。如果客户实际购买的计划和案例不完全相同，或者客户健康状况批准的等级不同，则佣金也会相应改变。</p>
-		<p>如果客户购买计划生效日2年之内取消，则佣金需要全额退回。</p>
+		<h2 class="title">投资理财计划佣金列表</h2>
+		<div class="block">
+			<div class="p">以下是不同案例代码和对应的参考佣金列表。案例代码所对应的案例详情请参阅附加文档。</div>
+			<div class="p">本列表仅供参考，实际的佣金以客户实际购买的计划为准。如果客户实际购买的计划和案例不完全相同，或者客户健康状况批准的等级不同，则佣金也会相应改变。</div>
+			<div class="p">如果客户购买计划生效日2年之内取消，则佣金需要全额退回。</div>
+		</div>
 		<br/>
 		<div class="block">
 			<div class="text">
@@ -95,9 +99,12 @@ reset($data);
 while($total_row_count < count($data)){
 ?>
 <div class="a4">
-	<div class="header"></div>
+	<div class="header">
+		<div>投资理财计划佣金列表</div>
+	</div>
 	<div class="main">
 		<div class="block">
+		<br/>
 			<div class="text">
 			<?php $total_row_count += one_page($data, 8);?>
 			</div>
