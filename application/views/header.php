@@ -9,8 +9,6 @@
 .webui-popover1{position:fixed;top:61px !important;left:auto !important;right:0 !important;}
 .webui-arrow1{left:auto !important;right: 22px;}
 .webui-popover-inner1{max-height:300px;overflow-y:auto}
-.social-media-icon{float:right;margin-right:60px;margin-top:35px}
-.social-media-icon img{height:20px;}
 </style>
 <header id="main-header">
 	<div id="logo" class="pull-left clearfix"><a href="<?php echo base_url();?>"><img src="<?php echo base_url();?>src/img/lfc.png"></a></div>
