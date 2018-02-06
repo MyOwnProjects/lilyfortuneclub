@@ -70,21 +70,12 @@
 						?>
 					</div>
 			</div>
-		<script>
-			$('#menu-icon').webuiPopover({
-				html: true,
-				content:$('#menu-icon').next().html(),
-				placement:'auto-bottom',
-				dismissible:true,
-				padding:false,
-			});
-		</script>
 	</div>
 	<?php
 	if($user){
 	?>
 	<div class="main-header-text pull-right" data-toggle="tooltip" data-placement="top" title="<?php echo $user['membership_code'];?>">
-		<span class="glyphicon glyphicon-user"></span>
+		<span id="profile-icon"><img src="<?php echo base_url();?>src/img/user.svg"></span>
 		<?php
 		//echo $user['first_name'].' '.$user['last_name'];
 		?>
@@ -105,5 +96,21 @@
 function toggle_chat(){
 	$('#live-chat').slideToggle();
 }
+	$('#menu-icon').webuiPopover({
+	html: true,
+				content:$('#menu-icon').next().html(),
+				placement:'auto-bottom',
+				dismissible:true,
+				padding:false,
+			});
+			
+	$('#profile-icon').webuiPopover({
+		html: true,
+		content:'<div style="padding:10px 20px;max-width:300px"><div style="white-space:nowrap"><?php echo $user['first_name'].' '.$user['last_name'].'<br/>'.$user['membership_code'];?></div></div>',
+		placement:'auto-bottom',
+		dismissible:true,
+		padding:false,
+	});
+			
 </script>
 </header>
