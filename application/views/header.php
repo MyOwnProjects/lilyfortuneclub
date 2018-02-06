@@ -9,6 +9,8 @@
 .webui-popover1{position:fixed;top:61px !important;left:auto !important;right:0 !important;}
 .webui-arrow1{left:auto !important;right: 22px;}
 .webui-popover-inner1{max-height:300px;overflow-y:auto}
+.social-media-icon{float:right;margin-right:60px;margin-top:35px}
+.social-media-icon img{height:20px;}
 </style>
 <header id="main-header">
 	<div id="logo" class="pull-left clearfix"><a href="<?php echo base_url();?>"><img src="<?php echo base_url();?>src/img/lfc.png"></a></div>
@@ -93,6 +95,15 @@
 	<?php
 	}
 	?>
+	
+	<div class="social-media-icon">
+		<a href="https://www.linkedin.com/company/lily-fortune-club/" target="_blank"><img src="<?php echo base_url();?>src/img/linkedin-logo.svg"></a>
+		&nbsp;
+		<img src="<?php echo base_url();?>src/img/twitter-logo-silhouette.svg">
+		&nbsp;
+		<img src="<?php echo base_url();?>src/img/facebook-letter-logo.svg">
+	</div>
+	
 <script>
 function toggle_chat(){
 	$('#live-chat').slideToggle();
