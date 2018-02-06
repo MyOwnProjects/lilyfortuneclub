@@ -5,7 +5,7 @@
 
 <div style="max-width:1000px;width:100%;padding:40px 20px;margin:0 auto">
 	<h3 class="text-center">About Us</h3>
-	<div style="margin:40px auto;max-width:600px;width:100%">
+	<div style="margin:40px auto;width:100%">
 	<p>We are financial doctors; we are financial brokers.</p>
 	<p>We help provide solutions; we are client oriented vs. company oriented.</p>
 	<p>We teach financial knowledge, leadership skills, and provide field training. </p>
