@@ -95,13 +95,8 @@ class Team extends Account_base_controller {
 		$baseshop = $this->_get_baseshop($code);
 		echo json_encode(array('success' => true, 'baseshop' => $baseshop));
 	}
-	
-	
-	public function get_recruits(){
-		$type = $this->input->post('type');
-		$code = $this->input->post('code');
-		$from = $this->input->post('date_from');
-		$to = $this->input->post('date_to');
+
+	private function _get_recuits($type, $code, $from, $to){
 		$this->load->model('user_model');
 		$ancestors = $this->user_model->get_ancestors($code);
 		$valid = false;
@@ -112,8 +107,7 @@ class Team extends Account_base_controller {
 			}
 		}
 		if(!$valid){
-			echo json_encode(array('success' => false, 'message' => "Invalid membership code."));
-			return;
+			return false;
 		}
 		$where = "1=1";
 		if(!empty($from)){
@@ -139,6 +133,34 @@ class Team extends Account_base_controller {
 				return strcmp($b['start_date'], $a['start_date']);
 			}
 			usort($result, "sort_temp");
+		}
+		return $result;
+	}
+	
+	public function export_recruits(){
+		$type = $this->input->get('type');
+		$code = $this->input->get('code');
+		$from = $this->input->get('date_from');
+		$to = $this->input->get('date_to');
+		$result = $this->_get_recuits($type, $code, $from, $to);
+		header('Content-Type: application/csv');
+		header('Content-Disposition: attachment; filename="recuits.csv";');
+		$f = fopen('php://output', 'w');
+		fputcsv($f, array('Name', 'Code', 'Recuiter', 'Downline', 'Grade', 'Phone', 'Email'));
+		foreach ($result as $r) {
+			fputcsv($f, array($r['name'], $r['membership_code'], $r['recruiter'], $r['children'], $r['grade'], $r['phone'], $r['email']));
+		}
+	}
+	
+	public function get_recruits(){
+		$type = $this->input->post('type');
+		$code = $this->input->post('code');
+		$from = $this->input->post('date_from');
+		$to = $this->input->post('date_to');
+		$result = $this->_get_recuits($type, $code, $from, $to);
+		if($result === false){
+			echo json_encode(array('success' => false, 'message' => "Invalid membership code."));
+			return;
 		}
 		echo json_encode(array('success' => true, 'data' => $result));
 	}

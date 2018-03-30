@@ -89,6 +89,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="form-group text-right">
+						<button class="btn btn-sm btn-primary" onclick="export_recruits();">Export</button>
 						<button class="btn btn-sm btn-primary" onclick="get_recruits();">Go</button>
 					</div>
 				</div>
@@ -107,6 +108,15 @@ function baseshop_sort(data, column, order){
 			return order == 'asc' ? x[column].localeCompare(y[column]) : y[column].localeCompare(x[column]);
 		}
 	);
+}
+
+function export_recruits(){
+	var type = $('#recruits-type-select').val();
+	var code = $('#recruits-baseshop-select').val();
+	var date_from = $('#recruits-date-from').val();
+	var date_to = $('#recruits-date-to').val();
+	window.location.href = '<?php echo base_url();?>account/team/export_recruits?type=' + type + 
+		'&code=' + code + '&date_from=' + date_from + '&date_to=' + date_to;
 }
 
 function get_recruits(){
