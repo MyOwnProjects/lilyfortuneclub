@@ -26,9 +26,11 @@
 						<a class="menu-ico-url" href="<?php echo base_url();?>" title="Home"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/home.svg"><div class="text">Home</div></div></a>
 					<?php
 					if(!empty($user)){
-						if($user['membership_code'] != 'GUEST'){
 					?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/startup" title="Startup"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Startup</div></div></a>
+					<?php
+						if($user['membership_code'] != 'GUEST'){
+					?>
 						<?php if($user['preference'] == 'B' || $user['preference'] == 'BE'){?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/business" title="Business Instruction"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/give-money.svg"><div class="text">Business Instruction</div></div></a>
 						<?php }?>
