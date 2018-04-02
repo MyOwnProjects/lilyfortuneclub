@@ -2,14 +2,26 @@
 
 require_once('account_base.php');
 class Documents extends Account_base_controller {
+	private $_params_str;
 	public function __construct(){
 		$this->guest_access_allowed = true;
 		parent::__construct();
 		$this->load->model('document_model');
+		$params = $this->input->get();
+		$this->_param_str = array();
+		if(!empty($params)){
+			foreach($params as $n => $v){
+				array_push($this->_param_str, "$n=$v");  
+			}
+		}
 	}
 	
 	public function index()
 	{
+		if($this->user['membership_code'] == 'GUEST'){
+			header('location: '.base_url().'ac/sign_in?redirect='.$this->uri->uri_string().(empty($this->_param_str) ? "" : "?".implode("&", $this->_param_str)));
+			exit;
+		}
 		$mime_type = $this->input->get('mime_type');
 		$content_type = $this->input->get('content_type');
 		$mime_type_list = $this->document_model->get_all_mime_content_types();
@@ -46,6 +58,11 @@ class Documents extends Account_base_controller {
 	}
 	
 	public function view($file){
+		if($file != '5ac1b8002b7d7' && $this->user['membership_code'] == 'GUEST'){
+			header('location: '.base_url().'ac/sign_in?redirect='.$this->uri->uri_string().(empty($this->_param_str) ? "" : "?".implode("&", $this->_param_str)));
+			exit;
+		}
+		
 		$result = $this->document_model->get_list("uniqid='$file'");
 		if(count($result) != 1){
 			$this->load_view('documents/view', array('error' => 'The document does not exist.'));
@@ -108,6 +125,10 @@ class Documents extends Account_base_controller {
 	}
 	
 	public function delete_temp_document(){
+		if($this->user['membership_code'] == 'GUEST'){
+			header('location: '.base_url().'ac/sign_in?redirect='.$this->uri->uri_string().(empty($this->_param_str) ? "" : "?".implode("&", $this->_param_str)));
+			exit;
+		}
 		$file = $this->input->get('file');
 		unlink(getcwd().'/src/temp/'.$file);
 	}
