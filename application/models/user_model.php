@@ -7,11 +7,15 @@
  */
 
 class User_model extends Base_model{
+	private $_guest_passcode_list = array('NewguesT');
 	public function __construct(){
 		parent::__construct();
 	}
 	
 	public function get_user_by_id($id){
+		if($id == PHP_INT_MAX){
+			return array('first_name' => 'New', 'last_name' => 'Guest', 'membership_code' => 'GUEST', 'first_access' => 'N', 'preference' => 'B', 'grade' => 'G');
+		}
 		$sql = "SELECT users.*,  
 			u1.first_name AS first_name1, u1.last_name AS last_name1, u1.nick_name AS nick_name1, 
 			u2.first_name AS first_name2, u2.last_name AS last_name2, u2.nick_name AS nick_name2 
@@ -52,6 +56,13 @@ class User_model extends Base_model{
 	}
 
 	public function get_user($username, $password){
+		if($username == 'GUEST'){
+			if(in_array($password, $this->_guest_passcode_list)){
+				return array('users_id' => PHP_INT_MAX, 'first_name' => 'New', 'last_name' => 'Guest', 'membership_code' => 'GUEST', 'first_access' => 'N', 'preference' => 'B', 'grade' => 'G');
+			}
+			return "Invalid guest password.";
+		}
+		
 		$sql = "SELECT * FROM users WHERE username='$username'";
 		$results = $this->db->query($sql);
 		if(count($results) == 0){

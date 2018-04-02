@@ -9,10 +9,24 @@ class Ac extends Base_Controller {
 	public function sign_in()
 	{
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
-			$result = $this->set_session_user($this->input->post('username'), $this->input->post('password'), $this->input->post('save_password'));
+			$role = $this->input->post('role');
+			if($role == 'guest'){
+				$username = "GUEST";
+				$password = $this->input->post('password-g');
+			}
+			else{
+				$username = $this->input->post('username');
+				$password = $this->input->post('password');
+			}
+			$result = $this->set_session_user($username, $password, $this->input->post('save_password'));
 			if($result === true && !empty($this->user)){
-				$redirect = $this->input->get('redirect');
-				$url = base_url().(empty($redirect) ? "account" : "$redirect");
+				if($this->user['membership_code'] == 'GUEST'){
+					$url = base_url().'account/welcome_guest';
+				}
+				else{
+					$redirect = $this->input->get('redirect');
+					$url = base_url().(empty($redirect) ? "account" : "$redirect");
+				}
 				header("location: $url");
 				exit;
 			}
@@ -21,8 +35,9 @@ class Ac extends Base_Controller {
 			}
 		} 
 		else{
+			$as = $this->input->get('as', $_GET);
 			$error = $this->input->get('error', $_GET);
-			$this->load_view('sign_in', array('error'=>$error));
+			$this->load_view('sign_in', array('error'=>$error, 'as' => $as));
 		}
 	}
 	

@@ -3,6 +3,7 @@
 require_once('account_base.php');
 class Startup extends Account_base_controller {
 	public function __construct(){
+		$this->guest_access_allowed = true;
 		parent::__construct();
 		$steps = array(array(
 			'title' => 'Who',
@@ -16,17 +17,19 @@ class Startup extends Account_base_controller {
 			)
 		),
 		array(
-				'title' => 'What',
-				'subject' => "What we do?",
-				'steps' => array(
-					'<p>Unlike other companies who target only wealthy clients, WFG is dedicated to teaching people simple financial concepts that will help them put their money to work more effectively and move them toward achieving their financial goals.</p>
-					<p>We also helps families by offering everyday people an uncommon opportunity - the chance to change careers and be in business <b>for themselves, but not by themselves</b>.</p>
-					<p>We are helping individuals and families who are often overlooked by other companies in the financial services industry.</p> 
-					<p>We are working with clients to create a customized strategy to protect them and their families. </p>
-					<p>We are educating individuals, families and business owners that financial decisions made today are critical in determining their financial futures.</p>'
-				),
+			'title' => 'What',
+			'subject' => "What we do?",
+			'steps' => array(
+				'<p>Unlike other companies who target only wealthy clients, WFG is dedicated to teaching people simple financial concepts that will help them put their money to work more effectively and move them toward achieving their financial goals.</p>
+				<p>We also helps families by offering everyday people an uncommon opportunity - the chance to change careers and be in business <b>for themselves, but not by themselves</b>.</p>
+				<p>We are helping individuals and families who are often overlooked by other companies in the financial services industry.</p> 
+				<p>We are working with clients to create a customized strategy to protect them and their families. </p>
+				<p>We are educating individuals, families and business owners that financial decisions made today are critical in determining their financial futures.</p>'
 			),
-			array(
+		)
+	);
+	if($this->user['membership_code'] != 'GUEST'){
+		array_push($steps, array(
 				'title' => 'How',
 				'subject' => "How we do?",
 				'steps' => array(
@@ -35,8 +38,9 @@ class Startup extends Account_base_controller {
 					<p>Go to <a href=\"".base_url()."account/business\">Start your business</a> for details.</p>
 					",
 					),
-				),
+				)
 		);
+	}
 		$this->summary = array(
 			'summary' => 'There are 2 or 3 steps to get your license, denpends on the state',
 			'steps' => $steps		

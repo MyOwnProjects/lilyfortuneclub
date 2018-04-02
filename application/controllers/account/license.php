@@ -4,7 +4,8 @@ require_once('account_base.php');
 class License extends Account_base_controller {
 	private $summary;
 	public function __construct(){
-		parent::__construct();
+		$this->guest_access_allowed = true;
+		parent::__construct();		
 		$steps = array(array(
 			'title' => 'Courses',
 			'comment' => 'The 52 hours onine courses are mandatory in some states, such as California. Some states do not require it, such as New Hampshire. <b>The online class is strongly recommended before your license exam, no matter the class is required or not</b>.',
@@ -52,7 +53,8 @@ class License extends Account_base_controller {
 				'Next, go to take the exam at the time and location you have scheduled. Good luck!'
 			),
 		),
-		array(
+	);
+		array_push($steps,	array(
 					'title' => 'Apply',
 					'comment' =>'You can only apply for the license after you finished both of the 52 hours courses and license exam.',
 					'subject' => "License Application",
@@ -68,6 +70,7 @@ class License extends Account_base_controller {
 							'You license application is done. After the license is issued, you can start the continuing education.',
 						),
 		));
+	if($this->user['membership_code'] != 'GUEST'){
 		if($this->user['preference'] == 'B' || $this->user['preference'] == 'BE'){
 			array_push($steps, array(
 					'title' => 'CE',
@@ -121,6 +124,7 @@ class License extends Account_base_controller {
 							'You have finished to appoint with the Transamerica Premier Life Insuarance Company. To appoint with other providres, select other product type/crriers, and fowllow the instruction.',
 					),
 				));
+		}
 		}
 		$this->summary = array(
 			'summary' => 'There are 2 or 3 steps to get your license, denpends on the state',

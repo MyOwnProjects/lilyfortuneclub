@@ -1,6 +1,8 @@
 <style>
-.nav-tabs>li:not(:last-child){width:33%}
-.nav-tabs>li:last-child{width:34%}
+.nav-tabs-1>li{width:100%}
+.nav-tabs-2>li{width:50%}
+.nav-tabs-3>li:not(:last-child){width:33%}
+.nav-tabs-3>li:last-child{width:34%}
 .tab-content-page{padding:40px}
 .content-page-head{text-align:center;margin-bottom:40px}
 .tab-content-page p{margin-bottom:20px}
@@ -9,7 +11,7 @@
 <div style="margin:0 auto;max-width:800px;padding:20px 0 80px 0;">
 		<h2 class="text-center">Startup</h2>
 	
-	<ul class="nav nav-tabs clearfix" id="top-tab">
+	<ul class="nav nav-tabs nav-tabs-<?php echo count($summary['steps']);?> clearfix" id="top-tab">
 		<?php
 		foreach($summary['steps'] as $i => $step){
 		?>

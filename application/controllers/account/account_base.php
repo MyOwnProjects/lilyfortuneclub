@@ -2,6 +2,7 @@
 
 require_once(getcwd().'/application/controllers/base.php');
 class Account_base_controller extends Base_Controller {
+	public $guest_access_allowed = false;
 	public function __construct(){
 		parent::__construct();
 		if(empty($this->user)){
@@ -15,7 +16,13 @@ class Account_base_controller extends Base_Controller {
 			header('location: '.base_url().'ac/sign_in?redirect='.$this->uri->uri_string().(empty($param_str) ? "" : "?".implode("&", $param_str)));
 			exit;
 		}
-		else{ 
+		if($this->user['membership_code'] == 'GUEST'){
+			if(!$this->guest_access_allowed){
+				header('location: '.base_url().'ac/sign_in?redirect='.$this->uri->uri_string().(empty($param_str) ? "" : "?".implode("&", $param_str)));
+				exit;
+			}
+		}
+		else{
 			$class = strtolower($this->router->fetch_class());
 			if($this->user['first_access'] == 'Y'){
 				if($class != 'first_access'){
