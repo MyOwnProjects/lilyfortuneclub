@@ -42,10 +42,10 @@ li{list-style:square !important;}
 	</p>
 	<ul>
 		<li><a href="<?php echo base_url();?>account/startup" target="_blank">Company Background</a></li>
-		<li><a href="http://lilyfortuneclub.com/account/documents/view/5ac1b8002b7d7" target="_blank">Financial Concept Classes</a></li>
-		<li><a href="http://lilyfortuneclub.com/account/documents/view/5ac1b8002b7d7" target="_blank">Business and Marketing Classes</a></li>
+		<li><a href="<?php echo base_url();?>account/documents/view/5ac1b8002b7d7" target="_blank">Financial Concept Classes</a></li>
+		<li><a href="<?php echo base_url();?>account/documents/view/5ac1b8002b7d7" target="_blank">Business and Marketing Classes</a></li>
 		<li><a href="<?php echo base_url();?>account/license" target="_blank">Financial Licensing Procedure</a></li>
-		<li><a href="#" target="_blank">Financial Knowledge Resources</a></li>
+		<li>Financial Knowledge Resources</li>
 	</ul>
 	<br/>
 	<p>
