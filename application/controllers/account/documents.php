@@ -1,8 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once('account_base.php');
-class Documents extends Base_controller {
+class Documents extends Account_base_controller {
 	public function __construct(){
+		$this->guest_access_allowed = true;
 		parent::__construct();
 		$this->load->model('document_model');
 	}
