@@ -16,7 +16,7 @@ li{list-style:square !important;}
 	<p>Congratulations on joining a winning team, led by influential business and community leaders such as:</p>
 	<div class="img clearfix">
 		<div>
-			<img src="<?php echo base_url();?>src/img/Lily.JPG">
+			<img src="<?php echo base_url();?>src/img/Lily.jpg">
 			<div><b>Lily Zhu</b><br/><u>Background</u>: High Tech Management</div>
 		</div>
 		<div>
