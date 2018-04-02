@@ -59,18 +59,16 @@ class Documents extends Account_base_controller {
 	
 	public function view($file){
 		if($file != '5ac1b8002b7d7' && $this->user['membership_code'] == 'GUEST'){
-			echo '*';exit;
 			header('location: '.base_url().'ac/sign_in?redirect='.$this->uri->uri_string().(empty($this->_param_str) ? "" : "?".implode("&", $this->_param_str)));
 			exit;
 		}
-		echo '-';exit;
 		$result = $this->document_model->get_list("uniqid='$file'");
 		if(count($result) != 1){
 			$this->load_view('documents/view', array('error' => 'The document does not exist.'));
 			return;
 		}
-		if(in_array($result[0]['grade_access'], array('SMD', 'MD', 'SA', 'A', 'TA')) && 
-			(empty($this->user) || $this->user['grade'] == 'G')){
+		if(in_array($result[0]['grade_access'], array('SMD', 'MD', 'SA', 'A', 'TA', 'G')) && 
+			empty($this->user)){
 			header('location: '.base_url().'ac/sign_in?redirect=account/documents/view/'.$file);
 			exit;
 		}
