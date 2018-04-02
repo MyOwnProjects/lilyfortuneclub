@@ -58,6 +58,7 @@ class Documents extends Account_base_controller {
 	}
 	
 	public function view($file){
+		echo $file;exit;
 		if($file != '5ac1b8002b7d7' && $this->user['membership_code'] == 'GUEST'){
 			header('location: '.base_url().'ac/sign_in?redirect='.$this->uri->uri_string().(empty($this->_param_str) ? "" : "?".implode("&", $this->_param_str)));
 			exit;
