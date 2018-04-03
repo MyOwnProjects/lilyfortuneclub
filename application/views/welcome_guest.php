@@ -12,7 +12,7 @@ li>div{font-size:14px;padding-left:10px}
 	<br/>
 	<p>Dear New Member,</p>
 	<p>Welcome to our team and our extended business family!</p>
-	<p><img style="float:left;margin-right:20px;width:250px" src="<?php echo base_url();?>src/img/h-TRANSAMERICA-PYRAMID-PHOTOS-628x314.jpg">We are under the big umbrella of Transamerica, who has been helping people feel better about the future for more than 100 years, and we’re proud of the trust we’ve earned. To learn more, please visit our website at <a href="http://www.transamerica.com" target="_blank">www.transamerica.com</a></p>
+	<p><img style="float:left;margin-right:20px;width:250px" src="<?php echo base_url();?>src/img/h-TRANSAMERICA-PYRAMID-PHOTOS-628x314.jpg">We are under the big umbrella of <b>Transamerica</b>, who has been helping people feel better about the future for more than <b>100 years</b>, and we’re proud of the trust we’ve earned. To learn more, please visit our website at <a href="http://www.transamerica.com" target="_blank">Transamerica</a></p>
 	<br/>
 	<p>Congratulations on joining a winning team, led by influential business and community leaders such as:</p>
 	<div class="img clearfix">
@@ -43,8 +43,7 @@ li>div{font-size:14px;padding-left:10px}
 	</p>
 	<ul>
 		<li><a href="<?php echo base_url();?>account/startup" target="_blank">Company Background</a></li>
-		<li><a href="<?php echo base_url();?>account/documents/view/5ac1b8002b7d7" target="_blank">Financial Concept Classes</a></li>
-		<li><a href="<?php echo base_url();?>account/documents/view/5ac1b8002b7d7" target="_blank">Business and Marketing Classes</a></li>
+		<li><a href="<?php echo base_url();?>account/documents/view/5ac1b8002b7d7" target="_blank">Financial and Business Classes</a></li>
 		<li><a href="<?php echo base_url();?>account/license" target="_blank">Financial Licensing Procedure</a></li>
 		<li>Financial Knowledge Resources
 			<div>-&nbsp;<a href="<?php echo base_url();?>resource/item/fa35e192121eabf3dabf9f5ea6abdbcbc107ac3b14" target="_blank">Lily Min Zhu's speech in 2017 Las Vegas Convention</a></div>
