@@ -31,7 +31,7 @@ class Startup extends Account_base_controller {
 					 Aegon N.V. is a multinational life insurance, pensions and asset management company headquartered in The Hague, Netherlands, is one of the world&#39;s leading insurance, pension and related financial services organizations. At the end of 2015, Aegon companies employed approximately 31,530 people worldwide, serving millions of customers. Aegon has major operations in the United States, where it is mostly represented through World Financial Group and Transamerica.
 					 <br/>&nbsp;&nbsp;-&nbsp;<a href="http://www.bloomberg.com/news/articles/2015-11-03/aegon-is-added-to-fsb-s-list-of-nine-too-big-to-fail-insurers" target="_blank">Aegon, our parent company, was recently named as one of the 9-Too-Big-To-Fail Insurers in the world.</a>
 				</p>
-				<p>Ms. Lily Min Zhu is a Senior Marketing Director with
+				<p><u>Ms. Lily Min Zhu</u> is a Senior Marketing Director with
 					World Financial Group, a Transamerica Company. She has many years professional
 					management experience at Intel and Samsung in
 					California. Ms. Zhu and her business
