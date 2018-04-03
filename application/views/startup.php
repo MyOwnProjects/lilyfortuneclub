@@ -6,6 +6,7 @@
 .tab-content-page{padding:40px}
 .content-page-head{text-align:center;margin-bottom:40px}
 .tab-content-page p{margin-bottom:20px}
+.tab-content-page p a{text-decoration:underline}
 </style>
 <div style="margin:0 auto;max-width:800px;padding:20px 0 80px 0;">
 		<h2 class="text-center">Startup</h2>
