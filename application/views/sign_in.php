@@ -21,8 +21,12 @@
 			</select>
 		</div>
 		<div class="form-group g" style="display:<?php echo $is_guest ? 'block' : 'none';?>">
-			<label for="pwd">Guest Passcode</label>
-			<input type="password" class="form-control" type="password" id="password-g" name="password-g" required <?php echo $is_guest ? '' : 'disabled';?>>
+			<label for="pwd">Full Name</label>
+			<input class="form-control" id="password-g" name="guest-name" required <?php echo $is_guest ? '' : 'disabled';?>>
+		</div>
+		<div class="form-group g" style="display:<?php echo $is_guest ? 'block' : 'none';?>">
+			<label for="pwd">Passcode</label>
+			<input class="form-control" type="password" id="password-g" name="password-g" required <?php echo $is_guest ? '' : 'disabled';?>>
 		</div>
 		<div class="form-group m" style="display:<?php echo !$is_guest ? 'block' : 'none';?>">
 			<label for="email">Username</label>
@@ -44,7 +48,7 @@
 <script>
 function role_change(obj){
 	if($(obj).val() == 'guest'){
-		$('#password-g').val('').prop('disabled', false);
+		$('#password-g, #guest-name').val('').prop('disabled', false);
 		$('.g').show();
 		$('.m').hide();
 		$('#password, #username').val('').prop('disabled', true);
@@ -53,7 +57,7 @@ function role_change(obj){
 		$('.g').hide();
 		$('#password, #username').val('').prop('disabled', false);
 		$('.m').show();
-		$('#password-g').val('').prop('disabled', true);
+		$('#password-g, #guest-name').val('').prop('disabled', true);
 	}
 }
 </script>

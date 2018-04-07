@@ -11,6 +11,7 @@ class Ac extends Base_Controller {
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$role = $this->input->post('role');
 			if($role == 'guest'){
+				$guest_name = $this->input->post('guest-name');
 				$username = "GUEST";
 				$password = $this->input->post('password-g');
 			}
@@ -21,6 +22,7 @@ class Ac extends Base_Controller {
 			$result = $this->set_session_user($username, $password, $this->input->post('save_password'));
 			if($result === true && !empty($this->user)){
 				if($this->user['membership_code'] == 'GUEST'){
+					$this->user_model->update_guest_access($guest_name);
 					$url = base_url().'account/welcome_guest';
 				}
 				else{

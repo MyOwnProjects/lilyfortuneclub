@@ -477,4 +477,10 @@ class User_model extends Base_model{
 			." ORDER BY u.start_date DESC";
 		return $result= $this->db->query($sql);
 	}
+	
+	public function update_guest_access($guest_name){
+		$guest_name = strip_tags($guest_name);
+		$sql = "INSERT INTO guest_access (guest_name, access_uri, access_time) VALUES ('$guest_name', 'account/welcome_guest', NOW())";
+		$this->db->query($sql);
+	}
 }
