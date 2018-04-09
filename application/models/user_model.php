@@ -7,7 +7,7 @@
  */
 
 class User_model extends Base_model{
-	private $_guest_passcode_list = array('NewguesT');
+	private $_guest_passcode_list = array('2018today');
 	public function __construct(){
 		parent::__construct();
 	}

@@ -55,7 +55,11 @@ function get_resource_list(lan){
 			for(var i = 0; i < data.length; ++i){
 				var content_wrapper = $('<div>').append(data[i]['content']);
 				var $_li = $('<li>');
-				var $_a = $('<a>').addClass('text-link').attr('href', '<?php echo base_url();?>resource/item/' + data[i]['url_id']).attr('target', '_blank');
+				var href = '<?php echo base_url();?>resource/item/' + data[i]['url_id'];
+				if(data[i]['source_url'] && data[i]['source_url'].trim().length > 0){
+					href= data[i]['source_url'];
+				}
+				var $_a = $('<a>').addClass('text-link').attr('href', href).attr('target', '_blank');
 				var img_wrappers = content_wrapper.find('.content-image');
 				var $_thumbnail = $('<div>').addClass('pull-left').addClass('resource-list-thumbnail').appendTo($_li);
 				if(img_wrappers.length > 0){

@@ -68,7 +68,7 @@ class Startup extends Account_base_controller {
 				'steps' => array(
 					"<p>To start up the business, the first step is to invite people. You can either invite your friends, relatives or colleagues to BPM, or one to one in coffee shop, office and your home. Bring your guest in front of your lead, and your lead will help you to recruit.</p>
 					<p>A good way is to invite your friends to your home for kids' birthday party, or home gathering. Bring your lead to the party, and your lead will help you to invite them.</p>
-					<p>Go to <a href=\"".base_url()."account/business\">Start your business</a> for details.</p>
+					<p>Go to <a style=\"text-decoration:none;\" role=\"button\" class=\"btn btn-success\" href=\"".base_url()."account/business\">Start your business</a> for details.</p>
 					",
 					),
 				)

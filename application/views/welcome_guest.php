@@ -46,10 +46,11 @@ li>div{font-size:14px;padding-left:10px}
 		<li><a href="<?php echo base_url();?>account/documents/view/5ac1b8002b7d7" target="_blank">Financial and Business Classes</a></li>
 		<li><a href="<?php echo base_url();?>account/license" target="_blank">Financial Licensing Procedure</a></li>
 		<li>Financial Knowledge Resources
-			<div>-&nbsp;<a href="<?php echo base_url();?>resource/item/fa35e192121eabf3dabf9f5ea6abdbcbc107ac3b14" target="_blank">Lily Min Zhu's speech in 2017 Las Vegas Convention</a></div>
-			<div>-&nbsp;<a href="<?php echo base_url();?>resource/item/91032ad7bbcb6cf72875e8e8207dcfba80173f7c20" target="_blank">Indexed Universal Life: It's Just a Great Investment</a></div>
-			<div>-&nbsp;<a href="<?php echo base_url();?>resource/item/b3f0c7f6bb763af1be91d9e74eabfeb199dc1f1f19" target="_blank">Why Indexed Universal Life Insurance Can Be a Good Retirement Investment</a></div>
-			<div>-&nbsp;<a href="<?php echo base_url();?>resource/item/b7eb6c689c037217079766fdb77c3bac3e51cb4c51" target="_blank">Can I Really Have a Tax-Free Retirement?</a></div>
+			<div>-&nbsp;<a href="https://www.fidelity.com/viewpoints/retirement/protect-your-retirement-income" target="_blank">5 ways to help protect retirement income</a></div>
+			<div>-&nbsp;<a href="https://www.foxbusiness.com/features/can-i-really-have-a-tax-free-retirement" target="_blank">Can I Really Have a Tax-Free Retirement?</a></div>
+			<div>-&nbsp;<a href="https://www.genworth.com/dam/Americas/US/PDFs/Consumer/corporate/130568_032514_CostofCare_FINAL_nonsecure.pdf" target="_blank">Genworth 2014 Cost of Care Survey</a></div>
+			<div>-&nbsp;<a href="https://www.fidelity.com/viewpoints/retirement/longevity" target="_blank">Longevity and retirement</a></div>
+			<div>-&nbsp;<a href="https://www.fidelity.com/viewpoints/retirement/retirement-income-strategies" target="_blank">Smart retirement income strategies</a></div>
 		</li>
 	</ul>
 	<br/>

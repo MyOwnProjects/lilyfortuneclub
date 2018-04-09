@@ -27,7 +27,7 @@
 					<?php
 					if(!empty($user)){
 					?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/startup" title="Startup"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Startup</div></div></a>
+						<a class="menu-ico-url" href="<?php echo base_url();?>account/startup" title="Who We Are"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Who We Are</div></div></a>
 					<?php
 						if($user['membership_code'] != 'GUEST'){
 					?>

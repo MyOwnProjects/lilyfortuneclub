@@ -31,6 +31,10 @@ class Resource extends Base_Controller {
 			if(sha1($id) == substr($raw_id, 0, 40)){
 				$result = $this->resource_model->get_items("resources_id = '$id' AND access = 0");
 				if(count($result) > 0){
+					if(isset($result[0]['source_url']) && !empty($result[0]['source_url'])){
+						header('location:'.$result[0]['source_url']);
+						return;
+					}
 					$file_type = strtolower($result[0]['file_type']);
 					if(!empty($file_type)){
 						$file = base_url().'src/doc/resources/'.$raw_id.'.'.$file_type;

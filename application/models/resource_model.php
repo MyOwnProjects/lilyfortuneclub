@@ -27,12 +27,12 @@ class Resource_model extends Base_model{
 		return $this->db->query($sql);
 	}
 	
-	public function insert($subject, $source, $content, $top, $language, $file_type){
+	public function insert($subject, $source, $source_url, $content, $top, $language, $file_type){
 		if(empty($source)){
-			$sql= "INSERT INTO resources (subject, content, top, language, file_type) VALUES ('".addslashes($subject)."','".addslashes($content)."', '$top', '$language', ".(empty($file_type) ? "NULL" : "'$file_type'").")";
+			$sql= "INSERT INTO resources (subject, source_url, content, top, language, file_type) VALUES ('".addslashes($subject)."','$source_url', ".addslashes($content)."', '$top', '$language', ".(empty($file_type) ? "NULL" : "'$file_type'").")";
 		}
 		else{
-			$sql= "INSERT INTO resources (subject, source, content, top, language, file_type) VALUES ('".addslashes($subject)."','".addslashes($source)."','".addslashes($content)."', '$top', '$language', ".(empty($file_type) ? "NULL" : "'$file_type'").")";
+			$sql= "INSERT INTO resources (subject, source, source_url, content, top, language, file_type) VALUES ('".addslashes($subject)."','".addslashes($source)."', '$source_url', '".addslashes($content)."', '$top', '$language', ".(empty($file_type) ? "NULL" : "'$file_type'").")";
 		}
 		if(!$this->db->query($sql)){
 			return false;

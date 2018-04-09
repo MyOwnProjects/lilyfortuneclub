@@ -9,7 +9,7 @@
 .tab-content-page p a{text-decoration:underline}
 </style>
 <div style="margin:0 auto;max-width:800px;padding:20px 0 80px 0;">
-		<h2 class="text-center">Startup</h2>
+		<h2 class="text-center">Who We Are?</h2>
 	
 	<ul class="nav nav-tabs nav-tabs-<?php echo count($summary['steps']);?> clearfix" id="top-tab">
 		<?php

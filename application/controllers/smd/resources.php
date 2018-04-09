@@ -73,6 +73,7 @@ class Resources extends Smd_Controller {
 			$top = $this->input->post('top');
 			$language = $this->input->post('language');
 			$source = trim($this->input->post('source'));
+			$source_url = trim($this->input->post('source_url'));
 			//$content = $this->update_content(trim($this->input->post('content')));
 			$content = update_content(trim($this->input->post('content')), 'src/img/resource');
 			$upload_files = $this->input->post('upload_files');
@@ -81,7 +82,7 @@ class Resources extends Smd_Controller {
 				$ext = substr(strrchr($upload_files,'.'),1);
 			}
 
-			$id = $this->resource_model->insert($subject, $source, $content, $top, $language, $ext);
+			$id = $this->resource_model->insert($subject, $source, $source_url, $content, $top, $language, $ext);
 			if($id){
 				if(!empty($upload_files)){
 					$ext = substr(strrchr($upload_files,'.'),1);
@@ -102,12 +103,14 @@ class Resources extends Smd_Controller {
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$subject = trim($this->input->post('subject'));
 			$source = trim($this->input->post('source'));
+			$source_url = trim($this->input->post('source_url'));
 			$content = update_content(trim($this->input->post('content')), 'src/img/resource');
 			$top = $this->input->post('top');
 			$language = $this->input->post('language');
 			$prop = array(
 				"subject='".addslashes($subject)."'",
 				"source=".(empty($source) ? 'NULL' : "'".addslashes($source)."'"),
+				"source_url=".(empty($source_url) ? 'NULL' : "'".addslashes($source_url)."'"),
 				"content='".addslashes($content)."'",
 				"top='$top'",
 				"language='$language'"
@@ -125,6 +128,7 @@ class Resources extends Smd_Controller {
 				$fields = array(
 					'subject' => $result[0]['subject'],
 					'source' => $result[0]['source'],
+					'source_url' => $result[0]['source_url'],
 					'content' => $result[0]['content'],
 					'top' => $result[0]['top'],
 					'language' => $result[0]['language']

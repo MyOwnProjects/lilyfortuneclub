@@ -34,7 +34,12 @@
 		</select>
  		<input class="btn btn-sm btn-success pull-right" type="submit" value="Submit">
 		</div>
-			<div style="padding:10px">
+		<div style="padding:10px">
+			<label>Subject</label>
+			<input class="form-control input-sm" style="width:500px" name="source_url" value="<?php echo isset($source_url) ? $source_url : '';?>">
+		</div>
+
+		<div style="padding:10px">
 				<div id="input-file">
 				</div>
 				<input class="dialog-edit-field" type="hidden" id="upload_files" name="upload_files">
