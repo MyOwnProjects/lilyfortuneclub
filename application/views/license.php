@@ -51,7 +51,7 @@
 				<div style="overflow:hidden">
 					<h5 class="text-left">
 						<?php 
-						echo '<p>'.str_replace('<br/>', '</p><p>', $s).($image_exist ? '<span class="detail-url">&nbsp;[<a href="'.base_url().'src/img/license/'.$img.'?'.time().' target=_blank">Detail'.'</a>]</span>' : '').'</p>';
+						echo '<p>'.str_replace('<br/>', '</p><p>', $s).($image_exist ? '<span class="detail-url">&nbsp;[<a href="'.base_url().'src/img/license/'.$img.'?'.time().'" target="_blank">Detail'.'</a>]</span>' : '').'</p>';
 						?>
 					</h5>
 				<?php 
@@ -75,3 +75,5 @@
 		?>
 	</div>
 </div>
+
+<script></script>
