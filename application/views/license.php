@@ -33,7 +33,7 @@
 		<?php
 		foreach($summary['steps'] as $i => $step){
 		?>
-		<div id="license-page-<?php echo $i + 1;?>" class="tab-pane fade in active tab-content-page">
+		<div id="license-page-<?php echo $i + 1;?>" class="tab-pane fade <?php echo $i == 0 ? 'in active' : '';?> tab-content-page">
 		<h4 class="text-center"><?php echo $step['subject'];?></h4>
 		<p><?php echo $step['comment'];?></p>
 
