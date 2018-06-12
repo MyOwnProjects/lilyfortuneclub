@@ -6,6 +6,11 @@
 	<h3 class="text-center">Members Update</h3>
 	<div class="row">
 		<div class="col-xs-12" id="get-baseshop-progress">
+			<button class="btn btn-primary btn-sm" id="button_start" onclick="starting();">Click to start</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12" id="get-baseshop-progress">
 			<div class="text">1. Retrieving baseshop......</div>
 			<div class="progress">
 				<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
@@ -50,6 +55,18 @@ function update_level(){
 			}
 	});
 }
+
+function get_baseshop1(start1){
+	for(var i = 0; i < 10; ++i){
+		$.ajax({
+			url: '<?php echo base_url();?>smd/team/get_base_shop?code=<?php echo $user['membership_code'];?>&start=' + (i * 5),
+			success: function(data){
+				alert(i + 'done');
+			}
+		});
+	}
+}
+
 function get_baseshop(start){
 	$.ajax({
 		url: '<?php echo base_url();?>smd/team/get_base_shop?code=<?php echo $user['membership_code'];?>&start=' + start,
@@ -139,6 +156,23 @@ function retrive_all_members(){
 	}
 }
 
+function starting(){
+	$('#button_start').addClass('disabed');
+	$.ajax({
+		url: '<?php echo base_url();?>smd/team/get_new_members',
+		dataType: 'json',
+		success: function(data){
+			existingCodes = data;
+			$('#result').html('Retrieving baseshop from MyWFG.com......');
+			get_baseshop(0);
+		},
+		error: function(){
+		},
+		complete: function(){
+		}
+	});
+}
+
 $('body').delegate('.new-member-url', 'click', function(){
 	var $_this = $(this);
 	ajax_loading(true);
@@ -172,14 +206,17 @@ $('body').delegate('.new-member-url', 'click', function(){
 		}
 	});
 });
+
+
 $(document).ready(function(){
+return false;
 	$.ajax({
 		url: '<?php echo base_url();?>smd/team/get_new_members',
 		dataType: 'json',
 		success: function(data){
 			existingCodes = data;
 			$('#result').html('Retrieving baseshop from MyWFG.com......');
-			get_baseshop(0);
+			//get_baseshop(0);
 		},
 		error: function(){
 		},

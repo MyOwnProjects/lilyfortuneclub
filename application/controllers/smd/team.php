@@ -38,6 +38,8 @@ class Team extends Smd_Controller {
 			$ret['search'] = $search_str;
 			$ret['rows'] = $this->user_model->get_list("smd='".$this->user['users_id']."'", $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count'], $search);
 			foreach($ret['rows'] as $i => $r){
+				unset($ret['rows'][$i]['password']);
+				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
 				$ret['rows'][$i]['name'] = $r['name'].(isset($ret['rows'][$i]['nick_name']) && trim($ret['rows'][$i]['nick_name']) != '' ? ' ('.$ret['rows'][$i]['nick_name'].')' : '');
 				$ret['rows'][$i]['status'] = $ret['rows'][$i]['status'] == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';
 				$ret['rows'][$i]['location'] = empty($r['state']) ? $r['country'] : $r['state'].'/'.$r['country'];
