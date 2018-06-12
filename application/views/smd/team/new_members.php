@@ -221,7 +221,7 @@ function get_5_members(start, total){
 							}
 						);
 					}
-					$('#get-baseshop-progress .result>div:nth-child(3)').append('<span>Level changed members: ' + c + '&nbsp;&nbsp;&nbsp;&nbsp;</span>').append(btn_update_level);
+					$('#get-baseshop-progress .result>div:nth-child(3)').append('<span>Level changed members: ' + changedCodes.length + '&nbsp;&nbsp;&nbsp;&nbsp;</span>').append(btn_update_level);
 					
 					return false;
 				}
