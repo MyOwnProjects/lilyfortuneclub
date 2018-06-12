@@ -181,11 +181,13 @@ function parseData(aaData){
 	var name = wrap.children('.list-agent-name').text();
 	var l = wrap.children('.list-agent-level').text().trim();
 	var level = l.substr(l.lastIndexOf(' ') + 1);
-	if(code in existingCodes && level != existingCodes[code]){
-		var t = existingCodes[code] + '&rarr;' + level +  ' - ' + name + ' (' + code + ')';
-		changedCodes[code] = {name: name, level: level, old_level: existingCodes[code]};
-		$('#get-baseshop-progress .result>div:nth-child(4)')
-			.attr('id', 'btn-trvieve-new-members').append('<div title="' + t + '">' + t + '</div>');
+	if(code in existingCodes){
+		if(level != existingCodes[code]){
+			var t = existingCodes[code] + '&rarr;' + level +  ' - ' + name + ' (' + code + ')';
+			changedCodes[code] = {name: name, level: level, old_level: existingCodes[code]};
+			$('#get-baseshop-progress .result>div:nth-child(4)')
+				.attr('id', 'btn-trvieve-new-members').append('<div title="' + t + '">' + t + '</div>');
+		}
 	}
 	else{
 		var t = code + ' - ' + name;
