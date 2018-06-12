@@ -7,6 +7,7 @@
 	<div class="row">
 		<div class="col-xs-12" id="get-baseshop-progress">
 			<button class="btn btn-primary btn-sm" id="button_start" onclick="starting();">Click to start</button>
+			<button class="btn btn-primary btn-sm" onclick="test();">Test</button>
 		</div>
 	</div>
 	<div class="row">
@@ -171,6 +172,10 @@ function starting(){
 		complete: function(){
 		}
 	});
+}
+
+function test(){
+	get_baseshop1(0);
 }
 
 $('body').delegate('.new-member-url', 'click', function(){
