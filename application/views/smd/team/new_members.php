@@ -174,8 +174,83 @@ function starting(){
 	});
 }
 
+var all_members = [];
+function parseData(aaData){
+	var code = aaData[1];
+	var wrap = $('<div>').append(aaData);
+	var name = wrap.children('.list-agent-name').text();
+	var l = wrap.children('.list-agent-level').text().trim();
+	var level = l.substr(l.lastIndexOf(' ') + 1);
+	if(code in existingCodes && level != existingCodes[code]){
+		var t = existingCodes[code] + '&rarr;' + level +  ' - ' + name + ' (' + code + ')';
+		changedCodes[code] = {name: name, level: level, old_level: existingCodes[code]};
+		$('#get-baseshop-progress .result>div:nth-child(4)')
+			.attr('id', 'btn-trvieve-new-members').append('<div title="' + t + '">' + t + '</div>');
+	}
+	else{
+		var t = code + ' - ' + name;
+		newCodes[code] = {name: name, level: level};
+		$('#get-baseshop-progress .result>div:nth-child(2)')
+			.append('<div title="' + t + '"><button type="button" class="new-member-url btn btn-link" data-id="' + code + '">' + t + '</button></div>');
+	}
+}
+
+function get_5_members(start, total){
+	if(start < total){
+		$.ajax({
+			url: '<?php echo base_url();?>smd/team/get_base_shop?code=<?php echo $user['membership_code'];?>&start=' + start,
+			success: function(data){
+				var result = JSON.parse(data);
+				var total = parseInt(result['iTotalRecords']);
+				var aaData = result['aaData'];
+				for(var i = 0; i < aaData.length; ++i){
+					parseData(aaData[i]);
+					//all_members.push(aaData[i]);
+				}
+							
+				var rate = all_members.length / total;
+				var percent = Math.round(rate * 100);
+				$('#get-baseshop-progress .progress-bar').attr('aria-valuenow', rate).html(percent + '%').css('width', percent + '%');
+				if(all_members.length == total){
+					var btn_update_level = null;
+					if(changedCodes.length > 0){
+						btn_update_level = $('<button>').addClass('btn').addClass('btn-sm').addClass('btn-success')
+							.attr('id', 'btn-update-level').html('Update Member Level').click(function(){
+								update_level();
+							}
+						);
+					}
+					$('#get-baseshop-progress .result>div:nth-child(3)').append('<span>Level changed members: ' + c + '&nbsp;&nbsp;&nbsp;&nbsp;</span>').append(btn_update_level);
+					
+					return false;
+				}
+				get_5_members(start + 50, total);
+			}
+		});
+	}
+}
+
+
 function test(){
-	get_baseshop1(0);
+	newCodes = {};
+	$.ajax({
+		url: '<?php echo base_url();?>smd/team/get_base_shop?code=<?php echo $user['membership_code'];?>&start=0',
+		success: function(data){
+			//data = '{"iTotalRecords":443,"iTotalDisplayRecords":443,"aaData":[["\u003cspan class=\"list-count\"\u003e1\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eXIN  HU\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(48SZN) - MD\u003c/div\u003e","48SZN","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e2\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eLUCY  CHAN\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(099ETC) - A\u003c/div\u003e","099ETC","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e3\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eGLORIA  CHUNG\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(48TAN) - A\u003c/div\u003e","48TAN","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e4\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eDIANE  DAO\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(41AQI) - A\u003c/div\u003e","41AQI","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e5\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eYIQING  DU\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(51LKJ) - A\u003c/div\u003e","51LKJ","ViewAssociate"]]}';
+			var result = JSON.parse(data);
+			var total = parseInt(result['iTotalRecords']);
+			var aaData = result['aaData'];
+			for(var i = 0; i < aaData.length; ++i){
+				parseData(aaData[i]);
+			}
+			for(var j = 1; j <= 10; ++j){//5,55, 105
+				var start = j * 5;
+				get_5_members(start, total);
+			}
+		},
+		error: function(a, b, c){
+		}
+	});
 }
 
 $('body').delegate('.new-member-url', 'click', function(){
