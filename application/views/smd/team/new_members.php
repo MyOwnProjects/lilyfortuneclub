@@ -233,24 +233,38 @@ function get_5_members(start, total){
 
 function test(){
 	newCodes = {};
+	$('#button_start').addClass('disabled');
 	$.ajax({
-		url: '<?php echo base_url();?>smd/team/get_base_shop?code=<?php echo $user['membership_code'];?>&start=0',
+		url: '<?php echo base_url();?>smd/team/get_new_members',
+		dataType: 'json',
 		success: function(data){
-			//data = '{"iTotalRecords":443,"iTotalDisplayRecords":443,"aaData":[["\u003cspan class=\"list-count\"\u003e1\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eXIN  HU\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(48SZN) - MD\u003c/div\u003e","48SZN","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e2\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eLUCY  CHAN\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(099ETC) - A\u003c/div\u003e","099ETC","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e3\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eGLORIA  CHUNG\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(48TAN) - A\u003c/div\u003e","48TAN","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e4\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eDIANE  DAO\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(41AQI) - A\u003c/div\u003e","41AQI","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e5\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eYIQING  DU\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(51LKJ) - A\u003c/div\u003e","51LKJ","ViewAssociate"]]}';
-			var result = JSON.parse(data);
-			var total = parseInt(result['iTotalRecords']);
-			var aaData = result['aaData'];
-			for(var i = 0; i < aaData.length; ++i){
-				parseData(aaData[i]);
-			}
-			for(var j = 1; j <= 10; ++j){//5,55, 105
-				var start = j * 5;
-				get_5_members(start, total);
-			}
+			existingCodes = data;
+			$('#result').html('Retrieving baseshop from MyWFG.com......');
+			$.ajax({
+				url: '<?php echo base_url();?>smd/team/get_base_shop?code=<?php echo $user['membership_code'];?>&start=0',
+				success: function(data){
+					//data = '{"iTotalRecords":443,"iTotalDisplayRecords":443,"aaData":[["\u003cspan class=\"list-count\"\u003e1\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eXIN  HU\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(48SZN) - MD\u003c/div\u003e","48SZN","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e2\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eLUCY  CHAN\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(099ETC) - A\u003c/div\u003e","099ETC","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e3\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eGLORIA  CHUNG\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(48TAN) - A\u003c/div\u003e","48TAN","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e4\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eDIANE  DAO\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(41AQI) - A\u003c/div\u003e","41AQI","ViewAssociate"],["\u003cspan class=\"list-count\"\u003e5\u003c/span\u003e\u003cspan class=\"list-agent-name\"\u003eYIQING  DU\u003c/span\u003e\u003cdiv class=\"list-agent-level\"\u003e(51LKJ) - A\u003c/div\u003e","51LKJ","ViewAssociate"]]}';
+					var result = JSON.parse(data);
+					var total = parseInt(result['iTotalRecords']);
+					var aaData = result['aaData'];
+					for(var i = 0; i < aaData.length; ++i){
+						parseData(aaData[i]);
+					}
+					for(var j = 1; j <= 10; ++j){//5,55, 105
+						var start = j * 5;
+						get_5_members(start, total);
+					}
+				},
+				error: function(a, b, c){
+				}
+			});
 		},
-		error: function(a, b, c){
+		error: function(){
+		},
+		complete: function(){
 		}
 	});
+
 }
 
 $('body').delegate('.new-member-url', 'click', function(){
