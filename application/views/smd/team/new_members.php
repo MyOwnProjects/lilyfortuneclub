@@ -6,8 +6,8 @@
 	<h3 class="text-center">Members Update</h3>
 	<div class="row">
 		<div class="col-xs-12" id="get-baseshop-progress">
-			<button class="btn btn-primary btn-sm" id="button_start" onclick="starting();">Click to start</button>
-			<button class="btn btn-primary btn-sm" onclick="test();">Test</button>
+			<button class="btn btn-primary btn-sm" id="button_start" onclick="starting();">Start</button>
+			<button class="btn btn-primary btn-sm" onclick="fast_start();">Fast Start</button>
 		</div>
 	</div>
 	<div class="row">
@@ -221,7 +221,7 @@ function get_5_members(start, total){
 							}
 						);
 					}
-					$('#get-baseshop-progress .result>div:nth-child(3)').append('<span>Level changed members: ' + changedCodes.length + '&nbsp;&nbsp;&nbsp;&nbsp;</span>').append(btn_update_level);
+					$('#get-baseshop-progress .result>div:nth-child(3)').append('<span>Level changed members: ' + Object.keys(changedCodes).length + '&nbsp;&nbsp;&nbsp;&nbsp;</span>').append(btn_update_level);
 					
 					return false;
 				}
@@ -232,7 +232,7 @@ function get_5_members(start, total){
 }
 
 
-function test(){
+function fast_start(){
 	newCodes = {};
 	$('#button_start').addClass('disabled');
 	$.ajax({
