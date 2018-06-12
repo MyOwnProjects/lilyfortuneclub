@@ -157,7 +157,7 @@ function retrive_all_members(){
 }
 
 function starting(){
-	$('#button_start').addClass('disabed');
+	$('#button_start').addClass('disabled');
 	$.ajax({
 		url: '<?php echo base_url();?>smd/team/get_new_members',
 		dataType: 'json',
