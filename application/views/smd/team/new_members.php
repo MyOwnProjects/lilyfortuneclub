@@ -174,7 +174,7 @@ function starting(){
 	});
 }
 
-var all_members = [];
+var retrieved_members = 0;
 function parseData(aaData){
 	var code = aaData[1];
 	var wrap = $('<div>').append(aaData);
@@ -207,13 +207,12 @@ function get_5_members(start, total){
 				var aaData = result['aaData'];
 				for(var i = 0; i < aaData.length; ++i){
 					parseData(aaData[i]);
-					//all_members.push(aaData[i]);
 				}
-							
-				var rate = all_members.length / total;
+				retrieved_members += aaData.length;			
+				var rate = retrieved_members / total;
 				var percent = Math.round(rate * 100);
 				$('#get-baseshop-progress .progress-bar').attr('aria-valuenow', rate).html(percent + '%').css('width', percent + '%');
-				if(all_members.length == total){
+				if(retrieved_members >= total){
 					var btn_update_level = null;
 					if(changedCodes.length > 0){
 						btn_update_level = $('<button>').addClass('btn').addClass('btn-sm').addClass('btn-success')
@@ -252,6 +251,10 @@ function test(){
 					for(var i = 0; i < aaData.length; ++i){
 						parseData(aaData[i]);
 					}
+					retrieved_members += aaData.length;
+					var rate = retrieved_members / total;
+					var percent = Math.round(rate * 100);
+					$('#get-baseshop-progress .progress-bar').attr('aria-valuenow', rate).html(percent + '%').css('width', percent + '%');
 					for(var j = 1; j <= 10; ++j){//5,55, 105
 						var start = j * 5;
 						get_5_members(start, total);
