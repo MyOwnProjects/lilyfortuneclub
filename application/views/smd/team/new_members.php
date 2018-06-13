@@ -22,7 +22,7 @@
 			<div class="result">
 				<div class="text clearfix">New members: <span>0</span>&nbsp;&nbsp;&nbsp;&nbsp;</div>
 				<div class="clearfix"></div>
-				<div class="text clearfix">Level changed members: <span>0</span>&nbsp;&nbsp;&nbsp;&nbsp;</span</div>
+				<div class="text clearfix">Level changed members: <span>0</span>&nbsp;&nbsp;&nbsp;&nbsp;</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -186,7 +186,7 @@ function parseData(aaData){
 		if(level != existingCodes[code]){
 			var t = existingCodes[code] + '&rarr;' + level +  ' - ' + name + ' (' + code + ')';
 			changedCodes[code] = {name: name, level: level, old_level: existingCodes[code]};
-			$('#get-baseshop-progress .result>div:nth-child(3) span').html(Object.keys(changedCodes).length');
+			$('#get-baseshop-progress .result>div:nth-child(3) span').html(Object.keys(changedCodes).length);
 			$('#get-baseshop-progress .result>div:nth-child(4)')
 				.attr('id', 'btn-trvieve-new-members').append('<div title="' + t + '">' + t + '</div>');
 		}
@@ -194,7 +194,7 @@ function parseData(aaData){
 	else{
 		var t = code + ' - ' + name;
 		newCodes[code] = {name: name, level: level};
-		$('#get-baseshop-progress .result>div:nth-child(1) span').html(Object.keys(newCodes).length');
+		$('#get-baseshop-progress .result>div:nth-child(1) span').html(Object.keys(newCodes).length);
 		$('#get-baseshop-progress .result>div:nth-child(2)')
 			.append('<div title="' + t + '"><button type="button" class="new-member-url btn btn-link" data-id="' + code + '">' + t + '</button></div>');
 	}
