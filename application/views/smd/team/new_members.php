@@ -176,8 +176,10 @@ function starting(){
 }
 
 var retrieved_members = 0;
+var temp = {};
 function parseData(aaData){
 	var code = aaData[1];
+	temp[code] = 0;
 	var wrap = $('<div>').append(aaData);
 	var name = wrap.children('.list-agent-name').text();
 	var l = wrap.children('.list-agent-level').text().trim();
