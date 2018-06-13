@@ -1,7 +1,7 @@
 <style>
 .text{line-height:40px}
 .result>div:nth-child(2)>div, .result>div:nth-child(4)>div{width:230px;margin-right:20px;float:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#get-baseshop-progress{display:none}
+#btn-update-level, #get-baseshop-progress{display:none}
 </style>
 <div class="main-body-wrapper">
 	<h3 class="text-center">Members Update</h3>
@@ -22,7 +22,9 @@
 			<div class="result">
 				<div class="text clearfix">New members: <span>0</span>&nbsp;&nbsp;&nbsp;&nbsp;</div>
 				<div class="clearfix"></div>
-				<div class="text clearfix">Level changed members: <span>0</span>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+				<div class="text clearfix">Level changed members: <span>0</span>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button class="btn btn-sm btn-success" id="btn-update-level" onclick="update_level();">Update Member Level</button>
+				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -218,13 +220,8 @@ function get_5_members(start, total){
 				var percent = Math.round(rate * 100);
 				$('#get-baseshop-progress .progress-bar').attr('aria-valuenow', rate).html(percent + '%').css('width', percent + '%');
 				if(retrieved_members >= total){
-					var btn_update_level = null;
 					if(Object.keys(changedCodes).length > 0){
-						btn_update_level = $('<button>').addClass('btn').addClass('btn-sm').addClass('btn-success')
-							.attr('id', 'btn-update-level').html('Update Member Level').click(function(){
-								update_level();
-							}
-						);
+						$('#btn-update-level').show();
 					}
 					
 					return false;
