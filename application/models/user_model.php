@@ -201,8 +201,8 @@ class User_model extends Base_model{
 				array_push($like_array, "nick_name LIKE '%$s%'");
 				array_push($like_array, "email LIKE '%$s%'");
 				array_push($like_array, "membership_code LIKE '%$s%'");
-				array_push($like_array, "upline LIKE '%$s%'");
-				array_push($like_array, "recruiter LIKE '%$s%'");
+				//array_push($like_array, "upline LIKE '%$s%'");
+				//array_push($like_array, "recruiter LIKE '%$s%'");
 			}
 		}
 		$order_by = array();
@@ -240,8 +240,8 @@ class User_model extends Base_model{
 				array_push($like_array, "nick_name LIKE '%$s%'");
 				array_push($like_array, "email LIKE '%$s%'");
 				array_push($like_array, "membership_code LIKE '%$s%'");
-				array_push($like_array, "upline LIKE '%$s%'");
-				array_push($like_array, "recruiter LIKE '%$s%'");
+				//array_push($like_array, "upline LIKE '%$s%'");
+				//array_push($like_array, "recruiter LIKE '%$s%'");
 			}
 		}
 		$sql = "SELECT COUNT(*) AS total FROM 
