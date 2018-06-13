@@ -1,13 +1,14 @@
 <style>
 .text{line-height:40px}
 .result>div:nth-child(2)>div, .result>div:nth-child(4)>div{width:230px;margin-right:20px;float:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#get-baseshop-progress{display:none}
 </style>
 <div class="main-body-wrapper">
 	<h3 class="text-center">Members Update</h3>
 	<div class="row">
-		<div class="col-xs-12" id="get-baseshop-progress">
-			<button class="btn btn-primary btn-sm" id="button_start" onclick="starting();">Start</button>
-			<button class="btn btn-primary btn-sm" onclick="fast_start();">Fast Start</button>
+		<div class="col-xs-12">
+			<button class="btn btn-primary btn-sm" id="button-start" onclick="starting();">Start</button>
+			<button class="btn btn-primary btn-sm" id="button-fast-start" onclick="fast_start();">Fast Start</button>
 		</div>
 	</div>
 	<div class="row">
@@ -158,7 +159,7 @@ function retrive_all_members(){
 }
 
 function starting(){
-	$('#button_start').addClass('disabled');
+	$('#button-start, #button-fast-start').addClass('disabled');
 	$.ajax({
 		url: '<?php echo base_url();?>smd/team/get_new_members',
 		dataType: 'json',
@@ -234,7 +235,8 @@ function get_5_members(start, total){
 
 function fast_start(){
 	newCodes = {};
-	$('#button_start').addClass('disabled');
+	$('#button-start, #button-fast-start').addClass('disabled');
+	$('#get-baseshop-progress').show();
 	$.ajax({
 		url: '<?php echo base_url();?>smd/team/get_new_members',
 		dataType: 'json',
