@@ -220,6 +220,7 @@ function get_5_members(start, total){
 				var percent = Math.round(rate * 100);
 				$('#get-baseshop-progress .progress-bar').attr('aria-valuenow', rate).html(percent + '%').css('width', percent + '%');
 				if(retrieved_members >= total){
+					$('#button-start, #button-fast-start').removeClass('disabled');
 					if(Object.keys(changedCodes).length > 0){
 						$('#btn-update-level').show();
 					}
