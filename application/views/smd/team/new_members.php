@@ -7,7 +7,7 @@
 	<h3 class="text-center">Members Update</h3>
 	<div class="row">
 		<div class="col-xs-12">
-			<button class="btn btn-primary btn-sm" id="button-start" onclick="starting();">Start</button>
+			<button class="btn btn-primary btn-sm disabled" id="button-start" onclick="starting();">Start</button>
 			<button class="btn btn-primary btn-sm" id="button-fast-start" onclick="fast_start();">Fast Start</button>
 		</div>
 	</div>
@@ -224,7 +224,7 @@ function get_5_members(start, total){
 				var percent = Math.round(rate * 100);
 				$('#get-baseshop-progress .progress-bar').attr('aria-valuenow', rate).html(percent + '%').css('width', percent + '%');
 				if(retrieved_members >= total){
-					$('#button-start, #button-fast-start').removeClass('disabled');
+					$('#button-fast-start').removeClass('disabled');
 					if(Object.keys(changedCodes).length > 0){
 						$('#btn-update-level').show();
 					}
@@ -242,6 +242,7 @@ function fast_start(){
 	newCodes = {};
 	$('#button-start, #button-fast-start').addClass('disabled');
 	$('#get-baseshop-progress').show();
+	$('#get-baseshop-progress .progress-bar').attr('aria-valuenow', rate).html('0%').css('width', '0%');
 	$.ajax({
 		url: '<?php echo base_url();?>smd/team/get_new_members',
 		dataType: 'json',
