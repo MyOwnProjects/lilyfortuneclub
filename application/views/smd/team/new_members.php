@@ -119,7 +119,11 @@ function get_baseshop(start){
 							}
 						);
 					}
-					$('#get-baseshop-progress .result>div:nth-child(1)').append('<span>New members: ' + c + '&nbsp;&nbsp;&nbsp;&nbsp;</span>').append(btn_trvieve_new_members);
+					var t = '';
+					if(c > 0){
+						t = '(Click each member to update)';
+					}
+					$('#get-baseshop-progress .result>div:nth-child(1)').append('<span>New members: ' + c + '&nbsp;&nbsp;' + t + '&nbsp;&nbsp;</span>').append(btn_trvieve_new_members);
 					c = 0;
 					for(var code in changedCodes){
 						c++;
