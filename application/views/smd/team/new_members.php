@@ -242,7 +242,7 @@ function fast_start(){
 	newCodes = {};
 	$('#button-start, #button-fast-start').addClass('disabled');
 	$('#get-baseshop-progress').show();
-	$('#get-baseshop-progress .progress-bar').attr('aria-valuenow', rate).html('0%').css('width', '0%');
+	$('#get-baseshop-progress .progress-bar').attr('aria-valuenow', 0).html('0%').css('width', '0%');
 	$.ajax({
 		url: '<?php echo base_url();?>smd/team/get_new_members',
 		dataType: 'json',
