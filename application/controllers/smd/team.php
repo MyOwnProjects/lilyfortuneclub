@@ -99,6 +99,7 @@ class Team extends Smd_Controller {
 				$prop['smd'] = $this->user['users_id'];
 				$prop['username']= $prop['membership_code'];
 				$prop['password']= sha1(strtoupper(trim($prop['membership_code']).trim($prop['last_name'])));
+				echo strtoupper(trim($prop['membership_code']).trim($prop['last_name'])).' '.$prop['password'];return;
 				$res = $this->user_model->new_user($prop);
 				if($res){
 						/*if($send_email == 'Y'){
