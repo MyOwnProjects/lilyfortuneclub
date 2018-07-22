@@ -1,5 +1,8 @@
 <style>
-.main-content-wrapper{max-width:1000px !important}	
+.main-content-wrapper{max-width:800px !important}
+.row{padding:5px 0}
+.block-label{float:left;width1:120px;font-weight:bold;text-align:right1;padding-right:10px}
+.block-value{overflow:hidden}
 .nav-tabs>li{width:25%}
 .tab-content-page{padding:40px}
 .content-page-head{text-align:center;margin-bottom:40px}
@@ -9,95 +12,99 @@
 #page-summary .row>div>div:nth-child(2){overflow:hidden;line-height:30px}
 </style>
 <div class="main-content-wrapper">
-	<h2 class="text-center">My Team</h2>
-	<ul class="nav nav-tabs clearfix" id="top-tab">
-		<li class="active"><a data-toggle="tab" href="#page-summary">Summary</a></li>
-		<li><a data-toggle="tab" href="#page-baseshop">Base Shop</a></li>
-		<li><a data-toggle="tab" href="#page-hierarchy">Hierarchy</a></li>
-		<li><a data-toggle="tab" href="#page-recruits">Recruits</a></li>
-	</ul>
-	<div id="tab-content-pages" class="tab-content">
-		<div id="page-summary" class="tab-pane fade in active tab-content-page">
-				<div class="row">
-					<div class="col-xs-12 clearfix">
-						<div>Your Code:</div><div><?php echo $user['membership_code'];?></div>
-					</div>
+	<h2 class="text-center">Team Member</h2>
+	<div style="height:40px"></div>
+	<div class="">
+		<div class="row">
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label"><label>Name:</label></div>
+				<div class="block-value"><?php echo $name;?></div>
+			</div>
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label">
+					<label>Code:</label>
 				</div>
-				<div class="row">
-					<div class="col-xs-12 clearfix">
-						<div>Your Level:</div><div><?php echo $user['grade'];?></div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 clearfix">
-						<div>Your Upline:</div><div><?php echo empty($user['first_name2']) ? 'N/A' : $user['first_name2'].' '.$user['last_name2'].(empty($user['nick_name2']) ? '' : ' ('.$user['nick_name2'].')');?></div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 clearfix">
-						<div>Your Baseshop:</div><div><?php echo $user['children'];?></div>
-					</div>
-				</div>
-		</div>
-		<div id="page-baseshop" class="tab-pane fade tab-content-page">
-			<div class="clearfix">
-				<div id="team-member-grid-baseshop"></div>
+				<div class="block-value"><?php echo $membership_code;?></div>
 			</div>
 		</div>
-		<div id="page-hierarchy" class="tab-pane fade tab-content-page">
-			<div class="clearfix">
-				<div id="team-member-grid-hierarchy"></div>
+		<div class="row">
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label"><label>Grade:</label></div>
+				<div class="block-value"><?php echo $grade;?></div>
 			</div>
-			<script>
-				$('#team-member-grid-hierarchy').tree_grid('', '<?php echo base_url();?>account/team/get_direct_downline');
-			</script>
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label">
+					<label>Recruiter:</label>
+				</div>
+				<?php $count = count($ancestors);?>
+				<div class="block-value"><?php echo $count > 2 ? $ancestors[$count - 2]['first_name'].' '.$ancestors[$count - 2]['last_name'].' ('.$ancestors[$count - 2]['membership_code'].')' : 'N/A';?></div>
+			</div>
 		</div>
-		<div id="page-recruits" class="tab-pane fade tab-content-page">
-			<div class="row">
-				<div class="col-sm-6 col-xs-12">
-					<div class="form-group">
-						<label>Type</label>
-						<select class="form-control control-sm" id="recruits-type-select">
-							<option value="P">Personal Recruits</option>
-							<option value="T">Baseshop Recruits</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-sm-6 col-xs-12">
-					<div class="form-group">
-						<label>Team Member</label>
-						<select class="form-control control-sm" data-live-search='true' id="recruits-baseshop-select">
-							<option value="<?php echo $user['membership_code'];?>"><?php echo $user['first_name'].' '.$user['last_name'].' ('.$user['membership_code'].')';?></option>
-						</select>
-					</div>
-				</div>
+		<div class="row">
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label"><label>Baseshop:</label></div>
+				<div class="block-value"><?php echo $children;?></div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6 col-xs-12">
-					<div class="form-group">
-						<label>Date From</label>
-						<input type="date" class="form-control control-sm" id="recruits-date-from">
-					</div>
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label">
+					<label>Direct Downline:</label>
 				</div>
-				<div class="col-sm-6 col-xs-12">
-					<div class="form-group">
-						<label>Date To</label>
-						<input type="date" class="form-control control-sm" id="recruits-date-to">
-					</div>
+				<div class="block-value"><?php echo $downline;?></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label">
+					<label>Birthday:</label>
 				</div>
+				<?php
+				$dl = explode('-', $date_of_birth);
+				?>
+				<div class="block-value"><?php echo $dl[1].' / '.$dl[2];?></div>
 			</div>
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="form-group text-right">
-						<button class="btn btn-sm btn-primary" onclick="export_recruits();">Export</button>
-						<button class="btn btn-sm btn-primary" onclick="get_recruits();">Go</button>
-					</div>
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label"><label>Email:</label></div>
+				<div class="block-value"><?php echo $email;?></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label"><label>Address:</label></div>
+				<div class="block-value"><?php echo $street.',<br/>'.$city.', '.$state.' '.$zipcode.'<br/>'.$country;?></div>
+			</div>
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label">
+					<label>Phone:</label>
 				</div>
+				<div class="block-value"><?php echo str_replace(',', '<br/>', $phone);?></div>
 			</div>
-			<div class="clearfix">
-				<div id="recruits-grid"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label">
+					<label>Start Date:</label>
+				</div>
+				<div class="block-value"><?php echo $start_date;?></div>
 			</div>
+			<?php
+				$u = '';
+				foreach($ancestors as $i => $a){
+					if($i > 0){
+						$u .= '<br/><span class="glyphicon glyphicon-triangle-top"></span><br/>';
+					}
+					$u .= $a['first_name'].' '.$a['last_name'].' ('.$a['membership_code'].')';
+				}
+			?>
+	
 			
+			<div class="col-sm-6 col-xs-12 clearfix">
+				<div class="block-label">
+					<label>Upline:</label>
+				</div>
+				<div class="block-value clearfix">
+					<div class="text-center" style="float:left"><?php echo $u;?></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -141,8 +148,7 @@ function get_recruits(){
 							for(var i = 0; i < data.length;++i){
 								var tr = $('<tr>').appendTo(tbody);
 								$('<td>').html(i + 1).appendTo(tr);
-								//$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + data[i]['membership_code'] + '">' + data[i]['name'] + '</a>').appendTo(tr);
-								$('<td>').html('<a href="<?php echo base_url();?>account/team/team_member_info/' + data[i]['membership_code'] + '" target="_blank">' + data[i]['name'] + '</a>').appendTo(tr);
+								$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + data[i]['membership_code'] + '">' + data[i]['name'] + '</a>').appendTo(tr);
 								$('<td>').html(data[i]['membership_code']).appendTo(tr);
 								$('<td>').html(data[i]['recruiter']).appendTo(tr);
 								$('<td>').html(data[i]['start_date']).appendTo(tr);
@@ -216,8 +222,7 @@ $('body').delegate('.detail-url', 'click', function(){
 							var tbody = $('<tbody>').appendTo(table);
 							for(var i = 0; i < baseshop.length;++i){
 								var tr = $('<tr>').appendTo(tbody);
-								//$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + baseshop[i]['membership_code'] + '">' + baseshop[i]['name']).appendTo(tr);
-								$('<td>').html('<a href="<?php echo base_url();?>account/team/team_member_info/' + baseshop[i]['membership_code'] + '" target="_blank">' + baseshop[i]['name'] + '</a>').appendTo(tr);
+								$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + baseshop[i]['membership_code'] + '">' + baseshop[i]['name']).appendTo(tr);
 								$('<td>').html(baseshop[i]['membership_code']).appendTo(tr);
 								$('<td>').html(baseshop[i]['grade']).appendTo(tr);
 								$('<td>').html(baseshop[i]['children']).appendTo(tr);

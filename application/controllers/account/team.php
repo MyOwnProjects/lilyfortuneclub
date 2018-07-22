@@ -10,6 +10,26 @@ class Team extends Account_base_controller {
 		$this->load_view('team');
 	}
 	
+	public function team_member_info($code = 0){
+		$this->load->model('user_model');
+		$ancestors = $this->user_model->get_ancestors($code);
+		$valid = false;
+		foreach($ancestors as $r){
+			if($r['membership_code'] == $this->user['membership_code']){
+				$valid = true;
+				break;
+			}
+		}
+		if(!$valid){
+			echo json_encode(array('success' => false, 'message' => "Invalid membership code."));
+			return;
+		}
+		$result = $this->user_model->get_user_by(array('membership_code' => $code));
+		$result[0]['ancestors']= $ancestors;
+		$this->load_view('team_member_info', $result[0]);
+		//echo json_encode(array('success' => true, 'info' => $result[0], 'ancestors' => $ancestors));
+	}
+	
 	public function get_member_info($code = 0){
 		$this->load->model('user_model');
 		$ancestors = $this->user_model->get_ancestors($code);
