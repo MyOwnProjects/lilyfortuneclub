@@ -240,6 +240,7 @@ function get_5_members(start, total){
 
 function fast_start(){
 	newCodes = {};
+	retrieved_members = 0;
 	$('#button-start, #button-fast-start').addClass('disabled');
 	$('#get-baseshop-progress').show();
 	$('#get-baseshop-progress .progress-bar').attr('aria-valuenow', 0).html('0%').css('width', '0%');
