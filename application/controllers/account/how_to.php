@@ -84,7 +84,7 @@ class How_to extends Account_base_controller {
 			4. Send the filled from to wfglicenseapps@transamerica.com, and wfgcoding@transamerica.com'
 	),
 	array('url' => base_url().'account/how_to/item/seven_pay_dca',
-		'img' => 'cityscape.svg',
+		'img' => 'cash.svg',
 		'text' => 'Process Seven Pay and DCA',
 		'content' => '<div>1. Max Fund seven pay into BASIC INTEREST ACCOUNT.</div>'
 		.'<p> - Before you call to the inforce department, prepeare the your agent code, policy number, bank account information.<br/>'
