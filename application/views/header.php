@@ -32,7 +32,8 @@
 						if($user['membership_code'] != 'GUEST'){
 					?>
 						<?php if($user['preference'] == 'B' || $user['preference'] == 'BE'){?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/business" title="Business Instruction"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/give-money.svg"><div class="text">Business Instruction</div></div></a>
+						<a class="menu-ico-url" href="<?php echo base_url();?>account/how_to" title="How to"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/question-mark-on-a-circular-black-background.svg"><div class="text">How to</div></div></a>
+						<a class="menu-ico-url" href="<?php echo base_url();?>account/team" title="My team"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/team.svg"><div class="text">My Team</div></div></a>
 						<?php }?>
 					<?php
 						}
@@ -41,8 +42,8 @@
 					<?php
 						if($user['membership_code'] != 'GUEST'){
 					?>
+						<a class="menu-ico-url" href="<?php echo base_url();?>account/business" title="Business Instruction"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/give-money.svg"><div class="text">Business Instruction</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>seminar" title="Seminar"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/instructor-lecture-with-sceen-projection-tool.svg"><div class="text">Class Schedule</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/team" title="Your team"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/team.svg"><div class="text">Team</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/code_of_honor" title="Code of Honor"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/promotion.svg"><div class="text">Code of Honor</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/finance_status" title="Finance Status"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/learning.svg"><div class="text">Your Finance Status</div></div></a>
 						<!--div class="menu-icon"><a href="<?php echo base_url();?>account/live" title="Live"><img src="<?php echo base_url();?>src/img/television.svg"><div class="text">Live</div></a></div-->
