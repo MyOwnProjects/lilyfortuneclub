@@ -95,7 +95,8 @@ class How_to extends Account_base_controller {
 		.' - Max fund seven pay into BASIC INTEREST ACCOUNT, double confirm this is for basic interest account,
 and write down the date, time and dollar amount for record.</p>'
 		.'<div>2. Fax the DCA form.</div>'
-		.'<p>After $ in basic interest account, DCA into global index account, fill out and fax in the DCA form to 727-299-1620.</p>'
+		.'<p> - Wait for 2 to 3 days, then check the status at premier.transamerica.com to make sure the transfer is done.<br/>'
+		. '- If the $ is successfully tranfered in basic interest account, DCA into global index account, fill out and fax in the DCA form to 727-299-1620.</p>'
 	),	
 );
 		
