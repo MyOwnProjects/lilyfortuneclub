@@ -83,7 +83,8 @@ class How_to extends Account_base_controller {
 			3. Ask your SMD to sign the form.<br/>
 			4. Send the filled from to wfglicenseapps@transamerica.com, and wfgcoding@transamerica.com'
 	),
-	array('url' => base_url().'account/how_to/item/seven_pay_dca',
+	array('url' => base_url().'account/how_to',
+		'name' => 'seven_pay_dca',
 		'img' => 'cash.svg',
 		'text' => 'Process Seven Pay and DCA',
 		'content' => '<div>1. Max Fund seven pay into BASIC INTEREST ACCOUNT.</div>'
