@@ -20,10 +20,13 @@ h4{margin-top:40px;}
 	</div>
 	<div class="row">
 		<?php
-		foreach($list as $l){
+		foreach($list as $n => $l){
 		?>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 clearfix">
-			<a class="menu-ico-url" href="<?php echo $l['url'].(array_key_exists('name', $l) ? '#'.$l['name'] : '');?>">
+			<?php 
+			$url = array_key_exists('url', $l) ? $l['url'] : base_url().'account/how_to';
+			?>
+			<a class="menu-ico-url" href="<?php echo $url.(array_key_exists('content', $l) ? '#'.$n : '');?>">
 				<div class="btn btn-default">
 					<div class="list-icon"><img src="<?php echo base_url();?>src/img/<?php echo $l['img'];?>"></div>
 					<div class="list-text"><?php echo $l['text'];?></div>
@@ -35,12 +38,12 @@ h4{margin-top:40px;}
 		?>
 	</div>
 	<?php
-	foreach($list as $l){
+	foreach($list as $n => $l){
 		if(!array_key_exists('content', $l)){
 			continue;
 		}
 	?>
-	<div class="row" <?php echo array_key_exists('name', $l) ? 'id="'.$l['name'].'"' : '';?>>
+	<div class="row" <?php echo array_key_exists('content', $l) ? 'id="'.$n.'"' : '';?>>
 		<div class="col-sm-12">
 			<h4>
 			<?php
