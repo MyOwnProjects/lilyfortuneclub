@@ -576,6 +576,18 @@ class Team extends Smd_Controller {
 						)
 					);
 					break;
+				case 'original_start_date':
+					$items = array(
+						array(
+							'label' => 'Original Start Date',
+							'name' => 'original_start_date',
+							'tag' => 'input',
+							'required' => true,
+							'type' => 'date',
+							'value' => $result[0]['original_start_date']
+						)
+					);
+					break;
 				case 'grade':
 					$items = array(
 						array(
@@ -714,6 +726,7 @@ class Team extends Smd_Controller {
 				case 'name':
 				case 'date_of_birth':
 				case 'start_date':
+				case 'original_start_date':
 				case 'grade':
 					foreach($this->input->post() as $n => $v){
 						$values[$n] = trim($v);
