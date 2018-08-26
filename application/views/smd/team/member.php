@@ -24,7 +24,12 @@ if(!$member){
 			<li class="list-group-item clearfix">
 				<div class="pull-left" style="font-weight:bold;text-transform:capitalize;width:130px;margin-right:5px;text-align:right">
 					<?php
-					echo str_replace('_', ' ', $name);
+					if($name == 'membership_code'){
+						echo 'code';
+					}
+					else{
+						echo str_replace('_', ' ', $name);
+					}
 					?>:
 				</div>
 				<?php
