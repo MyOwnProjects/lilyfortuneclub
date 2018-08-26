@@ -41,7 +41,7 @@ class Team extends Smd_Controller {
 				unset($ret['rows'][$i]['password']);
 				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
 				$ret['rows'][$i]['name'] = $r['name'].(isset($ret['rows'][$i]['nick_name']) && trim($ret['rows'][$i]['nick_name']) != '' ? ' ('.$ret['rows'][$i]['nick_name'].')' : '');
-				$ret['rows'][$i]['status'] = $ret['rows'][$i]['status'] == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';
+				$ret['rows'][$i]['original_start_date'] = isset($ret['rows'][$i]['original_start_date']) ? 'Yes' : 'No';
 				$ret['rows'][$i]['location'] = empty($r['state']) ? $r['country'] : $r['state'].'/'.$r['country'];
 				$ret['rows'][$i]['downline'] = $r['downline'];
 				$ret['rows'][$i]['action'] = array('view' => base_url().'smd/team/member/'.$r['membership_code']);

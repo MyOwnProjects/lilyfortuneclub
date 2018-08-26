@@ -104,7 +104,7 @@ class User_model extends Base_model{
 			users.username,
 			users.password,
 			users.date_of_birth,
-			users.start_date,
+			users.start_date, users.original_start_date,
 			CONCAT(users.street, '<br/>', users.city, ', ', users.state, ' ', users.zipcode, '<br/>', users.country) AS address,
 			users.users_id,
 			users.preference,

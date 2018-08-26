@@ -27,6 +27,9 @@ if(!$member){
 					if($name == 'membership_code'){
 						echo 'code';
 					}
+					else if($name == 'original_start_date'){
+						echo 'Initial Start';
+					}
 					else{
 						echo str_replace('_', ' ', $name);
 					}
@@ -49,6 +52,10 @@ if(!$member){
 					}
 					else if($name == 'phone'){
 						echo str_replace(',', '<br/>', $value);
+					}
+					else if($name == 'date_of_birth'){
+						$d = explode('-', $value);
+						echo $d[1].' / '.$d[2];
 					}
 					else{
 						echo $value;
