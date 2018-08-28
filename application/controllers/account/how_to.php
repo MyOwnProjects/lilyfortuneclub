@@ -82,9 +82,9 @@ class How_to extends Account_base_controller {
 			),
 			'seven_pay_dca' => array(
 				'img' => 'cash.svg',
-				'text' => 'Process seven pay and DCA',
+				'text' => 'Process FFIUL seven pay and DCA',
 				'content' => '<div>1. Max Fund seven pay into BASIC INTEREST ACCOUNT.</div>'
-				.'<p> - Before you call to the inforce department, prepeare the your agent code, policy number, bank account information.<br/>'
+				.'<p> - Before you call to the Transamerica inforce department, prepeare the your agent code, policy number, bank account information.<br/>'
 				.' - Call the inforce department at (800) 322-3796, and follow the instruction.<br/>'
 				.' - Stop monthly automatic draft.<br/>'
 				.' - Stop monthly billing statement and change it to annual and bill seven pay amount.<br/>'
