@@ -96,7 +96,7 @@ class User_model extends Base_model{
 			$where = '';
 		$sql = "SELECT CONCAT(users.first_name, ' ', users.last_name, IF(users.nick_name IS NULL OR users.nick_name='', '', CONCAT(' (', users.nick_name ,')'))) AS name,
 			users.membership_code,
-			CONCAT(u2.first_name, ' ', (u2.last_name), IF(u2.nick_name IS NULL OR u2.nick_name='', '', CONCAT(' (', u2.nick_name, ')')) ) AS recruiter, 
+			CONCAT(u2.first_name, ' ', (u2.last_name), IF(u2.nick_name IS NULL OR u2.nick_name='', '', CONCAT(' (', u2.nick_name, ')')) ) AS recruiter_name, 
 			users.children AS downline,
 			users.grade as grade,
 			users.phone,
@@ -471,7 +471,7 @@ class User_model extends Base_model{
 	}
 	
 	public function get_recruits($codes, $where = ""){
-		$sql = "SELECT u.*, CONCAT(u.first_name, ' ', u.last_name) AS name, CONCAT(u1.first_name, ' ', u1.last_name, ' (', u.recruiter, ')') AS recruiter FROM users u 
+		$sql = "SELECT u.*, CONCAT(u.first_name, ' ', u.last_name) AS name, CONCAT(u1.first_name, ' ', u1.last_name) AS recruiter_name FROM users u 
 			LEFT JOIN users u1 ON u1.membership_code=u.recruiter
 			WHERE u.recruiter IN ('".implode("','", $codes)."') AND (".(empty($where) ? "" : $where).") "
 			." ORDER BY u.start_date DESC";

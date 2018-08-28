@@ -60,6 +60,10 @@
 						<select class="form-control control-sm" id="recruits-type-select">
 							<option value="P">Personal Recruits</option>
 							<option value="T">Baseshop Recruits</option>
+							<option value="3_30">Rolling 3/30</option>
+							<option value="6_30">Rolling 6/30</option>
+							<option value="BBC10">BBC 10</option>
+							<option value="BBC20">BBC 20</option>
 						</select>
 					</div>
 				</div>
@@ -122,12 +126,13 @@ function export_recruits(){
 function get_recruits(){
 	$('#recruits-grid').empty();
 	ajax_loading(true);
+	var type = $('#recruits-type-select').val();
 	$.ajax({
 		url: '<?php echo base_url();?>account/team/get_recruits',
 		method: 'post',
 		dataType: 'json',
 		data: {
-			type: $('#recruits-type-select').val(),
+			type: type,
 			code: $('#recruits-baseshop-select').val(),
 			date_from: $('#recruits-date-from').val(),
 			date_to: $('#recruits-date-to').val(),
@@ -135,18 +140,38 @@ function get_recruits(){
 		success: function(data){
 			if(data['success']){
 				var data = data['data'];
-						var table = $('<table>').addClass('table').addClass('table-striped').appendTo($('#recruits-grid'));
-							table.append('<thead><tr><th>&nbsp;</th><th>Name</th><th>Code</th><th>Recruiter</th><th>Start Date</th></tr></thead>');
-							var tbody = $('<tbody>').appendTo(table);
-							for(var i = 0; i < data.length;++i){
+				var table = $('<table>').addClass('table').addClass('table-striped').appendTo($('#recruits-grid'));
+				if(type == 'P' || type == 'T'){
+					table.append('<thead><tr><th>&nbsp;</th><th>Name</th><th>Code</th><th>Recruiter</th><th>Start Date</th></tr></thead>');
+					var tbody = $('<tbody>').appendTo(table);
+					for(var i = 0; i < data.length;++i){
+						var tr = $('<tr>').appendTo(tbody);
+						$('<td>').html(i + 1).appendTo(tr);
+						//$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + data[i]['membership_code'] + '">' + data[i]['name'] + '</a>').appendTo(tr);
+						$('<td>').html('<a href="<?php echo base_url();?>account/team/team_member_info/' + data[i]['membership_code'] + '" target="_blank">' + data[i]['name'] + '</a>').appendTo(tr);
+						$('<td>').html(data[i]['membership_code']).appendTo(tr);
+						$('<td>').html(data[i]['recruiter_name'] + ' (' + data[i]['recruiter'] + ')').appendTo(tr);
+						$('<td>').html(data[i]['start_date']).appendTo(tr);
+					}
+				}
+				else if(type == '3_30' || type == '6_30'){
+					table.append('<thead><tr><th>Recruiter</th><th>Recruit</th><th>Recruit</th><th>Date</th></tr></thead>');
+					var tbody = $('<tbody>').appendTo(table);
+					for(var recruiter in data){
+						for(var i = 0; i < data[recruiter]['matches'].length; ++i){
+							var match = data[recruiter]['matches'][i];
+							for(var j = 0; j < match.length; ++j){
 								var tr = $('<tr>').appendTo(tbody);
-								$('<td>').html(i + 1).appendTo(tr);
-								//$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + data[i]['membership_code'] + '">' + data[i]['name'] + '</a>').appendTo(tr);
-								$('<td>').html('<a href="<?php echo base_url();?>account/team/team_member_info/' + data[i]['membership_code'] + '" target="_blank">' + data[i]['name'] + '</a>').appendTo(tr);
-								$('<td>').html(data[i]['membership_code']).appendTo(tr);
-								$('<td>').html(data[i]['recruiter']).appendTo(tr);
-								$('<td>').html(data[i]['start_date']).appendTo(tr);
+								if(j == 0){
+									$('<td>').attr('rowspan', match.length).html(data[recruiter]['name'] + '<br/>' + recruiter).appendTo(tr);
+								}
+								$('<td>').html(match[j]['name']).appendTo(tr);
+								$('<td>').html(match[j]['membership_code']).appendTo(tr);
+								$('<td>').html(match[j]['start_date']).appendTo(tr);
 							}
+						}
+					}
+				}
 			}
 			else{
 			}

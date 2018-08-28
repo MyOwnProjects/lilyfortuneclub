@@ -139,7 +139,7 @@ class Team extends Account_base_controller {
 		if($type == 'P'){
 			$result = $this->user_model->get_recruits(array($code), $where);
 		}
-		else{
+		else if($type == 'T' || $type == '3_30' || $type == '6_30'){
 			$baseshop = $this->_get_baseshop($code);
 			$result = array();
 			foreach($baseshop as $b){
@@ -153,6 +153,49 @@ class Team extends Account_base_controller {
 				return strcmp($b['start_date'], $a['start_date']);
 			}
 			usort($result, "sort_temp");
+			if($type == '3_30' || $type == '6_30'){
+				$result1 = array();
+				foreach($result as $r){
+					$recruiter = $r['recruiter'];
+					if(!array_key_exists($recruiter, $result1)){
+						$result1[$recruiter] = array();
+					}
+					array_push($result1[$recruiter], $r);
+				}
+				$result = array();
+				function check_30(&$result, $r, $number){
+					$i = count($r) - 1;
+					while($i >= 0){
+						if($i - $number + 1 < 0){
+							break;
+						}
+						$d1 = date_create($r[$i]['start_date']);
+						$d2 = date_create($r[$i - $number + 1]['start_date']);
+						$diff = date_diff($d2, $d1);
+						$recruiter = $r[$i]['recruiter'];
+						if(true){//$diff->format('%a') < 30){
+							if(!array_key_exists($recruiter, $result)){
+								$result[$recruiter] = array(
+									'name' => $r[$i]['recruiter_name'],
+									'matches' => array()
+								);
+							}
+							$a = array();
+							for($j = 0; $j < $number; ++$j){
+								array_push($a, $r[$i - $j]);
+							}
+							array_push($result[$recruiter]['matches'], $a);
+							$i -= $number;
+						}
+						else{
+							$i--;
+						}
+					}
+				}
+				foreach($result1 as $recruiter => $r){
+					check_30($result, $r, $type == '3_30' ? 3 : 6);
+				}
+			}
 		}
 		return $result;
 	}
