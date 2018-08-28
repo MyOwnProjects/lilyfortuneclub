@@ -173,7 +173,7 @@ class Team extends Account_base_controller {
 						$d2 = date_create($r[$i - $number + 1]['start_date']);
 						$diff = date_diff($d2, $d1);
 						$recruiter = $r[$i]['recruiter'];
-						if(true){//$diff->format('%a') < 30){
+						if($diff->format('%a') < 30){
 							if(!array_key_exists($recruiter, $result)){
 								$result[$recruiter] = array(
 									'name' => $r[$i]['recruiter_name'],
