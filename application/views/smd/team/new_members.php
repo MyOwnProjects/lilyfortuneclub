@@ -237,7 +237,7 @@ function get_5_members(start, total){
 	}
 }
 
-var n = 2;
+var n = 50;
 function fast_start(){
 	newCodes = {};
 	retrieved_members = 0;
