@@ -231,13 +231,13 @@ function get_5_members(start, total){
 					
 					return false;
 				}
-				get_5_members(start + 50, total);
+				get_5_members(start + n * 5, total);
 			}
 		});
 	}
 }
 
-
+var n = 10;
 function fast_start(){
 	newCodes = {};
 	retrieved_members = 0;
@@ -264,7 +264,7 @@ function fast_start(){
 					var rate = retrieved_members / total;
 					var percent = Math.round(rate * 100);
 					$('#get-baseshop-progress .progress-bar').attr('aria-valuenow', rate).html(percent + '%').css('width', percent + '%');
-					for(var j = 1; j <= 10; ++j){//5,55, 105
+					for(var j = 1; j <= n; ++j){//5,55, 105
 						var start = j * 5;
 						get_5_members(start, total);
 					}
