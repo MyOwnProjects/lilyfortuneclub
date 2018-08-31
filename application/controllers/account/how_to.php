@@ -69,7 +69,8 @@ class How_to extends Account_base_controller {
 				'content' => '<div>1. Medical order bloodwork for local in bay area</div>
 					<div>
 						<p>- Send an email to penghu501@gmail.com (the examiner is Peng Hu) to order the blood test.<br/>
-						- Include the exam date, insured name, policy provider, policy number if applicable, policy type, with/without LTC, face amount, insured date of birth, insured address, phone number, email, agent name and agent code. 
+						- Include the exam date, insured name, policy provider, policy number if applicable, policy type, with/without LTC, face amount, insured date of birth, insured address, phone number, email, agent name and agent code. And indicate that you are Lily Zhu\'s team.<br/>
+						- Call Peng Hu at 408-315-7070, to confirm the appointment, and tell Peng your are in Lily Zhu\'s team.<br/>
 						</p>
 					</div>
 					<div>2. Medical order bloodwork for remote city
