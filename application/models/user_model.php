@@ -395,18 +395,6 @@ class User_model extends Base_model{
 		return $this->db->query($sql);	
 	}
 
-	public function get_user_tracking_info_by_user_id($users_ids, $smd = null){
-		$sql = "SELECT users_tracking_info.* FROM users_tracking_info INNER JOIN users ON users_tracking_info.user_id=users.users_id "
-			. "WHERE 1=1 ".(empty($users_ids) ? "" : " AND users_id IN ('".implode("','", $users_ids)."')").(empty($smd) ? "" : " AND users.smd='$smd'");
-		$results = $this->db->query($sql);
-		$ret = array();
-		array_push($ret, $this->db->list_fields());
-		foreach($results as $r){
-			array_push($ret, $r);
-		}
-		return $ret;
-	}
-
 	public function get_user_info_by_user_id($users_ids, $smd = null){
 		$sql = "SELECT * FROM users_info INNER JOIN users ON users_info.user_id=users.users_id "
 			. "WHERE 1=1 ".(empty($users_ids) ? "" : " AND users_id IN ('".implode("','", $users_ids)."')").(empty($smd) ? "" : " AND users.smd='$smd'");
