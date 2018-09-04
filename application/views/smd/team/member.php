@@ -18,8 +18,8 @@ if(!$member){
 			</li>
 			<?php 
 			foreach($member as $name => $value){
-				if(in_array($name, array('users_id', 'reset_token', 'smd', 'street', 'city', 'state', 
-					'zipcode', 'country', 'first_name', 'last_name', 'nick_name'))) continue;
+				if(strpos($name, 'trck_') === 0 || in_array($name, array('users_id', 'username', 'reset_token', 'SMD', 'street', 'city', 'state', 'preference', 
+					'zipcode', 'country', 'first_name', 'last_name', 'nick_name', 'children', 'smd', 'status', 'recruiter_name'))) continue;
 			?>
 			<li class="list-group-item clearfix">
 				<div class="pull-left" style="font-weight:bold;text-transform:capitalize;width:130px;margin-right:5px;text-align:right">
@@ -57,6 +57,12 @@ if(!$member){
 						$d = explode('-', $value);
 						echo $d[1].' / '.$d[2];
 					}
+					else if($name == 'recruiter'){
+						echo $member['recruiter_name'].' - '.$value;
+					}
+					else if($name == 'first_access'){
+						echo $value == 'Y' ? 'Yes' : 'No';
+					}
 					else{
 						echo $value;
 					}
@@ -69,6 +75,21 @@ if(!$member){
 		</ul>
 	</div>
 	<div class="col-lg-6">
+		<ul class="list-group">
+			<li class="list-group-item list-group-item-info"><b>Member Tracking Information</b></li>
+			<?php 
+			foreach($member as $name => $value){
+				if(strpos($name, 'trck_') === 0){
+			?>
+			<li class="list-group-item clearfix">
+				<div class="pull-left" style="font-weight:bold;text-transform:capitalize;width:130px;margin-right:5px;text-align:right"><?php echo str_replace('_', ' ', substr($name, 5));?>:</div>
+				<div class="value pull-left"><?php echo str_replace("\n", '<br/>', $value);?></div>
+				<a href="javascript:void(0)" class="pull-right dialog-toggle" data-id="<?php echo $member['membership_code'];?>" dialog-header="Update Member Tracking Information" dialog-url="<?php echo base_url();?>smd/team/update_user/<?php echo $name?>"><i class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+			</li>
+			<?php 
+			}}
+			?>
+		</ul>
 		<ul class="list-group">
 			<li class="list-group-item list-group-item-info"><b>Member Customized Information</b>
 				<a href="javascript:void(0)" class="pull-right dialog-toggle"  dialog-header="Add Member Customized Information" dialog-url="<?php echo base_url();?>smd/team/add_user_info/<?php echo $member['users_id'];?>" new-dialog-header="Update Member Customized Information" new-dialog-url="update_user_info"><i class="glyphicon glyphicon-import" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Import"></i></a>

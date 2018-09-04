@@ -7,23 +7,37 @@
  */
 class My_database_model extends CI_Model{
 	private static $db = null;
+	private $query_result;
 	public function __construct(){
 		parent::__construct();
 		if(!self::$db)
 			self::$db = $this->load->database('', true);
 	}
-	
+
 	public function query($sql){
-		$result = self::$db->query($sql);
-		if(is_object($result)){
-			return $result->result_array();
+		$this->free_result();
+		$this->query_result = self::$db->query($sql);
+		if(is_object($this->query_result)){
+			return $this->query_result->result_array();
 		}
 		else
-			return $result;
+			return $this->query_result;
+	}
+	
+	public function list_fields(){
+		return $this->query_result->list_fields();
+	}
+	
+	public function free_result(){
+		if($this->query_result){
+			$this->query_result->free_result();
+		}
 	}
 	
 	public function query_obj($sql){
-		return self::$db->query($sql)->result_object();
+		$this->free_result();
+		$this->query_result = self::$db->query($sql)->result_object();
+		return $this->query_result;
 	}
 
 	public function escape_str($value, $add_quote = true, $like = false){
@@ -46,8 +60,8 @@ class My_database_model extends CI_Model{
 	}
 	
 	public function affected_rows(){
-		$result = $this->query('select row_count() AS count');
-		return $result[0]['count'];
+		$this->query_result = $this->query('select row_count() AS count');
+		return $this->query_result[0]['count'];
 	}
 	
 	public function trans_start(){

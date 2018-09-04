@@ -27,6 +27,7 @@
 					<?php
 					if(!empty($user)){
 					?>
+						<a class="menu-ico-url" href="<?php echo base_url();?>account/profile" title="Personal Information"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/man-user.svg?1"><div class="text">Personal Information</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/startup" title="Who We Are"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Who We Are</div></div></a>
 					<?php
 						if($user['membership_code'] != 'GUEST'){
@@ -51,7 +52,6 @@
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/terminology" title="Terminologies"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/terminology.svg"><div class="text">Terminologies</div></div></a>
 						<!--a class="menu-ico-url" href="<?php echo base_url();?>account/tools" title="Tools"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/work-tools-cross.svg?1"><div class="text">Tools</div></div></a-->
 						<!--a class="menu-ico-url" href="<?php echo base_url();?>account/how_to" title="How to"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/finger-of-a-hand-pointing-to-right-direction.svg?"><div class="text">How to</div></div></a-->
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/profile" title="Profile"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/man-user.svg?1"><div class="text">Profile</div></div></a>
 					<?php
 						}
 					?>

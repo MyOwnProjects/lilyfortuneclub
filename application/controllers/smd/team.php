@@ -236,9 +236,10 @@ class Team extends Smd_Controller {
 		$result = $this->user_model->get_user_by(array('membership_code' => $membership_code, 'smd'=> $this->user['users_id']));
 		if(count($result) == 1){
 			$member = $result[0];
+			$tracking_info = $this->user_model->get_user_tracking_info_by_user_id(array($member['users_id']), $this->user['users_id']);
 			$member_info = $this->user_model->get_user_info_by_user_id(array($member['users_id']), $this->user['users_id']);
 		}
-		$this->load_view('team/member', array('member' => $member, 'member_info' => $member_info));
+		$this->load_view('team/member', array('member' => $member, 'tracking_info'=> $tracking_info, 'member_info' => $member_info));
 	}
 	
 	public function delete_user_info($users_info_id = 0){
@@ -702,6 +703,25 @@ class Team extends Smd_Controller {
 					}
 					array_push($items, $item);
 					break;
+				case 'trck_top_25_list':
+				case 'trck_business_plan':
+				case 'trck_3_guest_to_BPM':
+				case 'trck_financial_needs_analysis':
+				case 'trck_fast_start_award':
+				case 'trck_30_days_of_success':
+				case 'trck_ceo_club':
+				case 'trck_insurance_licensed':
+				case 'trck_securities_registered':
+				case 'trck_training_completed':
+					$items = array(
+						array(
+							'label' => str_replace('_', ' ', substr($field, 5)),
+							'name' => $field,
+							'tag' => 'textarea',
+							'value' => $result[0][$field]
+						)
+					);
+					break;
 				default:
 					ajax_error(500, "Invalid field.");
 			}
@@ -741,6 +761,16 @@ class Team extends Smd_Controller {
 				case 'membership_code':
 				case 'phone':
 				case 'status':
+				case 'trck_top_25_list':
+				case 'trck_business_plan':
+				case 'trck_3_guest_to_BPM':
+				case 'trck_financial_needs_analysis':
+				case 'trck_fast_start_award':
+				case 'trck_30_days_of_success':
+				case 'trck_ceo_club':
+				case 'trck_insurance_licensed':
+				case 'trck_securities_registered':
+				case 'trck_training_completed':
 					$values[$field] = $this->input->post($field);
 					break;
 				default:

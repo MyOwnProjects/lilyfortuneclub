@@ -96,6 +96,7 @@ class User_model extends Base_model{
 			$where = '';
 		$sql = "SELECT CONCAT(users.first_name, ' ', users.last_name, IF(users.nick_name IS NULL OR users.nick_name='', '', CONCAT(' (', users.nick_name ,')'))) AS name,
 			users.membership_code,
+			users.recruiter,
 			CONCAT(u2.first_name, ' ', (u2.last_name), IF(u2.nick_name IS NULL OR u2.nick_name='', '', CONCAT(' (', u2.nick_name, ')')) ) AS recruiter_name, 
 			users.children AS downline,
 			users.grade as grade,
@@ -111,10 +112,19 @@ class User_model extends Base_model{
 			users.status,
 			users.first_access,
 			users.children,
-			users.recruiter,
 			CONCAT(u1.first_name, ' ', (u1.last_name)) AS SMD, 
 			users.first_name, users.last_name,users.nick_name,
-			users.street, users.city,users.state,users.zipcode, users.country
+			users.street, users.city,users.state,users.zipcode, users.country,
+			users.trck_top_25_list,
+			users.trck_business_plan,
+			users.trck_3_guest_to_BPM,
+			users.trck_financial_needs_analysis,
+			users.trck_fast_start_award,
+			users.trck_30_days_of_success,
+			users.trck_ceo_club,
+			users.trck_insurance_licensed,
+			users.trck_securities_registered,
+			users.trck_training_completed
 			FROM users 
 			LEFT JOIN users u1 ON users.smd=u1.users_id 
 			LEFT JOIN users u2 ON users.recruiter=u2.membership_code 
@@ -383,6 +393,18 @@ class User_model extends Base_model{
 		}
 		$sql = "UPDATE users_info SET ".implode(",", $va).(empty($where) ? "" : " WHERE $where");
 		return $this->db->query($sql);	
+	}
+
+	public function get_user_tracking_info_by_user_id($users_ids, $smd = null){
+		$sql = "SELECT users_tracking_info.* FROM users_tracking_info INNER JOIN users ON users_tracking_info.user_id=users.users_id "
+			. "WHERE 1=1 ".(empty($users_ids) ? "" : " AND users_id IN ('".implode("','", $users_ids)."')").(empty($smd) ? "" : " AND users.smd='$smd'");
+		$results = $this->db->query($sql);
+		$ret = array();
+		array_push($ret, $this->db->list_fields());
+		foreach($results as $r){
+			array_push($ret, $r);
+		}
+		return $ret;
 	}
 
 	public function get_user_info_by_user_id($users_ids, $smd = null){
