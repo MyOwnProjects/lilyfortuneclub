@@ -30,7 +30,7 @@ class My_database_model extends CI_Model{
 	
 	public function free_result(){
 		if($this->query_result){
-			$this->query_result->free_result();
+			//$this->query_result->free_result();
 		}
 	}
 	
