@@ -493,4 +493,65 @@ class User_model extends Base_model{
 		$sql = "INSERT INTO guest_access (guest_name, access_uri, access_time) VALUES ('$guest_name', 'account/welcome_guest', NOW())";
 		$this->db->query($sql);
 	}
+	
+	public function get_daily_report($date){
+		$sql = "SELECT CONCAT(IF(u.nick_name IS NULL OR u.nick_name='', u.first_name, u.nick_name), ' ', u.last_name) AS daily_report_name, dr.* 
+			FROM users u LEFT JOIN daily_report dr 
+			ON u.users_id=dr.daily_report_user_id AND dr.daily_report_date='$date'
+			WHERE u.daily_report='Y'";
+		return $this->db->query($sql); 
+	}
+	
+	public function get_monthly_report($date){
+		$str1 = date_format($date, 'Y-m-01');
+		$first_day = date_create($str1);
+		date_add($first_day, date_interval_create_from_date_string("1 months"));
+		$str2 = date_format($first_day, 'Y-m-01');
+		$sql = "SELECT CONCAT(IF(u.nick_name IS NULL OR u.nick_name='', u.first_name, u.nick_name), ' ', u.last_name) AS daily_report_name, dr.*
+			FROM users u 
+			LEFT JOIN 
+			( 
+				SELECT daily_report_id, daily_report_user_id,
+				SUM(daily_report_personal_recruits) AS daily_report_personal_recruits,
+				SUM(daily_report_personal_products) AS daily_report_personal_products,
+				SUM(daily_report_baseshop_recruits) AS daily_report_baseshop_recruits,
+				SUM(daily_report_baseshop_products) AS daily_report_baseshop_products,
+				SUM(daily_report_base_elite) AS daily_report_base_elite
+				FROM daily_report 
+				WHERE daily_report_date BETWEEN '$str1' AND '$str2'
+				GROUP BY daily_report_id
+			) dr 
+			ON u.users_id=dr.daily_report_user_id
+			WHERE u.daily_report='Y'";
+		return $this->db->query($sql);
+	}
+	
+	public function delete_daily_report($data_id){
+		$this->db->query("DELETE FROM daily_report WHERE daily_report_id='$data_id'");
+		return 0;
+	}
+	
+	public function insert_daily_report($date, $data){
+		if(!$this->db->query("INSERT INTO daily_report 
+			(daily_report_date, daily_report_user_id, daily_report_appointment, 
+			daily_report_personal_recruits,daily_report_personal_products,
+			daily_report_baseshop_recruits,daily_report_baseshop_products,daily_report_base_elite) 
+			VALUES 
+			('$date', $data[0], $data[1], $data[2], $data[3], $data[4], $data[5], $data[6])")){
+			return 0;
+		}
+		return $this->db->insert_id();
+	}
+	
+	public function update_daily_report($data_id, $data){
+		$sql = "UPDATE daily_report SET daily_report_appointment=$data[0],
+			daily_report_personal_recruits=$data[1],
+			daily_report_personal_products=$data[2],
+			daily_report_baseshop_recruits=$data[3],
+			daily_report_baseshop_products=$data[4],
+			daily_report_base_elite=$data[5] 
+			WHERE daily_report_id='$data_id'";
+		$this->db->query($sql);
+		return 0;
+	}
 }
