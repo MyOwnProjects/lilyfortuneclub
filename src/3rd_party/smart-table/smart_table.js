@@ -57,6 +57,20 @@
 				}
 			});
 		};
+		
+		var calculate_summary = function($_td){
+			var index_td = $_td.index();
+			var sum = 0;
+			$_main_table.children('tbody').children('tr').each(function(index, obj){
+				var data_id = parseInt($(obj).attr('data-id'));
+				if(data_id > 0){
+					var v = parseInt($(obj).children('td:nth-child(' + (index_td + 1) + ')').text());
+					sum += v;
+				}
+			});
+			return sum;
+		};
+		
 		for(var j = 0; j < columns.length; ++j){
 			var $_td = $('<td>').addClass('header').addClass('header-c').appendTo($_tr);
 			if(columns[j]['width']){
@@ -89,6 +103,7 @@
 				dataType: 'json',
 				success: function(data){
 					if(data){
+						var has_total = false;
 						for(var i = 0; i < data.length; ++i){
 							var row = data[i];
 							var $_tr = $('<tr>').attr('data-id', row[0]).appendTo($_main_table);
@@ -99,10 +114,32 @@
 								if(columns[j - 1]['text_align']){
 									$_td.css('text-align', columns[j - 1]['text_align']);
 								}
+								if(columns[j - 1]['summary']){
+									has_total = true;
+								}
+							}
+						}
+						if(has_total){
+							var $_tr = $('<tr>').attr('data-id', row[0]).appendTo($_main_table);
+							var $_td = $('<td>').addClass('header-r').html(i + 1).appendTo($_tr);
+							$_tr.append('<td class="space"></td>');
+							for(var i = 0; i < columns.length; ++i){
+								var $_td = $('<td>').appendTo($_tr);
+								if(i == 0){
+									$_td.html('Total');
+								}
+								else{
+									if(columns[i]['summary']){
+										$_td.html(calculate_summary($_td));
+									}
+								}
+								if(columns[i]['text_align']){
+									$_td.css('text-align', columns[i]['text_align']);
+								}
 							}
 						}
 						if(total_rows !== undefined){
-							for(var i = data.length; i < total_rows; ++i){
+							for(var i = has_total ? data.length + 1 : data.length; i < total_rows; ++i){
 								var $_tr = $('<tr>').attr('data-id', -1).appendTo($_main_table);
 								var $_td = $('<td>').addClass('header-r').html(i + 1).appendTo($_tr);
 								$_tr.append('<td class="space"></td>');
@@ -172,7 +209,7 @@
 			var self = $(this);
 			var new_index_row = self.parent().index();
 			if(_selected_index_row != new_index_row){
-				update_data(_selected_index_row);
+				update_data();
 				_selected_index_row = new_index_row;
 			}
 			

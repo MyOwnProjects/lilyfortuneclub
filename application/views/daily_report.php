@@ -155,7 +155,6 @@
 					data_type: 'text',
 					width: 60,
 					text_align: 'center',
-					summary: true
 				},
 				{
 					header: 'Name',
@@ -196,7 +195,6 @@
 					data_type: 'text',
 					width: 60,
 					text_align: 'center',
-					summary: true
 				},
 			]
 		],
