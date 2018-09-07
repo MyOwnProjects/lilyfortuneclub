@@ -36,7 +36,21 @@ class Daily_report extends Account_base_controller {
 		$result = array();
 		$len = count($dsort);
 		$color = 'red';
+		$total_rank_d_last = 1;
 		for($i = 0; $i < $len; ++$i){
+			if($i == 0){
+				$total_rank_d = 1;
+				$total_rank_m = 1;
+			}
+			else{
+				if($dsort[$i]['rank'] == $dsort[$i - 1]['rank']){
+					$total_rank_d = $total_rank_d_last;
+				}
+				else{
+					$total_rank_d = $i + 1;
+				}
+				$total_rank_d_last = $total_rank_d;				
+			}
 			$v = array( 
 				$ret[$i]['daily_report_id'],
 				$ret[$i]['daily_report_name'],
@@ -47,13 +61,14 @@ class Daily_report extends Account_base_controller {
 				$ret[$i]['daily_report_baseshop_products'],
 				$ret[$i]['daily_report_base_elite'],
 				
-				'<span style="color:red">'.($i + 1).'</span>',
+				'<span style="color:red">'.$total_rank_d.'</span>',
 				$dsort[$i]['name'],
 				(int)$dsort[$i]['data']['daily_report_personal_recruits'][0].' (<span style="color:'.$color.'">'.$dsort[$i]['data']['daily_report_personal_recruits'][1].'</span>)',
 				(int)$dsort[$i]['data']['daily_report_personal_products'][0].' (<span style="color:'.$color.'">'.$dsort[$i]['data']['daily_report_personal_products'][1].'</span>)',
 				(int)$dsort[$i]['data']['daily_report_baseshop_recruits'][0].' (<span style="color:'.$color.'">'.$dsort[$i]['data']['daily_report_baseshop_recruits'][1].'</span>)',
 				(int)$dsort[$i]['data']['daily_report_baseshop_products'][0].' (<span style="color:'.$color.'">'.$dsort[$i]['data']['daily_report_baseshop_products'][1].'</span>)',
 				$dsort[$i]['rank'],
+				'<span style="color:red">'.($i + 1).'</span>',
 				$msort[$i]['name'],
 				(int)$msort[$i]['data']['daily_report_personal_recruits'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_personal_recruits'][1].'</span>)',
 				(int)$msort[$i]['data']['daily_report_personal_products'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_personal_products'][1].'</span>)',
@@ -103,7 +118,19 @@ class Daily_report extends Account_base_controller {
 			});
 			$array[$key] = array();
 			foreach($ret as $i => $r){
-				array_push($array[$key], array($r['daily_report_id'], $r['daily_report_name'], $r[$key], $i + 1));
+				if(count($array[$key]) > 0){
+					$count = count($array[$key]);
+					$last_rank = $array[$key][$count - 1][3];
+					if($r[$key] == $array[$key][$count - 1][2]){
+						array_push($array[$key], array($r['daily_report_id'], $r['daily_report_name'], $r[$key], $last_rank));
+					}
+					else{
+						array_push($array[$key], array($r['daily_report_id'], $r['daily_report_name'], $r[$key], count($array[$key]) + 1));
+					}
+				}
+				else{
+					array_push($array[$key], array($r['daily_report_id'], $r['daily_report_name'], $r[$key], 1));
+				}
 			}
 		}
 		$new_array = array();
@@ -135,12 +162,14 @@ class Daily_report extends Account_base_controller {
 		$today = date_create();
 		$mret = $this->user_model->get_monthly_report($today);
 		$msort = $this->_sort($mret);
+			print_r($msort);exit;
 		date_sub($today, date_interval_create_from_date_string("1 days"));
 		$dret = $this->user_model->get_daily_report(date_format($today, 'Y-m-d'));
 		$dsort = $this->_sort($dret);
 		$result = array();
 		$len = count($dsort);
 		$color = 'red';
+	
 		for($i = 0; $i < $len; ++$i){
 			$v = array(0, $dsort[$i]['name'],
 				(int)$dsort[$i]['data']['daily_report_personal_recruits'][0].' (<span style="color:'.$color.'">'.$dsort[$i]['data']['daily_report_personal_recruits'][1].'</span>)',
@@ -156,7 +185,6 @@ class Daily_report extends Account_base_controller {
 				(int)$msort[$i]['data']['daily_report_personal_products'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_personal_products'][1].'</span>)',
 				(int)$msort[$i]['data']['daily_report_baseshop_recruits'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_baseshop_recruits'][1].'</span>)',
 				(int)$msort[$i]['data']['daily_report_baseshop_products'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_baseshop_products'][1].'</span>)',
-				'sfdsfds'
 				//((int)$msort[$i]['data']['daily_report_personal_recruits'][1] 
 				//	+ $msort[$i]['data']['daily_report_personal_products'][1] 
 				//	+ $msort[$i]['data']['daily_report_baseshop_recruits'][1]

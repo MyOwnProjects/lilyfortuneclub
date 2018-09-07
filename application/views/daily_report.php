@@ -57,7 +57,7 @@
 				},
 				{
 					header: 'Ranking - Month to Date',
-					col_span: '6'
+					col_span: '7'
 				}
 			],
 			[
@@ -162,6 +162,13 @@
 					width: 60,
 					text_align: 'center',
 				},
+				{
+					header: 'Rank',
+					data_type: 'text',
+					text_align: 'center',
+					editable: false,
+					width: 60,
+				}, 
 				{
 					header: 'Name',
 					data_type: 'text',
