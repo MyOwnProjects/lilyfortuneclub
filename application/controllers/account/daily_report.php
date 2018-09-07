@@ -51,19 +51,13 @@ class Daily_report extends Account_base_controller {
 				(int)$dsort[$i]['data']['daily_report_personal_products'][0].' (<span style="color:'.$color.'">'.$dsort[$i]['data']['daily_report_personal_products'][1].'</span>)',
 				(int)$dsort[$i]['data']['daily_report_baseshop_recruits'][0].' (<span style="color:'.$color.'">'.$dsort[$i]['data']['daily_report_baseshop_recruits'][1].'</span>)',
 				(int)$dsort[$i]['data']['daily_report_baseshop_products'][0].' (<span style="color:'.$color.'">'.$dsort[$i]['data']['daily_report_baseshop_products'][1].'</span>)',
-				(int)$dsort[$i]['data']['daily_report_personal_recruits'][1] 
-					+ $dsort[$i]['data']['daily_report_personal_products'][1] 
-					+ $dsort[$i]['data']['daily_report_baseshop_recruits'][1]
-					+ $dsort[$i]['data']['daily_report_baseshop_products'][1],
+				$dsort[$i]['rank'],
 				$msort[$i]['name'],
 				(int)$msort[$i]['data']['daily_report_personal_recruits'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_personal_recruits'][1].'</span>)',
 				(int)$msort[$i]['data']['daily_report_personal_products'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_personal_products'][1].'</span>)',
 				(int)$msort[$i]['data']['daily_report_baseshop_recruits'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_baseshop_recruits'][1].'</span>)',
 				(int)$msort[$i]['data']['daily_report_baseshop_products'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_baseshop_products'][1].'</span>)',
-				(int)$msort[$i]['data']['daily_report_personal_recruits'][1] 
-					+ $msort[$i]['data']['daily_report_personal_products'][1] 
-					+ $msort[$i]['data']['daily_report_baseshop_recruits'][1]
-					+ $msort[$i]['data']['daily_report_baseshop_products'][1],
+				$msort[$i]['rank'],
 			);
 			array_push($result, $v);
 		} 
@@ -111,8 +105,7 @@ class Daily_report extends Account_base_controller {
 			'daily_report_personal_recruits',
 			'daily_report_personal_products',
 			'daily_report_baseshop_recruits',
-			'daily_report_baseshop_products',
-			'daily_report_base_elite'
+			'daily_report_baseshop_products'
 		);
 		$array = array();
 		foreach($key_list as $key){
@@ -171,10 +164,11 @@ class Daily_report extends Account_base_controller {
 				(int)$msort[$i]['data']['daily_report_personal_products'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_personal_products'][1].'</span>)',
 				(int)$msort[$i]['data']['daily_report_baseshop_recruits'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_baseshop_recruits'][1].'</span>)',
 				(int)$msort[$i]['data']['daily_report_baseshop_products'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_baseshop_products'][1].'</span>)',
-				(int)$msort[$i]['data']['daily_report_personal_recruits'][1] 
-					+ $msort[$i]['data']['daily_report_personal_products'][1] 
-					+ $msort[$i]['data']['daily_report_baseshop_recruits'][1]
-					+ $msort[$i]['data']['daily_report_baseshop_products'][1],
+				'sfdsfds'
+				//((int)$msort[$i]['data']['daily_report_personal_recruits'][1] 
+				//	+ $msort[$i]['data']['daily_report_personal_products'][1] 
+				//	+ $msort[$i]['data']['daily_report_baseshop_recruits'][1]
+				//	+ $msort[$i]['data']['daily_report_baseshop_products'][1]).' - '.$msort[$i]['rank'],
 			);
 			array_push($result, $v);
 		} 

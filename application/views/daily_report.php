@@ -1,4 +1,5 @@
-<div class="main-content-wrapper" style="max-width:none !important;margin:0;padding:0">
+<div class="main-content-wrapper" style="max-width:none !important;margin:0;padding:0;">
+	<div style="margin-left:40px">
 	<h2>Daily Report</h2>
 	<div>
 		<?php
@@ -10,7 +11,9 @@
 		&nbsp;&nbsp;
 		<button class="btn btn-xs btn-primary" onclick="reload();">Reload</button>
 	</div>
+	</div>
 	<br/>
+	<div style="">
 	<table style="table-layout:fixed">
 		<tr>
 			<td style="vertical-align:top">
@@ -22,6 +25,7 @@
 			</td>
 		</tr>
 	</table>
+	</div>
 </div>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/jquery-ui-1.11.4/jquery-ui.css?<?php echo time();?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/smart-table/smart_table.css?t=<?php echo time();?>">
