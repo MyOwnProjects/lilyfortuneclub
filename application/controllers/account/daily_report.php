@@ -37,6 +37,7 @@ class Daily_report extends Account_base_controller {
 		$len = count($dsort);
 		$color = 'red';
 		$total_rank_d_last = 1;
+		$total_rank_m_last = 1;
 		for($i = 0; $i < $len; ++$i){
 			if($i == 0){
 				$total_rank_d = 1;
@@ -50,6 +51,13 @@ class Daily_report extends Account_base_controller {
 					$total_rank_d = $i + 1;
 				}
 				$total_rank_d_last = $total_rank_d;				
+				if($msort[$i]['rank'] == $msort[$i - 1]['rank']){
+					$total_rank_m = $total_rank_m_last;
+				}
+				else{
+					$total_rank_m = $i + 1;
+				}
+				$total_rank_m_last = $total_rank_m;				
 			}
 			$v = array( 
 				$ret[$i]['daily_report_id'],
@@ -68,7 +76,7 @@ class Daily_report extends Account_base_controller {
 				(int)$dsort[$i]['data']['daily_report_baseshop_recruits'][0].' (<span style="color:'.$color.'">'.$dsort[$i]['data']['daily_report_baseshop_recruits'][1].'</span>)',
 				(int)$dsort[$i]['data']['daily_report_baseshop_products'][0].' (<span style="color:'.$color.'">'.$dsort[$i]['data']['daily_report_baseshop_products'][1].'</span>)',
 				$dsort[$i]['rank'],
-				'<span style="color:red">'.($i + 1).'</span>',
+				'<span style="color:red">'.$total_rank_m.'</span>',
 				$msort[$i]['name'],
 				(int)$msort[$i]['data']['daily_report_personal_recruits'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_personal_recruits'][1].'</span>)',
 				(int)$msort[$i]['data']['daily_report_personal_products'][0].' (<span style="color:'.$color.'">'.$msort[$i]['data']['daily_report_personal_products'][1].'</span>)',
@@ -121,7 +129,7 @@ class Daily_report extends Account_base_controller {
 				if(count($array[$key]) > 0){
 					$count = count($array[$key]);
 					$last_rank = $array[$key][$count - 1][3];
-					if($r[$key] == $array[$key][$count - 1][2]){
+					if((int)$r[$key] == (int)$array[$key][$count - 1][2]){
 						array_push($array[$key], array($r['daily_report_id'], $r['daily_report_name'], $r[$key], $last_rank));
 					}
 					else{
