@@ -12,6 +12,7 @@
 		var $_main_table = $('<table>').addClass('smart-table');
 		var $_input_wrapper = $('<div>').addClass('editor-wrapper');
 		var $_input = $('<input>').addClass('editor')./*attr('type', 'date').*/appendTo($_input_wrapper);
+		var total_tr;
 		var _selected_index_row;
 		$_this.append($_main_table);
 		var $_tr = $('<tr>').appendTo($_main_table);
@@ -56,19 +57,39 @@
 				complete: function(){
 				}
 			});
+			calculate_summary();
 		};
 		
-		var calculate_summary = function($_td){
-			var index_td = $_td.index();
-			var sum = 0;
-			$_main_table.children('tbody').children('tr').each(function(index, obj){
-				var data_id = parseInt($(obj).attr('data-id'));
-				if(data_id > 0){
-					var v = parseInt($(obj).children('td:nth-child(' + (index_td + 1) + ')').text());
-					sum += v;
+		var calculate_summary = function(){
+			if(!total_tr){
+				return;
+			}
+			var sum = {};
+			var sum_index = [];
+			for(var i = 0; i < columns.length; ++i){
+				if(columns[i]['summary']){
+					sum[i] = 0;
+					sum_index.push(i);
+				}
+			}
+			var sel = ':not(:nth-child(1))';
+			for(var i = 1; i <= headers.length; ++i){
+				sel += ':not(:nth-child(' + (i + 1) + '))';
+			}
+			total_tr.siblings(sel).each(function(index, obj){
+				for(var i = 0; i < sum_index.length; ++i){
+					var $_td = $(obj).children('td:nth-child(' + (sum_index[i] + 3) + ')');
+					var t = $_td.text();
+					var v = parseInt(t);
+					if(!isNaN(v)){
+						sum[sum_index[i]] += v;
+					}
 				}
 			});
-			return sum;
+			for(var i = 0; i < sum_index.length; ++i){
+				var v = sum[sum_index[i]];
+				total_tr.children('td:nth-child(' + (sum_index[i] + 3) + ')').html(v);
+			}
 		};
 		
 		for(var j = 0; j < columns.length; ++j){
@@ -120,23 +141,19 @@
 							}
 						}
 						if(has_total){
-							var $_tr = $('<tr>').attr('data-id', row[0]).appendTo($_main_table);
-							var $_td = $('<td>').addClass('header-r').html(i + 1).appendTo($_tr);
-							$_tr.append('<td class="space"></td>');
+							total_tr = $('<tr>').attr('data-id', row[0]).appendTo($_main_table);
+							var $_td = $('<td>').addClass('header-r').html(i + 1).appendTo(total_tr);
+							total_tr.append('<td class="space"></td>');
 							for(var i = 0; i < columns.length; ++i){
-								var $_td = $('<td>').appendTo($_tr);
+								var $_td = $('<td>').appendTo(total_tr);
 								if(i == 0){
 									$_td.html('Total');
-								}
-								else{
-									if(columns[i]['summary']){
-										$_td.html(calculate_summary($_td));
-									}
 								}
 								if(columns[i]['text_align']){
 									$_td.css('text-align', columns[i]['text_align']);
 								}
 							}
+							calculate_summary();
 						}
 						if(total_rows !== undefined){
 							for(var i = has_total ? data.length + 1 : data.length; i < total_rows; ++i){

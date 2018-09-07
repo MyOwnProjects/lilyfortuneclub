@@ -495,7 +495,8 @@ class User_model extends Base_model{
 	}
 	
 	public function get_daily_report($date){
-		$sql = "SELECT CONCAT(IF(u.nick_name IS NULL OR u.nick_name='', u.first_name, u.nick_name), ' ', u.last_name) AS daily_report_name, dr.* 
+		$sql = "SELECT CONCAT(IF(u.nick_name IS NULL OR u.nick_name='', u.first_name, u.nick_name), ' ', u.last_name) AS daily_report_name, 
+			u.users_id, dr.* 
 			FROM users u LEFT JOIN daily_report dr 
 			ON u.users_id=dr.daily_report_user_id AND dr.daily_report_date='$date'
 			WHERE u.daily_report='Y'";
@@ -531,13 +532,13 @@ class User_model extends Base_model{
 		return 0;
 	}
 	
-	public function insert_daily_report($date, $data){
+	public function insert_daily_report($date, $user_id, $data){
 		if(!$this->db->query("INSERT INTO daily_report 
 			(daily_report_date, daily_report_user_id, daily_report_appointment, 
 			daily_report_personal_recruits,daily_report_personal_products,
 			daily_report_baseshop_recruits,daily_report_baseshop_products,daily_report_base_elite) 
 			VALUES 
-			('$date', $data[0], $data[1], $data[2], $data[3], $data[4], $data[5], $data[6])")){
+			('$date', '$user_id', $data[0], $data[1], $data[2], $data[3], $data[4], $data[5])")){
 			return 0;
 		}
 		return $this->db->insert_id();

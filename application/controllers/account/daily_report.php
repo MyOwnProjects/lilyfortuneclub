@@ -17,7 +17,14 @@ class Daily_report extends Account_base_controller {
 		$today = date_create();
 		date_sub($today, date_interval_create_from_date_string("1 days"));
 		$ret = $this->user_model->get_daily_report(date_format($today, 'Y-m-d'));
-		
+		foreach($ret as $r){
+			if(!isset($r['daily_report_user_id'])){
+				$this->user_model->insert_daily_report(date_format($today, 'Y-m-d'), $r['users_id'], array(
+					'NULL','NULL','NULL','NULL','NULL','NULL'
+				));
+			}
+		}
+		$ret = $this->user_model->get_daily_report(date_format($today, 'Y-m-d'));
 		$today = date_create();
 		$mret = $this->user_model->get_monthly_report($today);
 		$msort = $this->_sort($mret);
