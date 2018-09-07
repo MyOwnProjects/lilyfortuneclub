@@ -45,8 +45,11 @@
 					<h5><?php echo ($j + 1).'.'?></h5>
 				</div>
 				<?php 
-				$img = $step['image_file_name'].'-'.  str_pad($j + 1, 2, '0', STR_PAD_LEFT).'.png';
-				$image_exist = file_exists(getcwd().'/src/img/license/'.$img);
+				$image_exist = false;
+				if(array_key_exists('image_file_name', $step)){
+					$img = $step['image_file_name'].'-'.  str_pad($j + 1, 2, '0', STR_PAD_LEFT).'.png';
+					$image_exist = file_exists(getcwd().'/src/img/license/'.$img);
+				}
 				?>
 				<div style="overflow:hidden">
 					<h5 class="text-left">
@@ -55,7 +58,6 @@
 						?>
 					</h5>
 				<?php 
-				$img = $step['image_file_name'].'-'.  str_pad($j + 1, 2, '0', STR_PAD_LEFT).'.png';
 				if($image_exist){
 				?>
 				<div class="img-wrapper">
