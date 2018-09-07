@@ -3,7 +3,7 @@
 	<h2>Daily Report</h2>
 	<div>
 		<?php
-			$days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+			$days = array('', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
 			$timeZone = 'America/Los_Angeles';
 			date_default_timezone_set($timeZone);			
 			$today = date_create();
