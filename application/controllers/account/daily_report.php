@@ -69,30 +69,17 @@ class Daily_report extends Account_base_controller {
 		$this->load->model('user_model');
 		$data_id = $this->input->post('data_id');
 		$data = $this->input->post('data');
-		$all_blank = true;
 		foreach($data as $i => $d){
 			$dt = trim($d);
 			if($dt !== ''){
-				$all_blank = false;
 				$data[$i] = "'$dt'";
 			}
 			else{
 				$data[$i] = 'NULL';
 			}
 		}
-		if($all_blank){
-			$this->user_model->delete_daily_report($data_id);
-			echo -1;
-		}
-		else if($data_id < 0){
-			$today = date_create();
-			date_sub($today, date_interval_create_from_date_string("1 days"));
-			echo $this->user_model->insert_daily_report(date_format($today, 'Y-m-d'), $data);
-		}
-		else{
-			$this->user_model->update_daily_report($data_id, $data);
-			echo $data_id;
-		}
+		$this->user_model->update_daily_report($data_id, $data);
+		echo $data_id;
 	}
 	
 	public function delete(){
