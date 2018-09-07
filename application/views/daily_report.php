@@ -3,7 +3,9 @@
 	<h2>Daily Report</h2>
 	<div>
 		<?php
-			$days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+			$days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+			$timeZone = 'America/Los_Angeles';
+			date_default_timezone_set($timeZone);			
 			$today = date_create();
 			date_sub($today, date_interval_create_from_date_string("1 days"));
 			echo $days[date_format($today, "N")].', '.date_format($today, "M d, Y");

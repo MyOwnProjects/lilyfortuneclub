@@ -14,6 +14,8 @@ class Daily_report extends Account_base_controller {
 	
 	public function get(){
 		$this->load->model('user_model');
+		$timeZone = 'America/Los_Angeles';
+		date_default_timezone_set($timeZone);			
 		$today = date_create();
 		date_sub($today, date_interval_create_from_date_string("1 days"));
 		$ret = $this->user_model->get_daily_report(date_format($today, 'Y-m-d'));
@@ -127,6 +129,9 @@ class Daily_report extends Account_base_controller {
 	
 	public function summary(){
 		$this->load->model('user_model');
+		$timeZone = 'America/Los_Angeles';
+		date_default_timezone_set($timeZone);			
+		
 		$today = date_create();
 		$mret = $this->user_model->get_monthly_report($today);
 		$msort = $this->_sort($mret);
