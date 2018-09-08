@@ -544,13 +544,8 @@ class User_model extends Base_model{
 		return $this->db->insert_id();
 	}
 	
-	public function update_daily_report($data_id, $data){
-		$sql = "UPDATE daily_report SET daily_report_appointment=$data[0],
-			daily_report_personal_recruits=$data[1],
-			daily_report_personal_products=$data[2],
-			daily_report_baseshop_recruits=$data[3],
-			daily_report_baseshop_products=$data[4],
-			daily_report_base_elite=$data[5] 
+	public function update_daily_report($data_id, $field, $value){
+		$sql = "UPDATE daily_report SET $field=$value 
 			WHERE daily_report_id='$data_id'";
 		$this->db->query($sql);
 		return 0;

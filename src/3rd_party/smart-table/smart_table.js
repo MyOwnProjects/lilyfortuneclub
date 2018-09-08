@@ -1,5 +1,6 @@
 (function($){
 	$.fn.smart_table = function(prop){//, header, url, customized_buttons, filter, row_count, order_by){
+		var changed_cell_list = [];
 		var selected_data_id = 0;
 		var total_rows = prop['total_rows'];
 		var headers = prop['headers'];
@@ -13,14 +14,11 @@
 		var $_input_wrapper = $('<div>').addClass('editor-wrapper');
 		var $_input = $('<input>').addClass('editor')./*attr('type', 'date').*/appendTo($_input_wrapper);
 		var total_tr;
-		var _selected_index_row;
+		var $_last_selected_cell;
 		$_this.append($_main_table);
 		var $_tr = $('<tr>').appendTo($_main_table);
 		var $_td = $('<td>').addClass('header').addClass('header-c').addClass('header-r').appendTo($_tr);
 		$_tr.append('<td class="space header-c"></td>');
-		var get_data_id = function(){
-			return $_main_table.children('tbody').children('tr').eq(_selected_index_row).attr('data-id');
-		};
 		var delete_row = function(data_id){
 			$.ajax({
 				url: url['delete'],
@@ -36,19 +34,19 @@
 		};
 		
 		var update_data = function(){
-			if(_selected_index_row === undefined ){
+			if($_last_selected_cell === undefined ){
 				return false;
 			}
-			var $_tr = $_main_table.children('tbody').children('tr').eq(_selected_index_row);
+			var $_tr = $_last_selected_cell.parent();//$_main_table.children('tbody').children('tr').eq(_selected_index_row);
 			var data_id = $_tr.attr('data-id');
-			var data = [];
-			$_tr.children('td.editable').each(function(index, obj){
-				data.push($(obj).text());
-			});
+			var index = $_last_selected_cell.index() - 2;
+			if(!columns[index]['id']){
+				return false;
+			}
 			$.ajax({
 				url: url['update'],
 				method: 'post',
-				data: {data_id: data_id, data: data},
+				data: {data_id: data_id, field: columns[index]['id'], value: $_last_selected_cell.text()},
 				success: function(data){
 					$_tr.attr('data-id', data);
 				},
@@ -97,6 +95,9 @@
 			if(columns[j]['width']){
 				$_td.css('min-width', columns[j]['width']);
 			}
+			if(columns[j]['id']){
+				$_td.attr('data-id', columns[j]['id']);
+			}
 			$_td.html(String.fromCharCode(65 + j)).resizable({handles:'e'});
 		}
 		for(var i = 0; i < headers.length; ++i){
@@ -112,7 +113,7 @@
 			}
 		}
 		
-		$_this.load = function(){		
+		$_this.load = function(){	
 			var sel = '';
 			for(var i = 1; i <= headers.length; ++i){
 				sel += ':not(:nth-child(' + (i + 1) + '))';
@@ -224,10 +225,9 @@
 			$_input_wrapper.remove();
 			$_this.find('.active-cell').removeClass('active-cell').html($_input.val());
 			var self = $(this);
-			var new_index_row = self.parent().index();
-			if(_selected_index_row != new_index_row){
-				update_data();
-				_selected_index_row = new_index_row;
+			if(self != $_last_selected_cell){
+				update_data(self);
+				$_last_selected_cell = self; 
 			}
 			
 			$_input.innerWidth($(this).innerWidth() - 10);
@@ -246,15 +246,14 @@
 			}
 			return false;
 		});
-		$_this.click(function(e){
-			//alert(selected_data_id);
+		$('body').click(function(e){
 			$_input_wrapper.remove();
 			$_this.find('.active-cell').removeClass('active-cell').html($_input.val());
 			if(!$(e.target).hasClass('header-r')){
 				$_this.find('.selected-row').removeClass('selected-row');
 			}
 			update_data();
-			_selected_index_row = undefined;
+			$_last_selected_cell = undefined;
 			return false;
 		});
 		

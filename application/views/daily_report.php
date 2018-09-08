@@ -73,6 +73,7 @@
 					width: 60,
 					text_align: 'center',
 					editable: true,
+					id: 'daily_report_appointment',
 					summary: true
 				}, 
 				{
@@ -80,6 +81,7 @@
 					data_type: 'text',
 					width: 60,
 					text_align: 'center',
+					id: 'daily_report_personal_recruits',
 					editable: true,
 					summary: true
 				}, 
@@ -89,6 +91,7 @@
 					width: 60,
 					text_align: 'center',
 					editable: true,
+					id: 'daily_report_personal_products',
 					summary: true
 				},
 				{
@@ -97,6 +100,7 @@
 					width: 60,
 					text_align: 'center',
 					editable: true,
+					id: 'daily_report_baseshop_recruits',
 					summary: true
 				},
 				{
@@ -105,6 +109,7 @@
 					width: 60,
 					text_align: 'center',
 					editable: true,
+					id: 'daily_report_baseshop_products',
 					summary: true
 				},
 				{
@@ -113,6 +118,7 @@
 					width: 60,
 					text_align: 'center',
 					editable: true,
+					id: 'daily_report_base_elite',
 					summary: true
 				},
 				{

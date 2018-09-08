@@ -93,17 +93,10 @@ class Daily_report extends Account_base_controller {
 	public function update(){
 		$this->load->model('user_model');
 		$data_id = $this->input->post('data_id');
-		$data = $this->input->post('data');
-		foreach($data as $i => $d){
-			$dt = trim($d);
-			if($dt !== ''){
-				$data[$i] = "'$dt'";
-			}
-			else{
-				$data[$i] = 'NULL';
-			}
-		}
-		$this->user_model->update_daily_report($data_id, $data);
+		$field = $this->input->post('field');
+		$value = trim($this->input->post('value'));
+		$value === '' ? "NULL" : "'$value'";
+		$this->user_model->update_daily_report($data_id, $field, $value);
 		echo $data_id;
 	}
 	
