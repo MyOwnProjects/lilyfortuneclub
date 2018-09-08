@@ -95,7 +95,7 @@ class Daily_report extends Account_base_controller {
 		$data_id = $this->input->post('data_id');
 		$field = $this->input->post('field');
 		$value = trim($this->input->post('value'));
-		$value === '' ? "NULL" : "'$value'";
+		$value = $value == '' ? "NULL" : "'$value'";
 		$this->user_model->update_daily_report($data_id, $field, $value);
 		echo $data_id;
 	}
