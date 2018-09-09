@@ -254,7 +254,7 @@
 			}
 			update_data();
 			$_last_selected_cell = undefined;
-			return false;
+			//return false;
 		});
 		
 		$_this.load();
