@@ -520,7 +520,7 @@ class User_model extends Base_model{
 				SUM(daily_report_base_elite) AS daily_report_base_elite
 				FROM daily_report 
 				WHERE daily_report_date BETWEEN '$str1' AND '$str2'
-				GROUP BY daily_report_id
+				GROUP BY daily_report_user_id
 			) dr 
 			ON u.users_id=dr.daily_report_user_id
 			WHERE u.daily_report='Y'";
