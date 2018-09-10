@@ -11,7 +11,7 @@
 			echo $days[date_format($today, "N")].', '.date_format($today, "M d, Y");
 		?>
 		&nbsp;&nbsp;
-		<button class="btn btn-xs btn-primary" onclick="reload();">Reload</button>
+		<button class="btn btn-sm btn-primary" onclick="reload();">Reload</button>
 	</div>
 	</div>
 	<br/>
