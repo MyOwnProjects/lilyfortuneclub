@@ -39,6 +39,8 @@
 		grid1.load();
 		//grid2.load();
 	}
+	var background1 = 'RGB(255, 255, 190)';
+	var background2 = 'RGB(239, 253, 255)';
 	var grid1 = $('#daily-report-grid').smart_table({
 		url: {
 			get: '<?php echo base_url();?>account/daily_report/get',
@@ -53,11 +55,13 @@
 				},				
 				{
 					header: 'Ranking - Daily',
-					col_span: '7'
+					col_span: '7',
+					css: {background:background1}
 				},
 				{
 					header: 'Ranking - Month to Date',
-					col_span: '7'
+					col_span: '7',
+					css: {background:background2}
 				}
 			],
 			[
@@ -71,7 +75,7 @@
 					header: '#<br/>APP',
 					data_type: 'text', 
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center'},
 					editable: true,
 					id: 'daily_report_appointment',
 					summary: true
@@ -80,7 +84,7 @@
 					header: 'PER<br/>REC', 
 					data_type: 'text',
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center'},
 					id: 'daily_report_personal_recruits',
 					editable: true,
 					summary: true
@@ -89,7 +93,7 @@
 					header: 'PER<br/>PROD',
 					data_type: 'text',
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center'},
 					editable: true,
 					id: 'daily_report_personal_products',
 					summary: true
@@ -98,7 +102,7 @@
 					header: 'BASE<br/>REC',
 					data_type: 'text',
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center'},
 					editable: true,
 					id: 'daily_report_baseshop_recruits',
 					summary: true
@@ -107,7 +111,7 @@
 					header: 'BASE<br/>PROD',
 					data_type: 'text',
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center'},
 					editable: true,
 					id: 'daily_report_baseshop_products',
 					summary: true
@@ -116,7 +120,7 @@
 					header: 'ELITE<br/>REG',
 					data_type: 'text',
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center'},
 					editable: true,
 					id: 'daily_report_base_elite',
 					summary: true
@@ -124,13 +128,14 @@
 				{
 					header: 'Rank',
 					data_type: 'text',
-					text_align: 'center',
+					css: {'text-align':'center', background: background1, 'font-weight':'bold'},
 					editable: false,
 					width: 60,
 				}, 
 				{
 					header: 'Name',
 					data_type: 'text',
+					css: {background: background1},
 					editable: false,
 					width: 150,
 				}, 
@@ -138,13 +143,13 @@
 					header: 'PER<br/>REC', 
 					data_type: 'text',
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center', background: background1},
 					summary: true
 				}, 
 				{
 					header: 'PER<br/>PROD',
 					data_type: 'text',
-					text_align: 'center',
+					css: {'text-align':'center', background: background1},
 					width: 80,
 					summary: true
 				},
@@ -152,32 +157,33 @@
 					header: 'BASE<br/>REC',
 					data_type: 'text',
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center', background: background1},
 					summary: true
 				},
 				{
 					header: 'BASE<br/>PROD',
 					data_type: 'text',
 					width: 80,
-					text_align: 'center',
+					css: {'text-align':'center', background: background1},
 					summary: true
 				},
 				{
 					header: 'Total<br/>GS',
 					data_type: 'text',
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center', background: background1},
 				},
 				{
 					header: 'Rank',
 					data_type: 'text',
-					text_align: 'center',
+					css: {'text-align':'center', background: background2, 'font-weight':'bold'},
 					editable: false,
 					width: 60,
 				}, 
 				{
 					header: 'Name',
 					data_type: 'text',
+					css: {background: background2},
 					editable: false,
 					width: 150,
 				}, 
@@ -185,13 +191,13 @@
 					header: 'PER<br/>REC', 
 					data_type: 'text',
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center', background: background2},
 					summary: true
 				}, 
 				{
 					header: 'PER<br/>PROD',
 					data_type: 'text',
-					text_align: 'center',
+					css: {'text-align':'center', background: background2},
 					width: 80,
 					summary: true
 				},
@@ -199,21 +205,21 @@
 					header: 'BASE<br/>REC',
 					data_type: 'text',
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center', background: background2},
 					summary: true
 				},
 				{
 					header: 'BASE<br/>PROD',
 					data_type: 'text',
 					width: 80,
-					text_align: 'center',
+					css: {'text-align':'center', background: background2},
 					summary: true
 				},
 				{
 					header: 'Total<br/>GS',
 					data_type: 'text',
 					width: 60,
-					text_align: 'center',
+					css: {'text-align':'center', background: background2},
 				},
 			]
 		],

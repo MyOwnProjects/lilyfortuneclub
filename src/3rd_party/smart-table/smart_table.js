@@ -110,6 +110,11 @@
 				if(c[j]['col_span']){
 					$_td.attr('colspan', c[j]['col_span']);
 				}
+				if(c[j]['css']){
+					for(var prop in c[j]['css']){
+						$_td.css(prop, c[j]['css'][prop]);
+					}
+				}
 			}
 		}
 		
@@ -133,8 +138,10 @@
 							$_tr.append('<td class="space"></td>');
 							for(var j = 1; j < row.length; ++j){
 								var $_td = $('<td>').addClass(columns[j - 1]['editable'] ? 'editable' : '').html(row[j]).appendTo($_tr);
-								if(columns[j - 1]['text_align']){
-									$_td.css('text-align', columns[j - 1]['text_align']);
+								if(columns[j - 1]['css']){
+									for(var prop in columns[j - 1]['css']){
+										$_td.css(prop, columns[j - 1]['css'][prop]);
+									}
 								}
 								if(columns[j - 1]['summary']){
 									has_total = true;
