@@ -157,8 +157,10 @@
 								if(i == 0){
 									$_td.html('Total');
 								}
-								if(columns[i]['text_align']){
-									$_td.css('text-align', columns[i]['text_align']);
+								if(columns[i]['css']){
+									for(var prop in columns[i]['css']){
+										$_td.css(prop, columns[i]['css'][prop]);
+									}
 								}
 							}
 							calculate_summary();
@@ -173,7 +175,7 @@
 									if(columns[j]['editable']){
 										$_td.addClass('editable').html('');
 									}
-								}							
+								}
 							}
 						}
 						$_this.find('td.header-r').outerHeight(26).resizable({handles:'s', minHeight:26});
