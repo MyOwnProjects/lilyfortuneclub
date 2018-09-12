@@ -198,7 +198,8 @@
 			$(this).parent().siblings().removeClass('selected-row');
 			$_input_wrapper.remove();
 			$_this.find('.active-cell').removeClass('active-cell').html($_input.val());
-			if($(this).parent().is(':first-child, :nth-child(2)')){
+			if($(this).parent().is(':first-child') || 
+				$(this).parent().hasClass('c-header')){
 				return false;
 			}
 			$(this).parent().addClass('selected-row');
