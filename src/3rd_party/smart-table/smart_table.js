@@ -33,7 +33,7 @@
 			});
 		};
 		
-		var update_data = function(){
+		var update_data = function(value){
 			if($_last_selected_cell === undefined ){
 				return false;
 			}
@@ -46,7 +46,7 @@
 			$.ajax({
 				url: url['update'],
 				method: 'post',
-				data: {data_id: data_id, field: columns[index]['id'], value: $_last_selected_cell.text()},
+				data: {data_id: data_id, field: columns[index]['id'], value: value === undefined ? $_last_selected_cell.text() : value},
 				success: function(data){
 					$_tr.attr('data-id', data);
 				},
@@ -205,7 +205,7 @@
 			$(this).parent().addClass('selected-row');
 		});
 		
-		document.addEventListener("keyup", function(event) {
+		/*document.addEventListener("keyup", function(event) {
 			return;
 			var $_tr = $_this.find('.selected-row');
 			if($_tr.length == 1 && event.which == 46){
@@ -229,14 +229,14 @@
 					$_tr.children('td:nth-child(' + (i + 3) + ')').html('');
 				}
 			}
-		});
+		});*/
 		$_this.delegate('.editable', 'click', function(){
 			$_this.find('.selected-row').removeClass('selected-row');
 			$_input_wrapper.remove();
 			$_this.find('.active-cell').removeClass('active-cell').html($_input.val());
 			var self = $(this);
 			if(self != $_last_selected_cell){
-				update_data(self);
+				update_data();
 				$_last_selected_cell = self; 
 			}
 			
@@ -256,6 +256,11 @@
 			}
 			return false;
 		});
+		
+		$_this.delegate($_input, 'keyup', function(e){
+			update_data($_input.val());
+		});
+		
 		$('body').click(function(e){
 			$_input_wrapper.remove();
 			$_this.find('.active-cell').removeClass('active-cell').html($_input.val());
