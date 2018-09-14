@@ -18,6 +18,7 @@
 		$_this.append($_main_table);
 		var $_tr = $('<tr>').appendTo($_main_table);
 		var $_td = $('<td>').addClass('header').addClass('header-c').addClass('header-r').appendTo($_tr);
+		var timeout_callback;
 		$_tr.append('<td class="space header-c"></td>');
 		var delete_row = function(data_id){
 			$.ajax({
@@ -118,6 +119,28 @@
 			}
 		}
 		
+		var callback = function(){
+			$.ajax({
+				url: url['get'],
+				dataType: 'json',
+				success: function(data){
+					if(data){
+						for(var i = 0; i < columns.length; ++i){
+							if(columns[i]['auto_refresh']){
+								$_main_table.children('tbody').children('.row-value').each(function(index, obj){
+									$(obj).children('td:nth-child(' + (i + 2) + ')').html(data[index][i]);
+								});
+							}
+						}
+					}
+					timeout_callback = setTimeout(callback, 1000);
+				},
+				error: function(){
+					clearTimeout(timeout_callback, 1000);
+				}
+			});
+		};
+		
 		$_this.load = function(){	
 			var sel = '';
 			for(var i = 1; i <= headers.length; ++i){
@@ -130,14 +153,18 @@
 				dataType: 'json',
 				success: function(data){
 					if(data){
+						var tab_index = 0;
 						var has_total = false;
 						for(var i = 0; i < data.length; ++i){
 							var row = data[i];
-							var $_tr = $('<tr>').attr('data-id', row[0]).appendTo($_main_table);
+							var $_tr = $('<tr>').attr('data-id', row[0]).addClass('row-value').appendTo($_main_table);
 							var $_td = $('<td>').addClass('header-r').html(i + 1).appendTo($_tr);
 							$_tr.append('<td class="space"></td>');
 							for(var j = 1; j < row.length; ++j){
 								var $_td = $('<td>').addClass(columns[j - 1]['editable'] ? 'editable' : '').html(row[j]).appendTo($_tr);
+								if(columns[j - 1]['editable']){
+									$_td.attr('tab-index', tab_index++);
+								}
 								if(columns[j - 1]['css']){
 									for(var prop in columns[j - 1]['css']){
 										$_td.css(prop, columns[j - 1]['css'][prop]);
@@ -179,10 +206,15 @@
 							}
 						}
 						$_this.find('td.header-r').outerHeight(26).resizable({handles:'s', minHeight:26});
+						
+						timeout_callback = setTimeout(callback, 1000);
 					}
 					ajax_loading(false);
 				},
 				error: function(){
+					if(timeout_callback){
+						clearTimeout(timeout_callback);
+					}
 					ajax_loading(false);
 				},
 				complete: function(){
@@ -259,6 +291,49 @@
 		
 		$_this.delegate($_input, 'keyup', function(e){
 			update_data($_input.val());
+		}).keydown(function(e){
+			var index = $_input.parent().parent().index();
+			var $_td = $_input.parent().parent();
+			var	$_tr = $_td.parent();
+			var $_new_td;
+			if(e.which == 38){
+				while(!$_tr.is(':first-child')){
+					if($_tr.prev().children('td:nth-child(' + (index + 1) + ')') && 
+						$_tr.prev().children('td:nth-child(' + (index + 1) + ')').hasClass('editable')){
+						$_new_td = $_td.parent().prev().children('td:nth-child(' + (index + 1) + ')');
+						break;
+					}
+					$_tr = $_tr.prev();
+				}
+			}
+			else if(e.which == 40){
+				while(!$_tr.is(':last-child')){
+					if($_tr.next().children('td:nth-child(' + (index + 1) + ')') && 
+						$_tr.next().children('td:nth-child(' + (index + 1) + ')').hasClass('editable')){
+						$_new_td = $_td.parent().next().children('td:nth-child(' + (index + 1) + ')');
+						break;
+					}
+					$_tr = $_tr.next();
+				}
+			}
+			else if(e.which == 9){
+				var tab_index = parseInt($_td.attr('tab-index'));
+				var $_next_td = $_main_table.find('td[tab-index=' + (tab_index + 1) + ']');
+				if($_next_td.length == 1){
+					$_new_td = $_next_td;
+				}
+			}
+			if($_new_td){
+				$_new_td.click();
+				$_input.focus();
+				if($_input.setSelectionRange){
+					$_input.setSelectionRange(0, $_input.val().length);
+				}
+				else{
+					$_input.select();
+				}
+			}
+			return e.which != 9 && e.which != 40 && e.which != 38;
 		});
 		
 		$('body').click(function(e){

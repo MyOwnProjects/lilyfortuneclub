@@ -138,40 +138,46 @@
 					css: {background: background1},
 					editable: false,
 					width: 150,
+					auto_refresh: true
 				}, 
 				{
 					header: 'PER<br/>REC', 
 					data_type: 'text',
 					width: 60,
 					css: {'text-align':'center', background: background1},
-					summary: true
+					summary: true,
+					auto_refresh: true
 				}, 
 				{
 					header: 'PER<br/>PROD',
 					data_type: 'text',
 					css: {'text-align':'center', background: background1},
 					width: 80,
-					summary: true
+					summary: true,
+					auto_refresh: true
 				},
 				{
 					header: 'BASE<br/>REC',
 					data_type: 'text',
 					width: 60,
 					css: {'text-align':'center', background: background1},
-					summary: true
+					summary: true,
+					auto_refresh: true
 				},
 				{
 					header: 'BASE<br/>PROD',
 					data_type: 'text',
 					width: 80,
 					css: {'text-align':'center', background: background1},
-					summary: true
+					summary: true,
+					auto_refresh: true
 				},
 				{
 					header: 'Total<br/>GS',
 					data_type: 'text',
 					width: 60,
 					css: {'text-align':'center', background: background1},
+					auto_refresh: true				
 				},
 				{
 					header: 'Rank',
@@ -186,40 +192,46 @@
 					css: {background: background2},
 					editable: false,
 					width: 150,
+					auto_refresh: true				
 				}, 
 				{
 					header: 'PER<br/>REC', 
 					data_type: 'text',
 					width: 60,
 					css: {'text-align':'center', background: background2},
-					summary: true
+					summary: true,
+					auto_refresh: true				
 				}, 
 				{
 					header: 'PER<br/>PROD',
 					data_type: 'text',
 					css: {'text-align':'center', background: background2},
 					width: 80,
-					summary: true
+					summary: true,
+					auto_refresh: true				
 				},
 				{
 					header: 'BASE<br/>REC',
 					data_type: 'text',
 					width: 60,
 					css: {'text-align':'center', background: background2},
-					summary: true
+					summary: true,
+					auto_refresh: true				
 				},
 				{
 					header: 'BASE<br/>PROD',
 					data_type: 'text',
 					width: 80,
 					css: {'text-align':'center', background: background2},
-					summary: true
+					summary: true,
+					auto_refresh: true				
 				},
 				{
 					header: 'Total<br/>GS',
 					data_type: 'text',
 					width: 60,
 					css: {'text-align':'center', background: background2},
+					auto_refresh: true				
 				},
 			]
 		],
