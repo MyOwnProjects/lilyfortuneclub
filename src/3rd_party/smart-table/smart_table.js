@@ -128,7 +128,7 @@
 						for(var i = 0; i < columns.length; ++i){
 							if(columns[i]['auto_refresh']){
 								$_main_table.children('tbody').children('.row-value').each(function(index, obj){
-									$(obj).children('td:nth-child(' + (i + 2) + ')').html(data[index][i]);
+									$(obj).children('td:nth-child(' + (i + 3) + ')').html(data[index][i + 1]);
 								});
 							}
 						}
