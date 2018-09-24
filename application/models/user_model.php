@@ -499,7 +499,7 @@ class User_model extends Base_model{
 			u.users_id, dr.* 
 			FROM users u LEFT JOIN daily_report dr 
 			ON u.users_id=dr.daily_report_user_id AND dr.daily_report_date='$date'
-			WHERE u.daily_report='Y' ORDER BY u.last_name ASC";
+			WHERE u.daily_report='Y' ORDER BY u.last_name ASC, u.nick_name ASC, u.first_name ASC"; 
 		return $this->db->query($sql); 
 	}
 	
