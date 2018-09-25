@@ -34,29 +34,23 @@ class Account extends Smd_Controller {
 		foreach($result2 as $r){
 			if(!empty($r['sales_insured_dob'])){
 				$d = $this->_valid_dob($r['sales_insured_dob']);
-				echo $r['sales_insured_dob'].' '.$d.' ';
 				if($d == 0){
-					echo 'a ';
 					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['sales_insured'], 'dob' => $r['sales_insured_dob']));
 				}
 				else if($d > 0 && $d < 3){
-					echo 'b ';
 					array_push($birthday2, array('sales_id' => $r['sales_id'], 'name' => $r['sales_insured'], 'dob' => $r['sales_insured_dob']));
 				}
 			}
 			if(!empty($r['sales_owner_dob'])){
 				$d = $this->_valid_dob($r['sales_owner_dob']);
-				echo $r['sales_owner_dob'].' '.$d.' ';
 				if($d == 0){
-					echo 'a ';
 					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['sales_owner'], 'dob' => $r['sales_owner_dob']));
 				}
 				else if($d > 0 && $d < 3){
-					echo 'b ';
 					array_push($birthday2, array('sales_id' => $r['sales_id'], 'name' => $r['sales_owner'], 'dob' => $r['sales_owner_dob']));
 				}
 			}
-		}exit;
+		}
 		foreach($result as $r){
 			if(!array_key_exists($r['grade'], $grades)){
 				$grades[$r['grade']] = 0;
