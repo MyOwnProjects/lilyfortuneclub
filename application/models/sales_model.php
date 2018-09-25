@@ -21,7 +21,11 @@ class Sales_model extends Base_model{
 		$order_by = array();
 		if(!empty($sort)){
 			foreach($sort as $name => $value){
-				array_push($order_by, $name.' '.$value);
+				if($name == ''){
+				}
+				else{
+					array_push($order_by, $name.' '.$value);
+				}
 			}
 		}
 		$like_array = array();
@@ -31,9 +35,15 @@ class Sales_model extends Base_model{
 				array_push($like_array, "sales_owner LIKE '%$s%'");
 				array_push($like_array, "sales_policy_no LIKE '%$s%'");
 				array_push($like_array, "sales_client_contact LIKE '%$s%'");
+				array_push($like_array, "u1.first_name LIKE '%$s%'");
+				array_push($like_array, "u1.last_name LIKE '%$s%'");
+				array_push($like_array, "u1.nick_name LIKE '%$s%'");
+				array_push($like_array, "u2.first_name LIKE '%$s%'");
+				array_push($like_array, "u2.last_name LIKE '%$s%'");
+				array_push($like_array, "u2.nick_name LIKE '%$s%'");
 			}
 		}
-		$sql = "SELECT sales.*, 
+		$sql = "SELECT sales.*, u1.nick_name, u1.first_name, u1.last_name, u2.nick_name, u2.first_name, u2.last_name,
 			CONCAT(IF(u1.nick_name IS NULL OR u1.nick_name='', u1.first_name, u1.nick_name), ' ', u1.last_name) AS agent1,
 			CONCAT(IF(u2.nick_name IS NULL OR u2.nick_name='', u2.first_name, u2.nick_name), ' ', u2.last_name) AS agent2
 			FROM sales 
@@ -55,9 +65,17 @@ class Sales_model extends Base_model{
 				array_push($like_array, "sales_owner LIKE '%$s%'");
 				array_push($like_array, "sales_policy_no LIKE '%$s%'");
 				array_push($like_array, "sales_client_contact LIKE '%$s%'");
+				array_push($like_array, "u1.first_name LIKE '%$s%'");
+				array_push($like_array, "u1.last_name LIKE '%$s%'");
+				array_push($like_array, "u1.nick_name LIKE '%$s%'");
+				array_push($like_array, "u2.first_name LIKE '%$s%'");
+				array_push($like_array, "u2.last_name LIKE '%$s%'");
+				array_push($like_array, "u2.nick_name LIKE '%$s%'");
 			}
 		}
-			$sql = "SELECT COUNT(*) AS total FROM sales
+		$sql = "SELECT COUNT(*) AS total FROM sales
+			LEFT JOIN users u1 ON u1.membership_code= sales.sales_writing_agent
+			LEFT JOIN users u2 ON u2.membership_code= sales.sales_split_agent
 			WHERE 1=1 ".(empty($where) ? "" : " AND $where ")
 			.(empty($like_array) ? "" : " AND (".implode(" OR ", $like_array).")");
 	

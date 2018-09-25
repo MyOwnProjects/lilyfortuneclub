@@ -19,7 +19,7 @@ class Sales extends Smd_Controller {
 
 	public function get_sales_list(){
 		$policy_types = array(
-			'IL' => 'IUL-LTC',
+			'IL' => 'IUL+LTC',
 			'I' => 'IUL',
 			'A' => 'Annuity',
 			'T' => 'Term',
@@ -54,7 +54,7 @@ class Sales extends Smd_Controller {
 				$ret['rows'][$i]['sales_client'] = $r['sales_insured'].(empty($r['sales_owner']) ? '' : ' / '.$r['sales_owner']);
 				$ret['rows'][$i]['sales_agents'] = $r['agent1'].(empty($r['sales_split_agent']) ? '' : ' / '.$r['agent2']);
 				$ret['rows'][$i]['sales_policy'] = $r['sales_provider'].' / '.$policy_types[$r['sales_policy_type']];
-				$ret['rows'][$i]['sales_date'] = $r['sales_date_submission'].(empty($r['sales_date_closure']) ? '' : ' / '.$r['sales_date_closure']);
+				$ret['rows'][$i]['sales_date_submission'] = $r['sales_date_submission'].(empty($r['sales_date_closure']) ? '' : ' / '.$r['sales_date_closure']);
 				$ret['rows'][$i]['sales_face_amount'] = number_to_english($r['sales_face_amount']);
 				$ret['rows'][$i]['sales_status'] = $sales_status[$r['sales_status']];
 				$ret['rows'][$i]['action'] = array('view' => base_url().'smd/sales/sales_case/'.$r['sales_id']);

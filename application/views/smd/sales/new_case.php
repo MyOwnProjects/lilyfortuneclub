@@ -70,6 +70,7 @@
 						<div class="form-group">
 							<label>Policy Type</label>
 							<select class="form-control control-sm" name="sales_policy_type">
+								<option value="IL" <?php echo empty($sale) || $sale['sales_policy_type'] != 'IL' ? '' : 'selected';?>>IUL + LTC</option>
 								<option value="I" <?php echo empty($sale) || $sale['sales_policy_type'] != 'I' ? '' : 'selected';?>>IUL</option>
 								<option value="A" <?php echo empty($sale) || $sale['sales_policy_type'] != 'A' ? '' : 'selected';?>>Annuity</option>
 								<option value="T" <?php echo empty($sale) || $sale['sales_policy_type'] != 'T' ? '' : 'selected';?>>Term</option>
