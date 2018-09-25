@@ -15,7 +15,7 @@
 			if(!empty($birthday1) || !empty($birthday2)){
 			?>
 			<div class="panel panel-warning">
-				<div class="panel-heading" style="padding-left:40px;font-weight:bold;background-image:url(<?php echo base_url();?>src/img/cake_red.svg);background-repeat:no-repeat;background-position:5px 5px;background-size:25px 25px">Recent Birthday</div>
+				<div class="panel-heading" style="padding-left:50px;font-weight:bold;background-image:url(<?php echo base_url();?>src/img/cake_red.svg);background-repeat:no-repeat;background-position:10px 5px;background-size:25px 25px">Recent Birthday</div>
 				<div class="panel-body">
 					<table class="table">
 					<?php
