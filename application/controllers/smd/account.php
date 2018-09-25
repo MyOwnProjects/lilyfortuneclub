@@ -12,8 +12,8 @@ class Account extends Smd_Controller {
 	
 	private function _valid_dob($date){
 		$ds = explode('-', $date);
-		$d = date_create(date_format(date_create(), 'Y')."-$ds[1]-$ds[2]");
-		$today = date_create();
+		$d = date_create(date_format(date_create(), 'Y')."-$ds[1]-$ds[2] 00:00:00");
+		$today = date_create(date_format(date_create(), 'Y-m-d 00:00:00'));
 		$diff=date_diff($today,$d);
 		$d = $diff->format("%R%a");
 		return $d;
