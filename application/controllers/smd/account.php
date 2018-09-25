@@ -34,7 +34,7 @@ class Account extends Smd_Controller {
 		foreach($result2 as $r){
 			if(!empty($r['sales_insured_dob'])){
 				$d = $this->_valid_dob($r['sales_insured_dob']);
-				echo $d.' ';
+				echo $r['sales_insured_dob'].' '.$d.' ';
 				if($d == 0){
 					echo 'a ';
 					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['sales_insured'], 'dob' => $r['sales_insured_dob']));
@@ -46,7 +46,7 @@ class Account extends Smd_Controller {
 			}
 			if(!empty($r['sales_owner_dob'])){
 				$d = $this->_valid_dob($r['sales_owner_dob']);
-				echo $d.' ';
+				echo $r['sales_owner_dob'].' '.$d.' ';
 				if($d == 0){
 					echo 'a ';
 					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['sales_owner'], 'dob' => $r['sales_owner_dob']));
