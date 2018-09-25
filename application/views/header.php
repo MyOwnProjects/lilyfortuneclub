@@ -29,18 +29,19 @@
 					?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/profile" title="Personal Information"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/man-user.svg?1"><div class="text">Personal Information</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/daily_report" title="Daily Report"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/diagram.svg?1"><div class="text">Daily Report</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/startup" title="Who We Are"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Who We Are</div></div></a>
 					<?php
 						if($user['membership_code'] != 'GUEST'){
 					?>
 						<?php if($user['preference'] == 'B' || $user['preference'] == 'BE'){?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/how_to" title="How to"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/question-mark-on-a-circular-black-background.svg"><div class="text">How to</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/team" title="My team"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/team.svg"><div class="text">My Team</div></div></a>
+						<!--a class="menu-ico-url" href="<?php echo base_url();?>account/sales" title="My sales"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/team.svg"><div class="text">My Sales</div></div></a-->
 						<?php }?>
 					<?php
 						}
 					?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/license" title="License"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/certificate.svg"><div class="text">License</div></div></a>
+						<a class="menu-ico-url" href="<?php echo base_url();?>account/startup" title="Who We Are"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Who We Are</div></div></a>
 					<?php
 						if($user['membership_code'] != 'GUEST'){
 					?>

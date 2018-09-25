@@ -43,7 +43,7 @@
 		?>
 		<?php $this->load->view('smd/header', $this->_ci_cached_vars);?>
 		
-		<div>
+		<!--div-->
 				<div style="position:fixed;top:52px;width:150px;bottom:0;left:0;background:#f1f1f1;padding-top:20px">
 					<ul class="side-nav-left nav nav-pills nav-stacked">
 						<?php 
@@ -63,7 +63,7 @@
 				<div id="main-body-wrapper" style="position:fixed;top:52px;right:0px;bottom:0;left:150px;overflow:auto">
 					<?php $this->load->view("smd/$view", $this->_ci_cached_vars);?>
 				</div>
-			</div>			
-		</div>
+			<!--/div-->			
+		
 	</body>
 </html>

@@ -349,3 +349,21 @@ if ( ! function_exists('number_to_chinese')){
 		return $number.'亿';
 	}
 }
+	
+if ( ! function_exists('number_to_english')){
+	function number_to_english($number){
+		//10.3万
+		//341万
+		//2039万
+		//1.37亿
+		//13.98亿
+		if($number / 1000000 >= 1){
+			return ($number / 1000000).'M';
+		}
+		
+		if($number / 1000 >= 1){
+			return ($number / 1000).'K';
+		}
+		return $number;
+	}	
+}

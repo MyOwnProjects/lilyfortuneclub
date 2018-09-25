@@ -1,5 +1,5 @@
 .data-table button:focus{outline:none}
-.data-table .table-group-bar{overflow:hidden}
+.data-table .table-group-bar{}
 .data-table .customized_group{margin-right:20px}
 .data-table .standard-groups{margin-left:20px}
 .data-table .standard-groups>.btn-group{margin-left:5px}
@@ -33,7 +33,3 @@
 .data-table table thead td{border-width:1px;border-style:solid;border-color:#d5d5d5}
 .data-table table tbody td{vertical-align:middle;border-width:1px;border-style:solid;border-color:#e5e5e5}
 .data-table table tbody td img{height:16px;}
-
-
-
-

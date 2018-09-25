@@ -34,6 +34,17 @@ class Smd_controller extends CI_Controller {
 				),
 			),
 		),
+		'sales' => array(
+			'text' => 'Sales',
+			'sub_menus' => array(
+				'' => array(
+					'text' => 'List',
+				),
+				'sales_case' => array(
+					'text' => 'New Case',
+				),
+			),
+		),
 		'schedule' => array(
 			'text' => 'Schedule',
 			'sub_menus' => array(
@@ -111,6 +122,9 @@ class Smd_controller extends CI_Controller {
 			'sub_menus' => array(
 				'' => array(
 					'text' => 'Direct Query'
+				),
+				'daily_report' => array(
+					'text' => 'Daily Report'
 				),
 				'generate_plan' => array(
 					'text' => 'Generate Plan'
