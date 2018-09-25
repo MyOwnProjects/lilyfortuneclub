@@ -35,6 +35,7 @@ class Sales extends Smd_Controller {
 		$current = $this->input->post('current');
 		$row_count= $this->input->post('row_count');
 		$sort = $this->input->post('sort');
+		$filter = $this->input->post('filter');
 		$ret = array(
 			'current' => 1,
 			'last' => 0,
@@ -43,11 +44,11 @@ class Sales extends Smd_Controller {
 			'rows' => array(),
 			'total' => 0
 		);
-		$total = $this->sales_model->get_total('', $search);
+		$total = $this->sales_model->get_total('', $search, $filter);
 		if($total > 0){
 			$ret = paginate($total, $current, $row_count);
 			$ret['search'] = $search_str;
-			$ret['rows'] = $this->sales_model->get_list('', $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count'], $search);
+			$ret['rows'] = $this->sales_model->get_list('', $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count'], $search, $filter);
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
 				$ret['rows'][$i]['sales_policy_no'] = $r['sales_policy_no'];
@@ -76,7 +77,7 @@ class Sales extends Smd_Controller {
 				else if($k == 'sales_policy_no' && $v == ''){
 					$prop[$k] = "NULL";
 				}
-				else if($k == 'sales_date_closure' && $v == ''){
+				else if(($k == 'sales_date_closure' || $k == 'sales_insured_dob' || $k == 'sales_owner_dob') && $v == ''){
 					$prop[$k] = "NULL";
 				}
 				else{

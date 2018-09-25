@@ -13,19 +13,6 @@
 				<div class="row">
 					<div class="col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label>Policy NO</label>
-							<input class="form-control control-sm" name="sales_policy_no" value="<?php echo empty($sale) ? '': $sale['sales_policy_no'];?>">
-						</div>
-					</div>
-					<div class="col-sm-6 col-xs-12">
-						<div class="form-group">
-							<label>Face Amount</label>
-							<span class="text-danger">*</span>
-							<input class="form-control control-sm" type="number" name="sales_face_amount" value="<?php echo empty($sale) ? '': $sale['sales_face_amount'];?>" require min="0">
-						</div>
-					</div>
-					<div class="col-sm-6 col-xs-12">
-						<div class="form-group">
 							<label>Writing Agent</label>
 							<select class="form-control control-sm selectpicker" data-live-search='true' name="sales_writing_agent">
 								<?php
@@ -51,6 +38,19 @@
 								}
 								?>
 							</select>
+						</div>
+					</div>
+					<div class="col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label>Policy NO</label>
+							<input class="form-control control-sm" name="sales_policy_no" value="<?php echo empty($sale) ? '': $sale['sales_policy_no'];?>">
+						</div>
+					</div>
+					<div class="col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label>Face Amount</label>
+							<span class="text-danger">*</span>
+							<input class="form-control control-sm" type="number" name="sales_face_amount" value="<?php echo empty($sale) ? '': $sale['sales_face_amount'];?>" require min="0">
 						</div>
 					</div>
 					<div class="col-sm-6 col-xs-12">
@@ -83,11 +83,33 @@
 							<span class="text-danger">*</span>
 							<input class="form-control control-sm" name="sales_insured" value="<?php echo empty($sale) ? '': $sale['sales_insured'];?>" required>
 						</div>
+						<div class="form-group">
+							<label>Insured Date of Birth</label>
+							<input class="form-control control-sm" type="date" name="sales_insured_dob" value="<?php echo empty($sale) ? '': $sale['sales_insured_dob'];?>">
+						</div>
+						<div class="form-group">
+							<label>Insured Gender</label>
+							<select class="form-control control-sm" name="sales_insured_gender">
+								<option value="F" <?php echo empty($sale) || $sale['sales_insured_gender'] != 'F'? '': 'selected';?>>Female</option>
+								<option value="M" <?php echo empty($sale) || $sale['sales_insured_gender'] != 'M'? '': 'selected';?>>Male</option>
+							</select>
+						</div>
 					</div>
 					<div class="col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label>Owner Name</label>
 							<input class="form-control control-sm" name="sales_owner" value="<?php echo empty($sale) ? '': $sale['sales_owner'];?>">
+						</div>
+						<div class="form-group">
+							<label>Owner Date of Birth</label>
+							<input class="form-control control-sm" type="date" name="sales_owner_dob" value="<?php echo empty($sale) ? '': $sale['sales_owner_dob'];?>">
+						</div>
+						<div class="form-group">
+							<label>Owner Gender</label>
+							<select class="form-control control-sm" name="sales_owner_gender">
+								<option value="F" <?php echo empty($sale) || $sale['sales_owner_gender'] != 'F'? '': 'selected';?>>Female</option>
+								<option value="M" <?php echo empty($sale) || $sale['sales_owner_gender'] != 'M'? '': 'selected';?>>Male</option>
+							</select>
 						</div>
 					</div>
 					<div class="col-sm-6 col-xs-12">
@@ -124,7 +146,7 @@
 				</div>
 				<div class="form-group">
 					<label>Details (Outstanding Requirements)</label>
-					<textarea class="form-control control-sm" name="sales_details" rows="15"><?php echo empty($sale) || empty($sale['sales_details']) ? '': $sale['sales_details'];?></textarea>
+					<textarea class="form-control control-sm" name="sales_details" rows="20"><?php echo empty($sale) || empty($sale['sales_details']) ? '': $sale['sales_details'];?></textarea>
 				</div>
 			</div>
 		</div>

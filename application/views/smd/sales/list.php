@@ -30,9 +30,10 @@
 		row_count: 20,
 		//order_by: {tasks_create: 'desc'},
 		filter: {id: 'sales_status', options:{
-			P: '<span class="text-danger glyphicon glyphicon-question-sign"></span> Pending',
-			I: '<span class="text-green glyphicon glyphicon-ok-sign"></span> Inforced',
-			C: '<span class="text-muted glyphicon glyphicon-exclamation-sign"></span> Closed'
+			P: '<span class="text-danger">Pending</span>',
+			I: '<span class="text-green"> Inforced</span>',
+			C: '<span class="text-muted">Closed</span>',
+			CA: '<span class="text-muted">Canceled</span>',
 		}}
 	});
 </script>

@@ -10,6 +10,9 @@
 </style>
 <div class="main-body-wrapper">
 	<div class="row">
+		<div></div>
+	</div>
+	<div class="row">
 		<div class="col-md-4">
 			<?php
 			$pie_chart_data = array(	

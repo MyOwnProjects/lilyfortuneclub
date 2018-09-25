@@ -17,7 +17,7 @@ class Sales_model extends Base_model{
 		return $this->db->query($sql);
 	}
 	
-	public function get_list($where = '', $sort = array(), $limit = '', $search = array()){
+	public function get_list($where = '', $sort = array(), $limit = '', $search = array(), $filter = array()){
 		$order_by = array();
 		if(!empty($sort)){
 			foreach($sort as $name => $value){
@@ -43,6 +43,14 @@ class Sales_model extends Base_model{
 				array_push($like_array, "u2.nick_name LIKE '%$s%'");
 			}
 		}
+		$filter_str = '';
+		if(!empty($filter)){
+			$k = key($filter);
+			$v = $filter[$k];
+			if($v != ''){
+				$filter_str = "$k='$v'";
+			}
+		}
 		$sql = "SELECT sales.*, u1.nick_name, u1.first_name, u1.last_name, u2.nick_name, u2.first_name, u2.last_name,
 			CONCAT(IF(u1.nick_name IS NULL OR u1.nick_name='', u1.first_name, u1.nick_name), ' ', u1.last_name) AS agent1,
 			CONCAT(IF(u2.nick_name IS NULL OR u2.nick_name='', u2.first_name, u2.nick_name), ' ', u2.last_name) AS agent2
@@ -50,6 +58,7 @@ class Sales_model extends Base_model{
 			LEFT JOIN users u1 ON u1.membership_code= sales.sales_writing_agent
 			LEFT JOIN users u2 ON u2.membership_code= sales.sales_split_agent
 			WHERE 1=1 ".(empty($where) ? "" : " AND $where ")
+			.(empty($filter_str) ? '' : " AND $filter_str")
 			.(empty($like_array) ? "" : " AND (".implode(" OR ", $like_array).")")
 			.(empty($order_by) ? "" : " ORDER BY ".implode(",", $order_by))
 			.(empty($limit) ? "" : " LIMIT $limit");
@@ -57,7 +66,7 @@ class Sales_model extends Base_model{
 		return $result;
 	}
 	
-	public function get_total($where = '', $search = array()){
+	public function get_total($where = '', $search = array(), $filter = array()){
 		$like_array = array();
 		if(!empty($search)){
 			foreach($search as $s){
@@ -73,10 +82,19 @@ class Sales_model extends Base_model{
 				array_push($like_array, "u2.nick_name LIKE '%$s%'");
 			}
 		}
+		$filter_str = '';
+		if(!empty($filter)){
+			$k = key($filter);
+			$v = $filter[$k];
+			if($v != ''){
+				$filter_str = "$k='$v'";
+			}
+		}
 		$sql = "SELECT COUNT(*) AS total FROM sales
 			LEFT JOIN users u1 ON u1.membership_code= sales.sales_writing_agent
 			LEFT JOIN users u2 ON u2.membership_code= sales.sales_split_agent
 			WHERE 1=1 ".(empty($where) ? "" : " AND $where ")
+			.(empty($filter_str) ? '' : " AND $filter_str")
 			.(empty($like_array) ? "" : " AND (".implode(" OR ", $like_array).")");
 	
 		/*$sql = "SELECT COUNT(*) AS total FROM 
