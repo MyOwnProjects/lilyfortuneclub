@@ -27,7 +27,7 @@
 						</tr>
 					<?php
 					}
-					if(!empty($birthday2)){
+					foreach($birthday2 as $b){
 					?>
 						<tr>
 							<td><a href="<?php echo base_url();?>smd/team/member/<?php echo $b['membership_code'];?>"><?php echo (empty($b['nick_name']) ? $b['first_name'] : $b['nick_name']).' '.$b['last_name'];?></a></td>
