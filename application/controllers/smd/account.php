@@ -33,7 +33,7 @@ class Account extends Smd_Controller {
 			$today = date_create();
 			$diff=date_diff($today,$d);
 			$d = $diff->format("%R%a");
-			if(true){//$d == 0){
+			if($d == 0){
 				array_push($birthday1, $r);
 			}
 			else if($d > 0 && $d < 3){
