@@ -43,18 +43,6 @@
 			}
 			?>
   		</div>
-		<div class="col-med-6 col-sm-6">
-			<?php
-			if(!empty($birthday2)){
-			?>
-			<div class="panel panel-warning">
-				<div class="panel-heading">Birday in 3 Days</div>
-				<div class="panel-body">Panel Content</div>
-			</div>
-			<?php
-			}
-			?>
-  		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4">
