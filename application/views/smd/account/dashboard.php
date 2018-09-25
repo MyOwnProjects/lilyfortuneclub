@@ -41,7 +41,7 @@
 					?>
 						<tr>
 							<td><a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $b['sales_id'];?>"><?php echo $b['name'];?></a></td>
-							<td><?php echo date_format(date_create($b['date_of_birth']), 'M d');?></td>
+							<td><?php echo date_format(date_create($b['dob']), 'M d');?></td>
 							<td>Client</td>
 						</tr>
 					<?php
