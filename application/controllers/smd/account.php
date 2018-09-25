@@ -36,9 +36,11 @@ class Account extends Smd_Controller {
 				$d = $this->_valid_dob($r['sales_insured_dob']);
 				echo $d.' ';
 				if($d == 0){
+					echo 'a ';
 					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['sales_insured'], 'dob' => $r['sales_insured_dob']));
 				}
 				else if($d > 0 && $d < 3){
+					echo 'b ';
 					array_push($birthday2, array('sales_id' => $r['sales_id'], 'name' => $r['sales_insured'], 'dob' => $r['sales_insured_dob']));
 				}
 			}
@@ -46,9 +48,11 @@ class Account extends Smd_Controller {
 				$d = $this->_valid_dob($r['sales_owner_dob']);
 				echo $d.' ';
 				if($d == 0){
+					echo 'a ';
 					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['sales_owner'], 'dob' => $r['sales_owner_dob']));
 				}
 				else if($d > 0 && $d < 3){
+					echo 'b ';
 					array_push($birthday2, array('sales_id' => $r['sales_id'], 'name' => $r['sales_owner'], 'dob' => $r['sales_owner_dob']));
 				}
 			}
