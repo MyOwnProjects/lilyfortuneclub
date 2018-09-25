@@ -68,7 +68,7 @@ class Account extends Smd_Controller {
 			else if($d > 0 && $d < 3){
 				array_push($birthday4, $r);
 			}
-		}exit;
+		}
 		$this->nav_menus['account']['sub_menus']['']['active'] = true;
 		$this->load_view('account/dashboard', array('grades' => $grades, 
 			'statuses' => $statuses,
