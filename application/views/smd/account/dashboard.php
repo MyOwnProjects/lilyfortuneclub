@@ -22,16 +22,36 @@
 					foreach($birthday1 as $b){
 					?>
 						<tr>
+							<td><a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $b['sales_id'];?>"><?php echo $b['name'];?></a></td>
+							<td style="color:red">Today</td>
+							<td>Client</td>
+						</tr>
+					<?php
+					}
+					foreach($birthday3 as $b){
+					?>
+						<tr>
 							<td><a href="<?php echo base_url();?>smd/team/member/<?php echo $b['membership_code'];?>"><?php echo (empty($b['nick_name']) ? $b['first_name'] : $b['nick_name']).' '.$b['last_name'];?></a></td>
 							<td style="color:red">Today</td>
+							<td>Team</td>
 						</tr>
 					<?php
 					}
 					foreach($birthday2 as $b){
 					?>
 						<tr>
+							<td><a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $b['sales_id'];?>"><?php echo $b['name'];?></a></td>
+							<td><?php echo date_format(date_create($b['date_of_birth']), 'M d');?></td>
+							<td>Client</td>
+						</tr>
+					<?php
+					}
+					foreach($birthday4 as $b){
+					?>
+						<tr>
 							<td><a href="<?php echo base_url();?>smd/team/member/<?php echo $b['membership_code'];?>"><?php echo (empty($b['nick_name']) ? $b['first_name'] : $b['nick_name']).' '.$b['last_name'];?></a></td>
 							<td><?php echo date_format(date_create($b['date_of_birth']), 'M d');?></td>
+							<td>Team</td>
 						</tr>
 					<?php
 					}

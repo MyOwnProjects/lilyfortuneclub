@@ -10,14 +10,38 @@ class Account extends Smd_Controller {
 		$this->nav_menus['account']['active'] = true;
 	}
 	
+	private function _valid_dob($date){
+		$ds = explode('-', $date);
+		$d = date_create(date_format(date_create(), 'Y')."-$ds[1]-$ds[2]");
+		$today = date_create();
+		$diff=date_diff($today,$d);
+		$d = $diff->format("%R%a");
+		return $d;
+	}
+	
 	public function index()
 	{
 		$this->load->model('user_model');
+		$this->load->model('sales_model');
 		$result = $this->user_model->get_all_children($this->user['membership_code']);
+		$result2 = $this->sales_model->get_list("sales_insured_dob IS NOT NULL OR sales_owner_dob IS NOT NULL");
 		$grades = array();
-		$statuses = array();
+		$statuses = array(); 
 		$birthday1 = array();
 		$birthday2 = array();
+		$birthday3 = array();
+		$birthday4 = array();
+		foreach($result2 as $r){
+			if(!empty($r['sales_insured_dob'])){
+				$d = $this->_valid_dob($r['sales_insured_dob']);
+				if($d == 0){
+					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['name'], 'dob' => $r['dob']));
+				}
+				else if($d > 0 && $d < 3){
+					array_push($birthday2, array('sales_id' => $r['sales_id'], 'name' => $r['name'], 'dob' => $r['dob']));
+				}
+			}
+		}
 		foreach($result as $r){
 			if(!array_key_exists($r['grade'], $grades)){
 				$grades[$r['grade']] = 0;
@@ -27,24 +51,21 @@ class Account extends Smd_Controller {
 			}
 			$grades[$r['grade']]++;
 			$statuses[$r['status']]++;
-			
-			$ds = explode('-', $r['date_of_birth']);
-			$d = date_create(date_format(date_create(), 'Y')."-$ds[1]-$ds[2]");
-			$today = date_create();
-			$diff=date_diff($today,$d);
-			$d = $diff->format("%R%a");
+			$d = $this->_valid_dob($r['date_of_birth']);
 			if($d == 0){
-				array_push($birthday1, $r);
+				array_push($birthday3, $d);
 			}
 			else if($d > 0 && $d < 3){
-				array_push($birthday2, $r);
+				array_push($birthday4, $d);
 			}
 		}
 		$this->nav_menus['account']['sub_menus']['']['active'] = true;
 		$this->load_view('account/dashboard', array('grades' => $grades, 
 			'statuses' => $statuses,
 			'birthday1' => $birthday1,
-			'birthday2' => $birthday2
+			'birthday2' => $birthday2,
+			'birthday3' => $birthday3,
+			'birthday4' => $birthday4
 		));
 	}
 
