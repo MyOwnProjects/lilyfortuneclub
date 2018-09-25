@@ -61,7 +61,6 @@ class Account extends Smd_Controller {
 			$grades[$r['grade']]++;
 			$statuses[$r['status']]++;
 			$d = $this->_valid_dob($r['date_of_birth']);
-			echo $d.' ';
 			if($d == 0){
 				array_push($birthday3, $r);
 			}
