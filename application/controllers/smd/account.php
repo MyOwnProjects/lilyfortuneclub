@@ -61,11 +61,11 @@ class Account extends Smd_Controller {
 			$grades[$r['grade']]++;
 			$statuses[$r['status']]++;
 			$d = $this->_valid_dob($r['date_of_birth']);
-			if(true){//$d == 0){
-				array_push($birthday3, $d);
+			if($d == 0){
+				array_push($birthday3, $r);
 			}
 			else if($d > 0 && $d < 3){
-				array_push($birthday4, $d);
+				array_push($birthday4, $r);
 			}
 		}
 		$this->nav_menus['account']['sub_menus']['']['active'] = true;
