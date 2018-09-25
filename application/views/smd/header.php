@@ -1,13 +1,13 @@
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
-		<div class="navbar-header">
+		<!--div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>                        
 			</button>
 			<span class="navbar-brand"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Welcome, <?php echo $user['first_name'];?>!&nbsp;&nbsp;&nbsp;&nbsp;</span>
-		</div>
+		</div-->
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="<?php echo base_url();?>">Home</a></li>
