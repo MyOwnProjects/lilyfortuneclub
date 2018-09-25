@@ -35,10 +35,19 @@ class Account extends Smd_Controller {
 			if(!empty($r['sales_insured_dob'])){
 				$d = $this->_valid_dob($r['sales_insured_dob']);
 				if($d == 0){
-					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['name'], 'dob' => $r['dob']));
+					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['sales_insured'], 'dob' => $r['sales_insured_dob']));
 				}
 				else if($d > 0 && $d < 3){
-					array_push($birthday2, array('sales_id' => $r['sales_id'], 'name' => $r['name'], 'dob' => $r['dob']));
+					array_push($birthday2, array('sales_id' => $r['sales_id'], 'name' => $r['sales_insured'], 'dob' => $r['sales_insured_dob']));
+				}
+			}
+			if(!empty($r['sales_owner_dob'])){
+				$d = $this->_valid_dob($r['sales_owner_dob']);
+				if($d == 0){
+					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['sales_owner'], 'dob' => $r['sales_owner_dob']));
+				}
+				else if($d > 0 && $d < 3){
+					array_push($birthday2, array('sales_id' => $r['sales_id'], 'name' => $r['sales_owner'], 'dob' => $r['sales_owner_dob']));
 				}
 			}
 		}
@@ -52,7 +61,7 @@ class Account extends Smd_Controller {
 			$grades[$r['grade']]++;
 			$statuses[$r['status']]++;
 			$d = $this->_valid_dob($r['date_of_birth']);
-			if($d == 0){
+			if(true){//$d == 0){
 				array_push($birthday3, $d);
 			}
 			else if($d > 0 && $d < 3){
