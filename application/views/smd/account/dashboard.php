@@ -10,7 +10,51 @@
 </style>
 <div class="main-body-wrapper">
 	<div class="row">
-		<div></div>
+		<div class="col-md-6 col-sm-12">
+			<?php
+			if(!empty($birthday1) || !empty($birthday2)){
+			?>
+			<div class="panel panel-warning">
+				<div class="panel-heading" style="padding-left:40px;font-weight:bold;background-image:url(<?php echo base_url();?>src/img/cake_red.svg);background-repeat:no-repeat;background-position:5px 5px;background-size:25px 25px">Recent Birthday</div>
+				<div class="panel-body">
+					<table class="table">
+					<?php
+					foreach($birthday1 as $b){
+					?>
+						<tr>
+							<td><a href="<?php echo base_url();?>smd/team/member/<?php echo $b['membership_code'];?>"><?php echo (empty($b['nick_name']) ? $b['first_name'] : $b['nick_name']).' '.$b['last_name'];?></a></td>
+							<td style="color:red">Today</td>
+						</tr>
+					<?php
+					}
+					if(!empty($birthday2)){
+					?>
+						<tr>
+							<td><a href="<?php echo base_url();?>smd/team/member/<?php echo $b['membership_code'];?>"><?php echo (empty($b['nick_name']) ? $b['first_name'] : $b['nick_name']).' '.$b['last_name'];?></a></td>
+							<td><?php echo date_format(date_create($b['date_of_birth']), 'M d');?></td>
+						</tr>
+					<?php
+					}
+					?>
+					</table>
+				</div>
+			</div>
+			<?php
+			}
+			?>
+  		</div>
+		<div class="col-med-6 col-sm-6">
+			<?php
+			if(!empty($birthday2)){
+			?>
+			<div class="panel panel-warning">
+				<div class="panel-heading">Birday in 3 Days</div>
+				<div class="panel-body">Panel Content</div>
+			</div>
+			<?php
+			}
+			?>
+  		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4">

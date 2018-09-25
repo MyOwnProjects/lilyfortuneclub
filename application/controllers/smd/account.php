@@ -16,6 +16,8 @@ class Account extends Smd_Controller {
 		$result = $this->user_model->get_all_children($this->user['membership_code']);
 		$grades = array();
 		$statuses = array();
+		$birthday1 = array();
+		$birthday2 = array();
 		foreach($result as $r){
 			if(!array_key_exists($r['grade'], $grades)){
 				$grades[$r['grade']] = 0;
@@ -25,10 +27,25 @@ class Account extends Smd_Controller {
 			}
 			$grades[$r['grade']]++;
 			$statuses[$r['status']]++;
+			
+			$ds = explode('-', $r['date_of_birth']);
+			$d = date_create(date_format(date_create(), 'Y')."-$ds[1]-$ds[2]");
+			$today = date_create();
+			$diff=date_diff($today,$d);
+			$d = $diff->format("%R%a");
+			if(true){//$d == 0){
+				array_push($birthday1, $r);
+			}
+			else if($d > 0 && $d < 3){
+				array_push($birthday2, $r);
+			}
 		}
-		
 		$this->nav_menus['account']['sub_menus']['']['active'] = true;
-		$this->load_view('account/dashboard', array('grades' => $grades, 'statuses' => $statuses));
+		$this->load_view('account/dashboard', array('grades' => $grades, 
+			'statuses' => $statuses,
+			'birthday1' => $birthday1,
+			'birthday2' => $birthday2
+		));
 	}
 
 }
