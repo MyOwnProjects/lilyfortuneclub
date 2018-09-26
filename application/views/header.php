@@ -35,7 +35,7 @@
 						<?php if($user['preference'] == 'B' || $user['preference'] == 'BE'){?>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/how_to" title="How to"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/question-mark-on-a-circular-black-background.svg"><div class="text">How to</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/team" title="My team"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/team.svg"><div class="text">My Team</div></div></a>
-						<!--a class="menu-ico-url" href="<?php echo base_url();?>account/sales" title="My sales"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/team.svg"><div class="text">My Sales</div></div></a-->
+						<a class="menu-ico-url" href="<?php echo base_url();?>account/sales" title="My sales"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/sale.svg"><div class="text">My Sales</div></div></a>
 						<?php }?>
 					<?php
 						}

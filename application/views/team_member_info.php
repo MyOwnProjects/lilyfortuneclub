@@ -14,97 +14,85 @@
 <div class="main-content-wrapper">
 	<h2 class="text-center">Team Member</h2>
 	<div style="height:40px"></div>
-	<div class="">
 		<div class="row">
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label"><label>Name:</label></div>
-				<div class="block-value"><?php echo $name;?></div>
-			</div>
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label">
-					<label>Code:</label>
+			<div class="col-sm-6 col-xs-12">
+				<div class="clearfix">
+					<div class="block-label"><label>Name:</label></div>
+					<div class="block-value"><?php echo $name;?></div>
 				</div>
-				<div class="block-value"><?php echo $membership_code;?></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label"><label>Grade:</label></div>
-				<div class="block-value"><?php echo $grade;?></div>
-			</div>
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label">
-					<label>Recruiter:</label>
+				<div class="clearfix">
+					<div class="block-label">
+						<label>Code:</label>
+					</div>
+					<div class="block-value"><?php echo $membership_code;?></div>
 				</div>
-				<?php $count = count($ancestors);?>
-				<div class="block-value"><?php echo $count > 2 ? $ancestors[$count - 2]['first_name'].' '.$ancestors[$count - 2]['last_name'].' ('.$ancestors[$count - 2]['membership_code'].')' : 'N/A';?></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label"><label>Baseshop:</label></div>
-				<div class="block-value"><?php echo $children;?></div>
-			</div>
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label">
-					<label>Direct Downline:</label>
+				<div class="clearfix">
+					<div class="block-label"><label>Grade:</label></div>
+					<div class="block-value"><?php echo $grade;?></div>
 				</div>
-				<div class="block-value"><?php echo $downline;?></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label">
-					<label>Birthday:</label>
+				<div class="clearfix">
+					<div class="block-label">
+						<label>Recruiter:</label>
+					</div>
+					<?php $count = count($ancestors);?>
+					<div class="block-value"><?php echo $count > 2 ? $ancestors[$count - 2]['first_name'].' '.$ancestors[$count - 2]['last_name'].' ('.$ancestors[$count - 2]['membership_code'].')' : 'N/A';?></div>
+				</div>
+				<div class="clearfix">
+					<div class="block-label"><label>Baseshop:</label></div>
+					<div class="block-value"><?php echo $children;?></div>
+				</div>
+				<div class="clearfix">
+					<div class="block-label">
+						<label>Direct Downline:</label>
+					</div>
+					<div class="block-value"><?php echo $downline;?></div>
+				</div>
+				<div class="clearfix">
+					<div class="block-label">
+						<label>Birthday:</label>
+					</div>
+					<?php
+					$dl = explode('-', $date_of_birth);
+					?>
+					<div class="block-value"><?php echo $dl[1].' / '.$dl[2];?></div>
+				</div>
+				<div class="clearfix">
+					<div class="block-label"><label>Email:</label></div>
+					<div class="block-value"><?php echo $email;?></div>
+				</div>
+				<div class="clearfix">
+					<div class="block-label"><label>Address:</label></div>
+					<div class="block-value"><?php echo $street.',<br/>'.$city.', '.$state.' '.$zipcode.'<br/>'.$country;?></div>
+				</div>
+				<div class="clearfix">
+					<div class="block-label">
+						<label>Phone:</label>
+					</div>
+					<div class="block-value"><?php echo str_replace(',', '<br/>', $phone);?></div>
+				</div>
+				<div class="clearfix">
+					<div class="block-label">
+						<label>Start Date:</label>
+					</div>
+					<div class="block-value"><?php echo $start_date;?></div>
 				</div>
 				<?php
-				$dl = explode('-', $date_of_birth);
-				?>
-				<div class="block-value"><?php echo $dl[1].' / '.$dl[2];?></div>
-			</div>
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label"><label>Email:</label></div>
-				<div class="block-value"><?php echo $email;?></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label"><label>Address:</label></div>
-				<div class="block-value"><?php echo $street.',<br/>'.$city.', '.$state.' '.$zipcode.'<br/>'.$country;?></div>
-			</div>
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label">
-					<label>Phone:</label>
-				</div>
-				<div class="block-value"><?php echo str_replace(',', '<br/>', $phone);?></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label">
-					<label>Start Date:</label>
-				</div>
-				<div class="block-value"><?php echo $start_date;?></div>
-			</div>
-			<?php
-				$u = '';
-				foreach($ancestors as $i => $a){
-					if($i > 0){
-						$u .= '<br/><span class="glyphicon glyphicon-triangle-top"></span><br/>';
+					$u = '';
+					foreach($ancestors as $i => $a){
+						if($i > 0){
+							$u .= '<br/><span class="glyphicon glyphicon-arrow-up"></span><br/>';
+						}
+						$u .= '<span class="badge" style="font-size:14px">'.$a['first_name'].' '.$a['last_name'].' ('.$a['membership_code'].')</span>';
 					}
-					$u .= $a['first_name'].' '.$a['last_name'].' ('.$a['membership_code'].')';
-				}
-			?>
-	
-			
-			<div class="col-sm-6 col-xs-12 clearfix">
-				<div class="block-label">
-					<label>Upline:</label>
+				?>
+				<div class="clearfix">
+					<div class="block-label">
+						<label>Upline:</label>
+					</div>
+					<div class="block-value clearfix">
+						<div class="text-center" style="float:left"><?php echo $u;?></div>
+					</div>
 				</div>
-				<div class="block-value clearfix">
-					<div class="text-center" style="float:left"><?php echo $u;?></div>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
