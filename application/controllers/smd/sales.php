@@ -67,6 +67,10 @@ class Sales extends Smd_Controller {
 	public function sales_case($sales_id = null){
 		$sales = $this->sales_model->get_sales($sales_id);
 		$users = $this->user_model->get_list('', $sort = array('last_name' => 'ASC', 'first_name' => 'ASC'));
+		$users1 = array();
+		foreach($users as $u){
+			array_push($users1, array('text' => $u['first_name'].' '.$u['last_name'].' ('.$u['membership_code'].')', 'value' => $u['membership_code']));
+		}
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$prop = $this->input->post();
 			foreach($prop as $k => $v){
@@ -101,7 +105,7 @@ class Sales extends Smd_Controller {
 		else{
 			$sale = array();
 		}
-		$this->load_view('sales/new_case', array('sale' => $sale, 'users' => $users));
+		$this->load_view('sales/new_case', array('sale' => $sale, 'users' => $users1));
 	}
 
 	public function member($membership_code = 0){
