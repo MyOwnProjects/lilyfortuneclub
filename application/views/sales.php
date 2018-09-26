@@ -38,7 +38,7 @@
 			'C' => array('Closed', 'default'),
 			'CA' => array('Canceled', 'default')
 		);
-		if(false){//count($sales) > 0){
+		if(count($sales) > 0){
 			foreach($sales as $i => $row){
 			?>
 				<a href="#">
