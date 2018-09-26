@@ -23,6 +23,7 @@
 </style>
 <div class="main-content-wrapper">
 	<h2 class="text-center">My Sales</h2>
+	<div class="text-right" style="margin-bottom:10px"><a href="#"><img style="width:20px" src="<?php echo base_url();?>src/img/pencil.svg"></a></div>
 	<div>
 		<div class="simple-list">
 		<?php

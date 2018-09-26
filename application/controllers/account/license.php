@@ -92,36 +92,19 @@ class License extends Account_base_controller {
 				),
 				array(
 					'title' => 'Appoint',
-					'comment' =>'To sell products through certain product providers, you must be properly appointed.',
-					'subject' => "License Appoitment",
+					'comment' =>'To sell products through certain product providers, you must be properly appointed. There are 3 easy steps:',
+					'subject' => "Carrier Appoitment",
 					'image_file_name'=> 'license-appointment',
 					'steps' => array(
-							'Print the license and 3 CE certificates, sign them, and scan them to one PDF or image file.',
-							'Send an email, attached with the files in last step, to <b><i>wfghost@transamerica.com</i></b> and <b><i>wfglicenseapps@transamerica.com</i></b>.',
-							'Sign in to <a href="https://www.mywfg.com" target="_blank">www.mywfg.com</a>, click the <i>MENU</i> at the top right of the screen. Then select <i>Licensing</i> > </i>Appoitments</i>.',
-							'Click <i>Carrier Appointments</i>.',
-							'Let us, by example, select <i>Non-New York Life and Disability</i> carrier with <i>Transamerica PremierLife Insurance Company</i>.<br/>Select <i>Life and Disability Insuarance</i>.',
-							'Click <i>Non-New York Life and Disability Carriers</i>.',
-							'Click <i>Transamerica Premier Life Insuarance Company - TPLIC (P00002)</i>.',
-							'Click <i>Resident</i>.',
-							'Click the link <i>Click here to continue</i>.',
-							'At the bottom of the agreement page, type the date and your name, and then click <i>I Accept</i> button.',
-							'Click <i>Next</i> botton.',
-							'Enter your personal information, and then click <i>Next</i> botton.',
-							'Enter your resisdence address, and then click <i>Next</i> botton.',
-							'Enter your bisuness address, and then click <i>Next</i> botton.<br/><u>NOTE: Business address CANNOT be same as home address.</u>',
-							'Finish items in the background check page, and then click <i>Next</i> botton.',
-							'Select the states, and then click <i>Next</i> botton.',
-							'Select the products, and then click <i>Next</i> botton.',
-							'Check the items in acknowledgement page, and then click <i>Next</i> botton.',
-							'Fill additional information, and then click <i>Next</i> botton.',
-							'Click the <i>Review</i> botton on each document.',
-							'In each document review page, click the <i>Apply eSignature</i> botton at the bottom of the page.',
-							'After review the documents,click <i>Submit</i> botton.',
-							'You have finished to appoint with the Transamerica Premier Life Insuarance Company. To appoint with other providres, select other product type/crriers, and fowllow the instruction.',
+							'<b>License Status.</b> Check the status of license in that state on MyWFG.com at MENU > Commissions & Reports > Run a Report. <b>After the status is ready, go to step 2; Otherwise wait until the status is ready.</b>',
+							'<b>Electronic Appointment.</b> Go to MyWFG.com at MENU > Licensing & Appointments > Appointments > Carrier Appointments, select "Life and Disability Insurance", and then "Non-New Youk Life and Disability Carriers". Select the provider, and then fowllow the instruction.<br/>'
+							.'&nbsp;&nbsp;&nbsp;&nbsp;- PacLife and Nationwide, it may or may not background questionnaire, depends on the state.<br/>' 
+							.'&nbsp;&nbsp;&nbsp;&nbsp;- Transamerica, need to fill eForm online, and submit.<br/>'
+							.'&nbsp;&nbsp;&nbsp;&nbsp;- Voya, need to download and fill the paper application, and send through email (instruction on the paper application). ',
+							'<b>Additional Email.</b> Send an email to wfghost@transamerica.com and wfglicenseapps@transamerica.com, attached with license certificate and all required CE certificate (both resident and nonresident state CE certificate, for nonresident appointment).',
 					),
 				));
-		}
+			}
 		}
 		$this->summary = array(
 			'summary' => 'There are 2 or 3 steps to get your license, denpends on the state',
