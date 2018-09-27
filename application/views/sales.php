@@ -8,6 +8,7 @@
 #page-summary .row>div>div:first-child{float:left;font-weight:bold;width:100px;margin-right:20px;line-height:30px}
 #page-summary .row>div>div:nth-child(2){overflow:hidden;line-height:30px}
 
+.simple-list div{white-space:nowrap;text-overflow:ellipsis}
 .simple-list{border-bottom:1px solid #d5d5d5}
 .simple-list .simple-list-row{border-top:1px solid #d5d5d5}
 .simple-list .simple-list-row>div{padding:10px}
@@ -18,16 +19,16 @@
 .simple-list .simple-list-row>div:nth-child(2){float:right}
 .simple-list .simple-list-row>div:nth-child(2){overflow:hidden;}
 .simple-list .simple-list-row>div:nth-child(2)>div:first-child{width:150px;float:left}
-.simple-list .simple-list-row>div:nth-child(2)>div:nth-child(2){float:left;width:120px;white-space:nowrap;text-overflow:ellipsis}
+.simple-list .simple-list-row>div:nth-child(2)>div:nth-child(2){float:left;width:120px}
 .simple-list .simple-list-row>div:nth-child(2)>div:last-child{float:left;width:180px;}
 @media only screen and (max-width:800px) {
 .simple-list .simple-list-row>div:first-child{display:none}
 }
-@media only screen and (max-width:600px) {
-.simple-list .simple-list-row>div:last-child{float:none;width:100%}
-.simple-list .simple-list-row>div:nth-child(2){float:left}
-.simple-list .simple-list-row>div:nth-child(3){float:left}
-.simple-list .simple-list-row>div:nth-child(4){float:left}
+@media only screen and (max-width:480px) {
+.simple-list .simple-list-row>div{padding:5px 10px}
+.simple-list .simple-list-row>div:last-child{float:none;width:100%;}
+.simple-list .simple-list-row>div:nth-child(2){float:none;width:100%}
+.simple-list .simple-list-row>div:nth-child(2)>div:last-child{display:none}
 }
 
 </style>
