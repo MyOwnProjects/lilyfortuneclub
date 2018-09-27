@@ -18,7 +18,8 @@
 .simple-list .simple-list-row>div:not(:nth-child(1)):not(:last-child){float:right}
 .simple-list .simple-list-row>div:last-child{overflow:hidden}
 .simple-list .simple-list-row>div:nth-child(2){width:180px}
-.simple-list .simple-list-row>div:nth-child(4){width:120px;}
+.simple-list .simple-list-row>div:nth-child(3){width:120px;}
+.simple-list .simple-list-row>div:nth-child(4){width:150px;}
 .simple-list .simple-list-row>div:nth-child(5){width:80px;text-align:center}
 </style>
 <div class="main-content-wrapper">
@@ -34,10 +35,10 @@
 			'T' => 'Term',
 		);
 		$status = array(
-			'I' => array('Inforced', 'success'),
-			'P' => array('Pending', 'danger'),
-			'C' => array('Closed', 'default'),
-			'CA' => array('Canceled', 'default')
+			'I' => 'Inforced',
+			'P' => 'Pending',
+			'C' => 'Closed',
+			'CA' => 'Canceled'
 		);
 		if(count($sales) > 0){
 			foreach($sales as $i => $row){
@@ -46,9 +47,11 @@
 				<div class="simple-list-row clearfix">
 					<div class="simple-list-seq"><?php echo $i + 1;?></div>
 					<div><?php echo $row['sales_provider'].' / '.$types[$row['sales_policy_type']];?></div>
-					<div><?php echo $row['sales_date_submission'];?></div>
 					<div class="<?php echo empty($row['sales_policy_no']) ? 'simple-list-cell-grey' : '';?>"><?php echo empty($row['sales_policy_no']) ? 'No Policy #' : $row['sales_policy_no'];?></div>
-					<div><span class="label label-<?php echo $status[$row['sales_status']][1];?>"><?php echo $status[$row['sales_status']][0];?></span></div>
+					<div>
+						<?php echo ($row['sales_priority'] > 0 ? '<span class="label label-danger">High</span>' : ($row['sales_priority'] == 0 ? '<span class="label label-warning">Medium</span>' : '<span class="label label-success">Low</span>'))
+							.' - '.$status[$row['sales_status']];?>
+					</div>
 					<div>
 						<?php echo $row['sales_insured'].(empty($row['sales_owner']) ? '' : ' / '.$row['sales_owner']);?>
 					</div>
