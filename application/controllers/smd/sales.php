@@ -51,13 +51,13 @@ class Sales extends Smd_Controller {
 			$ret['rows'] = $this->sales_model->get_list('', $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count'], $search, $filter);
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
-				$ret['rows'][$i]['sales_priority'] = $r['sales_priority'] > 0 ? '<span class="label label-danger">High</span>' : ($r['sales_priority'] == 0 ? '<span class="label label-warning">Medium</span>' : '<span class="label label-success">Low</span>');
+				$ret['rows'][$i]['sales_priority'] = ($r['sales_priority'] > 0 ? '<span class="label label-danger">High</span>' : ($r['sales_priority'] == 0 ? '<span class="label label-warning">Medium</span>' : '<span class="label label-success">Low</span>'))
+					.' - '.$sales_status[$r['sales_status']];
 				$ret['rows'][$i]['sales_policy_no'] = $r['sales_policy_no'];
 				$ret['rows'][$i]['sales_client'] = $r['sales_insured'].(empty($r['sales_owner']) ? '' : ' / '.$r['sales_owner']);
 				$ret['rows'][$i]['sales_agents'] = $r['agent1'].(empty($r['sales_split_agent']) ? '' : ' / '.$r['agent2']);
 				$ret['rows'][$i]['sales_policy'] = $r['sales_provider'].' / '.$policy_types[$r['sales_policy_type']];
 				$ret['rows'][$i]['sales_face_amount'] = number_to_english($r['sales_face_amount']);
-				$ret['rows'][$i]['sales_status'] = $sales_status[$r['sales_status']];
 				$ret['rows'][$i]['action'] = array('view' => base_url().'smd/sales/sales_case/'.$r['sales_id']);
 			}
 		}
