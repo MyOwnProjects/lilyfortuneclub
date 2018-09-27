@@ -30,6 +30,19 @@ $general_select = function($list, $name) use($sale){
 };
 $fields = array(
 	array(
+		'sales_priority' => array(
+			'label' => 'Priority',
+			'tag' => 'select',
+			'options' => $general_select(array(
+				1 => 'High', 0 => 'Medium', -1 => 'Low'
+			), 'sales_priority')
+		),
+		'sales_priority_note' => array(
+			'label' => 'Priority Note',
+			'tag' => 'textarea',
+			'rows' => '5',
+			'value'=> empty($sale) ? '': $sale['sales_priority_note']
+		),
 		'sales_writing_agent' => array(
 			'label' => 'Writing Agent',
 			'tag' => 'select',
@@ -245,6 +258,11 @@ $fields = array(
 <div style="margin:40px"> 
 	<h4><?php echo empty($sale) ? 'New Case' : 'Edit Case'?></h4>
 	<form method="post"  action="<?php echo base_url();?>smd/sales/sales_case<?php echo empty($sale) ? '' : '/'.$sale['sales_id']; ?>">
+		<div style="margin:20px 0 10px 0">
+			<input type="submit" value="Submit" class="btn btn-sm btn-primary">
+			&nbsp;&nbsp;
+			<a href="<?php echo base_url();?>smd/sales">Back to List</a>
+		</div>
 		<div class="clearfix">
 			<?php
 			foreach($fields as $field){
@@ -252,7 +270,6 @@ $fields = array(
 			}
 			?>
 		</div>
-		<div><input type="submit" value="Submit" class="btn btn-md btn-primary"></div>
 	</form>
 	<!--form method="post" style="margin:40px" action="<?php echo base_url();?>smd/sales/sales_case<?php echo empty($sale) ? '' : '/'.$sale['sales_id']; ?>">
 		<?php 
