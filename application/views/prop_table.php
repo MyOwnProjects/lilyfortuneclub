@@ -4,13 +4,14 @@
 .table-prop td{padding:2px 5px;border:1px solid #e5e5e5}
 .table-prop td.prop-label{background:#f8f8f8;text-align:right}
 .table-prop input, .table-prop select, .table-prop textarea{border:none;outline:none;box-sizing:border-box;width:100%;line-height:initial !important}
-	
+.table-prop	tr.prop-error td:first-child{border-right:1px solid red}
+.table-prop	tr.prop-error td:last-child{border:1px solid red}
 </style>
 <table class="table-prop pull-left" border="0" cellspacing="0" cellpadding="0">
 				<?php
 				foreach($field as $id => $prop){
 				?>
-				<tr>
+				<tr class="<?php echo !empty($error) && in_array($id, $error['fields']) ? 'prop-error' : ''; ?>">
 					<td class="prop-label"><?php echo $prop['label'];?></td>
 					<td class="prop-value">
 						<?php
@@ -46,3 +47,8 @@
 				}
 				?>
 			</table>
+<script>
+$('.table-prop .prop-value input, .table-prop .prop-value select, .table-prop .prop-value textarea').change(function(){
+	$('.table-prop tr').removeClass('prop-error');
+});	
+</script>

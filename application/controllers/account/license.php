@@ -98,7 +98,7 @@ class License extends Account_base_controller {
 					'steps' => array(
 							'<b>License Status.</b> Check the status of license in that state on MyWFG.com at MENU > Commissions & Reports > Run a Report. <b>After the status is ready, go to step 2; Otherwise wait until the status is ready.</b>',
 							'<b>Electronic Appointment.</b> Go to MyWFG.com at MENU > Licensing & Appointments > Appointments > Carrier Appointments, select "Life and Disability Insurance", and then "Non-New Youk Life and Disability Carriers". Select the provider, and then fowllow the instruction.<br/>'
-							.'&nbsp;&nbsp;&nbsp;&nbsp;- PacLife and Nationwide, it may or may not background questionnaire, depends on the state.<br/>' 
+							.'&nbsp;&nbsp;&nbsp;&nbsp;- PacLife and Nationwide, may or may not background questionnaire, depends on the state.<br/>' 
 							.'&nbsp;&nbsp;&nbsp;&nbsp;- Transamerica, need to fill eForm online, and submit.<br/>'
 							.'&nbsp;&nbsp;&nbsp;&nbsp;- Voya, need to download and fill the paper application, and send through email (instruction on the paper application). ',
 							'<b>Additional Email.</b> Send an email to wfghost@transamerica.com and wfglicenseapps@transamerica.com, attached with license certificate and all required CE certificate (both resident and nonresident state CE certificate, for nonresident appointment).',

@@ -12,6 +12,75 @@ class Sales extends Account_base_controller {
 		$this->load_view('sales', array('sales' => $sales));
 	}
 	
+	public function sales_case($sales_id = null){
+		$sale = array();
+		if(isset($sales_id)){
+			$sales = $this->sales_model->get_list("sales_id='$sales_id' AND (sales_writing_agent='".$this->user['membership_code']."' OR sales_split_agent='".$this->user['membership_code']."')");
+			if(count($sales) > 0){
+				$sale = $sales[0];
+			}
+			else{
+				$sales_id = null;
+			}
+		}
+		$error = array();
+		$this->load->model('user_model');
+		$users = $this->user_model->get_list("membership_code <> '".$this->user['membership_code']."'", $sort = array('last_name' => 'ASC', 'first_name' => 'ASC'));
+		$users1 = array();
+		foreach($users as $u){
+			array_push($users1, array('text' => $u['first_name'].' '.$u['last_name'].' ('.$u['membership_code'].')', 'value' => $u['membership_code']));
+		}
+
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$prop = $this->input->post();
+			if($prop['sales_writing_agent'] != $this->user['membership_code'] 
+				&& $prop['sales_split_agent'] != $this->user['membership_code']){
+				$error = array('text'=> 'Neither writing agent nor split agent is yourself.', 'fields' => array(
+					'sales_writing_agent', 'sales_split_agent'
+				));
+			}
+			else if($prop['sales_writing_agent'] == $prop['sales_split_agent']){
+				$error = array('text'=> 'Writing agent cannot be same as split agent.', 'fields' => array(
+					'sales_writing_agent', 'sales_split_agent'
+				));
+			}
+			else{
+				foreach($prop as $k => $v){
+					$v = trim(addslashes(strip_tags($v)));
+					if($k == 'sales_split_agent' && $v == '0'){
+						$prop[$k] = "NULL";
+					}
+					else if($k == 'sales_policy_no' && $v == ''){
+						$prop[$k] = "NULL";
+					}
+					else if(($k == 'sales_date_closure' || $k == 'sales_insured_dob' || $k == 'sales_owner_dob') && $v == ''){
+						$prop[$k] = "NULL";
+					}
+					else{
+						$prop[$k] = "'$v'";
+					}
+				}
+				if(count($sales) > 0){
+					$res = $this->sales_model->update($sales[0]['sales_id'], $prop);
+				}
+				else{
+					$res = $this->sales_model->insert($prop);
+				}
+				if($res){
+					header('location: '.base_url().'smd/sales');
+					return;
+				}			
+			}
+			if(!empty($error)){
+				foreach($prop as $k => $v){
+					$sale[$k] = $v;
+				}
+			}
+		}
+		
+		$this->load_view('sales_case', array('error' => $error, 'sales_id' => $sales_id, 'sale' => $sale, 'users' => $users1));
+	}
+	
 	public function team_member_info($code = 0){
 		$this->load->model('user_model');
 		$ancestors = $this->user_model->get_ancestors($code);
