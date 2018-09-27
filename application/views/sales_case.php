@@ -254,8 +254,9 @@ $fields = array(
 	?>
 	<form method="post"  action="<?php echo base_url();?>account/sales/sales_case<?php echo empty($sales_id) ? '' : '/'.$sales_id; ?>">
 		<div style="margin:20px 0 10px 0">
-			<input type="submit" value="Submit" class="btn btn-sm btn-success">
-			<a href="<?php echo base_url();?>account/sales" class="btn btn-sm">Back to List</a>
+			<input type="submit" value="Submit" class="btn btn-sm btn-primary">
+			&nbsp;&nbsp;
+			<a href="<?php echo base_url();?>account/sales">Back to List</a>
 		</div>
 		<div class="clearfix">
 			<?php
