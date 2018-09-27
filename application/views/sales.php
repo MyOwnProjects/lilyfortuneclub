@@ -15,11 +15,21 @@
 .simple-list a{text-decoration:none;color:#000}
 .simple-list .simple-list-row:hover{background:#f8f8f8}
 .simple-list .simple-list-row>div:first-child{float:left;width:50px;text-align:center}
-.simple-list .simple-list-row>div:not(:nth-child(1)):not(:last-child){float:right}
-.simple-list .simple-list-row>div:nth-child(2){width:180px}
-.simple-list .simple-list-row>div:nth-child(3){width:120px;}
-.simple-list .simple-list-row>div:nth-child(4){width:150px;}
-.simple-list .simple-list-row>div:last-child{overflow:hidden}
+.simple-list .simple-list-row>div:nth-child(2){float:right}
+.simple-list .simple-list-row>div:nth-child(2){overflow:hidden;}
+.simple-list .simple-list-row>div:nth-child(2)>div:first-child{width:150px;float:left}
+.simple-list .simple-list-row>div:nth-child(2)>div:nth-child(2){float:left;width:120px;white-space:nowrap;text-overflow:ellipsis}
+.simple-list .simple-list-row>div:nth-child(2)>div:last-child{float:left;width:180px;}
+@media only screen and (max-width:800px) {
+.simple-list .simple-list-row>div:first-child{display:none}
+}
+@media only screen and (max-width:600px) {
+.simple-list .simple-list-row>div:last-child{float:none;width:100%}
+.simple-list .simple-list-row>div:nth-child(2){float:left}
+.simple-list .simple-list-row>div:nth-child(3){float:left}
+.simple-list .simple-list-row>div:nth-child(4){float:left}
+}
+
 </style>
 <div class="main-content-wrapper">
 	<h2 class="text-center">My Sales</h2>
@@ -45,11 +55,13 @@
 				<a href="<?php echo base_url();?>account/sales/sales_case/<?php echo $row['sales_id']; ?>">
 				<div class="simple-list-row clearfix">
 					<div class="simple-list-seq"><?php echo $i + 1;?></div>
-					<div><?php echo $row['sales_provider'].' / '.$types[$row['sales_policy_type']];?></div>
-					<div class="<?php echo empty($row['sales_policy_no']) ? 'simple-list-cell-grey' : '';?>"><?php echo empty($row['sales_policy_no']) ? 'No Policy #' : $row['sales_policy_no'];?></div>
-					<div>
-						<?php echo ($row['sales_priority'] > 0 ? '<span class="label label-danger">High</span>' : ($row['sales_priority'] == 0 ? '<span class="label label-warning">Medium</span>' : '<span class="label label-success">Low</span>'))
-							.' - '.$status[$row['sales_status']];?>
+					<div class="clearfix">
+						<div>
+							<?php echo ($row['sales_priority'] > 0 ? '<span class="label label-danger">High</span>' : ($row['sales_priority'] == 0 ? '<span class="label label-warning">Medium</span>' : '<span class="label label-success">Low</span>'))
+								.' - '.$status[$row['sales_status']];?>
+						</div>
+						<div class="<?php echo empty($row['sales_policy_no']) ? 'simple-list-cell-grey' : '';?>"><?php echo empty($row['sales_policy_no']) ? 'No Policy #' : $row['sales_policy_no'];?></div>
+						<div><?php echo $row['sales_provider'].' / '.$types[$row['sales_policy_type']];?></div>
 					</div>
 					<div>
 						<?php echo $row['sales_insured'].(empty($row['sales_owner']) ? '' : ' / '.$row['sales_owner']);?>
