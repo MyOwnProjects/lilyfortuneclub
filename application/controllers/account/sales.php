@@ -25,7 +25,7 @@ class Sales extends Account_base_controller {
 		}
 		$error = array();
 		$this->load->model('user_model');
-		$users = $this->user_model->get_list("membership_code <> '".$this->user['membership_code']."'", $sort = array('last_name' => 'ASC', 'first_name' => 'ASC'));
+		$users = $this->user_model->get_list('', $sort = array('last_name' => 'ASC', 'first_name' => 'ASC'));
 		$users1 = array();
 		foreach($users as $u){
 			array_push($users1, array('text' => $u['first_name'].' '.$u['last_name'].' ('.$u['membership_code'].')', 'value' => $u['membership_code']));
@@ -67,7 +67,7 @@ class Sales extends Account_base_controller {
 					$res = $this->sales_model->insert($prop);
 				}
 				if($res){
-					header('location: '.base_url().'smd/sales');
+					header('location: '.base_url().'account/sales');
 					return;
 				}			
 			}
