@@ -16,11 +16,10 @@
 .simple-list .simple-list-row:hover{background:#f8f8f8}
 .simple-list .simple-list-row>div:first-child{float:left;width:50px;text-align:center}
 .simple-list .simple-list-row>div:not(:nth-child(1)):not(:last-child){float:right}
-.simple-list .simple-list-row>div:last-child{overflow:hidden}
 .simple-list .simple-list-row>div:nth-child(2){width:180px}
 .simple-list .simple-list-row>div:nth-child(3){width:120px;}
 .simple-list .simple-list-row>div:nth-child(4){width:150px;}
-.simple-list .simple-list-row>div:nth-child(5){width:80px;text-align:center}
+.simple-list .simple-list-row>div:last-child{overflow:hidden}
 </style>
 <div class="main-content-wrapper">
 	<h2 class="text-center">My Sales</h2>
