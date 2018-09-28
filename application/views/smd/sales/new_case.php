@@ -69,17 +69,32 @@ $fields = array(
 			), 'sales_status'),
 			'split' => true, 
 		),
-		'sales_policy_no' => array(
-			'label' => 'Policy NO',
-			'tag' => 'input',
-			'value'=> empty($sale) ? '': $sale['sales_policy_no'],
-		),
 		'sales_face_amount' => array(
 			'label' => 'Face Amount',
 			'tag' => 'input',
 			'type' => 'number',
 			'min' => '0',
 			'value' => empty($sale) ? '': $sale['sales_face_amount']
+		),
+		'sales_target_premium' => array(
+			'label' => 'Target Premium',
+			'tag' => 'input',
+			'type' => 'number',
+			'min' => '0',
+			'value' => empty($sale) ? '': $sale['sales_target_premium']
+		),
+		'sales_initial_premium' => array(
+			'label' => 'Initial Premium',
+			'tag' => 'input',
+			'type' => 'number',
+			'min' => '0',
+			'value' => empty($sale) ? '': $sale['sales_initial_premium'],
+			'split' => true, 
+		),
+		'sales_policy_no' => array(
+			'label' => 'Policy NO',
+			'tag' => 'input',
+			'value'=> empty($sale) ? '': $sale['sales_policy_no'],
 		),
 		'sales_provider' => array(
 			'label' => 'Provider',

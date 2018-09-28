@@ -4,7 +4,7 @@
 
 .bootstrap-select .btn-group.open .dropdown-toggle{webkit-box-shadow:none;box-shadow:none}
 .bootstrap-select .btn-default:active, .bootstrap-select .btn-default:focus, .bootstrap-select .btn-default:hover, .bootstrap-select .open>.dropdown-toggle.btn-default {background-color:#fff !important;border-color:#fff !important}
-.table-prop tr:not(.prop-split) td{padding:5px 5px !important}
+.table-prop tr td{padding:5px 5px !important}
 </style>
 <?php
 $user_list = function($users, $sale, $name){
@@ -67,17 +67,32 @@ $fields = array(
 			'options' => $user_list(array_merge(array('-1' => array('text' => 'None', 'value' => '0')), $users), $sale, 'sales_split_agent'),
 			'split' => true, 
 		),
-		'sales_policy_no' => array(
-			'label' => 'Policy NO',
-			'tag' => 'input',
-			'value'=> empty($sale) ? '': $sale['sales_policy_no'],
-		),
 		'sales_face_amount' => array(
 			'label' => 'Face Amount',
 			'tag' => 'input',
 			'type' => 'number',
 			'min' => '0',
 			'value' => empty($sale) ? '': $sale['sales_face_amount']
+		),
+		'sales_target_premium' => array(
+			'label' => 'Target Premium',
+			'tag' => 'input',
+			'type' => 'number',
+			'min' => '0',
+			'value' => empty($sale) ? '': $sale['sales_target_premium']
+		),
+		'sales_initial_premium' => array(
+			'label' => 'Initial Premium',
+			'tag' => 'input',
+			'type' => 'number',
+			'min' => '0',
+			'value' => empty($sale) ? '': $sale['sales_initial_premium'],
+			'split' => true, 
+		),
+		'sales_policy_no' => array(
+			'label' => 'Policy NO',
+			'tag' => 'input',
+			'value'=> empty($sale) ? '': $sale['sales_policy_no'],
 		),
 		'sales_provider' => array(
 			'label' => 'Provider',
