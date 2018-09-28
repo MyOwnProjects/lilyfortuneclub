@@ -4,7 +4,7 @@
 
 .bootstrap-select .btn-group.open .dropdown-toggle{webkit-box-shadow:none;box-shadow:none}
 .bootstrap-select .btn-default:active, .bootstrap-select .btn-default:focus, .bootstrap-select .btn-default:hover, .bootstrap-select .open>.dropdown-toggle.btn-default {background-color:#fff !important;border-color:#fff !important}
-.table-prop td{padding:5px 5px !important}
+.table-prop tr:not(.prop-split) td{padding:5px 5px !important}
 </style>
 <?php
 $user_list = function($users, $sale, $name){
@@ -28,6 +28,30 @@ $general_select = function($list, $name) use($sale){
 };
 $fields = array(
 	array(
+		'sales_priority' => array(
+			'label' => 'Priority',
+			'tag' => 'select',
+			'options' => $general_select(array(
+				1 => 'High', 0 => 'Medium', -1 => 'Low'
+			), 'sales_priority')
+		),
+		'sales_priority_note' => array(
+			'label' => 'Priority Note',
+			'tag' => 'textarea',
+			'rows' => '4',
+			'value'=> empty($sale) ? '': $sale['sales_priority_note']
+		),
+		'sales_status' => array(
+			'label' => 'Status',
+			'tag' => 'select',
+			'options' => $general_select(array(
+				'P' => 'Pending',
+				'I' => 'Inforced',
+				'C' => 'Closed',
+				'CA' => 'Canceled'
+			), 'sales_status'),
+			'split' => true, 
+		),
 		'sales_writing_agent' => array(
 			'label' => 'Writing Agent',
 			'tag' => 'select',
@@ -41,6 +65,7 @@ $fields = array(
 			'class' => 'selectpicker',
 			'data-live-search' => 'true',
 			'options' => $user_list(array_merge(array('-1' => array('text' => 'None', 'value' => '0')), $users), $sale, 'sales_split_agent'),
+			'split' => true, 
 		),
 		'sales_policy_no' => array(
 			'label' => 'Policy NO',
@@ -68,28 +93,20 @@ $fields = array(
 			'options' => $general_select(array(
 					'IL' => 'IUL + LTC', 'I' => 'IUL', 'A' => 'Annuity', 'T' => 'Term'
 			), 'sales_policy_type'),
+			'split' => true, 
 		),
 		'sales_date_submission' => array(
 			'label' => 'Submission Date',
 			'tag' => 'input',
 			'type' => 'date',
-			'value' => empty($sale) ? '': $sale['sales_date_submission']
+			'value' => empty($sale) ? '': $sale['sales_date_submission'],
 		),
 		'sales_date_closure' => array(
+			'split' => true, 
 			'label' => 'Closure Date',
 			'tag' => 'input',
 			'type' => 'date',
 			'value' => empty($sale) ? '': $sale['sales_date_closure']
-		),
-		'sales_status' => array(
-			'label' => 'Status',
-			'tag' => 'select',
-			'options' => $general_select(array(
-				'P' => 'Pending',
-				'I' => 'Inforced',
-				'C' => 'Closed',
-				'CA' => 'Canceled'
-			), 'sales_status')
 		),
 		'sales_details' => array(
 			'label' => 'Notes',
@@ -124,7 +141,8 @@ $fields = array(
 		'sales_insured_email' => array(
 			'label' => 'Insured Email',
 			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_insured_email']
+			'value' => empty($sale) ? '': $sale['sales_insured_email'],
+			'split' => true, 
 		),
 		'sales_owner' => array(
 			'label' => 'Owner Name',
@@ -150,7 +168,8 @@ $fields = array(
 		'sales_owner_email' => array(
 			'label' => 'Owner Email',
 			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_owner_email']
+			'value' => empty($sale) ? '': $sale['sales_owner_email'],
+			'split' => true, 
 		),
 		'sales_payor' => array(
 			'label' => 'Payor Name',
@@ -176,9 +195,10 @@ $fields = array(
 		'sales_payor_email' => array(
 			'label' => 'Payor Email',
 			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_payor_email']
+			'value' => empty($sale) ? '': $sale['sales_payor_email'],
+			'split' => true, 
 		),
-			'sales_primary_beneficiary' => array(
+		'sales_primary_beneficiary' => array(
 			'label' => 'Primary Beneficiary Name',
 			'tag' => 'input',
 			'value' => empty($sale) ? '': $sale['sales_primary_beneficiary']
@@ -202,13 +222,15 @@ $fields = array(
 			'sales_primary_beneficiary_email' => array(
 				'label' => 'Primary Beneficiary Email',
 				'tag' => 'input',
-				'value' => empty($sale) ? '': $sale['sales_primary_beneficiary_email']
-			)
+				'value' => empty($sale) ? '': $sale['sales_primary_beneficiary_email'],
+				'split' => true, 
+			),
 		),
 		call_user_func(function() use($sale, $general_select){
 			$ret = array();
 			for($i = 1; $i <= 3; ++$i){
 				$ret['sales_contingent_beneficiary_'.$i] = array(
+						'split' => true, 
 						'label' => 'Contingent Beneficiary '.$i.' Name',
 						'tag' => 'input',
 						'value' => empty($sale) ? '': $sale['sales_contingent_beneficiary_'.$i]
