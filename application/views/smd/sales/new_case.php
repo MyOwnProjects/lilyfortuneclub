@@ -30,6 +30,21 @@ $general_select = function($list, $name) use($sale){
 };
 $fields = array(
 	array(
+		'sales_writing_agent' => array(
+			'label' => 'Writing Agent',
+			'tag' => 'select',
+			'class' => 'selectpicker',
+			'data-live-search' => 'true',
+			'options' => $user_list($users, $sale, 'sales_writing_agent'),
+		),
+		'sales_split_agent' => array(
+			'label' => 'Split Agent',
+			'tag' => 'select',
+			'class' => 'selectpicker',
+			'data-live-search' => 'true',
+			'options' => $user_list(array_merge(array('-1' => array('text' => 'None', 'value' => '0')), $users), $sale, 'sales_split_agent'),
+			'split' => true
+		),
 		'sales_priority' => array(
 			'label' => 'Priority',
 			'tag' => 'select',
@@ -53,21 +68,6 @@ $fields = array(
 				'CA' => 'Canceled'
 			), 'sales_status'),
 			'split' => true, 
-		),
-		'sales_writing_agent' => array(
-			'label' => 'Writing Agent',
-			'tag' => 'select',
-			'class' => 'selectpicker',
-			'data-live-search' => 'true',
-			'options' => $user_list($users, $sale, 'sales_writing_agent'),
-		),
-		'sales_split_agent' => array(
-			'label' => 'Split Agent',
-			'tag' => 'select',
-			'class' => 'selectpicker',
-			'data-live-search' => 'true',
-			'options' => $user_list(array_merge(array('-1' => array('text' => 'None', 'value' => '0')), $users), $sale, 'sales_split_agent'),
-			'split' => true
 		),
 		'sales_policy_no' => array(
 			'label' => 'Policy NO',
