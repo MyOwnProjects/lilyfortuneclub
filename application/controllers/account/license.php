@@ -12,7 +12,7 @@ class License extends Account_base_controller {
 			'subject' => "52 Hours Online Class Registration",
 			//'image_file_name'=> 'license-52-hours',
 			'steps' => array(
-				'Go to <a href="https://candidate.psiexams.com/" target="_blank">examfx.com</a>.',
+				'Go to <a href="https://www.examfx.com/" target="_blank">examfx.com</a>.',
 				'Click "Register Now".',
 				'Under "Special Company Discount Pricing", enter our company discount email as "teamaspire@examfx.com", click "Next Step".',
 				'Select Product "Insurance Prelicensing", then choose "California".', 
