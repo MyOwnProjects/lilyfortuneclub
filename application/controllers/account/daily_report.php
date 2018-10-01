@@ -20,17 +20,14 @@ class Daily_report extends Account_base_controller {
 		date_sub($today, date_interval_create_from_date_string("1 days"));
 		$ret = $this->user_model->get_daily_report(date_format($today, 'Y-m-d'));
 		foreach($ret as $r){
-			if(!isset($r['users_id'])){
+			if(!isset($r['daily_report_user_id'])){
 				$this->user_model->insert_daily_report(date_format($today, 'Y-m-d'), $r['users_id'], array(
 					'NULL','NULL','NULL','NULL','NULL','NULL'
 				));
 			}
 		}
-		$ret = $this->user_model->get_daily_report(date_format($today, 'Y-m-d'));
-		$today = date_create();
 		$mret = $this->user_model->get_monthly_report($today);
 		$msort = $this->_sort($mret);
-		date_sub($today, date_interval_create_from_date_string("1 days"));
 		$dret = $this->user_model->get_daily_report(date_format($today, 'Y-m-d'));
 		$dsort = $this->_sort($dret);
 		$result = array();
@@ -123,14 +120,14 @@ class Daily_report extends Account_base_controller {
 					$count = count($array[$key]);
 					$last_rank = $array[$key][$count - 1][3];
 					if((int)$r[$key] == (int)$array[$key][$count - 1][2]){
-						array_push($array[$key], array($r['users_id'], $r['daily_report_name'], $r[$key], $last_rank));
+						array_push($array[$key], array($r['daily_report_id'], $r['daily_report_name'], $r[$key], $last_rank));
 					}
 					else{
-						array_push($array[$key], array($r['users_id'], $r['daily_report_name'], $r[$key], count($array[$key]) + 1));
+						array_push($array[$key], array($r['daily_report_id'], $r['daily_report_name'], $r[$key], count($array[$key]) + 1));
 					}
 				}
 				else{
-					array_push($array[$key], array($r['users_id'], $r['daily_report_name'], $r[$key], 1));
+					array_push($array[$key], array($r['daily_report_id'], $r['daily_report_name'], $r[$key], 1));
 				}
 			}
 		}
@@ -155,7 +152,7 @@ class Daily_report extends Account_base_controller {
 		return $new_array;
 	}
 	
-	public function summary(){
+	/*public function summary(){
 		$this->load->model('user_model');
 		$timeZone = 'America/Los_Angeles';
 		date_default_timezone_set($timeZone);			
@@ -193,7 +190,7 @@ class Daily_report extends Account_base_controller {
 			array_push($result, $v);
 		} 
 		echo json_encode($result);
-	}
+	}*/
 	
 }
 
