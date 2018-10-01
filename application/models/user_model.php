@@ -508,11 +508,12 @@ class User_model extends Base_model{
 		$first_day = date_create($str1);
 		date_add($first_day, date_interval_create_from_date_string("1 months"));
 		$str2 = date_format($first_day, 'Y-m-01');
-		$sql = "SELECT CONCAT(IF(u.nick_name IS NULL OR u.nick_name='', u.first_name, u.nick_name), ' ', u.last_name) AS daily_report_name, dr.*
+		$sql = "SELECT CONCAT(IF(u.nick_name IS NULL OR u.nick_name='', u.first_name, u.nick_name), ' ', u.last_name) 
+			AS daily_report_name, u.users_id, dr.* 
 			FROM users u 
 			LEFT JOIN 
 			( 
-				SELECT daily_report_id, daily_report_user_id,
+				SELECT daily_report_user_id, daily_report_id,
 				SUM(daily_report_personal_recruits) AS daily_report_personal_recruits,
 				SUM(daily_report_personal_products) AS daily_report_personal_products,
 				SUM(daily_report_baseshop_recruits) AS daily_report_baseshop_recruits,
