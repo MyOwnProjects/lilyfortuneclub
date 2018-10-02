@@ -2,9 +2,9 @@
 .main-content-wrapper{max-width:1000px !important}
 .group-head{background:#00004d;margin-top:10px;color:#fff;padding:10px 0 10px 20px;font-weight:bold;}
 .group{margin:10px 0}
-.group-label{font-weight:bold;float:left;width:122px;text-align:right}
+.group-label{font-weight:bold;float:left;width:122px;margin-right:10px;text-align:right}
 .group-label:after{content:":"}
-.group-value{margin-left:10px;float:left}
+.group-value{overflow:hidden;word-wrap: break-word}
 .empty{color:#d5d5d5}
 </style>
 <div class="main-content-wrapper"> 
@@ -53,7 +53,7 @@
 				<div class="group-value"><?php echo $sale['sales_policy_no'];?></div>
 			</div>
 			<div class="group clearfix">
-				<div class="group-label">Provider / Type</div>
+				<div class="group-label">Policy Type</div>
 				<?php 
 				$type_list = array(
 					'IL' => 'IUL + LTC',
@@ -65,25 +65,25 @@
 				<div class="group-value"><?php echo $sale['sales_provider'].' - '.$type_list[$sale['sales_policy_type']];?></div>	
 			</div>
 			<div class="group clearfix">
-				<div class="group-label">Submission Date</div>
+				<div class="group-label">Submission</div>
 				<div class="group-value"><?php echo $sale['sales_date_submission'];?></div>	
 			</div>
 			<div class="group clearfix">
-				<div class="group-label">Closure Date</div>
+				<div class="group-label">Closure</div>
 				<div class="group-value"><?php echo $sale['sales_date_closure'];?></div>	
 			</div>
 		</div>
 		<div class="col-md-3 col-sm-6 col-xs-12">
 			<div class="group clearfix">
-				<div class="group-label">Face Amount</div>
+				<div class="group-label">Face AMT</div>
 				<div class="group-value"><?php echo '$'.number_to_english($sale['sales_face_amount']);?></div>	
 			</div>
 			<div class="group clearfix">
-				<div class="group-label">Target Premium</div>
+				<div class="group-label">Target PREM</div>
 				<div class="group-value"><?php echo isset($sale['sales_target_premium']) ? '$'.number_format(intval($sale['sales_target_premium']), 0) : '';?></div>	
 			</div>
 			<div class="group clearfix">
-				<div class="group-label">Initial Premium</div>
+				<div class="group-label">Initial PREM</div>
 				<div class="group-value"><?php echo isset($sale['sales_initial_premium']) ? '$'.number_format(intval($sale['sales_initial_premium']), 0) : '';?></div>	
 			</div>
 		</div>
