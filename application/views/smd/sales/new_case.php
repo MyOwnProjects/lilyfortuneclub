@@ -55,7 +55,7 @@ $fields = array(
 		'sales_priority_note' => array(
 			'label' => 'Priority Note',
 			'tag' => 'textarea',
-			'rows' => '4',
+			'rows' => '2',
 			'value'=> empty($sale) ? '': $sale['sales_priority_note']
 		),
 		'sales_status' => array(
@@ -128,7 +128,7 @@ $fields = array(
 		'sales_details' => array(
 			'label' => 'Notes',
 			'tag' => 'textarea',
-			'rows' => '40',
+			'rows' => '20',
 			'value' => empty($sale) || empty($sale['sales_details']) ? '': $sale['sales_details']
 		)
 		
@@ -144,11 +144,6 @@ $fields = array(
 			'tag' => 'input',
 			'type' => 'date',
 			'value' => empty($sale) || empty($sale['sales_insured_dob']) ? '': $sale['sales_insured_dob']
-		),
-		'sales_insured_gender' => array(
-			'label' => 'Insured Gender',
-			'tag' => 'select',
-			'options' => $general_select(array('F' => 'Female', 'M' => 'Male'), 'sales_insured_gender')
 		),
 		'sales_insured_phone' => array(
 			'label' => 'Insured Phone',
@@ -172,11 +167,6 @@ $fields = array(
 			'type' => 'date',
 			'value' => empty($sale) || empty($sale['sales_owner_dob']) ? '': $sale['sales_owner_dob']
 		),
-		'sales_owner_gender' => array(
-			'label' => 'Owner Gender',
-			'tag' => 'select',
-			'options' => $general_select(array('F' => 'Female', 'M' => 'Male'), 'sales_owner_gender')
-		),
 		'sales_owner_phone' => array(
 			'label' => 'Owner Phone',
 			'tag' => 'input',
@@ -198,11 +188,6 @@ $fields = array(
 			'tag' => 'input',
 			'type' => 'date',
 			'value' => empty($sale) || empty($sale['sales_payor_dob']) ? '': $sale['sales_payor_dob']
-		),
-		'sales_payor_gender' => array(
-			'label' => 'Payor Gender',
-			'tag' => 'select',
-			'options' => $general_select(array('F' => 'Female', 'M' => 'Male'), 'sales_payor_gender')
 		),
 		'sales_payor_phone' => array(
 			'label' => 'Payor Phone',
@@ -226,11 +211,6 @@ $fields = array(
 				'type' => 'date',
 				'value' => empty($sale) || empty($sale['sales_primary_beneficiary_dob']) ? '': $sale['sales_primary_beneficiary_dob']
 			),
-			'sales_primary_beneficiary_gender' => array(
-				'label' => 'Primary Beneficiary Gender',
-				'tag' => 'select',
-				'options' => $general_select(array('F' => 'Female', 'M' => 'Male'), 'sales_primary_beneficiary_gender')
-			),
 			'sales_primary_beneficiary_phone' => array(
 				'label' => 'Primary Beneficiary Phone',
 				'tag' => 'input',
@@ -245,9 +225,8 @@ $fields = array(
 		),
 		call_user_func(function() use($sale, $general_select){
 			$ret = array();
-			for($i = 1; $i <= 3; ++$i){
+			for($i = 1; $i <= 2; ++$i){
 				$ret['sales_contingent_beneficiary_'.$i] = array(
-					'split' => true,
 					'label' => 'Contingent Beneficiary '.$i.' Name',
 						'tag' => 'input',
 						'value' => empty($sale) ? '': $sale['sales_contingent_beneficiary_'.$i]
@@ -258,11 +237,6 @@ $fields = array(
 						'type' => 'date',
 						'value' => empty($sale) || empty($sale['sales_contingent_beneficiary_'.$i.'_dob']) ? '': $sale['sales_contingent_beneficiary_'.$i.'_dob']
 				);
-				$ret['sales_contingent_beneficiary_'.$i.'_gender'] = array(
-						'label' => 'Contingent Beneficiary '.$i.' Gender',
-						'tag' => 'select',
-						'options' => $general_select(array('F' => 'Female', 'M' => 'Male'), 'sales_contingent_beneficiary_'.$i.'_gender')
-				);
 				$ret['sales_contingent_beneficiary_'.$i.'_phone'] = array(
 						'label' => 'Contingent Beneficiary '.$i.' Phone',
 						'tag' => 'input',
@@ -271,7 +245,8 @@ $fields = array(
 				$ret['sales_contingent_beneficiary_'.$i.'_email'] = array(
 						'label' => 'Contingent Beneficiary '.$i.' Email',
 						'tag' => 'input',
-						'value' => empty($sale) ? '': $sale['sales_contingent_beneficiary_'.$i.'_email']
+						'value' => empty($sale) ? '': $sale['sales_contingent_beneficiary_'.$i.'_email'],
+					'split' => true,
 				);
 			}
 			return $ret;

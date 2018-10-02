@@ -12,6 +12,19 @@ class Sales extends Account_base_controller {
 		$this->load_view('sales', array('sales' => $sales));
 	}
 	
+	public function case_view($sales_id = null){
+		$sales = $this->sales_model->get_list("sales_id='$sales_id' AND (sales_writing_agent='".$this->user['membership_code']."' OR sales_split_agent='".$this->user['membership_code']."')");
+		if(count($sales) <= 0){
+			header('location: '.base_url().'account/sales/sales_case');
+			return;
+		}
+		foreach($sales[0] as $n => $v){
+			$sales[0][$n] = trim($v);
+		}
+		$this->load_view('case_view', array('sales_id' => $sales_id, 'sale' => $sales[0]));
+		
+	}
+	
 	public function sales_case($sales_id = null){
 		$sale = array();
 		if(isset($sales_id)){
@@ -62,14 +75,18 @@ class Sales extends Account_base_controller {
 				}
 				if(count($sales) > 0){
 					$res = $this->sales_model->update($sales[0]['sales_id'], $prop);
+					if($res){
+						header('location: '.base_url().'account/sales/case_view/'.$sales[0]['sales_id']);
+						return;
+					}			
 				}
 				else{
 					$res = $this->sales_model->insert($prop);
+					if($res){
+						header('location: '.base_url().'account/sales/case_view/'.$res);
+						return;
+					}			
 				}
-				if($res){
-					header('location: '.base_url().'account/sales');
-					return;
-				}			
 			}
 			if(!empty($error)){
 				foreach($prop as $k => $v){

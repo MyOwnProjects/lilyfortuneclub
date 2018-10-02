@@ -20,7 +20,7 @@
 .simple-list .simple-list-row>div:nth-child(2){overflow:hidden;}
 .simple-list .simple-list-row>div:nth-child(2)>div:first-child{width:150px;float:left}
 .simple-list .simple-list-row>div:nth-child(2)>div:nth-child(2){float:left;width:120px}
-.simple-list .simple-list-row>div:nth-child(2)>div:last-child{float:left;width:180px;}
+.simple-list .simple-list-row>div:nth-child(2)>div:nth-child(3){float:left;width:180px;}
 @media only screen and (max-width:800px) {
 .simple-list .simple-list-row>div:first-child{display:none}
 }
@@ -53,7 +53,7 @@
 		if(count($sales) > 0){
 			foreach($sales as $i => $row){
 			?>
-				<a href="<?php echo base_url();?>account/sales/sales_case/<?php echo $row['sales_id']; ?>">
+				<a href="<?php echo base_url();?>account/sales/case_view/<?php echo $row['sales_id']; ?>">
 				<div class="simple-list-row clearfix">
 					<div class="simple-list-seq"><?php echo $i + 1;?></div>
 					<div class="clearfix">
