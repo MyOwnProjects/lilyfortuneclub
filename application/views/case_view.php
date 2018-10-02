@@ -154,7 +154,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="group clearfix">
-				<div class="group-value"><?php echo $sale['sales_details'];?></div>	
+				<div class="group-value"><?php echo str_replace("\n", "<br/>", $sale['sales_details']);?></div>	
 			</div>
 		</div>
 	</div>
