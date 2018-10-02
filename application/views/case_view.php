@@ -80,11 +80,11 @@
 			</div>
 			<div class="group clearfix">
 				<div class="group-label">Target Premium</div>
-				<div class="group-value"><?php echo isset($sale['sales_target_premium']) ? '$'.number_format($sale['sales_target_premium'], 0) : '';?></div>	
+				<div class="group-value"><?php echo isset($sale['sales_target_premium']) ? '$'.number_format(intval($sale['sales_target_premium']), 0) : '';?></div>	
 			</div>
 			<div class="group clearfix">
 				<div class="group-label">Initial Premium</div>
-				<div class="group-value"><?php echo isset($sale['sales_initial_premium']) ? '$'.number_format($sale['sales_initial_premium'], 0) : '';?></div>	
+				<div class="group-value"><?php echo isset($sale['sales_initial_premium']) ? '$'.number_format(intval($sale['sales_initial_premium']), 0) : '';?></div>	
 			</div>
 		</div>
 	</div>
