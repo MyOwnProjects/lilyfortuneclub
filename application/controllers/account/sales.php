@@ -66,7 +66,7 @@ class Sales extends Account_base_controller {
 					else if($k == 'sales_policy_no' && $v == ''){
 						$prop[$k] = "NULL";
 					}
-					else if(in_array($k, array('sales_date_submission', 'sales_date_closure', 'sales_insured_dob', 'sales_owner_dob',
+					else if(in_array($k, array('sales_date_submission', 'sales_date_closure', 'sales_insured_dob', 'sales_owner_dob', 'sales_payor_dob',
 						'sales_primary_beneficiary_dob', 'sales_contingent_beneficiary_1_dob', 'sales_contingent_beneficiary_2_dob')) 
 						&& empty($v)){
 						$prop[$k] = "NULL";
@@ -97,7 +97,7 @@ class Sales extends Account_base_controller {
 			}
 		}
 		
-		$this->load_view('sales_case', array('error' => $error, 'sales_id' => $sales_id, 'sale' => $sale, 'users' => $users1));
+		$this->load_view('sales_case', array('error' => $error, 'sales_id' => $sales_id, 'sale' => $sale, 'users' => $users1, 'me' => $this->user));
 	}
 	
 	public function team_member_info($code = 0){

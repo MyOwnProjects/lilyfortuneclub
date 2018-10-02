@@ -7,13 +7,13 @@
 .table-prop tr td{padding:5px 5px !important}
 </style>
 <?php
-$user_list = function($users, $sale, $name){
+$user_list = function($users, $sale, $name) use ($me){
 			$ret = array();
-			foreach($users as $user){
+			foreach($users as $u){
 				array_push($ret, array(
-					'text' => $user['text'],
-					'value' => $user['value'],
-					'selected' => !empty($sale) && $sale[$name] == $user['value']
+					'text' => $u['text'],
+					'value' => $u['value'],
+					'selected' => !empty($sale) && $sale[$name] == $u['value']
 				));
 			}
 			return $ret;
@@ -55,14 +55,14 @@ $fields = array(
 		'sales_writing_agent' => array(
 			'label' => 'Writing Agent',
 			'tag' => 'select',
-			'class' => 'selectpicker',
+			'class' => 'selectpicker-opt',
 			'data-live-search' => 'true',
 			'options' => $user_list($users, $sale, 'sales_writing_agent'),
 		),
 		'sales_split_agent' => array(
 			'label' => 'Split Agent',
 			'tag' => 'select',
-			'class' => 'selectpicker',
+			'class' => 'selectpicker-opt',
 			'data-live-search' => 'true',
 			'options' => $user_list(array_merge(array('-1' => array('text' => 'None', 'value' => '0')), $users), $sale, 'sales_split_agent'),
 			'split' => true, 
@@ -268,7 +268,7 @@ $fields = array(
 		<div style="margin:20px 0 10px 0">
 			<input type="submit" value="Submit" class="btn btn-sm btn-primary">
 			&nbsp;&nbsp;
-			<a href="<?php echo base_url();?>account/sales">Back to List</a>
+			<a href="<?php echo base_url();?>account/sales">Cancel</a>
 		</div>
 		<div class="clearfix">
 			<?php
@@ -279,7 +279,43 @@ $fields = array(
 		</div>
 	</form>
 </div>
+<div style="display:none" id="prompt-wrapper">
+<div>Are you the writing agent or split agent?</div><div class="radio"><label><input type="radio" name="optradio" checked>Option 1</label></div><div class="radio"><label><input type="radio" name="optradio">Option 2</label></div>
+</div>
 <script>
-	$('.selectpicker').selectpicker();
+	if(<?php echo empty($sale) ? 1 : 0;?>){
+		bootbox.dialog({
+			title: "Select Agent",
+			message: '<div>Are you the writing agent or split agent?</div><div class="radio"><label><input type="radio" name="agent-sel" value="1" checked>Writing Agent</label></div><div class="radio"><label><input type="radio" name="agent-sel" value="2">Split Agent</label></div>',
+			buttons: [
+				{
+					label: '<i class="fa fa-check"></i> Confirm',
+					className: 'btn-primary',
+					callback: function(){
+						if($("input[name='agent-sel']:checked").val() == '1'){
+							//writing
+							$('[name=sales_writing_agent] option:not([value=<?php echo $me['membership_code'];?>])').remove();
+							$('[name=sales_split_agent]').selectpicker();
+						}
+						else{
+							//split
+							$('[name=sales_split_agent] option:not([value=<?php echo $me['membership_code'];?>])').remove();
+							$('[name=sales_writing_agent]').selectpicker();
+						}
+					}
+				},
+				{
+					label: '<i class="fa fa-times"></i> Cancel',
+					className: 'btn-default',
+					callback: function(){
+						window.history.back();
+					}
+				},
+			]
+		});
+	}
+	else{
+		$('[name=sales_split_agent], [name=sales_writing_agent]').selectpicker();
+	}
 					
 </script>

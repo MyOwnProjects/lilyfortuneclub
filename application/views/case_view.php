@@ -65,16 +65,6 @@
 				<div class="group-value"><?php echo $sale['sales_provider'].' - '.$type_list[$sale['sales_policy_type']];?></div>	
 			</div>
 			<div class="group clearfix">
-				<div class="group-label">Submission</div>
-				<div class="group-value"><?php echo $sale['sales_date_submission'];?></div>	
-			</div>
-			<div class="group clearfix">
-				<div class="group-label">Closure</div>
-				<div class="group-value"><?php echo $sale['sales_date_closure'];?></div>	
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-6 col-xs-12">
-			<div class="group clearfix">
 				<div class="group-label">Face AMT</div>
 				<div class="group-value"><?php echo '$'.number_to_english($sale['sales_face_amount']);?></div>	
 			</div>
@@ -85,6 +75,24 @@
 			<div class="group clearfix">
 				<div class="group-label">Initial PREM</div>
 				<div class="group-value"><?php echo isset($sale['sales_initial_premium']) ? '$'.number_format(intval($sale['sales_initial_premium']), 0) : '';?></div>	
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6 col-xs-12">
+			<div class="group clearfix">
+				<div class="group-label">Writing Agent</div>
+				<div class="group-value"><?php echo $sale['agent1'].' - '.$sale['sales_writing_agent'];?></div>	
+			</div>
+			<div class="group clearfix">
+				<div class="group-label">Split Agent</div>
+				<div class="group-value"><?php echo empty($sale['sales_split_agent']) ? '' : $sale['agent2'].' - '.$sale['sales_split_agent'];?></div>	
+			</div>
+			<div class="group clearfix">
+				<div class="group-label">Submission</div>
+				<div class="group-value"><?php echo $sale['sales_date_submission'];?></div>	
+			</div>
+			<div class="group clearfix">
+				<div class="group-label">Closure</div>
+				<div class="group-value"><?php echo $sale['sales_date_closure'];?></div>	
 			</div>
 		</div>
 	</div>
