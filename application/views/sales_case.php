@@ -295,11 +295,13 @@ $fields = array(
 						if($("input[name='agent-sel']:checked").val() == '1'){
 							//writing
 							$('[name=sales_writing_agent] option:not([value=<?php echo $me['membership_code'];?>])').remove();
+							$('[name=sales_split_agent]  option[value=<?php echo $me['membership_code'];?>]').remove();
 							$('[name=sales_split_agent]').selectpicker();
 						}
 						else{
 							//split
 							$('[name=sales_split_agent] option:not([value=<?php echo $me['membership_code'];?>])').remove();
+							$('[name=sales_writing_agent]  option[value=<?php echo $me['membership_code'];?>]').remove();
 							$('[name=sales_writing_agent]').selectpicker();
 						}
 					}
