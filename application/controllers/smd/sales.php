@@ -81,7 +81,9 @@ class Sales extends Smd_Controller {
 				else if($k == 'sales_policy_no' && $v == ''){
 					$prop[$k] = "NULL";
 				}
-				else if(($k == 'sales_date_closure' || $k == 'sales_insured_dob' || $k == 'sales_owner_dob') && $v == ''){
+				else if(in_array($k, array('sales_date_submission', 'sales_date_closure', 'sales_insured_dob', 'sales_owner_dob',
+						'sales_primary_beneficiary_dob', 'sales_contingent_beneficiary_1_dob', 'sales_contingent_beneficiary_2_dob')) 
+						&& empty($v)){
 					$prop[$k] = "NULL";
 				}
 				else{
