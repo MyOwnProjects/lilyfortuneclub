@@ -154,14 +154,14 @@ class Smd_controller extends CI_Controller {
 		$this->mailer = new PHPMailer();
 		$this->mailer->IsSMTP();
 		$this->mailer->Mailer = 'smtp';
-		$this->mailer->SMTPAuth = false;//true;
-		$this->mailer->Host = 'localhost'; 'smtp.gmail.com'; // "ssl://smtp.gmail.com" didn't worked
-		//$this->mailer->Port = 587;
-		//$this->mailer->SMTPSecure = 'tls';//'ssl';
-		//$this->mailer->SMTPDebug = 3;
+		$this->mailer->SMTPAuth = true;
+		$this->mailer->Host = 'smtp.gmail.com'; // "ssl://smtp.gmail.com" didn't worked
+		$this->mailer->Port = 587;
+		$this->mailer->SMTPSecure = 'tls';//'ssl';
+		$this->mailer->SMTPDebug = 3;
 
-		//$this->mailer->Username = "lilyfortuneclub@gmail.com";
-		//$this->mailer->Password = "Ceo2019$";
+		$this->mailer->Username = "lilyfortuneclub@gmail.com";
+		$this->mailer->Password = "Ceo2019$";
 		$this->mailer->SingleTo = true; // if you want to send a same email to multiple users. multiple emails will be sent one-by-one.
 		$this->mailer->IsHTML(true); // if you are going to send HTML formatted emails
 		$this->mailer->addBCC('kunyangnew@gmail.com', 'Kun Yang');
