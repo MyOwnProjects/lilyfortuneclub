@@ -26,7 +26,7 @@
 				}
 			}
 		],
-		row_count: 20,
+		row_count: 100,
 		//order_by: {tasks_create: 'desc'},
 		filter: {id: 'sales_status', options:{
 			P: '<span class="text-danger">Pending</span>',
