@@ -115,3 +115,16 @@ function ajax_loading(show){
 		}
 	}
 }
+
+function simple_alert(text, type){
+	var $_div = $('#simple-alert');
+	if($_div.length <= 0){
+		var $_div = $('<div>').attr('id', 'simple-alert').addClass("alert").addClass("alert-" + type)
+			.css('position', 'fixed').css('left', '50%').css('top', '50%').css('transform', 'translate(-50%, -50%)').html(text);
+		$('body').append($_div);
+	}
+	else{
+		$_div.fadeIn();
+	}
+	setTimeout(function(){$_div.fadeOut();}, 2000);
+}

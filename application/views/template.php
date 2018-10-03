@@ -26,7 +26,7 @@
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery.bootgrid-1.3.1/jquery.bootgrid.js"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/dialog/dialog.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery.webui-popover/jquery.webui-popover.js"></script>		
-		<script type="text/javascript" src="<?php echo base_url();?>src/js/tools.js"></script>		
+		<script type="text/javascript" src="<?php echo base_url();?>src/js/tools.js?<?php echo time();?>"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/js/live-chat/live-chat.js?t=<?php echo time();?>"></script>	
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/simple_video_player/simple_video_player.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/tree_grid/tree_grid.js?t=<?php echo time();?>"></script>		
