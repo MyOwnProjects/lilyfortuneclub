@@ -158,7 +158,7 @@ class Smd_controller extends CI_Controller {
 		$this->mailer->Host = 'smtp.gmail.com'; // "ssl://smtp.gmail.com" didn't worked
 		$this->mailer->Port = 587;
 		$this->mailer->SMTPSecure = 'tls';//'ssl';
-		$this->mailer->SMTPDebug = 0;
+		$this->mailer->SMTPDebug = 2;
 
 		$this->mailer->Username = "lilyfortuneclub@gmail.com";
 		$this->mailer->Password = "Ceo2019$";
