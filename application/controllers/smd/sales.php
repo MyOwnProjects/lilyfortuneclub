@@ -35,6 +35,9 @@ class Sales extends Smd_Controller {
 		$current = $this->input->post('current');
 		$row_count= $this->input->post('row_count');
 		$sort = $this->input->post('sort');
+		if(empty($sort)){
+			$sort = array('sales_id' => 'DESC');
+		}
 		$filter = $this->input->post('filter');
 		$ret = array(
 			'current' => 1,
