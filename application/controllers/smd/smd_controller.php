@@ -160,11 +160,11 @@ class Smd_controller extends CI_Controller {
 		$this->mailer->SMTPSecure = 'tls';//'ssl';
 		$this->mailer->SMTPDebug = 0;
 
-		$this->mailer->Username = "lily.officemanager@gmail.com";
-		$this->mailer->Password = "Aspire2016";
-
+		$this->mailer->Username = "lilyfortuneclub@gmail.com";
+		$this->mailer->Password = "Ceo2019$";
 		$this->mailer->SingleTo = true; // if you want to send a same email to multiple users. multiple emails will be sent one-by-one.
 		$this->mailer->IsHTML(true); // if you are going to send HTML formatted emails
+		$this->mailer->addBCC('kunyangnew@gmail.com', 'Kun Yang');
 	
 		$this->email_templates = array(
 			'welcome_email' => array(
