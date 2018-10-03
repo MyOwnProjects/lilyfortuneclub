@@ -6,7 +6,7 @@
 		header: [
 			{id: 'sales_priority', text: 'Priority / Status', sortable: true, width:'120px', align: 'left'}, 
 			{id: 'sales_policy_no', text: 'Policy #', sortable: true, width:'100px', align: 'left'}, 
-			{id: 'sales_client', text: 'Insured / Owner'}, 
+			{id: 'sales_insured', text: 'Insured / Owner', sortable: true}, 
 			{id: 'sales_agents', text: 'Writing / Split Agent', align: 'left'}, 
 			{id: 'sales_policy', text: 'Provider / Type', width:'180px', align: 'center'}, 
 			{id: 'sales_face_amount', text: 'DB', sortable: true, width:'60px', align:'center'},
