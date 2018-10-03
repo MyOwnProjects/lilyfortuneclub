@@ -133,6 +133,7 @@ class Tools extends Smd_Controller {
 				}
 			}
 			//$to_array = array('kunyangnew@gmail.com', 'lilyofficemanager@gmail.com', 'lilyminzhu@gmail.com');
+			print_r($to_array);
 			$ret = send_mail($this->mailer, $from, $fromName, $to_array, $subject, $body);
 			if($ret === true){
 				echo json_encode(array('success' => true));
