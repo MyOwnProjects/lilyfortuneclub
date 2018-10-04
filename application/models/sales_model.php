@@ -34,7 +34,6 @@ class Sales_model extends Base_model{
 				array_push($like_array, "sales_insured LIKE '%$s%'");
 				array_push($like_array, "sales_owner LIKE '%$s%'");
 				array_push($like_array, "sales_policy_no LIKE '%$s%'");
-				array_push($like_array, "sales_client_contact LIKE '%$s%'");
 				array_push($like_array, "u1.first_name LIKE '%$s%'");
 				array_push($like_array, "u1.last_name LIKE '%$s%'");
 				array_push($like_array, "u1.nick_name LIKE '%$s%'");
@@ -73,7 +72,6 @@ class Sales_model extends Base_model{
 				array_push($like_array, "sales_insured LIKE '%$s%'");
 				array_push($like_array, "sales_owner LIKE '%$s%'");
 				array_push($like_array, "sales_policy_no LIKE '%$s%'");
-				array_push($like_array, "sales_client_contact LIKE '%$s%'");
 				array_push($like_array, "u1.first_name LIKE '%$s%'");
 				array_push($like_array, "u1.last_name LIKE '%$s%'");
 				array_push($like_array, "u1.nick_name LIKE '%$s%'");
