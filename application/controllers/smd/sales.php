@@ -36,7 +36,7 @@ class Sales extends Smd_Controller {
 		$row_count= $this->input->post('row_count');
 		$sort = $this->input->post('sort');
 		if(empty($sort)){
-			$sort = array('sales_id' => 'DESC');
+			//$sort = array('sales_date_submission' => 'ASC');
 		}
 		$filter = $this->input->post('filter');
 		$ret = array(
@@ -55,11 +55,12 @@ class Sales extends Smd_Controller {
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
 				$ret['rows'][$i]['sales_priority'] = ($r['sales_priority'] > 0 ? '<span class="label label-danger">High</span>' : ($r['sales_priority'] == 0 ? '<span class="label label-warning">Medium</span>' : '<span class="label label-success">Low</span>'))
-					.' - '.$sales_status[$r['sales_status']];
+					.'<br/>'.$sales_status[$r['sales_status']];
 				$ret['rows'][$i]['sales_policy_no'] = $r['sales_policy_no'];
-				$ret['rows'][$i]['sales_client'] = $r['sales_insured'].(empty($r['sales_owner']) ? '' : ' / '.$r['sales_owner']);
-				$ret['rows'][$i]['sales_agents'] = $r['agent1'].(empty($r['sales_split_agent']) ? '' : ' / '.$r['agent2']);
-				$ret['rows'][$i]['sales_policy'] = $r['sales_provider'].' / '.$policy_types[$r['sales_policy_type']];
+				$ret['rows'][$i]['sales_client'] = $r['sales_insured'].(empty($r['sales_owner']) ? '' : '<br/>'.$r['sales_owner']);
+				$ret['rows'][$i]['sales_agents'] = $r['agent1'].(empty($r['sales_split_agent']) ? '' : '<br/>'.$r['agent2']);
+				$ret['rows'][$i]['sales_date_submission'] = $r['sales_date_submission'];
+				$ret['rows'][$i]['sales_policy'] = $r['sales_provider'].'<br/>'.$policy_types[$r['sales_policy_type']];
 				$ret['rows'][$i]['sales_face_amount'] = number_to_english($r['sales_face_amount']);
 				$ret['rows'][$i]['action'] = array('view' => base_url().'smd/sales/sales_case/'.$r['sales_id']);
 			}

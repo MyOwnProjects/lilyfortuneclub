@@ -4,12 +4,13 @@
 <script>
 	$('#sales-grid').data_table({
 		header: [
-			{id: 'sales_priority', text: 'Priority / Status', sortable: true, width:'120px', align: 'left'}, 
-			{id: 'sales_policy_no', text: 'Policy #', sortable: true, width:'100px', align: 'left'}, 
+			{id: 'sales_priority', text: 'Status', sortable: true, width:'60px', align: 'left'}, 
+			{id: 'sales_policy_no', text: 'Policy #', sortable: true, width:'120px', align: 'left'}, 
 			{id: 'sales_insured', text: 'Insured / Owner', sortable: true}, 
 			{id: 'sales_agents', text: 'Writing / Split Agent', align: 'left'}, 
-			{id: 'sales_policy', text: 'Provider / Type', width:'180px', align: 'center'}, 
-			{id: 'sales_face_amount', text: 'DB', sortable: true, width:'60px', align:'center'},
+			{id: 'sales_date_submission', text: 'Submission', width:'80px', align: 'center', sortable: true}, 
+			{id: 'sales_policy', text: 'Provider / Type', width:'120px', align: 'left'}, 
+			{id: 'sales_face_amount', text: 'DB', sortable: true, width:'40px', align:'center'},
 		],
 		url: '<?php echo base_url();?>smd/sales/get_sales_list',
 		customized_buttons: [
@@ -27,7 +28,7 @@
 			}
 		],
 		row_count: 100,
-		//order_by: {tasks_create: 'desc'},
+		order_by: {sales_date_submission: 'asc'},
 		filter: {id: 'sales_status', options:{
 			P: '<span class="text-danger">Pending</span>',
 			I: '<span class="text-green"> Inforced</span>',

@@ -364,7 +364,21 @@ function new_item(prop){//title, url, param){
 				td.css('width', (parseInt(header[i]['width']) + (header[i]['sortable'] ? 30 : 0)) + 'px');
 			}
 			if(header[i]['sortable']){
-				td.addClass('sortable').attr('title', 'Click to sort').append('<span class="glyphicon glyphicon-sort pull-right"></span>');
+				if(header[i]['id'] in _sort){
+					var sv = _sort[header[i]['id']].toUpperCase();
+					if(sv == 'ASC'){
+						td.addClass('sortable').attr('title', 'Click to sort').append('<span class="glyphicon glyphicon-triangle-top pull-right"></span>');
+					}
+					else if(sv == 'DESC'){
+						td.addClass('sortable').attr('title', 'Click to sort').append('<span class="glyphicon glyphicon-triangle-bottom pull-right"></span>');
+					}
+					else{
+						td.addClass('sortable').attr('title', 'Click to sort').append('<span class="glyphicon glyphicon-sort pull-right"></span>');
+					}
+				}
+				else{
+					td.addClass('sortable').attr('title', 'Click to sort').append('<span class="glyphicon glyphicon-sort pull-right"></span>');
+				}
 			}
 		}
 		$('<td>').addClass('data-table-action').addClass('bg-primary').html('Action').appendTo($_tr);
