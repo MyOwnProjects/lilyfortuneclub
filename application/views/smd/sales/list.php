@@ -28,7 +28,7 @@
 			}
 		],
 		row_count: 100,
-		order_by: {sales_date_submission: 'asc'},
+		order_by: {sales_priority: 'DESC', sales_date_submission: 'asc'},
 		filter: {id: 'sales_status', options:{
 			P: '<span class="text-danger">Pending</span>',
 			I: '<span class="text-green"> Inforced</span>',
