@@ -14,7 +14,7 @@
 			<span class="pull-left">&nbsp;&nbsp;</span>
 			<a class="pull-left" style="margin-top:20px" href="<?php echo base_url();?>account/sales">Back to List</a>
 			<span class="pull-right">&nbsp;&nbsp;</span>
-			<a href="#" class="pull-right btn btn-primary btn-ms"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;Upload</a>
+			<a href="javascript:upload_file();" class="pull-right btn btn-primary btn-ms"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;Upload</a>
 			<span class="pull-right">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<a class="pull-right btn btn-primary btn-ms" href="<?php echo base_url();?>account/sales/sales_case/<?php echo $sale['sales_id'];?>"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</a>
 		</div>
@@ -80,11 +80,32 @@
 		<div class="col-md-4 col-sm-6 col-xs-12">
 			<div class="group clearfix">
 				<div class="group-label">Writing Agent</div>
-				<div class="group-value"><?php echo $sale['agent1'].' - '.$sale['sales_writing_agent'];?></div>	
+				<div class="group-value">
+					<?php 
+					if($sale['sales_writing_agent'] == '-1'){
+						echo '['.$sale['sales_agent_other'].']';
+					}
+					else{
+						echo $sale['agent1'].' - '.$sale['sales_writing_agent'];
+					}
+					?>
+				</div>	
 			</div>
 			<div class="group clearfix">
 				<div class="group-label">Split Agent</div>
-				<div class="group-value"><?php echo empty($sale['sales_split_agent']) ? '' : $sale['agent2'].' - '.$sale['sales_split_agent'];?></div>	
+				<div class="group-value">
+					<?php 
+						if(empty($sale['sales_split_agent'])){
+							echo '';
+						}
+						else if($sale['sales_split_agent'] == -1){
+							echo '['.$sale['sales_agent_other'].']';
+						}
+						else{
+							echo $sale['agent2'].' - '.$sale['sales_split_agent'];
+						}
+						?>
+				</div>	
 			</div>
 			<div class="group clearfix">
 				<div class="group-label">Submission</div>
@@ -167,3 +188,58 @@
 		</div>
 	</div>
 </div>
+<script>	
+function file_submit(){
+	ajax_loading(true);
+	event.preventDefault();
+	var file = $('#form-upload input[type=file]')[0].files[0]; 
+	var formData = new FormData();
+					//if (!file.type.match('image.*')) {
+					//	return;
+					//}
+
+	formData.append('file', file);
+	$.ajax({
+		url: '<?php echo base_url();?>account/sales/upload_file/<?php echo $sale['sales_id'];?>',
+		method: 'post',
+		data: formData,
+		dataType: 'json',
+		processData: false,
+		contentType: false,
+		success: function (data) {
+			if(data['error']){
+				simple_alert(data['error'], 'danger');
+			}
+			else{
+				simple_alert('The file is uploaded.', 'success');
+			}
+		},
+		complete: function(){
+			ajax_loading(false);
+		}
+	});	
+}
+
+function upload_file(){
+	bootbox.dialog({
+		title: "Upload File",
+		message: '<form id="form-upload" onsubmit="file_submit();"><input type="file" name="upload_file" accept="application/pdf"><input type="submit" style="visibility:hidden"></form>',
+		buttons: [
+			{
+				label: '<i class="fa fa-check"></i> Upload',
+				className: 'btn-primary',
+				callback: function(){
+					$('#form-upload [type=submit]').click();
+				}
+			},
+			{
+				label: '<i class="fa fa-times"></i> Cancel',
+				className: 'btn-default',
+				callback: function(){
+				}
+			},
+		]
+	});
+	
+}
+</script>

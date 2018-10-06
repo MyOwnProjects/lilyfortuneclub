@@ -57,15 +57,20 @@ $fields = array(
 			'tag' => 'select',
 			'class' => 'selectpicker-opt',
 			'data-live-search' => 'true',
-			'options' => $user_list($users, $sale, 'sales_writing_agent'),
+			'options' => $user_list(array_merge(array('-1' => array('text' => 'Other', 'value' => '-1')), $users) , $sale, 'sales_writing_agent'),
 		),
 		'sales_split_agent' => array(
 			'label' => 'Split Agent',
 			'tag' => 'select',
 			'class' => 'selectpicker-opt',
 			'data-live-search' => 'true',
-			'options' => $user_list(array_merge(array('-1' => array('text' => 'None', 'value' => '0')), $users), $sale, 'sales_split_agent'),
-			'split' => true, 
+			'options' => $user_list(array_merge(array('-2' => array('text' => 'None', 'value' => '0'), '-1' => array('text' => 'Other', 'value' => '-1')), $users), $sale, 'sales_split_agent'),
+		),
+		'sales_agent_other' => array(
+			'label' => 'Other Team Agent',
+			'tag' => 'input',
+			'value' => empty($sale) ? '': $sale['sales_agent_other'],
+			'split' => true
 		),
 		'sales_face_amount' => array(
 			'label' => 'Face Amount',
@@ -268,7 +273,7 @@ $fields = array(
 		<div style="margin:20px 0 10px 0">
 			<input type="submit" value="Submit" class="btn btn-sm btn-primary">
 			&nbsp;&nbsp;
-			<a href="<?php echo base_url();?>account/sales">Cancel</a>
+			<a class="btn btn-sm btn-default" href="<?php echo base_url();?>account/sales">Cancel</a>
 		</div>
 		<div class="clearfix">
 			<?php
