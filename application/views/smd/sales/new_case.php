@@ -35,14 +35,19 @@ $fields = array(
 			'tag' => 'select',
 			'class' => 'selectpicker',
 			'data-live-search' => 'true',
-			'options' => $user_list($users, $sale, 'sales_writing_agent'),
+			'options' => $user_list(array_merge(array('-1' => array('text' => 'Other', 'value' => '-1')), $users), $sale, 'sales_writing_agent'),
 		),
 		'sales_split_agent' => array(
 			'label' => 'Split Agent',
 			'tag' => 'select',
 			'class' => 'selectpicker',
 			'data-live-search' => 'true',
-			'options' => $user_list(array_merge(array('-1' => array('text' => 'None', 'value' => '0')), $users), $sale, 'sales_split_agent'),
+			'options' => $user_list(array_merge(array('-2' => array('text' => 'None', 'value' => '0'), '-1' => array('text' => 'Other', 'value' => '-1')), $users), $sale, 'sales_split_agent'),
+		),
+		'sales_agent_other' => array(
+			'label' => 'Other Team Agent',
+			'tag' => 'input',
+			'value' => empty($sale) ? '': $sale['sales_agent_other'],
 			'split' => true
 		),
 		'sales_priority' => array(

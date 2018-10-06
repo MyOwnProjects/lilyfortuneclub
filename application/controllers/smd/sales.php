@@ -58,7 +58,8 @@ class Sales extends Smd_Controller {
 					.'<br/>'.$sales_status[$r['sales_status']];
 				$ret['rows'][$i]['sales_policy_no'] = $r['sales_policy_no'];
 				$ret['rows'][$i]['sales_client'] = $r['sales_insured'].(empty($r['sales_owner']) ? '' : '<br/>'.$r['sales_owner']);
-				$ret['rows'][$i]['sales_agents'] = $r['agent1'].(empty($r['sales_split_agent']) ? '' : '<br/>'.$r['agent2']);
+				$ret['rows'][$i]['sales_agents'] = ($r['sales_writing_agent'] == '-1' ? '['.$r['sales_agent_other'].']' : $r['agent1'])
+					.(empty($r['sales_split_agent']) ? '' : '<br/>'.($r['sales_split_agent'] == -1 ? '['.$r['sales_agent_other'].']' : $r['agent2']));
 				$ret['rows'][$i]['sales_date_submission'] = $r['sales_date_submission'];
 				$ret['rows'][$i]['sales_policy'] = $r['sales_provider'].'<br/>'.$policy_types[$r['sales_policy_type']];
 				$ret['rows'][$i]['sales_face_amount'] = number_to_english($r['sales_face_amount']);
