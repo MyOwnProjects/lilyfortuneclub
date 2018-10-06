@@ -12,7 +12,7 @@ li>div{font-size:14px;padding-left:10px}
 	<br/>
 	<p>Dear New Member,</p>
 	<p>Welcome to our team and our extended business family!</p>
-	<p><img style="float:left;margin-right:20px;width:250px" src="<?php echo base_url();?>src/img/h-TRANSAMERICA-PYRAMID-PHOTOS-628x314.jpg">We are under the big umbrella of <b>Transamerica</b>, who has been helping people feel better about the future for more than <b>100 years</b>, and we’re proud of the trust we’ve earned. To learn more, please visit our website at <a href="http://www.transamerica.com" target="_blank">Transamerica</a></p>
+	<p><img style="float:left;margin-right:20px;width:250px" src="<?php echo base_url();?>src/img/h-TRANSAMERICA-PYRAMID-PHOTOS-628x314.jpg">We are under the big umbrella of <b>Transamerica</b>, who has been helping people feel better about the future for more than <b>100 years</b>, and we’re proud of the trust we’ve earned. To learn more, please visit our website at <a href="https://www.transamerica.com" target="_blank">Transamerica</a></p>
 	<br/>
 	<p>Congratulations on joining a winning team, led by influential business and community leaders such as:</p>
 	<div class="img clearfix">

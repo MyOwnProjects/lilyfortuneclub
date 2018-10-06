@@ -24,12 +24,12 @@ iframe{width:100%;border:0}
 		<div id="page-pg" class="tab-pane fade in active tab-content-page">
 			<h4 class="text-center">High Standard Promotion Guideline</h4>
 			<p>High standard promotion is very important to your business, and your team build. We are very proud to hold a high standard for our business.</p>
-			<iframe frameBorder="0" src="http://lilyfortuneclub.com/account/documents/view/59a3bbd9eb40a"></iframe>
+			<iframe frameBorder="0" src="<?php echo base_url();?>account/documents/view/59a3bbd9eb40a"></iframe>
 		</div>
 		<div id="page-cod" class="tab-pane fade tab-content-page">
 			<h4 class="text-center">Code of Honor - Dream Team</h4>
 			<p>"Do it right, do it with pride". Code of Honor & Team Pride. Commission Split. Client Services. SMD Promotion.</p>
-			<iframe frameBorder="0" src="http://lilyfortuneclub.com/account/documents/view/599e6b4cc736e"></iframe>
+			<iframe frameBorder="0" src="<?php echo base_url();?>account/documents/view/599e6b4cc736e"></iframe>
 		</div>
 	</div>
 </div>
