@@ -56,7 +56,7 @@ class Sales extends Smd_Controller {
 				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
 				$ret['rows'][$i]['sales_priority'] = ($r['sales_priority'] > 0 ? '<span class="label label-danger">High</span>' : ($r['sales_priority'] == 0 ? '<span class="label label-warning">Medium</span>' : '<span class="label label-success">Low</span>'))
 					.'<br/>'.$sales_status[$r['sales_status']];
-				$ret['rows'][$i]['sales_client'] = $r['sales_insured'].(empty($r['sales_owner']) ? '' : '<br/>'.$r['sales_owner']);
+				$ret['rows'][$i]['sales_insured'] = $r['sales_insured'].(empty($r['sales_owner']) ? '' : '<br/>'.$r['sales_owner']);
 				$ret['rows'][$i]['sales_date_submission'] = $r['sales_date_submission'].(empty($r['sales_date_closure']) ? '' : '<br/>'.$r['sales_date_closure']);
 				
 				$note = '<b>Agent:</b> '.($r['sales_writing_agent'] == '-1' ? '['.$r['sales_agent_other'].']' : $r['agent1'])
