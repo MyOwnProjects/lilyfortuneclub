@@ -7,7 +7,7 @@
 			{id: 'sales_priority', text: 'Status', sortable: true, width:'60px', align: 'left'}, 
 			{id: 'sales_insured', text: 'Insured / Owner', width:'120px', sortable: true}, 
 			{id: 'sales_agents', text: 'Agent', width:'120px', align: 'left'}, 
-			{id: 'sales_date_submission', text: 'Submit', width:'80px', align: 'center', sortable: true}, 
+			{id: 'sales_date_submission', text: 'Date', width:'70px', align: 'center', sortable: true}, 
 			{id: 'sales_info', text: 'Info', sortable: true, width:'120px', align:'left'},
 			{id: 'sales_priority_note', text: 'Note'},
 		],
