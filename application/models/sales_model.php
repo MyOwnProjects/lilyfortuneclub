@@ -40,6 +40,8 @@ class Sales_model extends Base_model{
 				array_push($like_array, "u2.first_name LIKE '%$s%'");
 				array_push($like_array, "u2.last_name LIKE '%$s%'");
 				array_push($like_array, "u2.nick_name LIKE '%$s%'");
+				array_push($like_array, "sales.sales_agent_other LIKE '%$s%'");
+				array_push($like_array, "sales.sales_provider LIKE '%$s%'");
 			}
 		}
 		$filter_str = '';
@@ -78,6 +80,8 @@ class Sales_model extends Base_model{
 				array_push($like_array, "u2.first_name LIKE '%$s%'");
 				array_push($like_array, "u2.last_name LIKE '%$s%'");
 				array_push($like_array, "u2.nick_name LIKE '%$s%'");
+				array_push($like_array, "sales.sales_agent_other LIKE '%$s%'");
+				array_push($like_array, "sales.sales_provider LIKE '%$s%'");
 			}
 		}
 		$filter_str = '';
