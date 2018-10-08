@@ -58,7 +58,7 @@ class Sales extends Smd_Controller {
 					.'<br/>'.$sales_status[$r['sales_status']];
 				$ret['rows'][$i]['sales_insured'] = $r['sales_insured'].(empty($r['sales_owner']) ? '' : '<br/>'.$r['sales_owner']);
 				$ret['rows'][$i]['sales_date_submission'] = $r['sales_date_submission'].(empty($r['sales_date_closure']) ? '' : '<br/>'.$r['sales_date_closure']);
-				$dec = ' class="label label-default" style="font-wei1ght:normal !important;font-size:13px"';
+				$dec = ' class="label" style="background: #1a73eb !important;font-weight:normal !important;font-size:13px"';
 				$note = '<span'.$dec.'>'.($r['sales_writing_agent'] == '-1' ? '['.$r['sales_agent_other'].']' : $r['agent1'])
 					.(empty($r['sales_split_agent']) ? '' : ' / '.($r['sales_split_agent'] == -1 ? '['.$r['sales_agent_other'].']' : $r['agent2'])).'</span>&nbsp;&nbsp;&nbsp;&nbsp;';
 				$note .= empty($r['sales_policy_no']) ? '' : '<span'.$dec.'>'.$r['sales_policy_no'].'</span>&nbsp;&nbsp;&nbsp;&nbsp;';
