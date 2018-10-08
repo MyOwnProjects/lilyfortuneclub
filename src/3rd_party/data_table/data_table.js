@@ -381,7 +381,7 @@ function new_item(prop){//title, url, param){
 				}
 			}
 		}
-		$('<td>').addClass('data-table-action').addClass('bg-primary').html('Action').appendTo($_tr);
+		//$('<td>').addClass('data-table-action').addClass('bg-primary').html('Action').appendTo($_tr);
 		this.tbody = $('<tbody>').appendTo(this.table);
 		
 		this.reload = function(){
@@ -422,6 +422,9 @@ function new_item(prop){//title, url, param){
 						$_check_all_box.prop('disabled', false);
 						for(var i = 0; i < data['rows'].length; ++i){
 							var tr = $('<tr>').attr('data-id', data['rows'][i]['id']).appendTo(_this.tbody);
+							if(data['rows'][i]['action']['view']){
+								tr.addClass('clickable').attr('edit-url', data['rows'][i]['action']['view']);
+							}
 							$('<td>').addClass('data-table-checkbox').html('<input type="checkbox">').appendTo(tr);
 							for(var j = 0; j < header.length; ++j){
 								var td = $('<td>').html(data['rows'][i][header[j]['id']]).appendTo(tr);
@@ -429,7 +432,7 @@ function new_item(prop){//title, url, param){
 									td.css('text-align', header[j]['align']);
 								}
 							}
-							var $_action = $('<td>').addClass('data-table-action').html('').appendTo(tr);
+							/*var $_action = $('<td>').addClass('data-table-action').html('').appendTo(tr);
 							if(data['rows'][i]['action']){
 								if(data['rows'][i]['action']['view']){
 									$_action.append('<a href="' + data['rows'][i]['action']['view'] + '" title="View"><span class="glyphicon glyphicon-eye-open"></span></a>');  
@@ -440,7 +443,7 @@ function new_item(prop){//title, url, param){
 								if(data['rows'][i]['action']['delete']){
 									$_action.append('<a href="' + data['rows'][i]['action']['delete'] + '" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>');  
 								}
-							}
+							}*/
 						}
 					}
 					else{
@@ -493,6 +496,14 @@ function new_item(prop){//title, url, param){
 			$_check_all_box.prop('checked', all_checked);
 			_update_customized_button_status(!all_unchecked);
 		});
+		this.tbody.delegate('.data-table-checkbox input', 'click', function(e){
+			e.stopPropagation();
+		});
+		this.tbody.delegate('.clickable', 'click', function(){
+			if($(this).attr('edit-url').length > 0){
+				location = $(this).attr('edit-url');
+			}
+		});
                                     this.thead.delegate('.sortable', 'click', function(){
                                             if($(this).hasClass('sort-asc')){
                                                 $(this).removeClass('sort-asc').addClass('sort-desc');
@@ -526,6 +537,7 @@ function new_item(prop){//title, url, param){
                                             _current_page= 1;
                                             _this.reload();
                                     });
+		
 		for(var col_id in _sort){
 			var col = this.thead.find('td[data-id=' + col_id + ']');
 			if(col.length > 0 && col.hasClass('sortable')){

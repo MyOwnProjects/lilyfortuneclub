@@ -56,13 +56,14 @@ class Sales extends Smd_Controller {
 				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
 				$ret['rows'][$i]['sales_priority'] = ($r['sales_priority'] > 0 ? '<span class="label label-danger">High</span>' : ($r['sales_priority'] == 0 ? '<span class="label label-warning">Medium</span>' : '<span class="label label-success">Low</span>'))
 					.'<br/>'.$sales_status[$r['sales_status']];
-				$ret['rows'][$i]['sales_policy_no'] = $r['sales_policy_no'];
+				//$ret['rows'][$i]['sales_policy_no'] = $r['sales_policy_no'];
 				$ret['rows'][$i]['sales_client'] = $r['sales_insured'].(empty($r['sales_owner']) ? '' : '<br/>'.$r['sales_owner']);
 				$ret['rows'][$i]['sales_agents'] = ($r['sales_writing_agent'] == '-1' ? '['.$r['sales_agent_other'].']' : $r['agent1'])
 					.(empty($r['sales_split_agent']) ? '' : '<br/>'.($r['sales_split_agent'] == -1 ? '['.$r['sales_agent_other'].']' : $r['agent2']));
 				$ret['rows'][$i]['sales_date_submission'] = $r['sales_date_submission'];
 				$ret['rows'][$i]['sales_policy'] = $r['sales_provider'].'<br/>'.$policy_types[$r['sales_policy_type']];
-				$ret['rows'][$i]['sales_face_amount'] = number_to_english($r['sales_face_amount']);
+				$ret['rows'][$i]['sales_face_amount'] = (empty($r['sales_policy_no']) ? '' : $r['sales_policy_no'].'<br/>').$r['sales_provider'].'<br/>'.$policy_types[$r['sales_policy_type']].'<br/>$'.number_to_english($r['sales_face_amount']);
+				$ret['rows'][$i]['sales_priority_note'] = str_replace("\n", '<br/>', $r['sales_priority_note']);
 				$ret['rows'][$i]['action'] = array('view' => base_url().'smd/sales/sales_case/'.$r['sales_id']);
 			}
 		}

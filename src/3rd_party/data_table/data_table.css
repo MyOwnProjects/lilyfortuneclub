@@ -11,11 +11,10 @@
 .data-table table tbody td:not(.data-table-checkbox){padding:5px 10px;font-size:14px;}
 .data-table table thead td.sortable{cursor:pointer}
 .data-table table thead td span{font-size:8px;margin-top:5px}
-.data-table table td.data-table-checkbox{text-align:center;width:30px}
+.data-table table td.data-table-checkbox{text-align:center;width:30px;padding:5px 0;}
 .data-table table tbody td.center{text-align:center;padding:20px}
 .data-table table tbody td.loading{padding:20px}
 .data-table table tbody td.loading div{width:40px;height:40px;margin:0 auto;background:url('spinning.gif') no-repeat;}
-.data-table table td.data-table-checkbox{text-align:center;}
 .data-table table tr:nth-child(even){background:#fafafa}
 .data-table table .data-table-action{text-align:center;width:70px}
 .data-table-action a:not(:first-child){margin-left:5px}
@@ -31,5 +30,7 @@
 
 .data-table table{border-width:1px;border-style:solid;border-color:#2e6da4;border-radius:10px}
 .data-table table thead td{border-width:1px;border-style:solid;border-color:#d5d5d5}
-.data-table table tbody td{vertical-align:middle;border-width:1px;border-style:solid;border-color:#e5e5e5}
+.data-table table tbody td{vertical-align:top;border-width:1px;border-style:solid;border-color:#e5e5e5}
 .data-table table tbody td img{height:16px;}
+.data-table .clickable{cursor:pointer}
+.data-table .clickable:hover{background-color:#efefef !important}
