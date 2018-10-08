@@ -60,11 +60,11 @@ class Sales extends Smd_Controller {
 				$ret['rows'][$i]['sales_date_submission'] = $r['sales_date_submission'].(empty($r['sales_date_closure']) ? '' : '<br/>'.$r['sales_date_closure']);
 				$dec = ' class="label label-default" style="font-wei1ght:normal !important;font-size:13px"';
 				$note = '<span'.$dec.'>'.($r['sales_writing_agent'] == '-1' ? '['.$r['sales_agent_other'].']' : $r['agent1'])
-					.(empty($r['sales_split_agent']) ? '' : ' / '.($r['sales_split_agent'] == -1 ? '['.$r['sales_agent_other'].']' : $r['agent2'])).'</span>&nbsp;&nbsp;';
-				$note .= empty($r['sales_policy_no']) ? '' : '<span'.$dec.'>'.$r['sales_policy_no'].'</span>&nbsp;&nbsp;';
-				$note .= '<span'.$dec.'>'.$r['sales_provider'].' - '.$policy_types[$r['sales_policy_type']].'</span>&nbsp;&nbsp;';
-				$note .= '<span'.$dec.'>'.'$'.number_to_english($r['sales_face_amount']).'</span>&nbsp;&nbsp;';
-				$note .= empty($r['sales_priority_note']) ? '' : '<br/>'.str_replace("\n", '<br/>', $r['sales_priority_note']).'</span>&nbsp;&nbsp;';
+					.(empty($r['sales_split_agent']) ? '' : ' / '.($r['sales_split_agent'] == -1 ? '['.$r['sales_agent_other'].']' : $r['agent2'])).'</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+				$note .= empty($r['sales_policy_no']) ? '' : '<span'.$dec.'>'.$r['sales_policy_no'].'</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+				$note .= '<span'.$dec.'>'.$r['sales_provider'].' - '.$policy_types[$r['sales_policy_type']].'</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+				$note .= '<span'.$dec.'>'.'$'.number_to_english($r['sales_face_amount']).'</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+				$note .= empty($r['sales_priority_note']) ? '' : '<br/>'.str_replace("\n", '<br/>', $r['sales_priority_note']).'</span>';
 				$ret['rows'][$i]['sales_info'] = $note;
 				$ret['rows'][$i]['action'] = array('view' => base_url().'smd/sales/sales_case/'.$r['sales_id']);
 			}
