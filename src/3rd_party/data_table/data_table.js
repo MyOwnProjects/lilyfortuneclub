@@ -218,11 +218,12 @@ function new_item(prop){//title, url, param){
 		
 		$_this.addClass('data-table');
 		this.toolbar = $('<div>').addClass('data-table-toolbar').addClass('clearfix').appendTo($_this);
+        var $_search_group = $('<div>').addClass('dialog-input-group-block').addClass('clearfix').appendTo(this.toolbar);
 		
 		var $_customized_button_group;
 		if(customized_buttons){
-			var $customized_group = $('<div>').addClass('customized_group').addClass('pull-left').appendTo(this.toolbar);
-			var $_customized_button_group = $('<div>').addClass('btn-group').appendTo($customized_group);
+			var $customized_group = $('<div>').addClass('customized_group').appendTo(this.toolbar);
+			var $_customized_button_group = $('<div>').addClass('btn-group').addClass('pull-left').css('margin-right', '20px').appendTo(this.toolbar);
 			for(var i = 0; i < customized_buttons.length; ++i){
 				var $_button;
 				if(customized_buttons[i]['sub_menus'] && customized_buttons[i]['sub_menus'].length > 0){
@@ -290,10 +291,9 @@ function new_item(prop){//title, url, param){
 				}
 			}
 		}
-		var $_table_group_bar = $('<div>').addClass('table-group-bar').addClass('clearfix').appendTo(this.toolbar);
-		var $_standard_groups = $('<div>').addClass('standard-groups').addClass('pull-right').appendTo($_table_group_bar);
+		var $_standard_groups = $('<div>').addClass('standard-groups').addClass('pull-right').appendTo(this.toolbar);//$_table_group_bar);
 		if(filter && !$.isEmptyObject(filter)){
-			var $_filter_group = $('<div>').addClass('dialog-input-group-block').addClass('input-group').addClass('pull-right').addClass('dropdown').appendTo($_table_group_bar);
+			var $_filter_group = $('<div>').addClass('dialog-input-group-block').addClass('input-group').addClass('pull-right').addClass('dropdown').appendTo(this.toolbar);
 			var $_filter_input_group = $('<div>').addClass('input-group').addClass('pull-left').addClass('dropdown-toggle').attr('data-toggle', 'dropdown').appendTo($_filter_group);
 			var $_filter_select = $('<input>').addClass('form-control').addClass('input-sm').attr('type', 'text').attr('readonly', true).css('background', '#fff').attr('placeholder', 'Filter by ').appendTo($_filter_input_group);
 			var $_span = $('<span>').addClass('input-group-btn').appendTo($_filter_input_group);
@@ -311,7 +311,6 @@ function new_item(prop){//title, url, param){
 			
 		}
 
-        var $_search_group = $('<div>').addClass('dialog-input-group-block').css('overflow', 'hidden').appendTo($_table_group_bar);
 		var $_input_group = $('<div>').addClass('input-group').addClass('pull-left').appendTo($_search_group);
 		var $_search_input = $('<input>').addClass('form-control').addClass('input-sm').attr('type', 'text').attr('placeholder', 'search').appendTo($_input_group).keypress(function(e){
 			if ( e.which == 13 ) {
@@ -324,7 +323,50 @@ function new_item(prop){//title, url, param){
 		var $_search_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').attr('type','button').append('<span class="glyphicon glyphicon-search"></span>').appendTo($_span).click(function(){
 			_search(this);
 		});
-                  
+
+		//column
+		var $_columns_button_group = $('<div>').addClass('btn-group').appendTo($_standard_groups);
+		var $_columns_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary')
+			.addClass('dropdown-toggle').attr('data-toggle', 'dropdown')
+			.html('Columns&nbsp;<span class="caret"></span>').appendTo($_columns_button_group);
+			var $_dorpdown_ul = $('<ul>').addClass('dropdown-menu').appendTo($_columns_button_group);
+			/*for(var j = 0; j < customized_buttons[i]['sub_menus'].length; ++j){
+				var $_li = $('<li>').html('<a href="javascript:void(0)">' + customized_buttons[i]['sub_menus'][j]['text'] + '</a>');
+						if(customized_buttons[i]['sub_menus'][j]['callback']){
+							$_li.click(function(btn_index, menu_index, obj){
+								return function(){
+									var param = {};
+									if(customized_buttons[btn_index]['sub_menus'][menu_index]['success_reload']){
+										param['func'] = _this.reload;
+									}
+									if(customized_buttons[btn_index]['sub_menus'][menu_index]['checked']){
+										param['selected_ids'] = [];
+										_this.tbody.find('.data-table-checkbox input[type=checkbox]').each(function(){
+											if($(this).prop('checked')){
+												param['selected_ids'].push($(this).parent().parent().attr('data-id'));
+											}
+										});				
+									}
+									customized_buttons[btn_index]['sub_menus'][menu_index]['callback'](param);
+								};
+							}(i, j, $_li));
+						}
+						$_dorpdown_ul.append($_li);
+					}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		//var $_button_group = $('<div>').addClass('data-table-button-group').appendTo($_standard_groups);
 		var $_button_group = $('<div>').addClass('btn-group').appendTo($_standard_groups);
 		var $_refresh_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').attr('title', 'refresh').append('<span class="glyphicon glyphicon-refresh"></span>')
@@ -349,7 +391,7 @@ function new_item(prop){//title, url, param){
 			_current_page = 'last';
 			_this.reload();
 		});
-                                    
+
 		this.table = $('<table>').attr('cellpadding', '0').attr('cellspacing', '0').appendTo($_this);
 		this.thead = $('<thead>').appendTo(this.table);
 		var $_tr = $('<tr>').appendTo(this.thead);
@@ -422,7 +464,7 @@ function new_item(prop){//title, url, param){
 						$_check_all_box.prop('disabled', false);
 						for(var i = 0; i < data['rows'].length; ++i){
 							var tr = $('<tr>').attr('data-id', data['rows'][i]['id']).appendTo(_this.tbody);
-							if(data['rows'][i]['action']['view']){
+							if(data['rows'][i]['action'] && data['rows'][i]['action']['view']){
 								tr.addClass('clickable').attr('edit-url', data['rows'][i]['action']['view']);
 							}
 							$('<td>').addClass('data-table-checkbox').html('<input type="checkbox">').appendTo(tr);
