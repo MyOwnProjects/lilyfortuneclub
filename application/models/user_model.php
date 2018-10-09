@@ -469,14 +469,21 @@ class User_model extends Base_model{
 	
 	
 	public function bulk_update_level($data){
-		$sql = '';
+		$codes = array();
+		$sql1 = '';
+		$sql2 = '';
 		foreach($data as $code => $value){
-			$sql .= " WHEN membership_code='$code' THEN '$value'";
+			array_push($codes, "'$code'");
+			$sql1 .= " WHEN membership_code='$code' THEN '$value'";
+			$sql2 .= " WHEN membership_code='$code' THEN '".date_format(date_create(), 'Y-m-d')."'";
 		}
 		$sql = "UPDATE users SET grade = CASE
-			$sql
-			ELSE grade
-			END;";
+			$sql1
+			END,
+			last_promoted = CASE
+			$sql2
+			END
+			WHERE membership_code IN (".implode(",", $codes).")";
 		return $this->db->query($sql);
 	}
 	
