@@ -102,13 +102,13 @@ class Team extends Smd_Controller {
 				//echo strtoupper(trim($prop['membership_code']).trim($prop['last_name'])).' '.$prop['password'];return;
 				$res = $this->user_model->new_user($prop);
 				if($res){
-					if($send_email == 'Y' && !empty($prop['email'])){
+					/*if($send_email == 'Y' && !empty($prop['email'])){
 						$prop['email'] = 'kunyangnew@gmail.com';
 						$name = (empty($prop['nick_name']) ? $prop['first_name'] : $prop['nick_name']).' '.$prop['last_name'];
 						send_mail($this->mailer, DEFAULT_EMAIL_FROM, DEFAULT_NAME_FROM, 
 							array($prop['email']), $this->email_templates['welcome_email']['subject'], 
 							sprintf($this->email_templates['welcome_email']['body'], $name));
-					}
+					}*/
 					echo json_encode(array('success' => true));
 					return;
 				}
