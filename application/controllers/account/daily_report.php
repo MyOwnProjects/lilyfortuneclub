@@ -57,14 +57,14 @@ class Daily_report extends Account_base_controller {
 				$total_rank_m_last = $total_rank_m;				
 			}
 			$v = array( 
-				$ret[$i]['daily_report_id'],
-				$ret[$i]['daily_report_name'],
-				$ret[$i]['daily_report_appointment'],
-				$ret[$i]['daily_report_personal_recruits'],
-				$ret[$i]['daily_report_personal_products'],
-				$ret[$i]['daily_report_baseshop_recruits'],
-				$ret[$i]['daily_report_baseshop_products'],
-				$ret[$i]['daily_report_base_elite'],
+				$dret[$i]['daily_report_id'],
+				$dret[$i]['daily_report_name'],
+				$dret[$i]['daily_report_appointment'],
+				$dret[$i]['daily_report_personal_recruits'],
+				$dret[$i]['daily_report_personal_products'],
+				$dret[$i]['daily_report_baseshop_recruits'],
+				$dret[$i]['daily_report_baseshop_products'],
+				$dret[$i]['daily_report_base_elite'],
 				
 				'<span style="color:red">'.$total_rank_d.'</span>',
 				$dsort[$i]['name'],
@@ -83,7 +83,7 @@ class Daily_report extends Account_base_controller {
 			);
 			array_push($result, $v);
 		} 
-		
+
 		echo json_encode($result);
 	}
 	
