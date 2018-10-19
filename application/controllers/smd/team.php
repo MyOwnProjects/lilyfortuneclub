@@ -147,6 +147,13 @@ class Team extends Smd_Controller {
 				'placeholder' => 'YYYY-MM-DD',
 			),
 			array(
+				'label' => 'Initial Date',
+				'name' => 'original_start_date',
+				'tag' => 'input',
+				'type' => 'date',
+				'placeholder' => 'YYYY-MM-DD',
+			),
+			array(
 				'label' => 'First Name',
 				'name' => 'first_name',
 				'tag' => 'input',

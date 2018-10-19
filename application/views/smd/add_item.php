@@ -163,6 +163,15 @@ $half_count = floor($item_count / 2 - 0.5);
 </div>
 
 <script>
+// a and b are javascript Date objects
+function dateDiffInDays(b, a) {
+  // Discard the time and time-zone information.
+  var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+  var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+ 
+  return Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24));
+}
+
 (function($){
 	if($('#input-file')){	
 		$('#input-file').ajax_upload('<?php echo base_url();?>smd/documents/upload_files').change(function(files){
@@ -234,8 +243,16 @@ $(document).ready(function(){
 								break;
 							case 'Start Date':
 								var date = new Date(line);
+								var today = new Date();
+								var diff = dateDiffInDays(today, date);
 								var date_str = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
-								$('#start_date').val(date_str);
+								if(diff > 180){
+									$('#start_date').val(today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0'));
+									$('#original_start_date').val(date_str);
+								}
+								else{
+									$('#start_date').val(date_str);
+								}
 								break;
 							case 'DOB':
 								var date = new Date(line + ' 2017');
