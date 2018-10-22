@@ -6,6 +6,7 @@
 		header: [
 			{id: 'subject', text: 'Subject', }, 
 			{id: 'file_name', text: 'File Name', sortable: true, width:'150px'}, 
+			{id: 'pub_code', text: 'Code', sortable: true, width:'50px'}, 
 			{id: 'grade_access', text: 'Grade Access', sortable: true, width:'120px'}, 
 			{id: 'mime_content_type', text: 'File Type', sortable: true, width:'60px'}, 
 			{id: 'content_type', text: 'Content Type', sortable: true, width:'100px'}, 

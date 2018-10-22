@@ -1,11 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('account_base.php');
-class Documents extends Account_base_controller {
+require_once('base.php');
+class Documents extends Base_Controller {
 	private $_params_str;
 	public function __construct(){
-		$this->guest_access_allowed = true;
 		parent::__construct();
+		if(!empty($this->user)){
+			$base_url = base_url();
+			$full_url = current_url();
+			$path = substr($full_url, strlen($base_url));
+			$redirect = $base_url.'account/'.$path.(empty($_SERVER['QUERY_STRING']) ? '' : '?'.$_SERVER['QUERY_STRING']);
+			header('location: '.$redirect);
+			exit;
+		}
 		$this->load->model('document_model');
 		$params = $this->input->get();
 		$this->_param_str = array();
@@ -18,10 +25,6 @@ class Documents extends Account_base_controller {
 	
 	public function index()
 	{
-		if($this->user['membership_code'] == 'GUEST'){
-			header('location: '.base_url().'ac/sign_in?redirect='.$this->uri->uri_string().(empty($this->_param_str) ? "" : "?".implode("&", $this->_param_str)));
-			exit;
-		}
 		$mime_type = $this->input->get('mime_type');
 		$content_type = $this->input->get('content_type');
 		$mime_type_list = $this->document_model->get_all_mime_content_types();
@@ -31,7 +34,7 @@ class Documents extends Account_base_controller {
 			$page = 0;
 		else
 			$page -= 1;
-		$where = "1=1";
+		$where = "1=1 AND grade_access='G'";
 		if(!empty($mime_type) && $mime_type != 'All'){
 			$where .= " AND mime_content_type='$mime_type'";
 		} 
@@ -58,19 +61,15 @@ class Documents extends Account_base_controller {
 	}
 	
 	public function view($file){
-		if($file != '5ac1b8002b7d7' && $this->user['membership_code'] == 'GUEST'){
-			header('location: '.base_url().'ac/sign_in?redirect='.$this->uri->uri_string().(empty($this->_param_str) ? "" : "?".implode("&", $this->_param_str)));
-			exit;
+		if($this->input->server('REQUEST_METHOD') == 'GET'){
+			$this->load_view('document_code');
+			return;
 		}
-		$result = $this->document_model->get_list("uniqid='$file'");
+		$pub_code = strtoupper(trim($this->input->post('guest_code')));
+		$result = $this->document_model->get_list("uniqid='$file' && pub_code='$pub_code'");
 		if(count($result) != 1){
 			$this->load_view('document_error', array('error' => 'The document does not exist, or you do not have permission.'));
 			return;
-		}
-		if(in_array($result[0]['grade_access'], array('SMD', 'MD', 'SA', 'A', 'TA', 'G')) && 
-			empty($this->user)){
-			header('location: '.base_url().'ac/sign_in?redirect=account/documents/view/'.$file);
-			exit;
 		}
 		if(!empty($result[0]['file_name'])){
 			$full_path = getcwd().'/application/documents/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
@@ -85,7 +84,7 @@ class Documents extends Account_base_controller {
 				$file = uniqid().'.'.$ext;
 				$to = getcwd().'/src/temp/'.$file;
 				if(!@copy($full_path, $to)){
-					$this->load_view('document_error', array('error' => 'The document does not exist, or you do not have permission.'));
+					$this->load_view('documents_error', array('error' => 'The document does not exist, or you do not have permission.'));
 					return;
 				}
 			}

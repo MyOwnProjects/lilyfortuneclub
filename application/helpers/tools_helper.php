@@ -109,6 +109,9 @@ if ( ! function_exists('decode'))
 if ( ! function_exists('mime_type'))
 {
 	function mime_type($file_name){
+		if(!file_exists($file_name)){
+			return array('text', 'txt');
+		}
 		$ext = pathinfo($file_name, PATHINFO_EXTENSION);
 		$finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
 		$mime_type_str = finfo_file($finfo, $file_name);

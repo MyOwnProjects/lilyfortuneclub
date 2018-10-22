@@ -15,6 +15,9 @@ ul.doc-list li{padding:0 20px}
 .doc-type{display:none}
 }
 </style>
+			<?php 
+			$s = empty($user) ? '' : 'account/';
+			?>
 <div class="wrapper-900">
 	<div class="clearfix" style="margin-top:20px;padding-left:20px">
 		<div class="pull-right" style="line-height:40px;font-size:14px;text-align:right">
@@ -22,10 +25,10 @@ ul.doc-list li{padding:0 20px}
 				Content
 				<button class="btn btn-link dropdonw-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $content_type;?>&nbsp;<span class="caret"></span></button>
 				<ul class="dropdown-menu">
-					<li><a href="<?php echo base_url();?>account/documents<?php echo empty($mime_type) ? '' : "?mime_type=$mime_type";?>">All</a></li>
+					<li><a href="<?php echo base_url().$s;?>documents<?php echo empty($mime_type) ? '' : "?mime_type=$mime_type";?>">All</a></li>
 					<?php
 					foreach($content_type_list as $ct){
-						echo '<li><a href="'.base_url().'account/documents?content_type='.$ct.(empty($mime_type) ? '' : "&mime_type=$mime_type").'">'.$ct.'</a></li>';
+						echo '<li><a href="'.base_url().$s.'documents?content_type='.$ct.(empty($mime_type) ? '' : "&mime_type=$mime_type").'">'.$ct.'</a></li>';
 					}
 					?>
 				</ul>
@@ -45,9 +48,9 @@ ul.doc-list li{padding:0 20px}
 				}
 				?>
 			</div>
-			<div class="doc-type"><a href="<?php echo base_url();?>account/documents?content_type=<?php echo $l['content_type'];?>"><?php echo $l['content_type'];?></a></div>
+			<div class="doc-type"><a href="<?php echo base_url().$s;?>documents?content_type=<?php echo $l['content_type'];?>"><?php echo $l['content_type'];?></a></div>
 			<div class="doc-text">
-				<div class="doc-subject"><a href="<?php echo base_url();?>account/documents/view/<?php echo $l['uniqid'];?>" target="_blank"><?php echo $l['subject'];?></a></div>
+				<div class="doc-subject"><a href="<?php echo base_url().$s;?>documents/view/<?php echo $l['uniqid'];?>" target="_blank"><?php echo $l['subject'];?></a></div>
 				<div class="doc-abstract"><?php echo $l['abstract'];?></div>
 			</div>
 		</li>

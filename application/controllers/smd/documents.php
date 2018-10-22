@@ -58,6 +58,7 @@ class Documents extends Smd_Controller {
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['id'] = $r['uniqid'];
 				$ret['rows'][$i]['subject'] = '<a href="'.base_url().'/account/documents/view/'.$r['uniqid'].'">'.$r['subject'].'</a>';
+				$ret['rows'][$i]['pub_code'] = $r['pub_code'];
 				$ret['rows'][$i]['grade_access'] = $grade_access[$r['grade_access']];
 				$ret['rows'][$i]['content_type'] = ucwords($r['content_type']);
 				$ret['rows'][$i]['create_date'] = date_format(date_create($r['create_date']), 'm/d/Y H:i A');
@@ -65,7 +66,12 @@ class Documents extends Smd_Controller {
 					$mime_type = mime_type(getcwd().'/application/documents/'.$r['uniqid'].'.'.$r['file_name']);
 					$ret['rows'][$i]['mime_content_type'] = '<img src="'.base_url().'/src/img/file_type/'.$mime_type[1].'.png'.'">&nbsp;'.strtoupper($mime_type[0]);
 					$ret['rows'][$i]['file_name'] = $r['file_name'];
-					$file_size = filesize(getcwd().'/application/documents/'.$r['uniqid'].'.'.$r['file_name']);
+					if(file_exists(getcwd().'/application/documents/'.$r['uniqid'].'.'.$r['file_name'])){
+						$file_size = filesize(getcwd().'/application/documents/'.$r['uniqid'].'.'.$r['file_name']);
+					}
+					else{
+						$file_size = 0;
+					}
 					if($file_size / 1024 < 1){
 						$ret['rows'][$i]['file_size'] = number_format($file_size, 0).' B';
 					}
@@ -378,8 +384,22 @@ class Documents extends Smd_Controller {
 						'abstract' => $abstract
 						//'html_content' => addslashes($html_content)
 						));
+					if($grade_access == 'G'){
+						$code = '';
+						$len = mt_rand(5, 8);
+						for($i = 0; $i < $len; ++$i){
+							$t = mt_rand(1, 2);
+							if($t == 1){
+								$code .= chr(mt_rand(65, 90));
+							}
+							else{
+								$code .= mt_rand(0, 9);
+							}
+						}
+						$values[0]['pub_code'] = $code;
 					}
 				}
+			}
 			/*else{
 				array_push($values, array(
 					'uniqid' => $uniqid,
