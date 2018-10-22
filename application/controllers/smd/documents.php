@@ -209,6 +209,11 @@ class Documents extends Smd_Controller {
 	}
 	
 	public function upload_files(){
+		ini_set( 'memory_limit', '500M' );
+		ini_set('upload_max_filesize', '500M');  
+		ini_set('post_max_size', '500M');  
+		ini_set('max_input_time', 3600);  
+		ini_set('max_execution_time', 3600);		
 		$this->load->library('upload');
 		$uniq_id = uniqid();
 		$dir = getcwd().'/application/documents/temp/';
