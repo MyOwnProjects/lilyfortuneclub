@@ -11,6 +11,27 @@ class Account extends Smd_Controller {
 	}
 	
 	private function _valid_dob($date){
+		$da = explode('-', $date);
+		$today = date_create();
+		$ta = explode('-', date_format($today, 'Y-m-d'));
+		if($ta[1] == $da[1] && $ta[2] == $da[2]){
+			return 0;
+		}
+
+		date_add($today,date_interval_create_from_date_string("1 days"));
+		$ta = explode('-', date_format($today, 'Y-m-d'));
+		if($ta[1] == $da[1] && $ta[2] == $da[2]){
+			return 1;
+		}
+		
+		date_add($today,date_interval_create_from_date_string("1 days"));
+		$ta = explode('-', date_format($today, 'Y-m-d'));
+		if($ta[1] == $da[1] && $ta[2] == $da[2]){
+			return 2;
+		}
+		
+		return 3;
+		
 		$ds = explode('-', $date);
 		$d = date_create(date_format(date_create(), 'Y')."-$ds[1]-$ds[2] 00:00:00");
 		$today = date_create(date_format(date_create(), 'Y-m-d 00:00:00'));
