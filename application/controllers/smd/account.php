@@ -12,6 +12,7 @@ class Account extends Smd_Controller {
 	
 	private function _valid_dob($date){
 		$da = explode('-', $date);
+		date_default_timezone_set('America/Los_Angeles');
 		$today = date_create();
 		$ta = explode('-', date_format($today, 'Y-m-d'));
 		if($ta[1] == $da[1] && $ta[2] == $da[2]){
