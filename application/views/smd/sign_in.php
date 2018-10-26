@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="UTF-8"></meta>
 		<title></title>
-		<link type="text/css" rel="Stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/css/bootstrap.min.css" />
+		<link type="text/css" rel="Stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-4.1.3-dist/css/bootstrap.min.css" />
     	<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-migrate-1.2.1.js"></script>
-		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
 	</head>
 	<body style="margin:100px auto 0 auto;width:400px">
 		<h3>SMD Sign In</h3>

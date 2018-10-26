@@ -1,14 +1,14 @@
 (function($){
 	$.fn.tree_grid = function(header, loading_url){//nodes = [['text','view', 'child_count', 'child_url'], [], []...]
-		var tree_node_icon_down = 'glyphicon-menu-down';
-		var tree_node_icon_right = 'glyphicon-menu-right';
+		var tree_node_icon_down = 'fa-minus-square-o';
+		var tree_node_icon_right = 'fa-plus-square-o';
 		var _this = this;
 		var $_this = $(this);
 		$_this.addClass('tree-grid');
 			var $_div = $('<div>').html(header ? '<label>' + header + '</label>' : '');
 			var $_head = $('<li>').append($_div).appendTo($_this);
 			this.load_children = function(parent, ajax_url){
-				parent.find('.'+ tree_node_icon_right + ', .glyphicon-unchecked').removeClass(tree_node_icon_right).removeClass('glyphicon-unchecked').addClass(tree_node_icon_down); 
+				parent.find('.'+ tree_node_icon_right + ', .fa-square-o').removeClass(tree_node_icon_right).removeClass('fa-square-o').addClass(tree_node_icon_down); 
 				var $_ul_parent = $('<ul>').appendTo(parent);
 				var $_loading = $('<div>').addClass('loading');
 				var $_li_loading = $('<li>').html($_loading).appendTo($_ul_parent);
@@ -25,7 +25,7 @@
 									var $_li = $('<li>').appendTo($_ul_parent);
 									if(node['child_count'] && node['child_url']){
 										var $_node_text = $('<span>').html(node['text']);
-										var $_leaf_icon = $('<div>').addClass('tree-node-icon').addClass('glyphicon').attr('data-url', node['child_url']);
+										var $_leaf_icon = $('<i>').addClass('tree-node-icon').addClass('fa').attr('aria-hidden', 'true').attr('data-url', node['child_url']);
 										$_leaf_icon.addClass(tree_node_icon_right);
 										if(node['child_count'] == 0){
 											$_leaf_icon.css('visibility', 'hidden').attr('data-url', node['child_url']);
@@ -60,7 +60,7 @@
 				});
 			};
                                     
-			this.delegate('.' + tree_node_icon_right + ', .glyphicon-unchecked', 'click', function(){
+			this.delegate('.' + tree_node_icon_right + ', .fa-square-o', 'click', function(){
 				var $_parent = $(this).parent().parent();
 				_this.load_children($_parent, $(this).attr('data-url'));
 			}).delegate('.' + tree_node_icon_down, 'click', function(){

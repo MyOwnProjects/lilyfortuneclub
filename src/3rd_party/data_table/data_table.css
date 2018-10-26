@@ -6,7 +6,7 @@
 .data-table .table-group-bar>div, .data-table .customized_group>div{margin-bottom:10px}
 .data-table table{width:100%;table-layout:fixed}
 .data-table table td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.data-table table thead td{background:linear-gradient(#337ab7, #2e6da4)}
+.data-table table thead td{color:#fff;background1:linear-gradient(#337ab7, #2e6da4)}
 .data-table table thead td:not(.data-table-checkbox){padding:2px 5px 2px 10px;}
 .data-table table tbody td:not(.data-table-checkbox){padding:5px 10px;font-size:14px;}
 .data-table table thead td.sortable{cursor:pointer}
@@ -23,7 +23,8 @@
 .data-table .data-table-button-group .button{float:left;padding:10px 13px 7px 13px;cursor:pointer}
 .data-table .data-table-button-group .button:first-child{border-top-left-radius:3px;border-bottom-left-radius:3px}
 .data-table .data-table-button-group .button:last-child{border-top-right-radius:3px;border-bottom-right-radius:3px}
-
+.data-table .filter-group{max-width:200px}
+.data-table .standard-groups{min-width:315px}
 .data-table .btn-group .btn-text{background:#fff;border-color:#2e6da4;cursor:default}
 
 .data-table .data-table-button-group{display:inline-block}
@@ -34,3 +35,10 @@
 .data-table table tbody td img{height:16px;}
 .data-table .clickable{cursor:pointer}
 .data-table .clickable:hover{background-color:#efefef !important}
+.data-table table thead td .fa-sort{margin-top:5px}
+.data-table table thead td .fa-sort-asc{margin-top:10px}
+.data-table table thead td .fa-sort-desc{margin-top:2px}
+
+
+
+/*.data-table-toolbar{display:flex;flex-flow:row wrap}*/

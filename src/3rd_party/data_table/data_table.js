@@ -217,13 +217,25 @@ function new_item(prop){//title, url, param){
 		};
 		
 		$_this.addClass('data-table');
-		this.toolbar = $('<div>').addClass('data-table-toolbar').addClass('clearfix').appendTo($_this);
-        var $_search_group = $('<div>').addClass('dialog-input-group-block').addClass('clearfix').appendTo(this.toolbar);
+		this.toolbar = $('<div>').addClass('data-table-toolbar').appendTo($_this);
+		var $_toolbar_row = $('<div>').addClass('toolbar-row').addClass('d-flex').appendTo(this.toolbar);
+		var $_input_group = $('<div>').addClass('search-group').addClass('input-group').addClass('input-group-sm').addClass('pull-left').appendTo($_toolbar_row);
+		var $_search_input = $('<input>').addClass('form-control').attr('type', 'text').attr('placeholder', 'search').appendTo($_input_group).keypress(function(e){
+			if ( e.which == 13 ) {
+				e.preventDefault();
+				_search(this);
+				return false;
+			}          
+		});
+		var $_d = $('<div>').addClass('input-group-append').appendTo($_input_group);
+		var $_search_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-xs').attr('type','button').append('<i class="fa fa-search" aria-hidden="true"></i>').appendTo($_d).click(function(){
+			_search(this);
+		});
 		
+		$_toolbar_row = $('<div>').addClass('toolbar-row').addClass('d-flex').addClass('mt-2').appendTo(this.toolbar);
 		var $_customized_button_group;
 		if(customized_buttons){
-			var $customized_group = $('<div>').addClass('customized_group').appendTo(this.toolbar);
-			var $_customized_button_group = $('<div>').addClass('btn-group').addClass('pull-left').css('margin-right', '20px').appendTo(this.toolbar);
+			var $_customized_button_group = $('<div>').addClass('btn-group').addClass('customized_button_group').addClass('mr-auto').css('margin-right', '20px').appendTo($_toolbar_row);
 			for(var i = 0; i < customized_buttons.length; ++i){
 				var $_button;
 				if(customized_buttons[i]['sub_menus'] && customized_buttons[i]['sub_menus'].length > 0){
@@ -231,11 +243,11 @@ function new_item(prop){//title, url, param){
 					$_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary')
 						.addClass('dropdown-toggle').attr('data-toggle', 'dropdown')
 						.html(customized_buttons[i]['text'] + '&nbsp;<span class="caret"></span>').appendTo($_dropdown_group);
-					var $_dorpdown_ul = $('<ul>').addClass('dropdown-menu').appendTo($_dropdown_group);
+					var $_dorpdown_ul = $('<div>').addClass('dropdown-menu').appendTo($_dropdown_group);
 					for(var j = 0; j < customized_buttons[i]['sub_menus'].length; ++j){
-						var $_li = $('<li>').html('<a href="javascript:void(0)">' + customized_buttons[i]['sub_menus'][j]['text'] + '</a>');
+						var $_a = $('<a>').addClass('dropdown-item').attr('href', 'javascript:void(0)').html(customized_buttons[i]['sub_menus'][j]['text']);
 						if(customized_buttons[i]['sub_menus'][j]['callback']){
-							$_li.click(function(btn_index, menu_index, obj){
+							$_a.click(function(btn_index, menu_index, obj){
 								return function(){
 									var param = {};
 									if(customized_buttons[btn_index]['sub_menus'][menu_index]['success_reload']){
@@ -251,9 +263,9 @@ function new_item(prop){//title, url, param){
 									}
 									customized_buttons[btn_index]['sub_menus'][menu_index]['callback'](param);
 								};
-							}(i, j, $_li));
+							}(i, j, $_a));
 						}
-						$_dorpdown_ul.append($_li);
+						$_dorpdown_ul.append($_a);
 					}
 				}
 				else{
@@ -291,19 +303,20 @@ function new_item(prop){//title, url, param){
 				}
 			}
 		}
-		var $_standard_groups = $('<div>').addClass('standard-groups').addClass('pull-right').appendTo(this.toolbar);//$_table_group_bar);
+
 		if(filter && !$.isEmptyObject(filter)){
-			var $_filter_group = $('<div>').addClass('dialog-input-group-block').addClass('input-group').addClass('pull-right').addClass('dropdown').appendTo(this.toolbar);
-			var $_filter_input_group = $('<div>').addClass('input-group').addClass('pull-left').addClass('dropdown-toggle').attr('data-toggle', 'dropdown').appendTo($_filter_group);
+			//var $_filter_group = $('<div>').addClass('dialog-input-group-block').addClass('input-group').addClass('pull-right').appendTo(this.toolbar);
+			var $_filter_input_group = $('<div>').addClass('input-group').addClass('filter-group').addClass('input-group-sm').appendTo($_toolbar_row);//$_filter_group);
 			var $_filter_select = $('<input>').addClass('form-control').addClass('input-sm').attr('type', 'text').attr('readonly', true).css('background', '#fff').attr('placeholder', 'Filter by ').appendTo($_filter_input_group);
-			var $_span = $('<span>').addClass('input-group-btn').appendTo($_filter_input_group);
-			var $_filter_select_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').attr('type','button').append('<span class="glyphicon glyphicon glyphicon-menu-down"></span>').appendTo($_span).click(function(){
+			var $_d = $('<div>').addClass('input-group-append').appendTo($_filter_input_group);
+			var $_filter_select_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').addClass('dropdown-toggle')
+				.attr('type','button').attr('data-toggle', 'dropdown').appendTo($_d).click(function(){
 				//_search(this);
 			});
-			var $_filter_dropdown_menu = $('<ul>').addClass("dropdown-menu").css('width', '100%').css('margin', '0').appendTo($_filter_group);
-			$('<li data-value=""><a href="javascript:void(0)">All</a></li>').appendTo($_filter_dropdown_menu);
+			var $_filter_dropdown_menu = $('<div>').addClass("dropdown-menu").appendTo($_d);
+			$('<a data-value="" href="javascript:void(0)" class="dropdown-item">All</a>').appendTo($_filter_dropdown_menu);
 			for(var filter_id in filter['options']){
-				$('<li data-value="' + filter_id + '"><a href="javascript:void(0)">' + filter['options'][filter_id] + '</a></li>').appendTo($_filter_dropdown_menu);
+				$('<a data-value="' + filter_id + '" href="javascript:void(0)" class="dropdown-item">' + filter['options'][filter_id] + '</a>').appendTo($_filter_dropdown_menu);
 			}
 			this.filter_dropdown_menu = $_filter_dropdown_menu;
 		}
@@ -311,25 +324,20 @@ function new_item(prop){//title, url, param){
 			
 		}
 
-		var $_input_group = $('<div>').addClass('input-group').addClass('pull-left').appendTo($_search_group);
-		var $_search_input = $('<input>').addClass('form-control').addClass('input-sm').attr('type', 'text').attr('placeholder', 'search').appendTo($_input_group).keypress(function(e){
-			if ( e.which == 13 ) {
-				e.preventDefault();
-				_search(this);
-				return false;
-			}          
-		});
-		var $_span = $('<span>').addClass('input-group-btn').appendTo($_input_group);
-		var $_search_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').attr('type','button').append('<span class="glyphicon glyphicon-search"></span>').appendTo($_span).click(function(){
-			_search(this);
-		});
+		var $_standard_groups = $('<div>').addClass('standard-groups').appendTo($_toolbar_row);//$_table_group_bar);
 
 		//column
 		var $_columns_button_group = $('<div>').addClass('btn-group').appendTo($_standard_groups);
 		var $_columns_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary')
 			.addClass('dropdown-toggle').attr('data-toggle', 'dropdown')
 			.html('Columns&nbsp;<span class="caret"></span>').appendTo($_columns_button_group);
-			var $_dorpdown_ul = $('<ul>').addClass('dropdown-menu').appendTo($_columns_button_group);
+			var $_dorpdown_ul = $('<div>').addClass('dropdown-menu').appendTo($_columns_button_group);
+			for(var i = 0; i < header.length; ++i){
+				var $_a = $('<a>').addClass('dropdown-item').appendTo($_dorpdown_ul);
+				$_d = $('<div>').addClass('form-check-label')
+					.html('<label class="form-check-label"><input type="checkbox" class="form-check-input" value="">' + (i == 0 ? 'All' : header[i]['text']) + '</label>');
+				$_a.append($_d);
+			}
 			/*for(var j = 0; j < customized_buttons[i]['sub_menus'].length; ++j){
 				var $_li = $('<li>').html('<a href="javascript:void(0)">' + customized_buttons[i]['sub_menus'][j]['text'] + '</a>');
 						if(customized_buttons[i]['sub_menus'][j]['callback']){
@@ -369,25 +377,25 @@ function new_item(prop){//title, url, param){
 	
 		//var $_button_group = $('<div>').addClass('data-table-button-group').appendTo($_standard_groups);
 		var $_button_group = $('<div>').addClass('btn-group').appendTo($_standard_groups);
-		var $_refresh_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').attr('title', 'refresh').append('<span class="glyphicon glyphicon-refresh"></span>')
+		var $_refresh_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').attr('title', 'refresh').append('<i class="fa fa-refresh" aria-hidden="true"></i>')
 			.click(function(){
 				_this.reload();
 			}).appendTo($_button_group);
 		$_button_group = $('<div>').addClass('btn-group').appendTo($_standard_groups);//addClass('data-table-button-group').appendTo($_standard_groups);
-		var $_first_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'first page').append('<span class="glyphicon glyphicon-step-backward"></span>').appendTo($_button_group).click(function(){
+		var $_first_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'first page').append('<i class="fa fa-fast-backward" aria-hidden="true"></i>').appendTo($_button_group).click(function(){
 			_current_page = 'first';
 			_this.reload();
 		});
-		var $_prev_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'prev page').append('<span class="glyphicon glyphicon-chevron-left"></span>').appendTo($_button_group).click(function(){
+		var $_prev_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'prev page').append('<i class="fa fa-backward" aria-hidden="true"></i>').appendTo($_button_group).click(function(){
 			_current_page--;
 			_this.reload();
 		});
 		var $_current_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-text').css('width', '60px').html('0').appendTo($_button_group);
-		var $_next_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'next page').append('<span class="glyphicon glyphicon-chevron-right"></span>').appendTo($_button_group).click(function(){
+		var $_next_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'next page').append('<i class="fa fa-forward" aria-hidden="true"></i>').appendTo($_button_group).click(function(){
 			_current_page++;
 			_this.reload();
 		});
-		var $_last_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'last page').append('<span class="glyphicon glyphicon-step-forward"></span>').appendTo($_button_group).click(function(){
+		var $_last_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'last page').append('<i class="fa fa-fast-forward" aria-hidden="true"></i>').appendTo($_button_group).click(function(){
 			_current_page = 'last';
 			_this.reload();
 		});
@@ -409,17 +417,17 @@ function new_item(prop){//title, url, param){
 				if(header[i]['id'] in _sort){
 					var sv = _sort[header[i]['id']].toUpperCase();
 					if(sv == 'ASC'){
-						td.addClass('sortable').attr('title', 'Click to sort').append('<span class="glyphicon glyphicon-triangle-top pull-right"></span>');
+						td.addClass('sortable').attr('title', 'Click to sort').append('<i class="fa fa-sort-asc pull-right" aria-hidden="true"></i>');
 					}
 					else if(sv == 'DESC'){
-						td.addClass('sortable').attr('title', 'Click to sort').append('<span class="glyphicon glyphicon-triangle-bottom pull-right"></span>');
+						td.addClass('sortable').attr('title', 'Click to sort').append('<i class="fa fa-sort-desc pull-right" aria-hidden="true"></i>');
 					}
 					else{
-						td.addClass('sortable').attr('title', 'Click to sort').append('<span class="glyphicon glyphicon-sort pull-right"></span>');
+						td.addClass('sortable').attr('title', 'Click to sort').append('<i class="fa fa-sort pull-right" aria-hidden="true"></i>');
 					}
 				}
 				else{
-					td.addClass('sortable').attr('title', 'Click to sort').append('<span class="glyphicon glyphicon-sort pull-right"></span>');
+					td.addClass('sortable').attr('title', 'Click to sort').append('<i class="fa fa-sort pull-right" aria-hidden="true"></i>');
 				}
 			}
 		}
@@ -511,8 +519,8 @@ function new_item(prop){//title, url, param){
 		});
 		
 		if(this.filter_dropdown_menu){
-			this.filter_dropdown_menu.delegate('li', 'click', function(){
-				$(this).parent().parent().children(':first-child').children(':first-child').val($(this).text());
+			this.filter_dropdown_menu.delegate('a', 'click', function(){
+				$(this).parent().parent().parent().children(':first-child').val($(this).text());
 				var new_filter = $(this).attr('data-value');
 				if(_filter[filter['id']] != new_filter){
 					_filter[filter['id']] = new_filter;
@@ -549,21 +557,19 @@ function new_item(prop){//title, url, param){
                                     this.thead.delegate('.sortable', 'click', function(){
                                             if($(this).hasClass('sort-asc')){
                                                 $(this).removeClass('sort-asc').addClass('sort-desc');
-                                                $(this).children('span').removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom');
+                                                $(this).children('i').removeClass('fa-sort-asc').addClass('fa-sort-desc');
 												_sort[$(this).attr('data-id')] = 'desc';
                                             }
                                             else if($(this).hasClass('sort-desc')){
                                                 $(this).removeClass('sort-desc');
-                                                $(this).children('span').removeClass('glyphicon-triangle-bottom').addClass('glyphicon-sort');
+                                                $(this).children('i').removeClass('fa-sort-desc').addClass('fa-sort');
 												delete _sort[$(this).attr('data-id')];
                                             }
                                             else{
                                                 $(this).addClass('sort-asc');
-                                                $(this).children('span').removeClass('glyphicon-sort').addClass('glyphicon-triangle-top');
+                                                $(this).children('i').removeClass('fa-sort').addClass('fa-sort-asc');
 												_sort[$(this).attr('data-id')] = 'asc';
                                             }
-                                            //$(this).siblings().removeClass('sort-asc').removeClass('sort-desc');
-                                            //$(this).siblings().children('span').removeClass('glyphicon-triangle-top').removeClass('glyphicon-triangle-bottom').addClass('glyphicon-sort');
                                             var tr = $('<tr>');
                                             $('<td>').addClass('loading').attr('colspan', _this.thead.find('td').length).append('<div></div>').appendTo(tr);
                                             _this.tbody.empty().append(tr);
@@ -586,11 +592,11 @@ function new_item(prop){//title, url, param){
 				var v = _sort[col_id].toLowerCase();
 				if(v == 'asc'){
 					col.addClass('sort-asc');
-					col.children('span').removeClass('glyphicon-sort').addClass('glyphicon-triangle-bottom');
+					col.children('i').removeClass('fa-sort').addClass('fa-sort-asc');
 				}
 				else if(v == 'desc'){
 					col.addClass('sort-desc');
-					col.children('span').removeClass('glyphicon-sort').addClass('glyphicon-triangle-bottom');
+					col.children('i').removeClass('fa-sort').addClass('fa-sort-desc');
 				}
 			}
 		}

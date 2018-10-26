@@ -128,3 +128,7 @@ function simple_alert(text, type){
 	}
 	setTimeout(function(){$_div.fadeOut();}, 2000);
 }
+
+function send_welcome_email(email, id, key, nick_name, first_name, last_name, code){
+	alert(email + id + key + nick_name + first_name+ last_name + code);
+}

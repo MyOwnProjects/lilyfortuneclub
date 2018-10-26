@@ -21,7 +21,7 @@ function document_loaded(file){
 });*/
 </script>
 <div class="clearfix" style="margin-bottom:40px">
-	<div class="left-part pull-left">
+	<div style="width:100%;max-width:800px;margin:0 auto">
 	<ul class="breadcrumb">
 		<li><a href="<?php echo base_url();?>">Home</a></li>
 		<li><a href="<?php echo base_url();?>account/documents">Documents</a></li> 
@@ -36,17 +36,28 @@ function document_loaded(file){
 	<?php
 	if($mime_type == 'video'){
 	?>
-		<h3 class="text-center"><?php echo $subject;?></h3>
 		<div class="video-player" style="margin:20px auto">
 		</div>
+		<h2><?php echo $subject;?></h2>
 		<div style="line-height:30px">Content Type: <?php echo $content_type;?></div>
-		<?php if(!empty($html_content)){ ?>
-		<div style="line-height:20px"><?php echo $html_content;?></div>
-		<?php } ?>
+		<?php if(!empty($abstract)){ ?>
+		<div style="line-height:20px"><?php echo str_replace("\n", '<br/>', $abstract);?></div>
+		<?php } 
+		$video_duration = array();
+		$capitals = array();
+		if(!empty($duration) && (strtotime('now') > strtotime($expire))){
+			$video_duration = explode(',', $duration);
+			$capitals = array(array(0, $video_duration[1] + 1, 'Please contact Lily Fortune Club to get the full video'));
+		}
+		?>
 	<script>
 	$('.video-player').simple_video_player({
-		src: '<?php echo base_url().'src/temp/'.$file;?>', 
-		autostart: true, 
+		src: '<?php echo base_url().'src/temp/'.$file;?>',
+		duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
+		capitals: JSON.parse('<?php echo json_encode($capitals);?>'),
+		autostart: true,
+		out_duration_callback: function(){
+		},
 		loaded: function(){
 			document_loaded('<?php echo $file;?>');		
 		}
@@ -74,7 +85,7 @@ function document_loaded(file){
 	}
 	?>
 	</div>
-	<div class="right-part" style="overflow:hidden;padding-top:40px">
-	</div>
+	<!--div class="right-part" style="overflow:hidden;padding-top:40px">
+	</div-->
 </div>
 	

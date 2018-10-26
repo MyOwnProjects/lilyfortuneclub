@@ -58,7 +58,6 @@ class Documents extends Smd_Controller {
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['id'] = $r['uniqid'];
 				$ret['rows'][$i]['subject'] = '<a href="'.base_url().'/account/documents/view/'.$r['uniqid'].'">'.$r['subject'].'</a>';
-				$ret['rows'][$i]['pub_code'] = $r['pub_code'];
 				$ret['rows'][$i]['grade_access'] = $grade_access[$r['grade_access']];
 				$ret['rows'][$i]['content_type'] = ucwords($r['content_type']);
 				$ret['rows'][$i]['create_date'] = date_format(date_create($r['create_date']), 'm/d/Y H:i A');
@@ -88,7 +87,7 @@ class Documents extends Smd_Controller {
 					}
 				}
 				$ret['rows'][$i]['action'] =  array(
-					'update' => base_url().'smd/documents/edit/'.$r['uniqid']
+					'view' => base_url().'smd/documents/item/'.$r['uniqid']
 				);
 			}
 		}
@@ -299,7 +298,7 @@ class Documents extends Smd_Controller {
 							array('value' => 'A', 'text' => 'Associate an Above'),
 							array('value' => 'SA', 'text' => 'Senior Associate an Above'),
 							array('value' => 'MD', 'text' => 'Margeting Director Only')
-						),
+						), 
 						'value' => ''
 					),
 				);
@@ -368,7 +367,12 @@ class Documents extends Smd_Controller {
 			$content_type = $this->input->post('content_type');
 			$grade_access = $this->input->post('grade_access');
 			$abstract = $this->input->post('abstract');
-			//$html_content = update_content(trim($this->input->post('html_content')), 'src/img/document');
+			$html_content = $this->input->post('html_content');
+			$video_duration_start = intval($this->input->post('video_duration_start'));
+			$video_duration_end = intval($this->input->post('video_duration_end'));
+			if(!empty($video_duration_end)){
+				$video_duration = ($video_duration_start).','.($video_duration_end);
+			}
 			$uniqid = uniqid();
 
 			$values = array();
@@ -386,22 +390,10 @@ class Documents extends Smd_Controller {
 						'grade_access' => $grade_access,
 						'content_type' => $content_type,
 						'mime_content_type' => $mime_type[0],
-						'abstract' => $abstract
-						//'html_content' => addslashes($html_content)
-						));
-					if($grade_access == 'G'){
-						$code = '';
-						$len = mt_rand(5, 8);
-						for($i = 0; $i < $len; ++$i){
-							$t = mt_rand(1, 2);
-							if($t == 1){
-								$code .= chr(mt_rand(65, 90));
-							}
-							else{
-								$code .= mt_rand(0, 9);
-							}
-						}
-						$values[0]['pub_code'] = $code;
+						'abstract' => addslashes($abstract),
+					));
+					if(!empty($video_duration)){
+						$values[0]['video_duration'] = $video_duration;
 					}
 				}
 			}
@@ -424,13 +416,126 @@ class Documents extends Smd_Controller {
 		}
 		$content_types = $this->document_model->get_all_content_types();
 		$access_grades = array(
-			array('value' => 'G', 'text' => 'Guest an Above'),
-			array('value' => 'TA', 'text' => 'Trainee Associate an Above'),
-			array('value' => 'A', 'text' => 'Associate an Above'),
-			array('value' => 'SA', 'text' => 'Senior Associate an Above'),
-			array('value' => 'MD', 'text' => 'Margeting Director Only')
+			array('value' => 'G', 'text' => 'Guest and above'),
+			array('value' => 'TA', 'text' => 'TA and above'),
+			array('value' => 'A', 'text' => 'A and above'),
+			array('value' => 'SA', 'text' => 'SA and above'),
+			array('value' => 'MD', 'text' => 'MD Only')
 		);
 		$this->load_view('documents/create_web', array_merge(array('content_types' => $content_types, 'access_grades' => $access_grades), $fields));
+	}
+	
+	public function update($field = null, $uniqid = null){
+		$result = $this->document_model->get_item($uniqid);
+		if(count($result) == 0){
+			ajax_error(500, "The document does not eists, or you don't have permission to access the user.");
+			exit;
+		}
+
+		if($this->input->server('REQUEST_METHOD') == 'GET'){
+			$items = array();
+			switch($field){
+				case 'grade_access':
+					$items = array(
+						array(
+							'label' => 'Grade Access',
+							'name' => 'grade_access',
+							'tag' => 'select',
+							'required' => true,
+							'value' => $result[0]['grade_access'],
+							'options' => array(
+								array('value' => 'G', 'text' => 'Guest'),
+								array('value' => 'TA', 'text' => 'Trainee Associate'),
+								array('value' => 'A', 'text' => 'Associate'),
+								array('value' => 'SA', 'text' => 'Senior Associate'),
+								array('value' => 'MD', 'text' => 'Margeting Director')
+							),
+						)
+					);
+					break;
+				case 'content_type':
+					$items = array(
+						array(
+							'label' => 'Content Type',
+							'name' => 'content_type',
+							'tag' => 'select',
+							'required' => true,
+							'value' => $result[0]['content_type'],
+							'options' => array(
+								array('value' => 'business', 'text' => 'Business'),
+								array('value' => 'team build', 'text' => 'Team Build'),
+								array('value' => 'recruit', 'text' => 'Recruit'),
+								array('value' => 'sales', 'text' => 'Sales'),
+								array('value' => 'technical', 'text' => 'Technical'),
+								array('value' => 'license', 'text' => 'License'),
+								array('value' => 'other', 'text' => 'Other'),
+							),
+						)
+					);
+					break;
+				case 'subject':
+					$items = array(
+						array(
+							'label' => 'Subject',
+							'name' => 'subject',
+							'tag' => 'input',
+							'value' => $result[0]['subject']
+						),
+					);
+					break;
+				case 'abstract':
+					$items = array(
+						array(
+							'label' => 'Abstract',
+							'name' => 'abstract',
+							'tag' => 'textarea',
+							'value' => $result[0]['abstract'],
+						)
+					);
+					break;
+				case 'video_duration':
+					$items = array(
+						array(
+							'label' => 'Duration (Second)',
+							'name' => 'video_duration',
+							'tag' => '',
+							'value' => $result[0]['video_duration'],
+						)
+					);
+					break;
+				default:
+					ajax_error(500, "Invalid field.");
+			}
+			$this->load->view('smd/add_item', array('items' => $items));
+		}
+		else{
+			$values = array();
+			switch($field){
+				case 'grade_access':
+				case 'content_type':
+				case 'subject':
+				case 'abstract':
+					$values[$field] = addslashes(trim($this->input->post($field)));
+					break;
+				case 'video_duration':
+					$video_duration_start = intval($this->input->post('video_duration_start'));
+					$video_duration_end = intval($this->input->post('video_duration_end'));
+					if(!empty($video_duration_start) || !empty($video_duration_end)){
+						$values[$field]= $video_duration_start.','.$video_duration_end;
+					}
+					break;
+				default:
+					ajax_error(500, "Invalid field.");
+			}
+			
+			if($this->document_model->update($values, "uniqid='$uniqid'")){
+				echo json_encode(array('success' => true));
+			}
+			else{
+				echo json_encode(array('success' => false, 'message' => 'Failed to update value.'));
+			}
+		}
+		
 	}
 	
 	public function edit($uniqid = null){
@@ -471,6 +576,111 @@ class Documents extends Smd_Controller {
 			$fields));
 	}
 	
+	public function item($uniqid){
+		$result = $this->document_model->get_item($uniqid);
+		$item = array(
+			'documents_id'=>$result[0]['documents_id'],
+			'uniqid'=>$result[0]['uniqid'],
+			'file_name'=>$result[0]['file_name'],
+			'grade_access'=>$result[0]['grade_access'],
+			'mime_content_type'=>$result[0]['mime_content_type'],
+			'content_type'=>$result[0]['content_type'],
+			'video_duration' => $result[0]['video_duration'],
+			'create_date'=>$result[0]['create_date'],
+			'subject'=>$result[0]['subject'],
+			'abstract'=>$result[0]['abstract'],
+			'html_content'=>$result[0]['html_content'],
+			'pub_code' => array()
+		);
+		foreach($result as $r){
+			if(!empty($r['document_id'])){
+				array_push($item['pub_code'],
+					array(
+						'document_pub_code_id' => $r['document_pub_code_id'],
+						'code' => $r['code'],
+						'expire' => $r['expire'], 
+						'document_id' => $r['document_id'],
+					)
+				);
+			}
+		}
+		$this->load_view('documents/item', array('document' => $item));
+	}
+	
+	public function delete_pub_code($pub_code_id = null){
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$this->document_model->delete_pub_code("document_pub_code_id='$pub_code_id'");
+			echo json_encode(array('success' => true));
+			return;
+		}
+		else{
+			$items = array();
+			array_push($items,
+				array(
+					'tag' => 'text',
+					'text' => 'Do you want to delete the code?',
+				)
+			);
+			$this->load->view('smd/add_item', array('items' => $items));
+		}
+	}
+	
+	public function generate_pub_code($uniqid = null){
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$code = $this->input->post('code');
+			$expire = intval($this->input->post('expire'));
+			$expire = date_format(date_add(date_create(),date_interval_create_from_date_string("$expire hours")), "Y-m-d H:i:s");
+			$res = $this->document_model->new_pub_code($code, $expire, $uniqid);
+			if($res){
+				echo json_encode(array('success' => true));
+			}
+			else{
+				echo json_encode(array('success' => false, 'message' => 'Failed to generate pub code.'));
+			}
+			return;
+		}
+		else{
+			$result = $this->document_model->get_pub_code();
+			$all_codes = array();
+			foreach($result as $r){
+				array_push($all_codes, $r['code']);
+			}
+			do{
+				$code = '';
+				$len = mt_rand(5, 8);
+				for($i = 0; $i < $len; ++$i){
+					$t = mt_rand(1, 2);
+					if($t == 1){
+						$code .= chr(mt_rand(65, 90));
+					}
+					else{
+						$code .= mt_rand(0, 9);
+					}
+				}
+			}
+			while(in_array($code, $all_codes));
+			
+			$items = array(
+				array(
+					'label' => 'Code',
+					'name' => 'code',
+					'tag' => 'input',
+					'readonly' => true,
+					'value' => $code
+				),
+				array(
+					'label' => 'Expire',
+					'name' => 'expire',
+					'tag' => 'input',
+					'type' => 'number',
+					'min' => 1,
+					'required' => true,
+					'value' => 24
+				),
+			);
+			$this->load->view('smd/add_item', array('items' => $items));		
+		}
+	}
 }
 
 /* End of file welcome.php */

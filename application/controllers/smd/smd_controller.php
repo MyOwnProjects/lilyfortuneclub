@@ -34,6 +34,14 @@ class Smd_controller extends CI_Controller {
 				),
 			),
 		),
+		'faq' => array(
+			'text' => 'FAQ',
+			'sub_menus' => array(
+				'' => array(
+					'text' => 'List',
+				),
+			),
+		),
 		'sales' => array(
 			'text' => 'Sales',
 			'sub_menus' => array(

@@ -1,6 +1,9 @@
 <style>
 #query-result thead{font-weight:bold}
 .form-group{padding:5px}
+.block-plan-template{display:none}
+.block-plan{border-top:1px solid #d5d5d5;padding-top:10px;margin-top:10px}
+label{font-weight:normal}
 </style>
 <div style="margin:40px">
 <h3 class="text-center">Generate Plans</h3>
@@ -29,9 +32,17 @@
 </form>
 <br/>
 <form id="the_form" class="form-inline" target="_blank" action="<?php echo base_url();?>smd/tools/generate_plan" method="post" enctype="multipart/form-data">
+	<div class="form-group form-group-sm">
+		<label>For</label>&nbsp;
+		<select class="form-control" name="case-for">
+			<option value="0" <?php echo isset($content) && array_key_exists('case_for', $content) && $content['case_for'] == 0 ? 'selected' : ''?>>其它</option>
+			<option value="1" <?php echo !isset($content) || !array_key_exists('case_for', $content) || $content['case_for'] == 1 ? 'selected' : ''?>>新京集团</option>
+		</select>
+	</div>
+	<br/>
 	<input type="hidden" name="action" value="">
 	<div class="form-group form-group-sm">  
-		<label>Case Name</label>&nbsp;<input type="text" class="form-control" name="case-name" required value="<?php echo isset($content) && $content['case_name'] ? urldecode($content['case_name']) : ''?>">
+		<label>Client Name</label>&nbsp;<input type="text" class="form-control" name="client-name" required value="<?php echo isset($content) && $content['client_name'] ? urldecode($content['client_name']) : ''?>">
 	</div>
 	<div class="form-group form-group-sm">
 		<label>Age</label>&nbsp;<input type="number" class="form-control" min="20" max="100" name="case-age" value="<?php echo isset($content) && $content['case_age'] ? $content['case_age'] : ''?>">
@@ -43,17 +54,32 @@
 			<option value="M" <?php echo isset($content) && $content['case_gender'] == 'M' ? 'selected' : ''?>>Male</option>
 		</select>
 	</div>
-	<div class="form-group form-group-sm">
-		<label>For</label>&nbsp;
-		<select class="form-control" name="case-for">
-			<option value="0" <?php echo isset($content) && array_key_exists('case_for', $content) && $content['case_for'] == 0 ? 'selected' : ''?>>其它</option>
-			<option value="1" <?php echo !isset($content) || !array_key_exists('case_for', $content) || $content['case_for'] == 1 ? 'selected' : ''?>>新京集团</option>
-		</select>
-	</div>
 	<br/>
 	<div class="form-group form-group-sm">
+		<label>Face Amount</label>&nbsp;
+		<select class="form-control" name="face-amount">
+			<option value="50000">50K</option>
+			<option value="100000">100K</option>
+			<option value="150000">150K</option>
+			<option value="200000">200K</option>
+			<option value="250000">250K</option>
+			<option value="300000">300K</option>
+			<option value="500000">500K</option>
+			<option value="1000000">1M</option>
+			<option value="2000000">2M</option>
+		</select>
+	</div>
+	&nbsp;&nbsp;
+	<div class="checkbox">
+		<label><input type="checkbox" value="">&nbsp;Cash out</label>
+	</div>
+	<br/>
+	<div class="form-group form-group-sm">  
+		<label>Case Name</label>&nbsp;<input type="text" class="form-control" name="case-name" required value="<?php echo isset($content) && $content['case_name'] ? urldecode($content['case_name']) : ''?>" readonly>
+	</div>
+	<div class="form-group form-group-sm">
 		<label>Case Desc</label>&nbsp;
-		<textarea class="form-control" name="case-desc" style="height:80px;width:600px"><?php echo isset($content) && $content['case_desc'] ? urldecode($content['case_desc']) : ''?></textarea>
+		<textarea class="form-control" name="case-desc" style="height:80px;width:600px" readonly><?php echo isset($content) && $content['case_desc'] ? urldecode($content['case_desc']) : ''?></textarea>
 	</div>
 	<br/>
 	<div class="form-group">
@@ -80,8 +106,13 @@
 			<div class="form-group form-group-sm">
 				<a title="Remove the plan" class="btn btn-xs btn-danger" onclick="remove_plan(this);">
 					<span class="glyphicon glyphicon-trash"></span>
-				</a>&nbsp;&nbsp;<label>Code</label>&nbsp;<input type="text" name="plan-code[]" style="width:300px" class="form-control" value="<?php echo array_key_exists('plan_code', $content) ? urldecode($content['plan_code'][$i]) : '';?>">
-				<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Desc</label>&nbsp;<input type="text" name="plan-desc[]" style="width:300px" class="form-control" value="<?php echo urldecode($content['plan_descs'][$i]);?>">
+				</a>
+				&nbsp;&nbsp;
+				<label>Code</label>&nbsp;<input type="text" name="plan-code[]" style="width:300px" class="form-control" value="<?php echo array_key_exists('plan_code', $content) ? urldecode($content['plan_code'][$i]) : '';?>">
+				<br/><br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label>Desc</label>&nbsp;
+				<input type="text" name="plan-desc[]" style="width:300px" class="form-control" value="<?php echo urldecode($content['plan_descs'][$i]);?>">
 			</div>&nbsp;<div class="form-group form-group-sm">
 				<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quote</label>&nbsp<textarea style="height:150px;width:500px" name="plan-data[]" class="form-control"><?php echo $pd;?></textarea>
 			</div>
@@ -91,21 +122,50 @@
 		}
 		?>
 	</div>
+
 </form>
+<div class="block-plan-template">
+	<div style="float:left;padding-right:20px">
+		<div class="form-group form-group-sm">
+		<a title="Remove the plan" class="btn btn-xs btn-danger" onclick="remove_plan(this);">
+			<span class="glyphicon glyphicon-trash"></span>
+		</a>
+		</div>
+	</div>
+	<div style="float:left;padding-right:20px">
+		<div class="form-group form-group-sm">
+			<select name="plan-type1[]" class="form-control" onchange="plan_type_change(this)">
+				<option value="0">5 years 7 pay</option>
+				<option value="1">5 years 7 pay alternitive</option>
+				<option value="2">10 years target</option>
+				<option value="3">15 years target</option>
+				<option value="4">20 years target</option>
+			</select>
+			<br/><br/>
+			<input name="plan-code[]" class="form-control" type="text" style="width:100px" readonly placeholder="Code">
+			<br/><br/>
+			<input name="plan-desc[]" class="form-control" type="text" style="width:300px" readonly placeholder="Desc">
+		</div>
+	</div>
+	<div style="overflow:hidden;">
+		<div class="form-group form-group-sm">
+			<textarea style="height:130px;width:500px" name="plan-data[]" class="form-control" placeholder="Quote"></textarea>
+		</div>		
+	</div>
 </div>	
 <script>
 var plan_seq = 0;
 function remove_plan(obj){
-			$(obj).parent().parent().remove();
-			if($('.block-plan').length == 0){
-				$('.button-submit').addClass('disabled');
-			}
+	$(obj).parent().parent().parent().remove();
+	if($('.block-plan').length == 0){
+		$('.button-submit').addClass('disabled');
+	}
 }
 	
 function add_plan(){
 	plan_seq++;
-	var block_plan = $('<div>').addClass('block-plan').appendTo($('.block-plans'));
-	var group = $('<div>').addClass('form-group').addClass('form-group-sm').appendTo(block_plan);
+	var block_plan = $('<div>').addClass('block-plan').addClass('clear').appendTo($('.block-plans')).append($('.block-plan-template').html());
+	/*var group = $('<div>').addClass('form-group').addClass('form-group-sm').appendTo(block_plan);
 	$('<a>').attr('title', 'Remove the plan').addClass('btn').addClass('btn-xs').addClass('btn-danger').html('<span class="glyphicon glyphicon-trash"></span>')
 		.click(function(){
 			remove_plan(this);
@@ -128,9 +188,12 @@ function add_plan(){
 	//group.append('<br/>');
 	$('<label>').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quote').appendTo(group);
 	group.append('&nbsp;');
-	$('<textarea>').css('height', '150px').css('width', '500px').attr('name', 'plan-data[]').addClass('form-control').appendTo(group);
+	$('<textarea>').css('height', '150px').css('width', '500px').attr('name', 'plan-data[]').addClass('form-control').appendTo(group);*/
 	$('.button-submit').removeClass('disabled');
 	return false;
+}
+
+function plan_type_change(obj){
 }
 
 function save_report(){

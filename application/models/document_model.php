@@ -12,7 +12,7 @@ class Document_model extends Base_model{
 	}
 	
 	public function get_list($where = '', $sort = array(), $limit = ''){
-		$sql = "SELECT * FROM documents "
+		$sql = "SELECT * FROM documents"
 			.(empty($where) ? "" : " WHERE $where ")
 			.(empty($sort) ? "" : " ORDER BY ".implode(",", $sort))
 			.(empty($limit) ? "" : " LIMIT $limit");
@@ -77,5 +77,35 @@ class Document_model extends Base_model{
 			array_push($ret, $r['mime_type']);
 		}
 		return $ret;
+	}
+	
+	public function get_item($uniqid){
+		$sql = "SELECT * FROM documents d LEFT JOIN document_pub_code dpc ON d.uniqid=dpc.document_id
+			WHERE d.uniqid='$uniqid' ORDER BY dpc.expire DESC";
+		return $this->db->query($sql);
+	}
+	
+	public function get_item_with_code($uniqid, $code){
+		$sql = "SELECT * FROM documents d LEFT JOIN document_pub_code dpc ON d.uniqid=dpc.document_id
+			WHERE d.uniqid='$uniqid' AND dpc.code='$code' ORDER BY dpc.expire DESC";
+		return $this->db->query($sql);
+	}
+	
+	public function get_pub_code(){
+		$sql = "SELECT code FROM document_pub_code";
+		return $this->db->query($sql);
+	}
+	
+	public function new_pub_code($code, $expire, $uniqid){
+		$sql = "INSERT INTO document_pub_code (code, expire, document_id) VALUES ('$code','$expire','$uniqid')";
+		if(!$this->db->query($sql)){
+			return false;
+		}
+		return $this->db->insert_id();
+	}
+	
+	public function delete_pub_code($where){
+		$sql = "DELETE FROM document_pub_code WHERE 1=1 AND $where";
+		$this->db->query($sql);
 	}
 }

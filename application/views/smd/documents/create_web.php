@@ -1,11 +1,13 @@
 <div style="padding:40px">
 	<form method="post">
 		<div class="row">
-			<div class="col-lg-6 form-group">
+			<div class="form-group col-lg-12">
 				<label>Subject</label>
 				<input class="form-control" name="subject" value="<?php echo isset($subject) ? $subject : '';?>" required>
 			</div>
-			<div class="col-lg-3">
+		</div>
+		<div class="row">
+			<div class="form-group col-lg-3 col-md-4 col-sm-6">
 				<label>Content Type</label>
 				<select class="form-control" name="content_type">
 					<?php
@@ -15,7 +17,7 @@
 					?>
 				</select>
 			</div>
-			<div class="col-lg-3">
+			<div class="form-group col-lg-3 col-md-4 col-sm-6">
 				<label>Grade Access</label>
 				<select class="form-control" name="grade_access">
 					<?php
@@ -25,6 +27,28 @@
 					?>
 					
 				</select>
+			</div>
+			<!--div class="form-group col-lg-3 col-md-4 col-sm-6">
+				<label>Expiration</label>
+				<div class="input-group">
+					<input type="number" class="form-control">
+					<div class="input-group-append">
+						<span class="input-group-text">Hours</span>
+					</div>
+				</div>				
+			</div-->
+			<div class="form-group col-lg-3 col-md-4 col-sm-6">
+				<label>Duration (Second)</label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Start</span>
+					</div>
+					<input type="number" min="0" class="form-control" name="video_duration_tart">
+					<div class="input-group-prepend">
+						<span class="input-group-text">End</span>
+					</div>
+					<input type="number" min="0" class="form-control" name="video_duration_end">
+				</div>				
 			</div>
 		</div>
 		<?php if(empty($uniqid)){ ?>
@@ -40,8 +64,13 @@
 		<div class="row">
 			<div class="col-lg-12 form-group">
 				<label>Abstract</label>
-				<textarea class="form-control" name="abstract" style="height:200px"><?php echo isset($abstract) ? $abstract : '';?></textarea>
-				<!--textarea class="form-control" name="html_content" id="html_content"><?php echo isset($html_content) ? $html_content : '';?></textarea-->
+				<textarea class="form-control" name="abstract" style="height:100px"><?php echo isset($abstract) ? $abstract : '';?></textarea>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 form-group">
+				<label>HTML Content</label>
+				<textarea class="form-control" name="html_content" id="html_content"><?php echo isset($html_content) ? $html_content : '';?></textarea>
 			</div>
 		</div>
 		<div class="row">
@@ -53,13 +82,13 @@
 </div>
 <script>
 (function($){
-	/*CKEDITOR.replace( 'html_content', {
+	CKEDITOR.replace( 'html_content', {
 		enterMode: CKEDITOR.ENTER_P, 
 		extraPlugins: 'autogrow',
 	}).on('instanceCreated', function(ev) {
 		ev.editor.on('resize',function(reEvent){
 		});
-	});*/
+	});
 	if($('#input-file')){	
 		$('#input-file').ajax_upload('<?php echo base_url();?>smd/documents/upload_files').change(function(files){
 			var file_names = [];

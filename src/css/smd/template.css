@@ -1,14 +1,19 @@
 ul, ul li{padding:0;margin:0;list-style:none}
 .error{color:#FF0000}
 
-.sub-nav div{padding:0 20px;padding-bottom:10px}
-.sub-nav div.selected{border-bottom:3px solid #337ab7}
-
-.navbar{border-radius:0 !important;margin-bottom:0 !important}
+.nav-top div{line-height:52px;text-align:center;white-space:nowrap}
+.nav-top div:hover{background:#6c757d}
+.nav-top a{color:#fff;text-decoration:none}
+.nav-left li{line-height:40px;padding-left:10px}
+.nav-left li:hover{background:#343a40}
+.nav-left li.active{}
+.nav-left>a{color:#fff;text-decoration:none}
 .main-body-wrapper{padding:20px}
 .breadcrumb{background-color:#fff;margin-bottom:0;line-height:30px}
 
 .text-red{color:red}
 .text-lime{color:lime}
 .text-green{color:green}
+
+.bootbox .modal-header{display:block}
 

@@ -54,11 +54,11 @@ class Sales extends Smd_Controller {
 			$ret['rows'] = $this->sales_model->get_list('', $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count'], $search, $filter);
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
-				$ret['rows'][$i]['sales_priority'] = ($r['sales_priority'] > 0 ? '<span class="label label-danger">High</span>' : ($r['sales_priority'] == 0 ? '<span class="label label-warning">Medium</span>' : '<span class="label label-success">Low</span>'))
+				$ret['rows'][$i]['sales_priority'] = ($r['sales_priority'] > 0 ? '<span class="badge badge-danger">High</span>' : ($r['sales_priority'] == 0 ? '<span class="badge badge-warning">Medium</span>' : '<span class="badge badge-success">Low</span>'))
 					.'<br/>'.$sales_status[$r['sales_status']];
 				$ret['rows'][$i]['sales_insured'] = $r['sales_insured'].(empty($r['sales_owner']) ? '' : '<br/>'.$r['sales_owner']);
 				$ret['rows'][$i]['sales_date_submission'] = $r['sales_date_submission'].(empty($r['sales_date_closure']) ? '' : '<br/>'.$r['sales_date_closure']);
-				$dec = ' class="label" style="background: #1a73eb !important;font-weight:normal !important;font-size:13px"';
+				$dec = ' class="badge" style="background: #1a73eb !important;font-weight:normal !important;font-size:13px"';
 				$note = '<span'.$dec.'>'.($r['sales_writing_agent'] == '-1' ? '['.$r['sales_agent_other'].']' : $r['agent1'])
 					.(empty($r['sales_split_agent']) ? '' : ' / '.($r['sales_split_agent'] == -1 ? '['.$r['sales_agent_other'].']' : $r['agent2'])).'</span>&nbsp;&nbsp;&nbsp;&nbsp;';
 				$note .= empty($r['sales_policy_no']) ? '' : '<span'.$dec.'>'.$r['sales_policy_no'].'</span>&nbsp;&nbsp;&nbsp;&nbsp;';

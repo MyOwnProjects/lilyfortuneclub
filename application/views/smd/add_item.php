@@ -14,7 +14,15 @@ $half_count = floor($item_count / 2 - 0.5);
 	<?php
 	if(isset($items)){
 	foreach($items as $i => $item){
-		if(!$item['name']){
+		//if(!$item['name']){
+		//	continue;
+		//}
+		if($item['tag'] == 'text'){
+		?>
+		<div class="col-lg-12">
+			<?php echo $item['text'];?>
+		</div>
+		<?php
 			continue;
 		}
 		$is_auto_fill = $item['name'] == 'auto-fill';
@@ -32,10 +40,6 @@ $half_count = floor($item_count / 2 - 0.5);
 		</div>
 	<?php
 	continue;
-		}
-		if($item['tag'] == 'text'){
-			echo '<p>'.$item['text'].'<p>';
-			continue;
 		}
 		?>
 	<div class="col-lg-<?php echo $col_width;?>">
@@ -145,6 +149,23 @@ $half_count = floor($item_count / 2 - 0.5);
 						</div>
 					</div>
 				</div>
+			<?php
+			}
+			else if($item['name'] == 'video_duration'){
+				if(!empty($item['value'])){
+					$a = explode(',', $item['value']);
+				}
+			?>
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Start</span>
+				</div>
+				<input type="number" min="0" class="form-control dialog-edit-field" min="0" name="video_duration_start" id="video_duration_start" value="<?php echo empty($item['value']) ? '': intval($a[0]);?>">
+				<div class="input-group-prepend">
+					<span class="input-group-text">End</span>
+				</div>
+				<input type="number" min="0" class="form-control dialog-edit-field" min="0" name="video_duration_end" id="video_duration_end" value="<?php echo empty($item['value']) ? '': intval($a[1]);?>">
+			</div>				
 			<?php
 			}
 			?>
