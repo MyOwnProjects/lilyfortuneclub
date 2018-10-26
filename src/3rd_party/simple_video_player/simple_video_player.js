@@ -209,7 +209,7 @@
 				$_video.css('height', '100%');//outerHeight($_video.parent().innerHeight() + 'px');
 				//$_video.css('margin-left', ($_video.parent().innerWidth() - $_video.outerWidth()) / 2 + 'px');
 			}*/
-			$_source.removeAttr('src');
+			//$_source.removeAttr('src');
 			$_current.html(convert_time_format(0));
 			$_total.html(convert_time_format(_video.duration));
 			if($.isFunction(prop['loaded'])){
