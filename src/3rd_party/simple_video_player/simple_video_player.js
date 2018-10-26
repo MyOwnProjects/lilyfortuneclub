@@ -266,7 +266,7 @@
 		
 		var convert_time_format = function(total_seconds){
 			var minutes = Math.floor(total_seconds / 60);
-			var seconds = Math.floor(total_seconds - minutes);
+			var seconds = Math.floor(total_seconds - minutes * 60);
 			return String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
 		};
 		
