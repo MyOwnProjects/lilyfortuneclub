@@ -51,17 +51,19 @@ function document_loaded(file){
 		}
 		?>
 	<script>
-	$('.video-player').simple_video_player({
-		src: '<?php echo base_url().'src/temp/'.$file;?>',
-		duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
-		capitals: JSON.parse('<?php echo json_encode($capitals);?>'),
-		autostart: true,
-		out_duration_callback: function(){
-		},
-		loaded: function(){
-			document_loaded('<?php echo $file;?>');		
-		}
-	});
+		$(document).ready(function(){
+			$('.video-player').simple_video_player({
+				src: '<?php echo base_url().'src/temp/'.$file;?>',
+				duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
+				capitals: JSON.parse('<?php echo json_encode($capitals);?>'),
+				autostart: true,
+				out_duration_callback: function(){
+				},
+				loaded: function(){
+					document_loaded('<?php echo $file;?>');		
+				}
+			});
+		});
 	</script>
 	<?php
 	}
