@@ -36,7 +36,9 @@ function document_loaded(file){
 	<?php
 	if($mime_type == 'video'){
 	?>
-		<div class="video-player" style="margin:20px auto">
+		<div class="video-player">
+		</div>
+		<!--div class="video-player" style="margin:20px auto">
 			<video id="player" playsinline controls>
 				<source src="<?php echo base_url().'src/media/'.$file;?>" type="video/mp4">
 				<?php
@@ -49,7 +51,7 @@ function document_loaded(file){
 					}
 				?>
 			</video>
-		</div>
+		</div-->
 		<?php
 		if(count($video_duration) == 2){
 		?>
@@ -75,7 +77,7 @@ function document_loaded(file){
 		//-----
 		$(document).ready(function(){
 			$('.video-player').simple_video_player({
-				src: '<?php echo base_url().'src/temp/'.$file;?>',
+				src: '<?php echo base_url().'src/media/'.$file;?>',
 				duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
 				caption: JSON.parse('<?php echo json_encode($captions);?>'),
 				autostart: true,
