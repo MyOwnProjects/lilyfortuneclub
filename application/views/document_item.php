@@ -64,10 +64,10 @@ function document_loaded(file){
 		<?php } 
 //-----
 		$video_duration = array();
-		$capitions = array();
+		$captions = array();
 		if(!empty($duration) && (strtotime('now') > strtotime($expire))){
 			$video_duration = explode(',', $duration);
-			$capitions = array(array(0, $video_duration[1] + 1, 'Please contact Lilyfortuneclub to get the full video'));
+			$captions = array(array(0, $video_duration[1] + 1, 'Please contact Lilyfortuneclub to get the full video'));
 		}
 //---------		
 		?>
@@ -77,7 +77,7 @@ function document_loaded(file){
 			$('.video-player').simple_video_player({
 				src: '<?php echo base_url().'src/temp/'.$file;?>',
 				duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
-				capition: JSON.parse('<?php echo json_encode($captions);?>'),
+				caption: JSON.parse('<?php echo json_encode($captions);?>'),
 				autostart: true,
 				out_duration_callback: function(){
 				},
