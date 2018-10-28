@@ -187,11 +187,18 @@ class Documents extends Smd_Controller {
 			$files = array();
 			$upload_files = empty($upload_files) ? array() : explode(',', $upload_files);
 			foreach($upload_files as $file){
-				if(rename(getcwd().'/application/documents/temp/'.$file, getcwd().'/application/documents/'.$file)){
+				$mime_type = mime_type(getcwd().'/application/documents/temp/'.$file);
+				if($mime_type == 'video' || $mime_type == 'audio'){
+					$dest = getcwd().'/src/media/'.$file;
+				}
+				else{
+					$dest = getcwd().'/application/documents/'.$file;
+				}
+				
+				if(rename(getcwd().'/application/documents/temp/'.$file, $dest)){
 					$pos = strpos($file, '.');
 					$uniqid = substr($file, 0, $pos);
 					$name =  substr($file, $pos + 1);
-					$mime_type = mime_type(getcwd().'/application/documents/'.$file);
 					array_push($files, array(
 						'uniqid' => $uniqid,
 						'subject' => addslashes($subject),
@@ -355,6 +362,13 @@ class Documents extends Smd_Controller {
 		}
 	}
 	
+	private function _second_to_time($a){
+		$hour = floor($a / 60 / 60);
+		$minute = floor(($a - $hour * 60 * 60) / 60);
+		$second = $a - $hour * 60 * 60 - $minute * 60;
+		return str_pad($hour, 2, '0', STR_PAD_LEFT).':'.str_pad($minute, 2, '0', STR_PAD_LEFT).':'.str_pad($second, 2, '0', STR_PAD_LEFT);
+	}
+	
 	public function create(){
 		$fields = array();
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
@@ -378,11 +392,19 @@ class Documents extends Smd_Controller {
 			$values = array();
 			$upload_files = explode(',', $upload_files);
 			foreach($upload_files as $file){
-				if(rename(getcwd().'/application/documents/temp/'.$file, getcwd().'/application/documents/'.$file)){
+				$src = getcwd().'/application/documents/temp/'.$file;
+				$mime_type = mime_type($src);
+				if($mime_type[0] == 'video' || $mime_type[0] == 'audio'){
+					$dest = getcwd().'/src/media/'.$file;
+				}
+				else{
+					$dest = getcwd().'/application/documents/'.$file;
+				}
+				
+				if(rename($src, $dest)){
 					$pos = strpos($file, '.');
 					$uniqid = substr($file, 0, $pos);
 					$name =  substr($file, $pos + 1);
-					$mime_type = mime_type(getcwd().'/application/documents/'.$file);
 					array_push($values, array(
 						'uniqid' => $uniqid,
 						'subject' => addslashes($subject),
@@ -394,6 +416,10 @@ class Documents extends Smd_Controller {
 					));
 					if(!empty($video_duration)){
 						$values[0]['video_duration'] = $video_duration;
+						$vtt_content = "WEBVTT FILE\r\n\r\n".$this->_second_to_time($video_duration_start)
+							.".000 --> ".$this->_second_to_time($video_duration_end).".000\r\n"
+							."Please contact Lilyfortuneclub for the full video\r\n";
+						file_put_contents(getcwd().'/src/media/'.$uniqid.'.vtt', $vtt_content);
 					}
 				}
 			}

@@ -6,6 +6,9 @@
 <div style="max-width:1000px;width:100%;padding:40px 20px;margin:0 auto">
 	<h3 class="text-center">Contact Us</h3>
 	<div style="margin:40px auto;max-width:600px;width:100%">
+		<?php
+		if(!empty($user)){
+		?>
 		<div class="panel panel-success">
 			<div class="panel-heading">Senior Marketing Director</div>
 			<div class="panel-body"><b>Lily Zhu</b> (510) 501-4697, lily_min_zhu@yahoo.com</div>
@@ -69,19 +72,31 @@
 					</div>
 				</div>
 			</div>
-			<!--div class="panel panel-info">
+			<?php
+			}
+			else{
+			?>
+			<div class="panel panel-info">
 				<div class="panel-heading">
-					Name Tag, Team Shirt and Binder Order<br/>
+					Administrator<br/>
 				</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-xs-12">
-							<b>Christine Cen</b><br/>
-							(510) 364-0502<br/>
-							chrislicen@gmail.com
+						<div class="col-xs-12 clearfix">
+							<div class="pull-left">
+								<b>Kun Yang</b><br/>
+								(510) 461-3854<br/>
+								kunyangnew@gmail.com
+							</div>
+							<div class="pull-right">
+								<img style="width:200px" src="<?php echo base_url();?>src/img/webwxgetmsgimg.jpg">
+							</div>
 						</div>
 					</div>
 				</div>
-			</div-->
+			</div>
+			<?php
+			}
+			?>
 		</div>
 	</div>

@@ -37,33 +37,53 @@ function document_loaded(file){
 	if($mime_type == 'video'){
 	?>
 		<div class="video-player" style="margin:20px auto">
+			<video id="player" playsinline controls>
+				<source src="<?php echo base_url().'src/media/'.$file;?>" type="video/mp4">
+				<?php
+					$video_duration = array();
+					if(!empty($duration) && (strtotime('now') > strtotime($expire))){
+						$video_duration = explode(',', $duration);
+				?>
+				<track kind="captions" label="English captions" src="<?php echo base_url().'src/media/'.$uniqid.'.vtt';?>" srclang="en" default>
+				<?php
+					}
+				?>
+			</video>
 		</div>
+		<?php
+		if(count($video_duration) == 2){
+		?>
+		<p class="text-danger">You can only watch the video for <?php echo ($video_duration[1] - $video_duration[0]) / 60;?> minutes by this access code. To watch the full video, please contact <a href="<?php echo base_url();?>contact" target="_blank">Lilyfortuneclub</a></p>
+		<?php
+		}
+		?>
 		<h2><?php echo $subject;?></h2>
 		<div style="line-height:30px">Content Type: <?php echo $content_type;?></div>
 		<?php if(!empty($abstract)){ ?>
 		<div style="line-height:20px"><?php echo str_replace("\n", '<br/>', $abstract);?></div>
 		<?php } 
-		$video_duration = array();
-		$capitals = array();
-		if(!empty($duration) && (strtotime('now') > strtotime($expire))){
-			$video_duration = explode(',', $duration);
-			$capitals = array(array(0, $video_duration[1] + 1, 'Please contact Lily Fortune Club to get the full video'));
-		}
 		?>
 	<script>
-		$(document).ready(function(){
-			$('.video-player').simple_video_player({
-				src: '<?php echo base_url().'src/temp/'.$file;?>',
-				duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
-				capitals: JSON.parse('<?php echo json_encode($capitals);?>'),
-				autostart: true,
-				out_duration_callback: function(){
-				},
-				loaded: function(){
-					document_loaded('<?php echo $file;?>');		
+		const player = new Plyr('#player', {
+			invertTime: false,
+			captions: { active: true}
+		});
+		if(<?php echo count($video_duration) == 2 ? 'true' : 'false';?>){
+			var start = <?php echo count($video_duration) == 2 ? $video_duration[0] : 0;?>;
+			var end = <?php echo count($video_duration) == 2 ? $video_duration[1] : 0;?>;
+			player.on('timeupdate', event => {
+				if(player.currentTime > end){
+					player.stop();
+					player.currentTime = end;
 				}
 			});
-		});
+			player.on('play', event => {
+				if(player.currentTime < start){
+					player.stop();
+					player.currentTime = start;
+				}
+			});
+		}
 	</script>
 	<?php
 	}

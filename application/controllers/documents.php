@@ -132,7 +132,12 @@ class Documents extends Base_Controller {
 		}
 		
 		if(!empty($result[0]['file_name'])){
-			$full_path = getcwd().'/application/documents/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
+			if($result[0]['mime_content_type'] == 'VIDEO' || $result[0]['mime_content_type'] == 'AUDIO'){
+				$full_path = getcwd().'/src/media/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
+			}
+			else{
+				$full_path = getcwd().'/application/documents/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
+			}
 			if(!file_exists($full_path)){
 				$this->load_view('document_error', array('error' => 'The document does not exist, or you do not have permission.'));
 				return;
@@ -140,7 +145,7 @@ class Documents extends Base_Controller {
 			$ext = pathinfo($result[0]['uniqid'].'.'.$result[0]['file_name'], PATHINFO_EXTENSION);
 			$mime_type = mime_type($full_path);
 			$content_mime_type = $mime_type[0];
-			if($content_mime_type != 'csv'){
+			if($content_mime_type != 'csv' && $content_mime_type != 'video' && $content_mime_type != 'audio'){
 				$file = uniqid().'.'.$ext;
 				$to = getcwd().'/src/temp/'.$file;
 				if(!@copy($full_path, $to)){
@@ -148,13 +153,16 @@ class Documents extends Base_Controller {
 					return;
 				}
 			}
+			else{
+				$file = $result[0]['uniqid'].'.'.$result[0]['file_name'];
+			}
 		}
 			
 		if($this->input->is_ajax_request()){
 			echo json_encode(array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
 		}
-		else{
-			$this->load_view('document_item', array('expire' => $result[0]['expire'], 'duration' => $result[0]['video_duration'], 'subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
+		else{//media
+			$this->load_view('document_item', array('uniqid' => $result[0]['uniqid'], 'expire' => $result[0]['expire'], 'duration' => $result[0]['video_duration'], 'subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
 		}
 	}
 	
