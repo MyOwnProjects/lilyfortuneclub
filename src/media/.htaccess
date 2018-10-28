@@ -1,6 +1,6 @@
 RewriteEngine on
-RewriteCond %{HTTP_REFERER} !^http://localhost/.*$ [NC]
-RewriteCond %{HTTP_REFERER} !^http://localhost/.*$ [NC]
-RewriteCond %{HTTPS_REFERER} !^https://localhost/.*$ [NC]
-RewriteCond %{HTTPS_REFERER} !^https://localhost/.*$ [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.lilyfortuneclub.com/.*$ [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.lilyfortuneclub.com/.*$ [NC]
+RewriteCond %{HTTPS_REFERER} !^https://www.lilyfortuneclub.com/.*$ [NC]
+RewriteCond %{HTTPS_REFERER} !^https://www.lilyfortuneclub.com/.*$ [NC]
 RewriteRule .(mp4|mp3|avi)$ - [F]

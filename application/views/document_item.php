@@ -61,30 +61,9 @@ function document_loaded(file){
 		<div style="line-height:30px">Content Type: <?php echo $content_type;?></div>
 		<?php if(!empty($abstract)){ ?>
 		<div style="line-height:20px"><?php echo str_replace("\n", '<br/>', $abstract);?></div>
-		<?php }
-		//-----
-		$video_duration = array();
-		$capitions = array();
-		if(!empty($duration) && (strtotime('now') > strtotime($expire))){
-			$video_duration = explode(',', $duration);
-			$capitions = array(array(0, $video_duration[1] + 1, 'Please contact Lilyfortuneclub to get the full video'));
-		}
-		//-----
+		<?php } 
 		?>
 	<script>
-		//-----
-		$(document).ready(function(){
-			$('.video-player').simple_video_player({
-				src: '<?php echo base_url().'src/temp/'.$file;?>',
-				duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
-				capitals: JSON.parse('<?php echo json_encode($capitals);?>'),
-				autostart: true,
-				out_duration_callback: function(){
-				},
-				loaded: function(){
-					document_loaded('<?php echo $file;?>');	
-		//-----
-					
 		const player = new Plyr('#player', {
 			invertTime: false,
 			captions: { active: true}
