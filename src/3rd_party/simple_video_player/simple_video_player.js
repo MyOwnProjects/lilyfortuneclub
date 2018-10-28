@@ -11,13 +11,13 @@
 			return false;
 		}).appendTo($_this);
 		var _control_height = '30px';
-		var _capitals = {};
-		if(prop['capitals']){
-			for(var i = 0; i < prop['capitals'].length; ++i){
-				var start = prop['capitals'][i][0];
-				var end = prop['capitals'][i][1];
+		var _captions = {};
+		if(prop['captions']){
+			for(var i = 0; i < prop['captions'].length; ++i){
+				var start = prop['captions'][i][0];
+				var end = prop['captions'][i][1];
 				for(var j = start; j <= end; ++j){
-					_capitals[j] = prop['capitals'][i][2];
+					_captions[j] = prop['captions'][i][2];
 				}
 			}
 		}
@@ -40,7 +40,7 @@
 		};
 		
 		var $_source = $('<source>').appendTo($_video);
-		var $_capital = $('<div>').css('background', 'transparent').css('position','absolute').css('z-index', '9').css('bottom','40px').css('left','20%').css('right','20%')
+		var $_caption = $('<div>').css('background', 'transparent').css('position','absolute').css('z-index', '9').css('bottom','40px').css('left','20%').css('right','20%')
 			.css('text-align', 'center').css('color', '#fff').css('font-size', '30px').appendTo($_this);
 		var $_control_bar = $('<div>').css('background', 'rgba(0,0,0, 0.6)').css('color', '#fff').css('position','absolute').css('z-index', '10').css('bottom','0').css('left','0').css('right','0')
 			/*.css('border', '1px solid #d5d5d5')*/.css('margin-top', '-5px').css('padding-right', '5px').css('overflow', 'auto').appendTo($_this);
@@ -139,7 +139,7 @@
 					pause();
 					$_play_button.html('&#9658');
 					update_progress_bar();
-					update_capital();
+					update_caption();
 					if(prop['out_duration_callback']){
 						prop['out_duration_callback']();
 					}
@@ -219,7 +219,7 @@
 			if(prop['duration'] && prop['duration'] && prop['duration'].length == 2){
 				_video.currentTime = prop['duration'][0];
 				update_progress_bar();
-				update_capital();
+				update_caption();
 			}
 			setInterval(update_play_button, 100);
 			if(prop['autostart']){
@@ -235,7 +235,7 @@
 				pause();
 				$_play_button.html('&#9658');
 				update_progress_bar();
-				update_capital();
+				update_caption();
 				if(prop['out_duration_callback']){
 					prop['out_duration_callback']();
 				}
@@ -249,12 +249,12 @@
 				pause();
 				reset();
 				update_progress_bar();
-				update_capital();
+				update_caption();
 				$_control_bar.slideDown();
 			}
 			else{
 				update_progress_bar();
-				update_capital();
+				update_caption();
 				_timer = setTimeout(update_current, 10);
 			}
 		};
@@ -275,13 +275,13 @@
 			$_progress_line_color.outerWidth(_video.currentTime / _video.duration * 100 + '%');
 		};
 		
-		var update_capital = function(){
+		var update_caption = function(){
 			var t = parseInt(_video.currentTime);
-			if(_capitals[t]){
-				$_capital.html(_capitals[t]);
+			if(_captions[t]){
+				$_caption.html(_captions[t]);
 			}
 			else{
-				$_capital.html('');
+				$_caption.html('');
 			}
 		}
 

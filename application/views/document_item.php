@@ -77,7 +77,7 @@ function document_loaded(file){
 			$('.video-player').simple_video_player({
 				src: '<?php echo base_url().'src/temp/'.$file;?>',
 				duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
-				capitals: JSON.parse('<?php echo json_encode($capitals);?>'),
+				capition: JSON.parse('<?php echo json_encode($capions);?>'),
 				autostart: true,
 				out_duration_callback: function(){
 				},
