@@ -81,8 +81,8 @@ function document_loaded(file){
 				autostart: true,
 				out_duration_callback: function(){
 				},
-				loaded: function(){
-					document_loaded('<?php echo $file;?>');	
+			});
+		});
 		//-----
 		/*const player = new Plyr('#player', {
 			invertTime: false,
