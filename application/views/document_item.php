@@ -84,7 +84,7 @@ function document_loaded(file){
 				loaded: function(){
 					document_loaded('<?php echo $file;?>');	
 		//-----
-		const player = new Plyr('#player', {
+		/*const player = new Plyr('#player', {
 			invertTime: false,
 			captions: { active: true}
 		});
@@ -103,7 +103,7 @@ function document_loaded(file){
 					player.currentTime = start;
 				}
 			});
-		}
+		}*/
 	</script>
 	<?php
 	}
