@@ -668,7 +668,7 @@ class Documents extends Smd_Controller {
 			
 			$d = intval($diff->format('%R%a'));
 			$h = intval($diff->format('%R%h'));
-			echo $d.' '.$v;exit;
+			echo $d.' '.$h;exit;
 			$value = $d * 24 + $h;
 			if($v <= 0){
 				$v = 0;
