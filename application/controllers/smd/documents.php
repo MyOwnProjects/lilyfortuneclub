@@ -633,9 +633,9 @@ class Documents extends Smd_Controller {
 		$this->load_view('documents/item', array('document' => $item));
 	}
 	
-	public function delete_pub_code($pub_code_id = null){
+	public function delete_pub_code($code = null){
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
-			$this->document_model->delete_pub_code("document_pub_code_id='$pub_code_id'");
+			$this->document_model->delete_pub_code("code='$code'");
 			echo json_encode(array('success' => true));
 			return;
 		}
@@ -644,7 +644,46 @@ class Documents extends Smd_Controller {
 			array_push($items,
 				array(
 					'tag' => 'text',
-					'text' => 'Do you want to delete the code?',
+					'text' => "Do you want to delete the code $code?",
+				)
+			);
+			$this->load->view('smd/add_item', array('items' => $items));
+		}
+	}
+	
+	public function change_pub_code_time($code = null){
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$expire = intval($this->input->post('expire'));
+			$expire = date_format(date_add(date_create(),date_interval_create_from_date_string("$expire hours")), "Y-m-d H:i:s");
+			$prop = array('expire' => $expire);
+			$this->document_model->update_pub_code($prop, "code='$code'");
+			echo json_encode(array('success' => true));
+			return;
+		}
+		else{
+			$result = $this->document_model->get_pub_code("code='$code'");
+			$diff = date_diff(date_create(), date_create($result[0]['expire']));
+			$d = intval($diff->format('%R%a'));
+			$h = intval($diff->format('%R%h'));
+			$value = $d * 24 + $h;
+			if($d <= 0){
+				$d = 0;
+			}
+			$items = array(
+				array(
+					'label' => 'Code',
+					'tag' => 'input',
+					'type' => 'text',
+					'name' => 'code',
+					'readonly' => true,
+					'value' => $code
+				),
+				array(
+					'label' => 'Expiration (hours)',
+					'tag' => 'input',
+					'type' => 'number',
+					'name' => 'expire',
+					'value' => $d
 				)
 			);
 			$this->load->view('smd/add_item', array('items' => $items));
@@ -695,7 +734,7 @@ class Documents extends Smd_Controller {
 					'value' => $code
 				),
 				array(
-					'label' => 'Expire',
+					'label' => 'Expire (hours)',
 					'name' => 'expire',
 					'tag' => 'input',
 					'type' => 'number',

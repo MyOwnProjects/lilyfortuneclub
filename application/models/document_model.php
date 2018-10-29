@@ -91,8 +91,8 @@ class Document_model extends Base_model{
 		return $this->db->query($sql);
 	}
 	
-	public function get_pub_code(){
-		$sql = "SELECT code FROM document_pub_code";
+	public function get_pub_code($where = ''){
+		$sql = "SELECT * FROM document_pub_code WHERE 1=1".(empty($where) ? '' : " AND $where");
 		return $this->db->query($sql);
 	}
 	
@@ -108,4 +108,14 @@ class Document_model extends Base_model{
 		$sql = "DELETE FROM document_pub_code WHERE 1=1 AND $where";
 		$this->db->query($sql);
 	}
+	
+	public function update_pub_code($prop, $where){
+		$value = array();
+		foreach($prop as $n => $v){
+			array_push($value, "$n='$v'");
+		}
+		$sql = "UPDATE document_pub_code SET ".implode(",", $value)." WHERE 1=1 AND $where";
+		$this->db->query($sql);
+	}
+	
 }

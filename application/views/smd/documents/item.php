@@ -75,7 +75,8 @@ if(!$document){
 					echo '<span class="'.($expired ? 'text-danger' : 'text-success').'">'.$value['code'].'</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-secondary">['.date_format(date_create($value['expire']), 'm/d/Y H:i').']</span>';
 					?>
 				</div>
-				<a href="javascript:void(0)" class="pull-right dialog-toggle" data-id="<?php echo $value['document_pub_code_id'];?>" dialog-header="Delete Pub Code" dialog-url="<?php echo base_url();?>smd/documents/delete_pub_code"><i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Delete"></i></a>
+				<a href="javascript:void(0)" class="pull-right dialog-toggle" data-id="<?php echo $value['code'];?>" dialog-header="Delete Pub Code" dialog-url="<?php echo base_url();?>smd/documents/delete_pub_code"><i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Delete"></i></a>
+				<a href="javascript:void(0)" style="margin-right:10px" class="pull-right dialog-toggle" data-id="<?php echo $value['code'];?>" dialog-header="Change Pub Code Time" dialog-url="<?php echo base_url();?>smd/documents/change_pub_code_time"><i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 			</li>
 			<?php 
 			}
