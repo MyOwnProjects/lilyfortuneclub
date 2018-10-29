@@ -120,7 +120,7 @@ class Documents extends Account_base_controller {
 					echo json_encode(array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
 				}
 				else{
-					$this->load_view('document_item', array('duration' => $result[0]['video_duration'], 'subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
+					$this->load_view('document_item', array('duration' => $result[0]['video_duration'], 'subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name'], 'abstract' => $result[0]['abstract']));
 				}
 			}			
 			return;
