@@ -151,6 +151,7 @@ class Smd_controller extends CI_Controller {
 		$this->load->library('session');
 		$this->load->library('PHPMailer');
 		$this->load->helper('cookie');
+		date_default_timezone_set('America/Los_Angeles');
 		$user_id = $this->session->userdata('session_user');
 		if(empty($user_id)){
 			$user_id = $this->input->cookie('session_user');
