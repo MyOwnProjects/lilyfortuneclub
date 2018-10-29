@@ -41,7 +41,7 @@
 		
 		var $_source = $('<source>').appendTo($_video);
 		var $_caption = $('<div>').css('background', '#000').css('opacity', '0.8').css('padding', '5px').css('position','absolute').css('z-index', '9').css('bottom','40px').css('left','20%').css('right','20%')
-			.css('text-align', 'center').css('color', '#fff').css('font-size', '18px').appendTo($_this);
+			.css('text-align', 'center').css('color', '#fff').css('font-size', '18px').hide().appendTo($_this);
 		var $_control_bar = $('<div>').css('background', 'rgba(0,0,0, 0.6)').css('color', '#fff').css('position','absolute').css('z-index', '10').css('bottom','0').css('left','0').css('right','0')
 			/*.css('border', '1px solid #d5d5d5')*/.css('margin-top', '-5px').css('padding-right', '5px').css('overflow', 'auto')
 			.delegate('progress-bar', 'click', function(e){
@@ -366,10 +366,10 @@
 		var update_caption = function(){
 			var t = parseInt(_video.currentTime);
 			if(_captions[t]){
-				$_caption.html(_captions[t]);
+				$_caption.show().html(_captions[t]);
 			}
 			else{
-				$_caption.html('');
+				$_caption.hide().html('');
 			}
 		}
 
