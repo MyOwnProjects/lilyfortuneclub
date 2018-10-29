@@ -38,24 +38,16 @@ function document_loaded(file){
 	?>
 		<div class="video-player">
 		</div>
-		<!--div class="video-player" style="margin:20px auto">
-			<video id="player" playsinline controls>
-				<source src="<?php echo base_url().'src/media/'.$file;?>" type="video/mp4">
-				<?php
-					$video_duration = array();
-					if(!empty($duration) && (strtotime('now') > strtotime($expire))){
-						$video_duration = explode(',', $duration);
-				?>
-				<track kind="captions" label="English captions" src="<?php echo base_url().'src/media/'.$uniqid.'.vtt';?>" srclang="en" default>
-				<?php
-					}
-				?>
-			</video>
-		</div-->
 		<?php
+		$video_duration = array();
+		if(!empty($duration) && (strtotime('now') > strtotime($expire))){
+			$video_duration = explode(',', $duration);
+		}
 		if(count($video_duration) == 2){
+			$m = floor(($video_duration[1] - $video_duration[0]) / 60);
+			$s = $video_duration[1] - $video_duration[0] - $m * 60
 		?>
-		<p class="text-danger">You can only watch the video for <?php echo ($video_duration[1] - $video_duration[0]) / 60;?> minutes by this access code. To watch the full video, please contact <a href="<?php echo base_url();?>contact" target="_blank">Lilyfortuneclub</a></p>
+		<p class="text-danger">You can only watch the video for <?php echo str_pad($m, 2, '0', STR_PAD_LEFT).':'.str_pad($s, 2, '0', STR_PAD_LEFT);?> by this access code. To watch the full video, please contact <a href="<?php echo base_url();?>contact" target="_blank">Lilyfortuneclub</a></p>
 		<?php
 		}
 		?>
@@ -65,10 +57,8 @@ function document_loaded(file){
 		<div style="line-height:20px"><?php echo str_replace("\n", '<br/>', $abstract);?></div>
 		<?php } 
 //-----
-		$video_duration = array();
 		$captions = array();
-		if(!empty($duration) && (strtotime('now') > strtotime($expire))){
-			$video_duration = explode(',', $duration);
+		if(!empty($video_duration)){
 			$captions = array(array(0, $video_duration[1] + 1, 'Please contact Lilyfortuneclub to get the full video'));
 		}
 //---------		

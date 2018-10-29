@@ -10,7 +10,7 @@
 		var $_video = $('<video>').attr('preload', 'auto').css('z-index', '1').appendTo($_this).contextmenu(function(){
 			return false;
 		}).appendTo($_this);
-		var _control_height = '30px';
+		var _control_height = '40px';
 		var _captions = {};
 		if(prop['captions']){
 			for(var i = 0; i < prop['captions'].length; ++i){
@@ -43,12 +43,19 @@
 		var $_caption = $('<div>').css('background', '#000').css('opacity', '0.8').css('padding', '5px').css('position','absolute').css('z-index', '9').css('bottom','40px').css('left','20%').css('right','20%')
 			.css('text-align', 'center').css('color', '#fff').css('font-size', '18px').appendTo($_this);
 		var $_control_bar = $('<div>').css('background', 'rgba(0,0,0, 0.6)').css('color', '#fff').css('position','absolute').css('z-index', '10').css('bottom','0').css('left','0').css('right','0')
-			/*.css('border', '1px solid #d5d5d5')*/.css('margin-top', '-5px').css('padding-right', '5px').css('overflow', 'auto').appendTo($_this);
+			/*.css('border', '1px solid #d5d5d5')*/.css('margin-top', '-5px').css('padding-right', '5px').css('overflow', 'auto')
+			.delegate('progress-bar', 'click', function(e){
+					alert(1);
+			}).appendTo($_this);
 			
-		var $_play_button = $('<div>').addClass('no-select').css('border-radius', '3px').css('border', '1px solid #333').css('text-align', 'center').css('border-radius', '2px').css('cursor', 'pointer')
-			.outerHeight('26px').css('line-height', '20px').css('float', 'left').outerWidth('26px').css('margin', '2px 0 0 5px').addClass('play')
+		var $_play_button = $('<div>').addClass('no-select').css('border-radius', '3px').css('text-align', 'center').css('border-radius', '2px').css('cursor', 'pointer')
+			.outerHeight('26px').css('font-size', '18px').css('line-height', '26px').css('float', 'left').outerWidth('26px').css('margin', '7px 0 0 10px').addClass('play')
 			.click(function(){
 				click_play_button();
+			}).mouseenter(function(){
+				$(this).css('background','red');
+			}).mouseleave(function(){
+				$(this).css('background','none');
 			}).appendTo($_control_bar);
 		var $_full_screen_button = $('<div>').addClass('no-select').css('float', 'right').css('text-align', 'center').css('border-radius', '2px').css('cursor', 'pointer')
 			.css('line-height', _control_height).css('width',_control_height).css('height',_control_height).addClass('play').attr('title', 'Full screen').html('<i class="fa fa-expand" aria-hidden="true"></i>')
@@ -101,9 +108,10 @@
 		var $_total = $('<div>').addClass('no-select').css('text-align', 'left').css('margin-left', '5px').css('font-size', '12px').css('line-height', _control_height)
 			.css('float', 'right').css('height',_control_height).html('00:00').css('width', '50px').appendTo($_progress_bar);
 		var $_progress = $('<div>').css('height',_control_height).css('overflow', 'hidden').css('position', 'relative').appendTo($_progress_bar);
-		var bh = 6;
-		var $_progress_line_grey = $('<div>').css('position', 'absolute').css('left', 0).css('right', 0)
-			.css('height', bh + 'px').css('background', '#d5d5d5').css('cursor', 'pointer')
+		var _mouse_time = $('<div>').css('position', 'absolute').css('font-size', '12px').css('color', '#fff').hide().appendTo($_progress);
+		var bh = 10;
+		var $_progress_line_grey = $('<div>').addClass('progress-line-grey').css('position', 'absolute').css('z-index', 10).css('left', 0).css('right', 0)
+			.css('height', bh + 'px').css('background', '#656565').css('cursor', 'pointer')
 			.css('top', (parseInt(_control_height) - bh) / 2).click(function(e){
 				var val = e.offsetX / $_progress_line_grey.outerWidth() * _video.duration;
 				if(prop['duration'] && prop['duration'].length == 2 && 
@@ -115,21 +123,87 @@
 				}
 				_video.currentTime = val;
 				update_current();
+			}).mouseenter( function(e){
+				var val = convert_time_format(e.offsetX / $_progress_line_grey.outerWidth() * _video.duration);
+				_mouse_time.html(val);
+				var left = e.offsetX - _mouse_time.outerWidth() / 2;
+				if(left < 0){
+					left = 0;
+				}
+				_mouse_time.css('left', left + 'px').show();
+			}).mouseleave( function(e){
+				_mouse_time.hide();
+			}).mousemove( function(e){
+				var val = convert_time_format(e.offsetX / $_progress_line_grey.outerWidth() * _video.duration);
+				_mouse_time.html(val);
+				var left = e.offsetX - _mouse_time.outerWidth() / 2;
+				if(left < 0){
+					left = 0;
+				}
+				_mouse_time.css('left', left + 'px').show();
 			}).appendTo($_progress);
-		var $_progress_line_color = $('<div>').css('position', 'absolute').css('left', 0).css('width', '0')
+		var $_progress_line_duration = $('<div>').css('position', 'absolute').css('z-index', 11).css('left', 0).css('width', 0)	
+			.css('height', bh + 'px').css('background', '#d5d5d5').css('cursor', 'pointer')
+			.css('top', (parseInt(_control_height) - bh) / 2).hide().click(function(e){
+				var val = e.offsetX / $_progress_line_duration.outerWidth() * (prop['duration'][1]- prop['duration'][0]) + prop['duration'][0];
+				_video.currentTime = val;
+				update_current();
+			}).mouseenter( function(e){
+				var val = convert_time_format(e.offsetX / $_progress_line_duration.outerWidth() * (prop['duration'][1] - prop['duration'][0]) + prop['duration'][0]);
+				_mouse_time.html(val);
+				var left = e.offsetX - _mouse_time.outerWidth() / 2;
+				if(left < 0){
+					left = 0;
+				}
+				_mouse_time.css('left', left + 'px').show();
+			}).mouseleave( function(e){
+				_mouse_time.hide();
+			}).mousemove( function(e){
+				var val = convert_time_format(e.offsetX / $_progress_line_duration.outerWidth() * (prop['duration'][1] - prop['duration'][0]) + prop['duration'][0]);
+				_mouse_time.html(val);
+				var left = e.offsetX - _mouse_time.outerWidth() / 2;
+				if(left < 0){
+					left = 0;
+				}
+				_mouse_time.css('left', left + 'px').show();
+			}).appendTo($_progress);
+		var $_progress_line_color = $('<div>').css('position', 'absolute').css('z-index', 12).css('left', 0).css('width', '0')
 			.css('height', bh + 'px').css('background', '#ff0000').css('cursor', 'pointer')
 			.css('top', (parseInt(_control_height) - bh) / 2).click(function(e){
 				var val = e.offsetX / $_progress_line_grey.outerWidth() * _video.duration;
-				if(prop['duration'] && prop['duration'].length == 2 && 
-					(val < prop['duration'][0] || val > prop['duration'][1])){
-					if(prop['out_duration_callback']){
-						prop['out_duration_callback']();
+				if(prop['duration'] && prop['duration'].length == 2){
+					val += prop['duration'][0];
+					if(val < prop['duration'][0] || val > prop['duration'][1]){
+						if(prop['out_duration_callback']){
+							prop['out_duration_callback']();
+						}
+						return;
 					}
-					return;
 				}
 				_video.currentTime = val;
 				update_current();
+			}).mouseenter( function(e){
+				var val = convert_time_format(e.offsetX / $_progress_line_grey.outerWidth() * _video.duration 
+					+ (prop['duration'] && prop['duration'].length == 2 ? prop['duration'][0] : 0));
+				_mouse_time.html(val);
+				var left = e.offsetX - _mouse_time.outerWidth() / 2;
+				if(left < 0){
+					left = 0;
+				}
+				_mouse_time.css('left', left + 'px').show();
+			}).mouseleave( function(e){
+				_mouse_time.hide();
+			}).mousemove( function(e){
+				var val = convert_time_format(e.offsetX / $_progress_line_grey.outerWidth() * _video.duration 
+					+ (prop['duration'] && prop['duration'].length == 2 ? prop['duration'][0] : 0));
+				_mouse_time.html(val);
+				var left = e.offsetX - _mouse_time.outerWidth() / 2;
+				if(left < 0){
+					left = 0;
+				}
+				_mouse_time.css('left', left + 'px').show();
 			}).appendTo($_progress);
+			
 		var click_play_button = function(){
 			if(_video.paused){
 				if(prop['duration'] && prop['duration'].length == 2 && 
@@ -227,6 +301,15 @@
 			}
 		};
 		
+		_video.onloadedmetadata = function(){
+			if(prop['duration'] && prop['duration'].length == 2){
+				var left = prop['duration'][0] / _video.duration * $_progress_line_grey.outerWidth();
+				var width = (prop['duration'][1] - prop['duration'][0]) / _video.duration * $_progress_line_grey.outerWidth();
+				$_progress_line_duration.css('left', left + 'px').css('width', width + 'px').show();
+				$_progress_line_color.css('left', left + 'px');
+			}
+		}
+		
 		var update_current = function(){
 			if(prop['duration'] && prop['duration'] && prop['duration'].length == 2 && 
 				(_video.currentTime < prop['duration'][0] || _video.currentTime > prop['duration'][1])){
@@ -272,7 +355,12 @@
 		
 		var update_progress_bar = function(){
 			$_current.html(convert_time_format(_video.currentTime));
-			$_progress_line_color.outerWidth(_video.currentTime / _video.duration * 100 + '%');
+			if(prop['duration'] && prop['duration'] && prop['duration'].length == 2){
+				$_progress_line_color.outerWidth((_video.currentTime - prop['duration'][0]) / _video.duration * 100 + '%');
+			}
+			else{
+				$_progress_line_color.outerWidth(_video.currentTime / _video.duration * 100 + '%');
+			}
 		};
 		
 		var update_caption = function(){

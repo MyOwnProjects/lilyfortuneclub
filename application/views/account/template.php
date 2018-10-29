@@ -8,8 +8,6 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/dialog/dialog.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/data_table/data_table.css">
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/css/smd/template.css" />		
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>src/3rd_party/plyr-master/dist/plyr.css?<?php echo time();?>">
-		<script src="<?php echo base_url();?>src/3rd_party/plyr-master/dist/plyr.js?<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-migrate-1.2.1.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-ui-1.11.4/jquery-ui.min.js"></script>
