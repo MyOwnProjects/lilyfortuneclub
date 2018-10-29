@@ -235,7 +235,7 @@ class Team extends Smd_Controller {
 					array('value' => 'Y', 'text' => 'Yes'),
 					array('value' => 'N', 'text' => 'No'),
 				),
-				'value' => 'Y'
+				'value' => 'N'
 			)
 		);
 		$this->load->view('smd/add_item', array('items' => $items));

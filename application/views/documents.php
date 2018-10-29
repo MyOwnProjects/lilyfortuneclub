@@ -43,8 +43,6 @@ ul.doc-list li{padding:0 20px}
 			<div class="doc-icon" style="color:<?php echo doc_icon_color($l['mime_type']);?>">
 				<?php
 				$a = array_unique($l['mime_type']);
-				print_r($l['mime_type']);
-				print_r($a);
 				foreach($a as $mt){
 					echo '<i class="fa fa-file-'.$mt.'-o"></i>';
 				}
