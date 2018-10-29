@@ -668,10 +668,9 @@ class Documents extends Smd_Controller {
 			
 			$d = intval($diff->format('%R%a'));
 			$h = intval($diff->format('%R%h'));
-			echo $d.' '.$h;exit;
 			$value = $d * 24 + $h;
-			if($v <= 0){
-				$v = 0;
+			if($value <= 0){
+				$value = 0;
 			}
 			$items = array(
 				array(
@@ -687,7 +686,7 @@ class Documents extends Smd_Controller {
 					'tag' => 'input',
 					'type' => 'number',
 					'name' => 'expire',
-					'value' => $d
+					'value' => $value
 				)
 			);
 			$this->load->view('smd/add_item', array('items' => $items));
