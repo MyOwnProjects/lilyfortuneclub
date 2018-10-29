@@ -111,7 +111,7 @@
 		var _mouse_time = $('<div>').css('position', 'absolute').css('font-size', '12px').css('color', '#fff').hide().appendTo($_progress);
 		var bh = 10;
 		var $_progress_line_grey = $('<div>').addClass('progress-line-grey').css('position', 'absolute').css('z-index', 10).css('left', 0).css('right', 0)
-			.css('height', bh + 'px').css('background', '#656565').css('cursor', 'pointer')
+			.css('height', bh + 'px').css('background', '#b5b5b5').css('cursor', 'pointer')
 			.css('top', (parseInt(_control_height) - bh) / 2).click(function(e){
 				var val = e.offsetX / $_progress_line_grey.outerWidth() * _video.duration;
 				if(prop['duration'] && prop['duration'].length == 2 && 
@@ -143,7 +143,7 @@
 				_mouse_time.css('left', left + 'px').show();
 			}).appendTo($_progress);
 		var $_progress_line_duration = $('<div>').css('position', 'absolute').css('z-index', 11).css('left', 0).css('width', 0)	
-			.css('height', bh + 'px').css('background', '#d5d5d5').css('cursor', 'pointer')
+			.css('height', bh + 'px').css('background', '#eee').css('cursor', 'pointer')
 			.css('top', (parseInt(_control_height) - bh) / 2).hide().click(function(e){
 				var val = e.offsetX / $_progress_line_duration.outerWidth() * (prop['duration'][1]- prop['duration'][0]) + prop['duration'][0];
 				_video.currentTime = val;
