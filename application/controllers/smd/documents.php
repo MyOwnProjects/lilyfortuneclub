@@ -654,7 +654,7 @@ class Documents extends Smd_Controller {
 	public function change_pub_code_time($code = null){
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$expire = intval($this->input->post('expire'));
-			date_default_timezone_set('America/Los_angeles');
+			date_default_timezone_set('America/Los_Angeles');
 			$expire = date_format(date_add(date_create(),date_interval_create_from_date_string("$expire hours")), "Y-m-d H:i:s");
 			$prop = array('expire' => $expire);
 			$this->document_model->update_pub_code($prop, "code='$code'");
@@ -662,14 +662,16 @@ class Documents extends Smd_Controller {
 			return;
 		}
 		else{
-			date_default_timezone_set('America/Los_angeles');
+			date_default_timezone_set('America/Los_Angeles');
 			$result = $this->document_model->get_pub_code("code='$code'");
 			$diff = date_diff(date_create(), date_create($result[0]['expire']));
+			
 			$d = intval($diff->format('%R%a'));
 			$h = intval($diff->format('%R%h'));
+			echo $d.' '.$v;exit;
 			$value = $d * 24 + $h;
-			if($d <= 0){
-				$d = 0;
+			if($v <= 0){
+				$v = 0;
 			}
 			$items = array(
 				array(
