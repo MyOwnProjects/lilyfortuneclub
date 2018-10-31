@@ -310,6 +310,10 @@
 			}
 		}
 		
+		_video.onprogress = function() {
+			ajax_loading(true);
+		};
+		
 		var update_current = function(){
 			if(prop['duration'] && prop['duration'] && prop['duration'].length == 2 && 
 				(_video.currentTime < prop['duration'][0] || _video.currentTime > prop['duration'][1])){
