@@ -302,6 +302,7 @@
 		};
 		
 		_video.onloadedmetadata = function(){
+			$_loading.css('line-height', $_this.innerHeight() + 'px');
 			if(prop['duration'] && prop['duration'].length == 2){
 				var left = prop['duration'][0] / _video.duration * $_progress_line_grey.outerWidth();
 				var width = (prop['duration'][1] - prop['duration'][0]) / _video.duration * $_progress_line_grey.outerWidth();
