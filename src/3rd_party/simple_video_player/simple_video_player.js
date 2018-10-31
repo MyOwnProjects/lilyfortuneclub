@@ -310,7 +310,7 @@
 		}
 		
 		_video.onprogress = function() {
-			$_loading_show();
+			$_loading.show();
 		};
 		
 		var update_current = function(){
