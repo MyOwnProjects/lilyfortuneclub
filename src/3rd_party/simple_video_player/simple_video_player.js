@@ -47,7 +47,7 @@
 			.appendTo($_this);
 		var $_loading = $('<div>').css('z-index', 7).css('background', '#000').css('opacity', '0.9').css('color', '#fff')
 			.css('text-align', 'center').css('position', 'absolute').css('top', 0).css('right', 0).css('bottom', 0)
-			.css('left', 0).html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>').hide().appendTo($_this);	
+			.css('left', 0).html('<table style="width:100%;height:100%"><tr><td style="vertical-align:middle;text-align:center"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></tr></td></table>').hide().appendTo($_this);	
 		var $_play_button = $('<div>').addClass('no-select').css('border-radius', '3px').css('text-align', 'center').css('border-radius', '2px').css('cursor', 'pointer')
 			.outerHeight('26px').css('font-size', '18px').css('line-height', '26px').css('float', 'left').outerWidth('26px').css('margin', '7px 0 0 10px').addClass('play')
 			.click(function(){
