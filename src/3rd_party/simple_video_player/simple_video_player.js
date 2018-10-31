@@ -46,7 +46,8 @@
 			/*.css('border', '1px solid #d5d5d5')*/.css('margin-top', '-5px').css('padding-right', '5px').css('overflow', 'auto')
 			.appendTo($_this);
 		var $_loading = $('<div>').css('z-index', 7).css('background', '#000').css('opacity', '0.9').css('color', '#fff')
-			.css('text-align', 'center').css('position', 'absolute').css('top', 0).css('right', 0).css('bottom', 0).css('left', 0).html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>').hide().appendTo();	
+			.css('text-align', 'center').css('position', 'absolute').css('top', 0).css('right', 0).css('bottom', 0)
+			.css('left', 0).html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>').hide().appendTo($_this);	
 		var $_play_button = $('<div>').addClass('no-select').css('border-radius', '3px').css('text-align', 'center').css('border-radius', '2px').css('cursor', 'pointer')
 			.outerHeight('26px').css('font-size', '18px').css('line-height', '26px').css('float', 'left').outerWidth('26px').css('margin', '7px 0 0 10px').addClass('play')
 			.click(function(){
