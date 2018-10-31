@@ -309,13 +309,13 @@
 				$_progress_line_duration.css('left', left + 'px').css('width', width + 'px').show();
 				$_progress_line_color.css('left', left + 'px');
 			}
-		}
+		c
 		
 		_video.onprogress = function(e) {
 			$_loading.show();
 		};
 
-		_video.oncanplay = function(e) {
+		_video.onplaying = function(e) {
 			$_loading.hide();
 		};
 		
