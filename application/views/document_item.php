@@ -36,6 +36,11 @@ function document_loaded(file){
 	<?php
 	if($mime_type == 'video'){
 	?>
+<style>
+@media only screen and (max-width:600px) {
+	.video-text{padding:20px}
+}
+</style>
 		<div class="video-player">
 		</div>
 		<?php
@@ -51,10 +56,12 @@ function document_loaded(file){
 		<?php
 		}
 		?>
+		<div class="video-text">
 		<h2><?php echo $subject;?></h2>
 		<div style="line-height:30px">Content Type: <?php echo $content_type;?></div>
 		<?php if(!empty($abstract)){ ?>
 		<div style="line-height:20px"><?php echo str_replace("\n", '<br/>', $abstract);?></div>
+		</div>
 		<?php } 
 //-----
 		$captions = array();
