@@ -4,6 +4,7 @@
 .document-content .content-image{text-align:center;margin:40px auto} 
 .document-content img{width:100%;max-width:600px}
 @media only screen and (max-width:800px) {
+.video-text{padding:20px}
 .document-subject{text-align:left;font-weight:normal}
 .right-part{display:none;}
 .left-part{padding:0 20px}
@@ -36,11 +37,6 @@ function document_loaded(file){
 	<?php
 	if($mime_type == 'video'){
 	?>
-<style>
-@media only screen and (max-width:600px) {
-	.video-text{padding:20px}
-}
-</style>
 		<div class="video-player">
 		</div>
 		<?php
