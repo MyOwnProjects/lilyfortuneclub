@@ -40,14 +40,13 @@
 		};
 		
 		var $_source = $('<source>').appendTo($_video);
-		var $_caption = $('<div>').css('background', '#000').css('opacity', '0.8').css('padding', '5px').css('position','absolute').css('z-index', '9').css('bottom','40px').css('left','20%').css('right','20%')
+		var $_caption = $('<div>').css('background', '#000').css('opacity', '0.8').css('padding', '5px').css('position','absolute').css('z-index', '5').css('bottom','40px').css('left','20%').css('right','20%')
 			.css('text-align', 'center').css('color', '#fff').css('font-size', '18px').hide().appendTo($_this);
 		var $_control_bar = $('<div>').css('background', 'rgba(0,0,0, 0.6)').css('color', '#fff').css('position','absolute').css('z-index', '10').css('bottom','0').css('left','0').css('right','0')
 			/*.css('border', '1px solid #d5d5d5')*/.css('margin-top', '-5px').css('padding-right', '5px').css('overflow', 'auto')
-			.delegate('progress-bar', 'click', function(e){
-					alert(1);
-			}).appendTo($_this);
-			
+			.appendTo($_this);
+		var $_loading = $('<div>').css('z-index', 7).css('background', '#000').css('opacity', '0.9').css('color', '#fff')
+			.css('text-align', 'center').css('position', 'absolute').css('top', 0).css('right', 0).css('bottom', 0).css('left', 0).html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>').hide().appendTo();	
 		var $_play_button = $('<div>').addClass('no-select').css('border-radius', '3px').css('text-align', 'center').css('border-radius', '2px').css('cursor', 'pointer')
 			.outerHeight('26px').css('font-size', '18px').css('line-height', '26px').css('float', 'left').outerWidth('26px').css('margin', '7px 0 0 10px').addClass('play')
 			.click(function(){
@@ -311,7 +310,7 @@
 		}
 		
 		_video.onprogress = function() {
-			ajax_loading(true);
+			$_loading_show();
 		};
 		
 		var update_current = function(){
