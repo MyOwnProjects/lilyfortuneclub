@@ -313,6 +313,10 @@
 		_video.onprogress = function(e) {
 			$_loading.show();
 		};
+
+		_video.oncanplay = function(e) {
+			$_loading.hide();
+		};
 		
 		var update_current = function(){
 			if(prop['duration'] && prop['duration'] && prop['duration'].length == 2 && 
