@@ -12,7 +12,7 @@ class Courses_model extends Base_model{
 	}
 	
 	public function get_course_list(){
-		$sql = "SELECT c.*, d.uniqid, d.subject, d.mime_content_type, d.file_name FROM courses c LEFT JOIN documents d ON c.courses_id=d.courses_id";
+		$sql = "SELECT c.*, d.uniqid, d.subject, d.mime_content_type, d.file_name FROM courses c LEFT JOIN documents d ON c.courses_id=d.courses_id ORDER BY c.courses_id ASC";
 		return $this->db->query($sql);
 	}
 }
