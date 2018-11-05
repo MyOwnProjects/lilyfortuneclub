@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('Base.php');
-class Password extends base_controller {
+require_once('base.php');
+class Password extends Base_controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('user_model');
