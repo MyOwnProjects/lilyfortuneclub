@@ -126,7 +126,7 @@ class Team extends Smd_Controller {
 				'fill_type' => 'team_member',
 			),
 			array(
-				'label' => 'Membership Code',
+				'label' => 'Code',
 				'name' => isset($membership_code) ? null : 'membership_code',
 				'tag' => 'input',
 				'required' => true,
@@ -228,7 +228,7 @@ class Team extends Smd_Controller {
 				'value' => 'TA',
 			),
 			array(
-				'label' => 'Send welcome email?',
+				'label' => 'Send email?',
 				'name' => 'send_email',
 				'tag' => 'select',
 				'options' => array(
