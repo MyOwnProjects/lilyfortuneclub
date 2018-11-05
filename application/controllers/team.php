@@ -71,7 +71,7 @@ class Team extends Base_controller {
 					'text' => '<a class="detail-url" href="javascript:void(0)" data-id="'.$r['membership_code'].'">'.$r['first_name'].' '.$r['last_name']
 						.(empty($r['nick_name']) ? '' : ' ('.$r['nick_name'].')')." - ".$r['membership_code']."</a>"
 					, 'child_count' => $r['count'] 
-					, 'child_url' => base_url().'account/team/get_direct_downline/'.$r['membership_code']
+					, 'child_url' => base_url().'team/get_direct_downline/'.$r['membership_code']
 				));
 			}
 		}
