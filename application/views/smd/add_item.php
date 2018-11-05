@@ -14,17 +14,6 @@ $half_count = floor($item_count / 2 - 0.5);
 	<?php
 	if(isset($items)){
 	foreach($items as $i => $item){
-		//if(!$item['name']){
-		//	continue;
-		//}
-		if($item['tag'] == 'text'){
-		?>
-		<div class="col-lg-12">
-			<?php echo $item['text'];?>
-		</div>
-		<?php
-			continue;
-		}
 		$is_auto_fill = $item['name'] == 'auto-fill';
 		if($is_auto_fill){
 	?>
@@ -40,6 +29,14 @@ $half_count = floor($item_count / 2 - 0.5);
 		</div>
 	<?php
 	continue;
+		}
+		if($item['tag'] == 'text'){
+		?>
+		<div class="col-lg-12">
+			<?php echo $item['text'];?>
+		</div>
+		<?php
+			continue;
 		}
 		?>
 	<div class="col-lg-<?php echo $col_width;?>">
