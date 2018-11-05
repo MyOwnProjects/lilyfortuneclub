@@ -47,7 +47,7 @@ ul.doc-list li{padding:0 20px}
 			</div>
 			<div class="doc-type"><a href="<?php echo base_url();?>documents?content_type=<?php echo $l['content_type'];?>"><?php echo $l['content_type'];?></a></div>
 			<div class="doc-text">
-				<div class="doc-subject"><a href="<?php echo base_url();?><?php echo $l['grade_access'] == 'G' ? '' : 'account/';?>documents/view/<?php echo $l['uniqid'];?>" target="_blank"><?php echo $l['subject'];?></a></div>
+				<div class="doc-subject"><a href="<?php echo base_url();?>documents/view/<?php echo $l['uniqid'];?>" target="_blank"><?php echo $l['subject'];?></a></div>
 				<div class="doc-abstract"><?php echo $l['abstract'];?></div>
 			</div>
 		</li>
