@@ -301,7 +301,7 @@ $('body').delegate('.new-member-url', 'click', function(){
 				param:{source: {'auto-fill': text}, 
 					func: function(){
 						delete newCodes[code];
-						$_this.parent().prepend('<span class="text-success glyphicon glyphicon-ok-sign"></span>');
+						$_this.parent().prepend('<i class="fa fa-check-circle" aria-hidden="true"></i>');
 						$_this.addClass('disabled');
 					},
 				}
