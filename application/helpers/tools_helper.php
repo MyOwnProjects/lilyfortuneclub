@@ -302,6 +302,7 @@ if ( ! function_exists('doc_icon_color')){
 			'excel' => '#008000'
 		);
 		foreach($type as $t){
+			$t = strtolower($t);
 			if(array_key_exists($t, $icon_colors)){
 				return $icon_colors[$t];
 			}

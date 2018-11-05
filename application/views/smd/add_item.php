@@ -84,25 +84,23 @@ $half_count = floor($item_count / 2 - 0.5);
 				$add_class = array_key_exists('class', $item) ? $item['class'] : '';
 			?>
 				<select class="form-control input-sm dialog-edit-field <?php echo $add_class;?>" id="<?php echo $item['name'];?>" name="<?php echo $item['name'];?>">
-					<?php
-					if(array_key_exists('optgroups', $item)){
-						foreach($item['optgroups'] as $group){
+				<?php
+					foreach($item['options'] as $option){
+						if(array_key_exists('optgroups', $option) && $option['optgroups']){
 					?>
-						<optgroup label="<?php echo $group['label']?>">
-						<?php
-							foreach($group['options'] as $option){
-						?>
-						<option value="<?php echo $option['value'];?>" <?php echo $item['value'] == $option['value'] ? 'selected' : ''?>><?php echo $option['text'];?></option>
-						<?php
-						}
-						?>
-						</optgroup>	
+						<optgroup label="<?php echo $option['label']?>">
+					<?php
+						foreach($option['options'] as $o){
+					?>
+							<option value="<?php echo $o['value'];?>" <?php echo array_key_exists('value', $item) && $item['value'] == $o['value'] ? 'selected' : ''?>><?php echo $o['text'];?></option>
 					<?php
 						}
-					}
-					else{
-						foreach($item['options'] as $option){
-						?>
+					?>
+						</optgroup>
+					<?php		
+						}
+						else{
+					?>
 						<option value="<?php echo $option['value'];?>" <?php echo array_key_exists('value', $item) && $item['value'] == $option['value'] ? 'selected' : ''?>><?php echo $option['text'];?></option>
 						<?php
 						}

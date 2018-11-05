@@ -10,7 +10,7 @@
 				<li class="list-group-item list-group-item-info clearfix"><div><label>Account Information</label></div></li>
 				<li class="list-group-item clearfix"><div><label>Name:</label></div><div><?php echo $user['first_name'].' '.$user['last_name'];?><?php echo empty($user['nick_name']) ? '' : ' ('.$user['nick_name'].')';?></div></li>
 				<li class="list-group-item clearfix"><div><label>Username:</label></div><div><?php echo $user['username'];?></div></li>
-				<li class="list-group-item clearfix"><div><label>Password:</label></div><div>********</div><a class="pull-right" href="<?php echo base_url();?>account/password"><span class="glyphicon glyphicon-pencil"></span></a></li>
+				<li class="list-group-item clearfix"><div><label>Password:</label></div><div>********</div><a class="pull-right" href="<?php echo base_url();?>password"><span class="glyphicon glyphicon-pencil"></span></a></li>
 				<li class="list-group-item clearfix">
 					<div><label>Email:</label></div>
 					<div><?php echo $user['email'];?></div>

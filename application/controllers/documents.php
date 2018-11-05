@@ -5,26 +5,10 @@ class Documents extends Base_Controller {
 	private $_params_str;
 	public function __construct(){
 		parent::__construct();
-		if(!empty($this->user)){
-			$base_url = base_url();
-			$full_url = current_url();
-			$path = substr($full_url, strlen($base_url));
-			$redirect = $base_url.'account/'.$path.(empty($_SERVER['QUERY_STRING']) ? '' : '?'.$_SERVER['QUERY_STRING']);
-			header('location: '.$redirect);
-			exit;
-		}
 		$this->load->model('document_model');
-		$params = $this->input->get();
-		$this->_param_str = array();
-		if(!empty($params)){
-			foreach($params as $n => $v){
-				array_push($this->_param_str, "$n=$v");  
-			}
-		}
 	}
 	
-	public function index()
-	{
+	public function index(){
 		$mime_type = $this->input->get('mime_type');
 		$content_type = $this->input->get('content_type');
 		$mime_type_list = $this->document_model->get_all_mime_content_types();
@@ -34,7 +18,8 @@ class Documents extends Base_Controller {
 			$page = 0;
 		else
 			$page -= 1;
-		$where = "1=1 AND grade_access='G'";
+		
+		$where = "1=1";
 		if(!empty($mime_type) && $mime_type != 'All'){
 			$where .= " AND mime_content_type='$mime_type'";
 		} 
@@ -62,9 +47,13 @@ class Documents extends Base_Controller {
 	
 	public function view($file){
 		if($this->input->server('REQUEST_METHOD') == 'GET'){
-			$result = $this->document_model->get_list("uniqid='$file' && grade_access='G'");
-			if(count($result) != 1){
-				$this->load_view('document_error', array('error' => 'The document does not exist, or you do not have permission.'));
+			$result = $this->document_model->get_list("uniqid='$file'");
+			if(empty($result)){
+				$this->load_view('document_error', array('error' => 'The document or video does not exist.'));
+				return;
+			}
+			if(empty($this->user) && $result[0]['grade_access'] != 'G'){
+				$this->load_view('document_error', array('error' => '<p>You don\'t have the permission to access the document or video.</p><p>If you are a member, plase <a href="'.base_url().'ac/sign_in">sign in</a>. If you are not a member, please contact <a href="'.base_url().'contact">Lilyfortuneclub</a>.</p>'));
 				return;
 			}
 			if($result[0]['mime_content_type'] == 'VIDEO'){
@@ -73,28 +62,15 @@ class Documents extends Base_Controller {
 			}
 
 			if(!empty($result[0]['file_name'])){
-				$full_path = getcwd().'/application/documents/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
+				$full_path = getcwd().'/src/doc/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
 				if(!file_exists($full_path)){
-					$this->load_view('document_error', array('error' => 'The document does not exist, or you do not have permission.'));
+					$this->load_view('document_error', array('error' => 'The document does not exist.'));
 					return;
 				}
-				$ext = pathinfo($result[0]['uniqid'].'.'.$result[0]['file_name'], PATHINFO_EXTENSION);
-				$mime_type = mime_type($full_path);
-				$content_mime_type = $mime_type[0];
-				if($content_mime_type != 'csv'){
-					$file = uniqid().'.'.$ext;
-					$to = getcwd().'/src/temp/'.$file;
-					if(!@copy($full_path, $to)){
-						$this->load_view('documents_error', array('error' => 'The document does not exist, or you do not have permission.'));
-						return;
-					}
-				}
 			}
-			else{
-				$content_mime_type = $result[0]['mime_content_type'];
-			}
-			if($content_mime_type == 'pdf'){
-				$this->load->view('pdf_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
+			$content_mime_type = $result[0]['mime_content_type'];
+			if($content_mime_type == 'PDF'){
+				$this->load->view('pdf_viewer', array('subject' => $result[0]['subject'], 'file' => $result[0]['uniqid'].'.'.$result[0]['file_name']));
 			}
 			else if($content_mime_type == 'doc' || $content_mime_type == 'ppt' || $content_mime_type == 'excel'){
 				$this->load->view('doc_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
@@ -114,65 +90,50 @@ class Documents extends Base_Controller {
 					'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'data' => $ret, 'max_columns' => $max_columns,  'name' => $result[0]['file_name']));
 			}
 			else{
-				if($this->input->is_ajax_request()){
-					echo json_encode(array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
-				}
-				else{
-					$this->load_view('document_item', array('expire' => $result[0]['expire'], 'duration' => $result[0]['video_duration'], 'subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
-				}
+				//if($this->input->is_ajax_request()){
+				//	echo 1;exit;
+				//	echo json_encode(array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
+				//}
+				//else{
+				$docs = $this->document_model->get_list('', array(), '');
+				$this->load_view('document_item', 
+					array_merge($result[0], array('mime_type' => $content_mime_type, 'file' => $file, 'docs' => $docs)));
+				//}
 			}			
 			return;
 		}
-		
+
 		$pub_code = strtoupper(trim($this->input->post('guest_code')));
 		$result = $this->document_model->get_item_with_code($file, $pub_code);
+		
 		if(count($result) != 1){
-			$this->load_view('document_error', array('error' => '<p>The document does not exist, or you do not have permission, or your access code is invalid.</p><p>Please contact <a href="#">Lilyfortuneclub</a> to get the valid access code.</p>'));
+			$this->load_view('document_error', array('error' => 'The document does not exist.'));
 			return;
 		}
-		
+
 		if(!empty($result[0]['file_name'])){
-			if($result[0]['mime_content_type'] == 'VIDEO' || $result[0]['mime_content_type'] == 'AUDIO'){
-				$full_path = getcwd().'/src/media/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
-			}
-			else{
-				$full_path = getcwd().'/application/documents/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
-			}
+			$full_path = getcwd().'/src/doc/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
 			if(!file_exists($full_path)){
-				$this->load_view('document_error', array('error' => 'The document does not exist, or you do not have permission.'));
+				$this->load_view('document_error', array('error' => '11The document does not exist.'));
 				return;
 			}
-			$ext = pathinfo($result[0]['uniqid'].'.'.$result[0]['file_name'], PATHINFO_EXTENSION);
 			$mime_type = mime_type($full_path);
 			$content_mime_type = $mime_type[0];
-			if($content_mime_type != 'csv' && $content_mime_type != 'video' && $content_mime_type != 'audio'){
-				$file = uniqid().'.'.$ext;
-				$to = getcwd().'/src/temp/'.$file;
-				if(!@copy($full_path, $to)){
-					$this->load_view('documents_error', array('error' => 'The document does not exist, or you do not have permission.'));
-					return;
-				}
-			}
-			else{
-				$file = $result[0]['uniqid'].'.'.$result[0]['file_name'];
-			}
+			$file = $result[0]['uniqid'].'.'.$result[0]['file_name'];
 		}
-			
-		if($this->input->is_ajax_request()){
+
+		if($this->input->is_ajax_request()){echo 1;
 			echo json_encode(array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
 		}
 		else{//media
-			$this->load_view('document_item', array('uniqid' => $result[0]['uniqid'], 'abstract' => $result[0]['abstract'], 'expire' => $result[0]['expire'], 'duration' => $result[0]['video_duration'], 'subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name'], 'abstract' => $result[0]['abstract']));
+			$docs = $this->document_model->get_list('', array(), '');
+			$this->load_view('document_item', array('uniqid' => $result[0]['uniqid'], 'abstract' => $result[0]['abstract'], 
+				'expire' => $result[0]['expire'], 'duration' => $result[0]['video_duration'], 
+				'subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 
+				'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 
+				'name' => $result[0]['file_name'], 'abstract' => $result[0]['abstract'],
+				'docs' => $docs));
 		}
-	}
-	
-	public function delete_temp_document(){
-		if($this->user['membership_code'] == 'GUEST'){
-			header('location: '.base_url().'ac/sign_in?redirect='.$this->uri->uri_string().(empty($this->_param_str) ? "" : "?".implode("&", $this->_param_str)));
-			exit;
-		}
-		$file = $this->input->get('file');
-		unlink(getcwd().'/src/temp/'.$file);
 	}
 }
 

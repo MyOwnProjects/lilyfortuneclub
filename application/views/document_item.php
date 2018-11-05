@@ -1,31 +1,42 @@
 <style>
-.left-part{padding:0 100px;max-width:1000px;width:100%}
+.doc-view-wrapper{margin:40px 0}
+.doc-view-left{overflow:hidden;min-width:200px;margin:0 40px;}
+.doc-view-right{width:400px;margin:40px}
+.doc-view-right1{display:none}
 .document-content{padding:40px 0;line-height:25px;}
 .document-content .content-image{text-align:center;margin:40px auto} 
 .document-content img{width:100%;max-width:600px}
-@media only screen and (max-width:800px) {
-.video-text{padding:20px}
+@media only screen and (max-width:900px) {
+.doc-view-wrapper{margin:40px 0;display:table}
+.video-text{margin:20px;}
 .document-subject{text-align:left;font-weight:normal}
-.right-part{display:none;}
-.left-part{padding:0 20px}
+.doc-view-left{margin:0;width:100%;min-width:0;}
+.doc-view-right{display:none}
+.doc-view-right1{display:block;margin:20px}
 }
 </style>
-<script>
-function document_loaded(file){
-	$.ajax({
-		url: '<?php echo base_url();?>account/documents/delete_temp_document',
-		data: {file: file},
-	});
-}
-/*$('.doc-frame').each(function(index, obj){
-	$(obj).outerHeight($(obj).outerWidth() * 1.4);
-});*/
-</script>
-<div class="clearfix" style="margin-bottom:40px">
-	<div style="width:100%;max-width:800px;margin:0 auto">
+<div class="clearfix doc-view-wrapper">
+	<div class="pull-right doc-view-right">
+		<?php
+		foreach($docs as $d){
+		?>
+		<div class="clearfix" style="font-size:16px;padding:5px 0">
+		<?php 
+			$mt = mime_type(getcwd().'/src/doc/'.$d['uniqid'].'.'.$d['file_name']);
+			echo '<div class="pull-left" style="margin-right:20px"><i class="fa fa-file-'.$mt[0].'-o" style="color:'.doc_icon_color($mt).'"></i>&nbsp;';
+			echo '<a href="'.base_url().'documents/view/'.$d['uniqid'].'">'.$d['subject'].'</a>';
+			echo '</div>';
+		?>
+		</div>
+		<?php
+		}
+		?>
+	</div>
+
+	<div class="doc-view-left">
 	<ul class="breadcrumb">
 		<li><a href="<?php echo base_url();?>">Home</a></li>
-		<li><a href="<?php echo base_url();?>account/documents">Documents</a></li> 
+		<li><a href="<?php echo base_url();?>documents">Documents</a></li> 
 		<li class="active">Item</li> 
 	</ul>
 	<?php
@@ -48,11 +59,11 @@ function document_loaded(file){
 			$m = floor(($video_duration[1] - $video_duration[0]) / 60);
 			$s = $video_duration[1] - $video_duration[0] - $m * 60
 		?>
-		<p class="text-danger">You can only watch the video for <?php echo str_pad($m, 2, '0', STR_PAD_LEFT).':'.str_pad($s, 2, '0', STR_PAD_LEFT);?> by this access code. To watch the full video, please contact <a href="<?php echo base_url();?>contact" target="_blank">Lilyfortuneclub</a></p>
 		<?php
 		}
 		?>
 		<div class="video-text">
+		<p class="text-danger">You can only watch the video for <?php echo str_pad($m, 2, '0', STR_PAD_LEFT).':'.str_pad($s, 2, '0', STR_PAD_LEFT);?> by this access code. To watch the full video, please contact <a href="<?php echo base_url();?>contact" target="_blank">Lilyfortuneclub</a>.</p>
 		<h2><?php echo $subject;?></h2>
 		<div style="line-height:30px">Content Type: <?php echo $content_type;?></div>
 		<?php if(!empty($abstract)){ ?>
@@ -70,7 +81,7 @@ function document_loaded(file){
 		//-----
 		$(document).ready(function(){
 			$('.video-player').simple_video_player({
-				src: '<?php echo base_url().'src/media/'.$file;?>',
+				src: '<?php echo base_url().'src/doc/'.$file;?>',
 				duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
 				captions: JSON.parse('<?php echo json_encode($captions);?>'),
 				autostart: true,
@@ -116,13 +127,28 @@ function document_loaded(file){
 	?>
 		<h3 class="text-center"><?php echo $subject;?></h3>
 		<div>
-		<img src="<?php echo base_url().'src/temp/'.$file;?>" onload="document_loaded('<?php echo $file;?>')" style="width:100%">
+		<img src="<?php echo base_url().'src/doc/'.$file;?>" onload="document_loaded('<?php echo $file;?>')" style="width:100%">
 		</div>
 	<?php
 	}
 	?>
 	</div>
-	<!--div class="right-part" style="overflow:hidden;padding-top:40px">
-	</div-->
+		<div class="doc-view-right1">
+		<?php
+		foreach($docs as $d){
+		?>
+		<div class="clearfix" style="font-size:16px;padding:5px 0">
+		<?php 
+			$mt = mime_type(getcwd().'/src/doc/'.$d['uniqid'].'.'.$d['file_name']);
+			echo '<div class="pull-left" style="margin-right:20px"><i class="fa fa-file-'.$mt[0].'-o" style="color:'.doc_icon_color($mt).'"></i>&nbsp;';
+			echo '<a href="'.base_url().'documents/view/'.$d['uniqid'].'">'.$d['subject'].'</a>';
+			echo '</div>';
+		?>
+		</div>
+		<?php
+		}
+		?>
+	</div>
+
 </div>
 	

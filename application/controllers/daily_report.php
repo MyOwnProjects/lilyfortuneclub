@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('account_base.php');
-class Daily_report extends Account_base_controller {
+require_once('base.php');
+class Daily_report extends Base_controller {
 	private $list_content;
 	public function __construct(){
 		parent::__construct();
@@ -9,7 +9,7 @@ class Daily_report extends Account_base_controller {
 	}
 	
 	public function index(){
-		$this->load_view('daily_report');
+		$this->load_view('account/daily_report');
 	}
 	
 	public function get(){

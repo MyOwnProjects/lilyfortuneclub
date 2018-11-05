@@ -1,4 +1,8 @@
 <style>
+.main-head-menu{float:left;margin-left:20px;margin-top:33px}
+.main-head-menu .dropdown{float:left;margin-left:25px}
+.main-head-menu .dropdown-toggle{color:#fff;font-size:18px;cursor:pointer}
+.main-head-menu .dropdown a{text-decoration:none;}
 .menu-icon{padding:5px 0;border:1px solid #fff;padding:5px 15px;min-width:200px}
 .menu-icon:hover{background:#e5e5e5}
 .menu-ico-url:first-child .menu-icon{margin-top:10px}
@@ -9,12 +13,117 @@
 .webui-popover1{position:fixed;top:61px !important;left:auto !important;right:0 !important;}
 .webui-arrow1{left:auto !important;right: 22px;}
 .webui-popover-inner1{max-height:300px;overflow-y:auto}
+@media only screen and (max-width:768px) {
+.main-head-menu{display:none}	
+}
 </style>
 <header id="main-header">
 	<div id="logo" class="pull-left clearfix"><a href="<?php echo base_url();?>"><img src="<?php echo base_url();?>src/img/lfc.png"></a></div>
+	<div class="main-head-menu clearfix">
+		<?php
+		foreach($navigation as $nav){
+			if(array_key_exists('member_access', $nav) && $nav['member_access'] && empty($user)){
+				continue;
+			}
+			if(array_key_exists('member_access', $nav) && !$nav['member_access'] && !empty($user)){
+				continue;
+			}
+			$has_sub_menu = array_key_exists('sub_menu', $nav) && !empty($nav['sub_menu']);
+		?>
+		<div class="dropdown">
+			<a class="dropdown-toggle" <?php echo $has_sub_menu ? 'data-toggle="dropdown"' : '';?>>
+				<?php echo $nav['text'];?>
+				<?php echo $has_sub_menu ? '<span class="caret"></span>' : '';?>
+			</a>
+			<?php
+			if($has_sub_menu){
+			?>
+			<ul class="dropdown-menu">
+			<?php
+				foreach($nav['sub_menu'] as $sm){
+					if(array_key_exists('member_access', $sm) && $sm['member_access'] && empty($user)){
+						continue;
+					}
+					if(array_key_exists('member_access', $sm) && !$sm['member_access'] && !empty($user)){
+						continue;
+					}
+					if((empty($user) || $user['grade'] != 'SMD') && $sm['url'] == 'smd'){
+						continue;
+					}
+				?>
+				  <li><a href="<?php echo base_url().$sm['url'];?>"><img style="height:20px;margin-top:-2px" src="<?php echo base_url().'src/img/'.$sm['icon'];?>">&nbsp;&nbsp;<?php echo $sm['text'];?></a></li>
+				<?php
+				}
+			}
+			?>
+		</div>
+		<?php
+		}
+		?>
+	</div>
 	<div id="main-header-menu" class="list-unstyled pull-right clearfix">
-			<span class="glyphicon glyphicon-menu-hamburger" id="menu-icon" style="cursor:pointer;font-size:25px"></span>
-			<div style="display:none">
+		<span class="glyphicon glyphicon-menu-hamburger" id="menu-icon" style="cursor:pointer;font-size:25px"></span>
+		<div style="display:none">
+		<?php
+		$is_first1 = true;
+		foreach($navigation as $nav){
+			if(array_key_exists('member_access', $nav) && $nav['member_access'] && empty($user)){
+				continue;
+			}
+			if(array_key_exists('member_access', $nav) && !$nav['member_access'] && !empty($user)){
+				continue;
+			}
+			$has_sub_menu = array_key_exists('sub_menu', $nav) && !empty($nav['sub_menu']);
+			if($has_sub_menu){
+				$is_first2 = true;
+				foreach($nav['sub_menu'] as $sm){
+					if(array_key_exists('member_access', $sm) && $sm['member_access'] && empty($user)){
+						continue;
+					}
+					if(array_key_exists('member_access', $sm) && !$sm['member_access'] && !empty($user)){
+						continue;
+					}
+					if((empty($user) || $user['grade'] != 'SMD') && $sm['url'] == 'smd'){
+						continue;
+					}
+					if($is_first2){
+						if(!$is_first1){
+			?>
+			</div>
+			<?php
+						}
+			?>
+			<div class="clearfix" <?php echo !$is_first1 && $is_first2  ? 'style="border-top:1px solid #e5e5e5;"' : '';?>>
+			<?php
+					}
+			?>
+				<a class="menu-ico-url" href="<?php echo base_url();?>account/license" title="License"><div class="menu-icon clearfix"><img src="<?php echo base_url().'src/img/'.$sm['icon'];?>"><div class="text"><?php echo $sm['text'];?></div></div></a>
+			<?php
+					$is_first2 = false;
+				}
+			}
+			$is_first1 = false;
+		}
+		?>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!--div style="display:none">
 					<?php
 					if($user && $user['grade'] == 'SMD'){
 					?>
@@ -46,15 +155,9 @@
 					<?php
 						if($user['membership_code'] != 'GUEST'){
 					?>
-						<!--a class="menu-ico-url" href="<?php echo base_url();?>account/business" title="Business Instruction"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/give-money.svg"><div class="text">Business Instruction</div></div></a-->
 						<a class="menu-ico-url" href="<?php echo base_url();?>seminar" title="Seminar"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/instructor-lecture-with-sceen-projection-tool.svg"><div class="text">Class Schedule</div></div></a>
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/code_of_honor" title="Code of Honor"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/promotion.svg"><div class="text">Code of Honor</div></div></a>
-						<!--a class="menu-ico-url" href="<?php echo base_url();?>account/finance_status" title="Finance Status"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/learning.svg"><div class="text">Your Finance Status</div></div></a-->
-						<!--div class="menu-icon"><a href="<?php echo base_url();?>account/live" title="Live"><img src="<?php echo base_url();?>src/img/television.svg"><div class="text">Live</div></a></div-->
 						<a class="menu-ico-url" href="<?php echo base_url();?>account/documents" title="Education"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg"><div class="text">Education</div></div></a>
-						<!--a class="menu-ico-url" href="<?php echo base_url();?>account/terminology" title="Terminologies"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/terminology.svg"><div class="text">Terminologies</div></div></a-->
-						<!--a class="menu-ico-url" href="<?php echo base_url();?>account/tools" title="Tools"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/work-tools-cross.svg?1"><div class="text">Tools</div></div></a-->
-						<!--a class="menu-ico-url" href="<?php echo base_url();?>account/how_to" title="How to"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/finger-of-a-hand-pointing-to-right-direction.svg?"><div class="text">How to</div></div></a-->
 					<?php
 						}
 					?>
@@ -95,7 +198,7 @@
 						}
 						?>
 					</div>
-			</div>
+			</div-->
 	</div>
 	<?php
 	if($user){
@@ -132,7 +235,7 @@ function toggle_chat(){
 			
 	$('#profile-icon').webuiPopover({
 		html: true,
-		content:'<div style="padding:10px 20px;max-width:300px"><div style="white-space:nowrap"><?php echo $user['first_name'].' '.$user['last_name'].'<br/>'.$user['membership_code'];?></div></div>',
+		content:'<div style="padding:10px 20px;max-width:500px"><div style="white-space:nowrap"><?php echo $user['first_name'].' '.$user['last_name'].'<br/>'.$user['membership_code'];?></div></div>',
 		placement:'auto-bottom',
 		dismissible:true,
 		padding:false,

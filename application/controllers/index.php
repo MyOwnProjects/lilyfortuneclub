@@ -6,9 +6,14 @@ class Index extends Base_Controller {
 		parent::__construct();
 	}
 	
-	public function index()
-	{
-		$this->load_view('home');
+	public function index(){
+		$res = $this->not_signed_in();
+		if($this->not_signed_in()){
+			$this->load_view('home');
+		}
+		else{
+			$this->load_view('account/navigation');
+		}
 	}
 }
 

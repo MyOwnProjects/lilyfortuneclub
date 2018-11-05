@@ -49,7 +49,7 @@
 				<div id="team-member-grid-hierarchy"></div>
 			</div>
 			<script>
-				$('#team-member-grid-hierarchy').tree_grid('', '<?php echo base_url();?>account/team/get_direct_downline');
+				$('#team-member-grid-hierarchy').tree_grid('', '<?php echo base_url();?>team/get_direct_downline');
 			</script>
 		</div>
 		<div id="page-recruits" class="tab-pane fade tab-content-page">
@@ -119,7 +119,7 @@ function export_recruits(){
 	var code = $('#recruits-baseshop-select').val();
 	var date_from = $('#recruits-date-from').val();
 	var date_to = $('#recruits-date-to').val();
-	window.location.href = '<?php echo base_url();?>account/team/export_recruits?type=' + type + 
+	window.location.href = '<?php echo base_url();?>team/export_recruits?type=' + type + 
 		'&code=' + code + '&date_from=' + date_from + '&date_to=' + date_to;
 }
 
@@ -128,7 +128,7 @@ function get_recruits(){
 	ajax_loading(true);
 	var type = $('#recruits-type-select').val();
 	$.ajax({
-		url: '<?php echo base_url();?>account/team/get_recruits',
+		url: '<?php echo base_url();?>team/get_recruits',
 		method: 'post',
 		dataType: 'json',
 		data: {
@@ -148,7 +148,7 @@ function get_recruits(){
 						var tr = $('<tr>').appendTo(tbody);
 						$('<td>').html(i + 1).appendTo(tr);
 						//$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + data[i]['membership_code'] + '">' + data[i]['name'] + '</a>').appendTo(tr);
-						$('<td>').html('<a href="<?php echo base_url();?>account/team/team_member_info/' + data[i]['membership_code'] + '" target="_blank">' + data[i]['name'] + '</a>').appendTo(tr);
+						$('<td>').html('<a href="<?php echo base_url();?>team/member_info/' + data[i]['membership_code'] + '" target="_blank">' + data[i]['name'] + '</a>').appendTo(tr);
 						$('<td>').html(data[i]['membership_code']).appendTo(tr);
 						$('<td>').html(data[i]['recruiter_name'] + ' (' + data[i]['recruiter'] + ')').appendTo(tr);
 						$('<td>').html(data[i]['start_date']).appendTo(tr);
@@ -188,7 +188,7 @@ $('body').delegate('.detail-url', 'click', function(){
 	var code = $(this).attr('data-id');
 	ajax_loading(true);
 	$.ajax({
-		url: '<?php echo base_url();?>account/team/get_member_info/' + code,
+		url: '<?php echo base_url();?>team/get_member_info/' + code,
 		dataType: 'json',
 		success: function(data){
 			if(data['success']){
@@ -230,7 +230,7 @@ $('body').delegate('.detail-url', 'click', function(){
 });	
 
 				$.ajax({
-					url: '<?php echo base_url();?>account/team/get_baseshop',
+					url: '<?php echo base_url();?>team/get_baseshop',
 					dataType: 'json',
 					success: function(data){
 						if(data['success']){
@@ -242,7 +242,7 @@ $('body').delegate('.detail-url', 'click', function(){
 							for(var i = 0; i < baseshop.length;++i){
 								var tr = $('<tr>').appendTo(tbody);
 								//$('<td>').html('<a href="javascript:void(0)" class="detail-url" data-id="' + baseshop[i]['membership_code'] + '">' + baseshop[i]['name']).appendTo(tr);
-								$('<td>').html('<a href="<?php echo base_url();?>account/team/team_member_info/' + baseshop[i]['membership_code'] + '" target="_blank">' + baseshop[i]['name'] + '</a>').appendTo(tr);
+								$('<td>').html('<a href="<?php echo base_url();?>team/member_info/' + baseshop[i]['membership_code'] + '" target="_blank">' + baseshop[i]['name'] + '</a>').appendTo(tr);
 								$('<td>').html(baseshop[i]['membership_code']).appendTo(tr);
 								$('<td>').html(baseshop[i]['grade']).appendTo(tr);
 								$('<td>').html(baseshop[i]['children']).appendTo(tr);

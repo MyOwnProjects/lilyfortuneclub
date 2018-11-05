@@ -1,27 +1,31 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('account_base.php');
-class Sales extends Account_base_controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load->model('sales_model');
+require_once('base.php');
+class Sales extends Base_controller {
+    public function __construct(){
+	parent::__construct();
+	$this->load->model('sales_model');
+	if($redirect = $this->not_signed_in()){
+            header("location: $redirect");
+            exit;
 	}
+    }
 	
 	public function index(){
 		$sales = $this->sales_model->get_list("sales_writing_agent='".$this->user['membership_code']."' OR sales_split_agent='".$this->user['membership_code']."'");
-		$this->load_view('sales', array('sales' => $sales));
+		$this->load_view('account/sales', array('sales' => $sales));
 	}
 	
 	public function case_view($sales_id = null){
 		$sales = $this->sales_model->get_list("sales_id='$sales_id' AND (sales_writing_agent='".$this->user['membership_code']."' OR sales_split_agent='".$this->user['membership_code']."')");
 		if(count($sales) <= 0){
-			header('location: '.base_url().'account/sales/sales_case');
+			header('location: '.base_url().'sales/sales_case');
 			return;
 		}
 		foreach($sales[0] as $n => $v){
 			$sales[0][$n] = trim($v);
 		}
-		$this->load_view('case_view', array('sales_id' => $sales_id, 'sale' => $sales[0]));
+		$this->load_view('account/case_view', array('sales_id' => $sales_id, 'sale' => $sales[0]));
 		
 	}
 	
@@ -78,14 +82,14 @@ class Sales extends Account_base_controller {
 				if(count($sales) > 0){
 					$res = $this->sales_model->update($sales[0]['sales_id'], $prop);
 					if($res){
-						header('location: '.base_url().'account/sales/case_view/'.$sales[0]['sales_id']);
+						header('location: '.base_url().'sales/case_view/'.$sales[0]['sales_id']);
 						return;
 					}			
 				}
 				else{
 					$res = $this->sales_model->insert($prop);
 					if($res){
-						header('location: '.base_url().'account/sales/case_view/'.$res);
+						header('location: '.base_url().'sales/case_view/'.$res);
 						return;
 					}			
 				}
@@ -97,7 +101,7 @@ class Sales extends Account_base_controller {
 			}
 		}
 		
-		$this->load_view('sales_case', array('error' => $error, 'sales_id' => $sales_id, 'sale' => $sale, 'users' => $users1, 'me' => $this->user));
+		$this->load_view('account/sales_case', array('error' => $error, 'sales_id' => $sales_id, 'sale' => $sale, 'users' => $users1, 'me' => $this->user));
 	}
 	
 	public function upload_file($sales_id){

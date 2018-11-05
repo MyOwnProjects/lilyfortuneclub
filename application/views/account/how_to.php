@@ -24,7 +24,7 @@ h4{margin-top:40px;}
 		?>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 clearfix">
 			<?php 
-			$url = array_key_exists('url', $l) ? $l['url'] : base_url().'account/how_to';
+			$url = array_key_exists('url', $l) ? $l['url'] : base_url().'how_to';
 			?>
 			<a class="menu-ico-url" href="<?php echo $url.(array_key_exists('content', $l) ? '#'.$n : '');?>">
 				<div class="btn btn-default">

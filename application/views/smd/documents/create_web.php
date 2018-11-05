@@ -38,7 +38,7 @@
 				</div>				
 			</div-->
 			<div class="form-group col-lg-3 col-md-4 col-sm-6">
-				<label>Duration (Second)</label>
+				<label>Duration (Seconds)</label>
 				<div class="input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text">Start</span>
@@ -49,6 +49,27 @@
 					</div>
 					<input type="number" min="0" class="form-control" name="video_duration_end">
 				</div>				
+			</div>
+			<div class="form-group col-lg-3 col-md-4 col-sm-6">
+				<label>Course Related</label>
+				<select class="form-control" name="courses_id">
+					<option value="0">None</option>
+					<?php
+					foreach($courses as $t => $ct){
+					?>
+					<optgroup label="<?php echo $t == 'F' ? 'Financial Concept' : 'BFS/Marketing';?>">
+					<?php
+					foreach($ct as $c){
+					?>
+						<option value="<?php echo $c['courses_id'];?>"><?php echo $c['courses_topic'];?></option>
+					<?php
+					}
+					?>
+					</optgroup>
+					<?php
+					}
+					?>
+				</select>
 			</div>
 		</div>
 		<?php if(empty($uniqid)){ ?>

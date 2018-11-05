@@ -1,10 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('account_base.php');
-class How_to extends Account_base_controller {
+require_once('base.php');
+class How_to extends Base_controller {
 	private $list_content;
 	public function __construct(){
 		parent::__construct();
+		if($redirect = $this->not_signed_in()){
+			header("location: $redirect");
+			exit;
+		}
+		
 		$this->list_content = array(
 			'ama' => array(
 				'img' => 'WFG_logo.jpg',
@@ -107,7 +112,7 @@ class How_to extends Account_base_controller {
 	}
 	
 	public function index(){
-		$this->load_view('how_to', array('list' => $this->list_content));
+		$this->load_view('account/how_to', array('list' => $this->list_content));
 	}
 	
 	public function item($item = null){
@@ -124,7 +129,7 @@ class How_to extends Account_base_controller {
 		if(array_key_exists($item, $how_to_steps)){
 		}
 		else{
-				header('location:'.base_url().'account/how_to');
+			header('location:'.base_url().'how_to');
 		}
 	}
 }

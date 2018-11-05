@@ -321,10 +321,6 @@
   </body>
 </html>
 <script>
-load_pdf_viewer('<?php echo base_url().'src/temp/'.$file;?>', function(){
-	$.ajax({
-		url: '<?php echo base_url();?>account/documents/delete_temp_document',
-		data: {file: '<?php echo $file?>'},
-	});
+load_pdf_viewer('<?php echo base_url().'src/doc/'.$file;?>', function(){
 });
 </script>

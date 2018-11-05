@@ -16,7 +16,7 @@
 		<div class="form-group">
 			<label for="role">Sign in as</label>
 			<select class="form-control" id="role" name="role" onchange="role_change(this);">
-				<option value="guest" <?php echo $is_guest ? 'selected' : '';?>>Guest</option>
+				<option disabled value="guest" <?php echo $is_guest ? 'selected' : '';?>>Guest</option>
 				<option value="member" <?php echo !$is_guest ? 'selected' : '';?>>Member</option>
 			</select>
 		</div>

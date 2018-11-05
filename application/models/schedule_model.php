@@ -94,4 +94,9 @@ class Schedule_model extends Base_model{
 		return $this->db->query($sql);
 		
 	}
+	
+	public function get_course_list(){
+		$sql = "select * from courses";
+		return $this->db->query($sql);
+	}
 }

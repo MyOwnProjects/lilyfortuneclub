@@ -43,9 +43,9 @@
 	var background2 = 'RGB(239, 253, 255)';
 	var grid1 = $('#daily-report-grid').smart_table({
 		url: {
-			get: '<?php echo base_url();?>account/daily_report/get',
-			update: '<?php echo base_url();?>account/daily_report/update',
-			delete: '<?php echo base_url();?>account/daily_report/delete',
+			get: '<?php echo base_url();?>daily_report/get',
+			update: '<?php echo base_url();?>daily_report/update',
+			delete: '<?php echo base_url();?>daily_report/delete',
 		},
 		headers:[
 			[
@@ -237,105 +237,4 @@
 		],
 	});
 	
-	/*var grid2 = $('#daily-report-rank-grid').smart_table({
-		url: {
-			get: '<?php echo base_url();?>account/daily_report/summary',
-		},
-		headers:[
-			[
-				{
-					header: 'Ranking - Daily',
-					col_span: '6'
-				},
-				{
-					header: 'Ranking - Month to Date',
-					col_span: '6'
-				}
-			],
-			[
-				{
-					header: 'Name',
-					data_type: 'text',
-					editable: false,
-					width: 150,
-				}, 
-				{
-					header: 'PER<br/>REC', 
-					data_type: 'text',
-					width: 60,
-					text_align: 'center',
-					summary: true
-				}, 
-				{
-					header: 'PER<br/>PROD',
-					data_type: 'text',
-					text_align: 'center',
-					width: 80,
-					summary: true
-				},
-				{
-					header: 'BASE<br/>REC',
-					data_type: 'text',
-					width: 60,
-					text_align: 'center',
-					summary: true
-				},
-				{
-					header: 'BASE<br/>PROD',
-					data_type: 'text',
-					width: 80,
-					text_align: 'center',
-					summary: true
-				},
-				{
-					header: 'Total<br/>GS',
-					data_type: 'text',
-					width: 60,
-					text_align: 'center',
-					summary: true
-				},
-				{
-					header: 'Name',
-					data_type: 'text',
-					editable: false,
-					width: 150,
-				}, 
-				{
-					header: 'PER<br/>REC', 
-					data_type: 'text',
-					width: 60,
-					text_align: 'center',
-					summary: true
-				}, 
-				{
-					header: 'PER<br/>PROD',
-					data_type: 'text',
-					text_align: 'center',
-					width: 80,
-					summary: true
-				},
-				{
-					header: 'BASE<br/>REC',
-					data_type: 'text',
-					width: 60,
-					text_align: 'center',
-					summary: true
-				},
-				{
-					header: 'BASE<br/>PROD',
-					data_type: 'text',
-					width: 80,
-					text_align: 'center',
-					summary: true
-				},
-				{
-					header: 'Total<br/>GS',
-					data_type: 'text',
-					width: 60,
-					text_align: 'center',
-					summary: true
-				},
-			]
-		],
-	});*/
 </script>

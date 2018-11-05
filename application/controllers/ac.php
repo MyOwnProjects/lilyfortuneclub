@@ -27,7 +27,7 @@ class Ac extends Base_Controller {
 				}
 				else{
 					$redirect = $this->input->get('redirect');
-					$url = base_url().(empty($redirect) ? "account" : "$redirect");
+					$url = base_url().(empty($redirect) ? "" : "$redirect");
 				}
 				header("location: $url");
 				exit;

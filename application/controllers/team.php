@@ -1,16 +1,20 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('account_base.php');
-class Team extends Account_base_controller {
+require_once('base.php');
+class Team extends Base_controller {
 	public function __construct(){
 		parent::__construct();
+		if($redirect = $this->not_signed_in()){
+			header("location: $redirect");
+			exit;
+		}
 	}
 	
 	public function index(){
-		$this->load_view('team');
+		$this->load_view('account/team');
 	}
 	
-	public function team_member_info($code = 0){
+	public function member_info($code = 0){
 		$this->load->model('user_model');
 		$ancestors = $this->user_model->get_ancestors($code);
 		$valid = false;
@@ -26,7 +30,7 @@ class Team extends Account_base_controller {
 		}
 		$result = $this->user_model->get_user_by(array('membership_code' => $code));
 		$result[0]['ancestors']= $ancestors;
-		$this->load_view('team_member_info', $result[0]);
+		$this->load_view('account/team_member_info', $result[0]);
 		//echo json_encode(array('success' => true, 'info' => $result[0], 'ancestors' => $ancestors));
 	}
 	

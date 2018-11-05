@@ -10,6 +10,7 @@ class Documents extends Smd_Controller {
 			//header('location: '.base_url().'smd/ac/sign_in');
 		}		
 		$this->load->model('document_model');
+		$this->load->model('schedule_model');
 		$this->nav_menus['documents']['active'] = true;
 	}
 	
@@ -57,16 +58,16 @@ class Documents extends Smd_Controller {
 			$ret['rows'] = $this->document_model->get_list($where, $order_by, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count']);
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['id'] = $r['uniqid'];
-				$ret['rows'][$i]['subject'] = '<a href="'.base_url().'/account/documents/view/'.$r['uniqid'].'">'.$r['subject'].'</a>';
+				$ret['rows'][$i]['subject'] = '<a href="'.base_url().'documents/view/'.$r['uniqid'].'">'.$r['subject'].'</a>';
 				$ret['rows'][$i]['grade_access'] = $grade_access[$r['grade_access']];
 				$ret['rows'][$i]['content_type'] = ucwords($r['content_type']);
 				$ret['rows'][$i]['create_date'] = date_format(date_create($r['create_date']), 'm/d/Y H:i A');
 				if(!empty($r['file_name'])){
-					$mime_type = mime_type(getcwd().'/application/documents/'.$r['uniqid'].'.'.$r['file_name']);
+					$mime_type = mime_type(getcwd().'/src/doc/'.$r['uniqid'].'.'.$r['file_name']);
 					$ret['rows'][$i]['mime_content_type'] = '<img src="'.base_url().'/src/img/file_type/'.$mime_type[1].'.png'.'">&nbsp;'.strtoupper($mime_type[0]);
 					$ret['rows'][$i]['file_name'] = $r['file_name'];
-					if(file_exists(getcwd().'/application/documents/'.$r['uniqid'].'.'.$r['file_name'])){
-						$file_size = filesize(getcwd().'/application/documents/'.$r['uniqid'].'.'.$r['file_name']);
+					if(file_exists(getcwd().'/src/doc/'.$r['uniqid'].'.'.$r['file_name'])){
+						$file_size = filesize(getcwd().'/src/doc/'.$r['uniqid'].'.'.$r['file_name']);
 					}
 					else{
 						$file_size = 0;
@@ -187,27 +188,18 @@ class Documents extends Smd_Controller {
 			$files = array();
 			$upload_files = empty($upload_files) ? array() : explode(',', $upload_files);
 			foreach($upload_files as $file){
-				$mime_type = mime_type(getcwd().'/application/documents/temp/'.$file);
-				if($mime_type == 'video' || $mime_type == 'audio'){
-					$dest = getcwd().'/src/media/'.$file;
-				}
-				else{
-					$dest = getcwd().'/application/documents/'.$file;
-				}
-				
-				if(rename(getcwd().'/application/documents/temp/'.$file, $dest)){
-					$pos = strpos($file, '.');
-					$uniqid = substr($file, 0, $pos);
-					$name =  substr($file, $pos + 1);
-					array_push($files, array(
-						'uniqid' => $uniqid,
-						'subject' => addslashes($subject),
-						'file_name' => $name,
-						'grade_access' => $grade_access,
-						'content_type' => $content_type,
-						'mime_content_type' => $mime_type[0]
-					));
-				}
+				$mime_type = mime_type(getcwd().'/src/doc/'.$file);
+				$pos = strpos($file, '.');
+				$uniqid = substr($file, 0, $pos);
+				$name =  substr($file, $pos + 1);
+				array_push($files, array(
+					'uniqid' => $uniqid,
+					'subject' => addslashes($subject),
+					'file_name' => $name,
+					'grade_access' => $grade_access,
+					'content_type' => $content_type,
+					'mime_content_type' => $mime_type[0]
+				));
 			}
 			$success = $this->document_model->insert($files);
 			echo json_encode(array('success' => $success));
@@ -222,7 +214,7 @@ class Documents extends Smd_Controller {
 		ini_set('max_execution_time', 3600);		
 		$this->load->library('upload');
 		$uniq_id = uniqid();
-		$dir = getcwd().'/application/documents/temp/';
+		$dir = getcwd().'/src/doc/';
 		$this->upload->set_upload_path($dir);
 		$this->upload->set_allowed_types('*');
 		if($this->upload->do_upload('ajax-upload-file')){
@@ -243,15 +235,9 @@ class Documents extends Smd_Controller {
 			return;
 		}
 		if(!empty($result[0]['file_name'])){
-			$full_path = getcwd().'/application/documents/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
+			$file = $result[0]['uniqid'].'.'.$result[0]['file_name'];
+			$full_path = getcwd().'/src/doc/'.$file;
 			if(!file_exists($full_path)){
-				$this->load_view('documents/view', array('error' => 'The document does not exist.'));
-				return;
-			}
-			$ext = pathinfo($result[0]['uniqid'].'.'.$result[0]['file_name'], PATHINFO_EXTENSION);
-			$file = uniqid().'.'.$ext;
-			$to = getcwd().'/src/temp/'.$file;
-			if(!@copy($full_path, $to)){
 				$this->load_view('documents/view', array('error' => 'The document does not exist.'));
 				return;
 			}
@@ -380,6 +366,7 @@ class Documents extends Smd_Controller {
 			$subject = $this->input->post('subject');
 			$content_type = $this->input->post('content_type');
 			$grade_access = $this->input->post('grade_access');
+			$courses_id = $this->input->post('courses_id');
 			$abstract = $this->input->post('abstract');
 			$html_content = $this->input->post('html_content');
 			$video_duration_start = intval($this->input->post('video_duration_start'));
@@ -392,35 +379,27 @@ class Documents extends Smd_Controller {
 			$values = array();
 			$upload_files = explode(',', $upload_files);
 			foreach($upload_files as $file){
-				$src = getcwd().'/application/documents/temp/'.$file;
-				$mime_type = mime_type($src);
-				if($mime_type[0] == 'video' || $mime_type[0] == 'audio'){
-					$dest = getcwd().'/src/media/'.$file;
-				}
-				else{
-					$dest = getcwd().'/application/documents/'.$file;
-				}
-				
-				if(rename($src, $dest)){
-					$pos = strpos($file, '.');
-					$uniqid = substr($file, 0, $pos);
-					$name =  substr($file, $pos + 1);
-					array_push($values, array(
-						'uniqid' => $uniqid,
-						'subject' => addslashes($subject),
-						'file_name' => $name,
-						'grade_access' => $grade_access,
-						'content_type' => $content_type,
-						'mime_content_type' => $mime_type[0],
-						'abstract' => addslashes($abstract),
-					));
-					if(!empty($video_duration)){
-						$values[0]['video_duration'] = $video_duration;
-						$vtt_content = "WEBVTT FILE\r\n\r\n".$this->_second_to_time($video_duration_start)
-							.".000 --> ".$this->_second_to_time($video_duration_end).".000\r\n"
-							."Please contact Lilyfortuneclub for the full video\r\n";
-						file_put_contents(getcwd().'/src/media/'.$uniqid.'.vtt', $vtt_content);
-					}
+				$full_path = getcwd().'/src/doc/'.$file;
+				$mime_type = mime_type($full_path);
+				$pos = strpos($file, '.');
+				$uniqid = substr($file, 0, $pos);
+				$name =  substr($file, $pos + 1);
+				array_push($values, array(
+					'uniqid' => $uniqid,
+					'subject' => addslashes($subject),
+					'file_name' => $name,
+					'grade_access' => $grade_access,
+					'content_type' => $content_type,
+					'courses_id' => $courses_id,
+					'mime_content_type' => $mime_type[0],
+					'abstract' => addslashes($abstract),
+				));
+				if(!empty($video_duration)){
+					$values[0]['video_duration'] = $video_duration;
+					$vtt_content = "WEBVTT FILE\r\n\r\n".$this->_second_to_time($video_duration_start)
+						.".000 --> ".$this->_second_to_time($video_duration_end).".000\r\n"
+						."Please contact Lilyfortuneclub for the full video\r\n";
+					file_put_contents(getcwd().'/src/doc/'.$uniqid.'.vtt', $vtt_content);
 				}
 			}
 			/*else{
@@ -448,7 +427,15 @@ class Documents extends Smd_Controller {
 			array('value' => 'SA', 'text' => 'SA and above'),
 			array('value' => 'MD', 'text' => 'MD Only')
 		);
-		$this->load_view('documents/create_web', array_merge(array('content_types' => $content_types, 'access_grades' => $access_grades), $fields));
+		$result = $this->schedule_model->get_course_list();
+		$courses = array();
+		foreach($result as $r){
+			if(!array_key_exists($r['courses_type'], $courses)){
+				$courses[$r['courses_type']] = array();
+			}
+			array_push($courses[$r['courses_type']], $r);
+		}
+		$this->load_view('documents/create_web', array_merge(array('content_types' => $content_types, 'access_grades' => $access_grades, 'courses' => $courses), $fields));
 	}
 	
 	public function update($field = null, $uniqid = null){
@@ -499,6 +486,45 @@ class Documents extends Smd_Controller {
 						)
 					);
 					break;
+				case 'courses_id':
+					$courses = $this->schedule_model->get_course_list();
+					$options = array(
+						array('value' => '0', 'text' => 'None'),
+						array(
+							'optgroups' => true,
+							'label' => 'Financial Concept',
+							'options' => array(
+							)
+						),
+						array(
+							'optgroups' => true,
+							'label' => 'BFS/Marketing',
+							'options' => array(
+							)
+						),
+					);
+					foreach($courses as $r){
+						foreach($options as $i => $option){
+							if(array_key_exists('optgroups', $option) && $option['optgroups'] && $option['label'] == 'Financial Concept' && $r['courses_type'] == 'F'){
+								array_push($options[$i]['options'], array('value' => $r['courses_id'], 'text' => $r['courses_topic']));
+							}
+						}
+						foreach($options as $i => $option){
+							if(array_key_exists('optgroups', $option) && $option['optgroups'] && $option['label'] == 'BFS/Marketing' && $r['courses_type'] == 'B'){
+								array_push($options[$i]['options'], array('value' => $r['courses_id'], 'text' => $r['courses_topic']));
+							}
+						}
+					}
+					$items = array(
+						array(
+							'label' => 'Related Course',
+							'name' => 'courses_id',
+							'tag' => 'select',
+							'options' => $options,
+							'value' => intval($result[0]['courses_id'])						
+						),
+					);
+					break;
 				case 'subject':
 					$items = array(
 						array(
@@ -541,6 +567,7 @@ class Documents extends Smd_Controller {
 				case 'content_type':
 				case 'subject':
 				case 'abstract':
+				case 'courses_id':
 					$values[$field] = addslashes(trim($this->input->post($field)));
 					break;
 				case 'video_duration':
@@ -611,6 +638,7 @@ class Documents extends Smd_Controller {
 			'grade_access'=>$result[0]['grade_access'],
 			'mime_content_type'=>$result[0]['mime_content_type'],
 			'content_type'=>$result[0]['content_type'],
+			'courses_id'=>empty($result[0]['courses_id']) ? 'None' : $result[0]['courses_topic'],
 			'video_duration' => $result[0]['video_duration'],
 			'create_date'=>$result[0]['create_date'],
 			'subject'=>$result[0]['subject'],

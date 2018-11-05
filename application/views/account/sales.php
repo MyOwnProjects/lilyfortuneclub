@@ -34,7 +34,7 @@
 </style>
 <div class="main-content-wrapper">
 	<h2 class="text-center">My Sales</h2>
-	<div class="text-right" style="margin:0 20px 10px 0"><a title="New case" href="<?php echo base_url();?>account/sales/sales_case"><span class="glyphicon glyphicon-plus"></span></a></div>
+	<div class="text-right" style="margin:0 20px 10px 0"><a title="New case" href="<?php echo base_url();?>sales/sales_case"><span class="glyphicon glyphicon-plus"></span></a></div>
 	<div>
 		<div class="simple-list">
 		<?php
@@ -53,7 +53,7 @@
 		if(count($sales) > 0){
 			foreach($sales as $i => $row){
 			?>
-				<a href="<?php echo base_url();?>account/sales/case_view/<?php echo $row['sales_id']; ?>">
+				<a href="<?php echo base_url();?>sales/case_view/<?php echo $row['sales_id']; ?>">
 				<div class="simple-list-row clearfix">
 					<div class="simple-list-seq"><?php echo $i + 1;?></div>
 					<div class="clearfix">

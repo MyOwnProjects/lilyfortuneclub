@@ -111,7 +111,7 @@
 		var _mouse_time = $('<div>').css('position', 'absolute').css('font-size', '12px').css('color', '#fff').hide().appendTo($_progress);
 		var bh = 10;
 		var $_progress_line_grey = $('<div>').addClass('progress-line-grey').css('position', 'absolute').css('z-index', 10).css('left', 0).css('right', 0)
-			.css('height', bh + 'px').css('background', '#b5b5b5').css('cursor', 'pointer')
+			.css('height', bh + 'px').css('background', '#858585').css('cursor', 'pointer')
 			.css('top', (parseInt(_control_height) - bh) / 2).click(function(e){
 				var val = e.offsetX / $_progress_line_grey.outerWidth() * _video.duration;
 				if(prop['duration'] && prop['duration'].length == 2 && 
@@ -124,23 +124,25 @@
 				_video.currentTime = val;
 				update_current();
 			}).mouseenter( function(e){
-				var val = convert_time_format(e.offsetX / $_progress_line_grey.outerWidth() * _video.duration);
+				var rate = e.offsetX / $_progress_line_grey.outerWidth();
+				var val = convert_time_format(rate * _video.duration);
 				_mouse_time.html(val);
 				var left = e.offsetX - _mouse_time.outerWidth() / 2;
 				if(left < 0){
 					left = 0;
 				}
-				_mouse_time.css('left', left + 'px').show();
+				_mouse_time.css('left', (left * 100) + '%').show();
 			}).mouseleave( function(e){
 				_mouse_time.hide();
 			}).mousemove( function(e){
-				var val = convert_time_format(e.offsetX / $_progress_line_grey.outerWidth() * _video.duration);
+				var rate = e.offsetX / $_progress_line_grey.outerWidth();
+				var val = convert_time_format(rate * _video.duration);
 				_mouse_time.html(val);
 				var left = e.offsetX - _mouse_time.outerWidth() / 2;
 				if(left < 0){
 					left = 0;
 				}
-				_mouse_time.css('left', left + 'px').show();
+				_mouse_time.css('left', (rate * 100) + '%').show();
 			}).appendTo($_progress);
 		var $_progress_line_duration = $('<div>').css('position', 'absolute').css('z-index', 11).css('left', 0).css('width', 0)	
 			.css('height', bh + 'px').css('background', '#eee').css('cursor', 'pointer')
@@ -149,9 +151,9 @@
 				_video.currentTime = val;
 				update_current();
 			}).mouseenter( function(e){
-				var val = convert_time_format(e.offsetX / $_progress_line_duration.outerWidth() * (prop['duration'][1] - prop['duration'][0]) + prop['duration'][0]);
+				var val = convert_time_format((e.offsetX + $(this).position().left) / $_progress_line_grey.outerWidth() * _video.duration);
 				_mouse_time.html(val);
-				var left = e.offsetX - _mouse_time.outerWidth() / 2;
+				var left = e.offsetX + $(this).position().left - _mouse_time.outerWidth() / 2;
 				if(left < 0){
 					left = 0;
 				}
@@ -159,9 +161,9 @@
 			}).mouseleave( function(e){
 				_mouse_time.hide();
 			}).mousemove( function(e){
-				var val = convert_time_format(e.offsetX / $_progress_line_duration.outerWidth() * (prop['duration'][1] - prop['duration'][0]) + prop['duration'][0]);
+				var val = convert_time_format((e.offsetX + $(this).position().left) / $_progress_line_grey.outerWidth() * _video.duration);
 				_mouse_time.html(val);
-				var left = e.offsetX - _mouse_time.outerWidth() / 2;
+				var left = e.offsetX + $(this).position().left - _mouse_time.outerWidth() / 2;
 				if(left < 0){
 					left = 0;
 				}
@@ -183,10 +185,9 @@
 				_video.currentTime = val;
 				update_current();
 			}).mouseenter( function(e){
-				var val = convert_time_format(e.offsetX / $_progress_line_grey.outerWidth() * _video.duration 
-					+ (prop['duration'] && prop['duration'].length == 2 ? prop['duration'][0] : 0));
+				var val = convert_time_format((e.offsetX + $(this).position().left) / $_progress_line_grey.outerWidth() * _video.duration);
 				_mouse_time.html(val);
-				var left = e.offsetX - _mouse_time.outerWidth() / 2;
+				var left = e.offsetX + $(this).position().left - _mouse_time.outerWidth() / 2;
 				if(left < 0){
 					left = 0;
 				}
@@ -194,10 +195,9 @@
 			}).mouseleave( function(e){
 				_mouse_time.hide();
 			}).mousemove( function(e){
-				var val = convert_time_format(e.offsetX / $_progress_line_grey.outerWidth() * _video.duration 
-					+ (prop['duration'] && prop['duration'].length == 2 ? prop['duration'][0] : 0));
+				var val = convert_time_format((e.offsetX + $(this).position().left) / $_progress_line_grey.outerWidth() * _video.duration);
 				_mouse_time.html(val);
-				var left = e.offsetX - _mouse_time.outerWidth() / 2;
+				var left = e.offsetX + $(this).position().left - _mouse_time.outerWidth() / 2;
 				if(left < 0){
 					left = 0;
 				}
@@ -304,10 +304,11 @@
 		_video.onloadedmetadata = function(){
 			$_loading.css('line-height', $_this.innerHeight() + 'px');
 			if(prop['duration'] && prop['duration'].length == 2){
-				var left = prop['duration'][0] / _video.duration * $_progress_line_grey.outerWidth();
-				var width = (prop['duration'][1] - prop['duration'][0]) / _video.duration * $_progress_line_grey.outerWidth();
-				$_progress_line_duration.css('left', left + 'px').css('width', width + 'px').show();
-				$_progress_line_color.css('left', left + 'px');
+				var left = prop['duration'][0] / _video.duration;
+				var width = (prop['duration'][1] - prop['duration'][0]) / _video.duration;
+				
+				$_progress_line_duration.css('left', (left * 100) + '%').css('width', (width * 100) + '%').show();
+				$_progress_line_color.css('left', (left * 100) + '%');
 			}
 		}
 		
@@ -319,6 +320,9 @@
 			$_loading.hide();
 		};
 		
+		_video.oncanplay = function(e) {
+			$_loading.hide();
+		};
 		var update_current = function(){
 			if(prop['duration'] && prop['duration'] && prop['duration'].length == 2 && 
 				(_video.currentTime < prop['duration'][0] || _video.currentTime > prop['duration'][1])){

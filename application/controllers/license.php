@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('account_base.php');
-class License extends Account_base_controller {
+require_once('base.php');
+class License extends Base_controller {
 	private $summary;
 	public function __construct(){
 		$this->guest_access_allowed = true;
@@ -30,8 +30,7 @@ class License extends Account_base_controller {
 		),
 		array(
 			'title' => 'Exam',
-			'comment' => 'You must correctly answer above 60 or 70 percent, depends on state, of 150 questions in 195 minutes to pass the exam.',
-			'subject' => "License Exam Registration",
+			'comment' => 'You must correctly answer above 60 or 70 percent, depends on state, of 150 questions in 195 minutes to pass the exam. <u>You can practise exam questions before you take the exam</u>. Go to <a href="'.base_url().'documents?content_type=license" target="_blank">Documents</a> to practise online.',			'subject' => "License Exam Registration",
 			'image_file_name'=> 'license-exam',
 			'steps' => array(
 				'Go to the PSI Exam  website at <a href="https://candidate.psiexams.com/" target="_blank">PSI Exams Online</a>, and click <i>Create</i> an account.',
@@ -114,10 +113,10 @@ class License extends Account_base_controller {
 	
 	public function index(){
 		if(false){//$this->user['preference'] == 'E' && !$this->is_mobile){
-			header('location:'.base_url().'account/license/online_courses');
+			header('location:'.base_url().'license/online_courses');
 			exit;
 		}
-		$this->load_view('license', array('summary' => $this->summary));
+		$this->load_view('account/license', array('summary' => $this->summary));
 	}
 	
 	public function get_step_detail(){
@@ -132,7 +131,7 @@ class License extends Account_base_controller {
 	
 	public function online_courses(){
 		if(false){//$this->user['preference'] == 'E' && $this->is_mobile){
-			header('location:'.base_url().'account/license');
+			header('location:'.base_url().'license');
 			exit;
 		}
 		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][0]));
@@ -140,7 +139,7 @@ class License extends Account_base_controller {
 	
 	public function exam(){
 		if(false){//$this->user['preference'] == 'E'){
-			header('location:'.base_url().'account/license');
+			header('location:'.base_url().'license');
 			exit;
 		}
 		$this->load_view('license_instruct', array('instruct' => $this->summary['steps'][1]));

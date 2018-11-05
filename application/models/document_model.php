@@ -80,7 +80,8 @@ class Document_model extends Base_model{
 	}
 	
 	public function get_item($uniqid){
-		$sql = "SELECT * FROM documents d LEFT JOIN document_pub_code dpc ON d.uniqid=dpc.document_id
+		$sql = "SELECT d.*, dpc.*, c.courses_topic FROM documents d LEFT JOIN document_pub_code dpc ON d.uniqid=dpc.document_id
+			LEFT JOIN courses c ON d.courses_id=c.courses_id
 			WHERE d.uniqid='$uniqid' ORDER BY dpc.expire DESC";
 		return $this->db->query($sql);
 	}

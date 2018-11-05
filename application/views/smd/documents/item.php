@@ -26,6 +26,9 @@ if(!$document){
 					else if($name == 'original_start_date'){
 						echo 'Initial Start';
 					}
+					else if($name == 'courses_id'){
+						echo 'Related Course';
+					}
 					else{
 						echo str_replace('_', ' ', $name);
 					}

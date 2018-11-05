@@ -38,7 +38,6 @@ class Resource extends Base_Controller {
 					$file_type = strtolower($result[0]['file_type']);
 					if(!empty($file_type)){
 						$file = base_url().'src/doc/resources/'.$raw_id.'.'.$file_type;
-						echo $file;exit;
 						if($file_type == 'pdf'){
 							$this->load->view('pdf_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
 						}

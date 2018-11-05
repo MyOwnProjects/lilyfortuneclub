@@ -4,7 +4,7 @@ body{font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin:0 auto;fo
 #main-header{z-index:10;margin:0 auto;padding:5px 0;font-size:16px;background:url('../img/background/dark-wood-background-1013tm-pic-2573.jpg')}
 .main-header-text{color:#fff;font-size:16px;margin-top:30px;margin-right:30px;cursor:pointer}
 .main-header-text img{height:25px}
-#main-header-menu{color:#fff;font-family:'AvenirLTStd-Medium', sans-serif, Arial;font-size:16px;margin-top:30px;margin-right:20px}
+#main-header-menu{display:none;color:#fff;font-family:'AvenirLTStd-Medium', sans-serif, Arial;font-size:16px;margin-top:30px;margin-right:20px}
 .main-header-menu-item{margin-right:20px}
 .main-header-menu-item>a{color:#fff !important;text-decoration:none;}
 .main-header-menu-item>a:hover{color:#aaa}
@@ -17,6 +17,8 @@ body{font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin:0 auto;fo
 #logo img{height:80px}
 footer{text-align:center;color:#353535;padding:20px 20px 40px 20px;font-size:14px;line-height:40px;/*background:url('/img/background/dark-wood-background-1013tm-pic-2573.jpg')*/}
 
+.main-body-header{text-align:center;line-height:80px;margin-top:20px;font-size:28px;font-weight:bold}
+.main-body-wrapper{width:100%;max-width:1000px;margin:0 auto}
 
 .wrapper-900{max-width:900px;margin:0 auto}
 .red, .error{color:#FF0000}
@@ -53,6 +55,7 @@ fieldset label{font-weight:normal}
 #main-header{padding:0}
 #logo{margin-left:0}
 #logo img{height:40px}
+#main-header-menu{display:block}
 .main-header-text{margin-top:7px}
 #main-header-menu{margin-top:7px}
 #main-body{margin-top1:40px}
