@@ -96,7 +96,7 @@ class Schedule_model extends Base_model{
 	}
 	
 	public function get_course_list(){
-		$sql = "select * from courses";
+		$sql = "select * from courses ORDER BY courses_id ASC";
 		return $this->db->query($sql);
 	}
 }
