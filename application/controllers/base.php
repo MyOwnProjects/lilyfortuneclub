@@ -112,7 +112,7 @@ class Base_controller extends CI_Controller {
 				array(
 					'text' => 'Sign in',
 					'member_access' => false,
-					'cion' => 'sign-in.svg',
+					'icon' => 'sign-in.svg',
 					'url' => 'ac/sign_in',
 				),
 				array(
