@@ -27,6 +27,7 @@ function simpleUpload(e,l,n){function t(){if("object"==typeof n&&null!==n){if("b
 		_add_input();
 		$_this.addClass('ajax-upload');
 		var $_select_link =$('<a>').attr('href','javascript:void(0)').html('Click to select file(s)').appendTo($_this);
+		var $_loading_icon = $('<span>').css('margin-left', '20px').appendTo($_this);
 		$_upload_status = $('<div>').addClass('row').appendTo($_this);
 
 		$_select_link.click(function(){
@@ -43,6 +44,7 @@ function simpleUpload(e,l,n){function t(){if("object"==typeof n&&null!==n){if("b
 			var upload_error = false;
 			$_input.simpleUpload(url, {
 				start: function(file){
+					$_loading_icon.removeClass('text-danger').removeClass('text-success').html('<i class="fa fa-spinner fa-spin fa-fw"></i>');
 					var $_upload_status_block_wrapper = $('<div>').addClass('col-lg-12').addClass('col-md-12').addClass('small').appendTo($_upload_status);
 					var $_upload_status_block = $('<div>').addClass('clearfix').css('margin', '2px 0').css('padding', '5px').css('border', '1px solid #d5d5d5').appendTo($_upload_status_block_wrapper);
 					var top = $('<div>').addClass('clearfix').appendTo($_upload_status_block);
@@ -73,12 +75,15 @@ function simpleUpload(e,l,n){function t(){if("object"==typeof n&&null!==n){if("b
 						if(_change_callback){
 							_change_callback(_files);
 						}
+						$_loading_icon.addClass('text-success').html('Succeeded to upload file.');
 					}
 					else{
+						$_loading_icon.addClass('text-danger').html(data['error']);
 					}
 				},
 
 				error: function(error){
+					$_loading_icon.addClass('text-danger').html('Failed to upload file');
 				}
 			}).remove();
 			$_input = null;
