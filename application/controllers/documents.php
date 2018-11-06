@@ -29,7 +29,7 @@ class Documents extends Base_Controller {
 		$result = $this->document_model->get_list($where, array(), "$page,1000000");
 		foreach($result as $i => $r){
 			if(!empty($r['file_name'])){
-				$mime_type_i = mime_type(getcwd().'/application/documents/'.$r['uniqid'].'.'.$r['file_name']);
+				$mime_type_i = mime_type(getcwd().'/src/doc/'.$r['uniqid'].'.'.$r['file_name']);
 				$result[$i]['mime_type'] = $mime_type_i;
 				$result[$i]['mime_content_type'] = strtoupper($mime_type_i[0]);
 			}

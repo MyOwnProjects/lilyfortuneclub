@@ -35,14 +35,10 @@ ul.doc-list li{padding:0 20px}
 	<ul class="doc-list">
 	<?php
 	foreach($list as $l){
-		if(!empty($l['file_name'])){
-			$file = getcwd().'/src/doc'.$l['uniqid'].'.'.$l['file_name'];
-			$mt = mime_type($file);
-		}
 	?>
 		<li class="clearfix">
 			<div class="doc-icon" style="color:<?php echo doc_icon_color($l['mime_type']);?>">
-				<i class="fa fa-file-<?php echo $mt[0];?>-o"></i>
+				<i class="fa fa-file-<?php echo $l['mime_type'][0];?>-o"></i>
 			</div>
 			<div class="doc-type"><a href="<?php echo base_url();?>documents?content_type=<?php echo $l['content_type'];?>"><?php echo $l['content_type'];?></a></div>
 			<div class="doc-text">
