@@ -59,6 +59,7 @@ class Documents extends Smd_Controller {
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['id'] = $r['uniqid'];
 				$ret['rows'][$i]['subject'] = '<a href="'.base_url().'documents/view/'.$r['uniqid'].'">'.$r['subject'].'</a>';
+				$ret['rows'][$i]['uniqid'] = $r['uniqid'];
 				$ret['rows'][$i]['grade_access'] = $grade_access[$r['grade_access']];
 				$ret['rows'][$i]['content_type'] = ucwords($r['content_type']);
 				$ret['rows'][$i]['create_date'] = date_format(date_create($r['create_date']), 'm/d/Y H:i A');
