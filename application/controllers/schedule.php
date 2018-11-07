@@ -39,15 +39,25 @@ class Schedule extends Base_controller {
 	public function get_events(){
 		$result = $this->schedule_model->get_list();
 		$ret = array();
+		$color_list = array(
+			'Fremont' => array('lime', '#000'),
+			'San Jose' => array('yellow', '#000'),
+			'Pleasanton' => array('pink', '#000'),
+		);
 		foreach($result as $r){
-			array_push($ret, array(
+			$e = array(
 				'id' => $r['schedule_id'], 
 				'title' => '<br/>'.'Topic: '.$r['schedule_topic']
 					.(empty($r['schedule_presenters']) ? '' : '<br/>Presenters: '.$r['schedule_presenters'])
-					.(empty($r['location']) ? '' : '<br/>'.$r['location']),
+					.(empty($r['schedule_location']) ? '' : '<br/>Location: '.$r['schedule_location']),
 				'start' => $r['schedule_start_date'].' '.$r['schedule_start_time'],
-				'end' => $r['schedule_end_date'].' '.$r['schedule_end_time']
-			));
+				'end' => $r['schedule_end_date'].' '.$r['schedule_end_time'],
+			);
+			if(array_key_exists($r['schedule_location'], $color_list)){
+				$e['backgroundColor'] =  $color_list[$r['schedule_location']][0];
+				$e['textColor'] =  $color_list[$r['schedule_location']][1];
+			}
+			array_push($ret, $e);
 		}
 		echo json_encode($ret);
 	}

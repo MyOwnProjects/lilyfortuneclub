@@ -46,8 +46,9 @@ $(function() {
 				}
 			});
 		},
+		events: '<?php echo base_url();?>schedule/get_events'
 	});
-	ajax_loading(true);
+	/*ajax_loading(true);
 	$.ajax({
 		url: '<?php echo base_url();?>schedule/get_events',
 		dataType: 'json',
@@ -59,6 +60,6 @@ $(function() {
 		complete: function(){
 			ajax_loading(false);
 		}
-	});
+	});*/
 });
 </script>	

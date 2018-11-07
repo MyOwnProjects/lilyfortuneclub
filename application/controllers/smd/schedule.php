@@ -76,9 +76,9 @@ class Schedule extends Smd_Controller {
 					'placeholder' => 'city',
 					'tag' => 'select',
 					'options' => array(
-						array('value' => 'fremont', 'text' => 'Fremont'),
-						array('value' => 'san jose', 'text' => 'San Jose'),
-						array('value' => 'pleasanton', 'text' => 'Pleasanton'),
+						array('value' => 'Fremont', 'text' => 'Fremont'),
+						array('value' => 'San Jose', 'text' => 'San Jose'),
+						array('value' => 'Pleasanton', 'text' => 'Pleasanton'),
 						array('value' => '0', 'text' => 'Other'),
 					)
 				),
