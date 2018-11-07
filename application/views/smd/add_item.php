@@ -88,6 +88,7 @@ $half_count = floor($item_count / 2 - 0.5);
 			<div>
 			<input class="form-control input-sm dialog-edit-field mb-1" type="date" id="<?php echo $item['name']?>_date" value="<?php echo empty($dt) ? '' : $dt[0];?>">
 			<select class="form-control input-sm dialog-edit-field" id="<?php echo $item['name']?>_time">
+					<option value="0">None</option>
 					<?php
 						for($i = 0; $i < 24; ++$i){
 						?>
