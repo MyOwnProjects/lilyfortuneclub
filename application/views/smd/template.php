@@ -14,12 +14,14 @@
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/css/smd/template.css?t=<?php echo time();?>" />		
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/css/smd/team.css?t=<?php echo time();?>" />		
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-select-1.13.2/css/bootstrap-select.min.css?t=<?php echo time();?>" />		
+		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/fullcalendar-3.9.0/fullcalendar.min.css?t=<?php echo time();?>" />		
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-migrate-1.2.1.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/popper.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootstrap-4.1.3-dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootbox.min.js"></script>		
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/moment.min.js"></script>		
 		<script src="<?php echo base_url();?>src/3rd_party/jquery-simple-datetimepicker/jquery.datetimepicker.full.min.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/dialog/dialog.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/data_table/data_table.js?t=<?php echo time();?>"></script>
@@ -32,6 +34,7 @@
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jstz.js"></script>
 		<script src="<?php echo base_url();?>src/3rd_party/ckeditor/ckeditor.js"></script>
 		<script src="<?php echo base_url();?>src/3rd_party/bootstrap-select-1.13.2/js/bootstrap-select.min.js?<?php echo time();?>"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/fullcalendar-3.9.0/fullcalendar.min.js"></script>
 		<script>
 		$('document').ready(function(){
 			$('[data-toggle="tooltip"]').tooltip();

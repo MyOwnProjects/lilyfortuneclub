@@ -59,6 +59,9 @@ class Smd_controller extends CI_Controller {
 				'' => array(
 					'text' => 'List'
 				),
+				'import' => array(
+					'text' => 'Import'
+				),
 			),
 		),
 		'documents' => array(

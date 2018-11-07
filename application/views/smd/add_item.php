@@ -1,3 +1,9 @@
+
+<style>
+ .dialogWide > .modal-dialog {
+     width: 80% !important;
+ }
+</style>
 <?php
 $item_count = isset($items) ? count($items) : 0;
 $col_width = 4;
@@ -41,7 +47,7 @@ $half_count = floor($item_count / 2 - 0.5);
 		?>
 	<div class="col-lg-<?php echo $col_width;?>">
 		<div class="form-group">
-			<label for="<?php echo is_string($item['name']) ? $item['name'] : '';?>"><?php echo $item['label'];?></label>
+			<label class="" for="<?php echo is_string($item['name']) ? $item['name'] : '';?>"><?php echo $item['label'];?></label>
 				<?php echo array_key_exists('required', $item) ? '<span class="text-danger">*</span>' : ''; ?>
 
 			<?php
@@ -70,6 +76,29 @@ $half_count = floor($item_count / 2 - 0.5);
 			</select>
 			</div>
 			<?php			
+				}
+				else if($item['type'] == 'date_time'){
+					if(array_key_exists('value', $item)){
+						$dt = explode(' ', $item['value']);
+					}
+					else{
+						$dt = array();
+					}
+			?>
+			<div>
+			<input class="form-control input-sm dialog-edit-field mb-1" type="date" id="<?php echo $item['name']?>_date" value="<?php echo empty($dt) ? '' : $dt[0];?>">
+			<select class="form-control input-sm dialog-edit-field" id="<?php echo $item['name']?>_time">
+					<?php
+						for($i = 0; $i < 24; ++$i){
+						?>
+						<option value="<?php echo $i;?>:00:00"><?php echo date_format(date_create("$i:00:00"), 'h:i A');?></option>
+						<option value="<?php echo $i;?>:30:00"><?php echo date_format(date_create("$i:30:00"), 'h:i A');?></option>
+						<?php
+						}
+					?>
+			</select>
+			</div>
+			<?php
 				}
 			}
 			else if($item['tag'] == 'textarea'){

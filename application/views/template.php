@@ -18,12 +18,14 @@
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/css/template.css?t=<?php echo time();?>" />		
 		<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-select-master/css/bootstrap-select.min.css?t=<?php echo time();?>" />		
+		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/fullcalendar-3.9.0/fullcalendar.min.css?t=<?php echo time();?>" />		
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-migrate-1.2.1.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootbox.min.js"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery.bootgrid-1.3.1/jquery.bootgrid.js"></script>		
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/moment.min.js"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/dialog/dialog.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery.webui-popover/jquery.webui-popover.js"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/js/tools.js?<?php echo time();?>"></script>		
@@ -31,6 +33,7 @@
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/simple_video_player/simple_video_player.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/tree_grid/tree_grid.js?t=<?php echo time();?>"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootstrap-select-master/js/bootstrap-select.min.js"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/fullcalendar-3.9.0/fullcalendar.min.js"></script>
 		<script>
 			$('body').delegate('iframe', 'load', function(){
 				this.style.height = this.contentWindow.document.body.scrollHeight + 'px';

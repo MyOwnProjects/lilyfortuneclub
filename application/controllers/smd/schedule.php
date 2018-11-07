@@ -15,8 +15,121 @@ class Schedule extends Smd_Controller {
 	public function index()
 	{
 		$this->nav_menus['schedule']['sub_menus']['']['active'] = true;
-		$this->load_view('schedule/list');
+		$this->load_view('schedule');
 	}
+	
+	public function add_schedule(){
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$ret = $this->schedule_model->insert($this->input->post());
+			if($ret){
+				$schedule_start_date = $this->input->post('schedule_start_date');
+				$schedule_start_time = $this->input->post('schedule_start_time');
+				$schedule_end_date = $this->input->post('schedule_end_date');
+				$schedule_end_time = $this->input->post('schedule_end_time');
+				$r = array('success' => true, 'data' => array(
+					'id' => $ret,
+					'start' => $schedule_start_date.(empty($schedule_start_time) ? '' : ' '.$schedule_start_time),
+					'title' => $this->input->post('schedule_topic')
+				));
+				if(!empty($schedule_end_date)){
+					$r['data']['end'] = $schedule_end_date
+						.empty($schedule_end_time) ? '' : ' '.$schedule_end_time;
+				}
+				echo json_encode($r);
+			}
+			else{
+				echo json_encode(array('success' => false));
+			}
+			return;
+		}
+		$d = $this->input->get('date');
+			$items = array(
+				array(
+					'label' => 'Start',
+					'name' => 'schedule_start',
+					'tag' => 'combo',
+					'type' => 'date_time',
+					'value' => $d,
+					'required' => true
+				),
+				array(
+					'label' => 'End',
+					'name' => 'schedule_end',
+					'tag' => 'combo',
+					'type' => 'date_time',
+				),
+				array(
+					'label' => 'Topic',
+					'name' => 'schedule_topic',
+					'tag' => 'input',
+					'required' => true
+				),
+				array(
+					'label' => 'Presenter(s)',
+					'name' => 'schedule_presenters',
+					'placeholder' => 'Kun Yang, Min Zhu',
+					'tag' => 'input',
+				),
+				array(
+					'label' => 'Location',
+					'name' => 'schedule_location',
+					'placeholder' => 'city',
+					'tag' => 'select',
+					'options' => array(
+						array('value' => 'fremont', 'text' => 'Fremont'),
+						array('value' => 'san jose', 'text' => 'San Jose'),
+						array('value' => 'pleasanton', 'text' => 'Pleasanton'),
+						array('value' => '0', 'text' => 'Other'),
+					)
+				),
+				array(
+					'label' => 'Address',
+					'name' => 'schedule_address',
+					'placeholder' => 'Full address',
+					'tag' => 'input'
+				),
+				array(
+					'label' => 'Comment',
+					'name' => 'schedule_comment',
+					'tag' => 'textarea'
+				),
+			);
+			$this->load->view('smd/add_item', array('items' => $items));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public function get_schedule_list(){
 		$search_str = trim($this->input->post('search'));

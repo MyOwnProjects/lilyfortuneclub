@@ -16,7 +16,7 @@
 }
 </style>
 <div class="main-body-header">Courses</div>
-<div class="text-center">We provide 20 courses and materials. Please check the face to face <a href="#">course schedule</a>.</div>
+<div class="text-center">We provide 20 courses and materials. Please check the face to face <a href="<?php echo base_url();?>schedule">course schedule</a>.</div>
 <div class="main-body-wrapper clearfix">
 	<div style="margin:0 auto;max-width:800px;padding:20px 0 80px 0;">
 	<ul class="nav nav-tabs nav-tabs-2 clearfix" id="top-tab">

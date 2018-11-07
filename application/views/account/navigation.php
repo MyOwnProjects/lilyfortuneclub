@@ -12,11 +12,13 @@
 						continue;
 					}
 				?>
-				<div class="clearfix" style="margin:10px 0">
-					<div class="pull-left text-right" style="width:170px;margin-right:10px">
+				<div class="clearfix" style="margin:20px 0">
+					<div class="pull-left"><img style="width:20px;height:20px;margin:0 10px 0 20px" src="<?php echo base_url();?>src/img/<?php echo $sm['icon'];?>"></div>
+					<div class="pull-left text-left" style="width:120px;margin-right:10px">
 						<a href="<?php echo base_url().$sm['url'];?>">
 							<strong><?php echo $sm['text'];?></strong>
-						</a></div>
+						</a>
+					</div>
 					<div style="overflow:hidden"><?php echo $sm['desc'];?></div>
 				</div>
 				<?php

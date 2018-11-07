@@ -11,13 +11,31 @@ class Schedule_model extends Base_model{
 		parent::__construct();
 	}
 	
-	public function get_list($where = '', $sort = array(), $limit = ''){
+	public function get_list($where = ''){
+		$sql = "SELECT * from schedule WHERE 1=1 ".(empty($where) ? '' : " AND $where");
+		return $this->db->query($sql);
+	}
+	
+	public function insert($params){
+		$fields = array();
+		$values = array();
+		foreach($params as $n => $v){
+			array_push($fields, $n);
+			array_push($values, empty($v) ? "NULL" : "'".trim($v)."'");
+		}
+		$sql = "INSERT INTO schedule (".implode(',', $fields).") VALUES (".implode(",", $values).")";
+		$this->db->query($sql);
+		return $this->db->insert_id();
+	}
+
+
+	/*public function get_list($where = '', $sort = array(), $limit = ''){
 		$sql = "SELECT schedules.*, office_name, office_address FROM schedules LEFT JOIN offices ON location=offices.offices_id"
 			.(empty($where) ? "" : " WHERE $where ")
 			.(empty($sort) ? "" : " ORDER BY ".implode(",", $sort))
 			.(empty($limit) ? "" : " LIMIT $limit");
 		return $this->db->query($sql);
-	}
+	}*/
 	
 	public function get_list_total($where = ''){
 		$sql = "SELECT COUNT(DISTINCT schedules_id) AS count FROM schedules LEFT JOIN offices ON location=offices.offices_id "
@@ -42,7 +60,7 @@ class Schedule_model extends Base_model{
 		return $ret;
 	}
 
-	public function insert($files){
+	/*public function insert($files){
 		$values = array();
 		foreach($files as $file){
 			array_push($values, "('".$file['file']."', '".$file['schedule_date_start']."', ".(empty($file['schedule_date_end']) ? "NULL" : "'".$file['schedule_date_end']."'")
@@ -50,7 +68,7 @@ class Schedule_model extends Base_model{
 		}
 		$sql = "INSERT INTO schedules (file, schedule_date_start, schedule_date_end, location, access) VALUES ".implode(",", $values);
 		return $this->db->query($sql) && $this->db->insert_id() > 0;
-	}
+	}*/
 	
 	public function update($prop, $where){
 		$set = array();
