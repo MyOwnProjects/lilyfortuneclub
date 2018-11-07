@@ -23,7 +23,13 @@ class Base_controller extends CI_Controller {
 			'text' => 'Education',
 			'sub_menu' => array(
 				array(
-					'text' => 'Courses',
+					'text' => 'Course schedule',
+					'url' => 'schedule',
+					'icon' => 'calendar.svg',
+					'desc' => 'The face to face course schedule.'
+				),
+				array(
+					'text' => 'Course list',
 					'url' => 'courses',
 					'icon' => 'instructor-lecture-with-sceen-projection-tool.svg',
 					'desc' => 'The 20 couses we provided width related materials. 10 for technical, and 10 for business.'
