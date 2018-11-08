@@ -158,16 +158,18 @@ class Base_controller extends CI_Controller {
 			return base_url().'ac/sign_in'.(empty($redirect) ? '' : "?$redirect");
 		}
 		else{
+			header("location: ".base_url());
+			exit;
 			$class = strtolower($this->router->fetch_class());
 			if($this->user['first_access'] == 'Y'){
 				if($class != 'first_access'){
-					header("location: ".base_url()."account/first_access");
+					header("location: ".base_url()."first_access");
 					exit;
 				}
 			}
 			else if(!isset($this->user['preference'])){
 				if($class != 'preference'){
-					header("location: ".base_url()."account/preference");
+					header("location: ".base_url()."preference");
 					exit;
 				}
 			}
