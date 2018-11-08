@@ -15,6 +15,7 @@ $(function() {
 		windowResize: function(view) {
 			$('#main-body').css('top', $('#main-header').outerHeight() + 20);
 		},
+		eventLimit: true, // for all non-agenda views
 		header: {
 			left: 'prev,next today',
 			center: 'title',

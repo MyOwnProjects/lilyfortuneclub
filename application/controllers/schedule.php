@@ -47,9 +47,7 @@ class Schedule extends Base_controller {
 		foreach($result as $r){
 			$e = array(
 				'id' => $r['schedule_id'], 
-				'title' => '<br/>'.'Topic: '.$r['schedule_topic']
-					.(empty($r['schedule_presenters']) ? '' : '<br/>Presenters: '.$r['schedule_presenters'])
-					.(empty($r['schedule_location']) ? '' : '<br/>Location: '.$r['schedule_location']),
+				'title' => $r['schedule_topic'],
 				'start' => $r['schedule_start_date'].' '.$r['schedule_start_time'],
 				'end' => $r['schedule_end_date'].' '.$r['schedule_end_time'],
 			);
