@@ -7,7 +7,6 @@ class Index extends Base_Controller {
 	}
 	
 	public function index(){
-		$res = $this->not_signed_in();
 		if($this->not_signed_in()){
 			$this->load_view('home');
 		}
