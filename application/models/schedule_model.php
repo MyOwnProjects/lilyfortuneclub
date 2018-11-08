@@ -28,7 +28,12 @@ class Schedule_model extends Base_model{
 		return $this->db->insert_id();
 	}
 
-
+	public function bulk_insert($fields, $values){
+		if(empty($values))
+			return;
+		$sql = "INSERT INTO schedule (".implode(",", $fields).") VALUES ".implode(",", $values);
+		$this->db->query($sql);
+	}
 	/*public function get_list($where = '', $sort = array(), $limit = ''){
 		$sql = "SELECT schedules.*, office_name, office_address FROM schedules LEFT JOIN offices ON location=offices.offices_id"
 			.(empty($where) ? "" : " WHERE $where ")
