@@ -20,6 +20,11 @@ Date.prototype.numberOfWeeks = function(){
     return Math.ceil( used / 7);
 };
 
+Date.prototype.addHours= function(h){
+    this.setHours(this.getHours()+h);
+    return this;
+};
+
 String.prototype.padStart = function(targetLength, padChar){
 	var ret = '';
 	for(var i = 0; i < this.length; ++i)

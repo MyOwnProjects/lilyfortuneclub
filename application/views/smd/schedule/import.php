@@ -14,7 +14,7 @@
 			<td style="width:225px">
 				<div class="input-group">
 					<input class="form-control form-control-sm" type="date" name="schedule_start_date[]" style="width:125px">
-					<select class="form-control form-control-sm" name="schedule_start_time[]" style="width:55px">
+					<select class="form-control form-control-sm schedule_start_time" name="schedule_start_time[]" style="width:55px">
 						<option value="0">None</option>
 						<?php
 						for($j = 0; $j < 24; ++$j){
@@ -30,7 +30,7 @@
 			<td style="width:225px">
 				<div class="input-group">
 					<input class="form-control form-control-sm" type="date" name="schedule_end_date[]" style="width:125px">
-					<select class="form-control form-control-sm" name="schedule_end_time[]" style="width:55px">
+					<select class="form-control form-control-sm schedule_end_time" name="schedule_end_time[]" style="width:55px">
 						<option value="0">None</option>
 						<?php
 						for($j = 0; $j < 24; ++$j){
@@ -61,3 +61,16 @@
 	?>
 	</table>
 </form>
+<script>
+$('.schedule_start_time').change(function(){
+	if($(this).val() == 0){
+		$(this).parent().parent().next().find('.schedule_end_time').val(0);
+	}
+	else{
+		var st =$(this).val().split(':');
+		var d = new Date(1900, 1, 1, st[0], st[1], 0).addHours(2);
+		var en = (d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0'));
+		$(this).parent().parent().next().find('.schedule_end_time').val(en);
+	}
+});
+</script>
