@@ -53,6 +53,7 @@ class Schedule extends Base_controller {
 			);
 			if(array_key_exists($r['schedule_location'], $color_list)){
 				$e['backgroundColor'] =  $color_list[$r['schedule_location']][0];
+				$e['borderColor'] =  $color_list[$r['schedule_location']][0];
 				$e['textColor'] =  $color_list[$r['schedule_location']][1];
 			}
 			array_push($ret, $e);
