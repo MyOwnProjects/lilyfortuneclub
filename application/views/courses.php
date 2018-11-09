@@ -42,7 +42,7 @@
 					foreach($c['docs'] as $d){
 						$mt = mime_type(getcwd().'/src/doc/'.$d['uniqid'].'.'.$d['file_name']);
 						echo '<div class="pull-left" style="margin-right:20px"><i class="fa fa-file-'.$mt[0].'-o" style="color:'.doc_icon_color($mt).'"></i>&nbsp;';
-						echo '<a href="'.base_url().'documents/view/'.$d['uniqid'].'">'.$d['subject'].'</a>';
+						echo '<a href="'.base_url().'documents/view/'.$d['uniqid'].'" target="_blank">'.$d['subject'].'</a>';
 						echo '</div>';
 					}
 					?>
