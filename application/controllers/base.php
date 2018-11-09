@@ -32,7 +32,7 @@ class Base_controller extends CI_Controller {
 					'text' => 'Course list',
 					'url' => 'courses',
 					'icon' => 'instructor-lecture-with-sceen-projection-tool.svg',
-					'desc' => 'The 20 couses we provided width related materials. 10 for technical, and 10 for business.'
+					'desc' => 'The 20 courses we provided width related materials. 10 for technical, and 10 for business.'
 				),
 				array(
 					'text' => 'Course materials',
