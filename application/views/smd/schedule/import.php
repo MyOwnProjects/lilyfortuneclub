@@ -78,7 +78,7 @@ $('.schedule_start_date').change(function(){
 	if(d == 1 || d == 2){//Tue, Wed
 		$(this).next().val('19:00').trigger('change');
 	}
-	else if(d == 0 || d == 6){//Mon, Sun
+	else if(d == 0 || d == 5){//Mon, Sun
 		$(this).next().val('10:00').trigger('change');
 	}
 	
