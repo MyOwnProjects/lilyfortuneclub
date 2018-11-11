@@ -155,7 +155,7 @@ class Base_controller extends CI_Controller {
 				}
 			}
 			$redirect = $this->uri->uri_string().(empty($param_str) ? "" : "?".implode("&", $param_str));
-			return base_url().'ac/sign_in'.(empty($redirect) ? '' : "?$redirect");
+			return base_url().'ac/sign_in'.(empty($redirect) ? '' : "?redirect=$redirect");
 		}
 		else{
 			return;
