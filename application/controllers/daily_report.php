@@ -5,6 +5,10 @@ class Daily_report extends Base_controller {
 	private $list_content;
 	public function __construct(){
 		parent::__construct();
+		if($redirect = $this->not_signed_in()){
+			header("location: $redirect");
+			exit;
+		}
 		$this->load->model('user_model');
 	}
 	
