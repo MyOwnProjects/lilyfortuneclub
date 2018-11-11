@@ -110,7 +110,7 @@ function export_recruits(){
 	var code = $('#recruits-baseshop-select').val();
 	var date_from = $('#recruits-date-from').val();
 	var date_to = $('#recruits-date-to').val();
-	window.location.href = '<?php echo base_url();?>account/team/export_recruits?type=' + type + 
+	window.location.href = '<?php echo base_url();?>team/export_recruits?type=' + type + 
 		'&code=' + code + '&date_from=' + date_from + '&date_to=' + date_to;
 }
 
@@ -118,7 +118,7 @@ function get_recruits(){
 	$('#recruits-grid').empty();
 	ajax_loading(true);
 	$.ajax({
-		url: '<?php echo base_url();?>account/team/get_recruits',
+		url: '<?php echo base_url();?>team/get_recruits',
 		method: 'post',
 		dataType: 'json',
 		data: {
@@ -157,7 +157,7 @@ $('body').delegate('.detail-url', 'click', function(){
 	var code = $(this).attr('data-id');
 	ajax_loading(true);
 	$.ajax({
-		url: '<?php echo base_url();?>account/team/get_member_info/' + code,
+		url: '<?php echo base_url();?>team/get_member_info/' + code,
 		dataType: 'json',
 		success: function(data){
 			if(data['success']){
@@ -199,7 +199,7 @@ $('body').delegate('.detail-url', 'click', function(){
 });	
 
 				$.ajax({
-					url: '<?php echo base_url();?>account/team/get_baseshop',
+					url: '<?php echo base_url();?>team/get_baseshop',
 					dataType: 'json',
 					success: function(data){
 						if(data['success']){

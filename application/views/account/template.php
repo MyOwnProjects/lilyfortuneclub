@@ -37,7 +37,7 @@
 					</ul>
 				</div>
 				<div style="position:absolute;top:0;right:0px;bottom:0;left:150px;padding:20px;">
-					<?php $this->load->view("account/$view", $this->_ci_cached_vars);?>
+					<?php $this->load->view("$view", $this->_ci_cached_vars);?>
 				</div>
 			</div>			
 		</div>

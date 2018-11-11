@@ -97,7 +97,7 @@
 			<?php
 					}
 			?>
-				<a class="menu-ico-url" href="<?php echo base_url();?>account/license" title="License"><div class="menu-icon clearfix"><img src="<?php echo base_url().'src/img/'.$sm['icon'];?>"><div class="text"><?php echo $sm['text'];?></div></div></a>
+				<a class="menu-ico-url" href="<?php echo base_url().$sm['url'];?>"><div class="menu-icon clearfix"><img src="<?php echo base_url().'src/img/'.$sm['icon'];?>"><div class="text"><?php echo $sm['text'];?></div></div></a>
 			<?php
 					$is_first2 = false;
 				}
@@ -107,98 +107,6 @@
 		?>
 			</div>
 		</div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<!--div style="display:none">
-					<?php
-					if($user && $user['grade'] == 'SMD'){
-					?>
-					<div class="clearfix" style="border-bottom:1px solid #e5e5e5;">
-						<a class="menu-ico-url" href="<?php echo base_url();?>smd" title="SMD"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/hierarchical-structure.svg"><div class="text">SMD Account</div></div></a>
-					</div>
-					<?php }?>
-					<div class="clearfix" style="border-bottom:1px solid #e5e5e5;">
-						<a class="menu-ico-url" href="<?php echo base_url();?>" title="Home"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/home.svg"><div class="text">Home</div></div></a>
-					<?php
-					if(!empty($user)){
-					?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/profile" title="Personal Information"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/man-user.svg?1"><div class="text">Personal Information</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/daily_report" title="Daily Report"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/diagram.svg?1"><div class="text">Daily Report</div></div></a>
-					<?php
-						if($user['membership_code'] != 'GUEST'){
-					?>
-						<?php if($user['preference'] == 'B' || $user['preference'] == 'BE'){?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/faq" title="How to"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/question-mark-on-a-circular-black-background.svg"><div class="text">FAQ</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/how_to" title="How to"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/information-button.svg"><div class="text">How to</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/team" title="My team"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/team.svg"><div class="text">My Team</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/sales" title="My sales"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/sale.svg"><div class="text">My Sales</div></div></a>
-						<?php }?>
-					<?php
-						}
-					?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/license" title="License"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/certificate.svg"><div class="text">License</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/startup" title="Who We Are"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/rocket-icon.svg"><div class="text">Who We Are</div></div></a>
-					<?php
-						if($user['membership_code'] != 'GUEST'){
-					?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>seminar" title="Seminar"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/instructor-lecture-with-sceen-projection-tool.svg"><div class="text">Class Schedule</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/code_of_honor" title="Code of Honor"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/promotion.svg"><div class="text">Code of Honor</div></div></a>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/documents" title="Education"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg"><div class="text">Education</div></div></a>
-					<?php
-						}
-					?>
-					<?php
-					}
-					else{
-					?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>documents" title="Education"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/books-stack-of-three.svg"><div class="text">Education</div></div></a>
-					<?php
-					}
-					?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>resource" title="Resource"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/folded-newspaper.svg"><div class="text">Resource</div></div></a>
-					</div>
-					<div class="clearfix">
-						<?php
-						if(!empty($user)){
-						?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>account/contact" title="Contact us"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/telephone.svg?1"><div class="text">Contact Us</div></div></a>
-						<?php
-						}
-						else{
-						?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>contact" title="Contact us"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/telephone.svg?1"><div class="text">Contact Us</div></div></a>
-						<?php
-						}
-						?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>about" title="About us"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/about-us.svg"><div class="text">About Us</div></div></a>
-						<?php
-						if(empty($user)){
-						?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>ac/sign_in" title="Sign in"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/sign-in.svg"><div class="text">Sign in</div></div></a>
-						<?php
-						}
-						else{
-						?>
-						<a class="menu-ico-url" href="<?php echo base_url();?>ac/sign_out" title="Sign out"><div class="menu-icon clearfix"><img src="<?php echo base_url();?>src/img/sign-out-option.svg"><div class="text">Sign out</div></div></a>
-						<?php
-						}
-						?>
-					</div>
-			</div-->
 	</div>
 	<?php
 	if($user){
