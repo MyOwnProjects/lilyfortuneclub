@@ -17,7 +17,7 @@ class Sales_model extends Base_model{
 		return $this->db->query($sql);
 	}
 	
-	public function get_list($where = '', $sort = array(), $limit = '', $search = array(), $filter = array()){
+	public function get_list($where = '', $sort = array(), $limit = '', $search = array(), $filter = array(), $agent_id=''){
 		$order_by = array();
 		if(!empty($sort)){
 			foreach($sort as $name => $value){
@@ -55,7 +55,7 @@ class Sales_model extends Base_model{
 		$sql = "SELECT sales.*, u1.nick_name, u1.first_name, u1.last_name, u2.nick_name, u2.first_name, u2.last_name,
 			CONCAT(IF(u1.nick_name IS NULL OR u1.nick_name='', u1.first_name, u1.nick_name), ' ', u1.last_name) AS agent1,
 			CONCAT(IF(u2.nick_name IS NULL OR u2.nick_name='', u2.first_name, u2.nick_name), ' ', u2.last_name) AS agent2,
-			IF(sales_writing_agent IS NOT NULL OR sales_split_agent IS NOT NULL, 1, 0) AS self_agent
+			IF(sales_writing_agent='$agent_id' OR sales_split_agent='$agent_id', 1, 0) AS self_agent
 			FROM sales 
 			LEFT JOIN users u1 ON u1.membership_code= sales.sales_writing_agent
 			LEFT JOIN users u2 ON u2.membership_code= sales.sales_split_agent
