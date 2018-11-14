@@ -481,6 +481,9 @@ function new_item(prop){//title, url, param){
 								if(header[j]['align']){
 									td.css('text-align', header[j]['align']);
 								}
+								if(header[j]['valign']){
+									td.css('vertical-align', header[j]['valign']);
+								}
 							}
 							/*var $_action = $('<td>').addClass('data-table-action').html('').appendTo(tr);
 							if(data['rows'][i]['action']){

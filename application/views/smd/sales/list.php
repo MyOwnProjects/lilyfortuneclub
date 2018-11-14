@@ -7,6 +7,7 @@
 			{id: 'sales_priority', text: 'Status', sortable: true, width:'60px', align: 'left'}, 
 			{id: 'sales_insured', text: 'Insured / Owner', width:'120px', sortable: true}, 
 			{id: 'sales_date_submission', text: 'Date', width:'70px', align: 'center', sortable: true}, 
+			{id: 'sales_provider', text: 'Provider', valign: 'middle', width:'70px', align: 'center', sortable: true}, 
 			{id: 'sales_info', text: 'Info', align:'left'},
 		],
 		url: '<?php echo base_url();?>smd/sales/get_sales_list',
