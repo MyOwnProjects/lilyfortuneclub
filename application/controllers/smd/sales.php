@@ -51,7 +51,7 @@ class Sales extends Smd_Controller {
 		if($total > 0){
 			$ret = paginate($total, $current, $row_count);
 			$ret['search'] = $search_str;
-			$ret['rows'] = $this->sales_model->get_list('', $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count'], $search, $filter, $this->user['membership_code']);
+			$ret['rows'] = $this->sales_model->get_list('', $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count'], $search, $filter, array($this->user['membership_code'], '27QUE'));
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
 				$ret['rows'][$i]['sales_priority'] = ($r['sales_priority'] > 0 ? '<span class="badge badge-danger">High</span>' : ($r['sales_priority'] == 0 ? '<span class="badge badge-warning">Medium</span>' : '<span class="badge badge-success">Low</span>'))
