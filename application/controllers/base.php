@@ -93,6 +93,13 @@ class Base_controller extends CI_Controller {
 					'icon' => 'certificate.svg',
 					'desc' => 'The specific 5 steps of license application, and exam practice. Online courses, license exam, licen application, continuing education, and provider appointment.',
 				),
+				array(
+					'text' => 'Exam Practice',
+					'url' => 'documents?content_type=license',
+					'member_access' => true,
+					'icon' => 'practice.svg',
+					'desc' => 'Exam questions helpful to your license exam.',
+				),
 			),
 		));
 		array_push($this->navigation, array(
