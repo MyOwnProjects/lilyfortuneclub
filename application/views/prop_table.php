@@ -1,8 +1,8 @@
 <style>
-.table-prop-wrapper{float:left;border:1px solid #888;margin-right:20px}
-.table-prop{border:none}
+.table-prop-wrapper{border:1px solid #888;}
+.table-prop{border:none;width:100%}
 .table-prop tr td{padding:2px 5px;border:1px solid #e5e5e5}
-.table-prop td.prop-label{background:#f8f8f8;text-align:right}
+.table-prop td.prop-label{background:#f8f8f8;text-align:right;width:300px}
 .table-prop input, .table-prop select, .table-prop textarea{border:none;outline:none;box-sizing:border-box;width:100%;line-height:initial !important}
 .table-prop	tr.prop-error td:first-child{border-right:1px solid red}
 .table-prop	tr.prop-error td:last-child{border:1px solid red}

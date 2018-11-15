@@ -8,7 +8,8 @@ class License extends Base_controller {
 		parent::__construct();		
 		$steps = array(array(
 			'title' => 'Courses',
-			'comment' => 'The 52 hours onine courses are mandatory in some states, such as California. Some states do not require it, such as New Hampshire. <b>The online class is strongly recommended before your license exam, no matter the class is required or not</b>.',
+			'comment' => 'The 52 hours onine courses are mandatory in some states, such as California. Some states do not require it, such as New Hampshire. <u>The online class is strongly recommended before your license exam, no matter the class is required or not</u>.'
+			.'<br/><br/><img style="height:16px;width:auto;margin-top:-5px" src="'.base_url().'src/img/star.svg">&nbsp;<b>Practise <a href="'.base_url().'documents?content_type=license" target="_blank">exam questions</a> here.</b>',
 			'subject' => "52 Hours Online Class Registration",
 			//'image_file_name'=> 'license-52-hours',
 			'steps' => array(
@@ -30,7 +31,9 @@ class License extends Base_controller {
 		),
 		array(
 			'title' => 'Exam',
-			'comment' => 'You must correctly answer above 60 or 70 percent, depends on state, of 150 questions in 195 minutes to pass the exam. <u>You can practise exam questions before you take the exam</u>. Go to <a href="'.base_url().'documents?content_type=license" target="_blank">Documents</a> to practise online.',			'subject' => "License Exam Registration",
+			'comment' => 'You must correctly answer above 60 or 70 percent, depends on state, of 150 questions in 195 minutes to pass the exam.'
+			.'<br/><br/><img style="height:16px;width:auto;margin-top:-5px" src="'.base_url().'src/img/star.svg">&nbsp;<b>Practise <a href="'.base_url().'documents?content_type=license" target="_blank">exam questions</a> here.</b>',
+			'subject' => "License Exam Registration",
 			'image_file_name'=> 'license-exam',
 			'steps' => array(
 				'Go to the PSI Exam  website at <a href="https://candidate.psiexams.com/" target="_blank">PSI Exams Online</a>, and click <i>Create</i> an account.',

@@ -267,10 +267,16 @@ $fields = array(
 			&nbsp;&nbsp;
 			<a href="<?php echo base_url();?>smd/sales">Cancel</a>
 		</div>
-		<div class="clearfix">
+		<div class="row">
 			<?php
 			foreach($fields as $field){
+			?>
+			<div class="col-md-6 col-sm-12">
+			<?php
 				$this->load->view('prop_table', array('field' => $field));
+			?>	
+			</div>
+			<?php
 			}
 			?>
 		</div>
