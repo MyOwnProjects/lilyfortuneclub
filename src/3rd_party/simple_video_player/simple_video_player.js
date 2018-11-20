@@ -312,8 +312,16 @@
 			}
 		}
 		
-		_video.onprogress = function(e) {
+		//_video.onprogress = function(e) {
+		//	$_loading.show();
+		//};
+
+		_video.onwaiting = function(e) {
 			$_loading.show();
+		};
+
+		_video.onplay = function(e) {
+			$_loading.hide();
 		};
 
 		_video.onplaying = function(e) {
@@ -323,6 +331,11 @@
 		_video.oncanplay = function(e) {
 			$_loading.hide();
 		};
+		
+		_video.oncanplaythrough = function(e) {
+			$_loading.hide();
+		};
+		
 		var update_current = function(){
 			if(prop['duration'] && prop['duration'] && prop['duration'].length == 2 && 
 				(_video.currentTime < prop['duration'][0] || _video.currentTime > prop['duration'][1])){
