@@ -57,13 +57,17 @@
 		}
 		if(count($video_duration) == 2){
 			$m = floor(($video_duration[1] - $video_duration[0]) / 60);
-			$s = $video_duration[1] - $video_duration[0] - $m * 60
-		?>
-		<?php
+			$s = $video_duration[1] - $video_duration[0] - $m * 60;
 		}
 		?>
 		<div class="video-text">
+		<?php
+		if(isset($m)){
+		?>
 		<p class="text-danger">You can only watch the video for <?php echo str_pad($m, 2, '0', STR_PAD_LEFT).':'.str_pad($s, 2, '0', STR_PAD_LEFT);?> by this access code. To watch the full video, please contact <a href="<?php echo base_url();?>contact" target="_blank">Lilyfortuneclub</a>.</p>
+		<?php
+		}
+		?>
 		<h2><?php echo $subject;?></h2>
 		<div style="line-height:30px">Content Type: <?php echo $content_type;?></div>
 		<?php if(!empty($abstract)){ ?>
