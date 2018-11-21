@@ -15,7 +15,7 @@ class Account extends Smd_Controller {
 		date_default_timezone_set('America/Los_Angeles');
 		$today = date_create();
 		for($i = 0; $i < 14; ++$i){
-			date_add($today,date_interval_create_from_date_string("$i days"));
+			date_add($today,date_interval_create_from_date_string("1 days"));
 			$ta = explode('-', date_format($today, 'Y-m-d'));
 			if($ta[1] == $da[1] && $ta[2] == $da[2]){
 				return true;
@@ -23,7 +23,7 @@ class Account extends Smd_Controller {
 		}
 		$today = date_create();
 		for($i = 0; $i < 14; ++$i){
-			date_add($today,date_interval_create_from_date_string("-$i days"));
+			date_add($today,date_interval_create_from_date_string("-1 days"));
 			$ta = explode('-', date_format($today, 'Y-m-d'));
 			if($ta[1] == $da[1] && $ta[2] == $da[2]){
 				return true;
