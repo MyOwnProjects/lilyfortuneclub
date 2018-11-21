@@ -76,7 +76,7 @@
 					foreach($policy_ann as $p){
 					?>
 						<tr>
-							<td><a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $p['policies_id'];?>"><?php echo $p['policies_number'];?></a></td>
+							<td><img src="<?php echo base_url();?>src/img/<?php echo $p['policies_provider'];?>_logo.ico" style="height:15px;margin-top:-5px">&nbsp;<a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $p['policies_id'];?>"><?php echo $p['policies_number'];?></a></td>
 							<td><?php echo date_format(date_create($p['policies_issue_date']), 'M d, Y');?></td>
 							<td><?php echo $p['policies_insured_name'];?></td>
 						</tr>

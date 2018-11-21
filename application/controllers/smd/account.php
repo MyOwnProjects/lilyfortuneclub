@@ -11,6 +11,9 @@ class Account extends Smd_Controller {
 	}
 	
 	private function _valid_ann($date){
+		if(empty($date)){
+			return false;
+		}
 		$da = explode('-', $date);
 		date_default_timezone_set('America/Los_Angeles');
 		$today = date_create();
@@ -91,7 +94,7 @@ class Account extends Smd_Controller {
 			}
 			
 			if($this->_valid_ann($r['policies_issue_date'])){
-				array_push($policy_ann, array('policies_id' => $r['policies_id'], 'policies_number' => $r['policies_number'], 'policies_insured_name' => $r['policies_insured_name'], 'policies_issue_date' => $r['policies_issue_date']));
+				array_push($policy_ann, array('policies_id' => $r['policies_id'], 'policies_provider' =>$r['policies_provider'],  'policies_number' => $r['policies_number'], 'policies_insured_name' => $r['policies_insured_name'], 'policies_issue_date' => $r['policies_issue_date']));
 			}
 		}
 		foreach($result as $r){
