@@ -148,7 +148,7 @@ class Sales_model extends Base_model{
 			foreach($search as $s){
 				array_push($like_array, "policies_insured_name LIKE '%$s%'");
 				array_push($like_array, "policies_owner_name LIKE '%$s%'");
-				array_push($like_array, "policies_policy_number LIKE '%$s%'");
+				array_push($like_array, "policies_number LIKE '%$s%'");
 				array_push($like_array, "u1.first_name LIKE '%$s%'");
 				array_push($like_array, "u1.last_name LIKE '%$s%'");
 				array_push($like_array, "u1.nick_name LIKE '%$s%'");
