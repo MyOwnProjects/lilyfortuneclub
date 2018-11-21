@@ -51,6 +51,9 @@ class Smd_controller extends CI_Controller {
 				'sales_case' => array(
 					'text' => 'New Case',
 				),
+				'import_sales' => array(
+					'text' => 'Import',
+				),
 			),
 		),
 		'schedule' => array(

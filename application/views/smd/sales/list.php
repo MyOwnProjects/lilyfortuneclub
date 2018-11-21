@@ -4,11 +4,13 @@
 <script>
 	$('#sales-grid').data_table({
 		header: [
-			{id: 'sales_priority', text: 'Status', sortable: true, width:'60px', align: 'left'}, 
-			{id: 'sales_insured', text: 'Insured / Owner', width:'120px', sortable: true}, 
-			{id: 'sales_date_submission', text: 'Date', width:'70px', align: 'center', sortable: true}, 
-			{id: 'sales_provider', text: 'Provider', valign: 'middle', width:'70px', align: 'center', sortable: true}, 
-			{id: 'sales_info', text: 'Info', align:'left'},
+			{id: 'policies_number', text: 'Policy#', sortable: true, width:'80px', valign: 'middle', align: 'left'}, 
+			{id: 'policies_status', text: 'Status', sortable: true, width:'60px', valign: 'middle', align: 'left'}, 
+			{id: 'policies_name', text: 'Insured / Owner', width:'200px', sortable: true}, 
+			{id: 'policies_issue_date', text: 'Issure Date', width:'90px', valign: 'middle', align: 'center', sortable: true}, 
+			{id: 'policies_provider', text: 'Provider', valign: 'middle', width:'70px', align: 'center', sortable: true}, 
+			{id: 'policies_agents', text: 'Agents', valign: 'middle', align:'left', width: '150px'},
+			{id: 'policies_notes', text: 'Notes', align:'left'},
 		],
 		url: '<?php echo base_url();?>smd/sales/get_sales_list',
 		customized_buttons: [
@@ -26,7 +28,7 @@
 			}
 		],
 		row_count: 100,
-		order_by: {self_agent: 'DESC', sales_priority: 'DESC', sales_date_submission: 'asc'},
+		order_by: {self_agent: 'DESC', policies_issue_date: 'desc'},
 		filter: {id: 'sales_status', options:{
 			P: '<span class="text-danger">Pending</span>',
 			I: '<span class="text-green"> Inforced</span>',

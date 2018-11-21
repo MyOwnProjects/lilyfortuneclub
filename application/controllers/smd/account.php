@@ -10,6 +10,28 @@ class Account extends Smd_Controller {
 		$this->nav_menus['account']['active'] = true;
 	}
 	
+	private function _valid_ann($date){
+		$da = explode('-', $date);
+		date_default_timezone_set('America/Los_Angeles');
+		$today = date_create();
+		for($i = 0; $i < 14; ++$i){
+			date_add($today,date_interval_create_from_date_string("$i days"));
+			$ta = explode('-', date_format($today, 'Y-m-d'));
+			if($ta[1] == $da[1] && $ta[2] == $da[2]){
+				return true;
+			}
+		}
+		$today = date_create();
+		for($i = 0; $i < 14; ++$i){
+			date_add($today,date_interval_create_from_date_string("-$i days"));
+			$ta = explode('-', date_format($today, 'Y-m-d'));
+			if($ta[1] == $da[1] && $ta[2] == $da[2]){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	private function _valid_dob($date){
 		$da = explode('-', $date);
 		date_default_timezone_set('America/Los_Angeles');
@@ -32,13 +54,6 @@ class Account extends Smd_Controller {
 		}
 		
 		return 3;
-		
-		$ds = explode('-', $date);
-		$d = date_create(date_format(date_create(), 'Y')."-$ds[1]-$ds[2] 00:00:00");
-		$today = date_create(date_format(date_create(), 'Y-m-d 00:00:00'));
-		$diff=date_diff($today,$d);
-		$d = $diff->format("%R%a");
-		return $d;
 	}
 	
 	public function index()
@@ -46,31 +61,37 @@ class Account extends Smd_Controller {
 		$this->load->model('user_model');
 		$this->load->model('sales_model');
 		$result = $this->user_model->get_all_children($this->user['membership_code']);
-		$result2 = $this->sales_model->get_list("sales_insured_dob IS NOT NULL OR sales_owner_dob IS NOT NULL");
+		//$result2 = $this->sales_model->get_policy_list("sales_insured_dob IS NOT NULL OR sales_owner_dob IS NOT NULL");
+		$result2 = $this->sales_model->get_policy_list("policies_insured_dob IS NOT NULL OR policies_owner_dob IS NOT NULL");
 		$grades = array();
 		$statuses = array(); 
 		$birthday1 = array();
 		$birthday2 = array();
 		$birthday3 = array();
 		$birthday4 = array();
+		$policy_ann = array();
 		foreach($result2 as $r){
-			if(!empty($r['sales_insured_dob'])){
-				$d = $this->_valid_dob($r['sales_insured_dob']);
+			if(!empty($r['policies_owner_dob'])){
+				$d = $this->_valid_dob($r['policies_owner_dob']);
 				if($d == 0){
-					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['sales_insured'], 'dob' => $r['sales_insured_dob']));
+					array_push($birthday1, array('policies_id' => $r['policies_id'], 'name' => $r['policies_owner_name'], 'dob' => $r['policies_owner_dob']));
 				}
 				else if($d > 0 && $d < 3){
-					array_push($birthday2, array('sales_id' => $r['sales_id'], 'name' => $r['sales_insured'], 'dob' => $r['sales_insured_dob']));
+					array_push($birthday2, array('policies_id' => $r['policies_id'], 'name' => $r['policies_owner_name'], 'dob' => $r['policies_owner_dob']));
 				}
 			}
-			if(!empty($r['sales_owner_dob'])){
-				$d = $this->_valid_dob($r['sales_owner_dob']);
+			if($r['policies_owner_name'] != $r['policies_insured_name'] && !empty($r['policies_insured_dob'])){
+				$d = $this->_valid_dob($r['policies_insured_dob']);
 				if($d == 0){
-					array_push($birthday1, array('sales_id' => $r['sales_id'], 'name' => $r['sales_owner'], 'dob' => $r['sales_owner_dob']));
+					array_push($birthday1, array('policies_id' => $r['policies_id'], 'name' => $r['policies_insured_name'], 'dob' => $r['policies_insured_dob']));
 				}
 				else if($d > 0 && $d < 3){
-					array_push($birthday2, array('sales_id' => $r['sales_id'], 'name' => $r['sales_owner'], 'dob' => $r['sales_owner_dob']));
+					array_push($birthday2, array('policies_id' => $r['policies_id'], 'name' => $r['policies_insured_name'], 'dob' => $r['policies_insured_dob']));
 				}
+			}
+			
+			if($this->_valid_ann($r['policies_issue_date'])){
+				array_push($policy_ann, array('policies_id' => $r['policies_id'], 'policies_number' => $r['policies_number'], 'policies_insured_name' => $r['policies_insured_name'], 'policies_issue_date' => $r['policies_issue_date']));
 			}
 		}
 		foreach($result as $r){
@@ -96,7 +117,8 @@ class Account extends Smd_Controller {
 			'birthday1' => $birthday1,
 			'birthday2' => $birthday2,
 			'birthday3' => $birthday3,
-			'birthday4' => $birthday4
+			'birthday4' => $birthday4,
+			'policy_ann' => $policy_ann
 		));
 	}
 

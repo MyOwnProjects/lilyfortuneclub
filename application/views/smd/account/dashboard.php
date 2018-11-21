@@ -7,6 +7,7 @@
 .dashboard-block-orange{background: #fabb3d;border:1px solid #f9aa0b;color:#fff;}
 .dashboard-block-green{background: #79c447;border:1px solid #61a434;color:#fff;}
 .dashboard-block-darkorange{background: #FF5722;border:1px solid #f24a15;color:#fff;}
+.panel-heading{padding:10px 0 10px 50px;font-weight:bold;}
 </style>
 <div class="main-body-wrapper">
 	<div class="row">
@@ -15,14 +16,14 @@
 			if(!empty($birthday1) || !empty($birthday2) || !empty($birthday3) || !empty($birthday4)){
 			?>
 			<div class="panel panel-warning">
-				<div class="panel-heading" style="padding-left:50px;font-weight:bold;background-image:url(<?php echo base_url();?>src/img/cake_red.svg);background-repeat:no-repeat;background-position:10px 5px;background-size:25px 25px">Recent Birthday</div>
+				<div class="panel-heading " style="background-image:url(<?php echo base_url();?>src/img/cake_red.svg);background-repeat:no-repeat;background-position:10px 5px;background-size:25px 25px">Recent Birthday</div>
 				<div class="panel-body">
 					<table class="table">
 					<?php
 					foreach($birthday1 as $b){
 					?>
 						<tr>
-							<td><a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $b['sales_id'];?>"><?php echo $b['name'];?></a></td>
+							<td><a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $b['policies_id'];?>"><?php echo $b['name'];?></a></td>
 							<td style="color:red">Today</td>
 							<td>Client</td>
 						</tr>
@@ -40,7 +41,7 @@
 					foreach($birthday2 as $b){
 					?>
 						<tr>
-							<td><a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $b['sales_id'];?>"><?php echo $b['name'];?></a></td>
+							<td><a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $b['policies_id'];?>"><?php echo $b['name'];?></a></td>
 							<td><?php echo date_format(date_create($b['dob']), 'M d');?></td>
 							<td>Client</td>
 						</tr>
@@ -63,7 +64,34 @@
 			}
 			?>
   		</div>
+		<div class="col-md-6 col-sm-12">
+			<?php
+			if(!empty($policy_ann)){
+			?>
+			<div class="panel panel-warning">
+				<div class="panel-heading" style="padding-left:50px;font-weight:bold;background-image:url(<?php echo base_url();?>src/img/first-annual-day-calendar-page-interface-symbol.svg);background-repeat:no-repeat;background-position:10px 10px;background-size:25px 25px">Policy Anniversary</div>
+				<div class="panel-body">
+					<table class="table">
+					<?php
+					foreach($policy_ann as $p){
+					?>
+						<tr>
+							<td><a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $p['policies_id'];?>"><?php echo $p['policies_number'];?></a></td>
+							<td><?php echo date_format(date_create($p['policies_issue_date']), 'M d, Y');?></td>
+							<td><?php echo $p['policies_insured_name'];?></td>
+						</tr>
+					<?php
+					}
+					?>
+					</table>
+				</div>
+			</div>
+			<?php
+			}
+			?>
+  		</div>
 	</div>
+	
 	<div class="row">
 		<div class="col-md-4">
 			<?php
