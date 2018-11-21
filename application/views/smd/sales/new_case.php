@@ -12,386 +12,56 @@
 .bootstrap-select .btn-default:active, .bootstrap-select .btn-default:focus, .bootstrap-select .btn-default:hover, .bootstrap-select .open>.dropdown-toggle.btn-default {background-color:#fff !important;border-color:#fff !important}
 </style>
 <?php
-$user_list = function($users, $sale, $name){
-			$ret = array();
-			foreach($users as $user){
-				array_push($ret, array(
-					'text' => $user['text'],
-					'value' => $user['value'],
-					'selected' => !empty($sale) && $sale[$name] == $user['value']
-				));
-			}
-			return $ret;
-};
-/*
-$general_select = function($list, $name) use($sale){
-			$ret = array();
-			foreach($list as $k => $v){
-				array_push($ret, array('text' => $v, 'value' => $k, 'selected' => !empty($sale) && $sale[$name] == $k));
-			}
-			return $ret;
-};
-$fields = array(
-	array(
-		'sales_writing_agent' => array(
-			'label' => 'Writing Agent',
-			'tag' => 'select',
-			'class' => 'selectpicker',
-			'data-live-search' => 'true',
-			'options' => $user_list(array_merge(array('-1' => array('text' => 'Other', 'value' => '-1')), $users), $sale, 'sales_writing_agent'),
-		),
-		'sales_split_agent' => array(
-			'label' => 'Split Agent',
-			'tag' => 'select',
-			'class' => 'selectpicker',
-			'data-live-search' => 'true',
-			'options' => $user_list(array_merge(array('-2' => array('text' => 'None', 'value' => '0'), '-1' => array('text' => 'Other', 'value' => '-1')), $users), $sale, 'sales_split_agent'),
-		),
-		'sales_agent_other' => array(
-			'label' => 'Other Team Agent',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_agent_other'],
-			'split' => true
-		),
-		'sales_priority' => array(
-			'label' => 'Priority',
-			'tag' => 'select',
-			'options' => $general_select(array(
-				1 => 'High', 0 => 'Medium', -1 => 'Low'
-			), 'sales_priority')
-		),
-		'sales_priority_note' => array(
-			'label' => 'Priority Note',
-			'tag' => 'textarea',
-			'rows' => '2',
-			'value'=> empty($sale) ? '': $sale['sales_priority_note']
-		),
-		'sales_status' => array(
-			'label' => 'Status',
-			'tag' => 'select',
-			'options' => $general_select(array(
-				'P' => 'Pending',
-				'I' => 'Inforced',
-				'C' => 'Closed',
-				'CA' => 'Canceled'
-			), 'sales_status'),
-			'split' => true, 
-		),
-		'sales_face_amount' => array(
-			'label' => 'Face Amount',
-			'tag' => 'input',
-			'type' => 'number',
-			'min' => '0',
-			'value' => empty($sale) ? '': $sale['sales_face_amount']
-		),
-		'sales_target_premium' => array(
-			'label' => 'Target Premium',
-			'tag' => 'input',
-			'type' => 'number',
-			'min' => '0',
-			'value' => empty($sale) ? '': $sale['sales_target_premium']
-		),
-		'sales_initial_premium' => array(
-			'label' => 'Initial Premium',
-			'tag' => 'input',
-			'type' => 'number',
-			'min' => '0',
-			'value' => empty($sale) ? '': $sale['sales_initial_premium'],
-			'split' => true, 
-		),
-		'sales_policy_no' => array(
-			'label' => 'Policy NO',
-			'tag' => 'input',
-			'value'=> empty($sale) ? '': $sale['sales_policy_no'],
-		),
-		'sales_provider' => array(
-			'label' => 'Provider',
-			'tag' => 'select',
-			'options' => $general_select(array(
-				'Allianz' => 'Allianz', 'Nationwide' => 'Nationwide', 'PacLife' => 'PacLife', 
-				'Prudential' => 'Prudential', 'Transamerica' => 'Transamerica', 'Voya' => 'Voya'
-			), 'sales_provider')
-		),
-		'sales_policy_type' => array(
-			'label' => 'Policy Type',
-			'tag' => 'select',
-			'options' => $general_select(array(
-					'IL' => 'IUL + LTC', 'I' => 'IUL', 'A' => 'Annuity', 'T' => 'Term'
-			), 'sales_policy_type'),
-			'split' => true
-		),
-		'sales_date_submission' => array(
-			'label' => 'Submission Date',
-			'tag' => 'input',
-			'type' => 'date',
-			'value' => empty($sale) ? '': $sale['sales_date_submission']
-		),
-		'sales_date_closure' => array(
-			'label' => 'Closure Date',
-			'tag' => 'input',
-			'type' => 'date',
-			'value' => empty($sale) ? '': $sale['sales_date_closure'],
-			'split' => true
-		),
-		'sales_details' => array(
-			'label' => 'Notes',
-			'tag' => 'textarea',
-			'rows' => '20',
-			'value' => empty($sale) || empty($sale['sales_details']) ? '': $sale['sales_details']
-		)
-		
-	),
-	array_merge(array(
-		'sales_insured' => array(
-			'label' => 'Insured Name',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_insured']
-		),
-		'sales_insured_dob' => array(
-			'label' => 'Insured DOB',
-			'tag' => 'input',
-			'type' => 'date',
-			'value' => empty($sale) || empty($sale['sales_insured_dob']) ? '': $sale['sales_insured_dob']
-		),
-		'sales_insured_phone' => array(
-			'label' => 'Insured Phone',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_insured_phone']
-		),
-		'sales_insured_email' => array(
-			'label' => 'Insured Email',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_insured_email'],
-			'split' => true
-		),
-		'sales_owner' => array(
-			'label' => 'Owner Name',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_owner']
-		),
-		'sales_owner_dob' => array(
-			'label' => 'Owner DOB',
-			'tag' => 'input',
-			'type' => 'date',
-			'value' => empty($sale) || empty($sale['sales_owner_dob']) ? '': $sale['sales_owner_dob']
-		),
-		'sales_owner_phone' => array(
-			'label' => 'Owner Phone',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_owner_phone']
-		),
-		'sales_owner_email' => array(
-			'label' => 'Owner Email',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_owner_email'],
-			'split' => true
-		),
-		'sales_payor' => array(
-			'label' => 'Payor Name',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_payor']
-		),
-		'sales_payor_dob' => array(
-			'label' => 'Payor DOB',
-			'tag' => 'input',
-			'type' => 'date',
-			'value' => empty($sale) || empty($sale['sales_payor_dob']) ? '': $sale['sales_payor_dob']
-		),
-		'sales_payor_phone' => array(
-			'label' => 'Payor Phone',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_payor_phone']
-		),
-		'sales_payor_email' => array(
-			'label' => 'Payor Email',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_payor_email'],
-			'split' => true
-		),
-		'sales_primary_beneficiary' => array(
-			'label' => 'Primary Beneficiary Name',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_primary_beneficiary']
-			),
-			'sales_primary_beneficiary_dob' => array(
-				'label' => 'Primary Beneficiary DOB',
-				'tag' => 'input',
-				'type' => 'date',
-				'value' => empty($sale) || empty($sale['sales_primary_beneficiary_dob']) ? '': $sale['sales_primary_beneficiary_dob']
-			),
-			'sales_primary_beneficiary_phone' => array(
-				'label' => 'Primary Beneficiary Phone',
-				'tag' => 'input',
-				'value' => empty($sale) ? '': $sale['sales_primary_beneficiary_phone']
-			),
-			'sales_primary_beneficiary_email' => array(
-				'label' => 'Primary Beneficiary Email',
-				'tag' => 'input',
-				'value' => empty($sale) ? '': $sale['sales_primary_beneficiary_email'],
-				'split' => true
-			)
-		),
-		call_user_func(function() use($sale, $general_select){
-			$ret = array();
-			for($i = 1; $i <= 2; ++$i){
-				$ret['sales_contingent_beneficiary_'.$i] = array(
-					'label' => 'Contingent Beneficiary '.$i.' Name',
-						'tag' => 'input',
-						'value' => empty($sale) ? '': $sale['sales_contingent_beneficiary_'.$i]
-				);
-				$ret['sales_contingent_beneficiary_'.$i.'_dob'] = array(
-						'label' => 'Contingent Beneficiary '.$i.' DOB',
-						'tag' => 'input',
-						'type' => 'date',
-						'value' => empty($sale) || empty($sale['sales_contingent_beneficiary_'.$i.'_dob']) ? '': $sale['sales_contingent_beneficiary_'.$i.'_dob']
-				);
-				$ret['sales_contingent_beneficiary_'.$i.'_phone'] = array(
-						'label' => 'Contingent Beneficiary '.$i.' Phone',
-						'tag' => 'input',
-						'value' => empty($sale) ? '': $sale['sales_contingent_beneficiary_'.$i.'_phone']
-				);
-				$ret['sales_contingent_beneficiary_'.$i.'_email'] = array(
-						'label' => 'Contingent Beneficiary '.$i.' Email',
-						'tag' => 'input',
-						'value' => empty($sale) ? '': $sale['sales_contingent_beneficiary_'.$i.'_email'],
-					'split' => true,
-				);
-			}
-			return $ret;
-		})
-	)
-);
-		
-		
-		
-		
-		$fields = 	array(
-		'sales_writing_agent' => array(
-			'label' => 'Writing Agent',
-			'tag' => 'select',
-			'class' => 'selectpicker',
-			'data-live-search' => 'true',
-			'options' => $user_list(array_merge(array('-1' => array('text' => 'Other', 'value' => '-1')), $users), $sale, 'sales_writing_agent'),
-		),
-		'sales_split_agent' => array(
-			'label' => 'Split Agent',
-			'tag' => 'select',
-			'class' => 'selectpicker',
-			'data-live-search' => 'true',
-			'options' => $user_list(array_merge(array('-2' => array('text' => 'None', 'value' => '0'), '-1' => array('text' => 'Other', 'value' => '-1')), $users), $sale, 'sales_split_agent'),
-		),
-		'sales_agent_other' => array(
-			'label' => 'Other Team Agent',
-			'tag' => 'input',
-			'value' => empty($sale) ? '': $sale['sales_agent_other'],
-			'split' => true
-		),
-		'sales_priority' => array(
-			'label' => 'Priority',
-			'tag' => 'select',
-			'options' => $general_select(array(
-				1 => 'High', 0 => 'Medium', -1 => 'Low'
-			), 'sales_priority')
-		),
-		'sales_priority_note' => array(
-			'label' => 'Priority Note',
-			'tag' => 'textarea',
-			'rows' => '2',
-			'value'=> empty($sale) ? '': $sale['sales_priority_note']
-		),
-		'sales_status' => array(
-			'label' => 'Status',
-			'tag' => 'select',
-			'options' => $general_select(array(
-				'P' => 'Pending',
-				'I' => 'Inforced',
-				'C' => 'Closed',
-				'CA' => 'Canceled'
-			), 'sales_status'),
-			'split' => true, 
-		),
-		'sales_face_amount' => array(
-			'label' => 'Face Amount',
-			'tag' => 'input',
-			'type' => 'number',
-			'min' => '0',
-			'value' => empty($sale) ? '': $sale['sales_face_amount']
-		),
-		'sales_target_premium' => array(
-			'label' => 'Target Premium',
-			'tag' => 'input',
-			'type' => 'number',
-			'min' => '0',
-			'value' => empty($sale) ? '': $sale['sales_target_premium']
-		),
-		'sales_initial_premium' => array(
-			'label' => 'Initial Premium',
-			'tag' => 'input',
-			'type' => 'number',
-			'min' => '0',
-			'value' => empty($sale) ? '': $sale['sales_initial_premium'],
-			'split' => true, 
-		),
-		'sales_policy_no' => array(
-			'label' => 'Policy NO',
-			'tag' => 'input',
-			'value'=> empty($sale) ? '': $sale['sales_policy_no'],
-		),
-		'sales_provider' => array(
-			'label' => 'Provider',
-			'tag' => 'select',
-			'options' => $general_select(array(
-				'Allianz' => 'Allianz', 'Nationwide' => 'Nationwide', 'PacLife' => 'PacLife', 
-				'Prudential' => 'Prudential', 'Transamerica' => 'Transamerica', 'Voya' => 'Voya'
-			), 'sales_provider')
-		),
-		'sales_policy_type' => array(
-			'label' => 'Policy Type',
-			'tag' => 'select',
-			'options' => $general_select(array(
-					'IL' => 'IUL + LTC', 'I' => 'IUL', 'A' => 'Annuity', 'T' => 'Term'
-			), 'sales_policy_type'),
-			'split' => true
-		),
-		'sales_date_submission' => array(
-			'label' => 'Submission Date',
-			'tag' => 'input',
-			'type' => 'date',
-			'value' => empty($sale) ? '': $sale['sales_date_submission']
-		),
-		'sales_date_closure' => array(
-			'label' => 'Closure Date',
-			'tag' => 'input',
-			'type' => 'date',
-			'value' => empty($sale) ? '': $sale['sales_date_closure'],
-			'split' => true
-		),
-		'sales_details' => array(
-			'label' => 'Notes',
-			'tag' => 'textarea',
-			'rows' => '20',
-			'value' => empty($sale) || empty($sale['sales_details']) ? '': $sale['sales_details']
-		)
-		
-	);
-	*/	
-	$fields = array();
+$fields = array();
 	foreach($policy as $n => $v){
 		if($n == 'policies_id'){
 			continue;
 		}
 		$fields[$n] = array();
 		$fields[$n]['label'] = str_replace('_', ' ', substr($n, 9)); 
-		if(in_array($n, array('policies_status', 'policies_provider', 'policies_owner_gender', 'policies_insured_gender'))){
-			$fields[$n]['tag'] = 'select';
+		if(in_array($n, array('policies_status', 'policies_provider', 'policies_owner_gender', 'policies_insured_gender'
+			, 'policies_writing_agent', 'policies_split_agent'))){
+			$fields[$n]['tag'] = 'dropdownedit';
 			if($n == 'policies_owner_gender' || $n == 'policies_insured_gender'){
+				$fields[$n]['readonly']= 'true';
 				$fields[$n]['options']= array(
 					array('value' => '', 'text' => 'Unknown'),
 					array('value' => 'F', 'text' => 'Female'),
 					array('value' => 'M', 'text' => 'Male'),
 				);
 			}
+			else if($n == 'policies_provider'){
+				$fields[$n]['readonly']= 'true';
+				$fields[$n]['options']= array(
+					array('value' => 'Transamerica', 'text' => 'Transamerica'),
+					array('value' => 'Nationwide', 'text' => 'Nationwide'),
+					array('value' => 'Pacific Life', 'text' => 'Pacific Life'),
+				);
+			}
+			else if($n == 'policies_status'){
+				$fields[$n]['readonly']= 'true';
+				$fields[$n]['options']= array(
+					array('value' => 'Active', 'text' => 'Active'),
+					array('value' => 'Approved', 'text' => 'Approved'),
+					array('value' => 'Incomplete', 'text' => 'Incomplete'),
+					array('value' => 'Pending', 'text' => 'Pending'),
+					array('value' => 'Declined', 'text' => 'Declined'),
+				);
+			}
+			else if(in_array($n, array('policies_writing_agent', 'policies_split_agent'))){
+				$fields[$n]['options']= array();
+				foreach($users as $u){
+					array_push($fields[$n]['options'], array('value' => $u['value'], 'text' => $u['text']));
+				}
+			}
 		}
+		/*else if(in_array($n, array('policies_writing_agent', 'policies_split_agent'))){
+			$fields[$n]['tag'] = 'dropdownedit';
+			$fields[$n]['options']= array();
+			foreach($users as $u){
+				array_push($fields[$n]['options'], array('value' => $u['value'], 'text' => $u['text']));
+			}
+		}*/
 		else if($n == 'policies_notes'){
 			$fields[$n]['tag'] = 'textarea';
 		}
@@ -414,7 +84,7 @@ $fields = array(
 
 ?>
 <div style="margin:40px"> 
-	<h4><?php echo empty($sale) ? 'New Case' : 'Edit Case'?></h4>
+	<h4>Policy Case</h4>
 	<div class="row row-bg">
 	<?php
 		foreach($fields as $id => $prop){
@@ -431,25 +101,52 @@ $fields = array(
 			<div class="prop-value flex-fill">
 						<?php
 						if(array_key_exists('tag', $prop)){
-							echo '<'.$prop['tag'].' class="form-control form-control-sm" name="'.$id.'"';
-							foreach($prop as $name => $value){
-								if(!in_array($name, array('label', 'tag', 'options'))){
-									if($prop['tag'] == 'textarea' && $name == 'value'){
-										continue;
-									}
-									echo ' '.$name.'="'.$value.'"';
-								}
+							if($prop['tag'] == 'input'){
+							?>
+							<input class="form-control form-control-sm" id="<?php echo $id;?>" name="<?php echo $id;?>" value="<?php echo $prop['value'];?>" type="<?php array_key_exists('type', $prop) ? $prop['type'] : 'text';?>">
+							<?php
 							}
-							echo '>';
-							if($prop['tag'] == 'select'){
+							else if($prop['tag'] == 'select'){
+							?>
+							<select class="form-control form-control-sm" id="<?php echo $id;?>" name="<?php echo $id;?>" >
+							<?php
 								foreach($prop['options'] as $o){
 									echo '<option value="'.$o['value'].'"'.($o['value'] == $prop['value'] ? ' selected' : '').'>'.$o['text'].'</option>';
 								}
-								echo "</select>";
+							?>
+							</select>
+							<?php
 							}
 							else if($prop['tag'] == 'textarea'){
-								echo $prop['value'];
-								echo "</textarea>";
+							?>
+							<textarea class="form-control form-control-sm" id="<?php echo $id;?>" name="<?php echo $id;?>"><?php echo $prop['value'];?></textarea>
+							<?php
+							}
+							else if($prop['tag'] == 'dropdownedit'){
+							?>
+							<div class="dropdown">
+								<?php
+								$display_value = '';
+								foreach($prop['options'] as $o){
+									if($prop['value'] == $o['value']){
+										$display_value = $o['text'];
+										break;
+									}
+								}
+								?>
+								
+								<input type="text" class="dropdown-toggle form-control form-control-sm" data-toggle="dropdown" name="<?php echo $id;?>" id="<?php echo $id;?>" value="<?php echo $display_value;?>" <?php echo array_key_exists('readonly', $prop) ? 'readonly' : ''; ?> style="background:#fff">
+								<div class="dropdown-menu" style="max-height:200px;overflow-y:auto;right:0px !important;padding:0 !important">
+									<?php
+									foreach($prop['options'] as $o){
+									?>
+									<a class="dropdown-item" value="<?php echo $o['value'];?>"><?php echo $o['text'];?></a>
+									<?php
+									}
+									?>
+								</div>
+							  </div>						
+							<?php
 							}
 						}
 						else{
@@ -464,31 +161,66 @@ $fields = array(
 		}
 	?>
 	</div>
-	
-	
-	
-	
-	<form method="post"  action="<?php echo base_url();?>smd/sales/sales_case<?php echo empty($sale) ? '' : '/'.$sale['sales_id']; ?>">
-		<div style="margin:20px 0 10px 0">
-			<input type="submit" value="Submit" class="btn btn-sm btn-primary">
-			&nbsp;&nbsp;
-			<a href="<?php echo base_url();?>smd/sales">Cancel</a>
-		</div>
-		<div class="row">
-			<?php
-			foreach($fields as $field){
-			?>
-			<div class="col-md-6 col-sm-12">
-			<?php
-				//$this->load->view('prop_table', array('field' => $field));
-			?>	
-			</div>
-			<?php
-			}
-			?>
-		</div>
-	</form>
 </div>
 <script>
-	$('.selectpicker').selectpicker();
+$('.dropdown .dropdown-menu .dropdown-item').click(function(){
+	$(this).parent().prev().val($(this).html());
+	ajax_loading(true);
+	var data = {};
+	data[$(this).parent().prev().attr('id')] = $(this).attr('value');
+	$.ajax({
+		url: '<?php echo base_url();?>smd/sales/sales_case/<?php echo $policy['policies_id'];?>',
+		method: 'post',
+		data: data,
+		dataType: 'json',
+		success: function(data){
+		},
+		error: function(a, b, c){
+		},
+		complete:function(){
+			ajax_loading(false);
+		}
+	});
+});
+
+/*$('.dropdown input.dropdown-toggle').click(function(){
+	$(this).next().children().empty();
+	for(var i =0; i < user_list.length; ++i){
+		var a = $('<a>').addClass('dropdown-item').attr('value', user_list[i]['value']).html(user_list[i]['text']).appendTo($(this).next());
+	}
+});
+*/
+$('.dropdown input.dropdown-toggle').keyup(function(e){
+	if($(this).prop('readonly')){
+		return;
+	}
+	var value = $(this).val().trim();
+	$(this).next().children().each(function(index, obj){
+		if($(obj).html().toLowerCase().indexOf(value.toLowerCase()) >= 0){
+			$(obj).show();
+		}
+		else{
+			$(obj).hide();
+		}
+	});
+});
+
+$('.prop-value input, .prop-value select, .prop-value textarea').change(function(){
+	ajax_loading(true);
+	var data = {};
+	data[$(this).attr('id')] = $(this).val();
+	$.ajax({
+		url: '<?php echo base_url();?>smd/sales/sales_case/<?php echo $policy['policies_id'];?>',
+		method: 'post',
+		data: data,
+		dataType: 'json',
+		success: function(data){
+		},
+		error: function(a, b, c){
+		},
+		complete:function(){
+			ajax_loading(false);
+		}
+	});
+});
 </script>

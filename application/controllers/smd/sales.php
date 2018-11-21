@@ -20,7 +20,7 @@ class Sales extends Smd_Controller {
 	public function import_sales(){
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$provider = $this->input->post('provider');
-			if($provider == 'Transamerica'){
+			if($provider == 'Transamerica Inforce'){
 				$count = array(
 					'name' => 0,
 					'telephone' => 0,
@@ -198,11 +198,10 @@ class Sales extends Smd_Controller {
 			$ret['rows'] = $this->sales_model->get_policy_list('', $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count'], $search, $filter, array($this->user['membership_code'], '27QUE'));
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
-				$ret['rows'][$i]['policies_number'] = $r['policies_number'];
+				$ret['rows'][$i]['policies_number'] = '<img style="height:16px;margin-top:-5px;margin-right:5px" src="'.base_url().'src/img/'.$r['policies_provider'].'_logo.ico">'.$r['policies_number'];
 				$ret['rows'][$i]['policies_status'] = $r['policies_status'];
 				$ret['rows'][$i]['policies_name'] = $r['policies_insured_name'].'<br/>'.$r['policies_owner_name'];
 				$ret['rows'][$i]['policies_issue_date'] = $r['policies_issue_date'];
-				$ret['rows'][$i]['policies_provider'] = '<img style="height:30px" src="'.base_url().'src/img/'.$r['policies_provider'].'_logo.ico">';
 				$writing_agent = empty($r['agent1']) ? $r['policies_writing_agent'] : $r['agent1'].'('.$r['policies_writing_agent'].')';
 				$split_agent = '';
 				if(!empty($r['writing_split_agent'])){
@@ -221,6 +220,102 @@ class Sales extends Smd_Controller {
 		echo json_encode($ret);
 	}
 	
+	private function _geterate_fields($policy){
+		$users1 = $this->user_model->get_list('', $sort = array('last_name' => 'ASC', 'first_name' => 'ASC'));
+		$users = array();
+		foreach($users1 as $u){
+			array_push($users, array('text' => $u['first_name'].' '.$u['last_name'].' ('.$u['membership_code'].')', 'value' => $u['membership_code']));
+		}
+		
+		$fields = array();
+		foreach($policy as $n => $v){
+			if($n == 'policies_id'){
+				continue;
+			}
+			$fields[$n] = array();
+			$fields[$n]['label'] = str_replace('_', ' ', substr($n, 9)); 
+			if(in_array($n, array('policies_status', 'policies_provider', 'policies_owner_gender', 'policies_insured_gender'
+				, 'policies_writing_agent', 'policies_split_agent'))){
+				$fields[$n]['tag'] = 'dropdownedit';
+				if($n == 'policies_owner_gender' || $n == 'policies_insured_gender'){
+					$fields[$n]['readonly']= 'true';
+					$fields[$n]['options']= array(
+						array('value' => '', 'text' => 'Unknown'),
+						array('value' => 'F', 'text' => 'Female'),
+						array('value' => 'M', 'text' => 'Male'),
+					);
+				}
+				else if($n == 'policies_provider'){
+					$fields[$n]['readonly']= 'true';
+					$fields[$n]['options']= array(
+						array('value' => 'Transamerica', 'text' => 'Transamerica'),
+						array('value' => 'Nationwide', 'text' => 'Nationwide'),
+						array('value' => 'PacLife', 'text' => 'Pacific Life'),
+					);
+				}
+				else if($n == 'policies_status'){
+					$fields[$n]['readonly']= 'true';
+					$fields[$n]['options']= array(
+						array('value' => 'Active', 'text' => 'Active'),
+						array('value' => 'Approved', 'text' => 'Approved'),
+						array('value' => 'Incomplete', 'text' => 'Incomplete'),
+						array('value' => 'Pending', 'text' => 'Pending'),
+						array('value' => 'Declined', 'text' => 'Declined'),
+					);
+				}
+				else if(in_array($n, array('policies_writing_agent', 'policies_split_agent'))){
+					$fields[$n]['options']= array();
+					foreach($users as $u){
+						array_push($fields[$n]['options'], array('value' => $u['value'], 'text' => $u['text']));
+					}
+				}
+			}
+			else if($n == 'policies_notes'){
+				$fields[$n]['tag'] = 'textarea';
+			}
+			else{
+				$fields[$n]['tag'] = 'input';
+			}
+
+			if(in_array($n, array('policies_issue_date', 'policies_insured_dob', 'policies_owner_dob'))){
+				$fields[$n]['type'] = 'date';
+			}
+			if(in_array($n, array('policies_face_amount', 'policies_target_premium'))){
+				$fields[$n]['type'] = 'number';
+			}
+			$fields[$n]['value'] = $v;
+			if(in_array($n, array('policies_target_premium', 'policies_owner_gender', 'policies_insured_gender'))){
+				array_push($fields, 'split');
+			}
+
+		}
+		return $fields;
+	}
+	
+	public function new_case(){
+		$post = array();
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$post = $this->input->post();
+			$fields = array();
+			$values = array();
+			foreach($post as $n => $v){
+				array_push($fields, $n);
+				array_push($values, empty($v) ? "NULL" : "'$v'");
+			}
+			if($this->sales_model->insert_policies($fields, array(implode(",", $values)))){
+				header('location:'.base_url().'smd/sales');
+				return;
+			}
+		}
+		$fields = $this->sales_model->list_policies_fields();
+		$policy = array();
+		foreach($fields as $f){
+			$policy[$f] = array_key_exists($f, $post) ? '' : null;
+		}
+		$fields = $this->_geterate_fields($policy);
+		$this->load_view('sales/case_view', array('policies_id' =>null, 'fields' => $fields));
+	}
+	
 	public function sales_case($policies_id = null){
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$prop = $this->input->post();
@@ -229,19 +324,15 @@ class Sales extends Smd_Controller {
 		}
 		
 		$policies = $this->sales_model->get_policies($policies_id);
-		$users = $this->user_model->get_list('', $sort = array('last_name' => 'ASC', 'first_name' => 'ASC'));
-		$users1 = array();
-		foreach($users as $u){
-			array_push($users1, array('text' => $u['first_name'].' '.$u['last_name'].' ('.$u['membership_code'].')', 'value' => $u['membership_code']));
-		}
-		
 		if(count($policies) > 0){
 			$policy = $policies[0];
 		}
 		else{
 			$policy = array();
 		}
-		$this->load_view('sales/case_view', array('policy' => $policy, 'users' => $users1));
+		
+		$fields = $this->_geterate_fields($policy);
+		$this->load_view('sales/case_view', array('policies_id' => $policy['policies_id'], 'fields' => $fields));
 	}
 }
 

@@ -253,4 +253,8 @@ class Sales_model extends Base_model{
 		$sql = "UPDATE policies SET ".implode(",", $values)." WHERE $where";
 		$this->db->query($sql);
 	}
+	
+	public function list_policies_fields(){
+		return $this->db->list_fields('policies');
+	}
 }

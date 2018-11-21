@@ -20,12 +20,13 @@ class My_database_model extends CI_Model{
 		if(is_object($this->query_result)){
 			return $this->query_result->result_array();
 		}
-		else
-			return $this->query_result;
+		return $this->query_result;
 	}
 	
-	public function list_fields(){
-		return $this->query_result->list_fields();
+	public function list_fields($table){
+		$sql = "SELECT * FROM $table";
+		$result = self::$db->query($sql);
+		return $result->list_fields();
 	}
 	
 	public function free_result(){

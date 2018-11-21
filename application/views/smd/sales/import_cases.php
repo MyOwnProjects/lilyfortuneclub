@@ -15,9 +15,8 @@ label{font-weight:normal}
 			<div class="col-sm-12 control-group">
 				<label>Provider</label>
 				<select class="form-control form-control-sm" name="provider" id="provider">
-					<option>Transamerica</option>
-					<option>Nationwide</option>
-					<option>Pacific Life</option>
+					<option>Transamerica Inforce</option>
+					<option>Transamerica Pending</option>
 				</select>
 			</div>
 		</div>
