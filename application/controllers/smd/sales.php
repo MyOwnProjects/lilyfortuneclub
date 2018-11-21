@@ -300,7 +300,7 @@ class Sales extends Smd_Controller {
 			$values = array();
 			foreach($post as $n => $v){
 				array_push($fields, $n);
-				array_push($values, empty($v) ? "NULL" : "'$v'");
+				array_push($values, empty($v) ? "NULL" : "'".addslashes($v)."'");
 			}
 			if($this->sales_model->insert_policies($fields, array(implode(",", $values)))){
 				header('location:'.base_url().'smd/sales');
