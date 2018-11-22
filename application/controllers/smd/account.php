@@ -92,9 +92,10 @@ class Account extends Smd_Controller {
 					array_push($birthday2, array('policies_id' => $r['policies_id'], 'name' => $r['policies_insured_name'], 'dob' => $r['policies_insured_dob']));
 				}
 			}
-			
+			if($r['policies_number'] == 'B502720120'){
 			if($this->_valid_ann($r['policies_issue_date'])){
 				array_push($policy_ann, array('policies_id' => $r['policies_id'], 'policies_provider' =>$r['policies_provider'],  'policies_number' => $r['policies_number'], 'policies_insured_name' => $r['policies_insured_name'], 'policies_issue_date' => $r['policies_issue_date']));
+			}
 			}
 		}
 		foreach($result as $r){
