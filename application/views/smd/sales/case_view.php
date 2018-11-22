@@ -166,7 +166,8 @@ $('.prop-value input, .prop-value select, .prop-value textarea').change(function
 	if(<?php echo empty($policies_id) ? 'false' : 'true';?>){
 		ajax_loading(true);
 		var data = {};
-		data[$(this).prev().attr('id')] = $(this).val();
+		var id = $(this).prop('id') ? $(this).attr('id') : $(this).prev().attr('id');
+		data[id] = $(this).val();
 		$.ajax({
 			url: '<?php echo base_url();?>smd/sales/sales_case/<?php echo $policies_id;?>',
 			method: 'post',
