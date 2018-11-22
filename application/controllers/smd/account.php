@@ -93,7 +93,7 @@ class Account extends Smd_Controller {
 				}
 			}
 			if($r['policies_number'] == 'B502720120'){
-				echo $r['policies_issue_date'];
+				echo $r['policies_issue_date'].'ABCDEFG';
 			if($this->_valid_ann($r['policies_issue_date'])){
 				array_push($policy_ann, array('policies_id' => $r['policies_id'], 'policies_provider' =>$r['policies_provider'],  'policies_number' => $r['policies_number'], 'policies_insured_name' => $r['policies_insured_name'], 'policies_issue_date' => $r['policies_issue_date']));
 			}
