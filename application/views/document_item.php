@@ -49,6 +49,10 @@
 	if($mime_type == 'video'){
 	?>
 		<div class="video-player">
+			<video class="simple-video-player" id="document-video" width="100%" controls autoplay>
+				<source src="<?php echo base_url().'src/doc/'.$file;?>" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
 		</div>
 		<?php
 		$video_duration = array();
@@ -83,16 +87,17 @@
 		?>
 	<script>
 		//-----
-		$(document).ready(function(){
-			$('.video-player').simple_video_player({
+			/*$('.video-player').simple_video_player({
 				src: '<?php echo base_url().'src/doc/'.$file;?>',
 				duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
 				captions: JSON.parse('<?php echo json_encode($captions);?>'),
 				autostart: true,
 				out_duration_callback: function(){
 				},
+			});*/
+			simple_video_player1(document.getElementById('document-video'), {
+				duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
 			});
-		});
 		//-----
 		/*const player = new Plyr('#player', {
 			invertTime: false,
