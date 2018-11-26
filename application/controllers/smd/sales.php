@@ -220,11 +220,11 @@ class Sales extends Smd_Controller {
 		echo json_encode($ret);
 	}
 	
-	private function _geterate_fields($policy){
+	private function _generate_fields($policy){
 		$users1 = $this->user_model->get_list('', $sort = array('last_name' => 'ASC', 'first_name' => 'ASC'));
 		$users = array();
 		foreach($users1 as $u){
-			array_push($users, array('text' => $u['first_name'].' '.$u['last_name'].' ('.$u['membership_code'].')', 'value' => $u['membership_code']));
+			array_push($users, array('text' => ucwords(strtolower($u['last_name'])).', '.ucwords(strtolower($u['first_name'])).(empty($u['nick_name']) ? '' : ' ('.ucwords(strtolower($u['nick_name'])).')').' - '.$u['membership_code'], 'value' => $u['membership_code']));
 		}
 		
 		$fields = array();
@@ -312,7 +312,7 @@ class Sales extends Smd_Controller {
 		foreach($fields as $f){
 			$policy[$f] = array_key_exists($f, $post) ? '' : null;
 		}
-		$fields = $this->_geterate_fields($policy);
+		$fields = $this->_generate_fields($policy);
 		$this->load_view('sales/case_view', array('policies_id' =>null, 'fields' => $fields));
 	}
 	
@@ -331,7 +331,7 @@ class Sales extends Smd_Controller {
 			$policy = array();
 		}
 		
-		$fields = $this->_geterate_fields($policy);
+		$fields = $this->_generate_fields($policy);
 		$this->load_view('sales/case_view', array('policies_id' => $policy['policies_id'], 'fields' => $fields));
 	}
 }
