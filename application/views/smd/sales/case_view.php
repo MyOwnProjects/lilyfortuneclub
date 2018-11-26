@@ -39,8 +39,14 @@
 	<?php
 		}
 		else{
+			if($id != 'policies_notes'){
+				$col = 'col-md-6 col-sm-12';
+			}
+			else{
+				$col = 'col-sm-12';
+			}
 	?>
-		<div class="col-md-6 col-ms-12 d-flex prop-row">
+		<div class="<?php echo $col;?> d-flex prop-row">
 			<div class="prop-label"><?php echo $prop['label'];?>:</div>
 			<div class="prop-value flex-fill">
 						<?php
