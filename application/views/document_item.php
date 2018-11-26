@@ -49,7 +49,7 @@
 	if($mime_type == 'video'){
 	?>
 		<div class="video-player">
-			<video class="simple-video-player" id="document-video" width="100%" controls autoplay>
+			<video class="simple-video-player" id="document-video" oncontextmenu="return false;" width="100%" controls autoplay>
 				<source src="<?php echo base_url().'src/doc/'.$file;?>" type="video/mp4">
 				Your browser does not support the video tag.
 			</video>

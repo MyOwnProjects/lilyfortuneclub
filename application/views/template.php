@@ -30,6 +30,7 @@
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery.webui-popover/jquery.webui-popover.js"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/js/tools.js?<?php echo time();?>"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/js/live-chat/live-chat.js?t=<?php echo time();?>"></script>	
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/simple_video_player/simple_video_player.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/simple_video_player/simple_video_player1.js?t=<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/tree_grid/tree_grid.js?t=<?php echo time();?>"></script>		
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/bootstrap-select-master/js/bootstrap-select.min.js"></script>
