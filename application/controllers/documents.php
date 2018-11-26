@@ -107,14 +107,14 @@ class Documents extends Base_Controller {
 		$result = $this->document_model->get_item_with_code($file, $pub_code);
 		
 		if(count($result) != 1){
-			$this->load_view('document_error', array('error' => 'The document does not exist.'));
+			$this->load_view('document_error', array('error' => 'The access code is invalide. Please contact <a href="'.base_url().'contact">Lilyfortuneclub</a> to get the access code.'));
 			return;
 		}
 
 		if(!empty($result[0]['file_name'])){
 			$full_path = getcwd().'/src/doc/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
 			if(!file_exists($full_path)){
-				$this->load_view('document_error', array('error' => '11The document does not exist.'));
+				$this->load_view('document_error', array('error' => 'The document does not exist.'));
 				return;
 			}
 			$mime_type = mime_type($full_path);
