@@ -68,11 +68,11 @@
 		<?php
 		if(isset($m)){
 		?>
-		<p class="text-danger">You can only watch the video for <?php echo str_pad($m, 2, '0', STR_PAD_LEFT).':'.str_pad($s, 2, '0', STR_PAD_LEFT);?> by this access code. To watch the full video, please contact <a href="<?php echo base_url();?>contact" target="_blank">Lilyfortuneclub</a>.</p>
+		<p class="text-danger" style="font-size:18px">You can only watch the video for <?php echo str_pad($m, 2, '0', STR_PAD_LEFT).':'.str_pad($s, 2, '0', STR_PAD_LEFT);?> by this access code. To watch the full video, please contact <a href="<?php echo base_url();?>contact" target="_blank">Lilyfortuneclub</a>.</p>
 		<?php
 		}
 		?>
-		<h2><?php echo $subject;?></h2>
+		<h3><?php echo $subject;?></h3>
 		<div style="line-height:30px">Content Type: <?php echo $content_type;?></div>
 		<?php if(!empty($abstract)){ ?>
 		<div style="line-height:20px"><?php echo str_replace("\n", '<br/>', $abstract);?></div>
