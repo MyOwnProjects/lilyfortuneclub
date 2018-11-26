@@ -22,15 +22,15 @@
 							(510) 501-4697<br/>
 							lily_min_zhu@yahoo.com
 						</div>
-						<div class="col-sm-4 col-xs-4">
-							<b>Sherry Hu</b><br/>
-							(415) 264-1889<br/>
-							Ms_huxin@hotmail.com
-						</div>
-						<div class="col-sm-4 col-xs-4">
+						<div class="col-sm-4 col-xs-6">
 							<b>Minna Millare</b><br/>
 							(415) 828-8841<br/>
 							Minna.millare@gmail.com
+						</div>
+						<div class="col-sm-4 col-xs-6">
+							<b>Bob Wang</b><br/>
+							(408) 718-3622<br/>
+							bob888wang@gmail.com
 						</div>
 					</div>
 				</div>
@@ -45,9 +45,9 @@
 							lily_min_zhu@yahoo.com
 						</div>
 						<div class="col-sm-4 col-xs-6">
-							<b>Yiqing Du</b><br/>
-							(510) 754-9984<br/>
-							yiqingdu@hotmail.com
+							<b>Kun Yang</b><br/>
+							(510) 461-3854<br/>
+							kunyangnew@gmail.com
 						</div>
 						<div class="col-sm-4 col-xs-6">
 							<b>Bob Wang</b><br/>
@@ -68,6 +68,11 @@
 							<b>Kun Yang</b><br/>
 							(510) 461-3854<br/>
 							kunyangnew@gmail.com
+						</div>
+						<div class="col-xs-6">
+							<b>Christine Cen</b><br/>
+							(510) 364-0502<br/>
+							chrislicen@gmail.com
 						</div>
 					</div>
 				</div>
