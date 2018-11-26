@@ -39,20 +39,15 @@
 				<div class="panel-heading">Products</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-sm-4 col-xs-6">
+						<div class="col-sm-6 col-xs-6">
 							<b>Lily Zhu</b><br/>
 							(510) 501-4697<br/>
 							lily_min_zhu@yahoo.com
 						</div>
-						<div class="col-sm-4 col-xs-6">
+						<div class="col-sm-6 col-xs-6">
 							<b>Kun Yang</b><br/>
 							(510) 461-3854<br/>
 							kunyangnew@gmail.com
-						</div>
-						<div class="col-sm-4 col-xs-6">
-							<b>Bob Wang</b><br/>
-							(408) 718-3622<br/>
-							bob888wang@gmail.com
 						</div>
 					</div>
 				</div>
