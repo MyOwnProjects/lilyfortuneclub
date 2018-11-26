@@ -54,7 +54,7 @@
 				Your browser does not support the video tag.
 			</video>
 		</div>
-		<?php
+		<?php 
 		$video_duration = array();
 		if(!empty($duration) && (strtotime('now') > strtotime($expire))){
 			$video_duration = explode(',', $duration);
@@ -66,9 +66,11 @@
 		?>
 		<div class="video-text">
 		<?php
+		$end_text = '';
 		if(isset($m)){
+			$end_text = 'You can only watch the video for '.str_pad($m, 2, '0', STR_PAD_LEFT).':'.str_pad($s, 2, '0', STR_PAD_LEFT).' by this access code. To watch the full video, please contact <a href="'.base_url().'contact" target="_blank">Lilyfortuneclub</a>.';
 		?>
-		<p class="text-danger" style="font-size:18px">You can only watch the video for <?php echo str_pad($m, 2, '0', STR_PAD_LEFT).':'.str_pad($s, 2, '0', STR_PAD_LEFT);?> by this access code. To watch the full video, please contact <a href="<?php echo base_url();?>contact" target="_blank">Lilyfortuneclub</a>.</p>
+		<p class="text-danger" style="font-size:18px"><?php echo $end_text;?></p>
 		<?php
 		}
 		?>
@@ -97,6 +99,7 @@
 			});*/
 			simple_video_player1(document.getElementById('document-video'), {
 				duration: JSON.parse('<?php echo json_encode($video_duration);?>'),
+				end_text: '<?php echo $end_text;?>'
 			});
 		//-----
 		/*const player = new Plyr('#player', {
