@@ -29,7 +29,7 @@
 			}
 		],
 		row_count: 100,
-		order_by: {self_agent: 'DESC', policies_closure_date: 'asc'},
+		order_by: {policies_closure_date: 'asc', self_agent: 'DESC'},
 		filter: {id: 'policies_status', options:{
 			P: '<span class="text-danger">Pending</span>',
 			I: '<span class="text-green"> Inforced</span>',
