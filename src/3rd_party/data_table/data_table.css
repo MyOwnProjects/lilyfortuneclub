@@ -11,7 +11,7 @@
 .data-table table tbody td:not(.data-table-checkbox){padding:5px 10px;font-size:14px;}
 .data-table table thead td.sortable{cursor:pointer}
 .data-table table thead td span{font-size:8px;margin-top:5px}
-.data-table table td.data-table-checkbox{text-align:center;width:30px;padding:5px 0;}
+.data-table table td.data-table-checkbox{text-align:center;width:30px;padding:5px 0;vertical-align:middle}
 .data-table table tbody td.center{text-align:center;padding:20px}
 .data-table table tbody td.loading{padding:20px}
 .data-table table tbody td.loading div{width:40px;height:40px;margin:0 auto;background:url('spinning.gif') no-repeat;}

@@ -313,7 +313,7 @@ function new_item(prop){//title, url, param){
 				.attr('type','button').attr('data-toggle', 'dropdown').appendTo($_d).click(function(){
 				//_search(this);
 			});
-			var $_filter_dropdown_menu = $('<div>').addClass("dropdown-menu").appendTo($_d);
+			var $_filter_dropdown_menu = $('<div>').addClass("dropdown-menu").addClass('dropdown-menu-right').appendTo($_d);
 			$('<a data-value="" href="javascript:void(0)" class="dropdown-item">All</a>').appendTo($_filter_dropdown_menu);
 			for(var filter_id in filter['options']){
 				$('<a data-value="' + filter_id + '" href="javascript:void(0)" class="dropdown-item">' + filter['options'][filter_id] + '</a>').appendTo($_filter_dropdown_menu);
@@ -335,7 +335,7 @@ function new_item(prop){//title, url, param){
 			for(var i = 0; i < header.length; ++i){
 				var $_a = $('<a>').addClass('dropdown-item').appendTo($_dorpdown_ul);
 				$_d = $('<div>').addClass('form-check-label')
-					.html('<label class="form-check-label"><input type="checkbox" class="form-check-input" value="">' + (i == 0 ? 'All' : header[i]['text']) + '</label>');
+					.html('<label class="form-check-label"><input type="checkbox" class="form-check-input columns-display-checkbox" value="' + (i == 0 ? 'all' : header[i]['id']) + '">' + (i == 0 ? 'All' : header[i]['text']) + '</label>');
 				$_a.append($_d);
 			}
 			/*for(var j = 0; j < customized_buttons[i]['sub_menus'].length; ++j){
@@ -557,7 +557,47 @@ function new_item(prop){//title, url, param){
 				location = $(this).attr('edit-url');
 			}
 		});
-                                    this.thead.delegate('.sortable', 'click', function(){
+		$_columns_button_group.delegate('.columns-display-checkbox', 'click', function(){
+			if($(this).val() == 'all'){
+				$_columns_button_group.find('.columns-display-checkbox').prop('checked', $(this).prop('checked'));
+			}
+			else{
+				var check_all = true;
+				$_columns_button_group.find('.columns-display-checkbox').each(function(index, obj){
+					if(index > 0){
+						if(!$(this).prop('checked')){
+							check_all = false;
+						}
+						$_columns_button_group.find('.columns-display-checkbox[value=all]').prop('checked', check_all);
+					}
+				});
+			}
+			
+			$_columns_button_group.find('.columns-display-checkbox').each(function(index, obj){
+				var $_checkbox = $(this);
+				for(var i = 0; i < header.length; ++i){
+					if(header[i]['id'] == $_checkbox.val()){
+						_this.thead.children('tr').each(function(index, obj){
+							if($_checkbox.prop('checked')){
+								$(this).children('td:nth-child(' + (i + 2) + ')').show();
+							}
+							else{
+								$(this).children('td:nth-child(' + (i + 2) + ')').hide();
+							}
+						});
+						_this.tbody.children('tr').each(function(index, obj){
+							if($_checkbox.prop('checked')){
+								$(this).children('td:nth-child(' + (i + 1) + ')').show();
+							}
+							else{
+								$(this).children('td:nth-child(' + (i + 1) + ')').hide();
+							}
+						});
+					}
+				}
+			});
+		});
+        this.thead.delegate('.sortable', 'click', function(){
                                             if($(this).hasClass('sort-asc')){
                                                 $(this).removeClass('sort-asc').addClass('sort-desc');
                                                 $(this).children('i').removeClass('fa-sort-asc').addClass('fa-sort-desc');

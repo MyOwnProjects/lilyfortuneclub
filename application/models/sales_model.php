@@ -225,6 +225,7 @@ class Sales_model extends Base_model{
 			}
 		}
 		$sql = "SELECT policies.*, u1.nick_name, u1.first_name, u1.last_name, u2.nick_name, u2.first_name, u2.last_name, "
+			." IF(policies.policies_closure_date IS NULL, '9999-01-01', policies.policies_closure_date) AS policies_closure_date, "
 			.(empty($agent_ids) ? "" : "IF(policies_writing_agent IN ('".implode("','", $agent_ids)."') OR policies_split_agent IN ('".implode("','", $agent_ids)."'), 1, 0) AS self_agent,")
 			."CONCAT(IF(u1.nick_name IS NULL OR u1.nick_name='', u1.first_name, u1.nick_name), ' ', u1.last_name) AS agent1,
 			CONCAT(IF(u2.nick_name IS NULL OR u2.nick_name='', u2.first_name, u2.nick_name), ' ', u2.last_name) AS agent2 

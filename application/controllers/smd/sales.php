@@ -202,6 +202,7 @@ class Sales extends Smd_Controller {
 				$ret['rows'][$i]['policies_status'] = $r['policies_status'];
 				$ret['rows'][$i]['policies_name'] = $r['policies_insured_name'].'<br/>'.$r['policies_owner_name'];
 				$ret['rows'][$i]['policies_issue_date'] = $r['policies_issue_date'];
+				$ret['rows'][$i]['policies_closure_date'] = $r['policies_closure_date'] == '9999-01-01' ? '' : $r['policies_closure_date'];
 				$writing_agent = empty($r['agent1']) ? $r['policies_writing_agent'] : $r['agent1'].'('.$r['policies_writing_agent'].')';
 				$split_agent = '';
 				if(!empty($r['writing_split_agent'])){
@@ -277,7 +278,7 @@ class Sales extends Smd_Controller {
 				$fields[$n]['tag'] = 'input';
 			}
 
-			if(in_array($n, array('policies_issue_date', 'policies_insured_dob', 'policies_owner_dob'))){
+			if(in_array($n, array('policies_issue_date', 'policies_closure_date', 'policies_insured_dob', 'policies_owner_dob'))){
 				$fields[$n]['type'] = 'date';
 			}
 			if(in_array($n, array('policies_face_amount', 'policies_target_premium'))){
