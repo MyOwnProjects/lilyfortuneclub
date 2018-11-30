@@ -241,10 +241,15 @@ class Sales_model extends Base_model{
 	}
 	
 	public function get_policies($policies_id){
-		$sql = "SELECT * FROM policies WHERE policies_id='$policies_id'";
+		$sql = "SELECT * FROM policies WHERE policies_id='$policies_id'";echo $sql;
 		return $this->db->query($sql);
 	}
 	
+	public function get_policies_where($where = ''){
+		$sql = "SELECT * FROM policies WHERE 1=1 ".(empty($where) ? '' : " AND $where");
+		return $this->db->query($sql);
+	}
+
 	public function update_policy($prop, $where){
 		$values = array();
 		foreach($prop as $n => $v){

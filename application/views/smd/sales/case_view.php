@@ -7,6 +7,7 @@
 .prop-value input:focus, .prop-value select:focus, .prop-value textarea:focus{outline:none;}
 .prop-value textarea{height:200px !important;}
 .bootstrap-select .btn{padding:0;border:none}
+.prop-value input.value-error, .prop-value select.value-error, .prop-value textarea.value-error{border:1px solid #ff0000}
 
 .bootstrap-select .btn-group.open .dropdown-toggle{webkit-box-shadow:none;box-shadow:none}
 .bootstrap-select .btn-default:active, .bootstrap-select .btn-default:focus, .bootstrap-select .btn-default:hover, .bootstrap-select .open>.dropdown-toggle.btn-default {background-color:#fff !important;border-color:#fff !important}
@@ -122,6 +123,31 @@
 	
 </div>
 <script>
+$(document).ready(function(){
+	if(<?php echo empty($policies_id) ? 'true' : 'false';?>){
+		$('#policies_number').change(function(){
+			var $_input = $(this);
+			$.ajax({
+				url: '<?php echo base_url();?>smd/sales/number_existing',
+				method: 'post',
+				dataType: 'json',
+				data: {policies_number: $(this).val().trim()},
+				success: function(data){
+					if(data['exist']){
+						$_input.addClass('value-error');
+					}
+					else{
+						$_input.removeClass('value-error');
+					}
+				},
+				error: function(a, b, c){
+				}
+
+			});
+		});
+	}
+});
+
 $('.dropdown .dropdown-menu .dropdown-item').click(function(){
 	$(this).parent().prev().val($(this).html());
 	$(this).parent().prev().prev().val($(this).attr('value'));
@@ -145,13 +171,7 @@ $('.dropdown .dropdown-menu .dropdown-item').click(function(){
 	}
 });
 
-/*$('.dropdown input.dropdown-toggle').click(function(){
-	$(this).next().children().empty();
-	for(var i =0; i < user_list.length; ++i){
-		var a = $('<a>').addClass('dropdown-item').attr('value', user_list[i]['value']).html(user_list[i]['text']).appendTo($(this).next());
-	}
-});
-*/
+
 $('.dropdown input.dropdown-toggle').keyup(function(e){
 	if($(this).prop('readonly')){
 		return;

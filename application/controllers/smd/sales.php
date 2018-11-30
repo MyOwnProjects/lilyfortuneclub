@@ -335,5 +335,11 @@ class Sales extends Smd_Controller {
 		$fields = $this->_generate_fields($policy);
 		$this->load_view('sales/case_view', array('policies_id' => $policy['policies_id'], 'fields' => $fields));
 	}
+	
+	public function number_existing(){
+		$number = $this->input->post('policies_number');
+		$result = $this->sales_model->get_policies_where("policies_number='$number'");
+		echo json_encode(array('exist' => count($result) > 0));
+	}
 }
 
