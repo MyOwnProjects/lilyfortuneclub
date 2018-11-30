@@ -237,6 +237,8 @@ class Sales_model extends Base_model{
 			.(empty($like_array) ? "" : " AND (".implode(" OR ", $like_array).")")
 			.(empty($order_by) ? "" : " ORDER BY ".implode(",", $order_by))
 			.(empty($limit) ? "" : " LIMIT $limit");
+		
+		echo $sql;exit;
 		return $this->db->query($sql);
 	}
 	
