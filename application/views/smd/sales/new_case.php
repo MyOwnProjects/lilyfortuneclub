@@ -41,10 +41,10 @@ $fields = array();
 			else if($n == 'policies_status'){
 				$fields[$n]['readonly']= 'true';
 				$fields[$n]['options']= array(
+					array('value' => 'Pending', 'text' => 'Pending'),
 					array('value' => 'Active', 'text' => 'Active'),
 					array('value' => 'Approved', 'text' => 'Approved'),
 					array('value' => 'Incomplete', 'text' => 'Incomplete'),
-					array('value' => 'Pending', 'text' => 'Pending'),
 					array('value' => 'Declined', 'text' => 'Declined'),
 				);
 			}
