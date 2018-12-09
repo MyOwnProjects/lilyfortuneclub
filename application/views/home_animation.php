@@ -52,24 +52,10 @@
 			<img src="<?php echo base_url();?>src/img/clock-pointer.png">
 		</div>
 	</div>
-		<?php
-		$bw = 1280;
-		$bh = 712;
-		//$h = 
-		?>
 	<div id="question-bubble"></div>
 </div>
 <script>
-var rb = 400;
-var rs = rb * 0.4;
-var rm = 300;
-var left = rb - rm;
-var top = rb - rm;
-var piw = 100;
-var rc = 20;
-var pw = Math.max(100, rm * 2);
-var sb = 10, sp = 10;
-var bw = 1280, bh = 712;
+
 var rotate1, rotate2;
 var quiz = [
 	['Have you heard about 36 rule and 72 rule in finance industry?', ['36 rule only.', '72 rule only.', 'Both.', 'Neither.'], 1, -1, false, 1], 
@@ -94,14 +80,20 @@ var sm_image_list = [
 
 function resize_all(){
 	var rb = 400;
+	var sb = 10, sp = 10;
+	var rc = 20;
+	var piw = 100;
+	if($('#animation-bk').innerWidth() <= 600){
+		rb = 200;
+		sb = 5;
+		sp = 5;
+		rc = 10;
+		piw = 50;
+	}
 	var rs = rb * 0.4;
-	var rm = 300;
+	var rm = rb * 0.75;
 	var left = rb - rm;
 	var top = rb - rm;
-	var piw = 100;
-	var rc = 20;
-	var pw = Math.max(100, rm * 2);
-	var sb = 10, sp = 10;
 	var bw = 1280, bh = 712;
 	$('#animation-bk').css('height', (rs + rb) + 'px' );
 	$('#animation-block').css('left', '50%').css('margin', (rs / 2 + 20) + 'px 0 ' + (rs / 2 + 20) + 'px -' + rb + 'px')
