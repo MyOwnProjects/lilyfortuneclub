@@ -303,11 +303,8 @@ function show_quiz(){
 		var score = quiz_summary();
 		div.append('<p style="font-size:16px">You score is ' + Math.floor(score * 100)  + '%.</p>');
 		var t = "You don't seem to have enough financial knowledges.";
-		if(score >= 0.8){
-			$t = 'Congratulations! You seem to have much financial knowledges.';
-		}
-		else if(score >= 0.8){
-			$t = 'Congratulations! You seem to have some financial knowledges.';
+		if(score > 0.6){
+			t = 'Congratulations! You seem to have some financial knowledges.';
 		}
 		div.append('<p style="font-size:16px">' + t + ' If you want to learn more about HOW MONEY WORKS, please come to listen to our <a href="<?php echo base_url();?>courses">financial courses</a>.</p>');
 		div.append('<p style="text-align:center"><br/><button class="btn btn-md btn-danger" onclick="quit_quiz();">Close</button></p>');
