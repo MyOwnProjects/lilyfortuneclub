@@ -20,7 +20,7 @@
 #speech-div-wrap{z-index:10;position:absolute;}
 #speech-div{visibility:hidden;border:1px solid#000;white-space:normal;border-radius:5px;background:#e5e5e5;font-size:16px;font-family:Comic Sans MS, cursive, sans-serif;padding:8px 10px;width:155px;height:65px;}
 </style>
-<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jqueryRotate.js?<?php echo time();?>"></script>
+<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jQueryRotate.js?<?php echo time();?>"></script>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-easing/jquery.easing.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-easing/rotate.js"></script>
 <div id="animation-bk">
