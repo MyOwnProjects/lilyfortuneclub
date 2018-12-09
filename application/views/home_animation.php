@@ -19,7 +19,7 @@
 #question-bubble .quiz-option-selected{color:green}
 #speech-div-wrap{z-index:10;position:absolute;}
 #speech-div{float:left;visibility:hidden;border:1px solid#000;white-space:normal;border-radius:5px;background:#e5e5e5;font-size:16px;font-family:Comic Sans MS, cursive, sans-serif;padding:8px 10px;}
-#smd-profile{margin-left:10px;float:right;border-radius:50%;overflow:hidden;background:url(<?php echo base_url();?>/src/img/smd_profile.jpg);background-size:100% 100%}
+#smd-profile{float:right;border-radius:50%;overflow:hidden;background:url(<?php echo base_url();?>/src/img/smd_profile.jpg);background-size:100% 100%}
 </style>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jQueryRotate.js?<?php echo time();?>"></script>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-easing/jquery.easing.min.js"></script>
