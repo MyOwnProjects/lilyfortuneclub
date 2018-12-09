@@ -18,7 +18,8 @@
 .popup_visible #question-bubble {-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1);}
 #question-bubble .quiz-option-selected{color:green}
 #speech-div-wrap{z-index:10;position:absolute;}
-#speech-div{visibility:hidden;border:1px solid#000;white-space:normal;border-radius:5px;background:#e5e5e5;font-size:16px;font-family:Comic Sans MS, cursive, sans-serif;padding:8px 10px;width:155px;height:65px;}
+#speech-div{visibility:hidden;border:1px solid#000;white-space:normal;border-radius:5px;background:#e5e5e5;font-size:16px;font-family:Comic Sans MS, cursive, sans-serif;padding:8px 10px;}
+#smd-profile{margin-left:10px;overflow:hidden;border-radius:50%;overflow:hidden;background:url(<?php echo base_url();?>/src/img/smd_profile.jpg);background-size:100% 100%}
 </style>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jQueryRotate.js?<?php echo time();?>"></script>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-easing/jquery.easing.min.js"></script>
@@ -26,7 +27,7 @@
 <div id="animation-bk">
 	<div id="speech-div-wrap" class="clearfix">
 		<div id="speech-div" class="pull-left text-danger"></div>
-		<div style="margin-left:10px;overflow:hidden;width:80px;height:80px;border-radius:50%;overflow:hidden;background:url(<?php echo base_url();?>/src/img/smd_profile.jpg);background-size:100% 100%"></div>
+		<div id="smd-profile"></div>
 	</div>
 	<div id="animation-block">
 		<div id="animation1">
@@ -83,12 +84,18 @@ function resize_all(){
 	var sb = 10, sp = 10;
 	var rc = 20;
 	var piw = 100;
+	var spw = 80;
+	var sdw = 156;
+	var sdh = 65;
 	if($('#animation-bk').innerWidth() <= 600){
 		rb = 200;
 		sb = 5;
 		sp = 5;
 		rc = 10;
 		piw = 50;
+		//spw = 50;
+		//sdw = 100;
+		//sdh = 130;
 	}
 	var rs = rb * 0.4;
 	var rm = rb * 0.75;
@@ -118,7 +125,10 @@ function resize_all(){
 		.css('margin-top', '-' + rc + 'px');
 	$('.circle-md img').css('height', rm + 'px');
 	
-	$('#speech-div-wrap').css('left', ($('#animation-bk').innerWidth() / 2 + rs) + 'px');
+	$('#smd-profile').css('width', spw + 'px').css('height', spw + 'px');
+	$('#speech-div').css('width', sdw + 'px').css('height', sdh + 'px');
+	$('#speech-div-wrap').css('left', ($('#animation-bk').innerWidth() / 2) + 'px').css('margin-left', '-' + ($('#speech-div-wrap').outerWidth() / 2) + 'px');
+
 }
 
 $(window).resize(function(){
