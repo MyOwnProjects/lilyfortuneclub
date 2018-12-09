@@ -34,7 +34,10 @@
 	});
 </script>
 <div id="main-home">
-	<div class="swiper-container">
+	<?php
+	$this->load->view('home_animation');
+	?>
+	<!--div class="swiper-container">
 		<div class="swiper-wrapper" style="height:580px">
 			<div class="swiper-slide item active clearfix" id="slider-about">
 				<div class="slider-content-wrapper">
@@ -84,7 +87,7 @@
  
 <div class="swiper-button-next"></div>
 <div class="swiper-button-prev"></div>
-</div>
+</div-->
 	<link rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/swiper/css/swiper.min.css">
 	<script src="<?php echo base_url();?>src/3rd_party/swiper/js/swiper.min.js"></script>
 	<script>

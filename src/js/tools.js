@@ -25,6 +25,10 @@ Date.prototype.addHours= function(h){
     return this;
 };
 
+Math.deg2rad = function(d){
+	return d * (Math.PI/180);
+};
+
 String.prototype.padStart = function(targetLength, padChar){
 	var ret = '';
 	for(var i = 0; i < this.length; ++i)
