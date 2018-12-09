@@ -14,20 +14,20 @@
 .circle-md-center{position:absolute;background:#D80027;border-radius:50%}
 .circle-md img{display:block;margin:0 auto;}
 #question-bubble{-webkit-transform: scale(0.8);-moz-transform: scale(0.8);-ms-transform: scale(0.8);transform: scale(0.8);
-	padding:100px 150px 100px 200px;color:#000;position:absolute;top:10px;bottom:10px;background:url(<?php echo base_url();?>src/img/think-bubble-green.png) no-repeat;background-size:100% 100%;}
+	color:#000;position:absolute;top:10px;bottom:10px;}
 .popup_visible #question-bubble {-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1);}
 #question-bubble .quiz-option-selected{color:green}
 #speech-div-wrap{z-index:10;position:absolute;}
-#speech-div{visibility:hidden;border:1px solid#000;white-space:normal;border-radius:5px;background:#e5e5e5;font-size:16px;font-family:Comic Sans MS, cursive, sans-serif;padding:8px 10px;}
-#smd-profile{margin-left:10px;overflow:hidden;border-radius:50%;overflow:hidden;background:url(<?php echo base_url();?>/src/img/smd_profile.jpg);background-size:100% 100%}
+#speech-div{float:left;visibility:hidden;border:1px solid#000;white-space:normal;border-radius:5px;background:#e5e5e5;font-size:16px;font-family:Comic Sans MS, cursive, sans-serif;padding:8px 10px;}
+#smd-profile{margin-left:10px;float:right;border-radius:50%;overflow:hidden;background:url(<?php echo base_url();?>/src/img/smd_profile.jpg);background-size:100% 100%}
 </style>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jQueryRotate.js?<?php echo time();?>"></script>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-easing/jquery.easing.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-easing/rotate.js"></script>
 <div id="animation-bk">
 	<div id="speech-div-wrap" class="clearfix">
-		<div id="speech-div" class="pull-left text-danger"></div>
 		<div id="smd-profile"></div>
+		<div id="speech-div" class="text-danger"></div>
 	</div>
 	<div id="animation-block">
 		<div id="animation1">
@@ -87,17 +87,27 @@ function resize_all(){
 	var spw = 80;
 	var sdw = 156;
 	var sdh = 65;
+	var rs = rb * 0.4;
+	if($('#animation-bk').innerWidth() <= 800){
+		$('#speech-div-wrap').css('left', ($('#animation-bk').innerWidth() / 2) + 'px').css('margin-left', '-' + ($('#speech-div-wrap').outerWidth() / 2) + 'px');
+	}
+	else{
+		$('#speech-div-wrap').css('left', ($('#animation-bk').innerWidth() / 2 + rs) + 'px').css('margin-left', '0');
+	}
 	if($('#animation-bk').innerWidth() <= 600){
 		rb = 200;
+		rs = rb * 0.4;
 		sb = 5;
 		sp = 5;
 		rc = 10;
 		piw = 50;
-		//spw = 50;
-		//sdw = 100;
-		//sdh = 130;
+		$('#question-bubble').css('background', '#fff').css('border', '5px solid #1DB34A').css('padding', '20px')
+			.css('margin', '10px').css('border-radius', '10px');
 	}
-	var rs = rb * 0.4;
+	else{
+		$('#question-bubble').css('background', 'url(<?php echo base_url();?>src/img/think-bubble-green.png) no-repeat')
+			.css('margin', '0').css('background-size', '100% 100%').css('border', 'none').css('padding', '100px 150px 100px 200px');
+	}
 	var rm = rb * 0.75;
 	var left = rb - rm;
 	var top = rb - rm;
@@ -127,8 +137,6 @@ function resize_all(){
 	
 	$('#smd-profile').css('width', spw + 'px').css('height', spw + 'px');
 	$('#speech-div').css('width', sdw + 'px').css('height', sdh + 'px');
-	$('#speech-div-wrap').css('left', ($('#animation-bk').innerWidth() / 2) + 'px').css('margin-left', '-' + ($('#speech-div-wrap').outerWidth() / 2) + 'px');
-
 }
 
 $(window).resize(function(){
