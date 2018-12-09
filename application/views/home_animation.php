@@ -89,7 +89,6 @@ function resize_all(){
 	var sdh = 65;
 	var rs = rb * 0.4;
 	if($('#animation-bk').innerWidth() <= 800){
-		alert(1);
 		$('#speech-div-wrap').css('left', ($('#animation-bk').innerWidth() / 2) + 'px').css('margin-left', '-' + ($('#speech-div-wrap').outerWidth() / 2) + 'px');
 	}
 	else{
