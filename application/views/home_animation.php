@@ -89,10 +89,10 @@ function resize_all(){
 	var sdh = 65;
 	var rs = rb * 0.4;
 	if($('#animation-bk').innerWidth() <= 800){
-		$('#speech-div-wrap').css('left', ($('#animation-bk').innerWidth() / 2) + 'px').css('margin-left', '-' + ($('#speech-div-wrap').outerWidth() / 2) + 'px');
+		$('#speech-div-wrap').css('left', 'auto').css('right', 0);
 	}
 	else{
-		$('#speech-div-wrap').css('left', ($('#animation-bk').innerWidth() / 2 + rs) + 'px').css('margin-left', '0');
+		$('#speech-div-wrap').css('left', ($('#animation-bk').innerWidth() / 2 + rs) + 'px').css('margin-left', '0').css('right', 'auto');
 	}
 	if($('#animation-bk').innerWidth() <= 600){
 		rb = 200;
