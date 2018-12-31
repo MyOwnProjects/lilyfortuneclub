@@ -105,7 +105,7 @@ label{font-weight:normal}
 		<div class="block-plan">
 			<div class="form-group form-group-sm">
 				<a title="Remove the plan" class="btn btn-xs btn-danger" onclick="remove_plan(this);">
-					<span class="glyphicon glyphicon-trash"></span>
+					<i class="fa fa-trash" aria-hidden="true"></i>
 				</a>
 				&nbsp;&nbsp;
 				<label>Code</label>&nbsp;<input type="text" name="plan-code[]" style="width:300px" class="form-control" value="<?php echo array_key_exists('plan_code', $content) ? urldecode($content['plan_code'][$i]) : '';?>">
