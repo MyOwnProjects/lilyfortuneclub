@@ -4,6 +4,7 @@
 .block-plan-template{display:none}
 .block-plan{border-top:1px solid #d5d5d5;padding-top:10px;margin-top:10px}
 label{font-weight:normal}
+a.btn{color:#fff !important}
 </style>
 <div style="margin:40px">
 <h3 class="text-center">Generate Plans</h3>
