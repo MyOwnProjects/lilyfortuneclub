@@ -75,7 +75,7 @@ label{font-weight:normal}
 	</div>
 	<br/>
 	<div class="form-group form-group-sm">  
-		<label>Case Name</label>&nbsp;<input type="text" class="form-control" name="case-name" required value="<?php echo isset($content) && $content['case_name'] ? urldecode($content['case_name']) : ''?>" readonly1>
+		<label>Case Name</label>&nbsp;<input type="text" class="form-control" name="case-name" value="<?php echo isset($content) && $content['case_name'] ? urldecode($content['case_name']) : ''?>" readonly1>
 	</div>
 	<div class="form-group form-group-sm">
 		<label>Case Desc</label>&nbsp;
