@@ -42,7 +42,7 @@ label{font-weight:normal}
 	<br/>
 	<input type="hidden" name="action" value="">
 	<div class="form-group form-group-sm">  
-		<label>Client Name</label>&nbsp;<input type="text" class="form-control" name="client-name" required value="<?php echo isset($content) && $content['client_name'] ? urldecode($content['client_name']) : ''?>">
+		<label>Client Name</label>&nbsp;<input type="text" class="form-control" name="client-name" required value="<?php echo isset($content) && array_key_exists('client_name', $content) ? urldecode($content['client_name']) : ''?>">
 	</div>
 	<div class="form-group form-group-sm">
 		<label>Age</label>&nbsp;<input type="number" class="form-control" min="20" max="100" name="case-age" value="<?php echo isset($content) && $content['case_age'] ? $content['case_age'] : ''?>">
@@ -75,11 +75,11 @@ label{font-weight:normal}
 	</div>
 	<br/>
 	<div class="form-group form-group-sm">  
-		<label>Case Name</label>&nbsp;<input type="text" class="form-control" name="case-name" required value="<?php echo isset($content) && $content['case_name'] ? urldecode($content['case_name']) : ''?>" readonly>
+		<label>Case Name</label>&nbsp;<input type="text" class="form-control" name="case-name" required value="<?php echo isset($content) && $content['case_name'] ? urldecode($content['case_name']) : ''?>" readonly1>
 	</div>
 	<div class="form-group form-group-sm">
 		<label>Case Desc</label>&nbsp;
-		<textarea class="form-control" name="case-desc" style="height:80px;width:600px" readonly><?php echo isset($content) && $content['case_desc'] ? urldecode($content['case_desc']) : ''?></textarea>
+		<textarea class="form-control" name="case-desc" style="height:80px;width:600px" readonly1><?php echo isset($content) && $content['case_desc'] ? urldecode($content['case_desc']) : ''?></textarea>
 	</div>
 	<br/>
 	<div class="form-group">
@@ -142,9 +142,9 @@ label{font-weight:normal}
 				<option value="4">20 years target</option>
 			</select>
 			<br/><br/>
-			<input name="plan-code[]" class="form-control" type="text" style="width:100px" readonly placeholder="Code">
+			<input name="plan-code[]" class="form-control" type="text" style="width:100px" readonly1 placeholder="Code">
 			<br/><br/>
-			<input name="plan-desc[]" class="form-control" type="text" style="width:300px" readonly placeholder="Desc">
+			<input name="plan-desc[]" class="form-control" type="text" style="width:300px" readonly1 placeholder="Desc">
 		</div>
 	</div>
 	<div style="overflow:hidden;">
