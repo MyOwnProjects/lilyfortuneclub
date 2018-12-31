@@ -192,7 +192,7 @@ $blocks = array(
 						?>
 					</tr>
 					<tr>
-						<td class="h <?php echo $a == 100 ? 'b' : ''?>">投资杠杆</td>
+						<td class="h <?php echo $a == 100 ? 'b' : ''?>">投资回报率</td>
 						<?php
 						foreach($plans as $i => $plan){
 						?>
