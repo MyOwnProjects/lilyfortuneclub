@@ -11,31 +11,15 @@
 	<h3 style="text-align:center">Sign In</h3>
 	<br/>
 	<form method="post">
-		<?php $is_guest = isset($as)&& $as == 'guest'; ?>
 		<?php echo $error ? '<div class="alert alert-danger">'.$error.'</div>' : '';?>
-		<div class="form-group">
-			<label for="role">Sign in as</label>
-			<select class="form-control" id="role" name="role" onchange="role_change(this);">
-				<option disabled value="guest" <?php echo $is_guest ? 'selected' : '';?>>Guest</option>
-				<option value="member" <?php echo !$is_guest ? 'selected' : '';?>>Member</option>
-			</select>
-		</div>
-		<div class="form-group g" style="display:<?php echo $is_guest ? 'block' : 'none';?>">
-			<label for="pwd">Full Name</label>
-			<input class="form-control" id="password-g" name="guest-name" required <?php echo $is_guest ? '' : 'disabled';?>>
-		</div>
-		<div class="form-group g" style="display:<?php echo $is_guest ? 'block' : 'none';?>">
-			<label for="pwd">Passcode</label>
-			<input class="form-control" type="password" id="password-g" name="password-g" required <?php echo $is_guest ? '' : 'disabled';?>>
-		</div>
-		<div class="form-group m" style="display:<?php echo !$is_guest ? 'block' : 'none';?>">
+		<div class="form-group m">
 			<label for="email">Username</label>
-			<input class="form-control" id="username" name="username" required autofocus <?php echo !$is_guest ? '' : 'disabled';?>>
+			<input class="form-control" id="username" name="username" required autofocus>
 		</div>
-		<div class="form-group m" style="display:<?php echo !$is_guest ? 'block' : 'none';?>">
+		<div class="form-group m">
 			<a class="pull-right" style="font-size:12px;margin-top:4px" href="<?php echo base_url();?>ac/reset_password">Forget your password?</a>
 			<label for="pwd">Password</label>
-			<input type="password" class="form-control" type="password" id="password" name="password" required <?php echo !$is_guest ? '' : 'disabled';?>>
+			<input type="password" class="form-control" type="password" id="password" name="password" required>
 		</div>
 		<div class="checkbox">
 			<input type="checkbox" style="margin-left:0 !important;" name="save_password" checked>&nbsp;&nbsp;&nbsp;&nbsp;Stay signed in
