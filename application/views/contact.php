@@ -86,7 +86,8 @@
 							<div class="pull-left">
 								<b>Kun Yang</b><br/>
 								(510) 461-3854<br/>
-								kunyangnew@gmail.com
+								kunyangnew@gmail.com<br/>
+								lilyfortuneclub@gmail.com
 							</div>
 							<div class="pull-right">
 								<img style="width:200px" src="<?php echo base_url();?>src/img/webwxgetmsgimg.jpg">
