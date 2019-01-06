@@ -78,7 +78,7 @@
 			?>
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					Administrator<br/>
+					General Questions
 				</div>
 				<div class="panel-body">
 					<div class="row">

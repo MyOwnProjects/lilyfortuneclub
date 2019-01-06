@@ -4,7 +4,7 @@
 </style>
 
 <div style="max-width:1000px;width:100%;padding:40px 20px;margin:0 auto">
-	<h3 class="text-center">Term of Service</h3>
+	<h3 class="text-center">TERM OF SERVICE</h3>
 	<div style="margin:40px auto;width:100%;font-size:16px">
 	<p>Welcome to our website. When you access and use this website you are agreeing to comply with and be bound by the following terms and conditions of use, which, together with our privacy policy, govern Lily Fortune Club’s relationship with you in relation to this website. The term “Lilyfortuneclub” or “Lily Fortune Club” or “us” or “we” refers to the owner of the website. The term “you” refers to the user or viewer of our website.</p>
 	<p>The use of this website is subject to the following terms and conditions:</p>
