@@ -15,7 +15,7 @@ body{font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin:0 auto;fo
 #logo{margin-left:20px}
 #logo a{text-decoration:none;color:#fff}
 #logo img{height:80px}
-footer{text-align:center;color:#353535;padding:20px 20px 40px 20px;font-size:14px;line-height:40px;/*background:url('/img/background/dark-wood-background-1013tm-pic-2573.jpg')*/}
+footer{text-align:center;color:#353535;padding:20px 20px 40px 20px;line-height:30px;/*background:url('/img/background/dark-wood-background-1013tm-pic-2573.jpg')*/}
 
 .main-body-header{text-align:center;line-height:80px;margin-top:20px;font-size:28px;font-weight:bold}
 .main-body-wrapper{width:100%;max-width:1000px;margin:0 auto}
