@@ -85,7 +85,7 @@
 						<div class="col-xs-12 clearfix">
 							<div class="pull-left">
 								<b>Kun Yang</b><br/>
-								(510) 461-3854<br/>
+								1-510-461-3854<br/>
 								kunyangnew@gmail.com<br/>
 								lilyfortuneclub@gmail.com
 							</div>
