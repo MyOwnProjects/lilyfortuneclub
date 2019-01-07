@@ -84,7 +84,7 @@ class Base_controller extends CI_Controller {
 				array(
 					'text' => 'How to',
 					'url' => 'how_to',
-					'icon' => 'question-mark-on-a-circular-black-background.svg',
+					'icon' => 'info-green.svg',
 					'desc' => 'Step by step on how to sign up new members, order medical exam, process 7 pay, change business address, etc.'
 				),
 				array(

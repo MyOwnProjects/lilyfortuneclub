@@ -88,6 +88,7 @@
 								1-510-461-3854<br/>
 								kunyangnew@gmail.com<br/>
 								lilyfortuneclub@gmail.com
+								
 							</div>
 							<div class="pull-right">
 								<img style="width:200px" src="<?php echo base_url();?>src/img/webwxgetmsgimg.jpg">
