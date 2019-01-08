@@ -38,7 +38,7 @@
 				<?php
 				foreach($category['questions'] as $q_id => $c){
 				?>
-				<div><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
+				<div style="line-height:20px"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
 				<?php
 				}
 				?>
@@ -48,7 +48,7 @@
 				<?php
 				foreach($category['questions'] as $c){
 				?>
-				<div id="<?php echo $q_id;?>">
+				<div id="<?php echo $q_id;?>" style="margin:20px 0 10px 0">
 					<b><?php echo $c['subject'];?></b>&nbsp;&nbsp;&nbsp;&nbsp;
 					<button class="btn btn-xs btn-primary" title="edit question" onclick="edit_question(this, <?php echo $q_id;?>);"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;Edit</button>
 				</div>
