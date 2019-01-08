@@ -1,4 +1,5 @@
 <style>
+.nav-tabs{white-space:nowrap;overflow:ellipsis}	
 .nav-tabs-2>li{width:50%}
 .nav-tabs-3>li:not(:last-child){width:33%}
 .nav-tabs-3>li:last-child{width:34%}
