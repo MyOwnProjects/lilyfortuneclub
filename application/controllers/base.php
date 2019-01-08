@@ -79,16 +79,10 @@ class Base_controller extends CI_Controller {
 			),
 		));
 		array_push($this->navigation, array(
-			'text' => 'Tools',
+			'text' => 'License',
 			'sub_menu' => array(
 				array(
-					'text' => 'How to',
-					'url' => 'how_to',
-					'icon' => 'info-green.svg',
-					'desc' => 'Step by step on how to sign up new members, order medical exam, process 7 pay, change business address, etc.'
-				),
-				array(
-					'text' => 'License',
+					'text' => 'Instruction',
 					'url' => 'license',
 					'icon' => 'certificate.svg',
 					'desc' => 'The specific 5 steps of license application, and exam practice. Online courses, license exam, licen application, continuing education, and provider appointment.',
