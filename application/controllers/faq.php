@@ -20,7 +20,9 @@ class Faq extends Base_controller {
 				$c[$category_id] = array('text' => $r['editable_contents_categories_text'], 
 					'questions' => array());
 			}
-			$c[$category_id]['questions'][$r['editable_contents_id']] = array('subject' => $r['editable_contents_subject'], 'body' => $r['editable_contents_body']);
+			if(isset($r['editable_contents_id'])){
+				$c[$category_id]['questions'][$r['editable_contents_id']] = array('subject' => $r['editable_contents_subject'], 'body' => $r['editable_contents_body']);
+			}
 		}
 		$this->load_view('account/faq', array('editable_contents' => $c));
 	}
