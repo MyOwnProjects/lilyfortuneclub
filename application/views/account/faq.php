@@ -22,7 +22,9 @@
 		$i = 0;
 		foreach($editable_contents as $c_id => $category){
 		?>
-		<li <?php echo $i == $active_page ? 'class="active"' : '';?>><a data-toggle="tab" href="#faq-page-<?php echo $i + 1;?>"><?php echo $category['text'];?></a></li>
+		<li <?php echo $i == $active_page ? 'class="active"' : '';?>>
+			<a data-toggle="tab" href="#faq-page-<?php echo $i + 1;?>"><?php echo $category['text'];?></a>
+		</li>
 		<?php
 		++$i;
 		}
@@ -35,14 +37,16 @@
 		?>
 		<div id="faq-page-<?php echo $i + 1;?>" class="tab-pane fade <?php echo $i == $active_page ? 'in active' : '';?> tab-content-page">
 			<div style="margin:20px 0 40px 0">
+				<div class="text-right"><button class="btn btn-xs btn-success" title="new question" onclick="new_question(<?php echo $c_id;?>, '<?php echo $category['text'];?>', <?php echo $i;?>);"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;New</button></div>
+				<div class="row">
 				<?php
 				foreach($category['questions'] as $q_id => $c){
 				?>
-				<div style="line-height:30px"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
+				<div class="col-lg-6 col-md-6 col-sm-12" style="line-height:30px"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
 				<?php
 				}
 				?>
-				<div><button class="btn btn-xs btn-success" title="new question" onclick="new_question(<?php echo $c_id;?>, '<?php echo $category['text'];?>', <?php echo $i;?>);"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;New</button></div>
+				</div>
 			</div>
 			<div>
 				<?php
