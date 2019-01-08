@@ -12,6 +12,7 @@ class Faq extends Base_controller {
 	}
 	
 	public function index(){
+		$active_page = intval($this->input->get('active_page'));
 		$result = $this->editable_contents_model->get_all();
 		$c = array();
 		foreach($result as $r){
@@ -24,7 +25,7 @@ class Faq extends Base_controller {
 				$c[$category_id]['questions'][$r['editable_contents_id']] = array('subject' => $r['editable_contents_subject'], 'body' => $r['editable_contents_body']);
 			}
 		}
-		$this->load_view('account/faq', array('editable_contents' => $c));
+		$this->load_view('account/faq', array('editable_contents' => $c, 'active_page' => $active_page));
 	}
 	
 	public function new_question(){

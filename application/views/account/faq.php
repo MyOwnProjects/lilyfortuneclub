@@ -22,7 +22,7 @@
 		$i = 0;
 		foreach($editable_contents as $c_id => $category){
 		?>
-		<li <?php echo $i == 0 ? 'class="active"' : '';?>><a data-toggle="tab" href="#faq-page-<?php echo $i + 1;?>"><?php echo $category['text'];?></a></li>
+		<li <?php echo $i == $active_page ? 'class="active"' : '';?>><a data-toggle="tab" href="#faq-page-<?php echo $i + 1;?>"><?php echo $category['text'];?></a></li>
 		<?php
 		++$i;
 		}
@@ -33,7 +33,7 @@
 		$i = 0;
 		foreach($editable_contents as $c_id => $category){
 		?>
-		<div id="faq-page-<?php echo $i + 1;?>" class="tab-pane fade <?php echo $i == 0 ? 'in active' : '';?> tab-content-page">
+		<div id="faq-page-<?php echo $i + 1;?>" class="tab-pane fade <?php echo $i == $active_page ? 'in active' : '';?> tab-content-page">
 			<div style="margin:20px 0 40px 0">
 				<?php
 				foreach($category['questions'] as $q_id => $c){
