@@ -42,11 +42,11 @@
 				<?php
 				}
 				?>
-				<div><button class="btn btn-xs btn-success" title="new question" onclick="new_question(<?php echo $c_id;?>);"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;New</button></div>
+				<div><button class="btn btn-xs btn-success" title="new question" onclick="new_question(<?php echo $c_id;?>, '<?php echo $category['text'];?>');"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;New</button></div>
 			</div>
 			<div>
 				<?php
-				foreach($category['questions'] as $c){
+				foreach($category['questions'] as $q_id => $c){
 				?>
 				<div id="<?php echo $q_id;?>" style="margin:20px 0 10px 0">
 					<b><?php echo $c['subject'];?></b>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -67,44 +67,25 @@
 		?>
 	</div>
 </div>
-<div id="edit-block" style="display:none">
-	<div class="form-group">
-		<select class="form-control input-sm category" readonly>
-			<?php
-			foreach($editable_contents as $c_id => $category){
-			?>
-			<option value="<?php echo $c_id;?>"><?php echo $category['text'];?></option>
-			<?php
-			}
-			?>
-		</select>
-	</div>
-	<div class="form-group">
-		<label>Question</label>
-		<input type="text" class="form-control input-sm edit-subject">
-	</div>
-	<div class="form-group">
-		<label>Answer</label>
-		<textarea class="form-control input-sm edit-body" style="height:150px"></textarea>
-	</div>
-</div>
 <script>
-function new_question(c_id){
+function new_question(c_id, c_text){
 	if(<?php echo $user ? 'true' : 'false'?>){
-		$('#edit-block .category').show();
-		$('#edit-block .category .edit-subject').val('');
-		$('#edit-block .category .edit-body').val('');
-		$('#edit-block .category option').each(function(index, obj){
-			if($(obj).val() == c_id){
-				$(obj).attr('selected', 'selected');
-			}
-			else{
-				$(obj).prop('selected', false);
-			}
-		});
+		var wrapper = $('<div>');
+		var form_group = $('<div>').addClass('form-group').appendTo(wrapper);
+		var input = $('<select>').addClass('form-control').addClass('input-sm').addClass('category');
+		$('<option>').val(c_id).attr('selected', 'selected').html(c_text).appendTo(input);
+		form_group.append(input);
+		form_group = $('<div>').addClass('form-group').appendTo(wrapper);
+		form_group.append('<label>Question</label>');
+		input = $('<input>').attr('type', 'text').addClass('form-control').addClass('input-sm').addClass('edit-subject');
+		form_group.append(input);
+		form_group = $('<div>').addClass('form-group').appendTo(wrapper);
+		form_group.append('<label>Answer</label>');
+		input = $('<textarea>').addClass('form-control').addClass('input-sm').addClass('edit-body').css('height', '150px');
+		form_group.append(input);
 		bootbox.dialog({
 			title: "New Question",
-			message: $('#edit-block').html(),
+			message: wrapper.html(),
 			buttons: [
 				{
 					label: '<i class="fa fa-check"></i> Submit',
