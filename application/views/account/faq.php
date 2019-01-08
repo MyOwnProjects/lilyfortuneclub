@@ -52,7 +52,7 @@
 					<b><?php echo $c['subject'];?></b>&nbsp;&nbsp;&nbsp;&nbsp;
 					<button class="btn btn-xs btn-primary" title="edit question" onclick="edit_question(this, <?php echo $q_id;?>);"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;Edit</button>
 				</div>
-				<div>
+				<div style="margin-left:10px">
 					<p><?php echo str_replace("\n", "</p><p>", $c['body']);?></p>
 				</div>
 				<br/>
