@@ -43,7 +43,7 @@
 				<?php
 				foreach($category['questions'] as $q_id => $c){
 				?>
-				<div class="col-lg-6 col-md-6 col-sm-12" style="line-height:30px"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
+				<div class="col-lg-6 col-md-6 col-sm-12" style="padding:5px"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
 				<?php
 				}
 				?>
