@@ -42,7 +42,7 @@
 				<?php
 				}
 				?>
-				<div><button class="btn btn-xs btn-success" title="new question" onclick="new_question(<?php echo $c_id;?>, '<?php echo $category['text'];?>');"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;New</button></div>
+				<div><button class="btn btn-xs btn-success" title="new question" onclick="new_question(<?php echo $c_id;?>, '<?php echo $category['text'];?>', <?php echo $i;?>);"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;New</button></div>
 			</div>
 			<div>
 				<?php
@@ -50,7 +50,7 @@
 				?>
 				<div id="<?php echo $q_id;?>" style="margin:20px 0 10px 0">
 					<b><?php echo $c['subject'];?></b>&nbsp;&nbsp;&nbsp;&nbsp;
-					<button class="btn btn-xs btn-primary" title="edit question" onclick="edit_question(this, <?php echo $q_id;?>);"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;Edit</button>
+					<button class="btn btn-xs btn-primary" title="edit question" onclick="edit_question(<?php echo $q_id;?>, <?php echo $i;?>);"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;Edit</button>
 				</div>
 				<div style="margin-left:10px">
 					<p><?php echo str_replace("\n", "</p><p>", $c['body']);?></p>
@@ -68,7 +68,7 @@
 	</div>
 </div>
 <script>
-function new_question(c_id, c_text){
+function new_question(c_id, c_text, active_page){
 	if(<?php echo $user ? 'true' : 'false'?>){
 		var wrapper = $('<div>');
 		var form_group = $('<div>').addClass('form-group').appendTo(wrapper);
@@ -95,14 +95,14 @@ function new_question(c_id, c_text){
 						$.ajax({
 							url: '<?php echo base_url()?>faq/new_question',
 							method: 'post',
-							data: {category: <?php echo $c_id;?>, 
+							data: {category: c_id, 
 								subject: $('.bootbox-body .edit-subject').val(),
 								body: $('.bootbox-body .edit-body').val() 
 							},
 							dataType: 'json',
 							success: function(data){
 								if(data['success']){
-									location.reload();
+									location.href="<?php echo base_url();?>faq?active_page=" + active_page;
 								}
 							},
 							error: function(a, b, c){
@@ -124,7 +124,7 @@ function new_question(c_id, c_text){
 	}
 }
 
-function edit_question(btn, q_id){
+function edit_question(q_id, active_page){
 	if(<?php echo $user ? 'true' : 'false'?>){
 		ajax_loading(true);
 		$.ajax({
@@ -161,7 +161,7 @@ function edit_question(btn, q_id){
 									dataType: 'json',
 									success: function(data){
 										if(data['success']){
-											location.reload();
+											location.href="<?php echo base_url();?>faq?active_page=" + active_page;
 										}
 									},
 									error: function(a, b, c){
