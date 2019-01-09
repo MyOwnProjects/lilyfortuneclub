@@ -54,8 +54,15 @@
 				foreach($category['questions'] as $q_id => $c){
 				?>
 				<div id="<?php echo $q_id;?>" style="margin:20px 0 10px 0">
-					<b><?php echo $c['subject'];?></b>&nbsp;&nbsp;&nbsp;&nbsp;
+					<b><?php echo $c['subject'];?></b>
+					<?php
+					if($c['editable'] == 'Y'){
+					?>
+					&nbsp;&nbsp;&nbsp;&nbsp;
 					<button class="btn btn-xs btn-primary" title="edit question" onclick="edit_question(<?php echo $q_id;?>, <?php echo $i;?>);"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;Edit</button>
+					<?php
+					}
+					?>
 				</div>
 				<div style="margin-left:10px">
 					<p><?php echo str_replace("\n", "</p><p>", $c['body']);?></p>

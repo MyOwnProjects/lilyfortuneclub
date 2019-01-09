@@ -67,7 +67,7 @@ class Editable_contents_model extends Base_model{
 		try{
 			$this->db->query("BEGIN");
 			$sql = "UPDATE editable_contents SET editable_contents_subject='$subject',
-				editable_contents_body='$body' WHERE editable_contents_id='$g_id'";
+				editable_contents_body='$body' WHERE editable_contents_id='$g_id' AND editable_contents_editable='Y'";
 			if(!$this->db->query($sql)){
 				throw new Exception("");
 			}

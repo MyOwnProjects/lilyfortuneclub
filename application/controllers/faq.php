@@ -22,7 +22,11 @@ class Faq extends Base_controller {
 					'questions' => array());
 			}
 			if(isset($r['editable_contents_id'])){
-				$c[$category_id]['questions'][$r['editable_contents_id']] = array('subject' => $r['editable_contents_subject'], 'body' => $r['editable_contents_body']);
+				$c[$category_id]['questions'][$r['editable_contents_id']] = array(
+					'subject' => $r['editable_contents_subject'], 
+					'body' => $r['editable_contents_body'],
+					'editable' => $r['editable_contents_editable']
+				);
 			}
 		}
 		$this->load_view('account/faq', array('editable_contents' => $c, 'active_page' => $active_page));
