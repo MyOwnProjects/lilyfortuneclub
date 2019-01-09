@@ -84,11 +84,12 @@
 					<div class="row">
 						<div class="col-xs-12 clearfix">
 							<div class="pull-left">
-								<b>Kun Yang</b><br/>
+								<span style="font-family:微软雅黑"><b>Kun Yang / 杨昆</b></span><br/>
 								1-510-461-3854<br/>
 								kunyangnew@gmail.com<br/>
-								lilyfortuneclub@gmail.com
-								
+								lilyfortuneclub@gmail.com<br/>
+								<span style="font-family:微软雅黑">中国大陆客户可发送电子邮件至：</span><br/>
+								lilyfortuneclub@yahoo.com
 							</div>
 							<div class="pull-right">
 								<img style="width:200px" src="<?php echo base_url();?>src/img/webwxgetmsgimg.jpg">
