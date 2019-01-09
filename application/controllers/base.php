@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Base_controller extends CI_Controller {
-	protected $user = null;
+	protected $get_baseshopuser = null;
 	protected $navigation = array();
 	protected $is_mobile;
 	public function __construct(){
@@ -79,20 +79,27 @@ class Base_controller extends CI_Controller {
 			),
 		));
 		array_push($this->navigation, array(
-			'text' => 'License',
+			'text' => 'Tools',
 			'sub_menu' => array(
 				array(
-					'text' => 'Instruction',
+					'text' => 'License Instruction',
 					'url' => 'license',
 					'icon' => 'certificate.svg',
 					'desc' => 'The specific 5 steps of license application, and exam practice. Online courses, license exam, licen application, continuing education, and provider appointment.',
 				),
 				array(
-					'text' => 'Exam Practice',
+					'text' => 'License Exam Practice',
 					'url' => 'documents?content_type=license',
 					'member_access' => true,
 					'icon' => 'practice.svg',
 					'desc' => 'Exam questions helpful to your license exam.',
+				),
+				array(
+					'text' => 'Welcome Email',
+					'url' => 'welcome_email',
+					'member_access' => true,
+					'icon' => 'back-closed-envelope-shape.svg',
+					'desc' => 'Welcome email template to sent to your new team member.',
 				),
 			),
 		));

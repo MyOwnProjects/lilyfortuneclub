@@ -69,8 +69,7 @@ class License extends Base_controller {
 							'To download your license, go to <a href="https://interactive.web.insurance.ca.gov/eLicense/index.jsp" target="_blank">download your license</a>.'
 						),
 		));
-	if($this->user['membership_code'] != 'GUEST'){
-		if($this->user['preference'] == 'B' || $this->user['preference'] == 'BE'){
+	if(in_array($this->user['membership_code'], array('24KIZ', '27QUE'))){
 			array_push($steps, array(
 					'title' => 'CE',
 					'comment' =>'You can only pass the CE exam after you get your licen number, however, you can start to learn the curses during the course of  the license application..',
@@ -106,7 +105,6 @@ class License extends Base_controller {
 							'<b>Additional Email.</b> Send an email to wfghost@transamerica.com and wfglicenseapps@transamerica.com, attached with license certificate and all required CE certificate (both resident and nonresident state CE certificate, for nonresident appointment).',
 					),
 				));
-			}
 		}
 		$this->summary = array(
 			'summary' => 'There are 2 or 3 steps to get your license, denpends on the state',
