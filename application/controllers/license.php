@@ -69,7 +69,7 @@ class License extends Base_controller {
 							'To download your license, go to <a href="https://interactive.web.insurance.ca.gov/eLicense/index.jsp" target="_blank">download your license</a>.'
 						),
 		));
-	if($this->user && in_array($this->user['membership_code'], array('24KIZ', '27QUE'))){
+		if($this->user && in_array($this->user['membership_code'], array('24KIZ', '27QUE'))){
 			array_push($steps, array(
 					'title' => 'CE',
 					'comment' =>'You can only pass the CE exam after you get your licen number, however, you can start to learn the curses during the course of  the license application..',

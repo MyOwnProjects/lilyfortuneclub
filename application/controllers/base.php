@@ -4,6 +4,7 @@ class Base_controller extends CI_Controller {
 	protected $get_baseshopuser = null;
 	protected $navigation = array();
 	protected $is_mobile;
+	public $user = null;
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper('cookie');
