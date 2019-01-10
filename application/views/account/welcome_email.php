@@ -56,7 +56,7 @@ function get_member_info(){
 		success:function(data){
 			console.log(data);
 			var sep = "\n";
-			var welcome_email_template = "Hi "+ (data['info']['nick_name'] ? data['info']['nick_name'] : data['info']['first_name']) + ","
+			var welcome_email_template = "Hi "+ String(data['info']['nick_name'] ? data['info']['nick_name'] : data['info']['first_name']).firstUpper() + ","
 				+ sep
 				+ sep + "Hearty Congratulations on becoming a member of Lily Fortune Club / WFG!"
 				+ sep

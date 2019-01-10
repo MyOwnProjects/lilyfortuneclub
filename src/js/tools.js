@@ -41,6 +41,11 @@ String.prototype.padStart = function(targetLength, padChar){
 	return ret;
 };
 
+String.prototype.firstUpper = function(){
+	str = this.toLowerCase();
+	return str.charAt(0).toUpperCase() + str.substr(1);
+};
+
 function timeStr(hour, minute){
 	if(minute !== undefined){
 		if(minute < 10)
