@@ -24,6 +24,7 @@ footer{text-align:center;color:#353535;padding:20px 20px 40px 20px;line-height:3
 .red, .error{color:#FF0000}
 
 .breadcrumb{background-color:#fff;margin-bottom:0;line-height:30px}
+.nav-tabs{white-space:nowrap;overflow:ellipsis}
 
 .text-red{color:red}
 .text-lime{color:lime}

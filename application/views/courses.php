@@ -20,8 +20,8 @@
 <div class="main-body-wrapper clearfix">
 	<div style="margin:0 auto;max-width:800px;padding:20px 0 80px 0;">
 	<ul class="nav nav-tabs nav-tabs-2 clearfix" id="top-tab">
-		<li class="active"><a data-toggle="tab" href="#courses-F">Financial Concept Classes</a></li>
-		<li><a data-toggle="tab" href="#courses-B">BFS/Marketing Classes</a></li>
+		<li class="active"><a data-toggle="tab" href="#courses-F">Financial Concept</a></li>
+		<li><a data-toggle="tab" href="#courses-B">BFS/Marketing</a></li>
 	</ul>
 	<div id="tab-content-pages" class="tab-content">
 		<?php
