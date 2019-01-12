@@ -16,13 +16,23 @@ class Faq extends Base_controller {
 		$result = $this->editable_contents_model->get_all();
 		$c = array();
 		foreach($result as $r){
-			$category_id = $r['editable_contents_categories_id'];
-			if(!array_key_exists($category_id, $c)){
-				$c[$category_id] = array('text' => $r['editable_contents_categories_text'], 
+			$c_id = $r['editable_contents_categories_id'];
+			if($r['parent'] == 0){
+				if(!array_key_exists($c_id, $c)){
+					$c[$c_id] = array('text' => $r['editable_contents_categories_text'], 
+						'sub_c' => array()
+					);
+				}
+			}
+			else{
+				$c[$r['parent']]['sub_c'][$c_id] = array('text' => $r['editable_contents_categories_text'], 
 					'questions' => array());
 			}
+		}
+		foreach($result as $r){
+			$c_id = $r['editable_contents_categories_id'];
 			if(isset($r['editable_contents_id'])){
-				$c[$category_id]['questions'][$r['editable_contents_id']] = array(
+				$c[$r['parent']]['sub_c'][$c_id]['questions'][$r['editable_contents_id']] = array(
 					'subject' => $r['editable_contents_subject'], 
 					'body' => $r['editable_contents_body'],
 					'editable' => $r['editable_contents_editable']

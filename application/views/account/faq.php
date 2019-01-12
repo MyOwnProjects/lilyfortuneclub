@@ -38,20 +38,35 @@
 		?>
 		<div id="faq-page-<?php echo $i + 1;?>" class="tab-pane fade <?php echo $i == $active_page ? 'in active' : '';?> tab-content-page">
 			<div style="margin:20px 0 40px 0">
-				<div class="text-right"><button class="btn btn-xs btn-success" title="new question" onclick="new_question(<?php echo $c_id;?>, '<?php echo $category['text'];?>', <?php echo $i;?>);"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;New</button></div>
-				<div class="row">
 				<?php
-				foreach($category['questions'] as $q_id => $c){
+				foreach($category['sub_c'] as $sub_c_id => $sub_category){
 				?>
-				<div class="col-lg-6 col-md-6 col-sm-12" style="padding:5px"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<?php echo $sub_category['text'];?>&nbsp;&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-xs btn-success pull-right" style="margin-top:2px;font-size:10px" title="new question" onclick="new_question(<?php echo $sub_c_id;?>, '<?php echo  $category['text'].' / '.$sub_category['text'];?>', <?php echo $i;?>);"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;New</button>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+					<?php
+					foreach($sub_category['questions'] as $q_id => $c){
+					?>
+						<div class="col-lg-6 col-md-6 col-sm-12" style="padding:5px 10px"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
+					<!--div style="padding:5px"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?>ddgsdgs</a></div-->
+					<?php
+					}
+					?>
+					</div>
+					</div>
+				</div>
 				<?php
 				}
 				?>
-				</div>
 			</div>
 			<div>
 				<?php
-				foreach($category['questions'] as $q_id => $c){
+					foreach($category['sub_c'] as $sub_category){
+						foreach($sub_category['questions'] as $q_id => $c){
 				?>
 				<div id="<?php echo $q_id;?>" style="margin:20px 0 10px 0">
 					<b><?php echo $c['subject'];?></b>
@@ -59,7 +74,7 @@
 					if($c['editable'] == 'Y'){
 					?>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<button class="btn btn-xs btn-primary" title="edit question" onclick="edit_question(<?php echo $q_id;?>, <?php echo $i;?>);"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;Edit</button>
+					<button class="btn btn-xs btn-primary" style="font-size:10px;margin-top:-2px" title="edit question" onclick="edit_question(<?php echo $q_id;?>, <?php echo $i;?>);"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;Edit</button>
 					<?php
 					}
 					?>
@@ -69,6 +84,7 @@
 				</div>
 				<br/>
 				<?php
+					}
 				}
 				?>
 			</div>
