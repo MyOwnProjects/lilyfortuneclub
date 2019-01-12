@@ -51,8 +51,9 @@
 					<?php
 					foreach($sub_category['questions'] as $q_id => $c){
 					?>
-						<div class="col-lg-6 col-md-6 col-sm-12" style="padding:5px 10px"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
-					<!--div style="padding:5px"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?>ddgsdgs</a></div-->
+						<div class="col-lg-6 col-md-6 col-sm-12" style="padding:10px">
+							- <a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a>
+						</div>
 					<?php
 					}
 					?>
