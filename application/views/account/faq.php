@@ -49,10 +49,12 @@
 					<div class="panel-body">
 						<div class="row">
 					<?php
+					$i = 1;
 					foreach($sub_category['questions'] as $q_id => $c){
 					?>
-						<div class="col-lg-6 col-md-6 col-sm-12" style="padding:10px">
-							- <a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a>
+						<div class="col-lg-6 col-md-6 col-sm-12 clearfix" style="padding:10px">
+							<div class="pull-left"><?php echo $i++;?>. </div> 
+							<div style="overflow:hidden"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
 						</div>
 					<?php
 					}
