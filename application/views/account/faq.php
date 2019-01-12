@@ -53,7 +53,7 @@
 					foreach($sub_category['questions'] as $q_id => $c){
 					?>
 						<div class="col-lg-6 col-md-6 col-sm-12 clearfix" style="padding:10px">
-							<div class="pull-left"><?php echo $i++;?>. </div> 
+							<div class="pull-left" style="width:30px;color:#337ab7"><?php echo $i++;?>. </div> 
 							<div style="overflow:hidden"><a href="#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
 						</div>
 					<?php
