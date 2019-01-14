@@ -82,9 +82,9 @@
 		<?php } 
 //-----
 		$captions = array();
-		if(!empty($video_duration)){
-			$captions = array(array(0, $video_duration[1] + 1, 'Please contact Lilyfortuneclub to get the full video'));
-		}
+		//if(!empty($video_duration)){
+		//	$captions = array(array(0, $video_duration[1] + 1, 'Please contact Lilyfortuneclub to get the full video'));
+		//}
 //---------		
 		?>
 	<script>
