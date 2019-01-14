@@ -57,7 +57,30 @@ class Documents extends Base_Controller {
 				return;
 			}
 			if($result[0]['mime_content_type'] == 'VIDEO'){
-				$this->load_view('document_code');
+				if(!empty($result[0]['file_name'])){
+					$full_path = getcwd().'/src/doc/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
+					if(!file_exists($full_path)){
+						$this->load_view('document_error', array('error' => 'The document does not exist.'));
+						return;
+					}
+					$mime_type = mime_type($full_path);
+					$content_mime_type = $mime_type[0];
+					$file = $result[0]['uniqid'].'.'.$result[0]['file_name'];
+				}
+
+				if($this->input->is_ajax_request()){
+					echo json_encode(array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
+				}
+				else{//media
+					$docs = $this->document_model->get_list('', array(), '');
+					$this->load_view('document_item', array('uniqid' => $result[0]['uniqid'], 'abstract' => $result[0]['abstract'], 
+						'expire' => $result[0]['expire'], 'duration' => $result[0]['video_duration'], 
+						'subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 
+						'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 
+						'name' => $result[0]['file_name'], 'abstract' => $result[0]['abstract'],
+						'docs' => $docs));
+				}
+				//$this->load_view('document_code');
 				return;
 			}
 
@@ -110,7 +133,7 @@ class Documents extends Base_Controller {
 			$this->load_view('document_error', array('error' => 'The access code is invalide. Please contact <a href="'.base_url().'contact">Lilyfortuneclub</a> to get the access code.'));
 			return;
 		}
-
+return;
 		if(!empty($result[0]['file_name'])){
 			$full_path = getcwd().'/src/doc/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
 			if(!file_exists($full_path)){
@@ -122,7 +145,7 @@ class Documents extends Base_Controller {
 			$file = $result[0]['uniqid'].'.'.$result[0]['file_name'];
 		}
 
-		if($this->input->is_ajax_request()){echo 1;
+		if($this->input->is_ajax_request()){
 			echo json_encode(array('subject' => $result[0]['subject'], 'content_type' => $result[0]['content_type'], 'html_content' =>$result[0]['html_content'], 'mime_type' => $content_mime_type, 'file' => $file, 'name' => $result[0]['file_name']));
 		}
 		else{//media
