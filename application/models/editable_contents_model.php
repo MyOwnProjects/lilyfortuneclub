@@ -15,7 +15,7 @@ class Editable_contents_model extends Base_model{
 		$sql = "SELECT * FROM editable_contents_categories ecc 
 			LEFT JOIN editable_contents ec ON 
 			ecc.editable_contents_categories_id=ec.editable_contents_category 
-			ORDER BY ecc.editable_contents_categories_id ASC, ec.editable_contents_sub_category ASC, 
+			ORDER BY ecc.parent ASC, ecc.editable_contents_categories_id ASC, 
 			ec.editable_contents_id DESC";
 		return $this->db->query($sql);
 	}
@@ -23,7 +23,12 @@ class Editable_contents_model extends Base_model{
 	public function new_question($user, $c_id, $subject, $body){
 		$subject = addslashes(strip_tags(trim($subject)));
 		$body = preg_replace('/\n+/', "\n", trim($body));
-		$body = addslashes(strip_tags($body));
+		if($user['membership_code'] == '24KIZ' || $user['membership_code'] == '27QUE'){
+			$body = addslashes($body);
+		}
+		else{
+			$body = addslashes(strip_tags($body));
+		}
 		try{
 			$this->db->query("BEGIN");
 			$sql = "INSERT INTO editable_contents (editable_contents_subject,editable_contents_body,
@@ -63,7 +68,12 @@ class Editable_contents_model extends Base_model{
 	public function update_question($user, $g_id, $subject, $body){
 		$subject = addslashes(strip_tags(trim($subject)));
 		$body = preg_replace('/\n+/', "\n", trim($body));
-		$body = addslashes(strip_tags($body));
+		if($user['membership_code'] == '24KIZ' || $user['membership_code'] == '27QUE'){
+			$body = addslashes($body);
+		}
+		else{
+			$body = addslashes(strip_tags($body));
+		}
 		try{
 			$this->db->query("BEGIN");
 			$sql = "UPDATE editable_contents SET editable_contents_subject='$subject',
