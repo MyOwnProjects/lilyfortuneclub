@@ -52,9 +52,9 @@ class Documents extends Base_Controller {
 				$this->load_view('document_error', array('error' => 'The document or video does not exist.'));
 				return;
 			}
-			if(empty($this->user) && $result[0]['grade_access'] != 'G'){
-				$this->load_view('document_error', array('error' => '<p>You don\'t have the permission to access the document or video.</p><p>If you are a member, plase <a href="'.base_url().'ac/sign_in">sign in</a>. If you are not a member, please contact <a href="'.base_url().'contact">Lilyfortuneclub</a>.</p>'));
-				return;
+			if($redirect = $this->not_signed_in()){
+				header("location: $redirect");
+				exit;
 			}
 			if($result[0]['mime_content_type'] == 'VIDEO'){
 				if(!empty($result[0]['file_name'])){
