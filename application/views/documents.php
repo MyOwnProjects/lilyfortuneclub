@@ -2,6 +2,7 @@
 ul.doc-list, ul.doc-list li{list-style:none;margin:0;padding:0}
 ul.doc-list li{padding:10px}
 ul.doc-list li{border-top:1px solid #efefef}
+ul.doc-list li:last-child{border-bottom:1px solid #efefef}
 .doc-icon{float:left;font-size:30px;line-height:30px;height:30px;margin:0 20px 0 0}
 .doc-type{float:right;margin-left:20px;width:100px;text-align:center;line-height:60px}
 .doc-text{overflow:hidden}
@@ -49,7 +50,7 @@ ul.doc-list li{padding:0 20px}
 	<?php
 	}
 	?>
-		<li style="font-size:14px;text-align:center">
+		<!--li style="font-size:14px;text-align:center">
 			<a class="btn btn-link <?php echo count($list) == 0 ? 'disabled' : '';?>" href="<?php echo base_url().'documents?pg=1'.(empty($mime_type) ? '' : "&mime_type=$mime_type")
 				.(empty($content_type) ? '' : "&content_type=$content_type");?>"><span class="glyphicon glyphicon-step-backward"></span></a>
 			<a class="btn btn-link <?php echo $current > 1 ? '' : 'disabled';?>" href="<?php echo base_url().'documents?pg='.($current - 1)
@@ -61,6 +62,6 @@ ul.doc-list li{padding:0 20px}
 				.(empty($content_type) ? '' : "&content_type=$content_type");?>"><span class="glyphicon glyphicon-forward"></span></a>
 			<a class="btn btn-link <?php echo count($list) == 0 ? 'disabled' : '';?>" href="<?php echo base_url().'documents?pg='.$total.(empty($mime_type) ? '' : "&mime_type=$mime_type")
 				.(empty($content_type) ? '' : "&content_type=$content_type");?>"><span class="glyphicon glyphicon-step-forward"></span></a>
-		</li>
+		</li-->
 	</ul>
 </div>
