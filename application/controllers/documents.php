@@ -52,11 +52,11 @@ class Documents extends Base_Controller {
 				$this->load_view('document_error', array('error' => 'The document or video does not exist.'));
 				return;
 			}
-			if($redirect = $this->not_signed_in()){
-				header("location: $redirect");
-				exit;
-			}
 			if($result[0]['mime_content_type'] == 'VIDEO'){
+				if($redirect = $this->not_signed_in()){
+					$this->load_view('document_code', array('redirect' => $redirect));
+					return;
+				}
 				if(!empty($result[0]['file_name'])){
 					$full_path = getcwd().'/src/doc/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
 					if(!file_exists($full_path)){
@@ -82,6 +82,10 @@ class Documents extends Base_Controller {
 				}
 				//$this->load_view('document_code');
 				return;
+			}
+			if($redirect = $this->not_signed_in()){
+				header("location: $redirect");
+				exit;
 			}
 
 			if(!empty($result[0]['file_name'])){
@@ -133,7 +137,7 @@ class Documents extends Base_Controller {
 			$this->load_view('document_error', array('error' => 'The access code is invalide. Please contact <a href="'.base_url().'contact">Lilyfortuneclub</a> to get the access code.'));
 			return;
 		}
-return;
+//return;
 		if(!empty($result[0]['file_name'])){
 			$full_path = getcwd().'/src/doc/'.$result[0]['uniqid'].'.'.$result[0]['file_name'];
 			if(!file_exists($full_path)){

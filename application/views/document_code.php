@@ -1,7 +1,10 @@
 <form method="post" style="margin:100px auto 200px auto;max-width:500px">
 	<div class="form-group">
-		<h3>Please enter the access code.</h3>
-		<div style="font-weight:normal;color:#b5b5b5">If you don't have the access code, contact <a href="<?php echo base_url();?>contact" target="_blank">Lily Fortune Club</a>.</div>
+		<h3>You don't have the permission.</h3>
+		<div style="font-weight:normal;color:#858585">
+			If you are a member, please <a href="<?php echo $redirect;?>">sign in</a> first.<br/>
+			If you are not a member, please enter the access code below.<br/>
+			If you don't have the access code, contact <a href="<?php echo base_url();?>contact" target="_blank">Lily Fortune Club</a>.</div>
 		<br/>
 		<input type="text" class="form-control input-lg" required name="guest_code">
 		<br/>

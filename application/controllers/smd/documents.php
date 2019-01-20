@@ -32,7 +32,7 @@ class Documents extends Smd_Controller {
 		if(!empty($search)){
 			$serch_where = array();
 			foreach($search as $s){
-				array_push($serch_where, "subject LIKE '%$s%' OR display_name LIKE '%$s%'");
+				array_push($serch_where, "subject LIKE '%$s%' OR uniqid LIKE '%$s%' OR file_name LIKE '%$s%'");
 			}
 			$where .= " AND (".implode(" OR ", $serch_where).") ";
 		}
