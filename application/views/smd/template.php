@@ -47,8 +47,8 @@
 		?>
 		<?php $this->load->view('smd/header', $this->_ci_cached_vars);?>
 		
-		<div style="position:fixed;top:52px;right:0;bottom:0;left:0;overflow:auto;z-index:10">
-			<div class="bg-secondary" style="position:fixed;top:52px;width:150px;left:0;bottom:0;padding-top:20px">
+		<div id="main-body-container">
+			<div class="bg-secondary">
 				<ul class="nav-left">
 					<?php 
 						foreach($nav_menus as $menu_name => $menu){
@@ -66,7 +66,7 @@
 						?>
 					</ul>
 				</div>
-				<div id="main-body-wrapper" style="position:absolute;top:0;right:0px;left:150px;overflow:auto">
+				<div id="main-body-wrapper">
 					<?php $this->load->view("smd/$view", $this->_ci_cached_vars);?>
 				</div>
 			</div>

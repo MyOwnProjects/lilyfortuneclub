@@ -1,19 +1,37 @@
 ul, ul li{padding:0;margin:0;list-style:none}
 .error{color:#FF0000}
 
+.nav-top{position:absolute;top:0;right:0;left:0;z-index:100}
 .nav-top div{line-height:52px;text-align:center;white-space:nowrap}
 .nav-top div:hover{background:#6c757d}
-.nav-top a{color:#fff;text-decoration:none}
+.nav-top a,.nav-top .menu-item-a{color:#fff;text-decoration:none}
+.nav-top .menu-item-a a{color:#000;text-decoration:none}
+.nav-top .menu-item-a div:hover{background:#fff}
+.nav-top .menu-item-a div{line-height:30px;text-align:left;}
 .nav-left li{line-height:40px;padding-left:10px}
 .nav-left li:hover{background:#343a40}
 .nav-left li.active{}
 .nav-left>a{color:#fff;text-decoration:none}
-.main-body-wrapper{padding:20px}
+#main-body-container{position:fixed;top:52px;right:0;bottom:0;left:0;overflow:auto;z-index:10}
+.main-body-wrapper{padding:20px;}
+#main-body-wrapper{position:absolute;top:0;right:0px;left:150px;overflow:auto}
 .breadcrumb{background-color:#fff;margin-bottom:0;line-height:30px}
-
+.bg-secondary{position:fixed;top:52px;width:150px;left:0;bottom:0;padding-top:20px}
 .text-red{color:red}
 .text-lime{color:lime}
 .text-green{color:green}
 
 .bootbox .modal-header{display:block}
+.nav-top-sm{z-index:1000}
+.nav-top-bg{z-index:1001}
+
+@media only screen and (max-width:900px) {
+.nav-top-sm{z-index:1001}
+.nav-top-bg{z-index:1000}
+/*.nav-top{display:none}
+.menu-item{display:none}
+.nav-top .menu-item-a{display:block}*/
+.bg-secondary{display:none;}
+#main-body-wrapper,#main-body-wrapper{left:0}
+}
 
