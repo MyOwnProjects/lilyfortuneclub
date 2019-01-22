@@ -8,6 +8,8 @@
 .dashboard-block-green{background: #79c447;border:1px solid #61a434;color:#fff;}
 .dashboard-block-darkorange{background: #FF5722;border:1px solid #f24a15;color:#fff;}
 .panel-heading{padding:10px 0 10px 50px;font-weight:bold;}
+.d-flex{border-top:1px solid #e5e5e5}
+.d-flex:last-child{border-bottom:1px solid #e5e5e5}
 </style>
 <div class="main-body-wrapper">
 	<div class="row">
@@ -18,10 +20,47 @@
 			<div class="panel panel-warning">
 				<div class="panel-heading " style="background-image:url(<?php echo base_url();?>src/img/cake_red.svg);background-repeat:no-repeat;background-position:10px 5px;background-size:25px 25px">Recent Birthday</div>
 				<div class="panel-body">
+					<?php
+					foreach($birthday1 as $b){
+					?>
 					<div class="d-flex">
-						
+						<div class="p-2 flex-grow-1"><a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $b['policies_id'];?>"><?php echo $b['name'];?></a></div>
+						<div class="p-2 text-red">Today</div>
+						<div class="p-2">Client</div>
 					</div>
-					<table class="table" style="width:100%">
+					<?php
+					}
+					foreach($birthday3 as $b){
+					?>
+					<div class="d-flex">
+						<div class="p-2 flex-grow-1"><a href="<?php echo base_url();?>smd/team/member/<?php echo $b['membership_code'];?>"><?php echo (empty($b['nick_name']) ? $b['first_name'] : $b['nick_name']).' '.$b['last_name'];?></a></div>
+						<div class="p-2 text-red">Today</div>
+						<div class="p-2">Team</div>
+					</div>
+					<?php
+					}
+					foreach($birthday2 as $b){
+					?>
+					<div class="d-flex">
+						<div class="p-2 flex-grow-1"><a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $b['policies_id'];?>"><?php echo $b['name'];?></a></div>
+						<div class="p-2"><?php echo date_format(date_create($b['dob']), 'M d');?></div>
+						<div class="p-2">Client</div>
+					</div>
+					<?php
+					}
+					foreach($birthday4 as $b){
+					?>
+					<div class="d-flex">
+						<div class="p-2 flex-grow-1"><a href="<?php echo base_url();?>smd/team/member/<?php echo $b['membership_code'];?>"><?php echo (empty($b['nick_name']) ? $b['first_name'] : $b['nick_name']).' '.$b['last_name'];?></a></div>
+						<div class="p-2"><?php echo date_format(date_create($b['date_of_birth']), 'M d');?></div>
+						<div class="p-2">Team</div>
+					</div>
+					<?php
+					}
+					?>
+
+
+					<!--table class="table" style="width:100%">
 					<?php
 					foreach($birthday1 as $b){
 					?>
@@ -60,7 +99,7 @@
 					<?php
 					}
 					?>
-					</table>
+					</table-->
 				</div>
 			</div>
 			<?php
@@ -74,7 +113,20 @@
 			<div class="panel panel-warning">
 				<div class="panel-heading" style="padding-left:50px;font-weight:bold;background-image:url(<?php echo base_url();?>src/img/first-annual-day-calendar-page-interface-symbol.svg);background-repeat:no-repeat;background-position:10px 10px;background-size:25px 25px">Policy Anniversary</div>
 				<div class="panel-body">
-					<table class="table" style="width:100%">
+					<?php
+					foreach($policy_ann as $p){
+					?>
+					<div class="d-flex">
+						<div class="p-2"><img src="<?php echo base_url();?>src/img/<?php echo $p['policies_provider'];?>_logo.ico" style="height:15px;margin-top:-5px">&nbsp;<a href="<?php echo base_url();?>smd/sales/sales_case/<?php echo $p['policies_id'];?>"><?php echo $p['policies_number'];?></a></div>
+						<div class="p-2"><?php echo date_format(date_create($p['policies_issue_date']), 'M d, Y');?></div>
+						<div class="p-2 flex-grow-1"><?php echo $p['policies_insured_name'];?></div>
+					</div>
+					<?php
+					}
+					?>
+
+
+					<!--table class="table" style="width:100%">
 					<?php
 					foreach($policy_ann as $p){
 					?>
@@ -86,7 +138,7 @@
 					<?php
 					}
 					?>
-					</table>
+					</table-->
 				</div>
 			</div>
 			<?php
