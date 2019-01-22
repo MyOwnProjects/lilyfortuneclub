@@ -22,12 +22,10 @@ ul, ul li{padding:0;margin:0;list-style:none}
 .text-green{color:green}
 
 .bootbox .modal-header{display:block}
-.nav-top-sm{z-index:1000}
-.nav-top-bg{z-index:1001}
+.nav-top-sm{display:none;}
 
 @media only screen and (max-width:900px) {
-.nav-top-sm{z-index:1001}
-.nav-top-bg{z-index:1000}
+.nav-top-bg{display:none !important}
 /*.nav-top{display:none}
 .menu-item{display:none}
 .nav-top .menu-item-a{display:block}*/
