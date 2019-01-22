@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta harset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+		<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 		<title>SMD - Lily Fortune Club</title>
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/jquery-ui-1.11.4/jquery-ui.css" />
 		<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-4.1.3-dist/css/bootstrap.min.css" />

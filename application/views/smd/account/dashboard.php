@@ -18,6 +18,9 @@
 			<div class="panel panel-warning">
 				<div class="panel-heading " style="background-image:url(<?php echo base_url();?>src/img/cake_red.svg);background-repeat:no-repeat;background-position:10px 5px;background-size:25px 25px">Recent Birthday</div>
 				<div class="panel-body">
+					<div class="d-flex">
+						
+					</div>
 					<table class="table" style="width:100%">
 					<?php
 					foreach($birthday1 as $b){
