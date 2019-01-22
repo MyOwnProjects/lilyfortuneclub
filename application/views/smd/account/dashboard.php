@@ -18,7 +18,7 @@
 			<div class="panel panel-warning">
 				<div class="panel-heading " style="background-image:url(<?php echo base_url();?>src/img/cake_red.svg);background-repeat:no-repeat;background-position:10px 5px;background-size:25px 25px">Recent Birthday</div>
 				<div class="panel-body">
-					<table class="table">
+					<table class="table" style="width:100%">
 					<?php
 					foreach($birthday1 as $b){
 					?>
@@ -71,7 +71,7 @@
 			<div class="panel panel-warning">
 				<div class="panel-heading" style="padding-left:50px;font-weight:bold;background-image:url(<?php echo base_url();?>src/img/first-annual-day-calendar-page-interface-symbol.svg);background-repeat:no-repeat;background-position:10px 10px;background-size:25px 25px">Policy Anniversary</div>
 				<div class="panel-body">
-					<table class="table">
+					<table class="table" style="width:100%">
 					<?php
 					foreach($policy_ann as $p){
 					?>
@@ -92,7 +92,7 @@
   		</div>
 	</div>
 	
-	<div class="row">
+	<!--div class="row">
 		<div class="col-md-4">
 			<?php
 			$pie_chart_data = array(	
@@ -131,5 +131,5 @@
 				?>
 			</div>
 		</div>
-	</div>
+	</div-->
 </div>
