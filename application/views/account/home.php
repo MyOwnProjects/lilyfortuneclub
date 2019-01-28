@@ -3,7 +3,7 @@
 .common-ln{padding:5px 0}	
 </style>
 <div class="main-body-wrapper clearfix">
-	<div class="row">
+	<div class="row" style="margin:20px 0">
 		<div class="col-md-6 col-sm-12">
 			<div class="panel panel-default" style="margin:20px">
 				<div class="panel-heading"><strong>Navigation</strong></div>
