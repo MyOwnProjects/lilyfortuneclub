@@ -11,7 +11,7 @@ class Index extends Base_Controller {
 			$this->load_view('home');
 		}
 		else{
-			$this->load_view('account/navigation');
+			$this->load_view('account/home');
 		}
 	}
 }
