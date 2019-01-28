@@ -43,7 +43,7 @@
 						<a href="<?php echo base_url();?>documents/view/599e6b4cc736e">Code of Honor</a>
 					</div>
 					<div class="common-ln">
-						<a href="<?php echo base_url();?>documents/view/599e6b4cc736e">High Standard Promotion Guideline</a>
+						<a href="<?php echo base_url();?>documents/view/59a3bbd9eb40a">High Standard Promotion Guideline</a>
 					</div>
 				</div>
 			</div>
