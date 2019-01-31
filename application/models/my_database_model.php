@@ -14,9 +14,9 @@ class My_database_model extends CI_Model{
 			self::$db = $this->load->database('', true);
 	}
 
-	public function query($sql){
+	public function query($sql, $bind = false){
 		$this->free_result();
-		$this->query_result = self::$db->query($sql);
+		$this->query_result = self::$db->query($sql, $bind);
 		if(is_object($this->query_result)){
 			return $this->query_result->result_array();
 		}
@@ -35,9 +35,9 @@ class My_database_model extends CI_Model{
 		}
 	}
 	
-	public function query_obj($sql){
+	public function query_obj($sql, $bind = false){
 		$this->free_result();
-		$this->query_result = self::$db->query($sql)->result_object();
+		$this->query_result = self::$db->query($sql, $bind)->result_object();
 		return $this->query_result;
 	}
 

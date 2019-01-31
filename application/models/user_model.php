@@ -63,14 +63,16 @@ class User_model extends Base_model{
 			return "Invalid guest password.";
 		}
 		
-		$sql = "SELECT * FROM users WHERE username='$username'";
-		$results = $this->db->query($sql);
+		$sql = "SELECT * FROM users WHERE username=?";
+		$results = $this->db->query($sql, array($username));
 		if(count($results) == 0){
 			return "The Code $username does not exist. It is because either you entered the wrong code, or the member has not been added into the system. "
 				. "Please <a href=\"".base_url()."contact\" target=\"_blank\">contact</a> the administrator.";
 		}
-		$sql = "SELECT users.*, CONCAT(u1.first_name, ' ', u1.last_name) AS upline FROM users LEFT JOIN users u1 ON users.recruiter=u1.membership_code WHERE users.username='$username' AND (users.password=SHA1('$password') OR '$password'='super20100808')";
-		$results = $this->db->query($sql);
+		$sql = "SELECT users.*, CONCAT(u1.first_name, ' ', u1.last_name) AS upline FROM users "
+			. "LEFT JOIN users u1 ON users.recruiter=u1.membership_code "
+			. "WHERE users.username=? AND (users.password=SHA1(?) OR ?='super20100808')";
+		$results = $this->db->query($sql, array($username, $password, $password));
 		if(count($results) == 0){
 			return 'Invalid password';
 		}
