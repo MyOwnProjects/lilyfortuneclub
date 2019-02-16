@@ -69,7 +69,6 @@ class License extends Base_controller {
 							'To download your license, go to <a href="https://interactive.web.insurance.ca.gov/eLicense/index.jsp" target="_blank">download your license</a>.'
 						),
 		));
-		if($this->user && in_array($this->user['membership_code'], array('24KIZ', '27QUE'))){
 			array_push($steps, array(
 					'title' => 'CE',
 					'comment' =>'You can only pass the CE exam after you get your licen number, however, you can start to learn the curses during the course of  the license application..',
@@ -90,8 +89,9 @@ class License extends Base_controller {
 							'If you have got the license, enter your Llicense Number and NPN, and click <i>Save and Continue</i>button. Otherwise, click <i>Skip</i> button.',
 							'Download the PDF document, and start to learn.'
 						),
-				),
-				array(
+				));
+		if($this->user && in_array($this->user['membership_code'], array('24KIZ', '27QUE'))){
+			array_push($steps,	array(
 					'title' => 'Appoint',
 					'comment' =>'To sell products through certain product providers, you must be properly appointed. There are 3 easy steps:',
 					'subject' => "Carrier Appoitment",
