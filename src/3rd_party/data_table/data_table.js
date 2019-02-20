@@ -232,6 +232,27 @@ function new_item(prop){//title, url, param){
 			_search(this);
 		});
 		
+		if(filter && !$.isEmptyObject(filter)){
+			$_toolbar_row = $('<div>').addClass('toolbar-row').addClass('toolbar-row-sm').addClass('d-flex').addClass('mt-2').addClass('').appendTo(this.toolbar);
+			//var $_filter_group = $('<div>').addClass('dialog-input-group-block').addClass('input-group').addClass('pull-right').appendTo(this.toolbar);
+			var $_filter_input_group = $('<div>').addClass('input-group').addClass('filter-group').addClass('input-group-sm').appendTo($_toolbar_row);//$_filter_group);
+			var $_filter_select = $('<input>').addClass('form-control').addClass('input-sm').attr('type', 'text').attr('readonly', true).css('background', '#fff').attr('placeholder', 'Filter by ').appendTo($_filter_input_group);
+			var $_d = $('<div>').addClass('input-group-append').appendTo($_filter_input_group);
+			var $_filter_select_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').addClass('dropdown-toggle')
+				.attr('type','button').attr('data-toggle', 'dropdown').appendTo($_d).click(function(){
+				//_search(this);
+			});
+			var $_filter_dropdown_menu = $('<div>').addClass("dropdown-menu").addClass('dropdown-menu-right').appendTo($_d);
+			$('<a data-value="" href="javascript:void(0)" class="dropdown-item">All</a>').appendTo($_filter_dropdown_menu);
+			for(var filter_id in filter['options']){
+				$('<a data-value="' + filter_id + '" href="javascript:void(0)" class="dropdown-item">' + filter['options'][filter_id] + '</a>').appendTo($_filter_dropdown_menu);
+			}
+			this.filter_select1 = $_filter_select;
+			this.filter_dropdown_menu1 = $_filter_dropdown_menu;
+		}
+
+		
+		
 		$_toolbar_row = $('<div>').addClass('toolbar-row').addClass('d-flex').addClass('mt-2').appendTo(this.toolbar);
 		var $_customized_button_group;
 		if(customized_buttons){
@@ -306,7 +327,7 @@ function new_item(prop){//title, url, param){
 
 		if(filter && !$.isEmptyObject(filter)){
 			//var $_filter_group = $('<div>').addClass('dialog-input-group-block').addClass('input-group').addClass('pull-right').appendTo(this.toolbar);
-			var $_filter_input_group = $('<div>').addClass('input-group').addClass('filter-group').addClass('input-group-sm').appendTo($_toolbar_row);//$_filter_group);
+			var $_filter_input_group = $('<div>').addClass('input-group').addClass('filter-group').addClass('filter-group-sm').addClass('input-group-sm').appendTo($_toolbar_row);//$_filter_group);
 			var $_filter_select = $('<input>').addClass('form-control').addClass('input-sm').attr('type', 'text').attr('readonly', true).css('background', '#fff').attr('placeholder', 'Filter by ').appendTo($_filter_input_group);
 			var $_d = $('<div>').addClass('input-group-append').appendTo($_filter_input_group);
 			var $_filter_select_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').addClass('dropdown-toggle')
@@ -318,6 +339,7 @@ function new_item(prop){//title, url, param){
 			for(var filter_id in filter['options']){
 				$('<a data-value="' + filter_id + '" href="javascript:void(0)" class="dropdown-item">' + filter['options'][filter_id] + '</a>').appendTo($_filter_dropdown_menu);
 			}
+			this.filter_select = $_filter_select;
 			this.filter_dropdown_menu = $_filter_dropdown_menu;
 		}
 		else if(customized_filters && Array.isArray(customized_filters)){
@@ -535,7 +557,9 @@ function new_item(prop){//title, url, param){
 		
 		if(this.filter_dropdown_menu){
 			this.filter_dropdown_menu.delegate('a', 'click', function(){
-				$(this).parent().parent().parent().children(':first-child').val($(this).text());
+				_this.filter_select.val($(this).text());
+				_this.filter_select1.val($(this).text());
+				//$(this).parent().parent().parent().children(':first-child').val($(this).text());
 				var new_filter = $(this).attr('data-value');
 				if(_filter[filter['id']] != new_filter){
 					_filter[filter['id']] = new_filter;
@@ -547,6 +571,22 @@ function new_item(prop){//title, url, param){
 			});
 		}
 		
+		if(this.filter_dropdown_menu1){
+			this.filter_dropdown_menu1.delegate('a', 'click', function(){
+				_this.filter_select.val($(this).text());
+				_this.filter_select1.val($(this).text());
+				//$(this).parent().parent().parent().children(':first-child').val($(this).text());
+				var new_filter = $(this).attr('data-value');
+				if(_filter[filter['id']] != new_filter){
+					_filter[filter['id']] = new_filter;
+					_this.reload();
+				}
+				else if(new_filter == ''){
+					_filter = [];
+				}
+			});
+		}
+
 		this.tbody.delegate('.data-table-checkbox input[type=checkbox]', 'click', function(){
 			var all_checked = true;
 			var all_unchecked = true;

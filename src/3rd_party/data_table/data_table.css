@@ -23,7 +23,8 @@
 .data-table .data-table-button-group .button{float:left;padding:10px 13px 7px 13px;cursor:pointer}
 .data-table .data-table-button-group .button:first-child{border-top-left-radius:3px;border-bottom-left-radius:3px}
 .data-table .data-table-button-group .button:last-child{border-top-right-radius:3px;border-bottom-right-radius:3px}
-.data-table .filter-group{max-width:200px}
+.data-table .filter-group-sm{max-width:200px}
+.data-table .toolbar-row-sm{display:none !important}
 .data-table .standard-groups{xmin-width:315px}
 .data-table .btn-group .btn-text{background:#fff;border-color:#2e6da4;cursor:default}
 
@@ -46,6 +47,8 @@
 @media only screen and (max-width:768px) {
 .data-table .wide-table,.btn-first-pg,.btn-last-pg,.btn-pg-number,.columns-btn-group{display:none}
 .data-table .narrow-table{display:table}
+.data-table .filter-group-sm{display:none !important}
+.data-table .toolbar-row-sm{display:flex !important}
 }
 
 
