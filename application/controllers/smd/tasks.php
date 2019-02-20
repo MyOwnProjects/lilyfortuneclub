@@ -18,6 +18,13 @@ class Tasks extends Smd_Controller {
 		$this->load_view('tasks/list');
 	}
 	
+	public function ajax_task_list(){
+		if($this->input->is_ajax_request()){
+			$result = $this->task_model->get_internal_task_list();
+			echo json_encode($result);
+		}
+	}
+	
 	public function get_task_list(){
 		$search_str = trim($this->input->post('search'));
 		$search = isset($search_str) && $search_str !== '' ? preg_split('/[^a-z0-9]/i', $search_str) : array();
@@ -59,18 +66,18 @@ class Tasks extends Smd_Controller {
 				}
 				$ret['rows'][$i]['tasks_type'] = $type;
 				if($r['tasks_priority']== 'H'){
-					$c = 'label-danger';
+					$c = 'badge-danger';
 					$t = 'High';
 				}
 				else if($r['tasks_priority']== 'M'){
-					$c = 'label-warning';
+					$c = 'badge-warning';
 					$t = 'Meduim';
 				}
 				else{
-					$c = 'label-success';
+					$c = 'badge-success';
 					$t = 'Low';
 				}
-				$ret['rows'][$i]['tasks_priority'] = '<span class="label '.$c.'">'.$t.'</span>';
+				$ret['rows'][$i]['tasks_priority'] = '<span class="badge '.$c.'">'.$t.'</span>';
 				$ret['rows'][$i]['tasks_source'] = $r['tasks_source'];
 				
 				if($r['tasks_status'] == 'new'){
