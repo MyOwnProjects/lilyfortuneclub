@@ -1,4 +1,5 @@
-<div >
+<div style="margin-top:40px;">
+	<h3 class="text-center">New Task</h3>
 	<form method="post" style="margin:40px" action="<?php echo base_url();?>smd/tasks/<?php echo isset($tasks_id) ? "update/$tasks_id" : 'create';?>">
 		<?php 
 		if(isset($error) && $error){
@@ -9,15 +10,56 @@
 		}
 		?>
 		<div class="row">
+			<div class="col-lg-12 form-group">
+				<?php 
+				if(isset($tasks_id)){
+				?>
+				<input class="btn btn-sm btn-success" type="submit" value="Update">
+				<?php
+				}
+				else
+				{
+				?>
+				<input class="btn btn-sm btn-success" type="submit" value="Create">
+				<?php
+				}
+				?>
+				<span>&nbsp;&nbsp;</span>
+				<button class="btn btn-sm btn-danger" >Close</button>
+			</div>
 			<div class="col-lg-6 form-group">
 				<div class="row">
+					<div class="col-lg-12 form-group">
+						<label>Subject</label>
+						<input class="form-control input-sm" name="tasks_subject" value="<?php echo isset($tasks_subject) ? $tasks_subject : '';?>">
+					</div>
+					<div class="col-lg-12 form-group">
+						<label>Detail</label>
+						<textarea class="form-control input-sm" style="height:170px" name="tasks_detail" id="tasks_detail"><?php echo isset($tasks_detail) ? $tasks_detail : '';?></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 form-group">
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<label>Due Date</label>
+						<input name="tasks_due_date" class="form-control input-sm" type="date" value="<?php echo isset($tasks_due_date) ? $tasks_due_date : '';?>">
+					</div>
+					<div class="col-md-6 form-group">
+						<label>Priority</label>
+						<select class="form-control input-sm" name="tasks_priority">
+							<option value="L" <?php echo isset($tasks_priority) && $tasks_priority == 'L' ? 'selected' : '';?>>Low</option>
+							<option value="M" <?php echo !isset($tasks_priority) || $tasks_priority == 'M' ? 'selected' : '';?>>Medium</option>
+							<option value="H" <?php echo isset($tasks_priority) && $tasks_priority == 'H' ? 'selected' : '';?>>High</option>
+						</select>
+					</div>
 					<div class="col-md-6 form-group">
 						<label>Case NO</label>
 						<input class="form-control input-sm" name="tasks_case_no" value="<?php echo isset($tasks_case_no) ? $tasks_case_no : '';?>">
 					</div>
 					<div class="col-md-6 form-group">
 						<label>Name</label>
-						<input class="form-control input-sm" name="tasks_name" value="<?php echo isset($tasks_name) ? $tasks_name : '';?>" required>
+						<input class="form-control input-sm" name="tasks_name" value="<?php echo isset($tasks_name) ? $tasks_name : '';?>">
 					</div>
 					<div class="col-md-6 form-group">
 						<label>Type</label>
@@ -36,14 +78,6 @@
 						</select>
 					</div>
 					<div class="col-md-6 form-group">
-						<label>Priority</label>
-						<select class="form-control input-sm" name="tasks_priority">
-							<option value="L" <?php echo isset($tasks_priority) && $tasks_priority == 'L' ? 'selected' : '';?>>Low</option>
-							<option value="M" <?php echo !isset($tasks_priority) || $tasks_priority == 'M' ? 'selected' : '';?>>Medium</option>
-							<option value="H" <?php echo isset($tasks_priority) && $tasks_priority == 'H' ? 'selected' : '';?>>High</option>
-						</select>
-					</div>
-					<div class="col-md-6 form-group">
 						<label>Status</label>
 						<select class="form-control input-sm" name="tasks_status" <?php echo isset($tasks_status) ? '' : 'disabled';?>>
 							<option value="done" <?php echo isset($tasks_status) && $tasks_status == 'new' ? 'selected' : '';?>>Done</option>
@@ -54,42 +88,9 @@
 					</div>
 					<div class="col-md-6 form-group">
 						<label>Create Date</label>
-						<input name="tasks_create" class="form-control input-sm" type="date" value="<?php echo isset($tasks_create) ? $tasks_create : date_format(date_create(), 'Y-m-d');?>" required>
-					</div>
-					<div class="col-md-6 form-group">
-						<label>Due Date</label>
-						<input name="tasks_due_date" class="form-control input-sm" type="date" value="<?php echo isset($tasks_due_date) ? $tasks_due_date : '';?>">
+						<input name="tasks_create" class="form-control input-sm" type="date" value="<?php echo isset($tasks_create) ? $tasks_create : date_format(date_create(), 'Y-m-d');?>">
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-6 form-group">
-				<div class="row">
-					<div class="col-lg-12 form-group">
-						<label>Subject</label>
-						<input class="form-control input-sm" name="tasks_subject" value="<?php echo isset($tasks_subject) ? $tasks_subject : 'A batch of requirements';?>" required>
-					</div>
-					<div class="col-lg-12 form-group">
-						<label>Detail</label>
-						<textarea class="form-control input-sm" style="height:170px" name="tasks_detail" id="tasks_detail"><?php echo isset($tasks_detail) ? $tasks_detail : '';?></textarea>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-12 form-group">
-				<?php 
-				if(isset($tasks_id)){
-				?>
-				<input class="btn btn-sm btn-success" type="submit" value="Update">
-				<?php
-				}
-				else
-				{
-				?>
-				<input class="btn btn-sm btn-success" type="submit" value="Create">
-				<?php
-				}
-				?>
-				<span>&nbsp;&nbsp;</span>
-				<button class="btn btn-sm" >Close</button>
 			</div>
 		</div>
 	</form>
