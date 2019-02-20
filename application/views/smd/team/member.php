@@ -1,3 +1,6 @@
+<style>
+.list-group{margin-bottom:20px}	
+</style>
 <div class="main-body-wrapper">
 <?php 
 if(!$member){

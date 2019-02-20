@@ -35,6 +35,8 @@
 		<script src="<?php echo base_url();?>src/3rd_party/ckeditor/ckeditor.js"></script>
 		<script src="<?php echo base_url();?>src/3rd_party/bootstrap-select-1.13.2/js/bootstrap-select.min.js?<?php echo time();?>"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/fullcalendar-3.9.0/fullcalendar.min.js"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/dropdownedit/dropdownedit.js"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/angular.min.js"></script>
 		<script>
 		$('document').ready(function(){
 			$('[data-toggle="tooltip"]').tooltip();

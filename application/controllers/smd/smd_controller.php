@@ -29,8 +29,11 @@ class Smd_controller extends CI_Controller {
 				'hierarchy' => array(
 					'text' => 'Hierarchy',
 				),
-				'sync_members' => array(
+				/*'sync_members' => array(
 					'text' => 'Members Update',
+				),*/
+				'new_member' => array(
+					'text' => 'New Member',
 				),
 			),
 		),

@@ -146,3 +146,11 @@ function simple_alert(text, type){
 function send_welcome_email(email, id, key, nick_name, first_name, last_name, code){
 	alert(email + id + key + nick_name + first_name+ last_name + code);
 }
+
+function dateDiffInDays(b, a) {
+  // Discard the time and time-zone information.
+  var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+  var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+ 
+  return Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24));
+}
