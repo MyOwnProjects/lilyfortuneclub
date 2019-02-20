@@ -4,12 +4,12 @@
 <script>
 	$('#documents-grid').data_table({
 		header: [
-			{id: 'subject', text: 'Subject', }, 
+			{id: 'subject', text: 'Subject', narrow_display: true}, 
 			{id: 'file_name', text: 'File Name', sortable: true, width:'150px'}, 
 			{id: 'uniqid', text: 'Uniq ID', sortable: true, width:'120px'}, 
 			{id: 'grade_access', text: 'Grade Access', sortable: true, width:'120px'}, 
-			{id: 'mime_content_type', text: 'File Type', sortable: true, width:'60px'}, 
-			{id: 'content_type', text: 'Content Type', sortable: true, width:'100px'}, 
+			{id: 'mime_content_type', text: 'File Type', sortable: true, width:'60px', narrow_display: true}, 
+			{id: 'content_type', text: 'Content Type', sortable: true, width:'100px', narrow_display: true}, 
 			{id: 'create_date', text: 'Created', sortable: true, width:'130px'}, 
 			{id: 'file_size', text: 'File Size', sortable: true, width:'60px'}, 
 		],
