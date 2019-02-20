@@ -173,11 +173,12 @@ function new_item(prop){//title, url, param){
 		var customized_filters = prop['customized_filters'];
 		var row_count = prop['row_count'];
 		var order_by = prop['order_by'];
+		var filter_by = prop['filter_by'];
 		var _row_count = row_count > 0 ? row_count : Number.MAX_SAFE_INTEGER;
 		var _this = this;
 		var $_this = $(this);
 		var _search_key = '';
-		var _filter = {};
+		var _filter = filter_by;
 		var _current_page = 1;
 		var _sort = {};
 		$.extend(_sort, order_by);
@@ -236,7 +237,12 @@ function new_item(prop){//title, url, param){
 			$_toolbar_row = $('<div>').addClass('toolbar-row').addClass('toolbar-row-sm').addClass('d-flex').addClass('mt-2').addClass('').appendTo(this.toolbar);
 			//var $_filter_group = $('<div>').addClass('dialog-input-group-block').addClass('input-group').addClass('pull-right').appendTo(this.toolbar);
 			var $_filter_input_group = $('<div>').addClass('input-group').addClass('filter-group').addClass('input-group-sm').appendTo($_toolbar_row);//$_filter_group);
-			var $_filter_select = $('<input>').addClass('form-control').addClass('input-sm').attr('type', 'text').attr('readonly', true).css('background', '#fff').attr('placeholder', 'Filter by ').appendTo($_filter_input_group);
+			var $_filter_select = $('<input>').addClass('form-control').addClass('input-sm').attr('type', 'text')
+				.attr('readonly', true).css('background', '#fff').attr('placeholder', 'Filter by ')
+				.appendTo($_filter_input_group);
+				if(_filter){
+					$_filter_select.val(Object.values(_filter));
+				}
 			var $_d = $('<div>').addClass('input-group-append').appendTo($_filter_input_group);
 			var $_filter_select_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').addClass('dropdown-toggle')
 				.attr('type','button').attr('data-toggle', 'dropdown').appendTo($_d).click(function(){
@@ -329,6 +335,9 @@ function new_item(prop){//title, url, param){
 			//var $_filter_group = $('<div>').addClass('dialog-input-group-block').addClass('input-group').addClass('pull-right').appendTo(this.toolbar);
 			var $_filter_input_group = $('<div>').addClass('input-group').addClass('filter-group').addClass('filter-group-sm').addClass('input-group-sm').appendTo($_toolbar_row);//$_filter_group);
 			var $_filter_select = $('<input>').addClass('form-control').addClass('input-sm').attr('type', 'text').attr('readonly', true).css('background', '#fff').attr('placeholder', 'Filter by ').appendTo($_filter_input_group);
+			if(_filter){
+				$_filter_select.val(Object.values(_filter));
+			}
 			var $_d = $('<div>').addClass('input-group-append').appendTo($_filter_input_group);
 			var $_filter_select_button = $('<button>').addClass('btn').addClass('btn-primary').addClass('btn-sm').addClass('dropdown-toggle')
 				.attr('type','button').attr('data-toggle', 'dropdown').appendTo($_d).click(function(){

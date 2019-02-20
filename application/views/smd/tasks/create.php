@@ -80,10 +80,10 @@
 					<div class="col-md-6 form-group">
 						<label>Status</label>
 						<select class="form-control input-sm" name="tasks_status" <?php echo isset($tasks_status) ? '' : 'disabled';?>>
-							<option value="done" <?php echo isset($tasks_status) && $tasks_status == 'new' ? 'selected' : '';?>>Done</option>
-							<option value="new" <?php echo !isset($tasks_status) || $tasks_status == 'new' ? 'selected' : '';?>>New</option>
-							<option value="pending" <?php echo isset($tasks_status) && $tasks_status == 'pending' ? 'selected' : '';?>>Pending</option>
-							<option value="reopen" <?php echo isset($tasks_status) && $tasks_status == 'reopen' ? 'selected' : '';?>>Reopen</option>
+							<option value="done" <?php echo isset($tasks_status) && $tasks_status == 'done' ? 'selected' : '';?>>Done</option>
+							<!--option value="new" <?php echo !isset($tasks_status) || $tasks_status == 'new' ? 'selected' : '';?>>New</option-->
+							<option value="pending" <?php echo isset($tasks_status) && $tasks_status != 'done' ? 'selected' : '';?>>Pending</option>
+							<!--option value="reopen" <?php echo isset($tasks_status) && $tasks_status == 'reopen' ? 'selected' : '';?>>Reopen</option-->
 						</select>
 					</div>
 					<div class="col-md-6 form-group">

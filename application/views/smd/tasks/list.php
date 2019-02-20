@@ -31,10 +31,9 @@
 		row_count: 20,
 		order_by: {tasks_create: 'desc'},
 		filter: {id: 'tasks_status', options:{
-			new: '<span class="text-red glyphicon glyphicon-plus-sign"></span> New', 
-			pending: '<span class="text-danger glyphicon glyphicon-question-sign"></span> Pending',
-			done: '<span class="text-green glyphicon glyphicon-ok-sign"></span> Done',
-			reopen: '<span class="text-danger glyphicon glyphicon-exclamation-sign"></span> Reopen'
-		}}
+			pending: '<i class="text-danger fa fa-exclamation-circle"></i> Pending',
+			done: '<i class="text-green fa fa-check-circle"></i> Done',
+		}},
+		filter_by: {tasks_status: 'pending'} 
 	});
 </script>

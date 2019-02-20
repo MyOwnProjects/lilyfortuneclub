@@ -32,7 +32,7 @@ class Tasks extends Smd_Controller {
 		$row_count= $this->input->post('row_count');
 		$sort = $this->input->post('sort');
 		$filter = $this->input->post('filter');
-		$where = "tasks_status <> 'done' ";
+		$where = "1=1 ";
 		if(!empty($search)){
 			$serch_where = array();
 			foreach($search as $s){
@@ -81,18 +81,18 @@ class Tasks extends Smd_Controller {
 				$ret['rows'][$i]['tasks_source'] = $r['tasks_source'];
 				
 				if($r['tasks_status'] == 'new'){
-					$c = 'text-red glyphicon glyphicon-plus-sign';
+					$c = 'text-red fa fa-plus-circle';
 				}
 				else if($r['tasks_status'] == 'pending'){
-					$c = 'text-danger glyphicon glyphicon-question-sign';
+					$c = 'text-danger fa fa-exclamation-circle';
 				}
 				else if($r['tasks_status'] == 'done'){
-					$c = 'text-green glyphicon glyphicon-ok-sign';
+					$c = 'text-green fa fa-check-circle';
 				}
 				else{//reopen
-					$c = 'text-danger glyphicon glyphicon-exclamation-sign';
+					$c = 'text-danger fa fa-exclamation-circle';
 				}
-				$ret['rows'][$i]['tasks_status'] = '<span class="'.$c.'"></span> '.$r['tasks_status'];
+				$ret['rows'][$i]['tasks_status'] = '<i class="'.$c.'"></i> '.$r['tasks_status'];
 				$ret['rows'][$i]['tasks_create'] = isset($r['tasks_create']) ? date_format(date_create($r['tasks_create']), 'M j') : '';
 				$ret['rows'][$i]['tasks_due_date'] = isset($r['tasks_due_date']) ? date_format(date_create($r['tasks_due_date']), 'M j') : '';
 				$ret['rows'][$i]['action'] =  array(
