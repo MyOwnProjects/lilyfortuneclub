@@ -327,7 +327,7 @@ function new_item(prop){//title, url, param){
 		var $_standard_groups = $('<div>').addClass('standard-groups').appendTo($_toolbar_row);//$_table_group_bar);
 
 		//column
-		var $_columns_button_group = $('<div>').addClass('btn-group').appendTo($_standard_groups);
+		var $_columns_button_group = $('<div>').addClass('btn-group').addClass('columns-btn-group').appendTo($_standard_groups);
 		var $_columns_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary')
 			.addClass('dropdown-toggle').attr('data-toggle', 'dropdown')
 			.html('Columns&nbsp;<span class="caret"></span>').appendTo($_columns_button_group);
@@ -382,7 +382,7 @@ function new_item(prop){//title, url, param){
 				_this.reload();
 			}).appendTo($_button_group);
 		$_button_group = $('<div>').addClass('btn-group').appendTo($_standard_groups);//addClass('data-table-button-group').appendTo($_standard_groups);
-		var $_first_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'first page').append('<i class="fa fa-fast-backward" aria-hidden="true"></i>').appendTo($_button_group).click(function(){
+		var $_first_page_button = $('<button>').attr('type', 'button').addClass('btn-first-pg').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'first page').append('<i class="fa fa-fast-backward" aria-hidden="true"></i>').appendTo($_button_group).click(function(){
 			_current_page = 'first';
 			_this.reload();
 		});
@@ -390,17 +390,20 @@ function new_item(prop){//title, url, param){
 			_current_page--;
 			_this.reload();
 		});
-		var $_current_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-text').css('width', '60px').html('0').appendTo($_button_group);
+		var $_current_page_button = $('<button>').attr('type', 'button').addClass('btn-pg-number').addClass('btn').addClass('btn-sm').addClass('btn-text').css('width', '60px').html('0').appendTo($_button_group);
 		var $_next_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'next page').append('<i class="fa fa-forward" aria-hidden="true"></i>').appendTo($_button_group).click(function(){
 			_current_page++;
 			_this.reload();
 		});
-		var $_last_page_button = $('<button>').attr('type', 'button').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'last page').append('<i class="fa fa-fast-forward" aria-hidden="true"></i>').appendTo($_button_group).click(function(){
+		var $_last_page_button = $('<button>').attr('type', 'button').addClass('btn-last-pg').addClass('btn').addClass('btn-sm').addClass('btn-primary').attr('title', 'last page').append('<i class="fa fa-fast-forward" aria-hidden="true"></i>').appendTo($_button_group).click(function(){
 			_current_page = 'last';
 			_this.reload();
 		});
 
-		this.table = $('<table>').attr('cellpadding', '0').attr('cellspacing', '0').appendTo($_this);
+		this.table1 = $('<table>').addClass('narrow-table').attr('cellpadding', '0').attr('cellspacing', '0').appendTo($_this);
+		this.tbody1 = $('<tbody>').appendTo(this.table1);
+	
+		this.table = $('<table>').addClass('wide-table').attr('cellpadding', '0').attr('cellspacing', '0').appendTo($_this);
 		this.thead = $('<thead>').appendTo(this.table);
 		var $_tr = $('<tr>').appendTo(this.thead);
 		var $_check_all_box = $('<input>').attr('type', 'checkbox');
@@ -441,41 +444,46 @@ function new_item(prop){//title, url, param){
 				data: {current: _current_page, row_count: _row_count, sort: _sort, search: _search_key, filter: _filter},
 				dataType: 'json',
 				success: function(data){
+					_this.tbody1.empty();
 					_this.tbody.empty();
 					if(data['total'] == 0){
-                                                        $_first_page_button.addClass('disabled');
-                                                        $_prev_page_button.addClass('disabled');
-                                                        $_next_page_button.addClass('disabled');
-                                                        $_last_page_button.addClass('disabled');
-                                                        _current_page = 0;
-                                                        $_current_page_button.html(_current_page);
-                                                    }
-                                                    else{
-                                                                                          _current_page = data['current'];
-                                                                                          var last_page = data['last'];
-                                                                                          if(_current_page > 1){
-                                                                                              $_prev_page_button.removeClass('disabled');
-                                                                                          }
-                                                                                          else{
-                                                                                              $_prev_page_button.addClass('disabled');
-                                                                                          }
-                                                                                          if(last_page > _current_page){
-                                                                                              $_next_page_button.removeClass('disabled');
-                                                                                          }
-                                                                                          else{
-                                                                                              $_next_page_button.addClass('disabled');
-                                                                                          }
-                                                                $_current_page_button.html(_current_page + ' / ' + last_page);
-                                                      }
-                                                     $_search_input.val(data['search']);
-                                                                                          if(data['rows'].length > 0){
+						$_first_page_button.addClass('disabled');
+						$_prev_page_button.addClass('disabled');
+						$_next_page_button.addClass('disabled');
+						$_last_page_button.addClass('disabled');
+						_current_page = 0;
+						$_current_page_button.html(_current_page);
+					}
+					else{
+						_current_page = data['current'];
+						var last_page = data['last'];
+						if(_current_page > 1){
+							$_prev_page_button.removeClass('disabled');
+						}
+						else{
+							$_prev_page_button.addClass('disabled');
+						}
+						if(last_page > _current_page){
+							$_next_page_button.removeClass('disabled');
+						}
+						else{
+							$_next_page_button.addClass('disabled');
+						}
+						$_current_page_button.html(_current_page + ' / ' + last_page);
+					}
+					$_search_input.val(data['search']);
+					if(data['rows'].length > 0){
 						$_check_all_box.prop('disabled', false);
 						for(var i = 0; i < data['rows'].length; ++i){
 							var tr = $('<tr>').attr('data-id', data['rows'][i]['id']).appendTo(_this.tbody);
+							var tr1 = $('<tr>').attr('data-id', data['rows'][i]['id']).appendTo(_this.tbody1);
 							if(data['rows'][i]['action'] && data['rows'][i]['action']['view']){
 								tr.addClass('clickable').attr('edit-url', data['rows'][i]['action']['view']);
+								tr1.addClass('clickable').attr('edit-url', data['rows'][i]['action']['view']);
 							}
 							$('<td>').addClass('data-table-checkbox').html('<input type="checkbox">').appendTo(tr);
+
+							var text = '';
 							for(var j = 0; j < header.length; ++j){
 								var td = $('<td>').html(data['rows'][i][header[j]['id']]).appendTo(tr);
 								if(header[j]['align']){
@@ -484,7 +492,11 @@ function new_item(prop){//title, url, param){
 								if(header[j]['valign']){
 									td.css('vertical-align', header[j]['valign']);
 								}
+								if(header[j]['narrow_display']){
+									text += '<div><span>' + header[j]['text'] + ': </span><b>' + data['rows'][i][header[j]['id']] + '</b></div>';
+								}
 							}
+							$('<td>').addClass('clearfix').html(text).appendTo(tr1);
 							/*var $_action = $('<td>').addClass('data-table-action').html('').appendTo(tr);
 							if(data['rows'][i]['action']){
 								if(data['rows'][i]['action']['view']){
@@ -553,6 +565,11 @@ function new_item(prop){//title, url, param){
 			e.stopPropagation();
 		});
 		this.tbody.delegate('.clickable', 'click', function(){
+			if($(this).attr('edit-url').length > 0){
+				location = $(this).attr('edit-url');
+			}
+		});
+		this.tbody1.delegate('.clickable', 'click', function(){
 			if($(this).attr('edit-url').length > 0){
 				location = $(this).attr('edit-url');
 			}

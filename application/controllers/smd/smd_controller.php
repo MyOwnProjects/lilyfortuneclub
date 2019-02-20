@@ -16,7 +16,7 @@ class Smd_controller extends CI_Controller {
 					'text' => 'Profile'
 				),
 				'password' => array(
-					'text' => 'Pasword'
+					'text' => 'Password'
 				),
 			),
 		),
