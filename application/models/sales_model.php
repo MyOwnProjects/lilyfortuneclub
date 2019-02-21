@@ -241,7 +241,7 @@ class Sales_model extends Base_model{
 	}
 	
 	public function get_policies($policies_id){
-		$sql = "SELECT * FROM policies WHERE policies_id='$policies_id'";echo $sql;
+		$sql = "SELECT * FROM policies WHERE policies_id='$policies_id'";
 		return $this->db->query($sql);
 	}
 	
