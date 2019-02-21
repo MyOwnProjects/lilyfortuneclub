@@ -5,7 +5,11 @@ class License extends Base_controller {
 	private $summary;
 	public function __construct(){
 		$this->guest_access_allowed = true;
-		parent::__construct();		
+		parent::__construct();
+		if($redirect = $this->not_signed_in()){
+			header("location: $redirect");
+			exit;
+		}
 		$steps = array(array(
 			'title' => 'Courses',
 			'comment' => 'The 52 hours onine courses are mandatory in some states, such as California. Some states do not require it, such as New Hampshire. <u>The online class is strongly recommended before your license exam, no matter the class is required or not</u>.'
