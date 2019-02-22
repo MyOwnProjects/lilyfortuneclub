@@ -9,6 +9,10 @@ class Documents extends Base_Controller {
 	}
 	
 	public function index(){
+		if($redirect = $this->not_signed_in()){
+			header("location: $redirect");
+			exit;
+		}
 		$mime_type = $this->input->get('mime_type');
 		$content_type = $this->input->get('content_type');
 		$mime_type_list = $this->document_model->get_all_mime_content_types();
