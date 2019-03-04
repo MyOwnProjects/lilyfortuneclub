@@ -34,13 +34,13 @@ $(function() {
 		},
 		
 		eventClick: function(event, element) {
-			var url = '<?php echo base_url();?>smd/schedule/update_schedule?id=' + event.id;
+			var url = '<?php echo base_url();?>smd/schedule/update_schedule/' + event.id;
 			$.ajax({
 				url: url,
 				success: function(data){
 					Dialog.modal({
 						message: data,
-						title: 'New Schedules',
+						title: 'Schedule',
 						loaded: function(){},
 						buttons: {
 							primary: {
@@ -111,7 +111,8 @@ $(function() {
 				}
 			});
 		},
-		dayClick: function(date, jsEvent, view) {;
+		dayClick: function(date, jsEvent, view) {
+			date._d.setDate(date._d.getDate() + 1);
 			var url = '<?php echo base_url();?>smd/schedule/add_schedule?date=' 
 				+ date._d.getFullYear() + '-' + String(date._d.getMonth() + 1).padStart(2, '0') + '-' + String(date._d.getDate()).padStart(2, '0');
 			$.ajax({

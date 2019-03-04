@@ -18,7 +18,12 @@ class Schedule extends Smd_Controller {
 		$this->load_view('schedule');
 	}
 	
-	public function add_schedule(){
+	public function update_schedule($id=null){
+		$l = $this->schedule_model->get_list("schedule_id='$id'");
+		if(count($l) != 1){
+			echo json_encode(array('success' => false));
+			return;
+		}
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$ret = $this->schedule_model->insert($this->input->post());
 			if($ret){
@@ -31,6 +36,119 @@ class Schedule extends Smd_Controller {
 					'start' => $schedule_start_date.(empty($schedule_start_time) ? '' : ' '.$schedule_start_time),
 					'title' => $this->input->post('schedule_topic')
 				));
+				if(!empty($schedule_end_date)){
+					$r['data']['end'] = $schedule_end_date
+						.empty($schedule_end_time) ? '' : ' '.$schedule_end_time;
+				}
+				echo json_encode($r);
+			}
+			else{
+				echo json_encode(array('success' => false));
+			}
+			return;
+		}
+			$items = array(
+				array(
+					'label' => 'Start',
+					'name' => 'schedule_start',
+					'tag' => 'combo',
+					'type' => 'date_time',
+					'value' => $l[0]['schedule_start_date'].' '.$l[0]['schedule_start_time'],
+					'required' => true
+				),
+				array(
+					'label' => 'End',
+					'name' => 'schedule_end',
+					'tag' => 'combo',
+					'type' => 'date_time',
+					'value' => $l[0]['schedule_end_date'].' '.$l[0]['schedule_end_time'],
+				),
+				array(
+					'label' => 'Location',
+					'name' => 'schedule_location',
+					'placeholder' => 'city',
+					'tag' => 'select',
+					'value' => $l[0]['schedule_location'],
+					'options' => array(
+						array('value' => 'Fremont', 'text' => 'Fremont'),
+						array('value' => 'San Jose', 'text' => 'San Jose'),
+						array('value' => 'Pleasanton', 'text' => 'Pleasanton'),
+						array('value' => '0', 'text' => 'Other'),
+					)
+				),
+				array(
+					'label' => 'Address',
+					'name' => 'schedule_address',
+					'placeholder' => 'Full address',
+					'value' => $l[0]['schedule_address'],
+					'tag' => 'input'
+				),
+				array(
+					'label' => 'Topic',
+					'name' => 'schedule_topic',
+					'tag' => 'textarea',
+					'value' => $l[0]['schedule_topic'],
+					'required' => true
+				),
+				array(
+					'label' => 'Presenter(s)',
+					'name' => 'schedule_presenters',
+					'placeholder' => 'Kun Yang, Min Zhu',
+					'value' => $l[0]['schedule_presenters'],
+					'tag' => 'textarea',
+				),
+				array(
+					'label' => 'Comment',
+					'name' => 'schedule_comment',
+					'value' => $l[0]['schedule_comment'],
+					'tag' => 'textarea'
+				),
+			);
+			$this->load->view('smd/add_item', array('items' => $items, 'width' => '600'));
+	}
+	
+	public function add_schedule(){
+		if($this->input->server('REQUEST_METHOD') == 'POST'){
+			$ret = $this->schedule_model->insert($this->input->post());
+			if($ret){
+				$schedule_start_date = $this->input->post('schedule_start_date');
+				$schedule_start_time = $this->input->post('schedule_start_time');
+				$schedule_end_date = $this->input->post('schedule_end_date');
+				$schedule_end_time = $this->input->post('schedule_end_time');
+				
+				$t = explode("\n", $this->input->post('schedule_topic'));
+				$p = explode("\n", $this->input->post('schedule_presenters'));
+				$tt = array();			
+				for($i = 0; $i < max(count($t), count($p)); ++$i){
+					$l = array();
+					if($i < count($t)){
+						array_push($l, $t[$i]);
+					}
+					if($i < count($p)){
+						array_push($l, $p[$i]);
+					}
+					//echo implode(' ', $l).'    ';
+					array_push($tt, implode(' ', $l));
+				}
+				$data = array(
+					'id' => $ret,
+					'start' => $schedule_start_date.(empty($schedule_start_time) ? '' : ' '.$schedule_start_time),
+					'title' => implode('<br/>', $tt),
+					
+				);
+				$color_list = array(
+					'Fremont' => array('lime', '#000'),
+					'San Jose' => array('yellow', '#000'),
+					'Pleasanton' => array('pink', '#000'),
+				);
+				$sl = $this->input->post('schedule_location');
+				if(array_key_exists($sl, $color_list)){
+					$data['backgroundColor'] =  $color_list[$sl][0];
+					$data['borderColor'] =  $color_list[$sl][0];
+					$data['textColor'] =  $color_list[$sl][1];
+				}
+				
+				$r = array('success' => true, 'data' => $data);
 				if(!empty($schedule_end_date)){
 					$r['data']['end'] = $schedule_end_date
 						.empty($schedule_end_time) ? '' : ' '.$schedule_end_time;
@@ -59,18 +177,6 @@ class Schedule extends Smd_Controller {
 					'type' => 'date_time',
 				),
 				array(
-					'label' => 'Topic',
-					'name' => 'schedule_topic',
-					'tag' => 'input',
-					'required' => true
-				),
-				array(
-					'label' => 'Presenter(s)',
-					'name' => 'schedule_presenters',
-					'placeholder' => 'Kun Yang, Min Zhu',
-					'tag' => 'input',
-				),
-				array(
 					'label' => 'Location',
 					'name' => 'schedule_location',
 					'placeholder' => 'city',
@@ -89,12 +195,24 @@ class Schedule extends Smd_Controller {
 					'tag' => 'input'
 				),
 				array(
+					'label' => 'Topic',
+					'name' => 'schedule_topic',
+					'tag' => 'textarea',
+					'required' => true
+				),
+				array(
+					'label' => 'Presenter(s)',
+					'name' => 'schedule_presenters',
+					'placeholder' => 'Kun Yang, Min Zhu',
+					'tag' => 'textarea',
+				),
+				array(
 					'label' => 'Comment',
 					'name' => 'schedule_comment',
 					'tag' => 'textarea'
 				),
 			);
-			$this->load->view('smd/add_item', array('items' => $items));
+			$this->load->view('smd/add_item', array('items' => $items, 'width' => '600'));
 	}
 	
 	public function import(){

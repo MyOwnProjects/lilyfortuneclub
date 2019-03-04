@@ -3,6 +3,16 @@
  .dialogWide > .modal-dialog {
      width: 80% !important;
  }
+ <?php 
+ if($width){
+?>
+ /*@media (min-width: 576px)*/
+.modal-dialog {
+    max-width: 700px !important;
+}
+ <?php
+ }
+ ?>
 </style>
 <?php
 $item_count = isset($items) ? count($items) : 0;
@@ -92,8 +102,8 @@ $half_count = floor($item_count / 2 - 0.5);
 					<?php
 						for($i = 0; $i < 24; ++$i){
 						?>
-						<option value="<?php echo $i;?>:00:00"><?php echo date_format(date_create("$i:00:00"), 'h:i A');?></option>
-						<option value="<?php echo $i;?>:30:00"><?php echo date_format(date_create("$i:30:00"), 'h:i A');?></option>
+						<option value="<?php echo $i;?>:00:00" <?php echo !empty($dt) && count($dt) > 1 && $dt[1] == date_format(date_create("$i:00:00"), 'H:i:00') ? 'selected' : '';?>><?php echo date_format(date_create("$i:00:00"), 'h:i A');?></option>
+						<option value="<?php echo $i;?>:30:00" <?php echo !empty($dt) && count($dt) > 1 && $dt[1] == date_format(date_create("$i:30:00"), 'H:i:00') ? 'selected' : '';?>><?php echo date_format(date_create("$i:30:00"), 'h:i A');?></option>
 						<?php
 						}
 					?>

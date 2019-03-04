@@ -45,9 +45,24 @@ class Schedule extends Base_controller {
 			'Pleasanton' => array('pink', '#000'),
 		);
 		foreach($result as $r){
+			$t = explode("\n", $r['schedule_topic']);
+			$p = explode("\n", $r['schedule_presenters']);
+			$tt = array();
+			
+			for($i = 0; $i < max(count($t), count($p)); ++$i){
+				$l = array();
+				if($i < count($t)){
+					array_push($l, $t[$i]);
+				}
+				if($i < count($p)){
+					array_push($l, $p[$i]);
+				}
+				//echo implode(' ', $l).'    ';
+				array_push($tt, implode(' ', $l));
+			}
 			$e = array(
 				'id' => $r['schedule_id'], 
-				'title' => $r['schedule_topic'],
+				'title' => implode("<br/>", $tt),
 				'start' => $r['schedule_start_date'].' '.$r['schedule_start_time'],
 				'end' => $r['schedule_end_date'].' '.$r['schedule_end_time'],
 			);
