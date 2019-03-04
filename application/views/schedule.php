@@ -1,6 +1,6 @@
 <style>
-body, #main{position:absolute;top:0;right:0;bottom:0;left:0;}
-#main-body{position:absolute;right:20px;bottom:20px;left:20px}
+/*body1, #main1{position:absolute;top:0;right:0;bottom:0;left:0;}
+#main-body{position:absolute;right:20px;bottom:20px;left:20px}*/
 footer{display:none}
 .fc-event{cursor: pointer;}
 @media only screen and (max-width:900px) {
@@ -9,9 +9,9 @@ footer{display:none}
 <div id="calendar"></div>
 <script>
 $(function() {
-	$('#main-body').css('top', $('#main-header').outerHeight() + 20);
+	$('#main-body').css('top', $('#main-header').outerHeight() + 20).css('padding', '20px');
 	var $_calendar = $('#calendar').fullCalendar({
-		height: 'parent',
+		//height: 'parent',
 		windowResize: function(view) {
 			$('#main-body').css('top', $('#main-header').outerHeight() + 20);
 		},

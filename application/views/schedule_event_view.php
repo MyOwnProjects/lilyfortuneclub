@@ -1,11 +1,29 @@
 <style>
-.aRow{padding:10px 10px;margin:0 10px;}
-.aRow:not(:last-child){border-bottom:1px solid #d5d5d5}
-.row-label{float:left;font-weight:bold;text-align:right;margin-right:10px;width:80px}
+.aRow{padding:2px 0;}
 .row-value{overflow:hidden}
 </style>
+<table class="table table-striped table-condensed">
+	<tr>
+        <th>Topics&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th>Presenters</th>
+	</tr>
+<?php
+	$t = explode("\n", $schedule_topic);
+	$p = explode("\n", $schedule_presenters);
+	$tt = array();
+	for($i = 0; $i < max(count($t), count($p)); ++$i){
+?>
+<tr>
+<?php
+	echo "<td>".($i < count($t) ? $t[$i] : '')."</td>";
+	echo "<td>".($i < count($p) ? $p[$i] : '')."</td>";
+?>
+</tr>	
+<?php
+	}
+?>
+</table>
 <div class="aRow clearfix">
-	<div class="row-label"><b>Time:</b></div>
 	<div class="row-value">
 	<?php 
 		$start_date_str = date_format(date_create($schedule_start_date), 'D, M j');
@@ -27,24 +45,14 @@
 			$start_str = $start_time_str.' '.$start_date_str;
 			$end_str = $end_time_str.' '.$end_date_str;
 		}
-		echo "$start_str - $end_str";
+		echo "<b>Time:</b> $start_str - $end_str";
 	?>
 	</div>
 </div>
 <div class="aRow clearfix">
-	<div class="row-label"><b>Location:</b></div>
-	<div class="row-value"><?php echo empty($schedule_location) ? $schedule_address : $schedule_location;?></div>
+	<div class="row-value"><b>Location:</b> <?php echo empty($schedule_location) ? $schedule_address : $schedule_location.' office';?></div>
 </div>
 <div class="aRow clearfix">
-	<div class="row-label"><b>Topic:</b></div>
-	<div class="row-value"><?php echo $schedule_topic;?></div>
-</div>
-<div class="aRow clearfix">
-	<div class="row-label"><b>Presenters:</b></div>
-	<div class="row-value"><?php echo $schedule_presenters;?></div>
-</div>
-<div class="aRow clearfix">
-	<div class="row-label"><b>Comment:</b></div>
-	<div class="row-value"><?php echo $schedule_comment;?></div>
+	<div class="row-value"><b>Comment:</b> <?php echo empty($schedule_comment) ? 'N/A' : $schedule_comment;?></div>
 </div>
 
