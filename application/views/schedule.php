@@ -9,6 +9,7 @@ footer{display:none}
 <div id="calendar" style="margin:20px 10px 0 10px"></div>
 <script>
     $('#calendar').fullCalendar({
+		height: 'auto',
 		schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
       //editable: true,
       selectable: true,
