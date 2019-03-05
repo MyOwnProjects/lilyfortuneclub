@@ -27,13 +27,6 @@ footer{display:none}
 		eventRender: function (event, element) {
 			element.find('.fc-title').html(event.title);
 		},
-      events: [
-        { id: '1', resourceId: 'a', start: '2018-04-06', end: '2018-04-08', title: 'event 1' },
-        { id: '2', resourceId: 'a', start: '2018-04-07T09:00:00', end: '2018-04-07T14:00:00', title: 'event 2' },
-        { id: '3', resourceId: 'b', start: '2018-04-07T12:00:00', end: '2018-04-08T06:00:00', title: 'event 3' },
-        { id: '4', resourceId: 'c', start: '2018-04-07T07:30:00', end: '2018-04-07T09:30:00', title: 'event 4' },
-        { id: '5', resourceId: 'd', start: '2018-04-07T10:00:00', end: '2018-04-07T15:00:00', title: 'event 5' }
-      ],
 		eventClick: function(event, element) {
 			$.ajax({
 				url : '<?php echo base_url();?>schedule/get_event/' + event.id,
