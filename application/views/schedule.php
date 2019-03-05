@@ -9,7 +9,7 @@ footer{display:none}
 <div id="calendar" style="margin-top:20px"></div>
 <script>
 $(function() {
-	$('#main-body').css('top', $('#main-header').outerHeight() + 20).css('padding', '0 20px');
+	$('#main-body').css('top', $('#main-header').outerHeight() + 20).css('padding', '0 10px');
 	var $_calendar = $('#calendar').fullCalendar({
 		height: 'auto',
 		windowResize: function(view) {
