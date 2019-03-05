@@ -2,6 +2,11 @@
 
 require_once('smd_controller.php');
 class Schedule extends Smd_Controller {
+	private $color_list = array(
+					'Fremont' => array('lime', '#000'),
+					'San Jose' => array('yellow', '#000'),
+					'Pleasanton' => array('pink', '#000'),
+				);
 
 	public function __construct(){
 		parent::__construct();
@@ -21,21 +26,45 @@ class Schedule extends Smd_Controller {
 	public function update_schedule($id=null){
 		$l = $this->schedule_model->get_list("schedule_id='$id'");
 		if(count($l) != 1){
-			echo json_encode(array('success' => false));
+			echo json_encode(array('success' => false, 'message' => 'The schedule does not exist.'));
 			return;
 		}
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
-			$ret = $this->schedule_model->insert($this->input->post());
+			$ret = $this->schedule_model->update_schedule($this->input->post(), "schedule_id='$id'");
 			if($ret){
-				$schedule_start_date = $this->input->post('schedule_start_date');
-				$schedule_start_time = $this->input->post('schedule_start_time');
-				$schedule_end_date = $this->input->post('schedule_end_date');
-				$schedule_end_time = $this->input->post('schedule_end_time');
-				$r = array('success' => true, 'data' => array(
-					'id' => $ret,
+				$result = $this->schedule_model->get_list("schedule_id='$id'");
+				$schedule_start_date = $result[0]['schedule_start_date'];
+				$schedule_start_time = $result[0]['schedule_start_time'];
+				$schedule_end_date = $result[0]['schedule_end_date'];
+				$schedule_end_time = $result[0]['schedule_end_time'];
+				$t = explode("\n", $this->input->post('schedule_topic'));
+				$p = explode("\n", $this->input->post('schedule_presenters'));
+				$tt = array();			
+				for($i = 0; $i < max(count($t), count($p)); ++$i){
+					$l = array();
+					if($i < count($t)){
+						array_push($l, $t[$i]);
+					}
+					if($i < count($p)){
+						array_push($l, $p[$i]);
+					}
+					//echo implode(' ', $l).'    ';
+					array_push($tt, implode(' ', $l));
+				}
+				$data = array(
+					'id' => $id,
 					'start' => $schedule_start_date.(empty($schedule_start_time) ? '' : ' '.$schedule_start_time),
-					'title' => $this->input->post('schedule_topic')
-				));
+					'title' => implode('<br/>', $tt),
+					
+				);
+				$sl = $this->input->post('schedule_location');
+				if(array_key_exists($sl, $this->color_list)){
+					$data['backgroundColor'] =  $this->color_list[$sl][0];
+					$data['borderColor'] =  $this->color_list[$sl][0];
+					$data['textColor'] =  $this->color_list[$sl][1];
+				}
+				
+				$r = array('success' => true, 'data' => $data);
 				if(!empty($schedule_end_date)){
 					$r['data']['end'] = $schedule_end_date
 						.empty($schedule_end_time) ? '' : ' '.$schedule_end_time;
@@ -43,7 +72,7 @@ class Schedule extends Smd_Controller {
 				echo json_encode($r);
 			}
 			else{
-				echo json_encode(array('success' => false));
+				echo json_encode(array('success' => false, 'message' => 'Failed to update schedule.'));
 			}
 			return;
 		}
@@ -136,16 +165,11 @@ class Schedule extends Smd_Controller {
 					'title' => implode('<br/>', $tt),
 					
 				);
-				$color_list = array(
-					'Fremont' => array('lime', '#000'),
-					'San Jose' => array('yellow', '#000'),
-					'Pleasanton' => array('pink', '#000'),
-				);
 				$sl = $this->input->post('schedule_location');
-				if(array_key_exists($sl, $color_list)){
-					$data['backgroundColor'] =  $color_list[$sl][0];
-					$data['borderColor'] =  $color_list[$sl][0];
-					$data['textColor'] =  $color_list[$sl][1];
+				if(array_key_exists($sl, $this->color_list)){
+					$data['backgroundColor'] =  $this->color_list[$sl][0];
+					$data['borderColor'] =  $this->color_list[$sl][0];
+					$data['textColor'] =  $this->color_list[$sl][1];
 				}
 				
 				$r = array('success' => true, 'data' => $data);
@@ -258,6 +282,14 @@ class Schedule extends Smd_Controller {
 		$this->load_view('schedule/import');
 	}
 	
+	public function delete_schedule($id = null){
+		if($this->schedule_model->delete_schedule("schedule_id='$id'")){
+			echo json_encode(array('success' => true)); 
+		}
+		else{
+			echo json_encode(array('success' => false, 'message' => 'Failed to delete schedule.')); 
+		}
+	}
 }
 
 /* End of file welcome.php */

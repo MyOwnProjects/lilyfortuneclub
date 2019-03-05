@@ -28,6 +28,17 @@ class Schedule_model extends Base_model{
 		return $this->db->insert_id();
 	}
 
+	public function update_schedule($params, $where){
+		$set= array();
+		foreach($params as $f => $v){
+			$v = trim($v);
+			$v = empty($v) ? "NULL" : "'$v'";
+			array_push($set, "$f=$v");
+		}
+		$sql = "UPDATE schedule SET ".implode(",", $set)." WHERE $where";
+		return $this->db->query($sql);
+	}
+
 	public function bulk_insert($fields, $values){
 		if(empty($values))
 			return;
@@ -110,6 +121,12 @@ class Schedule_model extends Base_model{
 			array_push($ret, $r['mime_type']);
 		}
 		return $ret;
+	}
+
+	public function delete_schedule($where = ''){
+		$sql = "DELETE FROM schedule WHERE 1=1 AND $where";
+		return $this->db->query($sql);
+		
 	}
 	
 	public function delete($where = ''){

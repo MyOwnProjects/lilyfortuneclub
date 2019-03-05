@@ -50,8 +50,8 @@ $(function() {
 						loaded: function(){},
 						buttons: {
 							primary: {
-								label: 'Submit',
-								className: "btn-primary",
+								label: 'Update',
+								className: "btn-success",
 								callback: function() {
 									Dialog.modal.ajaxLoad(function(){
 										var param_data = {};
@@ -71,8 +71,13 @@ $(function() {
 											success: function(data){
 												if(data['success']){
 													Dialog.hide();
-													event.title = '';
-													$('#calendar').fullCalendar('updateEvent', event);
+													event.title = data['data']['title'];
+													event.start = data['data']['start'];
+													event.end = data['data']['end'];
+													event.backgroundColor = data['data']['backgroundColor'];
+													event.borderColor = data['data']['borderColor'];
+													event.textColor = data['data']['textColor'];
+													$_calendar.fullCalendar('updateEvent', event);
 												}
 												else{
 													if(data['fields']){
@@ -91,7 +96,7 @@ $(function() {
 											complete: function(){
 											}
 										});
-									return false;
+										return false;
 									});
 									return false;
 								}
@@ -99,6 +104,46 @@ $(function() {
 							cancel: {
 								label: 'Cancel',
 								className: "btn"
+							},
+							delete: {
+								label: 'Delete',
+								className: "btn-danger",
+								callback: function(){
+									Dialog.hide(function(){
+										bootbox.confirm({
+											title: "Comfirmation",
+											message: "Do you want to delete the schedule?",
+											buttons: {
+												confirm: {
+													label: 'Yes',
+													className: "btn-danger",
+												},
+												cancel: {
+													label: 'No'
+												},
+											},
+											callback: function (result) {
+												if(result){
+													$.ajax({
+														url: '<?php echo base_url();?>smd/schedule/delete_schedule/' + event.id,
+														dataType: 'json',
+														success: function(data){
+															if(data['success']){
+																$_calendar.fullCalendar('removeEvents',event.id);
+															}
+															else{
+																Dialog.error(data['message']);
+															}
+														},
+														error: function(a, b, c){
+															Dialog.error(a.responseText);
+														}
+													});
+												}
+											}
+										});
+									});
+								}
 							}
 						},
 						onEscape: function () {
