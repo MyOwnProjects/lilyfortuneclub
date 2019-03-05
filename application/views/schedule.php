@@ -13,7 +13,7 @@ footer{display:none}
 		schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
       //editable: true,
       selectable: true,
-      eventLimit: true, // allow "more" link when too many events
+      eventLimit: false, // allow "more" link when too many events
       header: {
         left: 'prev,next today',
         center: 'title',
