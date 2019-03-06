@@ -20,9 +20,12 @@
 									continue;
 								}
 							?>
-								<a href="<?php echo base_url().$sm['url'];?>" style="white-space:nowrap;text-decoration:underline;margin-right:10px">
+							<span style="white-space:nowrap">
+								<img src="<?php echo base_url();?>src/img/<?php echo $sm['icon'];?>" style="width:16px;height:16px;margin-right:0px">
+								<a href="<?php echo base_url().$sm['url'];?>" style="white-space:nowrap;text-decoration:underline;margin-right:20px">
 									<?php echo $sm['text'];?>
 								</a>
+							</span>
 							<?php
 							}
 							?>
