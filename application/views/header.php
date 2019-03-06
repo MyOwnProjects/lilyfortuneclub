@@ -1,7 +1,7 @@
 <style>
-.main-head-menu{float:left;margin-left:20px;margin-top:33px}
+.main-head-menu{float:left;margin-left:20px;margin-top:32px}
 .main-head-menu .dropdown{float:left;margin-left:25px}
-.main-head-menu .dropdown-toggle{color:#fff;font-size:18px;cursor:pointer}
+.main-head-menu .dropdown-toggle{color:#fff;font-size:20px;cursor:pointer;font-family:drugs}
 .main-head-menu .dropdown a{text-decoration:none;}
 .menu-icon{padding:5px 0;border:1px solid #fff;padding:5px 15px;min-width:200px}
 .menu-icon:hover{background:#e5e5e5}
