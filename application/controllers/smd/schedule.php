@@ -138,12 +138,18 @@ class Schedule extends Smd_Controller {
 	
 	public function add_schedule(){
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
-			$ret = $this->schedule_model->insert($this->input->post());
+			$params = $this->input->post();
+			$schedule_start_date = $this->input->post('schedule_start_date');
+			$schedule_start_time = $this->input->post('schedule_start_time');
+			$schedule_length = $this->input->post('schedule_length');
+			$date_end = date_add(date_create($schedule_start_date.' '.$schedule_start_time), date_interval_create_from_date_string("$schedule_length hours"));
+			$schedule_end_date = date_format($date_end, 'Y-m-d');
+			$schedule_end_time = date_format($date_end, 'H:i:s');
+			unset($params['schedule_length']);
+			$params['schedule_end_date'] = $schedule_end_date;
+			$params['schedule_end_time'] = $schedule_end_time;
+			$ret = $this->schedule_model->insert($params);
 			if($ret){
-				$schedule_start_date = $this->input->post('schedule_start_date');
-				$schedule_start_time = $this->input->post('schedule_start_time');
-				$schedule_end_date = $this->input->post('schedule_end_date');
-				$schedule_end_time = $this->input->post('schedule_end_time');
 				
 				$t = explode("\n", $this->input->post('schedule_topic'));
 				$p = explode("\n", $this->input->post('schedule_presenters'));
@@ -195,11 +201,20 @@ class Schedule extends Smd_Controller {
 					'required' => true
 				),
 				array(
+					'label' => 'Length (hours)',
+					'name' => 'schedule_length',
+					'tag' => 'input',
+					'type' => 'number',
+					'value' => 2,
+					'step' => 1,
+					'min' => 1
+				),
+				/*array(
 					'label' => 'End',
 					'name' => 'schedule_end',
 					'tag' => 'combo',
 					'type' => 'date_time',
-				),
+				),*/
 				array(
 					'label' => 'Location',
 					'name' => 'schedule_location',
