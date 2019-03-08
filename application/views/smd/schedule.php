@@ -171,7 +171,7 @@ $(function() {
 				success: function(data){
 					Dialog.modal({
 						message: data,
-						title: 'New Schedules',
+						title: 'New Schedule',
 						loaded: function(){},
 						buttons: {
 							primary: {
