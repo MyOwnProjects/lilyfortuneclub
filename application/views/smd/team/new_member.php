@@ -1,14 +1,14 @@
 <style>
 input,textarea,select{box-sizing:border-box;width:100%}
 </style>
-<div class="main-body-wrapper" ng-app="myapp" ng-controller="mycontroller" ng-init="membership_code_error=''">
+<div class="main-body-wrapper">
 	<h3 class="text-center">New Member</h3>
 	<div class="row" style="padding:20px 20px 0 20px">
 		<div class="col-sm-12 form-group">
 			<label>MyWFG Fields</label>
 			<textarea class="form-control form-control-sm" id="auto-fill" style="height:100px"></textarea>
 			<br/>
-			<button class="btn btn-sm btn-primary" onclick="auto_fill();return false;" id="auto-fill-btn">&nbsp;&nbsp;&nbsp;&nbsp;Fill&nbsp;&nbsp;&nbsp;&nbsp;</button>
+			<button class="btn btn-sm btn-primary" onclick="auto_fill()" id="auto-fill-btn">&nbsp;&nbsp;&nbsp;&nbsp;Fill&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		</div>
 	</div>
 	<form style="padding:20px;border-top:1px solid #d5d5d5" method="post">
@@ -25,7 +25,7 @@ input,textarea,select{box-sizing:border-box;width:100%}
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-4 col-md-6 col-sm-12 form-group">
+		<div class="col-lg-4 col-md-6 col-sm-12 form-group" ng-app="myapp" ng-controller="mycontroller" ng-init="membership_code_error=''">
 			<label>Code <span class="text-danger">*</span></label><div class="pull-right text-danger">{{member.membership_code_error()}}</div>
 			<input class="form-control form-control-sm member-info-field" name="membership_code" required ng-model="member.membership_code">
 		</div>
