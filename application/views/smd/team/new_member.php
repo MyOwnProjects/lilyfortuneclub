@@ -161,7 +161,7 @@ function auto_fill(){
 						lpos = line.indexOf('(');
 						rpos = line.indexOf(')');
 						code_len = rpos - lpos - 1;
-						$('#membership_code').val(line.substr(line.length - (code_len + 1), code_len)); 
+						$('#membership_code').val(line.substr(line.length - (code_len + 1), code_len)).trigger('change'); 
 						line = line.substr(0, line.length - (code_len + 2)).trim();
 						var pos = line.lastIndexOf(' ');
 						$('#first_name').val(line.substr(0, pos));
