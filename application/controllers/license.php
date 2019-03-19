@@ -94,7 +94,7 @@ class License extends Base_controller {
 							'Download the PDF document, and start to learn.'
 						),
 				));
-		if($this->user && in_array($this->user['membership_code'], array('24KIZ', '27QUE'))){
+		if($this->user && in_array($this->user['membership_code'], array('24KIZ', '27QUE', '53VQT'))){
 			array_push($steps,	array(
 					'title' => 'Appoint',
 					'comment' =>'To sell products through certain product providers, you must be properly appointed. There are 3 easy steps:',
