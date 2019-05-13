@@ -371,3 +371,25 @@ if ( ! function_exists('number_to_english')){
 		return $number;
 	}	
 }
+
+if ( ! function_exists('custom_number_format')){
+	function custom_number_format($n) {
+		if ($n < 1000) {
+			// Anything less than a million
+			$n_format = $n;
+		} else if ($n < 1000000) {
+			// Anything less than a million
+			$n_format = number_format($n / 1000).'K';
+		} else if ($n < 1000000000) {
+			// Anything less than a billion
+			if(number_format($n / 1000000) == $n / 1000000){
+				$n_format = ($n / 1000000) . 'M';
+			}
+			else{
+				$n_format = number_format($n / 1000000, 1) . 'M';
+			}
+		}
+
+		return $n_format;
+	}
+}

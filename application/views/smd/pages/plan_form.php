@@ -21,27 +21,6 @@ if ( ! function_exists('write_header'))
 	<?php
 	}
 }
-if ( ! function_exists('custom_number_format')){
-	function custom_number_format($n) {
-		if ($n < 1000) {
-			// Anything less than a million
-			$n_format = $n;
-		} else if ($n < 1000000) {
-			// Anything less than a million
-			$n_format = number_format($n / 1000).'K';
-		} else if ($n < 1000000000) {
-			// Anything less than a billion
-			if(number_format($n / 1000000) == $n / 1000000){
-				$n_format = ($n / 1000000) . 'M';
-			}
-			else{
-				$n_format = number_format($n / 1000000, 1) . 'M';
-			}
-		}
-
-		return $n_format;
-	}
-}
 $name = $age.'岁，'.($gender == 'F' ? '女' : '男').'，保额'.number_to_chinese($face_amount).'美元';
 $descs = array(
 	0 => '5年最大化投资',
@@ -127,7 +106,19 @@ $blocks = array(
 						<td colspan="2" class="h t">计划代码</td>
 						<?php
 						foreach($plans as $i => $plan){
-							$code = $gender.$age.($plan['type'] < 3 ? 'NC' : 'CO').custom_number_format($face_amount);
+							switch($plan['type']){
+								case '0':
+								case '3':
+									$co = 'A';
+									break;
+								case '1':
+								case '4':
+									$co = 'B';
+									break;
+								default:
+									$co = 'C';
+							}
+							$code = $gender.$age.($plan['type'] < 3 ? 'NC' : 'CO').custom_number_format($face_amount).$co;
 						?>
 						<td class="h2 t">
 							<?php echo $code;?>
@@ -259,7 +250,20 @@ foreach($plan_data as $i => $data){
 		<div class="block clearfix">
 			<div class="head1">附 
 				<?php 
-				$code = $gender.$age.($plans[$i]['type'] < 3 ? 'NC' : 'CO').custom_number_format($face_amount);
+							switch($plans[$i]['type']){
+								case '0':
+								case '3':
+									$co = 'A';
+									break;
+								case '1':
+								case '4':
+									$co = 'B';
+									break;
+								default:
+									$co = 'C';
+							}
+				
+				$code = $gender.$age.($plans[$i]['type'] < 3 ? 'NC' : 'CO').custom_number_format($face_amount).$co;
 				echo ($i + 1);?>：详细列表 - 计划 <?php echo $code;?> 
 			</div>
 			<div class="clearfix">

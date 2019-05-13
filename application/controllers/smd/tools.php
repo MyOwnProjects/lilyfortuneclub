@@ -336,7 +336,6 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$action = $this->input->post('action');
 			$case_for = $this->input->post('case-for');
-			$plan_descs = $this->input->post('plan-desc');
 			$plan_data = $this->input->post('plan-data');
 			$case_age = $this->input->post('case-age');
 			$case_gender = $this->input->post('case-gender'); 
@@ -345,21 +344,15 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 			//$case_desc = $this->input->post('case-desc');
 			//$plan_code = $this->input->post('plan-code');
 			if($action == 'save'){
-				$plan_descs_new = array();
-				foreach($plan_descs as $pd){
-					array_push($plan_descs_new, urlencode($pd));
-				}
 				$save_data = array(
-					'plan_descs' => $plan_descs_new,
-					'plan_code' => $plan_code,
-					'plan_data' => $plan_data,
-					'case_name' => urlencode($case_name), 
 					'case_age' => $case_age,
 					'case_gender' => $case_gender, 
-					'case_desc' => urlencode($case_desc),
-					'case_for' => $case_for
+					'face_amount' => $face_amount,
+					'case_for' => $case_for,
+					'plan_types' => $plan_types,
+					'plan_data' => $plan_data,
 				);
-				$file_name = $case_name.'.json';
+				$file_name = $case_gender.$case_age.($plan_types < 3 ? 'NC' : 'CO').'.json';
 				header('Content-Type: text/csv; charset=utf-8');
 				header("Content-Disposition: attachment; filename=$file_name");
 				//$save_data = mb_convert_encoding(json_encode($save_data), 'UTF-8', 'UTF-8');

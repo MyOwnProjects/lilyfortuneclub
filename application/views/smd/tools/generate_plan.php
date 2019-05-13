@@ -48,23 +48,18 @@ a.btn{color:#fff !important}
 	<div class="form-group form-group-sm">
 		<label>Face Amount</label>&nbsp;
 		<select class="form-control" name="face-amount">
-			<option value="100000">100K</option>
-			<option value="150000">150K</option>
-			<option value="200000">200K</option>
-			<option value="250000">250K</option>
-			<option value="300000">300K</option>
-			<option value="500000">500K</option>
-			<option value="1000000" selected>1M</option>
-			<option value="1500000">1.5M</option>
-			<option value="2000000">2M</option>
-			<option value="2500000">2.5M</option>
-			<option value="3000000">3M</option>
-			<option value="3500000">3.5M</option>
-			<option value="3000000">3M</option>
-			<option value="3500000">3.5M</option>
-			<option value="3000000">4M</option>
-			<option value="3500000">4.5M</option>
-			<option value="3000000">5M</option>
+			<?php
+			$face_amount = $content['face_amount'];
+			$fas = array(200000,250000,300000,400000,500000,750000,1000000,1500000,2000000,2500000,3000000,3500000
+				,4000000,4500000);
+			foreach($fas as $fa){
+			?>
+			<option value="<?php echo $fa;?>" <?php echo isset($face_amount) ? ($face_amount == $fa ? 'selected' : '') : ($fa == 1000000 ? 'selected' : '');?>>
+				<?php echo custom_number_format($fa);?>
+			</option>
+			<?php
+			}
+			?>
 		</select>
 	</div>
 	<div class="form-group form-group-sm">
@@ -93,23 +88,32 @@ a.btn{color:#fff !important}
 	<div class="block-plans">
 		<?php
 		if(isset($content)){
+			$plan_types = $content['plan_types'];
 			foreach($content['plan_data'] as $i => $pd){
 		?>
-		<div class="block-plan">
-			<div class="form-group form-group-sm">
+		<div class="block-plan clear">
+			<div style="float:left;padding-right:20px">
+				<div class="form-group form-group-sm">
 				<a title="Remove the plan" class="btn btn-xs btn-danger" onclick="remove_plan(this);">
 					<i class="fa fa-trash" aria-hidden="true"></i>
 				</a>
-				&nbsp;&nbsp;
-				<label>Code</label>&nbsp;<input type="text" name="plan-code[]" style="width:300px" class="form-control" value="<?php echo array_key_exists('plan_code', $content) ? urldecode($content['plan_code'][$i]) : '';?>">
-				<br/><br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<label>Desc</label>&nbsp;
-				<select name="plan-desc[]" style="width:300px" class="form-control" value="<?php echo urldecode($content['plan_descs'][$i]);?>">
-					<option></option>
-				</select>
-			</div>&nbsp;<div class="form-group form-group-sm">
-				<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quote</label>&nbsp<textarea style="height:150px;width:500px" name="plan-data[]" class="form-control"><?php echo $pd;?></textarea>
+				</div>
+			</div>
+			<div style="float:left;padding-right:20px">
+				<div class="form-group form-group-sm">
+					<select name="plan-type[]" class="form-control">
+						<option value="0" <?php echo $plan_types[$i] == '0' ? 'selected' : '';?>>5 years 7 pay</option>
+						<option value="1" <?php echo $plan_types[$i] == '1' ? 'selected' : '';?>>5 years 7 pay alternitive</option>
+						<option value="2" <?php echo $plan_types[$i] == '2' ? 'selected' : '';?>>target</option>
+						<option value="3" <?php echo $plan_types[$i] == '3' ? 'selected' : '';?>>5 years 7 pay cash out</option>
+						<option value="4" <?php echo $plan_types[$i] == '4' ? 'selected' : '';?>>5 years 7 pay alternitive cash out</option>
+					</select>
+				</div>
+			</div>
+			<div style="overflow:hidden;">
+				<div class="form-group form-group-sm">
+					<textarea style="height:130px;width:500px" name="plan-data[]" class="form-control" placeholder="Quote"><?php echo $pd;?></textarea>
+				</div>		
 			</div>
 		</div>
 		<?php
@@ -129,7 +133,7 @@ a.btn{color:#fff !important}
 	</div>
 	<div style="float:left;padding-right:20px">
 		<div class="form-group form-group-sm">
-			<select name="plan-type[]" class="form-control" onchange="plan_type_change(this)">
+			<select name="plan-type[]" class="form-control">
 				<option value="0">5 years 7 pay</option>
 				<option value="1">5 years 7 pay alternitive</option>
 				<option value="2">target</option>
@@ -156,36 +160,10 @@ function remove_plan(obj){
 function add_plan(){
 	plan_seq++;
 	var block_plan = $('<div>').addClass('block-plan').addClass('clear').appendTo($('.block-plans')).append($('.block-plan-template').html());
-	/*var group = $('<div>').addClass('form-group').addClass('form-group-sm').appendTo(block_plan);
-	$('<a>').attr('title', 'Remove the plan').addClass('btn').addClass('btn-xs').addClass('btn-danger').html('<span class="glyphicon glyphicon-trash"></span>')
-		.click(function(){
-			remove_plan(this);
-		})
-		.appendTo(group);
-	group.append('&nbsp;&nbsp;');
-    $('<label>').attr('for', 'aa').html('Code').appendTo(group);
-	group.append('&nbsp;');
-	$('<input>').attr('type', 'text').attr('name', 'plan-code[]').css('width', '300px').addClass('form-control').appendTo(group);	group.append('&nbsp;');
-	group.append('<br/><br/>');
-	group.append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
-    $('<label>').attr('for', 'aa').html('Desc').appendTo(group);
-	group.append('&nbsp;');
-	$('<input>').attr('type', 'text').attr('name', 'plan-desc[]').css('width', '300px').addClass('form-control').appendTo(group);	group.append('&nbsp;');
- 
-	var group = $('<div>').addClass('form-group').addClass('form-group-sm').appendTo(block_plan);
-	//$('<label>').html('Quote').appendTo(group);
-	//group.append('&nbsp;');
-	//$('<input>').attr('type', 'file').attr('name', 'plan-files[]').attr('accept', '.csv').addClass('form-control').appendTo(group);
-	//group.append('<br/>');
-	$('<label>').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quote').appendTo(group);
-	group.append('&nbsp;');
-	$('<textarea>').css('height', '150px').css('width', '500px').attr('name', 'plan-data[]').addClass('form-control').appendTo(group);*/
 	$('.button-submit').removeClass('disabled');
 	return false;
 }
 
-function plan_type_change(obj){
-}
 
 function save_report(){
 	$('input[name=action]').val('save');
