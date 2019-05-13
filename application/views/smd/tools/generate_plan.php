@@ -54,7 +54,7 @@ a.btn{color:#fff !important}
 			<option value="250000">250K</option>
 			<option value="300000">300K</option>
 			<option value="500000">500K</option>
-			<option value="1000000">1M</option>
+			<option value="1000000" selected>1M</option>
 			<option value="1500000">1.5M</option>
 			<option value="2000000">2M</option>
 			<option value="2500000">2.5M</option>
