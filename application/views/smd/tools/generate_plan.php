@@ -33,20 +33,9 @@ a.btn{color:#fff !important}
 </form>
 <br/>
 <form id="the_form" class="form-inline" target="_blank" action="<?php echo base_url();?>smd/tools/generate_plan" method="post" enctype="multipart/form-data">
-	<div class="form-group form-group-sm">
-		<label>For</label>&nbsp;
-		<select class="form-control" name="case-for">
-			<option value="0" <?php echo isset($content) && array_key_exists('case_for', $content) && $content['case_for'] == 0 ? 'selected' : ''?>>其它</option>
-			<option value="1" <?php echo !isset($content) || !array_key_exists('case_for', $content) || $content['case_for'] == 1 ? 'selected' : ''?>>新京集团</option>
-		</select>
-	</div>
-	<br/>
 	<input type="hidden" name="action" value="">
-	<div class="form-group form-group-sm">  
-		<label>Client Name</label>&nbsp;<input type="text" class="form-control" name="client-name" value="<?php echo isset($content) && array_key_exists('client_name', $content) ? urldecode($content['client_name']) : ''?>">
-	</div>
 	<div class="form-group form-group-sm">
-		<label>Age</label>&nbsp;<input type="number" class="form-control" min="20" max="100" name="case-age" value="<?php echo isset($content) && $content['case_age'] ? $content['case_age'] : ''?>">
+		<label>Age</label>&nbsp;<input type="number" class="form-control" min="20" max="100" name="case-age" value="<?php echo isset($content) && $content['case_age'] ? $content['case_age'] : ''?>" required>
 	</div>
 	<div class="form-group form-group-sm">
 		<label>Gender</label>&nbsp;
@@ -55,11 +44,10 @@ a.btn{color:#fff !important}
 			<option value="M" <?php echo isset($content) && $content['case_gender'] == 'M' ? 'selected' : ''?>>Male</option>
 		</select>
 	</div>
-	<br/>
+	&nbsp;&nbsp;
 	<div class="form-group form-group-sm">
 		<label>Face Amount</label>&nbsp;
 		<select class="form-control" name="face-amount">
-			<option value="50000">50K</option>
 			<option value="100000">100K</option>
 			<option value="150000">150K</option>
 			<option value="200000">200K</option>
@@ -67,20 +55,24 @@ a.btn{color:#fff !important}
 			<option value="300000">300K</option>
 			<option value="500000">500K</option>
 			<option value="1000000">1M</option>
+			<option value="1500000">1.5M</option>
 			<option value="2000000">2M</option>
+			<option value="2500000">2.5M</option>
+			<option value="3000000">3M</option>
+			<option value="3500000">3.5M</option>
+			<option value="3000000">3M</option>
+			<option value="3500000">3.5M</option>
+			<option value="3000000">4M</option>
+			<option value="3500000">4.5M</option>
+			<option value="3000000">5M</option>
 		</select>
 	</div>
-	&nbsp;&nbsp;
-	<div class="checkbox">
-		<label><input type="checkbox" value="">&nbsp;Cash out</label>
-	</div>
-	<br/>
-	<div class="form-group form-group-sm">  
-		<label>Case Name</label>&nbsp;<input type="text" class="form-control" name="case-name" required value="<?php echo isset($content) && $content['case_name'] ? urldecode($content['case_name']) : ''?>" readonly1>
-	</div>
 	<div class="form-group form-group-sm">
-		<label>Case Desc</label>&nbsp;
-		<textarea class="form-control" name="case-desc" style="height:80px;width:600px" readonly1><?php echo isset($content) && $content['case_desc'] ? urldecode($content['case_desc']) : ''?></textarea>
+		<label>For</label>&nbsp;
+		<select class="form-control" name="case-for">
+			<option value="0" <?php echo !isset($content) || array_key_exists('case_for', $content) || $content['case_for'] == 0 ? 'selected' : ''?>>其它</option>
+			<option value="1" <?php echo isset($content) && !array_key_exists('case_for', $content) && $content['case_for'] == 1 ? 'selected' : ''?>>新京集团</option>
+		</select>
 	</div>
 	<br/>
 	<div class="form-group">
@@ -113,7 +105,9 @@ a.btn{color:#fff !important}
 				<br/><br/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<label>Desc</label>&nbsp;
-				<input type="text" name="plan-desc[]" style="width:300px" class="form-control" value="<?php echo urldecode($content['plan_descs'][$i]);?>">
+				<select name="plan-desc[]" style="width:300px" class="form-control" value="<?php echo urldecode($content['plan_descs'][$i]);?>">
+					<option></option>
+				</select>
 			</div>&nbsp;<div class="form-group form-group-sm">
 				<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quote</label>&nbsp<textarea style="height:150px;width:500px" name="plan-data[]" class="form-control"><?php echo $pd;?></textarea>
 			</div>
@@ -129,23 +123,19 @@ a.btn{color:#fff !important}
 	<div style="float:left;padding-right:20px">
 		<div class="form-group form-group-sm">
 		<a title="Remove the plan" class="btn btn-xs btn-danger" onclick="remove_plan(this);">
-			<span class="glyphicon glyphicon-trash"></span>
+			<i class="fa fa-trash" aria-hidden="true"></i>
 		</a>
 		</div>
 	</div>
 	<div style="float:left;padding-right:20px">
 		<div class="form-group form-group-sm">
-			<select name="plan-type1[]" class="form-control" onchange="plan_type_change(this)">
+			<select name="plan-type[]" class="form-control" onchange="plan_type_change(this)">
 				<option value="0">5 years 7 pay</option>
 				<option value="1">5 years 7 pay alternitive</option>
-				<option value="2">10 years target</option>
-				<option value="3">15 years target</option>
-				<option value="4">20 years target</option>
+				<option value="2">target</option>
+				<option value="3">5 years 7 pay cash out</option>
+				<option value="4">5 years 7 pay alternitive cash out</option>
 			</select>
-			<br/><br/>
-			<input name="plan-code[]" class="form-control" type="text" style="width:100px" readonly1 placeholder="Code">
-			<br/><br/>
-			<input name="plan-desc[]" class="form-control" type="text" style="width:300px" readonly1 placeholder="Desc">
 		</div>
 	</div>
 	<div style="overflow:hidden;">

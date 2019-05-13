@@ -21,6 +21,35 @@ if ( ! function_exists('write_header'))
 	<?php
 	}
 }
+if ( ! function_exists('custom_number_format')){
+	function custom_number_format($n) {
+		if ($n < 1000) {
+			// Anything less than a million
+			$n_format = $n;
+		} else if ($n < 1000000) {
+			// Anything less than a million
+			$n_format = number_format($n / 1000).'K';
+		} else if ($n < 1000000000) {
+			// Anything less than a billion
+			if(number_format($n / 1000000) == $n / 1000000){
+				$n_format = ($n / 1000000) . 'M';
+			}
+			else{
+				$n_format = number_format($n / 1000000, 1) . 'M';
+			}
+		}
+
+		return $n_format;
+	}
+}
+$name = $age.'岁，'.($gender == 'F' ? '女' : '男').'，保额'.number_to_chinese($face_amount).'美元';
+$descs = array(
+	0 => '5年最大化投资',
+	1 => '前4年中等额度投资，第5年最大化投资',
+	2 => '年中等额度投资',
+	3 => '5年最大化投资，取钱',
+	4 => '前4年中等额度投资，第5年最大化投资，取钱',
+);
 ?>
 <!DOCTYPE html>
 <html>
@@ -79,14 +108,15 @@ $blocks = array(
 		}
 		
 		$ages = array(70, 80, 90, 100);
-		$real_age_count = count($plans[0]['cash_value']);
+		
+		$real_age_count = empty($plans) ? 0 : count($plans[0]['cash_value']);
 		?>
 		
 		<div class="block">
 			<div class="head1">案例 - <?php echo $name;?></div>
 			<div class="text">
-				<?php $da = explode("\n", $desc);?>
-				<div><?php echo implode('<br/>', $da);?></div>
+				<?php //$da = explode("\n", $desc);?>
+				<!--div><?php echo implode('<br/>', $da);?></div-->
 				<br/>
 				<table class="t1" cellspacing="0" cellpadding="0" border="0">
 					<tr>
@@ -97,9 +127,10 @@ $blocks = array(
 						<td colspan="2" class="h t">计划代码</td>
 						<?php
 						foreach($plans as $i => $plan){
+							$code = $gender.$age.($plan['type'] < 3 ? 'NC' : 'CO').custom_number_format($face_amount);
 						?>
 						<td class="h2 t">
-							<?php echo $plan['code'];?>
+							<?php echo $code;?>
 						</td>
 						<?php
 						}
@@ -110,7 +141,10 @@ $blocks = array(
 						<?php
 						foreach($plans as $i => $plan){
 						?>
-						<td><?php echo $plan['desc'];?></td>
+						<td>
+						<?php 
+							echo $plan['type'] == 2 ? $plan['premium']['years'].$descs[$plan['type']] : $descs[$plan['type']];
+						?></td>
 						<?php
 						}
 						?>
@@ -158,53 +192,55 @@ $blocks = array(
 						?>
 					</tr>
 					<?php
-					foreach($plans[0]['cash_value'] as $a => $v){
-					?>
-					<tr>
-						<td rowspan="4" class="h h1 <?php echo $a == 100 ? 'b' : ''?>"><?php echo $a.'<br/>岁';?></td>
-						<td class="h">账户现金余额</td>
-						<?php
-						foreach($plans as $i => $plan){
+					if(!empty($plans)){
+						foreach($plans[0]['cash_value'] as $a => $v){
 						?>
-						<td class="c g"><?php echo number_to_chinese($plan['cash_value'][$a]);?></td>
+						<tr>
+							<td rowspan="4" class="h h1 <?php echo $a == 100 ? 'b' : ''?>"><?php echo $a.'<br/>岁';?></td>
+							<td class="h">账户现金余额</td>
+							<?php
+							foreach($plans as $i => $plan){
+							?>
+							<td class="c g"><?php echo number_to_chinese($plan['cash_value'][$a]);?></td>
+							<?php
+							}
+							?>
+						</tr>
+						<tr>
+							<td class="h">生前取出总额</td>
+							<?php
+							foreach($plans as $i => $plan){
+							?>
+							<td class="c g"><?php echo number_to_chinese($plan['withdraw_value'][$a]);?></td>
+							<?php
+							}
+							?>
+						</tr>
+						<tr>
+							<td class="h">身后传承额</td>
+							<?php
+							foreach($plans as $i => $plan){
+							?>
+							<td class="c g"><?php echo number_to_chinese($plan['death_benifit'][$a]);?></td>
+							<?php
+							}
+							?>
+						</tr>
+						<tr>
+							<td class="h <?php echo $a == 100 ? 'b' : ''?>">投资回报率</td>
+							<?php
+							foreach($plans as $i => $plan){
+							?>
+							<td class="c <?php echo $a == 100 ? 'b' : ''?>">
+								<?php echo number_to_chinese($plan['rate'][$a]);?>，
+								<?php echo round($plan['rate'][$a] / $plan['premium_total'], 1);?>倍
+							</td>
+							<?php
+							}
+							?>
+						</tr>
 						<?php
 						}
-						?>
-					</tr>
-					<tr>
-						<td class="h">生前取出总额</td>
-						<?php
-						foreach($plans as $i => $plan){
-						?>
-						<td class="c g"><?php echo number_to_chinese($plan['withdraw_value'][$a]);?></td>
-						<?php
-						}
-						?>
-					</tr>
-					<tr>
-						<td class="h">身后传承额</td>
-						<?php
-						foreach($plans as $i => $plan){
-						?>
-						<td class="c g"><?php echo number_to_chinese($plan['death_benifit'][$a]);?></td>
-						<?php
-						}
-						?>
-					</tr>
-					<tr>
-						<td class="h <?php echo $a == 100 ? 'b' : ''?>">投资回报率</td>
-						<?php
-						foreach($plans as $i => $plan){
-						?>
-						<td class="c <?php echo $a == 100 ? 'b' : ''?>">
-							<?php echo number_to_chinese($plan['rate'][$a]);?>，
-							<?php echo round($plan['rate'][$a] / $plan['premium_total'], 1);?>倍
-						</td>
-						<?php
-						}
-						?>
-					</tr>
-					<?php
 					}
 					?>
 				</table>
@@ -221,7 +257,11 @@ foreach($plan_data as $i => $data){
 	<?php write_header($name);?>
 	<div class="main">
 		<div class="block clearfix">
-			<div class="head1">附 <?php echo ($i + 1);?>：详细列表 - 计划 <?php echo $plans[$i]['code'];?> </div>
+			<div class="head1">附 
+				<?php 
+				$code = $gender.$age.($plans[$i]['type'] < 3 ? 'NC' : 'CO').custom_number_format($face_amount);
+				echo ($i + 1);?>：详细列表 - 计划 <?php echo $code;?> 
+			</div>
 			<div class="clearfix">
 		<table class="t2 <?php echo count($data) > 53 ? 'th' : 'tf';?>">
 			<thead>
