@@ -352,7 +352,7 @@ echo '<html><head><meta charset="UTF-8"></head><body>';
 					'plan_types' => $plan_types,
 					'plan_data' => $plan_data,
 				);
-				$file_name = $case_gender.$case_age.($plan_types < 3 ? 'NC' : 'CO').'.json';
+				$file_name = $case_gender.$case_age.($plan_types[0] < 3 ? 'NC' : 'CO').'.json';
 				header('Content-Type: text/csv; charset=utf-8');
 				header("Content-Disposition: attachment; filename=$file_name");
 				//$save_data = mb_convert_encoding(json_encode($save_data), 'UTF-8', 'UTF-8');
