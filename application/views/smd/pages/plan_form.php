@@ -324,7 +324,6 @@ foreach($plan_data as $i => $data){
 			</thead>
 			<tbody>
 		<?php
-		$s1 = 0;
 		for($i = 50; $i < count($data); ++$i){
 			$row = $data[$i];
 			$a = intval($row[0]);
