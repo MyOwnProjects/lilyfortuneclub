@@ -209,6 +209,9 @@ class User_model extends Base_model{
 		$like_array = array();
 		if(!empty($search)){
 			foreach($search as $s){
+				if($s == ''){
+					continue;
+				}
 				array_push($like_array, "name LIKE '%$s%'");
 				array_push($like_array, "nick_name LIKE '%$s%'");
 				array_push($like_array, "email LIKE '%$s%'");

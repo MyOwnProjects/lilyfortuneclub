@@ -37,7 +37,18 @@
 						success_reload: false,
 						checked: false,
 						callback: function(param){
-							location.href = '<?php echo base_url();?>smd/team/export';
+							var p = "";
+							if(!jQuery.isEmptyObject(param['sort'])){
+								p += "?sort=" + JSON.stringify(param['sort']);
+							}
+							if(param['search']){
+								p += "&search=" + param['search'].trim();
+							}
+							if(param['filter'].length > 0){
+								p += "&filter=" + JSON.stringify(param['filter']);
+							}
+							//console.log('<?php echo base_url();?>smd/team/export' + p);
+							location.href = '<?php echo base_url();?>smd/team/export' + p;
 						}
 					},
 					{

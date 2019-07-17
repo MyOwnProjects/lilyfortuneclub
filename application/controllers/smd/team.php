@@ -1608,8 +1608,20 @@ class Team extends Smd_Controller {
 	}
 	
 	public function export($item = 'all'){
+		$filter = $this->input->get('filter');
+		$search_str = $this->input->get('search');
+		$sort = $this->input->get('sort');
+		if($filter){
+			$filter = json_decode($filter);
+		}
+		if($sort){
+			$sort = json_decode($sort);
+		}
+		
+		//
 		$this->load->model('user_model');
-		$result = $this->user_model->get_list();
+		$search = isset($search_str) && $search_str !== '' ? preg_split('/[^a-z0-9]/i', $search_str) : array();
+		$result = $this->user_model->get_list("smd='".$this->user['users_id']."'", $sort, '', $search);
 		header('Content-Type: text/csv; charset=utf-8');
 		header("Content-Disposition: attachment; filename=team-members.csv");
 		$output = fopen('php://output', 'w');

@@ -178,7 +178,7 @@ function new_item(prop){//title, url, param){
 		var _this = this;
 		var $_this = $(this);
 		var _search_key = '';
-		var _filter = filter_by;
+		var _filter = filter_by ? filter_by : [];
 		var _current_page = 1;
 		var _sort = {};
 		$.extend(_sort, order_by);
@@ -276,7 +276,7 @@ function new_item(prop){//title, url, param){
 						if(customized_buttons[i]['sub_menus'][j]['callback']){
 							$_a.click(function(btn_index, menu_index, obj){
 								return function(){
-									var param = {};
+									var param = {sort: _sort, search: _search_key, filter: _filter};
 									if(customized_buttons[btn_index]['sub_menus'][menu_index]['success_reload']){
 										param['func'] = _this.reload;
 									}
