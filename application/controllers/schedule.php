@@ -50,7 +50,7 @@ class Schedule extends Base_controller {
 			'schedule_address' => null,
 			'schedule_topic' => "Distance Training",
 			'schedule_presenters' => "",
-			'schedule_comment' => "<br/>Zoom - https://zoom.us/j/797669485<br/>Phone - 6699006833, 4086380968, 6468769923"
+			'schedule_comment' => '<br/>Zoom - <a href="https://zoom.us/j/797669485" target="_blank">https://zoom.us/j/797669485</a><br/>Phone - 6699006833, 4086380968, 6468769923'
 		),
 		'Saturday' => array(
 			'schedule_id' => 'e4',
