@@ -28,7 +28,7 @@ class Schedule extends Base_controller {
 			'schedule_presenters' => "",
 			'schedule_comment' => null
 		),
-		'Wendnesday' => array(
+		'wednesday' => array(
 			'schedule_id' => 'e2',
 			'schedule_start_date' => '',
 			'schedule_start_time' => '19:00:00',
