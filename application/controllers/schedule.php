@@ -24,7 +24,7 @@ class Schedule extends Base_controller {
 			'schedule_end_time' => '21:00:00',
 			'schedule_location' => 'San Jose',
 			'schedule_address' => null,
-			'schedule_topic' => "BPM\nTraining",
+			'schedule_topic' => "BPM\nProfessional Training",
 			'schedule_presenters' => "",
 			'schedule_comment' => null
 		),
@@ -36,7 +36,7 @@ class Schedule extends Base_controller {
 			'schedule_end_time' => '21:00:00',
 			'schedule_location' => 'Fremont',
 			'schedule_address' => null,
-			'schedule_topic' => "BPM\nTraining",
+			'schedule_topic' => "BPM\nProfessional Training",
 			'schedule_presenters' => "",
 			'schedule_comment' => null
 		),
@@ -60,7 +60,7 @@ class Schedule extends Base_controller {
 			'schedule_end_time' => '12:00:00',
 			'schedule_location' => 'Fremont',
 			'schedule_address' => null,
-			'schedule_topic' => "BPM\nTraining",
+			'schedule_topic' => "BPM\nProfessional Training",
 			'schedule_presenters' => null,
 			'schedule_comment' => null
 		),
