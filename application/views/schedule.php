@@ -8,7 +8,7 @@ footer{display:none}
 </style>
 <div id="calendar" style="margin:20px 10px 0 10px"></div>
 <script>
-    $('#calendar').fullCalendar({
+    var full_calendar = $('#calendar').fullCalendar({
 		height: 'auto',
 		schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
       //editable: true,
@@ -28,8 +28,10 @@ footer{display:none}
 			element.find('.fc-title').html(event.title);
 		},
 		eventClick: function(event, element) {
+			var d = new Date(event.start);
 			$.ajax({
-				url : '<?php echo base_url();?>schedule/get_event/' + event.id,
+				url : '<?php echo base_url();?>schedule/get_event/' + event.id + '?start=' 
+					+ d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(),
 				success: function(data){
 					bootbox.dialog({
 						title: 'Schedule',
@@ -45,8 +47,8 @@ footer{display:none}
 			});
 		},
 
-	events: '<?php echo base_url();?>schedule/get_events',
-      dayClick: function(date, jsEvent, view, resource) {
+	events: '<?php echo base_url();?>schedule/get_events?sadsdasd',
+    dayClick: function(date, jsEvent, view, resource) {
         console.log(
           'dayClick',
           date.format(),
@@ -54,6 +56,16 @@ footer{display:none}
         );
       }
     });
+	/*for(var i = 0; i < 2; ++i){
+		var event = {
+			id: i,
+			daysOfWeek: 2,
+			title: "test",
+			startTime: "10:00:00",
+			endTime: "11:30:00"
+		};
+		full_calendar.addEvent(event);
+	}*/
 /*$(function() {
 	$('#main-body').css('top', $('#main-header').outerHeight() + 20);//.css('padding', '0 10px');
 	var $_calendar = $('#calendar').fullCalendar({
