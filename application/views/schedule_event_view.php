@@ -50,7 +50,18 @@
 	</div>
 </div>
 <div class="aRow clearfix">
-	<div class="row-value"><b>Location:</b> <?php echo empty($schedule_location) ? $schedule_address : $schedule_location.' office';?></div>
+	<?php
+	if(empty($schedule_location)){
+		$l = $schedule_address;
+	}
+	else if(in_array($schedule_location, array("Fremont", "Pleasanton", "San Jose"))){
+		$l = $schedule_location." office";
+	}
+	else{
+		$l = $schedule_location;
+	}
+	?>
+	<div class="row-value"><b>Location:</b> <?php echo $l;?></div>
 </div>
 <div class="aRow clearfix">
 	<div class="row-value"><b>Comment:</b> <?php echo empty($schedule_comment) ? 'N/A' : $schedule_comment;?></div>
