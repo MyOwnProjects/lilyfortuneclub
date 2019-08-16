@@ -19,7 +19,7 @@ class License extends Base_controller {
 			'steps' => array(
 				'Go to <a href="https://www.examfx.com/" target="_blank">examfx.com</a>.',
 				'Click "Register Now".',
-				'Under "Special Company Discount Pricing", enter our company discount email as "teamaspire@examfx.com", click "Next Step".',
+				'Under "Special Company Discount Pricing", enter our company discount email as "assistant.aspire@gmail.com", click "Next Step".',
 				'Select Product "Insurance Prelicensing", then choose "California".', 
 				'Select Training "Life and Health Insurance", then click "Next Step".',
 				'Select Package, " California Life and Health Insurance, $29.95, Video Study Package - Life and Health", then "Next Step".', 
