@@ -1,0 +1,12 @@
+<FilesMatch ".pdf">
+	Order Allow,Deny
+	Deny from All
+</FilesMatch>
+<FilesMatch ".ppt">
+	Order Allow,Deny
+	Deny from All
+</FilesMatch>
+<FilesMatch ".pptx">
+	Order Allow,Deny
+	Deny from All
+</FilesMatch>
