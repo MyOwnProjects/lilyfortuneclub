@@ -19,7 +19,6 @@ class Training extends Smd_Controller {
 	}
 	
 	public function get_files(){
-		echo getcwd();exit;
 		$path = $this->input->post('path');
 		$sort = $this->input->post('sort');
 		$scan_files = scandir($path, $sort);
@@ -30,6 +29,7 @@ class Training extends Smd_Controller {
 				continue;
 			}
 			$full_file = $path."\\".$file;
+			echo $full_file;
 			$ext = pathinfo($full_file, PATHINFO_EXTENSION);
 			$size = filesize($full_file);
 			$type = filetype($full_file);
