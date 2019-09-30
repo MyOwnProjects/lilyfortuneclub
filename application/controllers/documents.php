@@ -99,9 +99,9 @@ class Documents extends Base_Controller {
 					return;
 				}
 			}
-			$content_mime_type = $result[0]['mime_content_type'];
-			if($content_mime_type == 'PDF'){
-				$this->load->view('pdf_viewer', array('subject' => $result[0]['subject'], 'file' => $result[0]['uniqid'].'.'.$result[0]['file_name']));
+			$content_mime_type = strtolower($result[0]['mime_content_type']);
+			if($content_mime_type == 'pdf'){
+				$this->load->view('pdf_viewer', array('subject' => $result[0]['subject'], 'file' => 'src/doc/'.$result[0]['uniqid'].'.'.$result[0]['file_name']));
 			}
 			else if($content_mime_type == 'doc' || $content_mime_type == 'ppt' || $content_mime_type == 'excel'){
 				$this->load->view('doc_viewer', array('subject' => $result[0]['subject'], 'file' => $file));
