@@ -10,7 +10,7 @@ class Training extends Base_Controller {
 	public function index(){
 		$data = array();
 		$this->_scan_dir('src/training', $data);
-		$this->load_view('account/home', array('data' => $data));
+		$this->load_view('account/training', array('data' => $data));
 	}
 	
 	private function _scan_dir($path, &$result){
