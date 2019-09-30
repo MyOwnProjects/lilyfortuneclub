@@ -30,11 +30,11 @@ class Training extends Smd_Controller {
 			}
 			$full_file = $path."\\".$file;
 			$ext = pathinfo($full_file, PATHINFO_EXTENSION);
-			$size = filesize($full_file);
-			$type = filetype($full_file);
-			$atime = date("Y-m-d H:i:s", fileatime($full_file));
-			$ctime = date("Y-m-d H:i:s", filectime($full_file));
-			$mtime = date("Y-m-d H:i:s", filemtime($full_file));
+			$size = 0;//filesize($full_file);
+			$type = 0;//filetype($full_file);
+			$atime = null;//date("Y-m-d H:i:s", fileatime($full_file));
+			$ctime = null;//date("Y-m-d H:i:s", filectime($full_file));
+			$mtime = null;//date("Y-m-d H:i:s", filemtime($full_file));
 			if($type == 'dir'){
 				array_push($folders, array(
 					'name' => $file,
