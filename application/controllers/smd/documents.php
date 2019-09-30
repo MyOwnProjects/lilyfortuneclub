@@ -6,7 +6,7 @@ class Documents extends Smd_Controller {
 	public function __construct(){
 		parent::__construct();
 		if(empty($this->user) || $this->user['grade'] !== 'SMD'){
-			$this->redirect('smd/ac/sign_in');
+			redirect('smd/ac/sign_in');
 			//header('location: '.base_url().'smd/ac/sign_in');
 		}		
 		$this->load->model('document_model');

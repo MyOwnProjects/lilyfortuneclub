@@ -321,6 +321,6 @@
   </body>
 </html>
 <script>
-load_pdf_viewer('<?php echo base_url().'src/doc/'.$file;?>', function(){
+load_pdf_viewer('<?php echo base_url().$file;?>', function(){
 });
 </script>

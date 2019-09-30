@@ -111,7 +111,7 @@ class License extends Base_controller {
 				));
 		}
 		$this->summary = array(
-			'summary' => 'There are 2 or 3 steps to get your license, denpends on the state',
+			'summary' => '',
 			'steps' => $steps		
 		);
 	}
@@ -121,7 +121,7 @@ class License extends Base_controller {
 			header('location:'.base_url().'license/online_courses');
 			exit;
 		}
-		$this->load_view('account/license', array('summary' => $this->summary));
+		$this->load_view('account/license', array('active_page' => $this->input->get('page'), 'summary' => $this->summary));
 	}
 	
 	public function get_step_detail(){
@@ -131,7 +131,6 @@ class License extends Base_controller {
 			'subject' => $this->summary['steps'][$page]['subject'], 
 			'image_file_name'=> $this->summary['steps'][$page]['steps']['image_file_name'], 
 			'step' => $this->summary['steps'][$page]['steps'][$step]));
-		
 	}
 	
 	public function online_courses(){

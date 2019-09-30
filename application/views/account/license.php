@@ -19,14 +19,17 @@
 </style>
 <div style="margin:0 auto;max-width:1000px;padding:20px 0 80px 0;">
 	<button class="pull-right btn btn-xs btn-primary" onclick="window.print();"><span class="glyphicon glyphicon-print"></span>&nbsp;Print</button>
-		<h2 class="text-center">Get Your License</h2>
+		<h2 class="text-center">Get Your License in the United States</h2>
 		<div class="text-center" style="font-size:16px;margin-bottom:20px"><?php echo $summary['summary'];?></div>
 	
 	<ul class="nav nav-tabs nav-tabs-<?php echo count($summary['steps']);?> clearfix" id="top-tab">
 		<?php
+		if($active_page > 4){
+			$active_page = 0;
+		}
 		foreach($summary['steps'] as $i => $step){
 		?>
-		<li <?php echo $i == 0 ? 'class="active"' : '';?>><a data-toggle="tab" href="#license-page-<?php echo $i + 1;?>"><?php echo $step['title'];?></a></li>
+		<li <?php echo $i == $active_page ? 'class="active"' : '';?>><a data-toggle="tab" href="#license-page-<?php echo $i + 1;?>"><?php echo $step['title'];?></a></li>
 		<?php
 		}
 		?>
