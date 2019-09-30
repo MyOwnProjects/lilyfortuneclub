@@ -30,6 +30,7 @@ class Training extends Smd_Controller {
 			}
 			$full_file = $path."\\".$file;
 			echo $full_file;
+			$stat = stat($full_file);
 			$ext = pathinfo($full_file, PATHINFO_EXTENSION);
 			$size = filesize($full_file);
 			$type = filetype($full_file);
