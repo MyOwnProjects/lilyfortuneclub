@@ -29,8 +29,6 @@ class Training extends Smd_Controller {
 				continue;
 			}
 			$full_file = getcwd().'/'.$path."/".$file;
-			echo $full_file;
-			$stat = stat($full_file);
 			$ext = pathinfo($full_file, PATHINFO_EXTENSION);
 			$size = filesize($full_file);
 			$type = filetype($full_file);
