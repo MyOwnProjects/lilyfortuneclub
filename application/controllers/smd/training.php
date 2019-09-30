@@ -28,7 +28,7 @@ class Training extends Smd_Controller {
 			if(in_array($file, array('.', '..', '.htaccess'))){
 				continue;
 			}
-			$full_file = $path."\\".$file;
+			$full_file = getcwd().'/'.$path."/".$file;
 			echo $full_file;
 			$stat = stat($full_file);
 			$ext = pathinfo($full_file, PATHINFO_EXTENSION);
