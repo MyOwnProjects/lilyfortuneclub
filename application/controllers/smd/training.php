@@ -19,6 +19,7 @@ class Training extends Smd_Controller {
 	}
 	
 	public function get_files(){
+		echo getcwd();exit;
 		$path = $this->input->post('path');
 		$sort = $this->input->post('sort');
 		$scan_files = scandir($path, $sort);
