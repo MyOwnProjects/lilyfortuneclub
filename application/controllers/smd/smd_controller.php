@@ -20,6 +20,14 @@ class Smd_controller extends CI_Controller {
 				),
 			),
 		),
+		'training' => array(
+			'text' => 'Training',
+			'sub_menus' =>array(
+				'' => array(
+					'text' => 'List'
+				),
+			),
+		),
 		'team' => array(
 			'text' => 'Team',
 			'sub_menus' => array(
