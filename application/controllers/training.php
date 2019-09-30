@@ -19,7 +19,7 @@ class Training extends Base_Controller {
 			if(in_array($file, array('.', '..', '.htaccess'))){
 				continue;
 			}
-			$full_file = $path."\\".$file;
+			$full_file = getcwd().'/'.$path.'/'.$file;
 			$ext = pathinfo($full_file, PATHINFO_EXTENSION);
 			$size = filesize($full_file);
 			$type = filetype($full_file);
