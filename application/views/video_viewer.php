@@ -20,7 +20,7 @@
 				<?php
 				foreach($schedule as $i => $s){
 				?>
-				<div class="col-lg-12" style="overflow:hidden;text-overflow:ellipsis"> - [<a href="<?php echo base_url();?>schedule"><?php echo date_format(date_create($s['schedule_start_date']), 'm/d');?></a>]&nbsp;<?php echo $s['schedule_topic'];?></div>
+				<div class="col-lg-12" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis"> - [<a href="<?php echo base_url();?>schedule"><?php echo date_format(date_create($s['schedule_start_date']), 'm/d');?></a>]&nbsp;<?php echo $s['schedule_topic'];?></div>
 				<?php
 					if($i > 19){
 						break;
