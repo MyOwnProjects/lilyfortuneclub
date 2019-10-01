@@ -56,7 +56,8 @@ class Training extends Base_Controller {
 		$file_info = pathinfo ($file);
 		$ext = strtolower($file_info['extension']);
 		if($ext == 'pdf'){
-			$this->load->view('pdf_viewer', array('file' => $file));
+			$this->load->view('pdf_viewer_1', array('file' => $file));
+			//$this->load->view('pdf_viewer', array('file' => $file));
 		}
 		else if($ext == 'mp4'){
 			$this->load->model('schedule_model');
