@@ -55,7 +55,7 @@ class Training extends Base_Controller {
 		}
 		$file_info = pathinfo ($file);
 		$ext = strtolower($file_info['extension']);
-		if($ext == 'pdf'){
+		if($ext == 'pdf1'){
 			$this->load->view('pdf_viewer', array('file' => $file));
 		}
 		else if($ext == 'mp4'){
@@ -63,7 +63,7 @@ class Training extends Base_Controller {
 			$schedule = $this->schedule_model->get_list("schedule_start_date>=".date_format(date_create(), "Y-m-d"), array("schedule_start_date ASC", "schedule_start_time ASC"));
 			$this->load_view('video_viewer', array('schedule' => $schedule, 'file' => $file));
 		}
-		else if(in_array($ext, array('ppt', 'pptx', 'doc', 'docx'))){
+		else if(in_array($ext, array('ppt', 'pptx', 'doc', 'docx', 'pdf'))){
 			$this->load->view('doc_viewer', array('subject' => $file_info['basename'], 'file' => $file));
 		}
 	}
