@@ -11,8 +11,9 @@ class Schedule_model extends Base_model{
 		parent::__construct();
 	}
 	
-	public function get_list($where = ''){
-		$sql = "SELECT * from schedule WHERE 1=1 ".(empty($where) ? '' : " AND $where");
+	public function get_list($where = '', $order_by = array()){
+		$sql = "SELECT * from schedule WHERE 1=1 ".(empty($where) ? '' : " AND $where")
+			.(empty($order_by) ? "" : " ORDER BY ".implode(",", $order_by));
 		return $this->db->query($sql);
 	}
 	
