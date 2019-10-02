@@ -14,7 +14,9 @@
 	#navigation-controls #zoom_out{position:absolute;right:20px}
 	#navigation-controls #zoom_in{position:absolute;right:46px}
 	#navigation-controls #total_page{margin-right:60px}
-	#navigation-controls #page_number{position:absolute;left:80px;right:80px;text-align:center}
+	#navigation-controls #page_number{display:none;position:absolute;left:80px;right:80px;text-align:center}
+	#navigation-controls #loading{position:absolute;left:80px;right:80px;text-align:center}
+	#navigation-controls #loading img{height:24px;line-height:24px}
 	#navigation-controls #current_page{;color:#000;text-align:right;padding:0 2px;width:50px;}
 	#canvas-container {background: #333;text-align:center;position:absolute;top:44px;right:0;bottom:0;left:0;overflow:auto}
 </style>
@@ -29,6 +31,7 @@
 			<!--div id="go_previous" class="buttons"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true" title="previous page"></span></div>
 			<div id="go_next" class="buttons"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true" title="next page"></span></div-->
 			<div id="page_number"><input id="current_page" min="1" max="" value="" type="number"> of <span id="total_page"></span></div>
+			<div id="loading"><img src="<?php echo base_url();?>src/img/spinning.gif"></div>
 			<div id="zoom_out" class="buttons"><span class="glyphicon glyphicon-minus" aria-hidden="true" title="zoom out"></span></div>
 			<div id="zoom_in" class="buttons"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="zoom in"></span></div>
 		</div>
@@ -62,7 +65,9 @@ function render() {
 pdfjsLib.getDocument('<?php echo base_url().$file;?>').then(function(pdf) {
     myState.pdf = pdf;
 	$('#total_page').html(myState.pdf.numPages);
-	$('#current_page').attr('min', 1).attr('max', myState.pdf.numPages).val(1);;
+	$('#current_page').attr('min', 1).attr('max', myState.pdf.numPages).val(1);
+	$('#loading').hide();
+	$('#page_number').show();
 	renderAllpages();
 });
 
