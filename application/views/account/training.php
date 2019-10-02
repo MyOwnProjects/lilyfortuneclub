@@ -1,14 +1,13 @@
 
 <style>
 .common-ln{padding:5px 0}
-.item-body{margin:20px}
+.item-body{margin:40px 20px 20px 20px}
 .item-body>.f-body{margin-left:10px}
-.f-head{position:relative;height:60px;}
-.f-head>div{position:absolute}
-.f-head>div:first-child{border:5px solid #FFF;z-index:1000;top:0;bottom:0;left:0;width:60px;height:60px;border-radius:50%;line-height:50px;text-align:center;font-size:24px;font-weight:bold}
-.f-head>div:last-child{top:10px;right:0;left:30px;line-height:40px;padding-left:40px;font-size:18px;border-radius:30px}
-.f-head-r>div{background:red;color:#FFF}
-.f-head-g>div{background:green;color:#FFF}
+.f-head{font-size:18px;}
+.f-head>div:first-child{color:darkred;border-bottom:3px solid darkred;float:left;width:30px;text-align:center}
+.f-head>div:last-child{overflow:hidden;border-bottom:3px solid #e5e5e5;padding-left:10px}
+.f-head>div{padding-bottom:5px;}
+
 .f-body{padding:0 30px}
 .f-sub-body-text img,.f-sub-body-file img{height:14px;margin-top:-4px;margin-left:10px}
 .f-sub-body-text>div:first-child,.f-sub-body-file>div:first-child{float:left;width:25px;}
@@ -87,7 +86,7 @@ function list_items($list, $level){
 	<div class="main-content-wrapper">
 		<h2 class="text-center">On-Boarding Process</h2>
 		<div class="item-body">
-			<div class="f-head f-head-g">
+			<div class="f-head f-head-g clearfix">
 				<div>1</div>
 				<div>Licensing</div>
 			</div>
