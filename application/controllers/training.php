@@ -66,7 +66,7 @@ class Training extends Base_Controller {
 			$this->load_view('video_viewer', array('schedule' => $schedule, 'file' => $file));
 		}
 		else if(in_array($ext, array('ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx'))){
-			$this->load->view('doc_viewer', array('subject' => $file_info['basename'], 'file' => $file));
+			$this->load->view('doc_viewer', array('subject' => $file_info['basename'], 'file' => $file.'?'.time()));
 		}
 	}
 }
