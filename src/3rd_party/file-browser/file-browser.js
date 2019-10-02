@@ -124,6 +124,7 @@
 					return false;
 				}
 			}
+			ajax_loading(true);
 			var ajaxData = new FormData();
 			for(var i = 0; i < droppedFiles.length; ++i){
 				ajaxData.append('uploaded[]', droppedFiles[i]);
@@ -151,8 +152,9 @@
 					$('.file-browser-item-folder').each(function(){
 						var o = $(this);
 						if(o.attr('data-folder') == dest[0] && o.attr('data-name') == dest[1]){
-							click_folder($(this));
-							click_folder($(this));
+							if(click_folder($(this)) == 'collapsed'){
+								click_folder($(this));
+							}
 							return false;
 						}
 					});
@@ -161,6 +163,7 @@
 				error: function(){
 				},
 				complete: function(){
+					ajax_loading(false);
 				}
 			});
 		};
@@ -180,14 +183,13 @@
 					}
 				}
 				d.removeClass('file-browser-item-expanded');
-				return false;
+				return 'collapsed';
 			}
 			var name = d.attr('data-name');
 			var folder = d.attr('data-folder');
 			var level = parseInt(d.attr('data-level'));
 			load(d, folder + '/' + name, index, level + 1);
-
-			
+			return 'expended';
 		};
 		
 		$($_this).delegate('.file-browser-item', 'hover', function(e){
