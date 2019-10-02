@@ -124,7 +124,7 @@
 					return false;
 				}
 			}
-			ajax_loading(true);
+			ajax_uploading(true);
 			var ajaxData = new FormData();
 			for(var i = 0; i < droppedFiles.length; ++i){
 				ajaxData.append('uploaded[]', droppedFiles[i]);
@@ -136,8 +136,7 @@
 					xhr.upload.addEventListener("progress", function(evt) {
 						if (evt.lengthComputable) {
 							var percentComplete = evt.loaded / evt.total;
-							percentComplete = parseInt(percentComplete * 100);
-							console.log(percentComplete + '%');
+							$('#ajax-uploading .progress-bar').css('width', (percentComplete * 100) + '%' );
 						}
 					}, false);
 					return xhr;
@@ -163,7 +162,7 @@
 				error: function(){
 				},
 				complete: function(){
-					ajax_loading(false);
+					//ajax_uploading(false);
 				}
 			});
 		};

@@ -130,6 +130,30 @@ function ajax_loading(show){
 	}
 }
 
+function ajax_uploading(show){
+	if(show){
+		if($('#ajax-uploading').length){
+			$('#ajax-uploading').show();
+		}
+		else{
+			var $_div = $('<div>').attr('id', 'ajax-uploading').css('position', 'fixed').css('margin', '100px auto 0 auto').css('left', '0').css('right', '0')
+				.css('width', '400px').css('border', '1px solid #d5d5d5').css('background', '#fff').css('z-index', '10000')
+				.css('padding', '20px');
+			var $_text= $('<div>').html('Uploading......').appendTo($_div);
+			var $_progress = $('<div>').addClass('progress').appendTo($_div);
+			var $_progress_bar = $('<div>').addClass('progress-bar').attr('role', 'progressbar')
+				.attr('aria-valuenow', 0).attr('aria-valuemin', 0).attr('aria-valuemax', 100).css('width', '0%').appendTo($_progress);
+			var $_span = $('<span>').addClass('sr-only').html('&nbsp;').appendTo($_progress_bar);
+			$('body').append($_div);
+		}
+	}
+	else{
+		if($('#ajax-uploading').length){
+			$('#ajax-uploading').hide();
+		}
+	}
+}
+
 function simple_alert(text, type){
 	var $_div = $('#simple-alert');
 	if($_div.length <= 0){
