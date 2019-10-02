@@ -50,13 +50,14 @@ class Training extends Base_Controller {
 			exit;
 		}
 		$file = $this->input->get('file');
-		if(!file_exists($file)){
+		$full_file = getcwd().'/'.$file;
+		if(!file_exists($full_file)){
 			return;
 		}
-		$file_info = pathinfo ($file);
+		$file_info = pathinfo ($full_file);
 		$ext = strtolower($file_info['extension']);
 		if($ext == 'pdf'){
-			$this->load->view('pdf_viewer_1', array('file' => $file));
+			$this->load->view('pdf_viewer_1', array('file' => $file, 'name' => $file_info['basename']));
 			//$this->load->view('pdf_viewer', array('file' => $file));
 		}
 		else if($ext == 'mp4'){
