@@ -162,7 +162,7 @@
 				error: function(){
 				},
 				complete: function(){
-					//ajax_uploading(false);
+					ajax_uploading(false);
 				}
 			});
 		};
