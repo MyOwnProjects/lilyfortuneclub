@@ -25,6 +25,12 @@
 					else if(ext == 'ppt' || ext == 'pptx'){
 						type_class = 'file-browser-item-ppt';
 					}
+					else if(ext == 'xls' || ext == 'xlsx'){
+						type_class = 'file-browser-item-xls';
+					}
+					else if(ext == 'doc' || ext == 'docx'){
+						type_class = 'file-browser-item-doc';
+					}
 					else if(ext == 'mp4'){
 						type_class = 'file-browser-item-mp4';
 					}

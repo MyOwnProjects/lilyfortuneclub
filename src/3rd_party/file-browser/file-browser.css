@@ -18,6 +18,8 @@
 .file-browser-item-folder{background-image:url(./folder.svg);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
 .file-browser-item-pdf{background-image:url(./ppt.svg);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
 .file-browser-item-ppt{background-image:url(./ppt.svg);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
+.file-browser-item-xls{background-image:url(./xls.svg);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
+.file-browser-item-doc{background-image:url(./doc.svg);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
 .file-browser-item-mp4{background-image:url(./mp4.svg);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
 .file-browser-item-png{background-image:url(./png.svg);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
 .file-browser-item-file{background-image:url(./file.svg);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}

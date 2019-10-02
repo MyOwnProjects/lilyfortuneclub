@@ -16,6 +16,8 @@
 .f-sub-body-file{display:inline-block;padding-right:10px}
 .file-pdf{background:url('<?php echo base_url();?>src/img/pdf.svg') no-repeat 0 2px;background-size:auto 20px}
 .file-ppt{background:url('<?php echo base_url();?>src/img/ppt.svg') no-repeat 0 2px;background-size:auto 20px}
+.file-xls{background:url('<?php echo base_url();?>src/img/xls.svg') no-repeat 0 2px;background-size:auto 20px}
+.file-doc{background:url('<?php echo base_url();?>src/img/doc.svg') no-repeat 0 2px;background-size:auto 20px}
 .file-mp4{background:url('<?php echo base_url();?>src/img/mp4.svg') no-repeat 0 2px;background-size:auto 20px}
 .file-png{background:url('<?php echo base_url();?>src/img/pdfpng.svg') no-repeat 0 2px;background-size:auto 20px}
 .file-default{background:url('<?php echo base_url();?>src/img/file.svg') no-repeat 0 2px;background-size:auto 20px}
@@ -55,6 +57,14 @@ function list_items($list, $level){
 				case 'ppt':
 				case 'pptx':
 					$type_class = 'file-ppt';
+					break;
+				case 'xls':
+				case 'xlsx':
+					$type_class = 'file-xls';
+					break;
+				case 'doc':
+				case 'docx':
+					$type_class = 'file-doc';
 					break;
 				case 'mp4':
 					$type_class = 'file-mp4';
