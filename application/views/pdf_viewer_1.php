@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My PDF Viewer</title>
+<title><?php echo isset($name) ? $name.' - ' : '';?>Lily Fortune Club</title>
 <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/css/bootstrap.css?<?php time();?>" />
 <style>
 	#pdf-viewer{position:absolute;top:0;right:0;bottom:0;left:0;}
