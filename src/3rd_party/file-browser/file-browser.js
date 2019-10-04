@@ -242,9 +242,9 @@
 				if(cele.hasClass('file-browser-item-folder')){
 					path.push(cele.attr('data-folder'));
 					path.push(cele.attr('data-name'));
-					if(!cele.hasClass('file-browser-item-expanded')){
-						click_folder(ele);
-					}
+					//if(!cele.hasClass('file-browser-item-expanded')){
+					//	click_folder(ele);
+					//}
 				}
 				else{
 					var prev = cele.prev();
@@ -257,8 +257,9 @@
 						}
 						prev = prev.prev();
 					}
-					upload_files(e.originalEvent.dataTransfer.files, path);
+					//upload_files(e.originalEvent.dataTransfer.files, path);
 				}
+				upload_files(e.originalEvent.dataTransfer.files, path);
 			} 
 			else {
 				alert('The File APIs are not fully supported in this browser.');
