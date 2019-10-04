@@ -108,11 +108,11 @@ function list_items($list, $level){
 						<div class="f-body">
 							<div class="f-sub-body-text clearfix"><div>a.</div><div>United States<img src="<?php echo base_url();?>src/img/national_flags/Flag_of_the_United_States.svg"></div></div>
 							<div class="f-body">
-								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license">Pre-Licensing Education</a></div></div>
-								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=1">License Exam</a></div></div>
-								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=2">License Application</a></div></div>
-								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=3">Continuing Education</a></div></div>
-								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=4">Carrier Appointment</a></div></div>					
+								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license" target="_blank">Pre-Licensing Education</a></div></div>
+								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=1" target="_blank">License Exam</a></div></div>
+								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=2" target="_blank">License Application</a></div></div>
+								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=3" target="_blank">Continuing Education</a></div></div>
+								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=4" target="_blank">Carrier Appointment</a></div></div>					
 							</div>
 						</div>
 					</div>
