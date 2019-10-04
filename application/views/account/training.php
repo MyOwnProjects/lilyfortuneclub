@@ -161,16 +161,16 @@ function list_items($list, $level){
 				<div class="row">
 					<div class="col-md-12">
 						<div class="f-body">
-							<div class="f-sub-body-text clearfix"><div>a.</div><div><a href="<?php echo base_url();?>license">Provider resource (web training etc)</a></div></div>
-							<div class="f-sub-body-text clearfix"><div>b.</div><div><a href="<?php echo base_url();?>license?page=1">Lilyfortuneclub.com tools</a></div></div>
-							<div class="f-sub-body-text clearfix"><div>c.</div><div><a href="<?php echo base_url();?>license?page=2">Facebook live and recorded videos</a></div></div>
-							<div class="f-sub-body-text clearfix"><div>d.</div><div><a href="<?php echo base_url();?>license?page=3">WFG resources</a></div></div>
+							<div class="f-sub-body-text clearfix"><div>a.</div><div>Provider resource (web training etc.)</div></div>
+							<div class="f-sub-body-text clearfix"><div>b.</div><div>Lilyfortuneclub.com tools</div></div>
+							<div class="f-sub-body-text clearfix"><div>c.</div><div>Facebook live and recorded videos</div></div>
+							<div class="f-sub-body-text clearfix"><div>d.</div><div>WFG resources</div></div>
 							<div class="f-body">
-								<div class="f-sub-body-text clearfix"><div>i.</div><div><a href="<?php echo base_url();?>license">Web Training(in sales force and WFG talks)</a></div></div>
-								<div class="f-sub-body-text clearfix"><div>ii.</div><div><a href="<?php echo base_url();?>license?page=1">Ed Mylett web</a></div></div>
-								<div class="f-sub-body-text clearfix"><div>iii.</div><div><a href="<?php echo base_url();?>license?page=1">Sales Force</a></div></div>
-								<div class="f-sub-body-text clearfix"><div>iv.</div><div><a href="<?php echo base_url();?>license?page=1">Campaign Manager</a></div></div>
-								<div class="f-sub-body-text clearfix"><div>vi.</div><div><a href="<?php echo base_url();?>license?page=1">Mywfg.com other tools</a></div></div>
+								<div class="f-sub-body-text clearfix"><div>i.</div><div>Web Training(in sales force and WFG talks)</div></div>
+								<div class="f-sub-body-text clearfix"><div>ii.</div><div>Ed Mylett web</div></div>
+								<div class="f-sub-body-text clearfix"><div>iii.</div><div>Sales Force</div></div>
+								<div class="f-sub-body-text clearfix"><div>iv.</div><div>Campaign Manager</div></div>
+								<div class="f-sub-body-text clearfix"><div>vi.</div><div>Mywfg.com other tools</div></div>
 							</div>
 							<div class="f-sub-body-text clearfix"><div>f.</div><div>Books/Audio/Video (Technical, and business, Jonathan CD)</div></div>
 						</div>
