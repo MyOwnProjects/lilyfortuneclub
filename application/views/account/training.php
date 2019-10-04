@@ -8,19 +8,21 @@
 .f-head>div:last-child{overflow:hidden;border-bottom:3px solid #e5e5e5;padding-left:10px}
 .f-head>div{padding-bottom:5px;}
 
-.f-body{padding:0 30px}
+.f-body{padding:0 0 0 20px}
 .f-sub-body-text img,.f-sub-body-file img{height:14px;margin-top:-4px;margin-left:10px}
-.f-sub-body-text>div:first-child,.f-sub-body-file>div:first-child{float:left;width:25px;}
+.f-sub-body-text>div:first-child,.f-sub-body-file>div:first-child{float:left;width:20px;}
 .f-sub-body-text>div:last-child,.f-sub-body-file>:last-child{overflow:hidden}
 .f-sub-body-text{padding-top:12px}
-.f-sub-body-file{display:inline-block;padding-right:10px}
-.file-pdf{background:url('<?php echo base_url();?>src/img/pdf.svg') no-repeat 0 2px;background-size:auto 20px}
-.file-ppt{background:url('<?php echo base_url();?>src/img/ppt.svg') no-repeat 0 2px;background-size:auto 20px}
-.file-xls{background:url('<?php echo base_url();?>src/img/xls.svg') no-repeat 0 2px;background-size:auto 20px}
-.file-doc{background:url('<?php echo base_url();?>src/img/doc.svg') no-repeat 0 2px;background-size:auto 20px}
-.file-mp4{background:url('<?php echo base_url();?>src/img/mp4.svg') no-repeat 0 2px;background-size:auto 20px}
-.file-png{background:url('<?php echo base_url();?>src/img/pdfpng.svg') no-repeat 0 2px;background-size:auto 20px}
-.file-default{background:url('<?php echo base_url();?>src/img/file.svg') no-repeat 0 2px;background-size:auto 20px}
+.f-sub-body-file{display:inline-block;padding-right:16px}
+.f-sub-body-file>div:first-child{background-repeat:no-repeat;background-position:0 3px;background-size:auto 16px}
+.file-pdf{background-image:url('<?php echo base_url();?>src/img/pdf.svg')}
+.file-ppt{background-image:url('<?php echo base_url();?>src/img/ppt.svg')}
+.file-xls{background-image:url('<?php echo base_url();?>src/img/xls.svg')}
+.file-doc{background-image:url('<?php echo base_url();?>src/img/doc.svg')}
+.file-mp4{background-image:url('<?php echo base_url();?>src/img/mp4.svg')}
+.file-png{background-image:url('<?php echo base_url();?>src/img/png.svg')}
+.file-html{background-image:url('<?php echo base_url();?>src/img/html.svg')}
+.file-default{background-image:url('<?php echo base_url();?>src/img/file.svg')}
 
 </style>
 <?php
@@ -102,19 +104,19 @@ function list_items($list, $level){
 			</div>
 			<div class="f-body">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<div class="f-body">
 							<div class="f-sub-body-text clearfix"><div>a.</div><div>United States<img src="<?php echo base_url();?>src/img/national_flags/Flag_of_the_United_States.svg"></div></div>
 							<div class="f-body">
-								<div class="f-sub-body-text clearfix"><div>i.</div><div><a href="<?php echo base_url();?>license">Pre-Licensing Education</a></div></div>
-								<div class="f-sub-body-text clearfix"><div>ii.</div><div><a href="<?php echo base_url();?>license?page=1">License Exam</a></div></div>
-								<div class="f-sub-body-text clearfix"><div>iii.</div><div><a href="<?php echo base_url();?>license?page=2">License Application</a></div></div>
-								<div class="f-sub-body-text clearfix"><div>iv.</div><div><a href="<?php echo base_url();?>license?page=3">Continuing Education</a></div></div>
-								<div class="f-sub-body-text clearfix"><div>vi.</div><div><a href="<?php echo base_url();?>license?page=4">Carrier Appointment</a></div></div>					
+								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license">Pre-Licensing Education</a></div></div>
+								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=1">License Exam</a></div></div>
+								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=2">License Application</a></div></div>
+								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=3">Continuing Education</a></div></div>
+								<div class="f-sub-body-file clearfix"><div class="file-html">&nbsp;</div><div><a href="<?php echo base_url();?>license?page=4">Carrier Appointment</a></div></div>					
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<div class="f-body">
 						<div class="f-sub-body-text clearfix"><div>b.</div><div>Canada<img src="<?php echo base_url();?>src/img/national_flags/Flag_of_Canada.svg"></div></div>
 						<div class="f-body">
