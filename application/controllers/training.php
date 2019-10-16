@@ -57,7 +57,7 @@ class Training extends Base_Controller {
 		$file_info = pathinfo ($full_file);
 		$ext = strtolower($file_info['extension']);
 		if($ext == 'pdf'){
-			$this->load->view('pdf_viewer_1', array('file' => $file.'?'.time(), 'name' => $file_info['basename']));
+			$this->load->view('pdf_viewer_1', array('file' => $file, 'name' => $file_info['basename']));
 			//$this->load->view('pdf_viewer', array('file' => $file));
 		}
 		else if($ext == 'mp4'){
@@ -67,6 +67,26 @@ class Training extends Base_Controller {
 		}
 		else if(in_array($ext, array('ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx'))){
 			$this->load->view('doc_viewer', array('subject' => $file_info['basename'], 'file' => $file.'?'.time()));
+		}
+	}
+	
+	function download(){
+		if($redirect = $this->not_signed_in()){
+			header("location: $redirect");
+			exit;
+		}
+		$file = $this->input->get('file');
+		$full_file = getcwd().'/'.$file;
+		if(!file_exists($full_file)){
+			return;
+		}
+		$file_info = pathinfo ($full_file);
+		$ext = strtolower($file_info['extension']);
+		if($ext == 'pdf'){
+			header('Content-Type: application/pdf');
+			header('Content-Disposition: attachment; filename="'.$file_info['basename'].'";');
+			$f = fopen('php://output', 'w');
+			file_put_contents($f, file_get_contents($full_file));
 		}
 	}
 }
