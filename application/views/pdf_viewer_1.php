@@ -8,17 +8,17 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>src/3rd_party/bootstrap-3.3.4-dist/css/bootstrap.css?<?php time();?>" />
 <style>
 	#pdf-viewer{position:absolute;top:0;right:0;bottom:0;left:0;}
-	#navigation-controls{color:#FFF;position:absolute;top:0;right:0;left:0;bottom:44px;background:#444;padding:10px 0}
-	#pdf-subject{position:absolute;left:20px;float:left;line-height:26px;height:26px;}
+	#navigation-controls{color:#FFF;position:absolute;top:0;right:0;left:0;bottom:44px;background:#444;padding:10px 20px}
+	#pdf-subject{/*position:absolute;left:20px;float:left;*/display:none;overflow:hidden;line-height:26px;height:26px;margin-right:20px;overflow:hidden;text-overflow:ellipsis}
 	#navigation-controls .buttons{cursor:pointer;text-align:center;line-height:26px;height:26px;width:26px;display:inline-block;border-radius:2px}
 	#navigation-controls .buttons:hover{background:#666}
-	#navigation-controls #download{position:absolute;right:120px}
-	#navigation-controls #zoom_out{position:absolute;right:146px}
-	#navigation-controls #zoom_in{position:absolute;right:172px}
-	#navigation-controls #page_number{display:none;position:absolute;right:20px;text-align:center}
+	#navigation-controls #download{/*position:absolute;right:120px*/display:none;float:right;}
+	#navigation-controls #zoom_out{/*position:absolute;right:146px*/display:none;float:right;}
+	#navigation-controls #zoom_in{/*position:absolute;right:172px*/display:none;float:right;}
+	#navigation-controls #page_number{/*display:none;position:absolute;right:20px;*/display:none;float:right;text-align:center}
 	#navigation-controls #loading{position:absolute;left:80px;right:80px;text-align:center}
 	#navigation-controls #loading img{height:24px;line-height:24px}
-	#navigation-controls #current_page{;color:#000;text-align:right;padding:0 2px;width:50px;}
+	#navigation-controls #current_page{display:none;color:#000;text-align:right;padding:0 2px;width:50px;}
 	#canvas-container {background: #333;text-align:center;position:absolute;top:44px;right:0;bottom:0;left:0;overflow:auto}
 </style>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
@@ -28,12 +28,12 @@
 <body style="margin:0">
 	<div id="pdf-viewer">
 		<div id="navigation-controls" class="clearfix">
-			<div id="pdf-subject"><?php echo isset($name) ? $name : '';?></div>
 			<div id="loading"><img src="<?php echo base_url();?>src/img/spinning.gif"></div>
 			<div id="page_number"><input id="current_page" min="1" max="" value="" type="number"> of <span id="total_page"></span></div>
 			<div id="zoom_out" class="buttons"><span class="glyphicon glyphicon-minus" aria-hidden="true" title="zoom out"></span></div>
 			<div id="zoom_in" class="buttons"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="zoom in"></span></div>
 			<div id="download" class="buttons"><span class="glyphicon glyphicon-download-alt" aria-hidden="true" title="download"></span></div>
+			<div id="pdf-subject"><?php echo isset($name) ? $name : '';?></div>
 		</div>
 		
 		<div id="canvas-container">
@@ -64,10 +64,10 @@ function render() {
 
 pdfjsLib.getDocument('<?php echo base_url().$file;?>?<?php echo time();?>').then(function(pdf) {
     myState.pdf = pdf;
-	$('#total_page').html(myState.pdf.numPages);
-	$('#current_page').attr('min', 1).attr('max', myState.pdf.numPages).val(1);
 	$('#loading').hide();
-	$('#page_number').show();
+	$('#total_page').html(myState.pdf.numPages).show();
+	$('#current_page').attr('min', 1).attr('max', myState.pdf.numPages).val(1).show();
+	$('#zoom_in, #zoom_out, #download, #page_number, #pdf-subject').show();
 	renderAllpages();
 });
 
