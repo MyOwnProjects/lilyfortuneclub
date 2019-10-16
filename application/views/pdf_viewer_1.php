@@ -71,7 +71,7 @@ pdfjsLib.getDocument('<?php echo base_url().$file;?>?<?php echo time();?>').then
 	renderAllpages();
 });
 
-function renderAllpages(){
+/*function renderAllpages(){
     viewer = document.getElementById('canvas-container');
 	while(viewer.childNodes.length > 0){
 		viewer.removeChild(viewer.childNodes[0]);
@@ -98,26 +98,45 @@ function renderPage(pageNumber, canvas) {
 			myState.pageHeights.push(myState.pageHeights[myState.pageHeights.length - 1] + canvas.offsetHeight);
 		}
     });
+}*/
+var viewer = document.getElementById('canvas-container');
+function renderAllpages(){
+    while(viewer.childNodes.length > 0){
+		viewer.removeChild(viewer.childNodes[0]);
+	}
+	myState.pageHeights.length = 0;
+    /*for(page = 1; page <= myState.pdf.numPages; page++) {
+		canvas = document.createElement("canvas");    
+        canvas.className = 'pdf-renderer';
+		canvas.id="pdf-pg-" + page;
+        viewer.appendChild(canvas); 
+        renderPage(page, canvas);
+    }*/
+	renderPage(1);
 }
 
-/*document.getElementById('go_previous').addEventListener('click', (e) => {
-	if(myState.pdf == null || myState.currentPage == 1){
+function renderPage(pageNumber) {
+	if(pageNumber > myState.pdf.numPages){
 		return;
 	}
-    myState.currentPage -= 1;
-    document.getElementById("current_page").value = myState.currentPage;
-    render();
-});
-		
-document.getElementById('go_next').addEventListener('click', (e) => {
-	if(myState.pdf == null || myState.currentPage >= myState.pdf._pdfInfo.numPages){ 
-		return;
-	}
-	myState.currentPage += 1;
-	document.getElementById("current_page").value = myState.currentPage;
-		render();
-	});
-*/		
+    myState.pdf.getPage(pageNumber).then(function(page) {
+		var canvas = document.createElement("canvas");    
+        canvas.className = 'pdf-renderer';
+		canvas.id="pdf-pg-" + page;
+        viewer.appendChild(canvas); 
+		viewport = page.getViewport(myState.zoom);
+		canvas.height = viewport.height;
+		canvas.width = viewport.width;          
+		page.render({canvasContext: canvas.getContext('2d'), viewport: viewport});
+		if(myState.pageHeights.length == 0){
+			myState.pageHeights.push(canvas.offsetHeight + 15);
+		}
+		else{
+			myState.pageHeights.push(myState.pageHeights[myState.pageHeights.length - 1] + canvas.offsetHeight);
+		}
+		renderPage(pageNumber + 1);
+    });
+}
 document.getElementById('current_page').addEventListener('change', (e) => {
 	if(myState.pdf == null){
 		return;
