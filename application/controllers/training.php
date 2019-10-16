@@ -65,6 +65,17 @@ class Training extends Base_Controller {
 			$schedule = $this->schedule_model->get_list("schedule_start_date>=".date_format(date_create(), "Y-m-d"), array("schedule_start_date ASC", "schedule_start_time ASC"));
 			$this->load_view('video_viewer', array('schedule' => $schedule, 'file' => $file));
 		}
+		else if($ext == 'url'){
+			$handle = fopen($full_file, "r");
+			$str = '';
+			while(!feof($handle)){
+				$ch = fread($handle, 1);
+				if(ord($ch) >= 40 && ord($ch) <= 125){
+					$str .= $ch;
+				}
+			}
+			header('location: '.$str);
+		}
 		else if(in_array($ext, array('ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx'))){
 			$this->load->view('doc_viewer', array('subject' => $file_info['basename'], 'file' => $file.'?'.time()));
 		}

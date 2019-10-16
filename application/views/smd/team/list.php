@@ -5,15 +5,16 @@
 	$('#team-member-grid').data_table({
 		header: [
 			{id: 'seq', text: '', sortable: false, width:'50px', align:'right'},
-			{id: 'membership_code', text: 'Code', sortable: true, width:'60px', align:'center', narrow_display: true},
-			{id: 'name', text: 'Name', sortable: true, width:'200px', narrow_display: true}, 
+			{id: 'membership_code', text: 'Code', sortable: true, width:'40px', align:'center', narrow_display: true},
+			{id: 'name', text: 'Name', sortable: true, narrow_display: true}, 
 			//{id: 'email', text: 'Email', sortable: true}, 
-			{id: 'grade', text: 'Grade', sortable: true, width:'40px', align:'center'},
-			{id: 'start_date', text: 'Start/Transfer',  width: '80px', sortable: true},
-			{id: 'original_start_date', text: 'Transfer', align: 'center', width: '50px', sortable: true},
+			{id: 'status', text: 'Status', sortable: true, width:'50px', align:'center'},
+			{id: 'grade', text: 'Grade', sortable: true, width:'50px', align:'center'},
+			{id: 'start_date', text: 'Start/Transfer',  width: '100px', sortable: true},
+			{id: 'original_start_date', text: 'Transfer', align: 'center', width: '60px', sortable: true},
 			{id: 'location', text: 'Location', align: 'center', width: '60px', sortable: true},
 			{id: 'upline', text: 'Recruiter', width:'100px', sortable: true, narrow_display: true},
-			{id: 'children', text: 'Downline', width:'60px', align: 'center', sortable: true},
+			{id: 'children', text: 'Team', width:'50px', align: 'center', sortable: true},
 		],
 		url: '<?php echo base_url();?>smd/team/get_member_list',
 		customized_buttons: [

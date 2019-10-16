@@ -652,6 +652,8 @@ class Team extends Smd_Controller {
 							'required' => true,
 							'value' => $result[0]['status'],
 							'options' => array(
+								array('value' => 'licensed', 'text' => 'Licensed'),
+								array('value' => 'lep', 'text' => 'License Exam Passed'),
 								array('value' => 'active', 'text' => 'Active'),
 								array('value' => 'inactive', 'text' => 'Inactive'),
 							),

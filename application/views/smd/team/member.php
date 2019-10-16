@@ -22,7 +22,7 @@ if(!$member){
 			<?php 
 			foreach($member as $name => $value){
 				if(strpos($name, 'trck_') === 0 || in_array($name, array('users_id', 'username', 'reset_token', 'SMD', 'street', 'city', 'state', 'preference', 
-					'zipcode', 'country', 'first_name', 'last_name', 'nick_name', 'children', 'smd', 'status', 'recruiter_name'))) continue;
+					'zipcode', 'country', 'first_name', 'last_name', 'nick_name', 'children', 'smd', 'recruiter_name'))) continue;
 			?>
 			<li class="list-group-item clearfix">
 				<div class="pull-left" style="font-weight:bold;text-transform:capitalize;width:130px;margin-right:5px;text-align:right">
@@ -48,7 +48,12 @@ if(!$member){
 				<div class="value" style="overflow:hidden">
 					<?php 
 					if($name == 'status'){
-						echo $value == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';
+						$statuses = array('active' => '<span class="label label-success">Active</span>',
+							'inactive' => '<span class="label label-default">Inactive</span>',
+							'licensed' => 'Licensed',
+							'lep' => 'License Exam Passed'
+						);
+						echo $statuses[$value];
 					}
 					else if($name == 'password'){
 						echo '********';

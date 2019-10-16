@@ -74,6 +74,9 @@ function list_items($list, $level){
 				case 'png':
 					$type_class = 'file-png';
 					break;
+				case 'url':
+					$type_class = 'file-html';
+					break;
 				default:
 					$type_class = 'file-default';
 					
@@ -81,9 +84,10 @@ function list_items($list, $level){
 ?>
 		<div class="<?php echo $type_class;?>">&nbsp;</div>
 		<div>
-			<a href="<?php echo base_url();?>training/view?file=<?php echo $item['path'].'/'.$item['name'];?>" target="_blank">
-			<?php echo $item['name'];?>
-			</a>
+			<?php
+			$href = base_url().'training/view?file='.$item['path'].'/'.$item['name'];
+			?>
+			<a href="<?php echo $href;?>" target="_blank"><?php echo pathinfo($item['name'], PATHINFO_FILENAME);?></a>
 		</div>
 	</div>
 <?php
