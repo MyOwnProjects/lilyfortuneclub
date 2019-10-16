@@ -48,12 +48,18 @@ if(!$member){
 				<div class="value" style="overflow:hidden">
 					<?php 
 					if($name == 'status'){
-						$statuses = array('active' => '<span class="label label-success">Active</span>',
-							'inactive' => '<span class="label label-default">Inactive</span>',
-							'licensed' => 'Licensed',
-							'lep' => 'License Exam Passed'
-						);
-						echo $statuses[$value];
+						echo $value == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';
+					}
+					else if($name == 'licensed'){						
+						if($value == 'licensed'){
+							echo '<span class="label label-success">Licensed</span>';
+						}
+						else if($value == 'license pass exam'){
+							echo '<span class="label label-success">License Exam Passed</span>';
+						}
+						else{
+							echo '<span class="label label-success">None Licensed</span>';
+						}
 					}
 					else if($name == 'password'){
 						echo '********';

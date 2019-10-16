@@ -100,7 +100,7 @@ class User_model extends Base_model{
 			users.membership_code,
 			users.recruiter,
 			CONCAT(u2.first_name, ' ', (u2.last_name), IF(u2.nick_name IS NULL OR u2.nick_name='', '', CONCAT(' (', u2.nick_name, ')')) ) AS recruiter_name, 
-			users.status,
+			users.status, users.licensed,
 			users.children AS downline,
 			users.grade as grade,
 			users.phone,

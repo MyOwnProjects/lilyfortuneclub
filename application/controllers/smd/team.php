@@ -652,10 +652,24 @@ class Team extends Smd_Controller {
 							'required' => true,
 							'value' => $result[0]['status'],
 							'options' => array(
-								array('value' => 'licensed', 'text' => 'Licensed'),
-								array('value' => 'lep', 'text' => 'License Exam Passed'),
 								array('value' => 'active', 'text' => 'Active'),
 								array('value' => 'inactive', 'text' => 'Inactive'),
+							),
+						)
+					);
+					break;
+				case 'licensed':
+					$items = array(
+						array(
+							'label' => 'Licensed',
+							'name' => 'licensed',
+							'tag' => 'select',
+							'required' => true,
+							'value' => $result[0]['licensed'],
+							'options' => array(
+								array('value' => 'licensed', 'text' => 'Licensed'),
+								array('value' => 'license exam passed', 'text' => 'License Exam Passed'),
+								array('value' => 'none licensed', 'text' => 'None Licensed'),
 							),
 						)
 					);
