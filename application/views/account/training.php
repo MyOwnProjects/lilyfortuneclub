@@ -87,7 +87,7 @@ function list_items($list, $level){
 			<?php
 			$href = base_url().'training/view?file='.$item['path'].'/'.$item['name'];
 			?>
-			<a href="<?php echo $href;?>" target="_blank"><?php echo pathinfo($item['name'], PATHINFO_FILENAME);?></a>
+			<a href="<?php echo $href;?>" target="_blank"><?php echo $item['name']/*pathinfo($item['name'], PATHINFO_FILENAME)*/;?></a>
 		</div>
 	</div>
 <?php
