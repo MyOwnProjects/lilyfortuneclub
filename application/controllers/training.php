@@ -86,7 +86,9 @@ class Training extends Base_Controller {
 			header('Content-Type: application/pdf');
 			header('Content-Disposition: attachment; filename="'.$file_info['basename'].'";');
 			$f = fopen('php://output', 'w');
-			file_put_contents($f, file_get_contents($full_file));
+			$handle = fopen($full_file, "r");
+			fwrite($f, fread($handle, filesize($full_file)));
+			fclose($handle);
 		}
 	}
 }
