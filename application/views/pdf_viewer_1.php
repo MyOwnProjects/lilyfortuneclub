@@ -9,7 +9,7 @@
 <style>
 	#pdf-viewer{position:absolute;top:0;right:0;bottom:0;left:0;}
 	#navigation-controls{color:#FFF;position:absolute;top:0;right:0;left:0;bottom:44px;background:#444;padding:10px 20px}
-	#pdf-subject{/*position:absolute;left:20px;float:left;*/display:none;overflow:hidden;line-height:26px;height:26px;margin-right:20px;overflow:hidden;text-overflow:ellipsis}
+	#pdf-subject{/*position:absolute;left:20px;float:left;*/display:none;overflow:hidden;line-height:26px;height:26px;margin-right:20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 	#navigation-controls .buttons{cursor:pointer;text-align:center;line-height:26px;height:26px;width:26px;display:inline-block;border-radius:2px}
 	#navigation-controls .buttons:hover{background:#666}
 	#navigation-controls #download{/*position:absolute;right:120px*/display:none;float:right;}
