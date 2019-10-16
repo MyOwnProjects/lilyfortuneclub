@@ -18,7 +18,7 @@
 	#navigation-controls #page_number{/*display:none;position:absolute;right:20px;*/display:none;float:right;text-align:center}
 	#navigation-controls #loading{position:absolute;left:80px;right:80px;text-align:center}
 	#navigation-controls #loading img{height:24px;line-height:24px}
-	#navigation-controls #current_page{display:none;color:#000;text-align:right;padding:0 2px;width:50px;}
+	#navigation-controls #current_page{display:none;color:#000;text-align:right;padding:0 2px;width:50px;margin-left:20px}
 	#canvas-container {background: #333;text-align:center;position:absolute;top:44px;right:0;bottom:0;left:0;overflow:auto}
 </style>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-1.11.2.js"></script>
@@ -30,9 +30,9 @@
 		<div id="navigation-controls" class="clearfix">
 			<div id="loading"><img src="<?php echo base_url();?>src/img/spinning.gif"></div>
 			<div id="page_number"><input id="current_page" min="1" max="" value="" type="number"> of <span id="total_page"></span></div>
+			<div id="download" class="buttons"><span class="glyphicon glyphicon-download-alt" aria-hidden="true" title="download"></span></div>
 			<div id="zoom_out" class="buttons"><span class="glyphicon glyphicon-minus" aria-hidden="true" title="zoom out"></span></div>
 			<div id="zoom_in" class="buttons"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="zoom in"></span></div>
-			<div id="download" class="buttons"><span class="glyphicon glyphicon-download-alt" aria-hidden="true" title="download"></span></div>
 			<div id="pdf-subject"><?php echo isset($name) ? $name : '';?></div>
 		</div>
 		
