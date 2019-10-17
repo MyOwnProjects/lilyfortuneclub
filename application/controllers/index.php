@@ -17,14 +17,13 @@ class Index extends Base_Controller {
 		}
 	}
 	
-	
 	private function _scan_dir($path, &$result){
 		$scan_files = scandir($path);
 		foreach($scan_files as $file){
 			if(in_array($file, array('.', '..', '.htaccess'))){
 				continue;
 			}
-			$full_file = $path."\\".$file;
+			$full_file = getcwd().'/'.$path.'/'.$file;
 			$ext = pathinfo($full_file, PATHINFO_EXTENSION);
 			$size = filesize($full_file);
 			$type = filetype($full_file);
