@@ -10,7 +10,8 @@
 
 .f-body{padding:0 0 0 20px}
 .f-sub-body-text img,.f-sub-body-file img{height:14px;margin-top:-4px;margin-left:10px}
-.f-sub-body-text>div:first-child,.f-sub-body-file>div:first-child{float:left;width:20px;}
+.f-sub-body-text>div:first-child{float:left;width:25px;margin-right:5px}
+.f-sub-body-file>div:first-child{float:left;width:20px;}
 .f-sub-body-text>div:last-child,.f-sub-body-file>:last-child{overflow:hidden}
 .f-sub-body-text{padding-top:12px}
 .f-sub-body-file{display:inline-block;padding-right:16px}
