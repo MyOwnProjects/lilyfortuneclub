@@ -106,7 +106,7 @@ function list_items($list, $level){
 		?>
 		<div class="item-body">
 			<div class="f-head f-head-g">
-				<div><?php echo $i + 2;?></div>
+				<div><?php echo $i + 1;?></div>
 				<div><?php echo substr($d['name'], 3);?></div>
 			</div>
 			<div class="f-body">
