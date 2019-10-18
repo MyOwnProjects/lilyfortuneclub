@@ -91,10 +91,11 @@ class License extends Base_controller {
 							'Select a course you want to take,',
 							'Click <i>Begin Courses</i> button.',
 							'If you have got the license, enter your Llicense Number and NPN, and click <i>Save and Continue</i>button. Otherwise, click <i>Skip</i> button.',
-							'Download the PDF document, and start to learn.'
+							'Download the PDF document, and start to learn.',
+							'Once you finish the course, download the certificate, and send an email with the certificate attached to <b>wfghost@transamerica.com</b> and <b>wfglicenseapps@transamerica.com</b>.'
 						),
 				));
-		if($this->user && in_array($this->user['membership_code'], array('24KIZ', '27QUE', '53VQT'))){
+		//if($this->user && in_array($this->user['membership_code'], array('24KIZ', '27QUE', '53VQT'))){
 			array_push($steps,	array(
 					'title' => 'Appoint',
 					'comment' =>'To sell products through certain product providers, you must be properly appointed. There are 3 easy steps:',
@@ -109,7 +110,7 @@ class License extends Base_controller {
 							'<b>Additional Email.</b> Send an email to wfghost@transamerica.com and wfglicenseapps@transamerica.com, attached with license certificate and all required CE certificate (both resident and nonresident state CE certificate, for nonresident appointment).',
 					),
 				));
-		}
+		//}
 		$this->summary = array(
 			'summary' => '',
 			'steps' => $steps		
