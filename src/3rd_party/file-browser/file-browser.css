@@ -22,6 +22,7 @@
 .file-browser-item-doc{background-image:url(./doc.png);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
 .file-browser-item-mp4{background-image:url(./mp4.png);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
 .file-browser-item-png{background-image:url(./img.png);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
+.file-browser-item-url{background-image:url(./url.png);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
 .file-browser-item-file{background-image:url(./file.png);background-repeat:no-repeat;background-position-y:7px;background-size:20px 20px}
 .file-browser-col:nth-child(2) .file-browser-item-l1{padding-left:30px}
 .file-browser-col:nth-child(2) .file-browser-item-l2{padding-left:55px}

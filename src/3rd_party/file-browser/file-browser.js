@@ -37,6 +37,9 @@
 					else if(ext == 'png'){
 						type_class = 'file-browser-item-png';
 					}
+					else if(ext == 'url'){
+						type_class = 'file-browser-item-url';
+					}
 					else{
 						type_class = 'file-browser-item-file';
 					}
