@@ -14,7 +14,7 @@
 .f-sub-body-file>div:first-child{float:left;width:20px;}
 .f-sub-body-text>div:last-child,.f-sub-body-file>:last-child{overflow:hidden}
 .f-sub-body-text{padding-top:12px}
-.f-sub-body-file{display:inline-block;padding-right:16px}
+.f-sub-body-file{display:inline-block;padding-right:16px;font-size:14px}
 .f-sub-body-file>div:first-child{background-repeat:no-repeat;background-position:0 3px;background-size:auto 16px}
 .file-pdf{background-image:url('<?php echo base_url();?>src/img/pdf.png')}
 .file-ppt{background-image:url('<?php echo base_url();?>src/img/ppt.png')}
