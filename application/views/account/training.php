@@ -16,14 +16,14 @@
 .f-sub-body-text{padding-top:12px}
 .f-sub-body-file{display:inline-block;padding-right:16px}
 .f-sub-body-file>div:first-child{background-repeat:no-repeat;background-position:0 3px;background-size:auto 16px}
-.file-pdf{background-image:url('<?php echo base_url();?>src/img/pdf.svg')}
-.file-ppt{background-image:url('<?php echo base_url();?>src/img/ppt.svg')}
-.file-xls{background-image:url('<?php echo base_url();?>src/img/xls.svg')}
-.file-doc{background-image:url('<?php echo base_url();?>src/img/doc.svg')}
+.file-pdf{background-image:url('<?php echo base_url();?>src/img/pdf.png')}
+.file-ppt{background-image:url('<?php echo base_url();?>src/img/ppt.png')}
+.file-xls{background-image:url('<?php echo base_url();?>src/img/xls.png')}
+.file-doc{background-image:url('<?php echo base_url();?>src/img/doc.png')}
 .file-mp4{background-image:url('<?php echo base_url();?>src/img/mp4.svg')}
-.file-png{background-image:url('<?php echo base_url();?>src/img/png.svg')}
-.file-html{background-image:url('<?php echo base_url();?>src/img/html.svg')}
-.file-default{background-image:url('<?php echo base_url();?>src/img/file.svg')}
+.file-png{background-image:url('<?php echo base_url();?>src/img/img.png')}
+.file-html{background-image:url('<?php echo base_url();?>src/img/url.png')}
+.file-default{background-image:url('<?php echo base_url();?>src/img/file.png')}
 
 </style>
 <?php
