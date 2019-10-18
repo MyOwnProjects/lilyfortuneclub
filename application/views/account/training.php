@@ -20,7 +20,7 @@
 .file-ppt{background-image:url('<?php echo base_url();?>src/img/ppt.png')}
 .file-xls{background-image:url('<?php echo base_url();?>src/img/xls.png')}
 .file-doc{background-image:url('<?php echo base_url();?>src/img/doc.png')}
-.file-mp4{background-image:url('<?php echo base_url();?>src/img/mp4.svg')}
+.file-mp4{background-image:url('<?php echo base_url();?>src/img/mp4.png')}
 .file-png{background-image:url('<?php echo base_url();?>src/img/img.png')}
 .file-html{background-image:url('<?php echo base_url();?>src/img/url.png')}
 .file-default{background-image:url('<?php echo base_url();?>src/img/file.png')}
