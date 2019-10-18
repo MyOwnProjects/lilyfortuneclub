@@ -98,7 +98,7 @@ class License extends Base_controller {
 		//if($this->user && in_array($this->user['membership_code'], array('24KIZ', '27QUE', '53VQT'))){
 			array_push($steps,	array(
 					'title' => 'Appoint',
-					'comment' =>'To sell products through certain product providers, you must be properly appointed. There are 3 easy steps:',
+					'comment' =>'To sell products through certain product providers, you must be properly appointed.<br/><u>Note: Once you appoint with a carrier, you must pay the E&O fee every month.</u>',
 					'subject' => "Carrier Appoitment",
 					'image_file_name'=> 'license-appointment',
 					'steps' => array(
