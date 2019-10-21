@@ -14,7 +14,7 @@ ul, ul li{padding:0;margin:0;list-style:none}
 .nav-left>a{color:#fff;text-decoration:none}
 #main-body-container{position:fixed;top:52px;right:0;bottom:0;left:0;overflow:auto;z-index:10}
 .main-body-wrapper{padding:20px;}
-#main-body-wrapper{position:absolute;top:0;right:0px;left:150px;overflow:auto}
+#main-body-wrapper{position:absolute;top:0;right:0px;bottom:0;left:150px;overflow:auto}
 .breadcrumb{background-color:#fff;margin-bottom:0;line-height:30px}
 .bg-secondary{position:fixed;top:52px;width:150px;left:0;bottom:0;padding-top:20px}
 .text-red{color:red}
