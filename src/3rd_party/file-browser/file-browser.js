@@ -3,6 +3,7 @@
 		var url = prop['get_files'];
 		var root = prop['root'];
 		var upload_url = prop['upload_files'];
+		var add_file_url = prop['add_file'];
 		var delete_url = prop['delete_file'];
 		var rename_url = prop['rename_file'];
 		var header = ['name', 'size', 'date_create'];
@@ -207,12 +208,16 @@
 					$('<div>').attr('title', 'change name').addClass('file-browser-item-icon').addClass('icon-change').appendTo(fe);
 					$('<div>').attr('title', 'delete').addClass('file-browser-item-icon').addClass('icon-delete').appendTo(fe);
 				}
+				else{
+					$('<div>').attr('title', 'new url file').addClass('file-browser-item-icon').addClass('icon-new').appendTo(fe);
+				}
 			}
 			else{
 				$($('.file-browser-item:nth-child(' + index + ')')).css('background-color', '#FFF');
-				fe.children('.icon-delete, .icon-change').remove();
+				fe.children('.icon-new, .icon-delete, .icon-change').remove();
 			}
-		}).delegate('.file-browser-item-clickable', 'click', function(e){
+		})
+		.delegate('.file-browser-item-clickable', 'click', function(e){
 			click_folder($(this));
 		}).delegate('.file-browser-item', 'dragenter', function(e){
 			e.stopPropagation();
@@ -323,22 +328,55 @@
 						});					
 					} 
 				});
-				
-				/*if(bootbox.confirm("Do you want to delete " + mele.attr('data-name') + "?")){
-					$.ajax({
-						url: delete_url,
-						method: 'post',
-						data: {file: mele.attr('data-folder') + '/' + mele.attr('data-name')},
-						dataType: 'json',
-						success: function(resp){
-							$('.file-browser-item:nth-child(' + index + ')').remove();
+			}
+			else if(ele.hasClass('icon-new')){
+				var p = ele.parent();
+				bootbox.dialog({
+					title: 'New url file',
+					message: '<div class="input-group">'
+						+ '<input type="text" id="new-file-name" class="form-control input-sm" placeholder="File name">'
+						+ '<div class="input-group-append">'
+						+ '<span class="input-group-text">.url</span>'
+						+ '</div></div><br/>'
+						+ '<div class="input-group">'
+						+ '<input type="text" id="new-file-url" class="form-control input-sm" placeholder="Url" value="http://">'
+						+ '</div>',
+					buttons: {
+						ok: {
+							label: "OK",
+							className: 'btn-success',
+							callback: function(){
+								$.ajax({
+									url: add_file_url,
+									method: 'post',
+									dataType: 'json',
+									data: {
+										file_path: mele.attr('data-folder') + '/' + mele.attr('data-name'),
+										file_name:  document.getElementById('new-file-name').value.trim() + '.url',
+										url: document.getElementById('new-file-url').value.trim()
+									},
+									dataType: 'json',
+									success: function(resp){
+										if(click_folder(p) == 'collapsed'){
+											click_folder(p);
+										}
+									},
+									error: function(a, b, c){
+									},
+									complete: function(){
+									}
+								});					
+							}
 						},
-						error: function(a, b, c){
+						cancel: {
+							label: "Cancel",
+							className: 'btn-default',
+							callback: function(){
+								console.log('Custom cancel clicked');
+							}
 						},
-						complete: function(){
-						}
-					});
-				}*/
+					}
+				});
 			}
 		});
 		

@@ -8,6 +8,7 @@
 	$('#file_browser').file_browser({
 		get_files: '<?php echo base_url();?>smd/training/get_files', 
 		upload_files: '<?php echo base_url();?>smd/training/upload_files',
+		add_file: '<?php echo base_url();?>smd/training/add_url_file',
 		delete_file: '<?php echo base_url();?>smd/training/delete_file',
 		rename_file: '<?php echo base_url();?>smd/training/rename_file',
 		root: 'src/training', 

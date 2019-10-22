@@ -70,6 +70,15 @@ class Training extends Smd_Controller {
 		}
 	}
 	
+	public function add_url_file(){
+		$file_path = trim($this->input->post('file_path'));
+		$file_name = trim($this->input->post('file_name'));
+		$url = trim($this->input->post('url'));
+		$full_path = getcwd().'/'.$file_path."/".$file_name;
+		file_put_contents($full_path, $url);
+		echo json_encode(array('success' => true));
+	}
+	
 	public function delete_file(){
 		$file = $this->input->post('file');
 		unlink($file);

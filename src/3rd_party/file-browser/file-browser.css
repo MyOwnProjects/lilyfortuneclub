@@ -6,6 +6,7 @@
 .file-browser-item{line-height:34px;height:34px}
 .file-browser-item-icon{cursor:pointer;float:left;margin:5px 0 5px 2px;width:24px;height:24px;background-repeat:no-repeat;background-position:4px 4px}
 .file-browser-item-icon:hover{background-color:#e5e5e5}
+.file-browser-item .icon-new{background-image:url(./add2.png)}
 .file-browser-item .icon-change{background-image:url(./edit.png);}
 .file-browser-item .icon-delete{background-image:url(./delete2.png)}
 .file-browser-col:first-child{width:60px;}
