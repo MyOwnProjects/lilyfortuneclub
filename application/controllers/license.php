@@ -103,7 +103,7 @@ class License extends Base_controller {
 					'subject' => "Carrier Appoitment",
 					'image_file_name'=> 'license-appointment',
 					'steps' => array(
-						'<b>Platform Fee and E&O Insurance.</b> Go to <a href="https://www.mywfg.com/platform-fee-us">https://www.mywfg.com/platform-fee-us</a> to check the pleatform fee.',
+						'<b>Platform Fee and E&O Insurance.</b> Before start, go to <a href="https://www.mywfg.com/platform-fee-us">https://www.mywfg.com/platform-fee-us</a> to check the pleatform fee.',
 						'<b>License Status.</b> Check the status of license in that state on MyWFG.com at MENU > Commissions & Reports > Run a Report. <b>After the status is ready, go to step 2; Otherwise wait until the status is ready.</b>',
 						'<b>Electronic Appointment.</b> Go to MyWFG.com at MENU > Licensing & Appointments > Appointments > Carrier Appointments, select "Life and Disability Insurance", and then "Non-New Youk Life and Disability Carriers". Select the provider, and then fowllow the instruction.<br/>'
 							.'&nbsp;&nbsp;&nbsp;&nbsp;- For <b>Transamerica Premier Life Insurance Company</b>, <b>Nationwide</b> and <b>Pacific Life</b>, select the related provider directly, and go to step 6.<br/>' 
