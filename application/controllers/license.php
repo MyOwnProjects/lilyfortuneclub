@@ -103,12 +103,15 @@ class License extends Base_controller {
 					'subject' => "Carrier Appoitment",
 					'image_file_name'=> 'license-appointment',
 					'steps' => array(
-							'<b>License Status.</b> Check the status of license in that state on MyWFG.com at MENU > Commissions & Reports > Run a Report. <b>After the status is ready, go to step 2; Otherwise wait until the status is ready.</b>',
-							'<b>Electronic Appointment.</b> Go to MyWFG.com at MENU > Licensing & Appointments > Appointments > Carrier Appointments, select "Life and Disability Insurance", and then "Non-New Youk Life and Disability Carriers". Select the provider, and then fowllow the instruction.<br/>'
-							.'&nbsp;&nbsp;&nbsp;&nbsp;- PacLife and Nationwide, may or may not background questionnaire, depends on the state.<br/>' 
-							.'&nbsp;&nbsp;&nbsp;&nbsp;- Transamerica, need to fill eForm online, and submit.<br/>'
-							.'&nbsp;&nbsp;&nbsp;&nbsp;- Voya, need to download and fill the paper application, and send through email (instruction on the paper application). ',
-							'<b>Additional Email.</b> Send an email to wfghost@transamerica.com and wfglicenseapps@transamerica.com, attached with license certificate and all required CE certificate (both resident and nonresident state CE certificate, for nonresident appointment).',
+						'<b>License Status.</b> Check the status of license in that state on MyWFG.com at MENU > Commissions & Reports > Run a Report. <b>After the status is ready, go to step 2; Otherwise wait until the status is ready.</b>',
+						'<b>Electronic Appointment.</b> Go to MyWFG.com at MENU > Licensing & Appointments > Appointments > Carrier Appointments, select "Life and Disability Insurance", and then "Non-New Youk Life and Disability Carriers". Select the provider, and then fowllow the instruction.<br/>'
+							.'&nbsp;&nbsp;&nbsp;&nbsp;- For <b>Transamerica Premier Life Insurance Company</b>, <b>Nationwide</b> and <b>Pacific Life</b>, select the related provider directly, and go to step 6.<br/>' 
+							.'&nbsp;&nbsp;&nbsp;&nbsp;- Select <b>CRUMP</b> and go to step 3, for other providers, such as AIG, Allianz, Prudential...<br/>' 
+							.'&nbsp;&nbsp;&nbsp;&nbsp;- The follow the instruction to fill the appointment form. Some providers require to download and fill pdf form.<br/>',
+						'<b>CRUMP Appointment.</b> In the CRUMP carrier appointment page, select <i>Start Electronic Appointment</i>, and then select the state(s) you want to appoint and continue. (You can also go to crump site by selecting MENU > Recruiting & Selling > Products & Providers > Crump).',
+						'<b>WFG Crump Website.</b> In the WFG crump website, select <i>ContractNow</i> and continue, and then in the Main Menu page, select <i>Start Contracting Questions</i>.',
+						'<b>Contractibg Questions.</b> Follow the instruction, answer the requested questions and finish the appointment.',
+						'<b>Additional Email.</b> Send an email to  and <b style="font-size:20px">wfglicenseapps@transamerica.com</b> and <b style="font-size:20px">wfghost@transamerica.com</b>, attached with license certificate and all required CE certificate (both resident and nonresident state CE certificate, for nonresident appointment).',
 					),
 				));
 		//}
