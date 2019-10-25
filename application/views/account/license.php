@@ -8,12 +8,14 @@
 .tab-content-page{padding:40px}
 .content-page-head{text-align:center;margin-bottom:40px}
 .tab-content img{width:100%}
-.tab-content .detail-url{display:none}
 .tab-content .detail-url a{color:red;text-decoration:underline}
 .content-list{padding:20px 0}
+.tab-content .detail-url-sm{display:none;}
+.tab-content .detail-url-lg{display:inline;}
 @media only screen and (max-width:768px) {
-.tab-content img{display:none}
-.tab-content .detail-url{display:inline;}
+.img-wrapper{display:none}
+.tab-content .detail-url-sm{display:inline;}
+.tab-content .detail-url-lg{display:none;}
 .content-list{padding:0}
 }
 </style>
@@ -58,14 +60,16 @@
 				?>
 				<div style="overflow:hidden">
 					<h5 class="text-left">
-						<?php 
-						echo '<p>'.str_replace('<br/>', '</p><p>', $s).($image_exist ? '<span class="detail-url">&nbsp;[<a href="'.base_url().'src/img/license/'.$img.'?'.time().'" target="_blank">Detail'.'</a>]</span>' : '').'</p>';
-						?>
+						<p>
+							<?php echo str_replace('<br/>', '</p><p>', $s);?>
+							<?php echo $image_exist ? '<span class="detail-url detail-url-lg">&nbsp;[<a style="cursor:pointer" data-toggle="collapse" data-target="#img-wrapper-'.$i.'-'.$j.'">Detail</a>]</span>'
+								.'<span class="detail-url detail-url-sm">&nbsp;[<a href="'.base_url().'src/img/license/'.$img.'?'.time().'" target="_blank">Detail'.'</a>]</span>' : '';?>
+						</p>
 					</h5>
 				<?php 
 				if($image_exist){
 				?>
-				<div class="img-wrapper">
+				<div class="img-wrapper collapse" id="img-wrapper-<?php echo $i.'-'.$j;?>">
 					<a href="<?php echo base_url();?>src/img/license/<?php echo $img;?>?<?php echo time();?>" target="_blank"><img src="<?php echo base_url();?>src/img/license/<?php echo $img;?>?<?php echo time();?>"></a>
 				</div>
 				<?php

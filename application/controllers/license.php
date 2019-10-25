@@ -92,7 +92,8 @@ class License extends Base_controller {
 							'Click <i>Begin Courses</i> button.',
 							'If you have got the license, enter your Llicense Number and NPN, and click <i>Save and Continue</i>button. Otherwise, click <i>Skip</i> button.',
 							'Download the PDF document, and start to learn.',
-							'Once you finish the course, download the certificate, and send an email with the certificate attached to <b>wfghost@transamerica.com</b> and <b>wfglicenseapps@transamerica.com</b>.'
+							'Once you finish the course, download the certificate, and send an email with the certificate attached to <b style="font-size:20px">wfghost@transamerica.com</b> and <b style="font-size:20px">wfglicenseapps@transamerica.com</b>.',
+							'For <b>AML</b> CE, go to <a href="https://www.mywfg.com/WFG.BackOffice/BackOffice" target="_blank">https://www.mywfg.com/WFG.BackOffice/BackOffice</a>, click the <i>AML Certification</i>, and then follow the instruction to upload your AML CE certificate.'
 						),
 				));
 		//if($this->user && in_array($this->user['membership_code'], array('24KIZ', '27QUE', '53VQT'))){
