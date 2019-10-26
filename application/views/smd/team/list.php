@@ -4,7 +4,7 @@
 <script>
 	$('#team-member-grid').data_table({
 		header: [
-			{id: 'seq', text: '', sortable: false, width:'50px', align:'right'},
+			{id: 'seq', text: 'Seq', sortable: false, width:'50px', align:'right'},
 			{id: 'membership_code', text: 'Code', sortable: true, width:'40px', align:'center', narrow_display: true},
 			{id: 'name', text: 'Name', sortable: true, narrow_display: true}, 
 			{id: 'status', text: 'Status', sortable: true, width:'50px', align:'center'},
