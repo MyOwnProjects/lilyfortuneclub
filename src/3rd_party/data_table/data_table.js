@@ -363,10 +363,14 @@ function new_item(prop){//title, url, param){
 			.addClass('dropdown-toggle').attr('data-toggle', 'dropdown')
 			.html('Columns&nbsp;<span class="caret"></span>').appendTo($_columns_button_group);
 			var $_dorpdown_ul = $('<div>').addClass('dropdown-menu').appendTo($_columns_button_group);
+			var $_a = $('<a>').addClass('dropdown-item').appendTo($_dorpdown_ul);
+			$_d = $('<div>').addClass('form-check-label')
+				.html('<label class="form-check-label"><input type="checkbox" class="form-check-input columns-display-checkbox" value="all" checked>All</label>');
+			$_a.append($_d);
 			for(var i = 0; i < header.length; ++i){
 				var $_a = $('<a>').addClass('dropdown-item').appendTo($_dorpdown_ul);
 				$_d = $('<div>').addClass('form-check-label')
-					.html('<label class="form-check-label"><input type="checkbox" class="form-check-input columns-display-checkbox" value="' + (i == 0 ? 'all' : header[i]['id']) + '">' + (i == 0 ? 'All' : header[i]['text']) + '</label>');
+					.html('<label class="form-check-label"><input type="checkbox" class="form-check-input columns-display-checkbox" value="' + header[i]['id'] + '" checked>' + header[i]['text'] + '</label>');
 				$_a.append($_d);
 			}
 			/*for(var j = 0; j < customized_buttons[i]['sub_menus'].length; ++j){
@@ -653,10 +657,10 @@ function new_item(prop){//title, url, param){
 						});
 						_this.tbody.children('tr').each(function(index, obj){
 							if($_checkbox.prop('checked')){
-								$(this).children('td:nth-child(' + (i + 1) + ')').show();
+								$(this).children('td:nth-child(' + (i + 2) + ')').show();
 							}
 							else{
-								$(this).children('td:nth-child(' + (i + 1) + ')').hide();
+								$(this).children('td:nth-child(' + (i + 2) + ')').hide();
 							}
 						});
 					}
