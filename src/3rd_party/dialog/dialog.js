@@ -70,8 +70,9 @@ Dialog.modal.fielderror = function(fields, callback){
 Dialog.modal.success = function(message, callback){
 	Dialog.modal.loading.hide();
 	Dialog.modal.result.removeClass('alert-danger').addClass('alert-success').html(message).show();
-	if(callback){// && $.isFunction(callback)){
-		eval(callback);//callback();
+	if(callback && $.isFunction(callback)){
+		//eval(callback);
+		callback();
 	}
 };
 

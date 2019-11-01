@@ -10,7 +10,7 @@ $tasks_name = isset($tasks_name) ?  $tasks_name : '';
 ?>
 
 <div style="margin-top:40px;">
-	<h3 class="text-center">New Task</h3>
+	<h3 class="text-center"><?php echo isset($tasks_id) ? 'Edit' : 'New' ?> Task</h3>
 	<form method="post" style="margin:40px" action="<?php echo base_url();?>smd/tasks/<?php echo isset($tasks_id) ? "update/$tasks_id" : 'create';?>">
 		<?php 
 		if(isset($error) && $error){

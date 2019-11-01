@@ -30,7 +30,7 @@ $half_count = floor($item_count / 2 - 0.5);
 	<?php
 	if(isset($items)){
 	foreach($items as $i => $item){
-		$is_auto_fill = $item['name'] == 'auto-fill';
+		$is_auto_fill = array_key_exists('name', $item) && $item['name'] == 'auto-fill';
 		if($is_auto_fill){
 	?>
 		<div class="col-lg-12">
