@@ -29,7 +29,7 @@
 			}
 		],
 		row_count: 20,
-		order_by: {tasks_create: 'desc'},
+		order_by: {tasks_due_date: 'desc'},
 		filter: [
 			{
 				id: 'tasks_due_date',
