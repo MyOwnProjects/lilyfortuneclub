@@ -24,6 +24,9 @@
 .data-table .data-table-button-group .button:first-child{border-top-left-radius:3px;border-bottom-left-radius:3px}
 .data-table .data-table-button-group .button:last-child{border-top-right-radius:3px;border-bottom-right-radius:3px}
 .data-table .filter-group-sm{max-width:200px}
+.data-table .filter-group span.dropdown-item{color:#b5b5b5}
+.data-table .filter-group a.dropdown-item{padding-left:20px}
+.data-table .filter-group a.dropdown-item-checked{background:url('verification-mark.svg') no-repeat 20px 8px;background-size:16px 16px}
 .data-table .toolbar-row-sm{display:none !important}
 .data-table .standard-groups{xmin-width:315px}
 .data-table .btn-group .btn-text{background:#fff;border-color:#2e6da4;cursor:default}
@@ -44,6 +47,7 @@
 .data-table .narrow-table td{width:100%;}
 .data-table .narrow-table td div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
+.data-table .dropdown-menu{max-height:300px;overflow-y:auto;}
 @media only screen and (max-width:768px) {
 .data-table .wide-table,.btn-first-pg,.btn-last-pg,.btn-pg-number,.columns-btn-group{display:none}
 .data-table .narrow-table{display:table}

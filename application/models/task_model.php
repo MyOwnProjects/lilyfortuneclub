@@ -25,7 +25,7 @@ class Task_model extends Base_model{
 			}
 		}
 		
-		$sql = "SELECT * FROM tasks "
+		$sql = "SELECT tasks.*, users.first_name, users.last_name, users.nick_name FROM tasks LEFT JOIN users ON tasks.tasks_name=users.membership_code "
 			.(empty($where) ? "" : " WHERE $where ")
 			.(empty($sort_array) ? "" : " ORDER BY ".implode(",", $sort_array))
 			.(empty($limit) ? "" : " LIMIT $limit");

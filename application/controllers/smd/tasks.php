@@ -5,8 +5,7 @@ class Tasks extends Smd_Controller {
 	public function __construct(){
 		parent::__construct();
 		if(empty($this->user) || $this->user['grade'] !== 'SMD'){
-			$this->redirect('smd/ac/sign_in');
-			//header('location: '.base_url().'smd/ac/sign_in');
+			header('location: '.base_url().'smd/ac/sign_in');
 		}		
 		$this->load->model('task_model');
 		$this->nav_menus['tasks']['active'] = true;
@@ -40,7 +39,28 @@ class Tasks extends Smd_Controller {
 			}
 			$where .= " AND (".implode(" OR ", $serch_where).") ";
 		}
-		$where .= (empty($filter) || is_null($filter[key($filter)]) || $filter[key($filter)] == '' ? "" : " AND ".key($filter)."='".$filter[key($filter)]."'");
+		
+		$fa = array();
+		if($filter){
+			foreach($filter as $k => $v){
+				if(is_null($v) || $v == ''){
+				}
+				else if($k == 'tasks_due_date'){
+					$today = date_create();
+					$tomorrow = new DateTime('tomorrow');
+					if($v == '2 days'){
+						array_push($fa, "($k='".date_format($today, 'Y-m-d')."' OR $k='".date_format($tomorrow, 'Y-m-d')."')");
+					}
+					else if($v == 'future'){
+						array_push($fa, "($k>='".date_format($today, 'Y-m-d')."')");
+					}
+				}
+				else{
+					array_push($fa, "$k='$v'");
+				}
+			}
+		}
+		$where .= empty($fa) ? "" : " AND (".implode(" AND ", $fa).")";
 		$ret = array(
 			'current' => 1,
 			'last' => 0,
@@ -58,13 +78,7 @@ class Tasks extends Smd_Controller {
 				$ret['rows'][$i]['id'] = $r['tasks_id'];
 				$ret['rows'][$i]['tasks_case_no'] = $r['tasks_case_no'];
 				$ret['rows'][$i]['tasks_subject'] = $r['tasks_subject'];
-				if($r['tasks_type'] == 'or'){
-					$type = 'Outstanding Requirement';
-				}
-				else{
-					$type = 'Other';
-				}
-				$ret['rows'][$i]['tasks_type'] = $type;
+				$ret['rows'][$i]['tasks_type'] = $r['tasks_type'];
 				if($r['tasks_priority']== 'H'){
 					$c = 'badge-danger';
 					$t = 'High';
@@ -95,6 +109,7 @@ class Tasks extends Smd_Controller {
 				$ret['rows'][$i]['tasks_status'] = '<i class="'.$c.'"></i> '.$r['tasks_status'];
 				$ret['rows'][$i]['tasks_create'] = isset($r['tasks_create']) ? date_format(date_create($r['tasks_create']), 'M j') : '';
 				$ret['rows'][$i]['tasks_due_date'] = isset($r['tasks_due_date']) ? date_format(date_create($r['tasks_due_date']), 'M j') : '';
+				$ret['rows'][$i]['tasks_name'] = empty($r['first_name']) && empty($r['last_name']) && empty($r['nick_name']) ? $r['tasks_name'] : $r['first_name'].' '.$r['last_name'].(empty($r['nick_name']) ? '' : ' ('.$r['nick_name'].')');
 				$ret['rows'][$i]['action'] =  array(
 					'view' => base_url().'smd/tasks/view/'.$r['tasks_id']
 				);
@@ -106,13 +121,20 @@ class Tasks extends Smd_Controller {
 	
 	public function view($id = 0){
 		$this->load->model('user_model');
+		$result = $this->user_model->get_list('', $sort = array('last_name' => 'ASC', 'first_name' => 'ASC'));
+		$users = array();
+		foreach($result as $u){
+			array_push($users, array('text' => ucwords(strtolower($u['last_name'])).', '.ucwords(strtolower($u['first_name'])).(empty($u['nick_name']) ? '' : ' ('.ucwords(strtolower($u['nick_name'])).')').' - '.$u['membership_code'], 'value' => $u['membership_code']));
+		}
+		
 		$result = $this->task_model->get_list("tasks_id='$id'");
 		if(count($result) == 0){
 			$this->load_view('tasks/create', array('error' => 'The task does not exist.'));
 			return;
 		}
+		$this->load_view('tasks/create', array('task' => $result[0], 'users' => $users));
 		
-		$this->load_view('tasks/create', $result[0]);
+		//$this->load_view('tasks/create', $result[0]);
 	}
 	
 	public function update($id = 0){
@@ -167,7 +189,13 @@ class Tasks extends Smd_Controller {
 			$error = 'Failed to create task';
 		}
 		$this->load->model('user_model');
-		$this->load_view('tasks/create', $this->input->post());
+		$result = $this->user_model->get_list('', $sort = array('last_name' => 'ASC', 'first_name' => 'ASC'));
+		$users = array();
+		foreach($result as $u){
+			array_push($users, array('text' => ucwords(strtolower($u['last_name'])).', '.ucwords(strtolower($u['first_name'])).(empty($u['nick_name']) ? '' : ' ('.ucwords(strtolower($u['nick_name'])).')').' - '.$u['membership_code'], 'value' => $u['membership_code']));
+		}
+		
+		$this->load_view('tasks/create', array('task' => $this->input->post(), 'error' => $error, 'users' => $users));
 	}
 	
 }
