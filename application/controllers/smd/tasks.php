@@ -33,7 +33,7 @@ class Tasks extends Smd_Controller {
 			$search_r = '';
 			for($i = 0; $i < strlen($search_str); ++$i){
 				$c = $search_str[$i];
-				if($c >= 'a' && $c <= 'z' || $c >= 'A' && $c <= 'Z' || $c > chr(127)){
+				if($c >= 'a' && $c <= 'z' || $c >= 'A' && $c <= 'Z' || $c >= '0' && $c <='9' || $c > chr(127)){
 					$search_r .= $c;
 				}
 				else{
