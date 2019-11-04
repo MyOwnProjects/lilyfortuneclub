@@ -28,8 +28,8 @@
 				}
 			}
 		],
-		row_count: 20,
-		order_by: {tasks_due_date: 'desc'},
+		row_count: 100,
+		order_by: {tasks_due_date: 'asc'},
 		filter: [
 			{
 				id: 'tasks_due_date',
