@@ -65,6 +65,6 @@
 				}
 			},
 		],
-		filter_by: {tasks_status: 'Pending', tasks_due_date: '2 days'} 
+		filter_by: {tasks_status: 'Pending'} 
 	});
 </script>
