@@ -26,7 +26,22 @@ class Tasks extends Smd_Controller {
 	
 	public function get_task_list(){
 		$search_str = trim($this->input->post('search'));
-		$search = isset($search_str) && $search_str !== '' ? preg_split('/[^a-z0-9]/i', $search_str) : array();
+		if($search_str == '' || !isset($search_str)){
+			$search = array();
+		}
+		else{
+			$search_r = '';
+			for($i = 0; $i < strlen($search_str); ++$i){
+				$c = $search_str[$i];
+				if($c >= 'a' && $c <= 'z' || $c >= 'A' && $c <= 'Z' || $c > chr(127)){
+					$search_r .= $c;
+				}
+				else{
+					$search_r .= ',';
+				}
+			}
+			$search = explode(',', $search_str);
+		}
 		$current = $this->input->post('current');
 		$row_count= $this->input->post('row_count');
 		$sort = $this->input->post('sort');
