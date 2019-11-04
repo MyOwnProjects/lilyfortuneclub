@@ -11,7 +11,7 @@ class Task_model extends Base_model{
 		parent::__construct();
 	}
 	
-	public function get_list($where = '', $sort = array(), $limit = ''){
+	public function get_list($where = '', $sort = array(), $limit = '', $null_date = null){
 		$sort_array = array();
 		if(is_array($sort)){
 			foreach($sort as $n=> $v){
@@ -25,7 +25,7 @@ class Task_model extends Base_model{
 			}
 		}
 		
-		$sql = "SELECT tasks.*, IF(tasks.tasks_due_date IS NULL, '9999-01-01', tasks.tasks_due_date) AS tasks_due_date, users.first_name, users.last_name, users.nick_name "
+		$sql = "SELECT tasks.*, ".(isset($null_date) ? "IF(tasks.tasks_due_date IS NULL, '9999-01-01', tasks.tasks_due_date) AS tasks_due_date," : "")." users.first_name, users.last_name, users.nick_name "
 			. "FROM tasks LEFT JOIN users ON tasks.tasks_name=users.membership_code "
 			.(empty($where) ? "" : " WHERE $where ")
 			.(empty($sort_array) ? "" : " ORDER BY ".implode(",", $sort_array))

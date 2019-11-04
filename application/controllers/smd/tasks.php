@@ -88,7 +88,7 @@ class Tasks extends Smd_Controller {
 		if($total > 0){
 			$ret = paginate($total, $current, $row_count);
 			$ret['search'] = $search_str;
-			$ret['rows'] = $this->task_model->get_list($where, $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count']);
+			$ret['rows'] = $this->task_model->get_list($where, $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count'], '9999-01-01');
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['id'] = $r['tasks_id'];
 				$ret['rows'][$i]['tasks_case_no'] = $r['tasks_case_no'];
