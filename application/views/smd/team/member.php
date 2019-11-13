@@ -46,8 +46,11 @@ if(!$member){
 				}
 				?>
 				<div class="value" style="overflow:hidden">
-					<?php 
-					if($name == 'status'){
+					<?php
+					if($name == 'name'){
+						echo ucwords(strtolower($value));
+					}
+					else if($name == 'status'){
 						echo $value == 'active' ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';
 					}
 					else if($name == 'licensed'){						
@@ -72,7 +75,7 @@ if(!$member){
 						echo $d[1].' / '.$d[2];
 					}
 					else if($name == 'recruiter'){
-						echo $member['recruiter_name'].' - '.$value;
+						echo ucwords(strtolower($member['recruiter_name'])).' - '.$value;
 					}
 					else if($name == 'first_access'){
 						echo $value == 'Y' ? 'Yes' : 'No';

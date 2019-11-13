@@ -40,11 +40,11 @@ class Team extends Smd_Controller {
 			foreach($ret['rows'] as $i => $r){
 				unset($ret['rows'][$i]['password']);
 				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
-				$ret['rows'][$i]['name'] = $r['name'].(isset($ret['rows'][$i]['nick_name']) && trim($ret['rows'][$i]['nick_name']) != '' ? ' ('.$ret['rows'][$i]['nick_name'].')' : '');
+				$ret['rows'][$i]['name'] = '<a href="'.base_url().'smd/team/member/'.$r['membership_code'].'" target="_blank">'.ucwords(strtolower($r['name'].(isset($ret['rows'][$i]['nick_name']) && trim($ret['rows'][$i]['nick_name']) != '' ? ' ('.$ret['rows'][$i]['nick_name'].')' : ''))).'</a>';
 				$ret['rows'][$i]['original_start_date'] = isset($ret['rows'][$i]['original_start_date']) ? 'Yes' : 'No';
 				$ret['rows'][$i]['location'] = empty($r['state']) ? $r['country'] : $r['state'].'/'.$r['country'];
 				$ret['rows'][$i]['downline'] = $r['downline'];
-				$ret['rows'][$i]['action'] = array('view' => base_url().'smd/team/member/'.$r['membership_code']);
+				//$ret['rows'][$i]['action'] = array('view' => base_url().'smd/team/member/'.$r['membership_code']);
 			}
 		}
 		echo json_encode($ret);
@@ -435,6 +435,24 @@ class Team extends Smd_Controller {
 		}
 		echo json_encode($ret);
 		
+	}
+	
+	public function get_all_hierarchy(){
+		$ret = array();
+		$this->_get_direct_downline($ret, "grade='SMD'");
+		echo json_encode($ret);
+	}
+	
+	private function _get_direct_downline(&$ret, $where){
+		$result = $this->user_model->get_list($where);
+		foreach($result as $i => $r){
+			$ret[$i] = $r;
+			if($r['children'] > 0){
+				$ret[$i]['downline'] = array();
+				$membership_code = $r['membership_code'];
+				$this->_get_direct_downline($ret[$i]['downline'], "recruiter='$membership_code'");
+			}
+		}
 	}
 	
 	private function _parse_uploade_team_file($target_file, $col_count){
