@@ -17,6 +17,62 @@ class Sales extends Smd_Controller {
 		$this->load_view('sales/list');
 	}
 
+	public function import_sales2(){
+		$file = fopen($_FILES["policies"]["tmp_name"],"r");
+		$data = array();
+		$n = 0;
+		while(!feof($file)){
+			$line = fgetcsv($file);
+			if($line[0] == 'Agent Name'){
+				continue;
+			}
+			$n++;
+			$f = trim($line[0]);
+			if(empty($f)){
+				continue;
+			}
+			$agent = trim($line[1]);
+			$len = strlen($line[3]);
+			$policy = '';
+			for($i = 0; $i < $len; ++$i){
+				if(($line[3][$i] >= '0' && $line[3][$i] <= '9') 
+					|| ($line[3][$i] >= 'A' && $line[3][$i] <= 'Z')
+					|| ($line[3][$i] >= 'a' && $line[3][$i] <= 'z')){
+					$policy .= $line[3][$i];
+				}
+			}
+			$owner = trim($line[4]);
+			$insured = trim($line[5]);
+			$issue_date = explode('/', trim($line[6]));
+			$issue_date = trim($issue_date[2]).'-'.trim($issue_date[0]).'-'.trim($issue_date[1]);
+			$status = trim($line[7]);
+			$product = trim($line[8]);
+			$data[$policy] = implode("','", array($agent, $policy, $owner, $insured, $issue_date, $status, 'Transamerica', $product))."'";
+		}
+		fclose($file);
+		$result = $this->sales_model->get_policy_list();
+		$fields = array('policies_writing_agent', 'policies_number'
+			, 'policies_owner_name', 'policies_insured_name', 'policies_issue_date', 'policies_status',
+			'policies_provider', 'policies_product');
+		foreach($result as $r){
+			if(array_key_exists($r['policies_number'], $data)){
+				$prop = array(
+					'policies_writing_agent' => $data[$r['policies_number']][0],
+					'policies_owner_name' => $data[$r['policies_number']][2], 
+					'policies_insured_name' => $data[$r['policies_number']][3], 
+					'policies_issue_date' => $data[$r['policies_number']][4], 
+					'policies_status' => $data[$r['policies_number']][5],
+					'policies_provider' => $data[$r['policies_number']][6], 
+					'policies_product' => $data[$r['policies_number']][7]
+				);
+				unset($data[$r['policies_number']]);
+				$this->sales_model->update_policy($prop, "policies_id='".$r['policies_number']."'");
+			}
+		}
+		$this->sales_model->insert_policies($fields, $data);
+		header("location:".base_url()."smd/sales");
+	}
+	
 	public function import_sales(){
 		if($this->input->server('REQUEST_METHOD') == 'POST'){
 			$provider = $this->input->post('provider');
