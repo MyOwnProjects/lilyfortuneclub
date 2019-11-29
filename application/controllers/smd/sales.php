@@ -379,7 +379,7 @@ class Sales extends Smd_Controller {
 					);
 				}
 				else if($n == 'policies_provider'){
-					$fields[$n]['readonly']= 'true';
+					//$fields[$n]['readonly']= 'true';
 					$fields[$n]['options']= array(
 						array('value' => 'Transamerica', 'text' => 'Transamerica'),
 						array('value' => 'Nationwide', 'text' => 'Nationwide'),
@@ -387,7 +387,7 @@ class Sales extends Smd_Controller {
 					);
 				}
 				else if($n == 'policies_status'){
-					$fields[$n]['readonly']= 'true';
+					//$fields[$n]['readonly']= 'true';
 					$fields[$n]['options']= array(
 						array('value' => 'Active', 'text' => 'Active'),
 						array('value' => 'Approved', 'text' => 'Approved'),
