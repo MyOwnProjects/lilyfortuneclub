@@ -136,6 +136,7 @@ class Sales extends Smd_Controller {
 						'policies_product' => $data[$r['policies_number']][7]
 					);
 					unset($data[$r['policies_number']]);
+					print_r($prop);echo '<br/><br/><br/>';
 					$this->sales_model->update_policy($prop, "policies_number='".$r['policies_number']."'");
 				}
 			}
