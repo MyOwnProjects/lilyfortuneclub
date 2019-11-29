@@ -60,6 +60,10 @@ class Sales extends Smd_Controller {
 				}
 			}
 			else if($provider == 'PacLife'){
+				$f = trim($line[0]);
+				if(empty($f)){
+					continue;
+				}
 				$insured = trim($line[1]).' '.trim($line[0]);
 				$policy = filter_char($line[2]);
 				$issue_date = date_format_convertion(trim($line[4]));
