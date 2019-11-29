@@ -393,3 +393,28 @@ if ( ! function_exists('custom_number_format')){
 		return $n_format;
 	}
 }
+
+if ( ! function_exists('date_format_convertion')){
+	function date_format_convertion($d) {//m/d/y -> Y-m-d
+		$da = explode('/', $d);
+		if($da && count($da) == 3){
+			$date = trim($da[2]).'-'.trim($da[0]).'-'.trim($da[1]);
+			return $date;
+		}
+	}
+}
+
+if ( ! function_exists('filter_char')){
+	function filter_char($s) {//only keep digitand letter
+		$len = strlen($s);
+		$v = '';
+		for($i = 0; $i < $len; ++$i){
+			if(($s[$i] >= '0' && $s[$i] <= '9')
+				|| ($s[$i] >= 'A' && $s[$i] <= 'Z')
+				|| ($s[$i] >= 'a' && $s[$i] <= 'z')){
+				$v .= $s[$i];
+			}
+		}
+		return $v;
+	}
+}

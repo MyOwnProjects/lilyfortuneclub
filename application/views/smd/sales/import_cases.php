@@ -10,12 +10,19 @@ label{font-weight:normal}
 </style>
 <div style="margin:40px"> 
 	<h4>Import New Case(s)</h4>
-	<form method="post"  action="<?php echo base_url();?>smd/sales/import_sales2" enctype="multipart/form-data">
-		<input type="file" name="policies" accept=".csv">
+	<br/>
+	<form class="p-3 border" method="post"  action="<?php echo base_url();?>smd/sales/import_sales2" enctype="multipart/form-data">
+		<select name="provider" class="fomr-control form-control-sm">
+			<option>Transamerica</option>
+			<option>PacLife</option>
+			<option>Nationwide</option>
+			<option>AIG</option>
+		</select>
+		<input type="file" name="policies" accept=".csv" class="fomr-control form-control-sm">
 		<input type="submit" class="btn btn-primary btn-sm" value="Submit">
 	</form>
 	<br/><br/>
-	<form method="post"  action="<?php echo base_url();?>smd/sales/import_sales">
+	<form class="p-3 border rounded-lg" method="post"  action="<?php echo base_url();?>smd/sales/import_sales">
 		<div class="row">
 			<div class="col-sm-12 control-group">
 				<label>Provider</label>
