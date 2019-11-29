@@ -129,14 +129,13 @@ class Sales extends Smd_Controller {
 					$prop = array(
 						'policies_writing_agent' => $data[$r['policies_number']][0],
 						'policies_insured_name' => $data[$r['policies_number']][2],
-						'policies_insured_dob' => $dob,
+						'policies_insured_dob' => $data[$r['policies_number']][3],
 						'policies_issue_date' => $data[$r['policies_number']][4], 
 						'policies_status' => $data[$r['policies_number']][5],
 						'policies_provider' => $data[$r['policies_number']][6], 
 						'policies_product' => $data[$r['policies_number']][7]
 					);
 					unset($data[$r['policies_number']]);
-					print_r($prop);echo '<br/><br/><br/>';
 					$this->sales_model->update_policy($prop, "policies_number='".$r['policies_number']."'");
 				}
 			}
@@ -146,7 +145,7 @@ class Sales extends Smd_Controller {
 				$data[$i] = "'".implode("','", $d)."'";
 			}
 			$this->sales_model->insert_policies($fields, $data);
-		}exit;
+		}
 		header("location:".base_url()."smd/sales");
 	}
 	
