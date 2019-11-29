@@ -146,7 +146,7 @@ class Sales extends Smd_Controller {
 				$data[$i] = "'".implode("','", $d)."'";
 			}
 			$this->sales_model->insert_policies($fields, $data);
-		}
+		}exit;
 		header("location:".base_url()."smd/sales");
 	}
 	
