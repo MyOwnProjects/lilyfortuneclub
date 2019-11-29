@@ -56,7 +56,8 @@ class Sales extends Smd_Controller {
 					$issue_date = date_format_convertion(trim($line[6]));
 					$status = trim($line[7]);
 					$product = trim($line[8]);
-					$data[$policy] = "'".implode("','", array($agent, $policy, $owner, $insured, $issue_date, $status, 'Transamerica', $product))."'";
+					$data[$policy] = array($agent, $policy, $owner, $insured, $issue_date, $status, 'Transamerica', $product);
+					//"'".implode("','", array($agent, $policy, $owner, $insured, $issue_date, $status, 'Transamerica', $product))."'";
 				}
 			}
 			else if($provider == 'PacLife'){
@@ -69,9 +70,10 @@ class Sales extends Smd_Controller {
 				$issue_date = date_format_convertion(trim($line[4]));
 				$product = trim($line[6]);
 				$dob = date_format_convertion(trim($line[7]));
-				$status = date_format_convertion(trim($line[8]));
+				$status = trim($line[8]);
 				$agent = filter_char($line[9]);
-				$data[$policy] = "'".implode("','", array($agent, $policy, $insured, $dob, $issue_date, $status, 'PacLife', $product))."'";
+				$data[$policy] = array($agent, $policy, $insured, $dob, $issue_date, $status, 'PacLife', $product);
+				//"'".implode("','", array($agent, $policy, $insured, $dob, $issue_date, $status, 'PacLife', $product))."'";
 			}
 		}
 		fclose($file);
@@ -114,7 +116,7 @@ class Sales extends Smd_Controller {
 						);
 					}
 					unset($data[$r['policies_number']]);
-					$this->sales_model->update_policy($prop, "policies_id='".$r['policies_number']."'");
+					$this->sales_model->update_policy($prop, "policies_number='".$r['policies_number']."'");
 				}
 			}
 		}
@@ -134,12 +136,14 @@ class Sales extends Smd_Controller {
 						'policies_product' => $data[$r['policies_number']][7]
 					);
 					unset($data[$r['policies_number']]);
-					$this->sales_model->update_policy($prop, "policies_id='".$r['policies_number']."'");
+					$this->sales_model->update_policy($prop, "policies_number='".$r['policies_number']."'");
 				}
 			}
 		}
-		if(!empty($data))
-		{
+		if(!empty($data)){
+			foreach($data as $i => $d){
+				$data[$i] = "'".implode("','", $d)."'";
+			}
 			$this->sales_model->insert_policies($fields, $data);
 		}
 		header("location:".base_url()."smd/sales");
