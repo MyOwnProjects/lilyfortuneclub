@@ -63,6 +63,7 @@ class Account extends Smd_Controller {
 	{
 		$this->load->model('user_model');
 		$this->load->model('sales_model');
+		$this->load->model('task_model');
 		$result = $this->user_model->get_all_children($this->user['membership_code']);
 		//$result2 = $this->sales_model->get_policy_list("sales_insured_dob IS NOT NULL OR sales_owner_dob IS NOT NULL");
 		$result2 = $this->sales_model->get_policy_list("");
@@ -113,8 +114,19 @@ class Account extends Smd_Controller {
 				array_push($birthday4, $r);
 			}
 		}
+		
+		$result = $this->task_model->get_list("tasks_status<>'Done'", array('due_days' => 'ASC'));
+		$tasks = array();
+		foreach($result as $t){
+			if(isset($t['due_days']) && $t['due_days'] < 4){
+				array_push($tasks, $t);
+			}
+		}
+			
 		$this->nav_menus['account']['sub_menus']['']['active'] = true;
-		$this->load_view('account/dashboard', array('grades' => $grades, 
+		$this->load_view('account/dashboard', array(
+			'tasks' => $tasks,
+			'grades' => $grades, 
 			'statuses' => $statuses,
 			'birthday1' => $birthday1,
 			'birthday2' => $birthday2,

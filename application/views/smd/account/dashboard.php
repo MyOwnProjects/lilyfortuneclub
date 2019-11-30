@@ -13,10 +13,40 @@
 </style>
 <div class="main-body-wrapper">
 	<div class="row">
+			<?php
+			if(count($tasks) > 0){
+			?>
 		<div class="col-md-6 col-sm-12">
+			<div class="panel panel-warning">
+				<div class="panel-heading " style="background-image:url(<?php echo base_url();?>src/img/alert.svg);background-repeat:no-repeat;background-position:10px 10px;background-size:25px 25px">Tasks</div>
+				<div class="panel-body">
+					<?php
+					foreach($tasks as $t){
+						$d = array(
+							-1 => 'yesterday',
+							0 => 'today',
+							1 => 'tomorrow',
+						);
+						$dt = array_key_exists($t['due_days'], $d) ? $d[$t['due_days']] : ($t['due_days'] > 0 ? 'in '.$t['due_days'].' days' : 'past '.(-1 * $t['due_days']).' days');
+					?>
+					<div class="d-flex">
+						<div class="p-2 flex-grow-1"><a href="<?php echo base_url();?>smd/tasks/view/<?php echo $t['tasks_id'];?>" target="_blank"><?php echo $t['tasks_subject'];?></a></div>
+						<div class="p-2 <?php echo $t['due_days'] < 2 ? 'text-danger' : 'text-warning';?>"><?php echo $dt;?></div>
+						<div class="p-2" style="width:80px"><?php echo $t['tasks_status'];?></div>
+					</div>
+					<?php
+					}
+					?>
+				</div>
+			</div>
+		</div>
+			<?php
+			}
+			?>
 			<?php
 			if(!empty($birthday1) || !empty($birthday2) || !empty($birthday3) || !empty($birthday4)){
 			?>
+		<div class="col-md-6 col-sm-12">
 			<div class="panel panel-warning">
 				<div class="panel-heading " style="background-image:url(<?php echo base_url();?>src/img/cake_red.svg);background-repeat:no-repeat;background-position:10px 5px;background-size:25px 25px">Recent Birthday</div>
 				<div class="panel-body">
@@ -102,14 +132,14 @@
 					</table-->
 				</div>
 			</div>
+  		</div>
 			<?php
 			}
 			?>
-  		</div>
-		<div class="col-md-6 col-sm-12">
 			<?php
 			if(!empty($policy_ann)){
 			?>
+		<div class="col-md-6 col-sm-12">
 			<div class="panel panel-warning">
 				<div class="panel-heading" style="padding-left:50px;font-weight:bold;background-image:url(<?php echo base_url();?>src/img/first-annual-day-calendar-page-interface-symbol.svg);background-repeat:no-repeat;background-position:10px 10px;background-size:25px 25px">Policy Anniversary</div>
 				<div class="panel-body">
@@ -141,10 +171,10 @@
 					</table-->
 				</div>
 			</div>
+  		</div>
 			<?php
 			}
 			?>
-  		</div>
 	</div>
 	
 	<!--div class="row">
