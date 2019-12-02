@@ -330,9 +330,10 @@ class Sales extends Smd_Controller {
 			$ret['rows'] = $this->sales_model->get_policy_list('', $sort, (($ret['current'] - 1) * $ret['row_count']).", ".$ret['row_count'], $search, $filter, array($this->user['membership_code'], '27QUE'));
 			foreach($ret['rows'] as $i => $r){
 				$ret['rows'][$i]['seq'] = ($current - 1) * $row_count + ($i + 1);
-				$ret['rows'][$i]['policies_number'] = '<img style="height:16px;margin-top:-5px;margin-right:5px" src="'.base_url().'src/img/'.$r['policies_provider'].'_logo.ico">'.$r['policies_number'];
+				$ret['rows'][$i]['policies_number'] = '<img style="height:16px;margin-top:-5px;margin-right:5px" src="'.base_url().'src/img/'.$r['policies_provider'].'_logo.ico"><a href="'.base_url().'smd/sales/sales_case/'.$r['policies_id'].'" target="_blank">'.$r['policies_number'].'</a>';
 				$ret['rows'][$i]['policies_status'] = $r['policies_status'];
 				$ret['rows'][$i]['policies_name'] = $r['policies_insured_name'].'<br/>'.$r['policies_owner_name'];
+				$ret['rows'][$i]['policies_payment_method'] = $r['policies_payment_method'];
 				$ret['rows'][$i]['policies_issue_date'] = $r['policies_issue_date'];
 				$ret['rows'][$i]['policies_closure_date'] = $r['policies_closure_date'] == '9999-01-01' ? '' : $r['policies_closure_date'];
 				$writing_agent = empty($r['agent1']) ? $r['policies_writing_agent'] : $r['agent1'].'('.$r['policies_writing_agent'].')';
@@ -347,7 +348,7 @@ class Sales extends Smd_Controller {
 				}
 				$ret['rows'][$i]['policies_agents'] = $writing_agent.(empty($split_agent) ? "" : "<br/>$split_agent");
 				$ret['rows'][$i]['notes'] = $r['policies_notes'];
-				$ret['rows'][$i]['action'] = array('view' => base_url().'smd/sales/sales_case/'.$r['policies_id']);
+				//$ret['rows'][$i]['action'] = array('view' => base_url().'smd/sales/sales_case/'.$r['policies_id']);
 			}
 		}
 		echo json_encode($ret);
@@ -367,7 +368,7 @@ class Sales extends Smd_Controller {
 			}
 			$fields[$n] = array();
 			$fields[$n]['label'] = str_replace('_', ' ', substr($n, 9)); 
-			if(in_array($n, array('policies_status', 'policies_provider', 'policies_owner_gender', 'policies_insured_gender'
+			if(in_array($n, array('policies_payment_method', 'policies_status', 'policies_provider', 'policies_owner_gender', 'policies_insured_gender'
 				, 'policies_writing_agent', 'policies_split_agent'))){
 				$fields[$n]['tag'] = 'dropdownedit';
 				if($n == 'policies_owner_gender' || $n == 'policies_insured_gender'){
@@ -384,6 +385,14 @@ class Sales extends Smd_Controller {
 						array('value' => 'Transamerica', 'text' => 'Transamerica'),
 						array('value' => 'Nationwide', 'text' => 'Nationwide'),
 						array('value' => 'PacLife', 'text' => 'Pacific Life'),
+					);
+				}
+				else if($n == 'policies_payment_method'){
+					//$fields[$n]['readonly']= 'true';
+					$fields[$n]['options']= array(
+						array('value' => 'Annually', 'text' => 'Annually'),
+						array('value' => 'Monthly', 'text' => 'Monthly'),
+						array('value' => '', 'text' => 'Other'),
 					);
 				}
 				else if($n == 'policies_status'){
