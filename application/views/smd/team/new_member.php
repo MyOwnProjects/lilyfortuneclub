@@ -115,6 +115,7 @@ input,textarea,select{box-sizing:border-box;width:100%}
 		</div>
 	</div>
 	</form>
+</div>
 <script>
 $('.member-info-field').each(function(){
 	$(this).attr('id', $(this).attr('name'));
