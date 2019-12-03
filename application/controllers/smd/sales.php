@@ -419,7 +419,7 @@ class Sales extends Smd_Controller {
 				$fields[$n]['tag'] = 'input';
 			}
 
-			if(in_array($n, array('policies_issue_date', 'policies_closure_date', 'policies_insured_dob', 'policies_owner_dob'))){
+			if(in_array($n, array('policies_issue_date', 'policies_closure_date', 'policies_submitted_date', 'policies_insured_dob', 'policies_owner_dob'))){
 				$fields[$n]['type'] = 'date';
 			}
 			if(in_array($n, array('policies_face_amount', 'policies_target_premium'))){
