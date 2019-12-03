@@ -30,7 +30,7 @@
 			}
 		],
 		row_count: 100,
-		order_by: {policies_closure_date: 'asc', self_agent: 'DESC'},
+		order_by: {policies_issue_date: 'asc', self_agent: 'DESC'},
 		filter: [
 			{
 				id: 'policies_status', 
