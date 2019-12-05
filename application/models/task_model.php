@@ -52,7 +52,12 @@ class Task_model extends Base_model{
 	public function update($prop, $where){
 		$set = array();
 		foreach($prop as $k => $v){
-			array_push($set, "$k='".addslashes($v)."'");
+			if(($k == 'tasks_due_date' || $k == 'tasks_create') && empty($v)){
+				array_push($set, "$k=NULL");
+			}
+			else{
+				array_push($set, "$k='".addslashes($v)."'");
+			}
 		}
 		$sql = "UPDATE tasks SET ".implode(",", $set).(!empty($where) ? " WHERE $where" : "");
 		return $this->db->query($sql);
