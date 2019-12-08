@@ -76,6 +76,7 @@ class Sales extends Smd_Controller {
 				//"'".implode("','", array($agent, $policy, $insured, $dob, $issue_date, $status, 'PacLife', $product))."'";
 			}
 			else if($provider == 'Nationwide'){
+				echo 1;exit;
 				$f = trim($line[0]);
 				if(empty($f)){
 					continue;
