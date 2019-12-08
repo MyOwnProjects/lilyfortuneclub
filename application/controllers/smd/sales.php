@@ -76,7 +76,6 @@ class Sales extends Smd_Controller {
 				//"'".implode("','", array($agent, $policy, $insured, $dob, $issue_date, $status, 'PacLife', $product))."'";
 			}
 			else if($provider == 'Nationwide'){
-				echo 1;exit;
 				$f = trim($line[0]);
 				if(empty($f)){
 					continue;
@@ -156,6 +155,8 @@ class Sales extends Smd_Controller {
 		else if($provider == 'Nationwide'){
 			$fields = array('policies_number'
 				, 'policies_owner_name', 'policies_insured_name', 'policies_provider', 'policies_face_amount');
+					echo 2;exit;
+		
 			foreach($result as $r){
 				if(array_key_exists($r['policies_number'], $data)){
 					$prop = array(
