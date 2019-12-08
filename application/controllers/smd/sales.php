@@ -85,7 +85,6 @@ class Sales extends Smd_Controller {
 				$insured = trim($line[4]).' '.trim($line[3]);
 				$policy = filter_char($line[0]);
 				$face_amount = filter_digit($line[5]);
-					echo 'C';exit;
 				$data[$policy] = array($policy, $owner, $insured, 'Nationwide', $face_amount);
 				//"'".implode("','", array($agent, $policy, $insured, $dob, $issue_date, $status, 'PacLife', $product))."'";
 			}
@@ -157,7 +156,6 @@ class Sales extends Smd_Controller {
 		else if($provider == 'Nationwide'){
 			$fields = array('policies_number'
 				, 'policies_owner_name', 'policies_insured_name', 'policies_provider', 'policies_face_amount');
-					echo 2;exit;
 		
 			foreach($result as $r){
 				if(array_key_exists($r['policies_number'], $data)){

@@ -418,3 +418,16 @@ if ( ! function_exists('filter_char')){
 		return $v;
 	}
 }
+
+if ( ! function_exists('filter_digit')){
+	function filter_digit($s) {//only keep digitand letter
+		$len = strlen($s);
+		$v = '';
+		for($i = 0; $i < $len; ++$i){
+			if($s[$i] >= '0' && $s[$i] <= '9'){
+				$v .= $s[$i];
+			}
+		}
+		return $v;
+	}
+}
