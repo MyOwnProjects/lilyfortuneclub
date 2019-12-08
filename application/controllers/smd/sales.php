@@ -80,12 +80,12 @@ class Sales extends Smd_Controller {
 				if(empty($f)){
 					continue;
 				}
-				echo count($line).' ';
-					echo 1;exit;
 				
 				$owner = trim($line[2]).' '.trim($line[1]);
 				$insured = trim($line[4]).' '.trim($line[3]);
 				$policy = filter_char($line[0]);
+					echo 1;exit;
+				
 				$face_amount = filter_digit($line[5]);
 				$data[$policy] = array($policy, $owner, $insured, 'Nationwide', $face_amount);
 				//"'".implode("','", array($agent, $policy, $insured, $dob, $issue_date, $status, 'PacLife', $product))."'";
