@@ -75,6 +75,18 @@ class Sales extends Smd_Controller {
 				$data[$policy] = array($agent, $policy, $insured, $dob, $issue_date, $status, 'PacLife', $product);
 				//"'".implode("','", array($agent, $policy, $insured, $dob, $issue_date, $status, 'PacLife', $product))."'";
 			}
+			else if($provider == 'Nationwide'){
+				$f = trim($line[0]);
+				if(empty($f)){
+					continue;
+				}
+				$owner = trim($line[2]).' '.trim($line[1]);
+				$insured = trim($line[4]).' '.trim($line[3]);
+				$policy = filter_char($line[0]);
+				$face_amount = filter_digit($line[5]);
+				$data[$policy] = array($policy, $owner, $insured, 'Nationwide', $face_amount);
+				//"'".implode("','", array($agent, $policy, $insured, $dob, $issue_date, $status, 'PacLife', $product))."'";
+			}
 		}
 		fclose($file);
 		$result = $this->sales_model->get_policy_list();
@@ -140,6 +152,23 @@ class Sales extends Smd_Controller {
 				}
 			}
 		}
+		else if($provider == 'Nationwide'){
+			$fields = array('policies_number'
+				, 'policies_owner_name', 'policies_insured_name', 'policies_provider', 'policies_face_amount');
+			foreach($result as $r){
+				if(array_key_exists($r['policies_number'], $data)){
+					$prop = array(
+						'policies_owner_name' => $data[$r['policies_number']][1],
+						'policies_insured_name' => $data[$r['policies_number']][2],
+						'policies_provider' => $data[$r['policies_number']][3], 
+						'policies_face_amount' => $data[$r['policies_number']][4]
+					);
+					unset($data[$r['policies_number']]);
+					$this->sales_model->update_policy($prop, "policies_number='".$r['policies_number']."'");
+				}
+			}
+		}
+
 		if(!empty($data)){
 			foreach($data as $i => $d){
 				$data[$i] = "'".implode("','", $d)."'";
