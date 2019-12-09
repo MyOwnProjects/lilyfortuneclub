@@ -24,10 +24,12 @@ class Team extends Smd_Controller {
 		$current = $this->input->post('current');
 		$row_count= $this->input->post('row_count');
 		$sort = $this->input->post('sort');
-		foreach($sort as $k => $v){
-			if($k == 'location'){
-				$sort['state'] = $v;
-				unset($sort[$k]);
+		if(!empty($sort)){
+			foreach($sort as $k => $v){
+				if($k == 'location'){
+					$sort['state'] = $v;
+					unset($sort[$k]);
+				}
 			}
 		}
 		$ret = array(
