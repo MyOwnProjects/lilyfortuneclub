@@ -70,7 +70,7 @@ class Training extends Base_Controller {
 			$str = '';
 			while(!feof($handle)){
 				$ch = fread($handle, 1);
-				if(ord($ch) >= 40 && ord($ch) <= 125){
+				if(ord($ch) >= 33 && ord($ch) <= 126){
 					$str .= $ch;
 				}
 			}
