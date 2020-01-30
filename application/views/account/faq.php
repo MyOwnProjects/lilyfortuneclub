@@ -54,7 +54,7 @@
 					?>
 						<div class="col-lg-6 col-md-6 col-sm-12 clearfix" style="padding:5px 10px">
 							<div class="pull-left" style="text-align:right;margin-right:5px;width:25px;color:#337ab7"><?php echo $qi++;?>. </div> 
-							<div style="overflow:hidden"><a href="?active_page=<?php echo $active_page?>#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
+							<div style="overflow:hidden"><a href="?active_page=<?php echo $i;?>#<?php echo $q_id;?>"><?php echo $c['subject'];?></a></div>
 						</div>
 					<?php
 					}
