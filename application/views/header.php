@@ -13,13 +13,13 @@
 .webui-popover1{position:fixed;top:61px !important;left:auto !important;right:0 !important;}
 .webui-arrow1{left:auto !important;right: 22px;}
 .webui-popover-inner1{max-height:300px;overflow-y:auto}
-@media only screen and (max-width:768px) {
+@media only screen and (max-width:10000px) {
 .main-head-menu{display:none}	
 }
 </style>
 <header id="main-header">
 	<div id="logo" class="pull-left clearfix"><a href="<?php echo base_url();?>"><img src="<?php echo base_url();?>src/img/lfc.png"></a></div>
-	<div class="main-head-menu clearfix">
+	<!--div class="main-head-menu clearfix">
 		<?php
 		foreach($navigation as $nav){
 			if(array_key_exists('member_access', $nav) && $nav['member_access'] && empty($user)){
@@ -60,7 +60,7 @@
 		<?php
 		}
 		?>
-	</div>
+	</div-->
 	<div id="main-header-menu" class="list-unstyled pull-right clearfix">
 		<span class="glyphicon glyphicon-menu-hamburger" id="menu-icon" style="cursor:pointer;font-size:25px"></span>
 		<div style="display:none">
