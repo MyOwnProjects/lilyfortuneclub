@@ -17,7 +17,7 @@
 .main-head-menu{display:none}	
 }
 </style>
-<div id="logo" style="position:absolute;z-index:10000000;left:20px;top:90px;padding:2px;background:#fff"><a href="<?php echo base_url();?>"><img style="width:120px" src="<?php echo base_url();?>src/img/logo_1.png"></a></div>
+<div id="logo" style="position:absolute;z-index:10000000;left:20px;top:90px;padding:2px;background:#fff"><a href="<?php echo base_url();?>"><img style="width:120px" src="<?php echo base_url();?>src/img/Logo_1.png"></a></div>
 <header id="main-header">
 	<img class="main-header-bk-img" src="<?php echo base_url();?>src/img/background/main-header-b.png" style="z-index:0;position:absolute;top:-50px;left:0;height:250px">
 	<div id="main-header-menu" class="list-unstyled clearfix main-header-menu-item">
