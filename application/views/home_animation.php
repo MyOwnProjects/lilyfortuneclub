@@ -1,5 +1,5 @@
 <style>
-#animation-bk{position:relative;background:url(<?php echo base_url();?>src/img/background/dark-wood-background-1013tm-pic-2573.jpg);overflow:hidden;}
+#animation-bk{position:relative;/*url(<?php echo base_url();?>src/img/background/dark-wood-background-1013tm-pic-2573.jpg1);*/overflow:hidden;}
 #animation-block{position:relative;}
 #animation1{background:#fff;position:absolute;top:0;right:0;bottom:0;left:0;margin:0 auto;border-radius:50%}
 #animation1-bk{opacity:0.3;width:100%;height:100%;position:absolute;top:0;right:0;bottom:0;left:0;}
@@ -17,16 +17,17 @@
 	color:#000;position:absolute;top:10px;bottom:10px;}
 .popup_visible #question-bubble {-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1);}
 #question-bubble .quiz-option-selected{color:green}
-#speech-div-wrap{z-index:10;position:absolute;}
-#speech-div{float:left;visibility:hidden;border:1px solid#000;white-space:normal;border-radius:5px;background:#e5e5e5;font-size:16px;font-family:Comic Sans MS, cursive, sans-serif;padding:8px 10px;}
-#smd-profile{float:right;border-radius:50%;overflow:hidden;background:url(<?php echo base_url();?>/src/img/smd_profile.jpg);background-size:100% 100%}
+#speech-div-wrap{z-index:10;position:absolute;top:10px}
+#speech-div{float:left;visibility:hidden;border:1px solid#000;white-space:normal;border-radius:5px;background:#e5e5e5;font-size:16px;font-family:Helvetica,Open Sans,Meta;padding:8px 10px;}
+#smd-profile-wrap{float:right;border-radius:50%;overflow:hidden;background:#fff;padding:2px}
+#smd-profile{border-radius:50%;overflow:hidden;background:url(<?php echo base_url();?>/src/img/smd_profile.jpg);background-size:100% 100%}
 </style>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jQueryRotate.js?<?php echo time();?>"></script>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-easing/jquery.easing.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>src/3rd_party/jquery-easing/rotate.js"></script>
 <div id="animation-bk">
 	<div id="speech-div-wrap" class="clearfix">
-		<div id="smd-profile"></div>
+		<div id="smd-profile-wrap"><div id="smd-profile"></div></div>
 		<div id="speech-div" class="text-danger"></div>
 	</div>
 	<div id="animation-block">
