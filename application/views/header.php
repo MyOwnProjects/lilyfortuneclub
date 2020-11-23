@@ -17,51 +17,10 @@
 .main-head-menu{display:none}	
 }
 </style>
+<div id="logo" style="position:absolute;z-index:10000000;left:20px;top:90px;padding:2px;background:#fff"><a href="<?php echo base_url();?>"><img style="width:120px" src="<?php echo base_url();?>src/img/logo_1.png"></a></div>
 <header id="main-header">
-	<div id="logo" class="pull-left clearfix"><a href="<?php echo base_url();?>"><img src="<?php echo base_url();?>src/img/lfc.png"></a></div>
-	<!--div class="main-head-menu clearfix">
-		<?php
-		foreach($navigation as $nav){
-			if(array_key_exists('member_access', $nav) && $nav['member_access'] && empty($user)){
-				continue;
-			}
-			if(array_key_exists('member_access', $nav) && !$nav['member_access'] && !empty($user)){
-				continue;
-			}
-			$has_sub_menu = array_key_exists('sub_menu', $nav) && !empty($nav['sub_menu']);
-		?>
-		<div class="dropdown">
-			<a class="dropdown-toggle" <?php echo $has_sub_menu ? 'data-toggle="dropdown"' : '';?>>
-				<?php echo $nav['text'];?>
-				<?php echo $has_sub_menu ? '<span class="caret"></span>' : '';?>
-			</a>
-			<?php
-			if($has_sub_menu){
-			?>
-			<ul class="dropdown-menu">
-			<?php
-				foreach($nav['sub_menu'] as $sm){
-					if(array_key_exists('member_access', $sm) && $sm['member_access'] && empty($user)){
-						continue;
-					}
-					if(array_key_exists('member_access', $sm) && !$sm['member_access'] && !empty($user)){
-						continue;
-					}
-					if((empty($user) || $user['grade'] != 'SMD') && $sm['url'] == 'smd'){
-						continue;
-					}
-				?>
-				  <li><a href="<?php echo base_url().$sm['url'];?>"><img style="height:20px;margin-top:-2px" src="<?php echo base_url().'src/img/'.$sm['icon'];?>">&nbsp;&nbsp;<?php echo $sm['text'];?></a></li>
-				<?php
-				}
-			}
-			?>
-		</div>
-		<?php
-		}
-		?>
-	</div-->
-	<div id="main-header-menu" class="list-unstyled pull-right clearfix">
+	<img class="main-header-bk-img" src="<?php echo base_url();?>src/img/background/main-header-b.png" style="z-index:0;position:absolute;top:-50px;left:0;height:250px">
+	<div id="main-header-menu" class="list-unstyled clearfix main-header-menu-item">
 		<span class="glyphicon glyphicon-menu-hamburger" id="menu-icon" style="cursor:pointer;font-size:25px"></span>
 		<div style="display:none">
 		<?php
@@ -106,27 +65,31 @@
 		}
 		?>
 			</div>
-		</div>
+		</div>&nbsp;&nbsp;&nbsp;&nbsp;
 	</div>
 	<?php
 	if($user){
 	?>
-	<div class="main-header-text pull-right" data-toggle="tooltip" data-placement="top" title="<?php echo $user['membership_code'];?>">
-		<span id="profile-icon"><img src="<?php echo base_url();?>src/img/user.svg"></span>
+	<div class="main-header-menu-item" style="background:#000;font-size:16px;" data-toggle="tooltip" data-placement="top" title="<?php echo $user['membership_code'];?>">
+		<span id="profile-icon"><img style="height:25px" src="<?php echo base_url();?>src/img/user.svg"></span>
 		<?php
 		//echo $user['first_name'].' '.$user['last_name'];
 		?>
+		&nbsp;&nbsp;
 	</div>
 	<?php
 	}
 	?>
 	
-	<div class="social-media-icon">
-		<a href="https://www.linkedin.com/company/lily-fortune-club/" target="_blank"><img src="<?php echo base_url();?>src/img/linkedin-logo.svg"></a>
+	<div class="main-header-menu-item" style="z-index:1000">
+		<a href="https://www.linkedin.com/company/lily-fortune-club/" target="_blank">
+			<img style="height:25px" src="<?php echo base_url();?>src/img/linkedin-logo.svg">
+		</a>
 		&nbsp;
-		<img src="<?php echo base_url();?>src/img/twitter-logo-silhouette.svg">
+		<img style="height:25px" src="<?php echo base_url();?>src/img/twitter-logo-silhouette.svg">
 		&nbsp;
-		<img src="<?php echo base_url();?>src/img/facebook-letter-logo.svg">
+		<img style="height:25px" src="<?php echo base_url();?>src/img/facebook-letter-logo.svg">
+		&nbsp;&nbsp;
 	</div>
 	
 <script>
